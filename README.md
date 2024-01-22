@@ -1,1 +1,1 @@
-# GNUting-iOS-
+#지누팅 iOS 파트입니다.
