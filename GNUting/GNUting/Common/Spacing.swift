@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import UIKit
+enum Spacing {
+    static let left : CGFloat = 30
+    static let right : CGFloat = -30
+
+}
