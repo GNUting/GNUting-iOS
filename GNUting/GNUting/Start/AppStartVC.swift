@@ -7,12 +7,18 @@
 
 import UIKit
 import SnapKit
-class ViewController: UIViewController {
-
+class AppStartVC: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    
+}
+extension AppStartVC {
+    private func setAddSubViews(){
+        
+    }
+    private func setAutoLayouy(){
+        
+    }
 }
 
