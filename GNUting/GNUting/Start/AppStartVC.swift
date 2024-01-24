@@ -13,13 +13,7 @@ class AppStartVC: UIViewController {
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 20)
         label.numberOfLines = 3
         label.textColor = .black
-        //지누팅 글자 만 변경
-        let fullText = "경상국립대학교 새로운 만남 과팅앱\n지누팅\n학교 속 새로운 인연을 만나보세요."
-        let attributedString = NSMutableAttributedString(string: fullText)
-        let strLen = attributedString.length
-        let range = ( fullText as NSString).range(of: "지누팅")
-        attributedString.addAttribute(.font, value: UIFont(name: Pretendard.Bold.rawValue, size: 20) ?? UIFont.boldSystemFont(ofSize: 20), range: range)
-        label.attributedText = attributedString
+        label.setRangTextFont(fullText: "경상국립대학교 새로운 만남 과팅앱\n지누팅\n학교 속 새로운 인연을 만나보세요.", range: "지누팅", UIFont: UIFont(name: Pretendard.Bold.rawValue, size: 20)!)
         return label
     }()
     private lazy var startBackImgView : UIImageView = {
