@@ -49,6 +49,7 @@ class LoginVC: UIViewController {
         config.attributedTitle = AttributedString("아이디 또는 비밀번호를 잊어버리셨나요?", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 15)!]))
         config.baseForegroundColor = UIColor(named: "LightGray")
         let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(tapFindPasswordButton), for: .touchUpInside)
         return button
     }()
     private lazy var loginButton : PrimaryColorButton = {
@@ -62,7 +63,7 @@ class LoginVC: UIViewController {
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
-        setRightBarButtonItem()
+        setNavigationBar()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,6 +73,10 @@ class LoginVC: UIViewController {
 extension LoginVC{
     @objc func tapSignUpBarButtonItem(){
         
+    }
+    @objc func tapFindPasswordButton(){
+        let findPasswordVC = FindPasswordVC()
+        self.navigationController?.pushViewController(findPasswordVC, animated: true)
     }
 }
 extension LoginVC {
@@ -88,11 +93,13 @@ extension LoginVC {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-180)
         }
     }
-    private func setRightBarButtonItem(){
+    private func setNavigationBar(){
+        let popButton = UIBarButtonItem(image: UIImage(named: "PopImg"), style: .plain, target: self, action: #selector(popButtonTap))
+        popButton.tintColor = UIColor(named: "Gray")
         let signUPButton = UIBarButtonItem(title: "회원가입", style: .plain, target: self, action: #selector(tapSignUpBarButtonItem))
         signUPButton.setTitleTextAttributes([.font : UIFont(name: Pretendard.Bold.rawValue, size: 15)!], for: .normal)
         signUPButton.tintColor = .black
-        
         self.navigationItem.rightBarButtonItem = signUPButton
+        self.navigationItem.leftBarButtonItem = popButton
     }
 }
