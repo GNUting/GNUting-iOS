@@ -30,6 +30,7 @@ class AppStartVC: UIViewController {
     private lazy var loginButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("로그인")
+        button.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
         return button
     }()
     private lazy var signUPButton : PrimaryColorButton = {
@@ -40,12 +41,19 @@ class AppStartVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        startBackImgView.isUserInteractionEnabled = true
         setAddSubViews()
-        setAutoLayouy()
+        setAutoLayout()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+    }
+}
+extension AppStartVC{
+    @objc func tapLoginButton(){
+        let loginVC = LoginVC()
+        self.navigationController?.pushViewController(loginVC, animated: true)
     }
 }
 extension AppStartVC {
@@ -53,7 +61,7 @@ extension AppStartVC {
         self.view.addSubview(startBackImgView)
         startBackImgView.addSubViews([explainLabel,loginButton,signUPButton])
     }
-    private func setAutoLayouy(){
+    private func setAutoLayout(){
         startBackImgView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.left.equalToSuperview()
@@ -74,7 +82,7 @@ extension AppStartVC {
             make.top.equalTo(loginButton.snp.bottom).offset(18)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-50)
         }
     }
 }

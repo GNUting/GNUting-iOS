@@ -14,6 +14,7 @@ class PrimaryColorButton : UIButton {
         self.backgroundColor = UIColor(named: "PrimaryColor")
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
+        self.isUserInteractionEnabled = true
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -26,5 +27,6 @@ class PrimaryColorButton : UIButton {
         config.baseForegroundColor = .white
         self.configuration = config
     }
+
 }
  

@@ -27,6 +27,9 @@
 		F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */; };
 		F85345362B5F8961001EADE6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345352B5F8961001EADE6 /* Spacing.swift */; };
 		F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */; };
+		F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E922B60CE88001DE5E4 /* LoginVC.swift */; };
+		F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E942B60DA40001DE5E4 /* UIStackView+Extesnion.swift */; };
+		F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,9 @@
 		F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extesnion.swift"; sourceTree = "<group>"; };
 		F85345352B5F8961001EADE6 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorButton.swift; sourceTree = "<group>"; };
+		F8A15E922B60CE88001DE5E4 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		F8A15E942B60DA40001DE5E4 /* UIStackView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extesnion.swift"; sourceTree = "<group>"; };
+		F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +90,11 @@
 		F85344F82B5F710A001EADE6 /* GNUting */ = {
 			isa = PBXGroup;
 			children = (
+				F85345192B5F79E2001EADE6 /* Font */,
 				F85345302B5F88CC001EADE6 /* Extension */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F853452E2B5F88A8001EADE6 /* Start */,
-				F85345192B5F79E2001EADE6 /* Font */,
+				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F85344F92B5F710A001EADE6 /* AppDelegate.swift */,
 				F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */,
 				F85345022B5F710B001EADE6 /* Assets.xcassets */,
@@ -127,6 +134,7 @@
 			children = (
 				F85345352B5F8961001EADE6 /* Spacing.swift */,
 				F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */,
+				F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -136,8 +144,17 @@
 			children = (
 				F85345312B5F88EF001EADE6 /* UILabel+Extension.swift */,
 				F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */,
+				F8A15E942B60DA40001DE5E4 /* UIStackView+Extesnion.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F8A15E912B60CE6B001DE5E4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F8A15E922B60CE88001DE5E4 /* LoginVC.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,10 +243,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
+				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
+				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
+				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F85345322B5F88EF001EADE6 /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
