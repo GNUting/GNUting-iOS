@@ -46,7 +46,7 @@ class LoginVC: UIViewController {
     }()
     private lazy var findPasswordButton : UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("아이디 또는 비밀번호를 잊어버리셨나요?", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 15)!]))
+        config.attributedTitle = AttributedString("비밀번호를 잊어버리셨나요?", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 15)!]))
         config.baseForegroundColor = UIColor(named: "LightGray")
         let button = UIButton(configuration: config)
         button.addTarget(self, action: #selector(tapFindPasswordButton), for: .touchUpInside)
@@ -96,10 +96,5 @@ extension LoginVC {
     private func setNavigationBar(){
         let popButton = UIBarButtonItem(image: UIImage(named: "PopImg"), style: .plain, target: self, action: #selector(popButtonTap))
         popButton.tintColor = UIColor(named: "Gray")
-        let signUPButton = UIBarButtonItem(title: "회원가입", style: .plain, target: self, action: #selector(tapSignUpBarButtonItem))
-        signUPButton.setTitleTextAttributes([.font : UIFont(name: Pretendard.Bold.rawValue, size: 15)!], for: .normal)
-        signUPButton.tintColor = .black
-        self.navigationItem.rightBarButtonItem = signUPButton
-        self.navigationItem.leftBarButtonItem = popButton
-    }
+        self.navigationItem.leftBarButtonItem = popButton    }
 }
