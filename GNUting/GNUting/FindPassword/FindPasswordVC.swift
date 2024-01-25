@@ -66,9 +66,9 @@ extension FindPasswordVC {
         }
     }
     private func setNavigationBar(){
-        let signUPButton = UIBarButtonItem(image: UIImage(named: "PopImg"), style: .plain, target: self, action: #selector(popButtonTap))
-        signUPButton.tintColor = UIColor(named: "Gray")
-        self.navigationItem.leftBarButtonItem = signUPButton
+        let popButton = UIBarButtonItem(image: UIImage(named: "PopImg"), style: .plain, target: self, action: #selector(popButtonTap))
+        popButton.tintColor = UIColor(named: "Gray")
+        self.navigationItem.leftBarButtonItem = popButton
         self.navigationItem.title = "비밀번호 찾기"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
