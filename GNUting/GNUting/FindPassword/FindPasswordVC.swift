@@ -18,7 +18,7 @@ class FindPasswordVC: UIViewController {
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 18)
         label.numberOfLines = 2
         label.textColor = .black
-        label.setRangTextFont(fullText: "가입시 등록한 학교 이메일로\n본인인증 후 Password를 찾을 수 있습니다.", range: "학교 이메일", UIFont: UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!)
+        label.setRangeTextFont(fullText: "가입시 등록한 학교 이메일로\n본인인증 후 Password를 찾을 수 있습니다.", range: "학교 이메일", uiFont: UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!)
         label.textAlignment = .center
         return label
     }()

@@ -13,7 +13,7 @@ class AppStartVC: UIViewController {
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 20)
         label.numberOfLines = 3
         label.textColor = .black
-        label.setRangTextFont(fullText: "경상국립대학교 새로운 만남 과팅앱\n지누팅\n학교 속 새로운 인연을 만나보세요.", range: "지누팅", UIFont: UIFont(name: Pretendard.Bold.rawValue, size: 20)!)
+        label.setRangeTextFont(fullText: "경상국립대학교 새로운 만남 과팅앱\n지누팅\n학교 속 새로운 인연을 만나보세요.", range: "지누팅", uiFont: UIFont(name: Pretendard.Bold.rawValue, size: 20)!)
         return label
     }()
     private lazy var startBackImgView : UIImageView = {
