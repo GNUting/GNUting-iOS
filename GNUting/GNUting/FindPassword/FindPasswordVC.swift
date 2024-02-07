@@ -37,9 +37,6 @@ class FindPasswordVC: UIViewController {
     }
     
 }
-extension FindPasswordVC{
-    
-}
 extension FindPasswordVC {
     private func addSubViews(){
         self.view.addSubViews([certifiedImageView,explainLabel,emailCertifiedButton])

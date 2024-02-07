@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F850061B2B738D78007AB351 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061A2B738D78007AB351 /* TermsVC.swift */; };
+		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
+		F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061F2B739488007AB351 /* UIColor+Extension.swift */; };
+		F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85006232B739C9D007AB351 /* AllCheckTermsView.swift */; };
 		F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344F92B5F710A001EADE6 /* AppDelegate.swift */; };
 		F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */; };
 		F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344FD2B5F710A001EADE6 /* AppStartVC.swift */; };
@@ -35,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F850061A2B738D78007AB351 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
+		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
+		F850061F2B739488007AB351 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F85006232B739C9D007AB351 /* AllCheckTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCheckTermsView.swift; sourceTree = "<group>"; };
 		F85344F62B5F710A001EADE6 /* GNUting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GNUting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F85344F92B5F710A001EADE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +83,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F85006172B738D48007AB351 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				F850061C2B738FB9007AB351 /* Terms */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		F850061C2B738FB9007AB351 /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				F850061A2B738D78007AB351 /* TermsVC.swift */,
+				F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */,
+				F85006232B739C9D007AB351 /* AllCheckTermsView.swift */,
+			);
+			path = Terms;
+			sourceTree = "<group>";
+		};
 		F85344ED2B5F710A001EADE6 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +126,7 @@
 				F853452E2B5F88A8001EADE6 /* Start */,
 				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F8A15E982B60F0C4001DE5E4 /* FindPassword */,
+				F85006172B738D48007AB351 /* SignUp */,
 				F85344F92B5F710A001EADE6 /* AppDelegate.swift */,
 				F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */,
 				F85345022B5F710B001EADE6 /* Assets.xcassets */,
@@ -151,6 +178,7 @@
 				F8A15E942B60DA40001DE5E4 /* UIStackView+Extesnion.swift */,
 				F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */,
 				F862C80F2B622601008120FA /* UILabel+Extension.swift */,
+				F850061F2B739488007AB351 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -202,7 +230,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					F85344F52B5F710A001EADE6 = {
 						CreatedOnToolsVersion = 14.3;
@@ -257,17 +285,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
+				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
+				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
+				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
+				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +354,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -382,6 +415,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
