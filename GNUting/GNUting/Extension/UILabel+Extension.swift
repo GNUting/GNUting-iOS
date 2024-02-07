@@ -5,8 +5,9 @@
 //  Created by 원동진 on 2024/01/25.
 //
 
-import Foundation
 import UIKit
+
+
 extension UILabel {
     func setRangeTextFont(fullText: String,range: String,uiFont : UIFont){
         let attributedString = NSMutableAttributedString(string: fullText)
