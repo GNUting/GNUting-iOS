@@ -24,6 +24,12 @@ class TermsVC: UIViewController {
         tableView.register(TermsTableViewCell.self, forCellReuseIdentifier: TermsTableViewCell.identi)
         return tableView
     }()
+    private lazy var nextButton : PrimaryColorButton = {
+        let button = PrimaryColorButton()
+        button.setText("다음으로")
+        button.sizeToFit()
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,19 +68,24 @@ extension TermsVC{
         termsTableView.dataSource = self
     }
     private func addSubViews(){
-        self.view.addSubViews([allCheckTermsView,termsTableView])
+        self.view.addSubViews([allCheckTermsView,termsTableView,nextButton])
     }
     private func setAutoLayout(){
         allCheckTermsView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.left.equalToSuperview().offset(30)
-            make.right.equalToSuperview().offset(-30)
+            make.left.equalToSuperview().offset(Spacing.left)
+            make.right.equalToSuperview().offset(Spacing.right)
         }
         termsTableView.snp.makeConstraints { make in
             make.top.equalTo(allCheckTermsView.snp.bottom)
-            make.left.equalToSuperview().offset(30)
-            make.right.equalToSuperview().offset(-30)
+            make.left.equalToSuperview().offset(Spacing.left)
+            make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        nextButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(Spacing.left)
+            make.right.equalToSuperview().offset(Spacing.right)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-50)
         }
     }
     private func setNavigationBar(){
