@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignUpFirstProcess: UIViewController {
+class SignUpFirstProcessVC: UIViewController {
     private let explainLabel : UILabel = {
         let label = UILabel()
         label.text = "지누팅 서비스 이용을 위해서\n회원님의 정보가 필요해요."
@@ -72,14 +72,14 @@ class SignUpFirstProcess: UIViewController {
     }
 
 }
-extension SignUpFirstProcess{
+extension SignUpFirstProcessVC{
     private func addSubViews(){
         self.view.addSubViews([explainLabel,inputViewUpperStackView,nextButton])
         inputViewUpperStackView.addStackSubViews([emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
     }
     private func setAutoLayout(){
         explainLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
@@ -102,8 +102,10 @@ extension SignUpFirstProcess{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
 }
-extension SignUpFirstProcess{
+//MARK: - Action
+extension SignUpFirstProcessVC{
     @objc private func tapNextButton(){
-        
+        let vc = SignUPSecondProcessVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
