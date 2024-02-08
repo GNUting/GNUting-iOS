@@ -70,7 +70,7 @@ extension SignUPInpuView{
             make.top.left.right.equalToSuperview()
         }
         bottomStackView.snp.makeConstraints { make in
-            make.top.equalTo(inputTextTypeLabel.snp.bottom)
+            make.top.equalTo(inputTextTypeLabel.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
         }
         

@@ -96,10 +96,10 @@ extension TermsVC{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
 }
-//MARK: - Button ACtoin
+//MARK: - Action
 extension TermsVC{
     @objc private func tapNextButton(){
-        let vc = SignUpFirstProcess()
+        let vc = SignUpFirstProcessVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
