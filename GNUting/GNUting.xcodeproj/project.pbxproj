@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F8235CE62B749E7E00E49073 /* TextFieldBottomLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE52B749E7E00E49073 /* TextFieldBottomLine.swift */; };
-		F8235CE82B74A14000E49073 /* InputAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* InputAddButtonView.swift */; };
+		F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInpuView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcess.swift */; };
 		F850061B2B738D78007AB351 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061A2B738D78007AB351 /* TermsVC.swift */; };
 		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
@@ -42,8 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F8235CE52B749E7E00E49073 /* TextFieldBottomLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBottomLine.swift; sourceTree = "<group>"; };
-		F8235CE72B74A14000E49073 /* InputAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddButtonView.swift; sourceTree = "<group>"; };
+		F8235CE72B74A14000E49073 /* SignUPInpuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInpuView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcess.swift; sourceTree = "<group>"; };
 		F850061A2B738D78007AB351 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
@@ -92,8 +90,7 @@
 		F8235CE42B749E5300E49073 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F8235CE52B749E7E00E49073 /* TextFieldBottomLine.swift */,
-				F8235CE72B74A14000E49073 /* InputAddButtonView.swift */,
+				F8235CE72B74A14000E49073 /* SignUPInpuView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -315,7 +312,7 @@
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
-				F8235CE82B74A14000E49073 /* InputAddButtonView.swift in Sources */,
+				F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
@@ -327,7 +324,6 @@
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
-				F8235CE62B749E7E00E49073 /* TextFieldBottomLine.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
