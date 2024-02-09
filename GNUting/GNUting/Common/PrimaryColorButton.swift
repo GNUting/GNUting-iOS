@@ -19,7 +19,7 @@ class PrimaryColorButton : UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setText(_ text : String){
+    public func setText(_ text : String){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: 10, bottom: 22, trailing: 10)
         config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 20)!]))
@@ -27,6 +27,6 @@ class PrimaryColorButton : UIButton {
         config.baseForegroundColor = .white
         self.configuration = config
     }
-
+    
 }
  

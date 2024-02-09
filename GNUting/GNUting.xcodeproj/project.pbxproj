@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInpuView.swift */; };
+		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
+		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
+		F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF32B74B77900E49073 /* SelectGenderView.swift */; };
+		F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF52B764AD700E49073 /* SelectDateView.swift */; };
+		F8235CF92B765E2200E49073 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF82B765E2200E49073 /* DateModel.swift */; };
 		F850061B2B738D78007AB351 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061A2B738D78007AB351 /* TermsVC.swift */; };
 		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
 		F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061F2B739488007AB351 /* UIColor+Extension.swift */; };
@@ -39,6 +45,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F8235CE72B74A14000E49073 /* SignUPInpuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInpuView.swift; sourceTree = "<group>"; };
+		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
+		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
+		F8235CF32B74B77900E49073 /* SelectGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderView.swift; sourceTree = "<group>"; };
+		F8235CF52B764AD700E49073 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
+		F8235CF82B765E2200E49073 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		F850061A2B738D78007AB351 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		F850061F2B739488007AB351 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -83,9 +95,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8235CE42B749E5300E49073 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CE72B74A14000E49073 /* SignUPInpuView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F8235CE92B74A3E500E49073 /* SignUpProcess */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CF72B765E1200E49073 /* model */,
+				F8235CF22B74B75D00E49073 /* ViewComponent */,
+				F8235CEF2B74B52800E49073 /* VC */,
+				F8235CE42B749E5300E49073 /* Common */,
+			);
+			path = SignUpProcess;
+			sourceTree = "<group>";
+		};
+		F8235CEE2B74B51100E49073 /* ViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */,
+				F85006232B739C9D007AB351 /* AllCheckTermsView.swift */,
+			);
+			path = ViewComponent;
+			sourceTree = "<group>";
+		};
+		F8235CEF2B74B52800E49073 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
+				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
+				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
+			);
+			path = ViewComponent;
+			sourceTree = "<group>";
+		};
+		F8235CF72B765E1200E49073 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CF82B765E2200E49073 /* DateModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		F85006172B738D48007AB351 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				F8235CE92B74A3E500E49073 /* SignUpProcess */,
 				F850061C2B738FB9007AB351 /* Terms */,
 			);
 			path = SignUp;
@@ -94,9 +161,8 @@
 		F850061C2B738FB9007AB351 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
+				F8235CEE2B74B51100E49073 /* ViewComponent */,
 				F850061A2B738D78007AB351 /* TermsVC.swift */,
-				F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */,
-				F85006232B739C9D007AB351 /* AllCheckTermsView.swift */,
 			);
 			path = Terms;
 			sourceTree = "<group>";
@@ -284,23 +350,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
+				F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
+				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */,
+				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
+				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
+				F8235CF92B765E2200E49073 /* DateModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -424,7 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

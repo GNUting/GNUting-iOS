@@ -27,7 +27,7 @@ class TermsVC: UIViewController {
     private lazy var nextButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("다음으로")
-        button.sizeToFit()
+        button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         return button
     }()
     override func viewDidLoad() {
@@ -94,5 +94,12 @@ extension TermsVC{
         self.navigationItem.leftBarButtonItem = popButton
         self.navigationItem.title = "서비스 이용 동의"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+    }
+}
+//MARK: - Action
+extension TermsVC{
+    @objc private func tapNextButton(){
+        let vc = SignUpFirstProcessVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
