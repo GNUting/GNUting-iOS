@@ -10,12 +10,20 @@ import UIKit
 import SnapKit
 class SelectDateView : UIView{
     let textColor = UIColor(hexCode: "7D7D7D")
+    private let typeLabel : UILabel = {
+        let uiLabel = UILabel()
+        uiLabel.text = "생년월일"
+        uiLabel.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
+        return uiLabel
+    }()
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 25
+        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     private lazy var innerStackView : UIStackView = {
@@ -75,15 +83,19 @@ class SelectDateView : UIView{
 }
 extension SelectDateView {
     private func configure(){
-        self.layer.cornerRadius = 10
-        self.backgroundColor = UIColor(hexCode: "F5F5F5")
-        self.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
-        self.layer.masksToBounds = true
-        addSubview(upperStackView)
+        upperStackView.layer.cornerRadius = 10
+        upperStackView.backgroundColor = UIColor(hexCode: "F5F5F5")
+        upperStackView.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
+        upperStackView.layer.masksToBounds = true
+        addSubViews([upperStackView,typeLabel])
         upperStackView.addStackSubViews([yearLabel,innerStackView,dayLabel])
         innerStackView.addStackSubViews([divide1Label,monthLabel,divide2Label])
+        typeLabel.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
         upperStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(typeLabel.snp.bottom)
+            make.bottom.left.right.equalToSuperview()
         }
     }
     public func setDateLabel(date : DateModel){
