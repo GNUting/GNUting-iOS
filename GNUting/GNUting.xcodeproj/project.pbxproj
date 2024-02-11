@@ -13,6 +13,7 @@
 		F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF32B74B77900E49073 /* SelectGenderView.swift */; };
 		F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF52B764AD700E49073 /* SelectDateView.swift */; };
 		F8235CF92B765E2200E49073 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF82B765E2200E49073 /* DateModel.swift */; };
+		F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CFC2B78C8D300E49073 /* SighUpThirdProcessVC.swift */; };
 		F850061B2B738D78007AB351 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061A2B738D78007AB351 /* TermsVC.swift */; };
 		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
 		F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061F2B739488007AB351 /* UIColor+Extension.swift */; };
@@ -51,6 +52,7 @@
 		F8235CF32B74B77900E49073 /* SelectGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderView.swift; sourceTree = "<group>"; };
 		F8235CF52B764AD700E49073 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		F8235CF82B765E2200E49073 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
+		F8235CFC2B78C8D300E49073 /* SighUpThirdProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SighUpThirdProcessVC.swift; sourceTree = "<group>"; };
 		F850061A2B738D78007AB351 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		F850061F2B739488007AB351 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
 				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
+				F8235CFC2B78C8D300E49073 /* SighUpThirdProcessVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
+				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
