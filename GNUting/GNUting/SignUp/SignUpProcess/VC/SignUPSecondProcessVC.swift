@@ -137,7 +137,7 @@ extension SignUPSecondProcessVC{
         nextButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-50)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
         }
     }
     private func setNavigationBar(){
@@ -178,6 +178,7 @@ extension SignUPSecondProcessVC {
         
     }
     @objc private func tapNextButton(){
-        
+        let vc = SighUpThirdProcessVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
