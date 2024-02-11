@@ -79,6 +79,10 @@ extension SighUpThirdProcessVC {
         self.present(alert, animated: true)
     }
     @objc private func tapSignUpCompltedButton(){
-        
+        let alert = UIAlertController(title: "가입 완료", message: "가입이 완료 되었습니다", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "등록하기", style: .default, handler: { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        self.present(alert, animated: true)
     }
 }
