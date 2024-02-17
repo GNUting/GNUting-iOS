@@ -55,6 +55,7 @@ class LoginVC: UIViewController {
     private lazy var loginButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("로그인")
+        button.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
         button.sizeToFit()
         return button
     }()
@@ -71,9 +72,10 @@ class LoginVC: UIViewController {
     }
 }
 extension LoginVC{
-    @objc func tapSignUpBarButtonItem(){
-        
+    @objc func tapLoginButton(){
+        self.view.window?.rootViewController = TabBarController()
     }
+    
     @objc func tapFindPasswordButton(){
         let findPasswordVC = FindPasswordVC()
         self.navigationController?.pushViewController(findPasswordVC, animated: true)
