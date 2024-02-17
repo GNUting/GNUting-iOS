@@ -43,6 +43,11 @@
 		F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */; };
 		F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E992B60F128001DE5E4 /* FindPasswordVC.swift */; };
 		F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */; };
+		F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89D82B807646008E6767 /* TabBarController.swift */; };
+		F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89DE2B80770F008E6767 /* HomeVC.swift */; };
+		F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */; };
+		F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E22B8077A9008E6767 /* ChatVC.swift */; };
+		F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E42B8078BA008E6767 /* MyPageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +88,11 @@
 		F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		F8A15E992B60F128001DE5E4 /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		F8BE89D82B807646008E6767 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F8BE89DE2B80770F008E6767 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusVC.swift; sourceTree = "<group>"; };
+		F8BE89E22B8077A9008E6767 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		F8BE89E42B8078BA008E6767 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,13 +199,18 @@
 		F85344F82B5F710A001EADE6 /* GNUting */ = {
 			isa = PBXGroup;
 			children = (
-				F85345192B5F79E2001EADE6 /* Font */,
-				F85345302B5F88CC001EADE6 /* Extension */,
+				F8BE89D82B807646008E6767 /* TabBarController.swift */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F853452E2B5F88A8001EADE6 /* Start */,
 				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F8A15E982B60F0C4001DE5E4 /* FindPassword */,
 				F85006172B738D48007AB351 /* SignUp */,
+				F85345192B5F79E2001EADE6 /* Font */,
+				F85345302B5F88CC001EADE6 /* Extension */,
+				F8BE89DA2B807668008E6767 /* Home */,
+				F8BE89DB2B807678008E6767 /* RequestStatus */,
+				F8BE89DD2B8076CA008E6767 /* Chat */,
+				F8BE89DC2B8076C4008E6767 /* MyPage */,
 				F85344F92B5F710A001EADE6 /* AppDelegate.swift */,
 				F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */,
 				F85345022B5F710B001EADE6 /* Assets.xcassets */,
@@ -266,6 +281,38 @@
 				F8A15E992B60F128001DE5E4 /* FindPasswordVC.swift */,
 			);
 			path = FindPassword;
+			sourceTree = "<group>";
+		};
+		F8BE89DA2B807668008E6767 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F8BE89DB2B807678008E6767 /* RequestStatus */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */,
+			);
+			path = RequestStatus;
+			sourceTree = "<group>";
+		};
+		F8BE89DC2B8076C4008E6767 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE89E42B8078BA008E6767 /* MyPageVC.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		F8BE89DD2B8076CA008E6767 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE89E22B8077A9008E6767 /* ChatVC.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,8 +408,10 @@
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
+				F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
+				F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */,
@@ -370,8 +419,11 @@
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
+				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
+				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
+				F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
