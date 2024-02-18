@@ -52,6 +52,10 @@
 		F8BE8A0E2B82031A008E6767 /* DateBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0D2B82031A008E6767 /* DateBoardTableViewCell.swift */; };
 		F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A102B820453008E6767 /* DateBoardModel.swift */; };
 		F8BE8A142B8207EA008E6767 /* DateBoardTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A132B8207EA008E6767 /* DateBoardTableViewHeader.swift */; };
+		F8BE8A172B820BBA008E6767 /* DateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardVC.swift */; };
+		F8BE8A192B820E66008E6767 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A182B820E66008E6767 /* BackButton.swift */; };
+		F8BE8A1B2B82127A008E6767 /* DetailDateBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DetailDateBoardTableViewCell.swift */; };
+		F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1C2B821372008E6767 /* DetailDateBoardModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +105,10 @@
 		F8BE8A0D2B82031A008E6767 /* DateBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A102B820453008E6767 /* DateBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardModel.swift; sourceTree = "<group>"; };
 		F8BE8A132B8207EA008E6767 /* DateBoardTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardTableViewHeader.swift; sourceTree = "<group>"; };
+		F8BE8A162B820BBA008E6767 /* DateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardVC.swift; sourceTree = "<group>"; };
+		F8BE8A182B820E66008E6767 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		F8BE8A1A2B82127A008E6767 /* DetailDateBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardTableViewCell.swift; sourceTree = "<group>"; };
+		F8BE8A1C2B821372008E6767 /* DetailDateBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +267,7 @@
 				F85345352B5F8961001EADE6 /* Spacing.swift */,
 				F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */,
 				F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */,
+				F8BE8A182B820E66008E6767 /* BackButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -294,9 +303,9 @@
 		F8BE89DA2B807668008E6767 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F8BE8A152B820BA4008E6767 /* VC */,
 				F8BE8A122B82049E008E6767 /* ViewComponent */,
 				F8BE8A0F2B820438008E6767 /* Model */,
-				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				F8BE8A102B820453008E6767 /* DateBoardModel.swift */,
+				F8BE8A1C2B821372008E6767 /* DetailDateBoardModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,11 +346,21 @@
 		F8BE8A122B82049E008E6767 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				F8BE8A1A2B82127A008E6767 /* DetailDateBoardTableViewCell.swift */,
 				F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */,
 				F8BE8A0D2B82031A008E6767 /* DateBoardTableViewCell.swift */,
 				F8BE8A132B8207EA008E6767 /* DateBoardTableViewHeader.swift */,
 			);
 			path = ViewComponent;
+			sourceTree = "<group>";
+		};
+		F8BE8A152B820BA4008E6767 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
+				F8BE8A162B820BBA008E6767 /* DateBoardVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,18 +463,22 @@
 				F8BE8A142B8207EA008E6767 /* DateBoardTableViewHeader.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
 				F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */,
+				F8BE8A172B820BBA008E6767 /* DateBoardVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */,
+				F8BE8A192B820E66008E6767 /* BackButton.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
+				F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* DateBoardTableViewCell.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
+				F8BE8A1B2B82127A008E6767 /* DetailDateBoardTableViewCell.swift in Sources */,
 				F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,

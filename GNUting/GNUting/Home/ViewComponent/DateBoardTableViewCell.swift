@@ -24,7 +24,7 @@ class DateBoardTableViewCell: UITableViewCell {
         label.textAlignment = .left
         return label
     }()
-    private lazy var introduceTextLabel : UILabel = {
+    private lazy var boardTitleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 15)
         label.textColor = .black
@@ -47,18 +47,18 @@ class DateBoardTableViewCell: UITableViewCell {
     }
     public func setCell(model : DateBoardModel){
         majorLabel.text = model.major
-        introduceTextLabel.text = model.introduce
+        boardTitleLabel.text = model.title
     }
     private func configure(){
         contentView.addSubview(upperStackView)
-        upperStackView.addStackSubViews([majorLabel,introduceTextLabel])
+        upperStackView.addStackSubViews([majorLabel,boardTitleLabel])
         upperStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
             make.bottom.equalToSuperview().offset(-15)
             make.left.right.equalToSuperview()
         }
         majorLabel.setContentHuggingPriority(.init(250), for: .horizontal)
-        introduceTextLabel.setContentHuggingPriority(.init(251), for: .horizontal)
+        boardTitleLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         majorLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }
