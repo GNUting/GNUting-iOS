@@ -90,7 +90,9 @@ extension DateBoardVC : UITableViewDataSource,UITableViewDelegate{
 }
 extension DateBoardVC {
     @objc private func tapSearchButton(){
-        
+        let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
