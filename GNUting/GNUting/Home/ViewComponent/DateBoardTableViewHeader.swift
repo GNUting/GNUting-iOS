@@ -9,6 +9,7 @@ import UIKit
 
 class DateBoardTableViewHeader: UITableViewHeaderFooterView {
     static let identi = "DateBoardTableViewHeaderid"
+    var tapMoreViewButtonCompletion : (()->())?
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -30,6 +31,7 @@ class DateBoardTableViewHeader: UITableViewHeaderFooterView {
         button.setTitle("더보기 >", for: .normal)
         button.setTitleColor(UIColor(hexCode: "767676"), for: .normal)
         button.titleLabel?.font = UIFont.init(name: Pretendard.SemiBold.rawValue, size: 15)
+        button.addTarget(self, action: #selector(tapMoreViewButton), for: .touchUpInside)
         return button
     }()
     private let borderView : UIView = {
@@ -54,6 +56,10 @@ class DateBoardTableViewHeader: UITableViewHeaderFooterView {
         borderView.snp.makeConstraints { make in
             make.top.equalTo(upperStackView.snp.bottom).offset(15)
             make.left.bottom.right.equalToSuperview()
+            make.height.equalTo(1)
         }
+    }
+    @objc private func tapMoreViewButton(){
+        tapMoreViewButtonCompletion?()
     }
 }

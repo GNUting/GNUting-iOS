@@ -141,8 +141,10 @@ extension SignUPSecondProcessVC{
         }
     }
     private func setNavigationBar(){
-        let popButton = UIBarButtonItem(image: UIImage(named: "PopImg"), style: .plain, target: self, action: #selector(popButtonTap))
-        popButton.tintColor = UIColor(named: "Gray")
+        let backButton = BackButton()
+        backButton.setConfigure(text: "")
+        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
+        let popButton = UIBarButtonItem(customView: backButton)
         self.navigationItem.leftBarButtonItem = popButton
         self.navigationItem.title = "2/3"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]

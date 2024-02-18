@@ -12,7 +12,7 @@ class HomeVC: UIViewController{
     
     var userName = "원동진"
     let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
-    let sampeleDateBoardData : [DateBoardModel] = [DateBoardModel(major: "간호학과", introduce: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", introduce: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", introduce: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", introduce: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", introduce: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", introduce: "3:3과팅하실분 연락주세요.")]
+    let sampeleDateBoardData : [DateBoardModel] = [DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.")]
     var currentPage = 0
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
@@ -73,12 +73,12 @@ extension HomeVC{
     }
     private func setAutoLayout(){
         explainLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(15)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
         advertCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(explainLabel.snp.bottom).offset(15)
+            make.top.equalTo(explainLabel.snp.bottom).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
             make.height.equalTo(80)
@@ -96,7 +96,7 @@ extension HomeVC{
     }
     private func setNavigationBar(){
         let notiButton = UIBarButtonItem(image: UIImage(named: "BellImg"), style: .plain, target: self, action: #selector(tapNotiButton))
-        notiButton.tintColor = .black
+        notiButton.tintColor = UIColor(named: "IconColor")
         let imagebutton = UIButton()
         imagebutton.setImage(UIImage(named: "SampleImg1"), for: .normal)
         imagebutton.layer.cornerRadius = imagebutton.layer.frame.size.width / 2
@@ -104,14 +104,7 @@ extension HomeVC{
         self.navigationItem.rightBarButtonItems = [userImageButton,notiButton]
     }
 }
-extension HomeVC{
-    @objc private func tapNotiButton(){
-        
-    }
-    @objc private func tapUserImageButton(){
-        
-    }
-}
+
 extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         sampleAdvertImage.count
@@ -142,7 +135,19 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateBoardTableViewHeader.identi) as? DateBoardTableViewHeader else {return UIView()}
+        header.tapMoreViewButtonCompletion = { [unowned self] in
+            let vc = DateBoardVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         return header
     }
   
+}
+extension HomeVC{
+    @objc private func tapNotiButton(){
+        
+    }
+    @objc private func tapUserImageButton(){
+        
+    }
 }
