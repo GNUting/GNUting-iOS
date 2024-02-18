@@ -48,6 +48,10 @@
 		F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */; };
 		F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E22B8077A9008E6767 /* ChatVC.swift */; };
 		F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E42B8078BA008E6767 /* MyPageVC.swift */; };
+		F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */; };
+		F8BE8A0E2B82031A008E6767 /* DateBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0D2B82031A008E6767 /* DateBoardTableViewCell.swift */; };
+		F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A102B820453008E6767 /* DateBoardModel.swift */; };
+		F8BE8A142B8207EA008E6767 /* DateBoardTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A132B8207EA008E6767 /* DateBoardTableViewHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +97,10 @@
 		F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusVC.swift; sourceTree = "<group>"; };
 		F8BE89E22B8077A9008E6767 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		F8BE89E42B8078BA008E6767 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8BE8A0D2B82031A008E6767 /* DateBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardTableViewCell.swift; sourceTree = "<group>"; };
+		F8BE8A102B820453008E6767 /* DateBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardModel.swift; sourceTree = "<group>"; };
+		F8BE8A132B8207EA008E6767 /* DateBoardTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardTableViewHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +294,8 @@
 		F8BE89DA2B807668008E6767 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F8BE8A122B82049E008E6767 /* ViewComponent */,
+				F8BE8A0F2B820438008E6767 /* Model */,
 				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
 			);
 			path = Home;
@@ -313,6 +323,24 @@
 				F8BE89E22B8077A9008E6767 /* ChatVC.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		F8BE8A0F2B820438008E6767 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE8A102B820453008E6767 /* DateBoardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F8BE8A122B82049E008E6767 /* ViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */,
+				F8BE8A0D2B82031A008E6767 /* DateBoardTableViewCell.swift */,
+				F8BE8A132B8207EA008E6767 /* DateBoardTableViewHeader.swift */,
+			);
+			path = ViewComponent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
@@ -410,6 +439,8 @@
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
+				F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */,
+				F8BE8A142B8207EA008E6767 /* DateBoardTableViewHeader.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
 				F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
@@ -419,6 +450,7 @@
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
+				F8BE8A0E2B82031A008E6767 /* DateBoardTableViewCell.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
