@@ -56,6 +56,8 @@
 		F8BE8A192B820E66008E6767 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A182B820E66008E6767 /* BackButton.swift */; };
 		F8BE8A1B2B82127A008E6767 /* DetailDateBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DetailDateBoardTableViewCell.swift */; };
 		F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1C2B821372008E6767 /* DetailDateBoardModel.swift */; };
+		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
+		F8BE8A252B822094008E6767 /* BoardTextSearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +111,8 @@
 		F8BE8A182B820E66008E6767 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* DetailDateBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A1C2B821372008E6767 /* DetailDateBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardModel.swift; sourceTree = "<group>"; };
+		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
+		F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchResultVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +363,8 @@
 			children = (
 				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
 				F8BE8A162B820BBA008E6767 /* DateBoardVC.swift */,
+				F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */,
+				F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8BE8A252B822094008E6767 /* BoardTextSearchResultVC.swift in Sources */,
 				F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
@@ -470,6 +477,7 @@
 				F8BE8A192B820E66008E6767 /* BackButton.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
+				F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
 				F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */,
