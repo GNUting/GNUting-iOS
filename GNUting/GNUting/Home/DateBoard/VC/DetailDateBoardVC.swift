@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DateBoardVC: UIViewController {
+class DetailDateBoardVC: UIViewController {
     let sampeleDetailDateBoardData : [DetailDateBoardModel] = [DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "21학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "24학번")]
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
@@ -30,7 +30,7 @@ class DateBoardVC: UIViewController {
         button.layer.shadowOpacity = 0.3
         button.layer.shadowOffset = .zero
         button.layer.shadowRadius = 20
-        
+        button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
         return button
     }()
     override func viewDidLoad() {
@@ -43,7 +43,7 @@ class DateBoardVC: UIViewController {
     }
     
 }
-extension DateBoardVC{
+extension DetailDateBoardVC{
     private func setTableView(){
         dateBoardTableView.delegate = self
         dateBoardTableView.dataSource = self
@@ -75,7 +75,7 @@ extension DateBoardVC{
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 }
-extension DateBoardVC : UITableViewDataSource,UITableViewDelegate{
+extension DetailDateBoardVC : UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sampeleDetailDateBoardData.count
     }
@@ -88,11 +88,15 @@ extension DateBoardVC : UITableViewDataSource,UITableViewDelegate{
     
     
 }
-extension DateBoardVC {
+extension DetailDateBoardVC {
     @objc private func tapSearchButton(){
         let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    @objc private func tapWriteTextButton(){
+        let vc = WriteDateBoardVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
