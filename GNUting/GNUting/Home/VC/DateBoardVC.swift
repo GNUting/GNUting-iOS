@@ -30,7 +30,7 @@ class DateBoardVC: UIViewController {
         button.layer.shadowOpacity = 0.3
         button.layer.shadowOffset = .zero
         button.layer.shadowRadius = 20
-        
+        button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
         return button
     }()
     override func viewDidLoad() {
@@ -93,6 +93,10 @@ extension DateBoardVC {
         let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    @objc private func tapWriteTextButton(){
+        let vc = WriteDateBoardVC()
+        self.present(vc, animated: true)
     }
 }
 
