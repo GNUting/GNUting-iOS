@@ -48,9 +48,12 @@ extension WriteDateBoardVC{
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.title = "글쓰기"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
-//        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "SearchImg"), style: .plain, target: self, action: #selector(tapSearchButton))
-//        rightBarButtonItem.tintColor = UIColor(named: "IconColor")
-//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        let completedButton = UIButton()
+        completedButton.setTitle("완료", for: .normal)
+        completedButton.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        completedButton.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
+        completedButton.addTarget(self, action: #selector(tapCompletedButton), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
     }
     private func addSubViews() {
         view.addSubViews([titleContetnView,memberTableView])
@@ -118,3 +121,8 @@ extension WriteDateBoardVC : UITextViewDelegate{
        }
 }
 
+extension WriteDateBoardVC{
+    @objc private func tapCompletedButton(){
+    
+    }
+}

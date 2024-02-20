@@ -170,8 +170,8 @@
 		F80C4DE32B838CE500BA6FFB /* Wrtie */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DE72B8394D200BA6FFB /* ViewComponent */,
 				F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */,
+				F80C4DE72B8394D200BA6FFB /* ViewComponent */,
 			);
 			path = Wrtie;
 			sourceTree = "<group>";
