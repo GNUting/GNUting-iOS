@@ -11,7 +11,7 @@ class BoardTextSearchResultVC: UIViewController {
     var filterData : [DetailDateBoardModel] = []
     private lazy var searchResultTableView : UITableView = {
        let tableView = UITableView()
-        tableView.register(DetailDateBoardTableViewCell.self, forCellReuseIdentifier: DetailDateBoardTableViewCell.identi)
+        tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
         return tableView
     }()
     override func viewDidLoad() {
@@ -47,7 +47,7 @@ extension BoardTextSearchResultVC : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailDateBoardTableViewCell.identi, for: indexPath) as? DetailDateBoardTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return UITableViewCell()}
         cell.setCell(model: filterData[indexPath.row])
         return cell
     }
