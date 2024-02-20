@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailDateBoardTableViewCell: UITableViewCell {
+class DateBoardListTableViewCell: UITableViewCell {
     static let identi = "DetailDateBoardTableViewCellid"
     private lazy var boardTitleLabel : UILabel = {
         let label = UILabel()
