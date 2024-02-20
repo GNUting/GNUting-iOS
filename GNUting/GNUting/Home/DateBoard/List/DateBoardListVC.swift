@@ -11,7 +11,7 @@ class DateBoardListVC: UIViewController {
     let sampeleDetailDateBoardData : [DetailDateBoardModel] = [DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "21학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "24학번")]
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
-        tableView.register(DetailDateBoardTableViewCell.self, forCellReuseIdentifier: DetailDateBoardTableViewCell.identi)
+        tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -81,12 +81,14 @@ extension DateBoardListVC : UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailDateBoardTableViewCell.identi, for: indexPath) as? DetailDateBoardTableViewCell else {return DetailDateBoardTableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
         cell.setCell(model: sampeleDetailDateBoardData[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailDateBoardVC()
+        vc.setTitleLabel(title: sampeleDetailDateBoardData[indexPath.row].title)
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
