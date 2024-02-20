@@ -136,7 +136,7 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateBoardTableViewHeader.identi) as? DateBoardTableViewHeader else {return UIView()}
         header.tapMoreViewButtonCompletion = { [unowned self] in
-            let vc = DetailDateBoardVC()
+            let vc = DateBoardListVC()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         return header
