@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailDateBoardVC: UIViewController {
+class DateBoardListVC: UIViewController {
     let sampeleDetailDateBoardData : [DetailDateBoardModel] = [DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "21학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "24학번")]
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
@@ -43,7 +43,7 @@ class DetailDateBoardVC: UIViewController {
     }
     
 }
-extension DetailDateBoardVC{
+extension DateBoardListVC{
     private func setTableView(){
         dateBoardTableView.delegate = self
         dateBoardTableView.dataSource = self
@@ -75,7 +75,7 @@ extension DetailDateBoardVC{
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 }
-extension DetailDateBoardVC : UITableViewDataSource,UITableViewDelegate{
+extension DateBoardListVC : UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sampeleDetailDateBoardData.count
     }
@@ -85,10 +85,13 @@ extension DetailDateBoardVC : UITableViewDataSource,UITableViewDelegate{
         cell.setCell(model: sampeleDetailDateBoardData[indexPath.row])
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailDateBoardVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
-extension DetailDateBoardVC {
+extension DateBoardListVC {
     @objc private func tapSearchButton(){
         let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())
         vc.modalPresentationStyle = .fullScreen
