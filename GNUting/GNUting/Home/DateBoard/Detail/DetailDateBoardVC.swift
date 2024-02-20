@@ -8,11 +8,19 @@
 import UIKit
 
 class DetailDateBoardVC: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        addSubViews()
+        setAutoLayout()
+    }
+}
+extension DetailDateBoardVC{
+    private func addSubViews() {
         
-        // Do any additional setup after loading the view.
+    }
+    private func setAutoLayout(){
+        
     }
     
 }
