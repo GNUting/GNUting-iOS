@@ -7,8 +7,8 @@
 
 import UIKit
 
-class DateBoardTableViewHeader: UITableViewHeaderFooterView {
-    static let identi = "DateBoardTableViewHeaderid"
+class HomeDateBoardListTableViewHeader: UITableViewHeaderFooterView {
+    static let identi = "HomeDateBoardListTableViewHeaderid"
     var tapMoreViewButtonCompletion : (()->())?
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
