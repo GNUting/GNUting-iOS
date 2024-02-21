@@ -7,8 +7,8 @@
 
 import UIKit
 
-class DateBoardTableViewCell: UITableViewCell {
-    static let identi = "DateBoardTableViewCellid"
+class HomeDateBoardListTableViewCell: UITableViewCell {
+    static let identi = "HomeDateBoardListTableViewCellid"
     private lazy var upperStackView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal

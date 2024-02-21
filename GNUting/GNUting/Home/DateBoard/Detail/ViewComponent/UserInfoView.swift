@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+
 class UserInfoView: UIView {
     private lazy var border1 : UIView = {
         let view = UIView()

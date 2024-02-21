@@ -8,6 +8,8 @@
 import UIKit
 
 class DetailDateBoardVC: UIViewController {
+
+    
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 20)
@@ -42,17 +44,27 @@ class DetailDateBoardVC: UIViewController {
 //        button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         return button
     }()
+    private lazy var detailDateBoardSetView : DetailDateBoardSetView = {
+        let view = DetailDateBoardSetView()
+        view.isHidden = true
+        return view
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
         setNavigationBar()
+        bringToDetailDateBoardSetView()
+        setDelegate()
     }
 }
 extension DetailDateBoardVC{
+    private func bringToDetailDateBoardSetView() {
+        self.view.bringSubviewToFront(detailDateBoardSetView)
+    }
     private func addSubViews() {
-        view.addSubViews([titleLabel,userInfoView,contentTextView,chatPeopleViewButton,requetChatButton])
+        view.addSubViews([titleLabel,userInfoView,contentTextView,chatPeopleViewButton,requetChatButton,detailDateBoardSetView])
     }
     private func setAutoLayout(){
         titleLabel.snp.makeConstraints { make in
@@ -81,6 +93,10 @@ extension DetailDateBoardVC{
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
         }
+        detailDateBoardSetView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.right.equalToSuperview().offset(Spacing.right)
+        }
     }
     private func setNavigationBar(){
         let backButton = BackButton()
@@ -89,9 +105,17 @@ extension DetailDateBoardVC{
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.title = "과팅 게시판"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
-        let settingButton = UIBarButtonItem(image: UIImage(named: "SettingButton"), style: .plain, target: self, action: #selector(tapSettingButton))
+        
+        
+        let settingButton = UIBarButtonItem(image: UIImage(named: "SettingButton"), style: .plain, target: self, action: #selector(tapSettingButton(_:)))
         settingButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItem = settingButton
+    }
+}
+//MARK: - delegate
+extension DetailDateBoardVC{
+    private func setDelegate(){
+        detailDateBoardSetView.buttonActionDelegate = self
     }
 }
 extension DetailDateBoardVC {
@@ -104,7 +128,24 @@ extension DetailDateBoardVC {
     }
 }
 extension DetailDateBoardVC{
-    @objc private func tapSettingButton(){
+    @objc private func tapSettingButton(_ sender: UIButton){
+        sender.isSelected.toggle()
+        if sender.isSelected{
+            detailDateBoardSetView.isHidden = false
+        }else{
+            detailDateBoardSetView.isHidden = true
+        }
         
+    }
+}
+extension DetailDateBoardVC : DetailDateBoardSetViewButtonAction {
+    func didTapUpDateButton() {
+        print("Update")
+    }
+    func didTapDeleteButton() {
+        print("Delete")
+    }
+    func didTapReportButton() {
+        print("Delete")
     }
 }
