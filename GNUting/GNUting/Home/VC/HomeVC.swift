@@ -44,8 +44,8 @@ class HomeVC: UIViewController{
     private lazy var dateBoardTableView : UITableView = { // 과팅 게시판
         let tableview = UITableView()
         tableview.separatorStyle = .none
-        tableview.register(DateBoardTableViewHeader.self, forHeaderFooterViewReuseIdentifier: DateBoardTableViewHeader.identi)
-        tableview.register(DateBoardTableViewCell.self, forCellReuseIdentifier: DateBoardTableViewCell.identi)
+        tableview.register(HomeDateBoardListTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HomeDateBoardListTableViewHeader.identi)
+        tableview.register(HomeDateBoardListTableViewCell.self, forCellReuseIdentifier: HomeDateBoardListTableViewCell.identi)
         return tableview
     }()
     override func viewDidLoad() {
@@ -129,12 +129,12 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardTableViewCell.identi, for: indexPath) as? DateBoardTableViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeDateBoardListTableViewCell.identi, for: indexPath) as? HomeDateBoardListTableViewCell else { return UITableViewCell()}
         cell.setCell(model: sampeleDateBoardData[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateBoardTableViewHeader.identi) as? DateBoardTableViewHeader else {return UIView()}
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeDateBoardListTableViewHeader.identi) as? HomeDateBoardListTableViewHeader else {return UIView()}
         header.tapMoreViewButtonCompletion = { [unowned self] in
             let vc = DateBoardListVC()
             self.navigationController?.pushViewController(vc, animated: true)
