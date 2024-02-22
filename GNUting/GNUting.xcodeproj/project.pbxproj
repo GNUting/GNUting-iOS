@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
-		F80C4DDF2B83852100BA6FFB /* WrtieTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieTitleContentView.swift */; };
+		F80C4DDD2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift */; };
+		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
 		F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */; };
 		F80C4DEB2B839C3100BA6FFB /* MemBerAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DEA2B839C3100BA6FFB /* MemBerAddTableViewCell.swift */; };
@@ -69,8 +69,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDateBoardVC.swift; sourceTree = "<group>"; };
-		F80C4DDE2B83852100BA6FFB /* WrtieTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieTitleContentView.swift; sourceTree = "<group>"; };
+		F80C4DDC2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteUpdateDateBoardVC.swift; sourceTree = "<group>"; };
+		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
 		F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		F80C4DEA2B839C3100BA6FFB /* MemBerAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemBerAddTableViewCell.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DE32B838CE500BA6FFB /* Wrtie */,
+				F80C4DE32B838CE500BA6FFB /* Wrtie+Update */,
 				F8CDE3502B849ED000E5598D /* List */,
 				F8CDE34D2B849AA400E5598D /* Detail */,
 				F80C4DE42B838CEA00BA6FFB /* Search */,
@@ -154,13 +154,13 @@
 			path = DateBoard;
 			sourceTree = "<group>";
 		};
-		F80C4DE32B838CE500BA6FFB /* Wrtie */ = {
+		F80C4DE32B838CE500BA6FFB /* Wrtie+Update */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */,
+				F80C4DDC2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift */,
 				F80C4DE72B8394D200BA6FFB /* ViewComponent */,
 			);
-			path = Wrtie;
+			path = "Wrtie+Update";
 			sourceTree = "<group>";
 		};
 		F80C4DE42B838CEA00BA6FFB /* Search */ = {
@@ -175,7 +175,7 @@
 		F80C4DE72B8394D200BA6FFB /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DDE2B83852100BA6FFB /* WrtieTitleContentView.swift */,
+				F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */,
 				F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */,
 				F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */,
 				F80C4DEA2B839C3100BA6FFB /* MemBerAddTableViewCell.swift */,
@@ -546,7 +546,7 @@
 				F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */,
-				F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */,
+				F80C4DDD2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */,
 				F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */,
@@ -566,7 +566,7 @@
 				F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
-				F80C4DDF2B83852100BA6FFB /* WrtieTitleContentView.swift in Sources */,
+				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
 				F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,

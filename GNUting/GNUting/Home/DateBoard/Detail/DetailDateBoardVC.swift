@@ -140,7 +140,13 @@ extension DetailDateBoardVC{
 }
 extension DetailDateBoardVC : DetailDateBoardSetViewButtonAction {
     func didTapUpDateButton() {
-        print("Update")
+        detailDateBoardSetView.isHidden = true
+        self.navigationItem.rightBarButtonItem?.isSelected = false
+        let VC = WriteUpdateDateBoardVC()
+        VC.titleState = "수정하기"
+        
+        VC.sendDetailTextData(textTuple: (titleLabel.text!, contentTextView.text))
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     func didTapDeleteButton() {
         print("Delete")

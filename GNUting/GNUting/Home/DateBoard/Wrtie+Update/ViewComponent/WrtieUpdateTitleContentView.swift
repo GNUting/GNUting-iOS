@@ -7,7 +7,7 @@
 
 import UIKit
 //MARK: - 제목, 내용 입력 화면
-class WrtieTitleContentView: UIView {
+class WrtieUpdateTitleContentView: UIView {
     private lazy var upperView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
@@ -43,6 +43,9 @@ class WrtieTitleContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+  
+}
+extension WrtieUpdateTitleContentView{
     private func configure(){
         addSubview(upperView)
         upperView.snp.makeConstraints { make in
@@ -52,5 +55,17 @@ class WrtieTitleContentView: UIView {
         borderView.snp.makeConstraints { make in
             make.height.equalTo(1)
         }
+    }
+
+}
+extension WrtieUpdateTitleContentView{
+    public func setTitleTextFieldText(text : String) {
+        titleTextField.text = text
+    }
+    public func setContentTextView(text : String) {
+        contentTextView.text = text
+    }
+    public func setContentTextViewTextColor(color : UIColor){
+        contentTextView.textColor = color
     }
 }
