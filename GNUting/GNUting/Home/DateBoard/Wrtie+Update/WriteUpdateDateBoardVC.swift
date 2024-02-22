@@ -7,11 +7,12 @@
 
 import UIKit
 
-class WriteDateBoardVC: UIViewController {
+class WriteUpdateDateBoardVC: UIViewController {
+    var titleState = "글쓰기"
     let textViewPlaceHolder = "내용을 입력해주세요."
     let sampleData = ["짱짱맨(asd123) 컴퓨터과학과 | 21살 | 20학번|안녕하세요...이쁜이 구해요","짱짱맨(asd123) 컴퓨터과학과 | 21살 | 20학번|안녕하세요...이쁜이 구해요","짱짱맨(asd123) 컴퓨터과학과 | 21살 | 20학번|안녕하세요...이쁜이 구해요"]
-    private lazy var titleContetnView : WrtieTitleContentView = {
-        let customView = WrtieTitleContentView()
+    private lazy var titleContentView : WrtieUpdateTitleContentView = {
+        let customView = WrtieUpdateTitleContentView()
         customView.contentTextView.delegate = self
         customView.contentTextView.text = textViewPlaceHolder
         
@@ -36,17 +37,17 @@ class WriteDateBoardVC: UIViewController {
     
 
 }
-extension WriteDateBoardVC{
+extension WriteUpdateDateBoardVC{
     private func setTableView(){
         memberTableView.delegate = self
         memberTableView.dataSource = self
     }
     private func setNavigationBar(){
         let backButton = BackButton()
-        backButton.setConfigure(text: "홈")
+        backButton.setConfigure(text: "취소")
         backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.title = "글쓰기"
+        self.navigationItem.title = "\(titleState)"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
         let completedButton = UIButton()
         completedButton.setTitle("완료", for: .normal)
@@ -56,17 +57,17 @@ extension WriteDateBoardVC{
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
     }
     private func addSubViews() {
-        view.addSubViews([titleContetnView,memberTableView])
+        view.addSubViews([titleContentView,memberTableView])
     }
     private func setAutoLayout(){
-        titleContetnView.snp.makeConstraints { make in
+        titleContentView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
 //            make.height.equalTo(self.view.frame.height).dividedBy(3)
         }
         memberTableView.snp.makeConstraints { make in
-            make.top.equalTo(titleContetnView.snp.bottom).offset(Spacing.top)
+            make.top.equalTo(titleContentView.snp.bottom).offset(Spacing.top)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.height.equalToSuperview().dividedBy(2)
@@ -75,7 +76,7 @@ extension WriteDateBoardVC{
     }
     
 }
-extension WriteDateBoardVC : UITableViewDelegate,UITableViewDataSource {
+extension WriteUpdateDateBoardVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sampleData.count == 0{
             return 1
@@ -105,24 +106,33 @@ extension WriteDateBoardVC : UITableViewDelegate,UITableViewDataSource {
     }
 
 }
-extension WriteDateBoardVC : UITextViewDelegate{
+extension WriteUpdateDateBoardVC : UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
            if textView.text == textViewPlaceHolder {
                textView.text = nil
                textView.textColor = .black
+               
            }
        }
 
        func textViewDidEndEditing(_ textView: UITextView) {
            if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                textView.text = textViewPlaceHolder
-               textView.textColor = UIColor(named: "9F9F9F")
+               textView.textColor = UIColor(hexCode: "9F9F9F")
            }
        }
 }
 
-extension WriteDateBoardVC{
+extension WriteUpdateDateBoardVC{
     @objc private func tapCompletedButton(){
     
     }
+}
+extension WriteUpdateDateBoardVC {
+    public func sendDetailTextData(textTuple : (String,String)) {
+        titleContentView.setTitleTextFieldText(text: textTuple.0)
+        titleContentView.setContentTextView(text: textTuple.1)
+        titleContentView.setContentTextViewTextColor(color: .black)
+    }
+    
 }
