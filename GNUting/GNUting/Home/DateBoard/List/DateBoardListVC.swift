@@ -100,7 +100,7 @@ extension DateBoardListVC {
         present(vc, animated: true)
     }
     @objc private func tapWriteTextButton(){
-        let vc = WriteDateBoardVC()
+        let vc = WriteUpdateDateBoardVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
