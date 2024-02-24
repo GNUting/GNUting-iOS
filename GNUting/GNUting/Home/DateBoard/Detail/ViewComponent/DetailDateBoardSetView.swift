@@ -58,7 +58,7 @@ class DetailDateBoardSetView: UIView {
         config.baseForegroundColor = .black
         config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 50, bottom: 10, trailing: 50)
         let button = UIButton(configuration: config)
-        button.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapReportButton), for: .touchUpInside)
         return button
     }()
     override init(frame: CGRect) {
@@ -90,9 +90,9 @@ extension DetailDateBoardSetView{
         buttonActionDelegate?.didTapUpDateButton()
     }
     @objc private func didTapDeleteButton(){
-        buttonActionDelegate?.didTapUpDateButton()
+        buttonActionDelegate?.didTapDeleteButton()
     }
     @objc private func didTapReportButton(){
-        buttonActionDelegate?.didTapUpDateButton()
+        buttonActionDelegate?.didTapReportButton()
     }
 }

@@ -66,6 +66,7 @@
 		F8BE8A252B822094008E6767 /* BoardTextSearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */; };
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
+		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchResultVC.swift; sourceTree = "<group>"; };
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,10 +148,11 @@
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DE32B838CE500BA6FFB /* Wrtie+Update */,
 				F8CDE3502B849ED000E5598D /* List */,
 				F8CDE34D2B849AA400E5598D /* Detail */,
+				F80C4DE32B838CE500BA6FFB /* Wrtie+Update */,
 				F80C4DE42B838CEA00BA6FFB /* Search */,
+				F8F3E51D2B8835E300827BB0 /* Report */,
 			);
 			path = DateBoard;
 			sourceTree = "<group>";
@@ -449,6 +452,14 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		F8F3E51D2B8835E300827BB0 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				F8F3E5202B8837B200827BB0 /* ReportVC.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -580,6 +591,7 @@
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
+				F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */,
 				F8235CF92B765E2200E49073 /* DateModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
