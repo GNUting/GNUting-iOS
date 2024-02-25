@@ -152,6 +152,9 @@ extension DetailDateBoardVC : DetailDateBoardSetViewButtonAction {
         print("Delete")
     }
     func didTapReportButton() {
-        print("Delete")
+        detailDateBoardSetView.isHidden = true
+        self.navigationItem.rightBarButtonItem?.isSelected = false
+        let VC = ReportVC()
+        self.navigationController?.pushViewController(VC, animated: true)
     }
 }
