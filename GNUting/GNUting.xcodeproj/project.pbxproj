@@ -66,6 +66,8 @@
 		F8BE8A252B822094008E6767 /* BoardTextSearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */; };
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
+		F8E3CD0A2B8B5E6600712CBF /* ReportReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */; };
+		F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */; };
 		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,8 @@
 		F8BE8A242B822094008E6767 /* BoardTextSearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchResultVC.swift; sourceTree = "<group>"; };
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonView.swift; sourceTree = "<group>"; };
+		F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCheckButton.swift; sourceTree = "<group>"; };
 		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -452,9 +456,19 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		F8E3CD082B8B5E2600712CBF /* ViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */,
+				F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */,
+			);
+			path = ViewComponent;
+			sourceTree = "<group>";
+		};
 		F8F3E51D2B8835E300827BB0 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				F8E3CD082B8B5E2600712CBF /* ViewComponent */,
 				F8F3E5202B8837B200827BB0 /* ReportVC.swift */,
 			);
 			path = Report;
@@ -563,6 +577,7 @@
 				F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
 				F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */,
+				F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */,
 				F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
@@ -591,6 +606,7 @@
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
+				F8E3CD0A2B8B5E6600712CBF /* ReportReasonView.swift in Sources */,
 				F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */,
 				F8235CF92B765E2200E49073 /* DateModel.swift in Sources */,
 			);
