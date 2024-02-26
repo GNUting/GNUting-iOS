@@ -36,6 +36,7 @@ class DetailDateBoardVC: UIViewController {
         config.imagePlacement = .leading
         config.imagePadding = 5
         let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(didTapchatPeopleViewButton), for: .touchUpInside)
         return button
     }()
     private lazy var requetChatButton : PrimaryColorButton = {
@@ -127,6 +128,7 @@ extension DetailDateBoardVC {
     
     }
 }
+// MARK: - Button Action
 extension DetailDateBoardVC{
     @objc private func tapSettingButton(_ sender: UIButton){
         sender.isSelected.toggle()
@@ -135,7 +137,11 @@ extension DetailDateBoardVC{
         }else{
             detailDateBoardSetView.isHidden = true
         }
-        
+    }
+    
+    @objc private func didTapchatPeopleViewButton(){
+        let VC = DateJoinMemberVC()
+        self.present(VC, animated: true)
     }
 }
 extension DetailDateBoardVC : DetailDateBoardSetViewButtonAction {

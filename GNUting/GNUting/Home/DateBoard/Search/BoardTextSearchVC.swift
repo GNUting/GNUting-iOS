@@ -60,8 +60,3 @@ extension BoardTextSearchVC : UISearchResultsUpdating,UISearchControllerDelegate
         }
     }
 }
-extension BoardTextSearchVC{
-    @objc private func tapDissmisButton(){
-        dismiss(animated: true)
-    }
-}

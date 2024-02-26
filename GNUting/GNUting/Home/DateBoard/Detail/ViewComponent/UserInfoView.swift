@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-
+// 한줄 소개 없는 버젼
 class UserInfoView: UIView {
     private lazy var border1 : UIView = {
         let view = UIView()
