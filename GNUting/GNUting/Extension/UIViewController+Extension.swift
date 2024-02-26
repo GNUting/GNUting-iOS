@@ -12,5 +12,8 @@ extension UIViewController{
     @objc func popButtonTap(){
         self.navigationController?.popViewController(animated: true)
     }
-   
+    
+    @objc func tapDissmisButton(){
+        dismiss(animated: true)
+    }
 }
