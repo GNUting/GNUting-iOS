@@ -158,13 +158,11 @@
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
-				F8E3CD582B8CEA8900712CBF /* CommonViewComponent */,
+				F8F3E51D2B8835E300827BB0 /* Report */,
 				F8E3CD532B8CE9CD00712CBF /* DateJoinMember */,
 				F8CDE3502B849ED000E5598D /* List */,
 				F8CDE34D2B849AA400E5598D /* Detail */,
 				F80C4DE32B838CE500BA6FFB /* Wrtie+Update */,
-				F80C4DE42B838CEA00BA6FFB /* Search */,
-				F8F3E51D2B8835E300827BB0 /* Report */,
 			);
 			path = DateBoard;
 			sourceTree = "<group>";
@@ -370,15 +368,17 @@
 			path = FindPassword;
 			sourceTree = "<group>";
 		};
-		F8BE89DA2B807668008E6767 /* Home */ = {
+		F8BE89DA2B807668008E6767 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F8E3CD502B8CE95D00712CBF /* VC */,
+				F8E3CD582B8CEA8900712CBF /* CommonViewComponent */,
+				F8E3CD502B8CE95D00712CBF /* HomeVC */,
 				F8BE8A0F2B820438008E6767 /* HomeModel */,
 				F8BE8A122B82049E008E6767 /* HomeViewComponent */,
+				F80C4DE42B838CEA00BA6FFB /* Search */,
 				F80C4DE02B838BCB00BA6FFB /* DateBoard */,
 			);
-			path = Home;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		F8BE89DB2B807678008E6767 /* RequestStatus */ = {
@@ -427,7 +427,7 @@
 		F8CDE34D2B849AA400E5598D /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */,
+				F8E3CD5A2B8CECE000712CBF /* VC */,
 				F86DC9372B862B0E007EC3CA /* ViewComponent */,
 			);
 			path = Detail;
@@ -436,9 +436,7 @@
 		F8CDE3502B849ED000E5598D /* List */ = {
 			isa = PBXGroup;
 			children = (
-				F8E3CD522B8CE97500712CBF /* ViewComponent */,
 				F8E3CD512B8CE96F00712CBF /* VC */,
-				F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -471,7 +469,7 @@
 				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F8A15E982B60F0C4001DE5E4 /* FindPassword */,
 				F85006172B738D48007AB351 /* SignUp */,
-				F8BE89DA2B807668008E6767 /* Home */,
+				F8BE89DA2B807668008E6767 /* Main */,
 				F8BE89DB2B807678008E6767 /* RequestStatus */,
 				F8BE89DD2B8076CA008E6767 /* Chat */,
 				F8BE89DC2B8076C4008E6767 /* MyPage */,
@@ -506,26 +504,20 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		F8E3CD502B8CE95D00712CBF /* VC */ = {
+		F8E3CD502B8CE95D00712CBF /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
 				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
 			);
-			path = VC;
+			path = HomeVC;
 			sourceTree = "<group>";
 		};
 		F8E3CD512B8CE96F00712CBF /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		F8E3CD522B8CE97500712CBF /* ViewComponent */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewComponent;
 			sourceTree = "<group>";
 		};
 		F8E3CD532B8CE9CD00712CBF /* DateJoinMember */ = {
@@ -582,6 +574,14 @@
 			isa = PBXGroup;
 			children = (
 				F8F3E5202B8837B200827BB0 /* ReportVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		F8E3CD5A2B8CECE000712CBF /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
