@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DateBoardListTableViewCell: UITableViewCell {
+class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이틀/학과/학번
     static let identi = "DetailDateBoardTableViewCellid"
     private lazy var boardTitleLabel : UILabel = {
         let label = UILabel()

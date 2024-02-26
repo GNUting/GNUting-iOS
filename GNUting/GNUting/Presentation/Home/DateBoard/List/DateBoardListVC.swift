@@ -9,12 +9,14 @@ import UIKit
 
 class DateBoardListVC: UIViewController {
     let sampeleDetailDateBoardData : [DetailDateBoardModel] = [DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "21학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "24학번")]
+    
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
         tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
         tableView.separatorStyle = .none
         return tableView
     }()
+    
     private lazy var writeTextButton : UIButton = {
         var config = UIButton.Configuration.plain()
         config.attributedTitle = AttributedString("글쓰기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
@@ -104,4 +106,3 @@ extension DateBoardListVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
