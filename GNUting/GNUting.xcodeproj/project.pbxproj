@@ -68,9 +68,9 @@
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
 		F8E3CD0A2B8B5E6600712CBF /* ReportReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */; };
 		F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */; };
-		F8E3CD3E2B8CD33300712CBF /* DateJoinMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD3D2B8CD33300712CBF /* DateJoinMemberVC.swift */; };
 		F8E3CD402B8CD39100712CBF /* UserInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD3F2B8CD39100712CBF /* UserInfoDetailView.swift */; };
 		F8E3CD432B8CD93200712CBF /* DateJoinMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD422B8CD93200712CBF /* DateJoinMemberTableViewCell.swift */; };
+		F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */; };
 		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -137,9 +137,9 @@
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonView.swift; sourceTree = "<group>"; };
 		F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCheckButton.swift; sourceTree = "<group>"; };
-		F8E3CD3D2B8CD33300712CBF /* DateJoinMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateJoinMemberVC.swift; path = "../../../../../../../../.Trash/GNUTing 오후 6.14.13/GNUting-iOS/GNUting/GNUting/Home/DateBoard/Detail/DateJoinMemberVC.swift"; sourceTree = "<group>"; };
 		F8E3CD3F2B8CD39100712CBF /* UserInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserInfoDetailView.swift; path = "../../../../../../../.Trash/GNUTing 오후 6.14.13/GNUting-iOS/GNUting/GNUting/Home/ViewComponent/UserInfoDetailView.swift"; sourceTree = "<group>"; };
 		F8E3CD422B8CD93200712CBF /* DateJoinMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateJoinMemberTableViewCell.swift; path = "../../../../../../../../../.Trash/GNUTing 오후 6.14.13/GNUting-iOS/GNUting/GNUting/Home/DateBoard/Detail/ViewComponent/DateJoinMemberTableViewCell.swift"; sourceTree = "<group>"; };
+		F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateJoinMemberVC.swift; sourceTree = "<group>"; };
 		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -450,7 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */,
-				F8E3CD3D2B8CD33300712CBF /* DateJoinMemberVC.swift */,
+				F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */,
 				F86DC9372B862B0E007EC3CA /* ViewComponent */,
 			);
 			path = Detail;
@@ -580,6 +580,7 @@
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
 				F8E3CD432B8CD93200712CBF /* DateJoinMemberTableViewCell.swift in Sources */,
 				F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */,
+				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */,
 				F80C4DDD2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift in Sources */,
@@ -599,7 +600,6 @@
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */,
-				F8E3CD3E2B8CD33300712CBF /* DateJoinMemberVC.swift in Sources */,
 				F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */,
 				F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
