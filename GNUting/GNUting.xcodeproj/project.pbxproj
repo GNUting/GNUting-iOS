@@ -42,6 +42,7 @@
 		F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */; };
 		F85345362B5F8961001EADE6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345352B5F8961001EADE6 /* Spacing.swift */; };
 		F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */; };
+		F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */; };
 		F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862C80F2B622601008120FA /* UILabel+Extension.swift */; };
 		F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */; };
 		F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E922B60CE88001DE5E4 /* LoginVC.swift */; };
@@ -111,6 +112,7 @@
 		F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extesnion.swift"; sourceTree = "<group>"; };
 		F85345352B5F8961001EADE6 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorButton.swift; sourceTree = "<group>"; };
+		F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestChatVC.swift; sourceTree = "<group>"; };
 		F862C80F2B622601008120FA /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
 		F8A15E922B60CE88001DE5E4 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
+				F85F8F652B8E3EB700E69922 /* RequestChat */,
 				F8F3E51D2B8835E300827BB0 /* Report */,
 				F8E3CD532B8CE9CD00712CBF /* DateJoinMember */,
 				F8CDE3502B849ED000E5598D /* List */,
@@ -341,6 +344,14 @@
 				F850061F2B739488007AB351 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F85F8F652B8E3EB700E69922 /* RequestChat */ = {
+			isa = PBXGroup;
+			children = (
+				F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */,
+			);
+			path = RequestChat;
 			sourceTree = "<group>";
 		};
 		F86DC9372B862B0E007EC3CA /* ViewComponent */ = {
@@ -710,6 +721,7 @@
 				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
 				F80C4DEB2B839C3100BA6FFB /* MemBerAddTableViewCell.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
+				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */,
 				F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */,
