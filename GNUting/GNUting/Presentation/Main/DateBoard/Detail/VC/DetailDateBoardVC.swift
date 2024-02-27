@@ -42,7 +42,7 @@ class DetailDateBoardVC: UIViewController {
     private lazy var requetChatButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("채팅 신청하기")
-//        button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapRequetChatButton), for: .touchUpInside)
         return button
     }()
     private lazy var detailDateBoardSetView : DetailDateBoardSetView = {
@@ -141,6 +141,11 @@ extension DetailDateBoardVC{
     
     @objc private func didTapchatPeopleViewButton(){
         let VC = DateJoinMemberVC()
+        self.present(VC, animated: true)
+    }
+    
+    @objc private func tapRequetChatButton(){
+        let VC = RequestChatVC()
         self.present(VC, animated: true)
     }
 }
