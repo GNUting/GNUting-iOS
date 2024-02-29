@@ -109,5 +109,10 @@ extension RequestChatVC : UITableViewDelegate,UITableViewDataSource {
         headerView.setMemberLabelCount(memberCount: sampleData.count)
         return headerView
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if Int(indexPath.row) == sampleData.count{
+            let vc = UINavigationController(rootViewController: SearchAddMemberVC())
+            present(vc, animated: true)
+        }
+    }
 }

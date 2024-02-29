@@ -1,28 +1,26 @@
 //
-//  DateJoinMemberTableViewCell.swift
+//  dateMemberTableViewCell.swift
 //  GNUting
 //
-//  Created by 원동진 on 2/27/24.
+//  Created by 원동진 on 2/29/24.
 //
 
 import UIKit
 
-import SnapKit
-
-class DateJoinMemberTableViewCell: UITableViewCell {
-    static let identi = "DateJoinMemberTableViewCellid"
-    
+class DateMemberTableViewCell: UITableViewCell {
+    static let identi = "DateMemberTableViewCellid"
     private lazy var memberInfoView = UserInfoDetailView()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setAddSubView()
+        setAddSubViews()
         setAutoLayout()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,18 +30,14 @@ class DateJoinMemberTableViewCell: UITableViewCell {
     }
 
 }
-extension DateJoinMemberTableViewCell{
-    private func setAddSubView() {
+extension DateMemberTableViewCell{
+    private func setAddSubViews() {
         contentView.addSubview(memberInfoView)
     }
-    
-    private func setAutoLayout() {
+    private func setAutoLayout(){
         memberInfoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(7)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-7)
-            
+            make.edges.equalToSuperview()
         }
     }
+    
 }

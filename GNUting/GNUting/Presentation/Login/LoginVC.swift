@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+// MARK: - 오토레이아웃 설정 다시 필요
 class LoginVC: UIViewController {
     private lazy var upperStackView : UIStackView = {
        let stackView = UIStackView()
@@ -83,17 +83,18 @@ extension LoginVC{
 }
 extension LoginVC {
     private func addSubViews(){
-        self.view.addSubViews([upperStackView,textFieldStackView])
+        self.view.addSubViews([upperStackView])
         upperStackView.addStackSubViews([LoginLabel,textFieldStackView,findPasswordButton,loginButton])
         textFieldStackView.addStackSubViews([emailTextField,passwordTextField])
     }
     private func setAutoLayout(){
         upperStackView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(180)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(100)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-180)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-100)
         }
+        loginButton.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     private func setNavigationBar(){
         let backButton = BackButton()
