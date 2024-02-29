@@ -45,6 +45,24 @@
 		F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */; };
 		F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862C80F2B622601008120FA /* UILabel+Extension.swift */; };
 		F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */; };
+		F87351672B906295004E89C5 /* UpdaetProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351662B906295004E89C5 /* UpdaetProfileVC.swift */; };
+		F87351692B906EE0004E89C5 /* UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */; };
+		F873516B2B90703C004E89C5 /* UserWriteTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */; };
+		F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */; };
+		F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */; };
+		F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */; };
+		F87351862B90B043004E89C5 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351852B90B043004E89C5 /* BasePaddingLabel.swift */; };
+		F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351872B90B21E004E89C5 /* RequestModel.swift */; };
+		F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */; };
+		F873518C2B90B569004E89C5 /* DateMemeberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518B2B90B569004E89C5 /* DateMemeberModel.swift */; };
+		F873518E2B90B664004E89C5 /* DateMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518D2B90B664004E89C5 /* DateMemberTableViewCell.swift */; };
+		F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */; };
+		F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */; };
+		F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */; };
+		F87D05862B8F915400910773 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05852B8F915400910773 /* MyPageModel.swift */; };
+		F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */; };
+		F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05892B8F940100910773 /* MyPageTableViewCell.swift */; };
+		F87D058C2B8F95A500910773 /* MyPageTitleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */; };
 		F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E922B60CE88001DE5E4 /* LoginVC.swift */; };
 		F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E942B60DA40001DE5E4 /* UIStackView+Extesnion.swift */; };
 		F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */; };
@@ -115,6 +133,24 @@
 		F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestChatVC.swift; sourceTree = "<group>"; };
 		F862C80F2B622601008120FA /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
+		F87351662B906295004E89C5 /* UpdaetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaetProfileVC.swift; sourceTree = "<group>"; };
+		F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWriteTextVC.swift; sourceTree = "<group>"; };
+		F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderLineSegmentedControl.swift; sourceTree = "<group>"; };
+		F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequsetListTableViewCell.swift; sourceTree = "<group>"; };
+		F87351852B90B043004E89C5 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
+		F87351872B90B21E004E89C5 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
+		F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusDetailVC.swift; sourceTree = "<group>"; };
+		F873518B2B90B569004E89C5 /* DateMemeberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemeberModel.swift; sourceTree = "<group>"; };
+		F873518D2B90B664004E89C5 /* DateMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemberTableViewCell.swift; sourceTree = "<group>"; };
+		F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemberHeader.swift; sourceTree = "<group>"; };
+		F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddMemberVC.swift; sourceTree = "<group>"; };
+		F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemeberCollectionViewCell.swift; sourceTree = "<group>"; };
+		F87D05852B8F915400910773 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
+		F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUserInfoTableViewHeader.swift; sourceTree = "<group>"; };
+		F87D05892B8F940100910773 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
+		F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTitleTableViewHeader.swift; sourceTree = "<group>"; };
 		F8A15E922B60CE88001DE5E4 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		F8A15E942B60DA40001DE5E4 /* UIStackView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extesnion.swift"; sourceTree = "<group>"; };
 		F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
@@ -160,6 +196,7 @@
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
+				F87D057B2B8F787A00910773 /* SearchAddMember */,
 				F85F8F652B8E3EB700E69922 /* RequestChat */,
 				F8F3E51D2B8835E300827BB0 /* Report */,
 				F8E3CD532B8CE9CD00712CBF /* DateJoinMember */,
@@ -342,6 +379,7 @@
 				F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */,
 				F862C80F2B622601008120FA /* UILabel+Extension.swift */,
 				F850061F2B739488007AB351 /* UIColor+Extension.swift */,
+				F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -359,6 +397,23 @@
 			children = (
 				F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */,
 				F8CDE3512B849F9500E5598D /* UserInfoView.swift */,
+			);
+			path = ViewComponent;
+			sourceTree = "<group>";
+		};
+		F87D057B2B8F787A00910773 /* SearchAddMember */ = {
+			isa = PBXGroup;
+			children = (
+				F87D057E2B8F7CB200910773 /* ViewComponent */,
+				F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */,
+			);
+			path = SearchAddMember;
+			sourceTree = "<group>";
+		};
+		F87D057E2B8F7CB200910773 /* ViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -396,6 +451,13 @@
 			isa = PBXGroup;
 			children = (
 				F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */,
+				F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */,
+				F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */,
+				F87351872B90B21E004E89C5 /* RequestModel.swift */,
+				F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */,
+				F873518B2B90B569004E89C5 /* DateMemeberModel.swift */,
+				F873518D2B90B664004E89C5 /* DateMemberTableViewCell.swift */,
+				F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */,
 			);
 			path = RequestStatus;
 			sourceTree = "<group>";
@@ -404,6 +466,12 @@
 			isa = PBXGroup;
 			children = (
 				F8BE89E42B8078BA008E6767 /* MyPageVC.swift */,
+				F87D05852B8F915400910773 /* MyPageModel.swift */,
+				F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */,
+				F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */,
+				F87D05892B8F940100910773 /* MyPageTableViewCell.swift */,
+				F87351662B906295004E89C5 /* UpdaetProfileVC.swift */,
+				F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -412,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				F8BE89E22B8077A9008E6767 /* ChatVC.swift */,
+				F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -503,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */,
+				F87351852B90B043004E89C5 /* BasePaddingLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -692,7 +762,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8BE8A252B822094008E6767 /* BoardTextSearchResultVC.swift in Sources */,
+				F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */,
 				F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */,
+				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
@@ -701,18 +773,27 @@
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
+				F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */,
 				F8E3CD472B8CE69700712CBF /* DateJoinMemberTableViewCell.swift in Sources */,
 				F8235CE82B74A14000E49073 /* SignUPInpuView.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
+				F87D058C2B8F95A500910773 /* MyPageTitleTableViewHeader.swift in Sources */,
+				F87D05862B8F915400910773 /* MyPageModel.swift in Sources */,
 				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
+				F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatVC.swift in Sources */,
 				F80C4DDD2B83841100BA6FFB /* WriteUpdateDateBoardVC.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
+				F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */,
+				F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */,
 				F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */,
 				F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */,
+				F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
+				F87351672B906295004E89C5 /* UpdaetProfileVC.swift in Sources */,
 				F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */,
 				F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */,
+				F87351692B906EE0004E89C5 /* UITableViewHeaderFooterView.swift in Sources */,
 				F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
@@ -725,22 +806,29 @@
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */,
 				F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */,
+				F873516B2B90703C004E89C5 /* UserWriteTextVC.swift in Sources */,
 				F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */,
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
 				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
 				F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
+				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
+				F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
+				F873518E2B90B664004E89C5 /* DateMemberTableViewCell.swift in Sources */,
 				F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
+				F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
 				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
 				F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
+				F87351862B90B043004E89C5 /* BasePaddingLabel.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
+				F873518C2B90B569004E89C5 /* DateMemeberModel.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
 				F8E3CD0A2B8B5E6600712CBF /* ReportReasonView.swift in Sources */,
 				F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */,

@@ -84,10 +84,10 @@ extension UserInfoDetailView{
 
     private func setAutoLayout() {
         upperView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(7)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalToSuperview().offset(-7)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         firstStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
@@ -109,5 +109,8 @@ extension UserInfoDetailView{
         }
         
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
+    }
+    func hiddenBorder(){
+        upperView.layer.borderWidth = 0
     }
 }

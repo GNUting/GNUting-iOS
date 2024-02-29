@@ -107,6 +107,7 @@ extension SignUPInpuView{
         config.titleAlignment = .center
         config.baseForegroundColor = .white
         confirmButton.configuration = config
+        confirmButton.isHidden = false
     }
     
     public func setUnderLineColor(color : UIColor){
@@ -114,9 +115,6 @@ extension SignUPInpuView{
     }
     public func isEmailTextField(eamilField : Bool){
         emailLabel.isHidden = !eamilField
-    }
-    public func setAddButton(AddButton : Bool){
-        confirmButton.isHidden = !AddButton
     }
     public func checkLabelHidden(isHidden : Bool){
         inputCheckLabel.isHidden = isHidden

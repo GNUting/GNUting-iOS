@@ -30,7 +30,6 @@ class SignUpFirstProcessVC: UIViewController {
         signUPInpuView.setConfirmButton(text: "인증받기")
         signUPInpuView.setPlaceholder(placeholder: "이메일을 입력해주세요.")
         signUPInpuView.isEmailTextField(eamilField: true)
-        signUPInpuView.setAddButton(AddButton: true)
         return signUPInpuView
     }()
     private lazy var certifiedInputView : SignUPInpuView = {
@@ -38,7 +37,6 @@ class SignUpFirstProcessVC: UIViewController {
         signUPInpuView.setInputTextTypeLabel(text: "인증번호")
         signUPInpuView.setConfirmButton(text: "확인")
         signUPInpuView.setPlaceholder(placeholder: "인증 번호를 입력해주세요.")
-        signUPInpuView.setAddButton(AddButton: true)
         return signUPInpuView
     }()
     private lazy var passWordInputView : SignUPInpuView = {

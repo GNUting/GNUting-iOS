@@ -85,6 +85,7 @@ class SignUPSecondProcessVC: UIViewController {
        let nickNameInputView = SignUPInpuView()
         nickNameInputView.setInputTextTypeLabel(text: "닉네임")
         nickNameInputView.setPlaceholder(placeholder: "닉네임을 입력해주세요.")
+        nickNameInputView.setConfirmButton(text: "중복확인")
         return nickNameInputView
     }()
     private lazy var majorInputView : SignUPInpuView = {

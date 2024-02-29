@@ -50,8 +50,8 @@ extension DateJoinMemberVC {
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(40)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(Spacing.left)
+            make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalToSuperview()
         }
     }
