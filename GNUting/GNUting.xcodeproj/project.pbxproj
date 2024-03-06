@@ -23,6 +23,7 @@
 		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
 		F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061F2B739488007AB351 /* UIColor+Extension.swift */; };
 		F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85006232B739C9D007AB351 /* AllCheckTermsView.swift */; };
+		F8510D0A2B98B09A00CF1055 /* SignUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8510D092B98B09A00CF1055 /* SignUpManager.swift */; };
 		F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344F92B5F710A001EADE6 /* AppDelegate.swift */; };
 		F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */; };
 		F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344FD2B5F710A001EADE6 /* AppStartVC.swift */; };
@@ -110,6 +111,7 @@
 		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		F850061F2B739488007AB351 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F85006232B739C9D007AB351 /* AllCheckTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCheckTermsView.swift; sourceTree = "<group>"; };
+		F8510D092B98B09A00CF1055 /* SignUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpManager.swift; sourceTree = "<group>"; };
 		F85344F62B5F710A001EADE6 /* GNUting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GNUting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F85344F92B5F710A001EADE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F85344FB2B5F710A001EADE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +308,14 @@
 				F8235CEE2B74B51100E49073 /* ViewComponent */,
 			);
 			path = Terms;
+			sourceTree = "<group>";
+		};
+		F8510D082B98B03800CF1055 /* SharedData */ = {
+			isa = PBXGroup;
+			children = (
+				F8510D092B98B09A00CF1055 /* SignUpManager.swift */,
+			);
+			path = SharedData;
 			sourceTree = "<group>";
 		};
 		F85344ED2B5F710A001EADE6 = {
@@ -533,6 +543,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F8510D082B98B03800CF1055 /* SharedData */,
 				F8BE89D82B807646008E6767 /* TabBarController.swift */,
 				F85345302B5F88CC001EADE6 /* Extension */,
 				F85345192B5F79E2001EADE6 /* Font */,
@@ -812,6 +823,7 @@
 				F8235CFD2B78C8D300E49073 /* SighUpThirdProcessVC.swift in Sources */,
 				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
 				F8BE8A1D2B821372008E6767 /* DetailDateBoardModel.swift in Sources */,
+				F8510D0A2B98B09A00CF1055 /* SignUpManager.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
 				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
 				F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */,
