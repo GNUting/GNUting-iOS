@@ -10,6 +10,7 @@ import UIKit
 class TermsTableViewCell: UITableViewCell {
     static let identi = "TermsTableViewCellid"
     var tapCheckButtonClosure : ((Bool)->())?
+    var selectedState : Bool = false
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -60,11 +61,15 @@ class TermsTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    public func setTextLabel(_ text : String){
-        termsTextLabel.text = text
-    }
+ 
+}
+
+// MARK: - ButtonAction
+
+extension TermsTableViewCell {
     @objc func tapCheckButton(_ sender: UIButton){
         sender.isSelected.toggle()
+        selectedState = sender.isSelected
         tapCheckButtonClosure?(sender.isSelected)
         if sender.isSelected {
             checkButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
@@ -72,7 +77,12 @@ class TermsTableViewCell: UITableViewCell {
             checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
     }
-    public func setAllCheckButton(AllCheckButtonSelected : Bool){
+}
+
+// MARK: - Method
+
+extension TermsTableViewCell {
+    func setAllCheckButton(AllCheckButtonSelected : Bool){
         if AllCheckButtonSelected{
             checkButton.isSelected = true
             checkButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
@@ -81,4 +91,10 @@ class TermsTableViewCell: UITableViewCell {
             checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
     }
+    
+    func setTextLabel(_ text : String){
+        termsTextLabel.text = text
+    }
+    
+    
 }

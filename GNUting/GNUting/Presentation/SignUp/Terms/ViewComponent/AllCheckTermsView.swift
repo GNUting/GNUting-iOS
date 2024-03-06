@@ -17,7 +17,7 @@ class AllCheckTermsView: UIView {
         stackView.spacing = 15
         return stackView
     }()
-    lazy var checkButton  : UIButton = {
+    private lazy var checkButton  : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "circle"), for: .normal)
         button.tintColor = UIColor(hexCode: "DFDFDF")
@@ -66,5 +66,10 @@ class AllCheckTermsView: UIView {
         }else{
             checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
+    }
+}
+extension AllCheckTermsView {
+    func checkButtonSelected(isSelected : Bool) {
+        checkButton.isSelected = isSelected
     }
 }
