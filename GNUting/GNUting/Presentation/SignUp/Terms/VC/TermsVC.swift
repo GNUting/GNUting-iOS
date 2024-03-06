@@ -10,24 +10,34 @@ import SnapKit
 class TermsVC: UIViewController {
     let textArr = ["만 18세이상입니다. ","(필수)서비스 이용약관","(필수) 개인 정보 처리 방침","(선택) 위치정보 제공","(선택) 마케팅 수신 동의)"]
     var allCheckSelected : Bool = false
+    var nextMoveStatus : Bool = false
+    var selectedState : [Bool] = [false,false,false,false,false]
     private lazy var allCheckTermsView : AllCheckTermsView = {
         let view = AllCheckTermsView()
         view.tapAllCheckButtonClosure = { [unowned self] selected in
-            self.allCheckSelected = selected
+            allCheckSelected = selected
+            self.allCheckButton(selected: selected)
+            
             termsTableView.reloadData()
         }
         return view
     }()
     private lazy var termsTableView : UITableView = {
        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(TermsTableViewCell.self, forCellReuseIdentifier: TermsTableViewCell.identi)
+        
         return tableView
     }()
     private lazy var nextButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("다음으로")
+        button.backgroundColor = UIColor(named: "DisableColor")
         button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+//        button.isEnabled = false
+        
         return button
     }()
     override func viewDidLoad() {
@@ -37,25 +47,35 @@ class TermsVC: UIViewController {
         addSubViews()
         setAutoLayout()
         setNavigationBar()
-        tableViewConfigure()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
     }
 }
-extension TermsVC : UITableViewDelegate,UITableViewDataSource{
+extension TermsVC: UITableViewDataSource{
+    
+}
+extension TermsVC : UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         textArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TermsTableViewCell.identi, for: indexPath) as? TermsTableViewCell else {return UITableViewCell()}
+        cell.selectionStyle = .none
+        
         cell.tapCheckButtonClosure = { [unowned self] selected in
             if !selected{
-                allCheckTermsView.checkButton.isSelected = false
+                allCheckTermsView.checkButtonSelected(isSelected: selected)
             }
+            selectedState[indexPath.row] = selected
+            if selectedState.filter({$0 == true}).count == 5 {
+                allCheckTermsView.checkButtonSelected(isSelected: true)
+            }
+            setNextButton()
         }
+        
         cell.setTextLabel(textArr[indexPath.row])
         cell.setAllCheckButton(AllCheckButtonSelected: self.allCheckSelected)
         return cell
@@ -63,10 +83,6 @@ extension TermsVC : UITableViewDelegate,UITableViewDataSource{
     
 }
 extension TermsVC{
-    private func tableViewConfigure(){
-        termsTableView.delegate = self
-        termsTableView.dataSource = self
-    }
     private func addSubViews(){
         self.view.addSubViews([allCheckTermsView,termsTableView,nextButton])
     }
@@ -96,10 +112,35 @@ extension TermsVC{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
 }
-//MARK: - Action
+
+// MARK: - Method
+extension TermsVC{
+    private func setNextButton(){
+        if selectedState[0] == true && selectedState[1] == true && selectedState[2] == true {
+            nextButton.backgroundColor = UIColor(named: "PrimaryColor")
+            nextButton.isEnabled = true
+        } else {
+            nextButton.backgroundColor = UIColor(named: "DisableColor")
+            nextButton.isEnabled = false
+        }
+    }
+    private func allCheckButton(selected : Bool) {
+        if selected {
+            selectedState = [true,true,true,true,true]
+            nextButton.backgroundColor = UIColor(named: "PrimaryColor")
+//            nextButton.isEnabled = true
+        } else {
+            selectedState = [false,false,false,false,false]
+            nextButton.backgroundColor = UIColor(named: "DisableColor")
+//            nextButton.isEnabled = false
+        }
+    }
+}
+//MARK : - Action
 extension TermsVC{
     @objc private func tapNextButton(){
         let vc = SignUpFirstProcessVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
