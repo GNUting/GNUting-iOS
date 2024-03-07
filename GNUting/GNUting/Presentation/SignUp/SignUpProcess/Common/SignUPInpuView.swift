@@ -94,13 +94,13 @@ extension SignUPInpuView{
     }
 }
 extension SignUPInpuView{
-    public func setInputTextTypeLabel(text : String){
+    func setInputTextTypeLabel(text: String){
         inputTextTypeLabel.text = text
     }
-    public func setPlaceholder(placeholder : String){
+    func setPlaceholder(placeholder: String){
         inputTextField.placeholder = placeholder
     }
-    public func setConfirmButton(text : String){
+    func setConfirmButton(text: String){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
@@ -110,13 +110,16 @@ extension SignUPInpuView{
         confirmButton.isHidden = false
     }
     
-    public func setUnderLineColor(color : UIColor){
+    func setUnderLineColor(color: UIColor){
         bottomLine.backgroundColor = color
     }
-    public func isEmailTextField(eamilField : Bool){
+    func isEmailTextField(eamilField: Bool){
         emailLabel.isHidden = !eamilField
     }
-    public func checkLabelHidden(isHidden : Bool){
+    func checkLabelHidden(isHidden: Bool){
         inputCheckLabel.isHidden = isHidden
+    }
+    func getTextFieldText() -> String {
+        inputTextField.text ?? ""
     }
 }

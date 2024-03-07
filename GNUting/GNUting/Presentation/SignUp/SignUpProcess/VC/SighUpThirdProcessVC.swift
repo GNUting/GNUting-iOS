@@ -35,7 +35,7 @@ class SighUpThirdProcessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setNavigationBar()
+        setNavigationBar(title: "3/3")
         addSubViews()
         setAutoLayout()
     }
@@ -60,16 +60,6 @@ extension SighUpThirdProcessVC{
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
         }
     }
-    private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        let popButton = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = popButton
-        self.navigationItem.title = "3/3"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
-    }
-    
 }
 extension SighUpThirdProcessVC {
     @objc private func tapPhothImageView(){

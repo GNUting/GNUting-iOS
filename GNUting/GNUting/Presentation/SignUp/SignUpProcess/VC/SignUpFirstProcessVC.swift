@@ -60,7 +60,7 @@ class SignUpFirstProcessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setNavigationBar()
+        setNavigationBar(title: "1/3")
         addSubViews()
         setAutoLayout()
     }
@@ -70,11 +70,15 @@ class SignUpFirstProcessVC: UIViewController {
     }
 
 }
+
+// MARK: - Set View/UI
+
 extension SignUpFirstProcessVC{
     private func addSubViews(){
         self.view.addSubViews([explainLabel,inputViewUpperStackView,nextButton])
         inputViewUpperStackView.addStackSubViews([emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
     }
+    
     private func setAutoLayout(){
         explainLabel.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
@@ -92,21 +96,13 @@ extension SignUpFirstProcessVC{
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
         }
     }
-    private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        let popButton = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = popButton
-        self.navigationItem.title = "1/3"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
-        
-    }
 }
 //MARK: - Action
 extension SignUpFirstProcessVC{
     @objc private func tapNextButton(){
         let vc = SignUPSecondProcessVC()
+        SignUpModelManager.shared.setSignUpDictionary(setkey: "email", setData: emailInputView.getTextFieldText())
+        SignUpModelManager.shared.setSignUpDictionary(setkey: "password", setData: passWordInputView.getTextFieldText())
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
