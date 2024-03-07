@@ -23,7 +23,7 @@ class UserWriteTextVC: UIViewController {
         navigationController?.navigationBar.isHidden = false
         addSubViews()
         setAutoLayout()
-        setNavigationBar()
+        setNavigationBar(title: "작성한 글 목록")
         setTableView()
     }
     
@@ -43,14 +43,6 @@ extension UserWriteTextVC{
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
-    }
-    private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.title = "작성한 글 목록"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
 }
 extension UserWriteTextVC : UITableViewDataSource,UITableViewDelegate{

@@ -62,7 +62,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setNavigationBar()
+        setNavigationBar(title: "")
         addSubViews()
         setAutoLayout()
     }
@@ -95,12 +95,5 @@ extension LoginVC {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-100)
         }
         loginButton.setContentCompressionResistancePriority(.required, for: .vertical)
-    }
-    private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        let popButton = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = popButton
     }
 }

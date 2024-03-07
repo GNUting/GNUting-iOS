@@ -100,12 +100,7 @@ extension DetailDateBoardVC{
         }
     }
     private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.title = "과팅 게시판"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        setNavigationBar(title: "과팅 게시판")
         
         
         let settingButton = UIBarButtonItem(image: UIImage(named: "SettingButton"), style: .plain, target: self, action: #selector(tapSettingButton(_:)))

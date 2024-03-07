@@ -109,18 +109,23 @@ class SignUPSecondProcessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setNavigationBar()
+        
+        setNavigationBar(title: "2/3")
         addSubViews()
         setAutoLayout()
     }
 
 }
+
+// MARK: - Set View/UI
+
 extension SignUPSecondProcessVC{
     private func addSubViews(){
         self.view.addSubViews([inputViewUpperStackView,datePicker,bluerEffectView,buttonStackView,nextButton])
         inputViewUpperStackView.addStackSubViews([nameInputView,phoneNumberInputView,genderView,selectDateView,nickNameInputView,majorInputView,studentIDInputView])
         buttonStackView.addStackSubViews([dateViewCacnelButton,dateViewSelectButton])
     }
+    
     private func setAutoLayout(){
         inputViewUpperStackView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
@@ -141,16 +146,10 @@ extension SignUPSecondProcessVC{
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
         }
     }
-    private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        let popButton = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = popButton
-        self.navigationItem.title = "2/3"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
-    }
 }
+
+//MARK: - Button Action
+
 extension SignUPSecondProcessVC {
     @objc private func tapSelectDateView(){
         datePicker.isHidden = false
@@ -163,8 +162,6 @@ extension SignUPSecondProcessVC {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM dd"
         selectedDate = formatter.string(from: sender.date)
-        
-    
     }
     @objc private func tapSelectButton(){
         datePicker.isHidden = true

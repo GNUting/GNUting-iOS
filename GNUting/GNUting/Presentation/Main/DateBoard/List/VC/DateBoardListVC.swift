@@ -66,12 +66,7 @@ extension DateBoardListVC{
         }
     }
     private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "홈")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.title = "과팅 게시판"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        setNavigationBar(title: "과팅 게시판")
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "SearchImg"), style: .plain, target: self, action: #selector(tapSearchButton))
         rightBarButtonItem.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItem = rightBarButtonItem

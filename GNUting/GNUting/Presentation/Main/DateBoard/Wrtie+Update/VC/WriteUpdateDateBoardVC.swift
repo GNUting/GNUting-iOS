@@ -43,12 +43,8 @@ extension WriteUpdateDateBoardVC{
         memberTableView.dataSource = self
     }
     private func setNavigationBar(){
-        let backButton = BackButton()
-        backButton.setConfigure(text: "취소")
-        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.title = "\(titleState)"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        setNavigationBar(title: "\(titleState)")
+        
         let completedButton = UIButton()
         completedButton.setTitle("완료", for: .normal)
         completedButton.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
