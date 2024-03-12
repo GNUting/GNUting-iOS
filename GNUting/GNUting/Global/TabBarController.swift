@@ -12,10 +12,14 @@ class TabBarController: UITabBarController {
     let secondVC = UINavigationController.init(rootViewController: RequestStatusVC())
     let thirdVC = UINavigationController.init(rootViewController: ChatVC())
     let forthVC = UINavigationController.init(rootViewController: MyPageVC())
+    var email = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
-        // Do any additional setup after loading the view.
+        print("TabBar")
+        print(email)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

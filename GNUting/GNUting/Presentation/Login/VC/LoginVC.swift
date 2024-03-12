@@ -33,14 +33,14 @@ class LoginVC: UIViewController {
     }()
     private lazy var emailTextField : PaddingTextField = {
         let textField = PaddingTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 15)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
+        textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
         
         return textField
     }()
     private lazy var passwordTextField : PaddingTextField = {
         let textField = PaddingTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 15)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
+        textField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
         return textField
     }()
@@ -57,6 +57,7 @@ class LoginVC: UIViewController {
         button.setText("로그인")
         button.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
         button.sizeToFit()
+        
         return button
     }()
     override func viewDidLoad() {
@@ -73,7 +74,24 @@ class LoginVC: UIViewController {
 }
 extension LoginVC{
     @objc func tapLoginButton(){
-        self.view.window?.rootViewController = TabBarController()
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        APIPostManager.shared.postLoginAPI(email: email, password: password) { response, statusCode in
+            switch statusCode {
+            case 200..<300:
+                guard let email = response?.result.email else { return }
+                UserEmailManager.shard.email = email
+                
+                self.view.window?.rootViewController = TabBarController()
+            default:
+                let alert = UIAlertController(title: "사용자 정보가 일치하지 않습니다.", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                self.present(alert, animated: true)
+            }
+            
+        }
+        
+
     }
     
     @objc func tapFindPasswordButton(){

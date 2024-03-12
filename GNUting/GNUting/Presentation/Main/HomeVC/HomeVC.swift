@@ -9,8 +9,6 @@
 import UIKit
 import SnapKit
 class HomeVC: UIViewController{
-    
-    var userName = "원동진"
     let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
     let sampeleDateBoardData : [DateBoardModel] = [DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.")]
     var currentPage = 0
@@ -25,7 +23,6 @@ class HomeVC: UIViewController{
     }()
     private lazy var explainLabel : UILabel = {
         let label = UILabel()
-        label.text = "\(userName)님 안녕하세요!"
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 22)
         return label
     }()
@@ -48,9 +45,12 @@ class HomeVC: UIViewController{
         tableview.register(HomeDateBoardListTableViewCell.self, forCellReuseIdentifier: HomeDateBoardListTableViewCell.identi)
         return tableview
     }()
+    private lazy var imageButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        getUserData()
         setNavigationBar()
         addSubViews()
         setAutoLayout()
@@ -92,15 +92,21 @@ extension HomeVC{
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
+        imageButton.snp.makeConstraints { make in
+            make.height.width.equalTo(40)
+        }
     }
     private func setNavigationBar(){
         let notiButton = UIBarButtonItem(image: UIImage(named: "BellImg"), style: .plain, target: self, action: #selector(tapNotiButton))
         notiButton.tintColor = UIColor(named: "IconColor")
-        let imagebutton = UIButton()
-        imagebutton.setImage(UIImage(named: "SampleImg1"), for: .normal)
-        imagebutton.layer.cornerRadius = imagebutton.layer.frame.size.width / 2
-        let userImageButton = UIBarButtonItem(customView: imagebutton)
+    
+        let userImageButton = UIBarButtonItem(customView: imageButton)
+        userImageButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItems = [userImageButton,notiButton]
+    }
+    
+    private func setExplainLabel(text: String) {
+        explainLabel.text = "\(text)님 안녕하세요 😄"
     }
 }
 
@@ -148,5 +154,32 @@ extension HomeVC{
     }
     @objc private func tapUserImageButton(){
         
+    }
+}
+// MARK: - Data
+extension HomeVC {
+    private func getUserData(){
+        APIGetManager.shared.getUserData { userData in
+            guard let userData = userData else { return }
+            self.setExplainLabel(text: userData.result.nickname)
+            self.setImageFromStringURL(stringURL: userData.result.profileImage ?? "")
+        }
+    }
+    private func setImageFromStringURL(stringURL : String) {
+        if let url = URL(string: stringURL) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let imageData = data else { return }
+                DispatchQueue.main.async {
+                    self.imageButton.setImage(UIImage(data: imageData), for: .normal)
+                    self.imageButton.layer.cornerRadius = self.imageButton.layer.frame.size.width / 2
+                    self.imageButton.layer.masksToBounds = true
+                }
+            }.resume()
+        }else {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0)
+            imageButton.configuration = config
+            self.imageButton.setImage(UIImage(systemName: "person.circle"), for: .normal)
+        }
     }
 }

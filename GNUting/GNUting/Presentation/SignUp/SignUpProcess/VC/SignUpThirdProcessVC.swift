@@ -86,16 +86,14 @@ extension SignUpThirdProcessVC {
     private func setPostData() {
         let savedSignUpdate = SignUpModelManager.shared.signUpDictionary
         
-//        let signUpData : SignUpModel = SignUpModel(birthDate: savedSignUpdate["birthDate"] ?? "", department: savedSignUpdate["department"] ?? "", email: (savedSignUpdate["email"] ?? "") + "@gnu.ac.kr", gender: savedSignUpdate["gender"] ?? "", name: savedSignUpdate["name"] ?? "", nickname: savedSignUpdate["nickname"] ?? "", password: savedSignUpdate["password"] ?? "", phoneNumber: savedSignUpdate["phoneNumber"] ?? "", studentId: savedSignUpdate["studentId"] ?? "", userSelfIntroduction: savedSignUpdate["userSelfIntroduction"] ?? "")
-//        let signUpData : SignUpModel = SignUpModel(birthDate: "1997-06-11", department: "컴퓨터과학과", email: "tjsqls8337@gnu.ac.kr", gender: "MALE", name: "원동진", nickname: "동진97", password: "123456", phoneNumber: "01041964507", studentId: "2016010879", userSelfIntroduction: "테스트아이디")
+        let signUpData : SignUpModel = SignUpModel(birthDate: savedSignUpdate["birthDate"] ?? "", department: savedSignUpdate["department"] ?? "", email: (savedSignUpdate["email"] ?? "") + "@gnu.ac.kr", gender: savedSignUpdate["gender"] ?? "", name: savedSignUpdate["name"] ?? "", nickname: savedSignUpdate["nickname"] ?? "", password: savedSignUpdate["password"] ?? "", phoneNumber: savedSignUpdate["phoneNumber"] ?? "", studentId: savedSignUpdate["studentId"] ?? "", userSelfIntroduction: savedSignUpdate["userSelfIntroduction"] ?? "")
+        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: phothImageView.image ?? UIImage()) { error in
+            guard error != nil else {
+                print("Error :\(String(describing: error))")
+                return
+            }
     
-//        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: phothImageView.image ?? UIImage()) { error in
-//            guard error != nil else {
-//                print("Error :\(String(describing: error))")
-//                return
-//            }
-    
-//        }
+        }
     }
 }
 
@@ -105,7 +103,6 @@ extension SignUpThirdProcessVC {
         let alert = UIAlertController(title: "가입 완료", message: "가입이 완료 되었습니다", preferredStyle: .alert)
         setPostData()
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-            let vc = LoginVC()
             self.navigationController?.setViewControllers([AppStartVC()], animated: true)
         }))
         self.present(alert, animated: true)
