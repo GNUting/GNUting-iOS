@@ -10,10 +10,6 @@ import UIKit
 class UserInfoDetailView: UIView { // 한줄소개 있음
     private lazy var upperView : UIView = {
         let stackView = UIView()
-//        stackView.axis = .vertical
-//        stackView.distribution = .fill
-//        stackView.alignment = .fill
-//        stackView.spacing = 10
         stackView.layer.cornerRadius = 10
         stackView.layer.borderWidth = 1
         stackView.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
@@ -26,7 +22,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 5
+        stackView.spacing = 15
         return stackView
     }()
     
@@ -107,10 +103,23 @@ extension UserInfoDetailView{
             make.right.equalToSuperview().offset(-12)
             make.bottom.equalToSuperview().offset(-10)
         }
-        
+        userImageButton.snp.makeConstraints { make in
+            make.height.width.equalTo(50)
+        }
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
     }
     func hiddenBorder(){
         upperView.layer.borderWidth = 0
+    }
+    func setUserInfoDetailView(name :String,studentID: String, age: String, introduce: String, image : UIImage ) {
+        DispatchQueue.main.async {
+            self.userImageButton.setImage(image, for: .normal)
+            self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.height / 2
+            self.userImageButton.layer.masksToBounds = true
+            self.userNameLabel.text = name
+            self.subInfoLabel.text = "\(studentID) | \(age)"
+            self.selfIntroduceLabel.text = introduce
+        }
+        
     }
 }
