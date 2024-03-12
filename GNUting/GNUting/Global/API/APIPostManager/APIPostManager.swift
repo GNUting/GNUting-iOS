@@ -12,6 +12,31 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
+    
+    func postLoginAPI(email: String, password: String, completion: @escaping (LoginSuccessResponse?,Int) -> Void) {
+        let url = EndPoint.login.url
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let parameters : [String : String] = ["email": email,"password":password]
+        AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
+            .responseData { response in
+                guard let authorization = response.response?.allHeaderFields["Authorization"] else { return }
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                print("postLoginAPI statusCode:\(statusCode)")
+                switch statusCode {
+                case 200..<300:
+                    guard let data = response.value else { return }
+                    if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
+                        completion(json,statusCode)
+                        let email = json.result.email
+                        KeyChainManager.shared.create(key: email, token: authorization as! String)
+                    }
+                default:
+                    completion(nil,statusCode)
+                }
+            }
+    }
+    
     func postEmailCheck(email: String, completion: @escaping (String,Error?) -> Void) {
         let url = EndPoint.emailCheck.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
