@@ -15,23 +15,23 @@ class UpdaetProfileVC: UIViewController {
         return imageView
     }()
     
-    private lazy var nickNameInputView : SignUPInpuView = {
-        let inputView = SignUPInpuView()
+    private lazy var nickNameInputView : SignUPInputView = {
+        let inputView = SignUPInputView()
         inputView.setInputTextTypeLabel(text: "닉네임")
         inputView.setPlaceholder(placeholder: "닉네임을 입력해주세요.")
         inputView.setConfirmButton(text: "중복확인")
         return inputView
     }()
     
-    private lazy var majorInputView : SignUPInpuView = {
-       let majorInputView = SignUPInpuView()
+    private lazy var majorInputView : SignUPInputView = {
+       let majorInputView = SignUPInputView()
         majorInputView.setInputTextTypeLabel(text: "학과")
         majorInputView.setPlaceholder(placeholder: "힉과를 입력해주세요.")
         return majorInputView
     }()
     
-    private lazy var introduceInputView : SignUPInpuView = {
-       let majorInputView = SignUPInpuView()
+    private lazy var introduceInputView : SignUPInputView = {
+       let majorInputView = SignUPInputView()
         majorInputView.setInputTextTypeLabel(text: "한줄 소개")
         majorInputView.setPlaceholder(placeholder: "한줄 소개를 입력해주세요.")
         return majorInputView
@@ -98,7 +98,3 @@ extension UpdaetProfileVC{
     }
     
 }
-@available(iOS 17,*)
-#Preview(traits: .defaultLayout, body: {
-    UpdaetProfileVC()
-})

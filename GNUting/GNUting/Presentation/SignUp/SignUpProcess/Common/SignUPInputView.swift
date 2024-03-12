@@ -7,14 +7,31 @@
 
 import Foundation
 import UIKit
-class SignUPInpuView : UIView {
+protocol CheckEmailButtonDelegate {
+    func action(number: String)
+}
+
+protocol ConfirmButtonDelegate {
+    func action(sendTextFieldText: String)
+}
+
+protocol PasswordCheckDelegate {
+    func keyboarReturn(text: String)
+}
+
+class SignUPInputView : UIView{
+    var checkEmailButtonDelegate: CheckEmailButtonDelegate?
+    var confirmButtonDelegate: ConfirmButtonDelegate?
+    var passwordCheckDelegate : PasswordCheckDelegate?
+    var textFieldType : SignUpInputViewType = .email
+    
     private lazy var inputTextTypeLabel : UILabel = {
         let uiLabel = UILabel()
         uiLabel.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
         return uiLabel
     }()
     private lazy var bottomStackView : UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -24,6 +41,8 @@ class SignUPInpuView : UIView {
     private lazy var inputTextField : UITextField = {
         let textField = UITextField()
         textField.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        textField.delegate = self
+        
         return textField
     }()
     private lazy var confirmButton : UIButton = {
@@ -46,9 +65,10 @@ class SignUPInpuView : UIView {
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
         return view
     }()
-    private lazy var inputCheckLabel : UILabel = {
+    lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
         label.text = "틀렸습니다."
+        label.textAlignment = .right
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 14)
         label.isHidden = true
@@ -62,7 +82,7 @@ class SignUPInpuView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension SignUPInpuView{
+extension SignUPInputView{
     private func configure(){
         self.addSubViews([inputTextTypeLabel,bottomStackView,bottomLine,inputCheckLabel])
         bottomStackView.addStackSubViews([inputTextField,emailLabel,confirmButton])
@@ -93,14 +113,17 @@ extension SignUPInpuView{
         confirmButton.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }
-extension SignUPInpuView{
-    public func setInputTextTypeLabel(text : String){
+extension SignUPInputView{
+    func setInputTextTypeLabel(text: String){
         inputTextTypeLabel.text = text
     }
-    public func setPlaceholder(placeholder : String){
+    func setFoucInputTextFiled() {
+        inputTextField.becomeFirstResponder()
+    }
+    func setPlaceholder(placeholder: String){
         inputTextField.placeholder = placeholder
     }
-    public func setConfirmButton(text : String){
+    func setConfirmButton(text: String){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
@@ -110,13 +133,70 @@ extension SignUPInpuView{
         confirmButton.isHidden = false
     }
     
-    public func setUnderLineColor(color : UIColor){
+    func setUnderLineColor(color: UIColor){
         bottomLine.backgroundColor = color
     }
-    public func isEmailTextField(eamilField : Bool){
-        emailLabel.isHidden = !eamilField
+    func isEmailTextField(emailField: Bool){
+        emailLabel.isHidden = !emailField
     }
-    public func checkLabelHidden(isHidden : Bool){
+    func setCheckLabel(isHidden: Bool,text: String?){
         inputCheckLabel.isHidden = isHidden
+        if !isHidden {
+            inputCheckLabel.text = text
+        }
+    }
+    func getTextFieldText() -> String {
+        inputTextField.text ?? ""
+    }
+    // 추후 델리게이트로 빼야됨
+    func setCheckEmailAction() {
+        confirmButton.addTarget(self, action: #selector(getEmailAuthNumber), for: .touchUpInside)
+    }
+    func setConfrimButton() {
+        confirmButton.addTarget(self, action: #selector(confrimButtonAction), for: .touchUpInside)
+    }
+    
+}
+
+
+
+
+
+extension SignUPInputView {
+    @objc private func getEmailAuthNumber(){
+        APIPostManager.shared.postEmailCheck(email: (inputTextField.text ?? "") + "@gnu.ac.kr") { checkNumber,error  in
+            guard let error = error else {
+                self.checkEmailButtonDelegate?.action(number: checkNumber)
+                return
+            }
+            print("error\(error)")
+            
+            
+        }
+        
+    }
+    @objc private func confrimButtonAction(){
+        confirmButtonDelegate?.action(sendTextFieldText: inputTextField.text ?? "")
+    }
+}
+extension SignUPInputView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+     
+        
+        bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
+        confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
+        confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textFieldType == .passwordCheck {
+            passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
+        }
+        return textField.resignFirstResponder()
     }
 }
