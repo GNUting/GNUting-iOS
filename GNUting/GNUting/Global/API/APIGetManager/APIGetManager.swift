@@ -11,6 +11,27 @@ import Alamofire
 
 class APIGetManager {
     static let shared = APIGetManager()
+    func getUserData(completion: @escaping(GetUserDataModel?) -> Void) {
+        let url = EndPoint.getUserData.url
+        let email = UserEmailManager.shard.email
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        let headers : HTTPHeaders = ["Authorization": token]
+        AF.request(url,method: .get,headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: GetUserDataModel.self) { response in
+                switch response.result {
+                case .success:
+                    completion(response.value)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+
+            
+    }
+    
+    
     func checkNickname(nickname: String, completion: @escaping(NicknameCheckModel?,Int) -> Void) {
         let url = EndPoint.checkNickname.url
         let parameters : [String : String] = ["nickname": nickname]

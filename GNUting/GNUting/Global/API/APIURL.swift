@@ -10,14 +10,20 @@ enum EndPoint{
     case signUp
     case emailCheck
     case checkNickname
+    case login
+    case getUserData
     var url : URL {
         switch self{
+        case .login:
+            return .makeForEndpoint(endPoint: "login")
         case .signUp:
             return .makeForEndpoint(endPoint: "signup")
         case .emailCheck:
             return .makeForEndpoint(endPoint: "mail")
         case .checkNickname:
             return .makeForEndpoint(endPoint: "check-nickname")
+        case .getUserData:
+            return .makeForEndpoint(endPoint: "board/user/myinfo")
         }
     }
 }
