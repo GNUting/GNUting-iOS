@@ -121,7 +121,7 @@ class SignUPSecondProcessVC: UIViewController{
         let button = PrimaryColorButton()
         button.setText("다음")
         button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
-//        button.isEnabled = false
+        button.isEnabled = false
         
         return button
     }()
