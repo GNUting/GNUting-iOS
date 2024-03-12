@@ -33,10 +33,9 @@ class TermsVC: UIViewController {
     }()
     private lazy var nextButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
-        button.setText("다음으로")
-        button.backgroundColor = UIColor(named: "DisableColor")
+        button.setText("다음")
         button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
-//        button.isEnabled = false
+        button.isEnabled = false
         
         return button
     }()
@@ -121,11 +120,11 @@ extension TermsVC{
         if selected {
             selectedState = [true,true,true,true,true]
             nextButton.backgroundColor = UIColor(named: "PrimaryColor")
-//            nextButton.isEnabled = true
+            nextButton.isEnabled = true
         } else {
             selectedState = [false,false,false,false,false]
             nextButton.backgroundColor = UIColor(named: "DisableColor")
-//            nextButton.isEnabled = false
+            nextButton.isEnabled = false
         }
     }
 }

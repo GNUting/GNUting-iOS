@@ -21,7 +21,7 @@ class SelectDateView : UIView{
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
-        stackView.spacing = 25
+        stackView.spacing = 20
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
@@ -31,7 +31,7 @@ class SelectDateView : UIView{
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
-        stackView.spacing = 25
+        stackView.spacing = 15
         return stackView
     }()
     private lazy var yearLabel : UILabel = {
@@ -98,7 +98,7 @@ extension SelectDateView {
             make.bottom.left.right.equalToSuperview()
         }
     }
-    public func setDateLabel(date : DateModel){
+    func setDateLabel(date : DateModel){
         yearLabel.text = date.year
         monthLabel.text = date.momth
         dayLabel.text = date.day

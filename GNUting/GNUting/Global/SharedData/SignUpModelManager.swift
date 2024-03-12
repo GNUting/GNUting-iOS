@@ -9,7 +9,7 @@ import Foundation
 
 class SignUpModelManager {
     static let shared = SignUpModelManager()
-    var signUpDictionary : [String: String?] = ["email": nil,"password": nil,"name": nil,"phoneNumber": nil,"gender": nil,"birthDate": nil,"nickName": nil,"department": nil,"studentId": nil,"userSelfIntroduction": nil]
+    var signUpDictionary : [String: String] = ["email": "","password": "","name": "","phoneNumber": "","gender": "","birthDate": "","nickName": "","department": "","studentId": "","userSelfIntroduction": ""]
     
     private init () {}
     
