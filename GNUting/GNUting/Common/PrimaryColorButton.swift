@@ -16,8 +16,18 @@ class PrimaryColorButton : UIButton {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         self.isUserInteractionEnabled = true
+        self.setTitleColor(.white, for: .disabled)
         self.snp.makeConstraints { make in
             make.height.equalTo(65)
+        }
+    }
+    override var isEnabled: Bool {
+        didSet {
+            if isEnabled {
+                self.backgroundColor = UIColor(named: "PrimaryColor")
+            } else {
+                self.backgroundColor = UIColor(named: "DisableColor")
+            }
         }
     }
     required init?(coder: NSCoder) {
