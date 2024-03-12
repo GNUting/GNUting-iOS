@@ -8,8 +8,6 @@
 import UIKit
 import SnapKit
 class MyPageVC: UIViewController {
- 
-    
     let mypageConfiguration = [MyPageModel(title: "", elements: ["작성한 글 목록"]),MyPageModel(title: "고객지원", elements: ["신고하기","고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "안내", elements: ["공지사항","도움말","오픈소스 사용","법적고지"])]
     
     private lazy var myPageTabelView : UITableView = {
@@ -62,6 +60,20 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
         if section == 0{
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MyPageUserInfoTableViewHeader.identi) as? MyPageUserInfoTableViewHeader else {return UIView()}
             header.profileUpdateButtonDelegate = self
+            APIGetManager.shared.getUserData { userData in
+                guard let userData = userData?.result else { return }
+                if let url = URL(string: userData.profileImage ?? "") {
+                    URLSession.shared.dataTask(with: url) { data, response, error in
+                        guard let imageData = data else { return }
+                        
+                        header.setUserInfoView(name: userData.nickname , studentID: userData.studentId , age: userData.age , introduce: userData.userSelfIntroduction , image:UIImage(data: imageData) ?? UIImage())
+                        
+                    }.resume()
+                }else {
+                    header.setUserInfoView(name: userData.nickname , studentID: userData.studentId , age: userData.age , introduce: userData.userSelfIntroduction , image: UIImage(systemName: "person.circle") ?? UIImage())
+                }
+            }
+           
             return header
         }else{
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MyPageTitleTableViewHeader.identi) as? MyPageTitleTableViewHeader else { return UIView()}
@@ -89,5 +101,6 @@ extension MyPageVC : tapProfileUpateButtonDelegate {
         let VC = UpdaetProfileVC()
         self.navigationController?.pushViewController(VC, animated: true)
     }
-
+    
 }
+
