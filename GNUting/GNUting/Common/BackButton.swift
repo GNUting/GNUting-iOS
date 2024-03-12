@@ -2,28 +2,30 @@
 //  BackButton.swift
 //  GNUting
 //
-//  Created by 원동진 on 2/18/24.
+//  Created by 원동진 on 3/7/24.
 //
 
-import Foundation
 import UIKit
+
 class BackButton : UIButton {
-   
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setBackButton()
     }
+    
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
-    public func setConfigure(text: String){
+}
+extension BackButton {
+    private func setBackButton(){
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 18)!]))
         config.image = UIImage(named: "PopImg")
         config.baseForegroundColor = UIColor(hexCode: "504A4A")
         config.imagePlacement = .leading
         config.imagePadding = 5
         self.configuration = config
     }
-    
 }
 

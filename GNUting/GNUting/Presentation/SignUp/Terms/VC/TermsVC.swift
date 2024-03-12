@@ -33,10 +33,9 @@ class TermsVC: UIViewController {
     }()
     private lazy var nextButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
-        button.setText("다음으로")
-        button.backgroundColor = UIColor(named: "DisableColor")
+        button.setText("다음")
         button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
-//        button.isEnabled = false
+        button.isEnabled = false
         
         return button
     }()
@@ -46,7 +45,7 @@ class TermsVC: UIViewController {
         self.view.backgroundColor =  .white
         addSubViews()
         setAutoLayout()
-        setNavigationBar()
+        setNavigationBar(title: "서비스 이용 동의")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -104,13 +103,6 @@ extension TermsVC{
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
         }
     }
-    private func setNavigationBar(){
-        let popButton = UIBarButtonItem(image: UIImage(named: "PopImg"), style: .plain, target: self, action: #selector(popButtonTap))
-        popButton.tintColor = UIColor(named: "Gray")
-        self.navigationItem.leftBarButtonItem = popButton
-        self.navigationItem.title = "서비스 이용 동의"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
-    }
 }
 
 // MARK: - Method
@@ -128,11 +120,11 @@ extension TermsVC{
         if selected {
             selectedState = [true,true,true,true,true]
             nextButton.backgroundColor = UIColor(named: "PrimaryColor")
-//            nextButton.isEnabled = true
+            nextButton.isEnabled = true
         } else {
             selectedState = [false,false,false,false,false]
             nextButton.backgroundColor = UIColor(named: "DisableColor")
-//            nextButton.isEnabled = false
+            nextButton.isEnabled = false
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 class SelectGenderView : UIView {
+    var selectedGender : Int = 0 // 0 : 남자 , 1:여자
     private let typeLabel : UILabel = {
         let uiLabel = UILabel()
         uiLabel.text = "성별"
@@ -84,7 +85,7 @@ extension SelectGenderView {
         
     }
     @objc func tapButton(_ sender : UIButton){
-        
+        selectedGender = sender.tag
         if sender.tag  == 0{
             isSelctedButton(text: "남", isSelcted: true, button: manTypeButton)
             isSelctedButton(text: "여", isSelcted: false, button: girlTypeButton)
@@ -120,5 +121,16 @@ extension SelectGenderView {
             button.layer.borderWidth = 1
         }
        
+    }
+}
+
+
+extension SelectGenderView {
+    func getSelectedGender() -> String{
+        if selectedGender == 0 {
+            return "MALE"
+        } else {
+            return "FEMALE"
+        }
     }
 }
