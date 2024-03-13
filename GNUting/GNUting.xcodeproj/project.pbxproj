@@ -80,6 +80,8 @@
 		F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */; };
 		F8A6955F2BA09B2100BEB0C6 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955E2BA09B2100BEB0C6 /* UserDataManager.swift */; };
 		F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */; };
+		F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695692BA1A17400BEB0C6 /* BoardModel.swift */; };
+		F8A6956C2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6956B2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift */; };
 		F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89D82B807646008E6767 /* TabBarController.swift */; };
 		F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89DE2B80770F008E6767 /* HomeVC.swift */; };
 		F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */; };
@@ -87,7 +89,6 @@
 		F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E42B8078BA008E6767 /* MyPageVC.swift */; };
 		F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */; };
 		F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */; };
-		F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A102B820453008E6767 /* DateBoardModel.swift */; };
 		F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */; };
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
 		F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */; };
@@ -167,7 +168,7 @@
 		F87D05892B8F940100910773 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTitleTableViewHeader.swift; sourceTree = "<group>"; };
 		F88EE47E2B9ED94E0058BC00 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
-		F88EE4812B9EE3420058BC00 /* APIURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIURL.swift; path = GNUting/Global/API/APIURL.swift; sourceTree = SOURCE_ROOT; };
+		F88EE4812B9EE3420058BC00 /* APIURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIURL.swift; path = GNUting/Global/API/APIURLBase/APIURL.swift; sourceTree = SOURCE_ROOT; };
 		F88EE4852B9EE4F80058BC00 /* APIPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostManager.swift; sourceTree = "<group>"; };
 		F88EE4872B9F06550058BC00 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F88EE4892B9F2E430058BC00 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
@@ -182,6 +183,8 @@
 		F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		F8A6955E2BA09B2100BEB0C6 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDataModel.swift; sourceTree = "<group>"; };
+		F8A695692BA1A17400BEB0C6 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
+		F8A6956B2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingTableViewCell.swift; path = "../../../../../../../../../.Trash/GNUting-iOS 오전 1.50.59/GNUting/GNUting/Presentation/Main/CommonViewComponent/LoadingTableViewCell.swift"; sourceTree = "<group>"; };
 		F8BE89D82B807646008E6767 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F8BE89DE2B80770F008E6767 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusVC.swift; sourceTree = "<group>"; };
@@ -189,7 +192,6 @@
 		F8BE89E42B8078BA008E6767 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDateBoardListTableViewCell.swift; sourceTree = "<group>"; };
-		F8BE8A102B820453008E6767 /* DateBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardModel.swift; sourceTree = "<group>"; };
 		F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataBoardListTableViewHeader.swift; sourceTree = "<group>"; };
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListTableViewCell.swift; sourceTree = "<group>"; };
@@ -462,8 +464,8 @@
 		F88EE4802B9EE3270058BC00 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				F8A695602BA09B9000BEB0C6 /* Model */,
-				F8A695542BA07FC400BEB0C6 /* APIURL */,
+				F8A695662BA19D7D00BEB0C6 /* APIURLBase */,
+				F8A695602BA09B9000BEB0C6 /* APIModel  */,
 				F88EE4902B9F861C0058BC00 /* APIGetManager */,
 				F88EE4842B9EE4E20058BC00 /* APIPostManager */,
 			);
@@ -503,14 +505,6 @@
 			path = FindPassword;
 			sourceTree = "<group>";
 		};
-		F8A695542BA07FC400BEB0C6 /* APIURL */ = {
-			isa = PBXGroup;
-			children = (
-				F88EE4812B9EE3420058BC00 /* APIURL.swift */,
-			);
-			path = APIURL;
-			sourceTree = "<group>";
-		};
 		F8A695592BA0871200BEB0C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,13 +529,22 @@
 			path = KeyChain;
 			sourceTree = "<group>";
 		};
-		F8A695602BA09B9000BEB0C6 /* Model */ = {
+		F8A695602BA09B9000BEB0C6 /* APIModel  */ = {
 			isa = PBXGroup;
 			children = (
+				F8A695692BA1A17400BEB0C6 /* BoardModel.swift */,
 				F88EE4892B9F2E430058BC00 /* APIResponse.swift */,
 				F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */,
 			);
-			path = Model;
+			path = "APIModel ";
+			sourceTree = "<group>";
+		};
+		F8A695662BA19D7D00BEB0C6 /* APIURLBase */ = {
+			isa = PBXGroup;
+			children = (
+				F88EE4812B9EE3420058BC00 /* APIURL.swift */,
+			);
+			path = APIURLBase;
 			sourceTree = "<group>";
 		};
 		F8BE89DA2B807668008E6767 /* Main */ = {
@@ -598,7 +601,6 @@
 		F8BE8A0F2B820438008E6767 /* HomeModel */ = {
 			isa = PBXGroup;
 			children = (
-				F8BE8A102B820453008E6767 /* DateBoardModel.swift */,
 				F8BE8A1C2B821372008E6767 /* DetailDateBoardModel.swift */,
 			);
 			path = HomeModel;
@@ -760,6 +762,7 @@
 			isa = PBXGroup;
 			children = (
 				F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */,
+				F8A6956B2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift */,
 			);
 			path = CommonViewComponent;
 			sourceTree = "<group>";
@@ -880,7 +883,6 @@
 				F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */,
 				F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */,
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
-				F8BE8A112B820453008E6767 /* DateBoardModel.swift in Sources */,
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
@@ -891,6 +893,7 @@
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
 				F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */,
+				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
 				F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */,
 				F8E3CD472B8CE69700712CBF /* DateJoinMemberTableViewCell.swift in Sources */,
@@ -948,6 +951,7 @@
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
 				F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */,
+				F8A6956C2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
 				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
 				F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */,
