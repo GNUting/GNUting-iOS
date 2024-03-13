@@ -39,9 +39,9 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         
         // Configure the view for the selected state
     }
-    public func setCell(model:DetailDateBoardModel){
+    public func setCell(model:BoardResult){
         boardTitleLabel.text = model.title
-        majorStudentIDLabel.text = "\(model.major)|\(model.studentID)"
+        majorStudentIDLabel.text = model.detail
     }
     private func configure(){
         contentView.addSubViews([boardTitleLabel,majorStudentIDLabel,borderView])

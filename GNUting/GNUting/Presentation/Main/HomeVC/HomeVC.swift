@@ -10,8 +10,16 @@ import UIKit
 import SnapKit
 class HomeVC: UIViewController{
     let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
-    let sampeleDateBoardData : [DateBoardModel] = [DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요."),DateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.")]
+
+    var homeBoardData : [BoardResult] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.dateBoardTableView.reloadData()
+            }
+        }
+    }
     var currentPage = 0
+
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
         
@@ -50,6 +58,7 @@ class HomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        getBoardData()
         getUserData()
         setNavigationBar()
         addSubViews()
@@ -112,7 +121,7 @@ extension HomeVC{
 
 extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        sampleAdvertImage.count
+        return sampleAdvertImage.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -130,12 +139,13 @@ extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollec
 }
 extension HomeVC : UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampeleDateBoardData.count
+        return homeBoardData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeDateBoardListTableViewCell.identi, for: indexPath) as? HomeDateBoardListTableViewCell else { return UITableViewCell()}
-        cell.setCell(model: sampeleDateBoardData[indexPath.row])
+        cell.setCell(model: homeBoardData[indexPath.row])
+        
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -156,10 +166,16 @@ extension HomeVC{
         
     }
 }
-// MARK: - Data
+// MARK: - Get Data
 extension HomeVC {
+    private func getBoardData() {
+        APIGetManager.shared.getBoardText(page: 1, size: 10) { boardData in
+            guard let boardDataList = boardData?.result else { return}
+            self.homeBoardData = boardDataList
+        }
+    }
     private func getUserData(){
-        APIGetManager.shared.getUserData { userData in
+        APIGetManager.shared.getUserData { [unowned self] userData in
             guard let userData = userData else { return }
             self.setExplainLabel(text: userData.result.nickname)
             self.setImageFromStringURL(stringURL: userData.result.profileImage ?? "")
