@@ -11,6 +11,26 @@ import Alamofire
 
 class APIGetManager {
     static let shared = APIGetManager()
+    
+    func getBoardText(page:Int, size: Int, completion: @escaping(BoardModel?)-> Void) {
+        let url = EndPoint.getBoardData.url
+        let email = UserEmailManager.shard.email
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        let headers : HTTPHeaders = ["Authorization": token]
+        let parameters: [String:Any] = ["page": page, "size": size]
+        AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default,headers: headers)
+            .responseDecodable(of:BoardModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                print("getBoardText statusCode: \(statusCode)")
+                switch response.result {
+                case .success:
+                    completion(response.value)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+    }
     func getUserData(completion: @escaping(GetUserDataModel?) -> Void) {
         let url = EndPoint.getUserData.url
         let email = UserEmailManager.shard.email
@@ -27,8 +47,8 @@ class APIGetManager {
                     break
                 }
             }
-
-            
+        
+        
     }
     
     
@@ -49,3 +69,4 @@ class APIGetManager {
             }
     }
 }
+
