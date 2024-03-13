@@ -52,7 +52,7 @@ extension UserWriteTextVC : UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
-        cell.setCell(model: sampeleDetailDateBoardData[indexPath.row])
+//        cell.setCell(model: sampeleDetailDateBoardData[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

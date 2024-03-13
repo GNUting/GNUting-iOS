@@ -26,7 +26,7 @@ class LoginVC: UIViewController {
     private lazy var textFieldStackView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 12
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
@@ -35,13 +35,14 @@ class LoginVC: UIViewController {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        
+        textField.text = "test1234@gnu.ac.kr"
         return textField
     }()
     private lazy var passwordTextField : PaddingTextField = {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
+        textField.text = "1234"
         return textField
     }()
     private lazy var findPasswordButton : UIButton = {
@@ -110,7 +111,7 @@ extension LoginVC {
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(100)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-100)
+            make.bottom.lessThanOrEqualTo(self.view.safeAreaLayoutGuide).offset(-100)
         }
         loginButton.setContentCompressionResistancePriority(.required, for: .vertical)
     }

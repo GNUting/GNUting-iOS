@@ -48,7 +48,7 @@ extension BoardTextSearchResultVC : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return UITableViewCell()}
-        cell.setCell(model: filterData[indexPath.row])
+//        cell.setCell(model: filterData[indexPath.row])
         return cell
     }
     
