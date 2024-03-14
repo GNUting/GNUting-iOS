@@ -62,16 +62,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             header.profileUpdateButtonDelegate = self
             APIGetManager.shared.getUserData { userData in
                 guard let userData = userData?.result else { return }
-                if let url = URL(string: userData.profileImage ?? "") {
-                    URLSession.shared.dataTask(with: url) { data, response, error in
-                        guard let imageData = data else { return }
-                        
-                        header.setUserInfoView(name: userData.nickname , studentID: userData.studentId , age: userData.age , introduce: userData.userSelfIntroduction , image:UIImage(data: imageData) ?? UIImage())
-                        
-                    }.resume()
-                }else {
-                    header.setUserInfoView(name: userData.nickname , studentID: userData.studentId , age: userData.age , introduce: userData.userSelfIntroduction , image: UIImage(systemName: "person.circle") ?? UIImage())
-                }
+                header.setUserInfoView(name: userData.nickname , studentID: userData.studentId , age: userData.age , introduce: userData.userSelfIntroduction , image: userData.profileImage)
             }
            
             return header

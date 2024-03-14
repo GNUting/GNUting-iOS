@@ -11,11 +11,31 @@ import Alamofire
 
 class APIGetManager {
     static let shared = APIGetManager()
-    func getSearchBoardText(searchText: String,page: Int, completion: @escaping(SearchBoardTextModel?)->Void) {
-        let url = EndPoint.searchBoardData.url
+    
+    func getSearchUser(searchNickname: String, completion:@escaping(SearchUserModel?)-> Void) {
+        let url = EndPoint.searchGetUserData.url
         let email = UserEmailManager.shard.email
         guard let token = KeyChainManager.shared.read(key: email) else { return }
+  
+        let headers : HTTPHeaders = ["Authorization": token]
+        let parameters: [String:Any] = ["nickname": searchNickname]
+        AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default,headers: headers).responseDecodable(of: SearchUserModel.self) { response in
+            guard let statusCode = response.response?.statusCode else { return }
+            print("getSearchUser statusCode: \(statusCode)")
+            switch response.result {
+            case .success:
+                completion(response.value)
+            case .failure(let err):
+                print(err)
+                break
+            }
+        }
+    }
     
+    func getSearchBoardText(searchText: String,page: Int, completion: @escaping(SearchBoardTextModel?)->Void) {
+        let url = EndPoint.searchGetBoardData.url
+        let email = UserEmailManager.shard.email
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
         let headers : HTTPHeaders = ["Authorization": token]
         let parameters: [String:Any] = ["keyword": searchText,"page": page]
         AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default,headers: headers)
@@ -54,7 +74,7 @@ class APIGetManager {
         let url = EndPoint.getUserData.url
         let email = UserEmailManager.shard.email
         guard let token = KeyChainManager.shared.read(key: email) else { return }
-        
+        print(token)
         let headers : HTTPHeaders = ["Authorization": token]
         AF.request(url,method: .get,headers: headers)
             .validate(statusCode: 200..<300)

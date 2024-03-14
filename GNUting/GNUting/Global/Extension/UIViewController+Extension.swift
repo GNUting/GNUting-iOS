@@ -24,4 +24,6 @@ extension UIViewController{
         self.navigationItem.title = title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
+    
+    
 }

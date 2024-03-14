@@ -12,8 +12,45 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
-    
-    func postLoginAPI(email: String, password: String, completion: @escaping (LoginSuccessResponse?,Int) -> Void) {
+    func postWriteText(title: String,detail:String,joinMemberID: [UserIDList],completion: @escaping(Int)->Void) {
+        let url = EndPoint.writeText.url
+        let email = UserEmailManager.shard.email
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        let requestBody = WriteTextUserData(title: title, detail: detail, inUser: joinMemberID)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if (200..<300).contains(httpResponse.statusCode) {
+                print("Request successful")
+                completion(httpResponse.statusCode)
+            } else {
+                print("Request failed with status code: \(httpResponse.statusCode)")
+                completion(httpResponse.statusCode)
+                // Handle error response
+            }
+        }.resume()
+        
+    }
+    func postLoginAPI(email: String, password: String, completion: @escaping (LoginSuccessResponse?,Int) -> Void) { // httpbody가아니라 파라미터로 넣는데 통신되는 이유 ?
         let url = EndPoint.login.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters : [String : String] = ["email": email,"password":password]
@@ -24,7 +61,7 @@ class APIPostManager {
                 case 200..<300:
                     guard let data = response.value else { return }
                     guard let authorization = response.response?.allHeaderFields["Authorization"] else { return }
-                  
+                    
                     print("postLoginAPI statusCode:\(statusCode)")
                     if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
                         completion(json,statusCode)

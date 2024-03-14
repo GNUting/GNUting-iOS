@@ -96,7 +96,7 @@ extension RequestChatVC : UITableViewDelegate,UITableViewDataSource {
         
         if indexPath.row < sampleData.count{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
-            cell.setContentLabel(model: sampleData[indexPath.row])
+//            cell.setContentLabel(model: sampleData[indexPath.row])
             return cell
         }else{
             guard let addCell = tableView.dequeueReusableCell(withIdentifier: MemBerAddTableViewCell.identi, for: indexPath) as? MemBerAddTableViewCell else { return UITableViewCell()}

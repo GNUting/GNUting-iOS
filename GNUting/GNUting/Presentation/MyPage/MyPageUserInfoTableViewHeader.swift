@@ -63,7 +63,7 @@ extension MyPageUserInfoTableViewHeader{
     }
 }
 extension MyPageUserInfoTableViewHeader {
-    func setUserInfoView(name :String,studentID: String, age: String, introduce: String, image : UIImage) {
+    func setUserInfoView(name :String,studentID: String, age: String, introduce: String, image : String?) {
         userInfoView.setUserInfoDetailView(name: name, studentID: studentID, age: age, introduce: introduce, image: image)
     }
 }

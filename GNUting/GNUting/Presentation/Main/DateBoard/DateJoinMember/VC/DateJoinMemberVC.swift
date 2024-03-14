@@ -72,3 +72,8 @@ extension DateJoinMemberVC : UITableViewDataSource {
     }
 
 }
+@available(iOS 17,*)
+
+#Preview(traits: .defaultLayout) {
+return DateJoinMemberVC()
+}
