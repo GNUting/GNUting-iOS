@@ -20,15 +20,12 @@ class DateBoardListVC: UIViewController {
             }
         }
     }
-  
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
         tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
-        tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: LoadingTableViewCell.identi)
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.showsVerticalScrollIndicator = false
                                                        
         return tableView
     }()
@@ -51,6 +48,7 @@ class DateBoardListVC: UIViewController {
         button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
         return button
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -72,8 +70,8 @@ extension DateBoardListVC{
     private func setAutoLayout(){
         dateBoardTableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         writeTextButton.snp.makeConstraints { make in
@@ -107,33 +105,15 @@ extension DateBoardListVC: UITableViewDataSource{
 }
 
 extension DateBoardListVC: UITableViewDelegate{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0{
-            return dateBoardListData.count
-        } else if section == 1 && isFetching {
-            return 1
-        }
-        return 0
+        return dateBoardListData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
+        boardListCell.boardListSetCell(model: dateBoardListData[indexPath.row])
         
-        if indexPath.section == 0{
-            boardListCell.setCell(model: dateBoardListData[indexPath.row])
-            
-            return boardListCell
-        } else {
-            guard let loadingCell = tableView.dequeueReusableCell(withIdentifier: LoadingTableViewCell.identi, for: indexPath) as? LoadingTableViewCell else {return UITableViewCell()}
-            loadingCell.start()
-            return loadingCell
-        }
-        
-        
+        return boardListCell
         
     }
 }

@@ -13,6 +13,7 @@ enum EndPoint{
     case login
     case getUserData
     case getBoardData
+    case searchBoardData
     var url : URL {
         switch self{
         case .login:
@@ -27,6 +28,8 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "board/user/myinfo")
         case .getBoardData:
             return .makeForEndpoint(endPoint: "board")
+        case .searchBoardData:
+            return .makeForEndpoint(endPoint: "board/search")
         }
     }
 }
