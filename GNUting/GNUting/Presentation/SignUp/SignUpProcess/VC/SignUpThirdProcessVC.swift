@@ -87,7 +87,7 @@ extension SignUpThirdProcessVC {
         let savedSignUpdate = SignUpModelManager.shared.signUpDictionary
         
         let signUpData : SignUpModel = SignUpModel(birthDate: savedSignUpdate["birthDate"] ?? "", department: savedSignUpdate["department"] ?? "", email: (savedSignUpdate["email"] ?? "") + "@gnu.ac.kr", gender: savedSignUpdate["gender"] ?? "", name: savedSignUpdate["name"] ?? "", nickname: savedSignUpdate["nickname"] ?? "", password: savedSignUpdate["password"] ?? "", phoneNumber: savedSignUpdate["phoneNumber"] ?? "", studentId: savedSignUpdate["studentId"] ?? "", userSelfIntroduction: savedSignUpdate["userSelfIntroduction"] ?? "")
-        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: phothImageView.image ?? UIImage()) { error in
+        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: phothImageView.image ?? UIImage()) { error,isSuccess  in
             guard error != nil else {
                 print("Error :\(String(describing: error))")
                 return

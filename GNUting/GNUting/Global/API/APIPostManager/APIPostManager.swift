@@ -19,13 +19,13 @@ class APIPostManager {
         let parameters : [String : String] = ["email": email,"password":password]
         AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
             .responseData { response in
-                guard let authorization = response.response?.allHeaderFields["Authorization"] else { return }
-                
                 guard let statusCode = response.response?.statusCode else { return }
-                print("postLoginAPI statusCode:\(statusCode)")
                 switch statusCode {
                 case 200..<300:
                     guard let data = response.value else { return }
+                    guard let authorization = response.response?.allHeaderFields["Authorization"] else { return }
+                  
+                    print("postLoginAPI statusCode:\(statusCode)")
                     if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
                         completion(json,statusCode)
                         let email = json.result.email
@@ -61,7 +61,7 @@ class APIPostManager {
     }
     
     
-    func postSignUP(signUpdata : SignUpModel,image : UIImage,completion: @escaping (Error?) -> Void) {
+    func postSignUP(signUpdata : SignUpModel,image : UIImage,completion: @escaping (Error?,Bool) -> Void) {
         let url = EndPoint.signUp.url
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
@@ -81,12 +81,13 @@ class APIPostManager {
                 print("postSignUP statusCode:\(statusCode)")
                 guard let data = response.value else { return }
                 if let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) {
-                    print("postSignUP response Body : \(json)")
+                    print("postSignUP response Body : \(json.isSuccess)")
+                    completion(response.error,json.isSuccess)
                 }
                 
             case .failure(let err):
                 print(err)
-                completion(err)
+                completion(err, false)
             }
         }
         
