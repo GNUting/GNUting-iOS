@@ -10,7 +10,12 @@ import UIKit
 class WriteUpdateDateBoardVC: UIViewController {
     var titleState = "글쓰기"
     let textViewPlaceHolder = "내용을 입력해주세요."
-    let sampleData = ["짱짱맨(asd123) 컴퓨터과학과 | 21살 | 20학번|안녕하세요...이쁜이 구해요","짱짱맨(asd123) 컴퓨터과학과 | 21살 | 20학번|안녕하세요...이쁜이 구해요","짱짱맨(asd123) 컴퓨터과학과 | 21살 | 20학번|안녕하세요...이쁜이 구해요"]
+    var addMemberDataList: [SearchUserData] = [] {
+        didSet {
+            memberTableView.reloadData()
+        }
+    }
+  
     private lazy var titleContentView : WrtieUpdateTitleContentView = {
         let customView = WrtieUpdateTitleContentView()
         customView.contentTextView.delegate = self
@@ -20,28 +25,32 @@ class WriteUpdateDateBoardVC: UIViewController {
     }()
     private lazy var memberTableView : UITableView = {
         let tableView = UITableView()
+        
+        tableView.sectionHeaderTopPadding = 0
         tableView.separatorStyle = .none
+        tableView.bounces = false
         tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: MemberTableViewCell.identi)
         tableView.register(MemBerAddTableViewCell.self, forCellReuseIdentifier: MemBerAddTableViewCell.identi)
         tableView.register(MemberTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MemberTableViewHeader.identi)
+        tableView.delegate = self
+        tableView.dataSource = self
         return tableView
     }()
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        getUserData()
         addSubViews()
         setAutoLayout()
         setNavigationBar()
-        setTableView()
     }
     
 
 }
 extension WriteUpdateDateBoardVC{
-    private func setTableView(){
-        memberTableView.delegate = self
-        memberTableView.dataSource = self
-    }
     private func setNavigationBar(){
         setNavigationBar(title: "\(titleState)")
         
@@ -72,35 +81,59 @@ extension WriteUpdateDateBoardVC{
     }
     
 }
-extension WriteUpdateDateBoardVC : UITableViewDelegate,UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sampleData.count == 0{
-            return 1
-        }else {
-            return sampleData.count + 1
+extension WriteUpdateDateBoardVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let vc = SearchAddMemberVC()
+            vc.memberAddButtonDelegate = self
+            let navigationVC = UINavigationController.init(rootViewController: vc)
+            navigationVC.modalPresentationStyle = .fullScreen
+            present(navigationVC, animated: true)
+            
         }
-        
+    }
+}
+extension WriteUpdateDateBoardVC: UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            print(addMemberDataList.count)
+            return addMemberDataList.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        if indexPath.row < sampleData.count{
+        if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
-            cell.setContentLabel(model: sampleData[indexPath.row])
+            cell.setUserInfoView(model: addMemberDataList[indexPath.row])
+            cell.selectionStyle = .none
+            
             return cell
-        }else{
+        } else {
             guard let addCell = tableView.dequeueReusableCell(withIdentifier: MemBerAddTableViewCell.identi, for: indexPath) as? MemBerAddTableViewCell else { return UITableViewCell()}
+            addCell.selectionStyle = .none
             return addCell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MemberTableViewHeader.identi) as? MemberTableViewHeader else {return UIView()}
-        headerView.setMemberLabelCount(memberCount: sampleData.count)
-        return headerView
+        if section == 0 {
+            headerView.setMemberLabelCount(memberCount: addMemberDataList.count)
+            return headerView
+        }
+        return UIView()
     }
-
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 1
+        }
+        return tableView.estimatedSectionHeaderHeight
+    }
 }
 extension WriteUpdateDateBoardVC : UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -121,9 +154,28 @@ extension WriteUpdateDateBoardVC : UITextViewDelegate{
 
 extension WriteUpdateDateBoardVC{
     @objc private func tapCompletedButton(){
-    
+        var joinMemberID : [UserIDList] = []
+        for userData in addMemberDataList {
+            joinMemberID.append(UserIDList(id: userData.id))
+        }
+//        print(joinMemberID)
+        APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { statusCode in
+            print(statusCode)
+        }
+        popButtonTap()
     }
 }
+extension WriteUpdateDateBoardVC{
+    private func getUserData(){
+        APIGetManager.shared.getUserData { userData in
+            guard let userData = userData?.result else { return }
+            self.addMemberDataList.append(SearchUserData(id: userData.id, name: userData.nickname, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, profileImage: userData.profileImage , userSelfIntroduction: userData.userSelfIntroduction))
+            
+        }
+    }
+}
+
+
 extension WriteUpdateDateBoardVC {
     public func sendDetailTextData(textTuple : (String,String)) {
         titleContentView.setTitleTextFieldText(text: textTuple.0)
@@ -132,3 +184,9 @@ extension WriteUpdateDateBoardVC {
     }
     
 }
+extension WriteUpdateDateBoardVC: MemberAddButtonDelegate {
+    func sendAddMemberData(send: [SearchUserData]) {
+        addMemberDataList.append(contentsOf: send)
+    }
+}
+

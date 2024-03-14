@@ -26,16 +26,10 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
         return stackView
     }()
     
-    private lazy var userImageButton : UIButton = {
-        let imagebutton = UIButton()
-        imagebutton.setImage(UIImage(named: "SampleImg1"), for: .normal)
-        imagebutton.layer.cornerRadius = imagebutton.layer.frame.size.width / 2
-        return imagebutton
-    }()
+    private lazy var userImageButton = UIButton()
  
     private lazy var userNameLabel : UILabel = {
         let label = UILabel()
-        label.text = "전병규"
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
         label.textColor = .black
         label.textAlignment = .left
@@ -44,19 +38,19 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
     
     private lazy var subInfoLabel : UILabel = { // 학번 나이
         let label = UILabel()
-        label.text = "20학번|23살"
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
         label.textColor = UIColor(hexCode: "767676")
         label.textAlignment = .left
+        
         return label
     }()
     
     private lazy var selfIntroduceLabel : UILabel = { // 한줄 소개
         let label = UILabel()
-        label.text = "안녕하세요 재밌게 놀아요."
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
         label.textColor = .black
         label.textAlignment = .left
+        
         return label
     }()
     
@@ -108,18 +102,42 @@ extension UserInfoDetailView{
         }
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
     }
-    func hiddenBorder(){
-        upperView.layer.borderWidth = 0
-    }
-    func setUserInfoDetailView(name :String,studentID: String, age: String, introduce: String, image : UIImage ) {
-        DispatchQueue.main.async {
-            self.userImageButton.setImage(image, for: .normal)
-            self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.height / 2
-            self.userImageButton.layer.masksToBounds = true
-            self.userNameLabel.text = name
-            self.subInfoLabel.text = "\(studentID) | \(age)"
-            self.selfIntroduceLabel.text = introduce
+    func selected(isSelected: Bool){
+        if isSelected {
+            upperView.layer.borderColor = UIColor(named: "SecondaryColor")?.cgColor
+        } else {
+            upperView.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
         }
         
+    }
+    func hiddenBorder() {
+        upperView.layer.borderWidth = 0
+    }
+    
+    func setUserInfoDetailView(name :String?,studentID: String?, age: String?, introduce: String?, image : String? ) {
+        
+        self.userNameLabel.text = name
+        self.subInfoLabel.text = "\(studentID ?? "학번") | \(age ?? "학번")"
+        self.selfIntroduceLabel.text = introduce
+        self.setImageFromStringURL(stringURL: image)
+    }
+}
+extension UserInfoDetailView {
+    private func setImageFromStringURL(stringURL : String?) {
+        if let url = URL(string: stringURL ?? "") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let imageData = data else { return }
+                DispatchQueue.main.async {
+                    self.userImageButton.setImage(UIImage(data: imageData), for: .normal)
+                    self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                    self.userImageButton.layer.masksToBounds = true
+                }
+            }.resume()
+        }else {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0)
+            userImageButton.configuration = config
+            self.userImageButton.setImage(UIImage(named: "ProfileImg"), for: .normal)
+        }
     }
 }

@@ -141,7 +141,7 @@ extension DetailDateBoardVC{
     
     @objc private func tapRequetChatButton(){
         let VC = RequestChatVC()
-        self.present(VC, animated: true)
+        self.navigationController?.pushViewController(VC, animated: true)
     }
 }
 extension DetailDateBoardVC : DetailDateBoardSetViewButtonAction {

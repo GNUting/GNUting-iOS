@@ -7,7 +7,7 @@
 
 import UIKit
 //MARK: - 제목, 내용 입력 화면
-class WrtieUpdateTitleContentView: UIView {
+class WrtieUpdateTitleContentView: UIView, UITextViewDelegate{
     private lazy var upperView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
@@ -21,6 +21,7 @@ class WrtieUpdateTitleContentView: UIView {
         textField.font = UIFont(name: Pretendard.Bold.rawValue, size: 18)
         textField.textColor = .black
         textField.attributedPlaceholder = NSAttributedString(string: "제목",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 18)!,NSAttributedString.Key.foregroundColor : UIColor(hexCode: "9F9F9F")])
+        textField.delegate = self
         return textField
     }()
     private lazy var borderView : UIView = {
@@ -32,6 +33,7 @@ class WrtieUpdateTitleContentView: UIView {
         let textView = UITextView()
         textView.font = UIFont(name: Pretendard.Regular.rawValue, size: 18)
         textView.textColor = UIColor(hexCode: "9F9F9F")
+        textView.delegate = self
         return textView
     }()
     override init(frame: CGRect) {
@@ -68,4 +70,18 @@ extension WrtieUpdateTitleContentView{
     public func setContentTextViewTextColor(color : UIColor){
         contentTextView.textColor = color
     }
+    
+    func getTitleTextFieldText() -> String? {
+        return titleTextField.text
+    }
+    
+    func getContentTextViewText() -> String {
+        return contentTextView.text
+    }
 }
+extension WrtieUpdateTitleContentView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        titleTextField.resignFirstResponder()
+    }
+}
+

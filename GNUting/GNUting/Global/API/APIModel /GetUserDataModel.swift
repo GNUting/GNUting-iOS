@@ -19,5 +19,6 @@ struct UserDataResult: Decodable {
     let department: String
     let profileImage: String?
     let studentId: String
+    let userRole: String
     let userSelfIntroduction: String
 }

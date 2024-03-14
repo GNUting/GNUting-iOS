@@ -7,7 +7,25 @@
 
 import UIKit
 // 추후 컴포지셔널 뷰사용
-class SearchAddMemberVC: UIViewController {
+// MARK: - 멤버검색해서 추가하는 VC
+
+protocol MemberAddButtonDelegate: AnyObject{
+    func sendAddMemberData(send: [SearchUserData])
+}
+
+class SearchAddMemberVC: UIViewController{
+    var searchUser : SearchUserData?
+    var addMemberInfos: [SearchUserData] = [] {
+        didSet {
+            addMemberCollectionView.reloadData()
+        }
+    }
+    var searchText: String = ""
+    
+    var tappedSearchUserInfoView: Bool = false
+    
+    var memberAddButtonDelegate: MemberAddButtonDelegate?
+    
     private lazy var dismissButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "DissmissImg"), for: .normal)
@@ -16,17 +34,28 @@ class SearchAddMemberVC: UIViewController {
         return button
     }()
     private lazy var memberAddButton : UIButton = {
-        let button = UIButton()
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = AttributedString("멤버 추가", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 14)!]))
+        config.baseForegroundColor = .white
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        let button = UIButton(configuration: config)
+        
         button.setTitle("멤버 추가", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(named: "SecondaryColor")
-        button.titleLabel?.font = UIFont(name: Pretendard.Bold.rawValue, size: 14)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(tapMemberAddButtton), for: .touchUpInside)
+        
         return button
     }()
     private lazy var searchController : UISearchController = {
-        let searchController = UISearchController()
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "추가할 멤버의 닉네임을 입력하세요."
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.searchTextField.delegate = self
+        searchController.searchBar.searchTextField.returnKeyType = .search
         return searchController
     }()
     private lazy var addMemberCollectionView : UICollectionView = {
@@ -34,49 +63,46 @@ class SearchAddMemberVC: UIViewController {
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(AddMemeberCollectionViewCell.self, forCellWithReuseIdentifier: AddMemeberCollectionViewCell.identi)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         return collectionView
     }()
-    private lazy var searchMemBerTableView : UITableView = {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.register(DateJoinMemberTableViewCell.self, forCellReuseIdentifier: DateJoinMemberTableViewCell.identi)
-        return tableView
+    private lazy var searchUserInfoView : UserInfoDetailView = {
+        let view = UserInfoDetailView()
+        view.isHidden = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSearchUserInfoView))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        return view
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
         setAddSubViews()
         setAutoLayout()
-        setCollectionView()
-        setTableView()
         setNavigationBar()
     }
 }
 extension SearchAddMemberVC{
     private func setAddSubViews() {
-        self.view.addSubViews([addMemberCollectionView,searchMemBerTableView])
+        self.view.addSubViews([addMemberCollectionView,searchUserInfoView])
     }
     private func setAutoLayout(){
         addMemberCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.height.equalTo(80)
+            make.height.equalTo(40)
         }
-        searchMemBerTableView.snp.makeConstraints { make in
-            make.top.equalTo(addMemberCollectionView.snp.bottom).offset(Spacing.top)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        
+        searchUserInfoView.snp.makeConstraints { make in
+            make.top.equalTo(self.addMemberCollectionView.snp.bottom).offset(Spacing.top)
+            make.left.equalToSuperview().offset(Spacing.left)
+            make.right.equalToSuperview().offset(Spacing.right)
+            make.bottom.lessThanOrEqualToSuperview().offset(-50)
         }
-    }
-    private func setCollectionView() {
-        addMemberCollectionView.delegate = self
-        addMemberCollectionView.dataSource = self
-    }
-    private func setTableView() {
-//        searchMemBerTableView.delegate = self
-        searchMemBerTableView.dataSource = self
     }
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
@@ -85,31 +111,72 @@ extension SearchAddMemberVC{
     }
 }
 
-extension SearchAddMemberVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+extension SearchAddMemberVC {
+    @objc private func didSearchUserInfoView() {
+        guard let searchUser = searchUser else { return }
+        
+        if tappedSearchUserInfoView{
+            tappedSearchUserInfoView = false
+            if let index = addMemberInfos.firstIndex(where: {$0.id == searchUser.id}) {
+                addMemberInfos.remove(at: index)
+            }
+        } else {
+            addMemberInfos.append(searchUser)
+            tappedSearchUserInfoView = true
+        }
+        searchUserInfoView.selected(isSelected: tappedSearchUserInfoView)
     }
     
+    @objc private func tapMemberAddButtton() {
+        dismiss(animated: true)
+        memberAddButtonDelegate?.sendAddMemberData(send: addMemberInfos)
+    }
+}
+extension SearchAddMemberVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        addMemberInfos.remove(at: indexPath.item)
+        searchUserInfoView.selected(isSelected: false)
+    }
+}
+extension SearchAddMemberVC: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return addMemberInfos.count
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMemeberCollectionViewCell.identi, for: indexPath) as? AddMemeberCollectionViewCell else { return UICollectionViewCell()}
+        cell.setCell(text: addMemberInfos[indexPath.item].nickname)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 150, height: 40)
-    }
-}
-
-
-extension SearchAddMemberVC : UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        return CGSize(width: addMemberInfos[indexPath.item].nickname.size(withAttributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 15)!]).width + 50, height: 35)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateJoinMemberTableViewCell.identi, for: indexPath) as? DateJoinMemberTableViewCell else { return UITableViewCell() }
-        return cell
-    }
-
 }
 
+
+extension SearchAddMemberVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return}
+        searchText = text
+    }
+}
+extension SearchAddMemberVC: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchUserInfoView.isHidden = true
+        searchUserInfoView.selected(isSelected: false)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        APIGetManager.shared.getSearchUser(searchNickname: searchText) { [self] searchUserData in
+            searchUserInfoView.isHidden = false
+            searchUser = searchUserData?.result
+          
+            self.searchUserInfoView.setUserInfoDetailView(name: searchUser?.name, studentID: searchUser?.studentId, age: searchUser?.age, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
+            searchController.searchBar.text = ""
+        }
+        return true
+    }
+ 
+}

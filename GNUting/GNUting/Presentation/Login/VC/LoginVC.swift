@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        textField.text = "dje@gnu.ac.kr"
+        textField.text = "test123@gnu.ac.kr"
         return textField
     }()
     private lazy var passwordTextField : PaddingTextField = {
