@@ -79,6 +79,7 @@ extension LoginVC{
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         APIPostManager.shared.postLoginAPI(email: email, password: password) { response, statusCode in
+            
             switch statusCode {
             case 200..<300:
                 guard let email = response?.result.email else { return }

@@ -197,7 +197,7 @@ extension HomeVC {
             var config = UIButton.Configuration.plain()
             config.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0)
             imageButton.configuration = config
-            self.imageButton.setImage(UIImage(systemName: "person.circle"), for: .normal)
+            self.imageButton.setImage(UIImage(named: "ProfileImg"), for: .normal)
         }
     }
 }

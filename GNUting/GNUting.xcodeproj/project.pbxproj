@@ -82,6 +82,7 @@
 		F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */; };
 		F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695692BA1A17400BEB0C6 /* BoardModel.swift */; };
 		F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */; };
+		F8AAD3C92BA32B790047B8C0 /* PostContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AAD3C82BA32B790047B8C0 /* PostContentModel.swift */; };
 		F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89D82B807646008E6767 /* TabBarController.swift */; };
 		F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89DE2B80770F008E6767 /* HomeVC.swift */; };
 		F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */; };
@@ -185,6 +186,7 @@
 		F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDataModel.swift; sourceTree = "<group>"; };
 		F8A695692BA1A17400BEB0C6 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
 		F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBoardTextModel.swift; sourceTree = "<group>"; };
+		F8AAD3C82BA32B790047B8C0 /* PostContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentModel.swift; sourceTree = "<group>"; };
 		F8BE89D82B807646008E6767 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F8BE89DE2B80770F008E6767 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusVC.swift; sourceTree = "<group>"; };
@@ -532,6 +534,8 @@
 		F8A695602BA09B9000BEB0C6 /* APIModel  */ = {
 			isa = PBXGroup;
 			children = (
+				F8AAD3C72BA32B4A0047B8C0 /* Post */,
+				F8AAD3C62BA32B3F0047B8C0 /* Get */,
 				F8A695692BA1A17400BEB0C6 /* BoardModel.swift */,
 				F88EE4892B9F2E430058BC00 /* APIResponse.swift */,
 				F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */,
@@ -546,6 +550,21 @@
 				F88EE4812B9EE3420058BC00 /* APIURL.swift */,
 			);
 			path = APIURLBase;
+			sourceTree = "<group>";
+		};
+		F8AAD3C62BA32B3F0047B8C0 /* Get */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Get;
+			sourceTree = "<group>";
+		};
+		F8AAD3C72BA32B4A0047B8C0 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				F8AAD3C82BA32B790047B8C0 /* PostContentModel.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 		F8BE89DA2B807668008E6767 /* Main */ = {
@@ -962,6 +981,7 @@
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
 				F873518C2B90B569004E89C5 /* DateMemeberModel.swift in Sources */,
 				F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */,
+				F8AAD3C92BA32B790047B8C0 /* PostContentModel.swift in Sources */,
 				F8E3CD0A2B8B5E6600712CBF /* ReportReasonView.swift in Sources */,
 				F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */,
 				F8235CF92B765E2200E49073 /* DateModel.swift in Sources */,
