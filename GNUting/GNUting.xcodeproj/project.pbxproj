@@ -81,7 +81,7 @@
 		F8A6955F2BA09B2100BEB0C6 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955E2BA09B2100BEB0C6 /* UserDataManager.swift */; };
 		F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */; };
 		F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695692BA1A17400BEB0C6 /* BoardModel.swift */; };
-		F8A6956C2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6956B2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift */; };
+		F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */; };
 		F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89D82B807646008E6767 /* TabBarController.swift */; };
 		F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89DE2B80770F008E6767 /* HomeVC.swift */; };
 		F8BE89E12B80778E008E6767 /* RequestStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */; };
@@ -184,7 +184,7 @@
 		F8A6955E2BA09B2100BEB0C6 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDataModel.swift; sourceTree = "<group>"; };
 		F8A695692BA1A17400BEB0C6 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
-		F8A6956B2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingTableViewCell.swift; path = "../../../../../../../../../.Trash/GNUting-iOS 오전 1.50.59/GNUting/GNUting/Presentation/Main/CommonViewComponent/LoadingTableViewCell.swift"; sourceTree = "<group>"; };
+		F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBoardTextModel.swift; sourceTree = "<group>"; };
 		F8BE89D82B807646008E6767 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F8BE89DE2B80770F008E6767 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		F8BE89E02B80778E008E6767 /* RequestStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusVC.swift; sourceTree = "<group>"; };
@@ -535,6 +535,7 @@
 				F8A695692BA1A17400BEB0C6 /* BoardModel.swift */,
 				F88EE4892B9F2E430058BC00 /* APIResponse.swift */,
 				F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */,
+				F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */,
 			);
 			path = "APIModel ";
 			sourceTree = "<group>";
@@ -762,7 +763,6 @@
 			isa = PBXGroup;
 			children = (
 				F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */,
-				F8A6956B2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift */,
 			);
 			path = CommonViewComponent;
 			sourceTree = "<group>";
@@ -922,6 +922,7 @@
 				F87351692B906EE0004E89C5 /* UITableViewHeaderFooterView.swift in Sources */,
 				F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
+				F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */,
 				F88EE4882B9F06550058BC00 /* UIImage+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */,
@@ -951,7 +952,6 @@
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
 				F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */,
-				F8A6956C2BA1BE6C00BEB0C6 /* LoadingTableViewCell.swift in Sources */,
 				F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */,
 				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
 				F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */,
@@ -1112,6 +1112,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1139,6 +1140,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -39,24 +39,29 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         
         // Configure the view for the selected state
     }
-    public func setCell(model:BoardResult){
+    public func boardListSetCell(model:BoardResult){
         boardTitleLabel.text = model.title
-        majorStudentIDLabel.text = model.detail
+        majorStudentIDLabel.text = "\(model.user.department) | \((model.user.studentId)) "
+    }
+    func searchSetCell(model: SearchResultContent) {
+        boardTitleLabel.text = model.title
+        majorStudentIDLabel.text = "\(model.department) | \((model.studentID)) "
     }
     private func configure(){
         contentView.addSubViews([boardTitleLabel,majorStudentIDLabel,borderView])
         boardTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.left)
         }
         majorStudentIDLabel.snp.makeConstraints { make in
             make.top.equalTo(boardTitleLabel.snp.bottom).offset(5)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.left)
             
         }
         borderView.snp.makeConstraints { make in
             make.top.equalTo(majorStudentIDLabel.snp.bottom).offset(Spacing.top)
-            make.left.bottom.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.left)
+            make.bottom.equalToSuperview()
             make.height.equalTo(1)
         }
     }

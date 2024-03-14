@@ -51,6 +51,7 @@ class HomeVC: UIViewController{
         tableview.separatorStyle = .none
         tableview.register(HomeDateBoardListTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HomeDateBoardListTableViewHeader.identi)
         tableview.register(HomeDateBoardListTableViewCell.self, forCellReuseIdentifier: HomeDateBoardListTableViewCell.identi)
+        tableview.showsVerticalScrollIndicator = false
         return tableview
     }()
     private lazy var imageButton = UIButton()
@@ -156,6 +157,7 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
         }
         return header
     }
+
   
 }
 extension HomeVC{
