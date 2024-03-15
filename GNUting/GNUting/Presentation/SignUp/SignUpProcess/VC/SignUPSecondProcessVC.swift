@@ -220,7 +220,7 @@ extension SignUPSecondProcessVC {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "phoneNumber", setData: phoneNumberInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "gender", setData: genderView.getSelectedGender())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "birthDate", setData: selectedDate)
-        SignUpModelManager.shared.setSignUpDictionary(setkey: "nickName", setData: nickNameInputView.getTextFieldText())
+        SignUpModelManager.shared.setSignUpDictionary(setkey: "nickname", setData: nickNameInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "department", setData: majorInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "studentId", setData: studentIDInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "userSelfIntroduction", setData: introduceOneLine.getTextFieldText())

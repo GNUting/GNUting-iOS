@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+// MARK: - 마이 페이지
 class MyPageVC: UIViewController {
     let mypageConfiguration = [MyPageModel(title: "", elements: ["작성한 글 목록"]),MyPageModel(title: "고객지원", elements: ["신고하기","고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "안내", elements: ["공지사항","도움말","오픈소스 사용","법적고지"])]
     
@@ -17,6 +18,7 @@ class MyPageVC: UIViewController {
         tableView.register(MyPageTitleTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MyPageTitleTableViewHeader.identi)
         tableView.separatorStyle = .none
         tableView.bounces = false
+        tableView.backgroundColor = .white
         return tableView
     }()
     override func viewDidLoad() {
@@ -62,7 +64,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             header.profileUpdateButtonDelegate = self
             APIGetManager.shared.getUserData { userData in
                 guard let userData = userData?.result else { return }
-                header.setUserInfoView(name: userData.nickname , studentID: userData.studentId , age: userData.age , introduce: userData.userSelfIntroduction , image: userData.profileImage)
+                header.setInfoView(image: userData.profileImage, name: userData.name, studentID: userData.studentId, age: userData.age, major: userData.department, introuduce: userData.userSelfIntroduction)
             }
            
             return header
@@ -72,6 +74,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             return header
         }
     }
+  
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

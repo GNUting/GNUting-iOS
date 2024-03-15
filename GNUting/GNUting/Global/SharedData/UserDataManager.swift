@@ -11,5 +11,9 @@ class UserEmailManager {
     static let shard = UserEmailManager()
     var email = ""
     private init () {}
-    
+    func getToken() -> String? {
+        let token = KeyChainManager.shared.read(key: email)
+        
+        return "bearer " + (token ?? "")
+    }
 }

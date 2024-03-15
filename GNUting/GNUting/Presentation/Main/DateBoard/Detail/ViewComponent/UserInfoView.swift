@@ -30,7 +30,7 @@ class UserInfoView: UIView {
     private lazy var userImageButton : UIButton = {
         let imagebutton = UIButton()
         imagebutton.setImage(UIImage(named: "SampleImg1"), for: .normal)
-        imagebutton.layer.cornerRadius = imagebutton.layer.frame.size.width / 2
+     
         return imagebutton
     }()
     private lazy var middleStackView : UIStackView = {
@@ -92,6 +92,12 @@ extension UserInfoView {
         majorStudentIDLabel.setContentHuggingPriority(.init(250), for: .horizontal)
         writeDateLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         writeDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+    }
+    private func setAutoLayout(){
+        userImageButton.snp.makeConstraints { make in
+            make.height.width.equalTo(40)
+        }
         border1.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
@@ -110,10 +116,17 @@ extension UserInfoView {
             make.bottom.equalToSuperview()
             make.height.equalTo(1)
         }
-
-        
     }
-    private func setAutoLayout(){
-        
+    func setUserInfoView(userImage: String?,userNickname: String, major: String, StudentID: String, writeDataeLabel: String) {
+        nickNameLabel.text = userNickname
+        majorStudentIDLabel.text = major + " | " + StudentID
+        writeDateLabel.text = writeDataeLabel
+        setImageFromStringURL(stringURL: userImage) { image in
+            DispatchQueue.main.async {
+                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
+            }
+        }
     }
 }

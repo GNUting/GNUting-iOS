@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// 글쓰기 Post
 struct WriteTextUserData: Codable {
     let title: String
     let detail: String

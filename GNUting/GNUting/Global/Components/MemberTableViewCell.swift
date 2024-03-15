@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MemberTableViewCell: UITableViewCell {
+class MemberTableViewCell: UITableViewCell { // 유저 이미지, 이름, 학번,나이 ,한줄소개
     static let identi = "MemberTableViewCellid"
     private lazy var userInfoView = UserInfoDetailView()
     
@@ -38,7 +38,7 @@ extension MemberTableViewCell {
             make.bottom.equalToSuperview()
         }
     }
-    func setUserInfoView(model : SearchUserData ){
+    func setUserInfoViews(model: UserInfosModel ){
         userInfoView.setUserInfoDetailView(name: model.name, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
 }

@@ -9,12 +9,13 @@ import Foundation
 struct GetUserDataModel: Decodable {
     let isSuccess: Bool
     let code : String
-    let result : UserDataResult
+    let result : UserDataResult?
 }
 struct UserDataResult: Decodable {
     let id: Int
     let gender: String
     let age: String
+    let name: String
     let nickname: String
     let department: String
     let profileImage: String?

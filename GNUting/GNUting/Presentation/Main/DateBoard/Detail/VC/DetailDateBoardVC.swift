@@ -8,8 +8,8 @@
 import UIKit
 
 class DetailDateBoardVC: UIViewController {
-
-    
+    var boardID: Int = 0
+    var UserInfos: [UserInfosModel] = []
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 20)
@@ -30,7 +30,7 @@ class DetailDateBoardVC: UIViewController {
     }()
     private lazy var chatPeopleViewButton : UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("현재채팅/참여중인 사람 4명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+        config.attributedTitle = AttributedString("현재채팅/참여중인 사람 4명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!])) // 수정필요
         config.image = UIImage(named: "ChatImg")
         config.baseForegroundColor = UIColor(named: "PrimaryColor")
         config.imagePlacement = .leading
@@ -39,7 +39,7 @@ class DetailDateBoardVC: UIViewController {
         button.addTarget(self, action: #selector(didTapchatPeopleViewButton), for: .touchUpInside)
         return button
     }()
-    private lazy var requetChatButton : PrimaryColorButton = {
+    private lazy var requetChatButton : PrimaryColorButton = { // 어떻게 할지 정해야된다. 내글에서는 필요가 없기때문에
         let button = PrimaryColorButton()
         button.setText("채팅 신청하기")
         button.addTarget(self, action: #selector(tapRequetChatButton), for: .touchUpInside)
@@ -48,16 +48,20 @@ class DetailDateBoardVC: UIViewController {
     private lazy var detailDateBoardSetView : DetailDateBoardSetView = {
         let view = DetailDateBoardSetView()
         view.isHidden = true
+        
         return view
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        getBoardDetailData()
         addSubViews()
         setAutoLayout()
-        setNavigationBar()
         bringToDetailDateBoardSetView()
-        setDelegate()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
     }
 }
 extension DetailDateBoardVC{
@@ -101,28 +105,13 @@ extension DetailDateBoardVC{
     }
     private func setNavigationBar(){
         setNavigationBar(title: "과팅 게시판")
-        
-        
+
         let settingButton = UIBarButtonItem(image: UIImage(named: "SettingButton"), style: .plain, target: self, action: #selector(tapSettingButton(_:)))
         settingButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItem = settingButton
     }
 }
-//MARK: - delegate
-extension DetailDateBoardVC{
-    private func setDelegate(){
-        detailDateBoardSetView.buttonActionDelegate = self
-    }
-}
-extension DetailDateBoardVC {
-    public func setTitleLabel(title : String){
-        titleLabel.text = title
-    }
-    public func setContentTextView(title : String){
-        
-    
-    }
-}
+
 // MARK: - Button Action
 extension DetailDateBoardVC{
     @objc private func tapSettingButton(_ sender: UIButton){
@@ -135,32 +124,55 @@ extension DetailDateBoardVC{
     }
     
     @objc private func didTapchatPeopleViewButton(){
-        let VC = DateJoinMemberVC()
-        self.present(VC, animated: true)
+        let vc = DateJoinMemberVC()
+        vc.modalPresentationStyle = .fullScreen
+        vc.userInfos = self.UserInfos
+        self.present(vc, animated: true)
     }
     
     @objc private func tapRequetChatButton(){
-        let VC = RequestChatVC()
-        self.navigationController?.pushViewController(VC, animated: true)
+        let vc = RequestChatVC()
+        vc.boardID = boardID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-extension DetailDateBoardVC : DetailDateBoardSetViewButtonAction {
-    func didTapUpDateButton() {
+
+// MARK: - detailDateBoardSetViewButton Action Delegate
+
+extension DetailDateBoardVC : OtherPostDelegate {
+    func didTapReportButton() { // 신고하기
+        let vc = ReportVC()
+        vc.boardID = boardID
         detailDateBoardSetView.isHidden = true
-        self.navigationItem.rightBarButtonItem?.isSelected = false
-        let VC = WriteUpdateDateBoardVC()
-        VC.titleState = "수정하기"
         
-        VC.sendDetailTextData(textTuple: (titleLabel.text!, contentTextView.text))
-        self.navigationController?.pushViewController(VC, animated: true)
-    }
-    func didTapDeleteButton() {
-        print("Delete")
-    }
-    func didTapReportButton() {
-        detailDateBoardSetView.isHidden = true
         self.navigationItem.rightBarButtonItem?.isSelected = false
-        let VC = ReportVC()
-        self.navigationController?.pushViewController(VC, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+// MAKR : 어디서 push 된지 체크
+
+extension DetailDateBoardVC {
+    func setPushMypostVersion() {
+        detailDateBoardSetView.myPost(isMypost: true)
+    }
+    func setPushBoardList() {
+        detailDateBoardSetView.otherPostDelegate = self
+        detailDateBoardSetView.myPost(isMypost: false)
+    }
+}
+
+extension DetailDateBoardVC {
+    private func getBoardDetailData() {
+        
+        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData in
+            guard let result = boardDetailData?.result else { return }
+            let user = result.user
+            
+            self.titleLabel.text =  result.title
+            self.contentTextView.text = result.detail
+            self.UserInfos = result.inUser
+            self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId, writeDataeLabel: result.time)
+        }
     }
 }

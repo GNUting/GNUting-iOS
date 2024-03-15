@@ -16,6 +16,8 @@ enum EndPoint{
     case searchGetBoardData
     case searchGetUserData
     case writeText
+    case report
+    case mypost
     var url : URL {
         switch self{
         case .login:
@@ -36,6 +38,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "board/user/search")
         case .writeText:
             return .makeForEndpoint(endPoint: "board/save")
+        case .report:
+            return .makeForEndpoint(endPoint: "boardReport")
+        case .mypost:
+            return .makeForEndpoint(endPoint: "board/myboard")
         }
     }
 }
@@ -45,4 +51,5 @@ private extension URL{
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
+    
 }

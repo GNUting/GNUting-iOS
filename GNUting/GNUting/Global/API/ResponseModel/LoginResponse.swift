@@ -15,7 +15,6 @@ struct LoginSuccessResponse: Decodable {
 }
 
 struct ResponseResult: Decodable {
-    let id : Int
-    let name : String
-    let email : String
+    let accessToken: String
+    let refreshToken: String
 }

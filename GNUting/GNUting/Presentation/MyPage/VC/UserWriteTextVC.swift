@@ -7,8 +7,14 @@
 
 import UIKit
 
+// MARK: - 내가 작성한글
+
 class UserWriteTextVC: UIViewController {
-    let sampeleDetailDateBoardData : [DetailDateBoardModel] = [DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "22학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "23학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "21학번"),DetailDateBoardModel(major: "간호학과", title: "3:3과팅하실분 연락주세요.", studentID: "24학번")]
+    var myPostList : [MyPostResult] = [] {
+        didSet{
+            dateBoardTableView.reloadData()
+        }
+    }
     
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
@@ -21,6 +27,7 @@ class UserWriteTextVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
+        getMyPostList()
         addSubViews()
         setAutoLayout()
         setNavigationBar(title: "작성한 글 목록")
@@ -39,27 +46,38 @@ extension UserWriteTextVC{
     private func setAutoLayout(){
         dateBoardTableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
 }
-extension UserWriteTextVC : UITableViewDataSource,UITableViewDelegate{
+extension UserWriteTextVC: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailDateBoardVC()
+        vc.boardID = myPostList[indexPath.row].id
+        vc.setPushMypostVersion()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+extension UserWriteTextVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sampeleDetailDateBoardData.count
+        myPostList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
-//        cell.setCell(model: sampeleDetailDateBoardData[indexPath.row])
+        cell.myPostSetCell(model: myPostList[indexPath.row])
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailDateBoardVC()
-        vc.setTitleLabel(title: sampeleDetailDateBoardData[indexPath.row].title)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+   
     
+}
+extension UserWriteTextVC {
+    private func getMyPostList(){
+        APIGetManager.shared.getMyPost { response in
+            guard let result = response?.result else { return }
+            self.myPostList = result
+        }
+    }
 }

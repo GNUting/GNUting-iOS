@@ -6,16 +6,16 @@
 //
 
 import UIKit
-// 추후 컴포지셔널 뷰사용
+
 // MARK: - 멤버검색해서 추가하는 VC
 
 protocol MemberAddButtonDelegate: AnyObject{
-    func sendAddMemberData(send: [SearchUserData])
+    func sendAddMemberData(send: [UserInfosModel])
 }
 
 class SearchAddMemberVC: UIViewController{
-    var searchUser : SearchUserData?
-    var addMemberInfos: [SearchUserData] = [] {
+    var searchUser : UserInfosModel?
+    var addMemberInfos: [UserInfosModel] = [] {
         didSet {
             addMemberCollectionView.reloadData()
         }
@@ -128,8 +128,9 @@ extension SearchAddMemberVC {
     }
     
     @objc private func tapMemberAddButtton() {
-        dismiss(animated: true)
         memberAddButtonDelegate?.sendAddMemberData(send: addMemberInfos)
+        self.presentingViewController?.dismiss(animated: true)
+        
     }
 }
 extension SearchAddMemberVC: UICollectionViewDelegate {
