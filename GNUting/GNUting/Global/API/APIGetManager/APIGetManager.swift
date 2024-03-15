@@ -12,10 +12,47 @@ import Alamofire
 class APIGetManager {
     static let shared = APIGetManager()
     
+    func getMyPost(completion: @escaping(MyPostModel?) -> Void) {
+        let url = EndPoint.mypost.url
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        
+        let headers : HTTPHeaders = ["Authorization": token]
+        AF.request(url,method: .get,headers: headers)
+            .responseDecodable(of:MyPostModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                print("getBoardDetail statusCode: \(statusCode)")
+                switch response.result {
+                case .success:
+                    completion(response.value)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+    }
+    
+    func getBoardDetail(id: Int, completion: @escaping(BoardDetailModel?) -> Void) {
+        let urlString = "http://localhost:8080/api/v1/board/\(id)"
+        guard let url = URL(string: urlString) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        let headers : HTTPHeaders = ["Authorization": token]
+        AF.request(url,method: .get,headers: headers)
+            .responseDecodable(of:BoardDetailModel.self){ response in
+                guard let statusCode = response.response?.statusCode else { return }
+                print("getBoardDetail statusCode: \(statusCode)")
+                switch response.result {
+                case .success:
+                    completion(response.value)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+    }
     func getSearchUser(searchNickname: String, completion:@escaping(SearchUserModel?)-> Void) {
         let url = EndPoint.searchGetUserData.url
-        let email = UserEmailManager.shard.email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        
+        guard let token = UserEmailManager.shard.getToken() else { return }
   
         let headers : HTTPHeaders = ["Authorization": token]
         let parameters: [String:Any] = ["nickname": searchNickname]
@@ -34,8 +71,7 @@ class APIGetManager {
     
     func getSearchBoardText(searchText: String,page: Int, completion: @escaping(SearchBoardTextModel?)->Void) {
         let url = EndPoint.searchGetBoardData.url
-        let email = UserEmailManager.shard.email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
         let headers : HTTPHeaders = ["Authorization": token]
         let parameters: [String:Any] = ["keyword": searchText,"page": page]
         AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default,headers: headers)
@@ -53,8 +89,7 @@ class APIGetManager {
     }
     func getBoardText(page:Int, size: Int, completion: @escaping(BoardModel?)-> Void) {
         let url = EndPoint.getBoardData.url
-        let email = UserEmailManager.shard.email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
         let headers : HTTPHeaders = ["Authorization": token]
         let parameters: [String:Any] = ["page": page, "size": size]
         AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default,headers: headers)
@@ -72,13 +107,13 @@ class APIGetManager {
     }
     func getUserData(completion: @escaping(GetUserDataModel?) -> Void) {
         let url = EndPoint.getUserData.url
-        let email = UserEmailManager.shard.email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
-        print(token)
+        guard let token = UserEmailManager.shard.getToken() else { return }
+
         let headers : HTTPHeaders = ["Authorization": token]
         AF.request(url,method: .get,headers: headers)
-            .validate(statusCode: 200..<300)
             .responseDecodable(of: GetUserDataModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                print("getUserData :\(statusCode)")
                 switch response.result {
                 case .success:
                     completion(response.value)

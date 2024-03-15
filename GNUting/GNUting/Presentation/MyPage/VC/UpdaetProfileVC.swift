@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - 프로필 수정화면
+
 class UpdaetProfileVC: UIViewController {
     private lazy var userImageView : UIImageView = {
         let imageView = UIImageView()

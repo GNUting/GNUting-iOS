@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        textField.text = "test123@gnu.ac.kr"
+        textField.text = "girl8337@gnu.ac.kr"
         return textField
     }()
     private lazy var passwordTextField : PaddingTextField = {
@@ -79,12 +79,9 @@ extension LoginVC{
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         APIPostManager.shared.postLoginAPI(email: email, password: password) { response, statusCode in
-            
             switch statusCode {
             case 200..<300:
-                guard let email = response?.result.email else { return }
                 UserEmailManager.shard.email = email
-                
                 self.view.window?.rootViewController = TabBarController()
             default:
                 let alert = UIAlertController(title: "사용자 정보가 일치하지 않습니다.", message: nil, preferredStyle: .alert)

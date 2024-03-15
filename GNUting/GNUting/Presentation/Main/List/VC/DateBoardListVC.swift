@@ -90,8 +90,8 @@ extension DateBoardListVC{
 extension DateBoardListVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailDateBoardVC()
-//        vc.setTitleLabel(title: sampeleDetailDateBoardData[indexPath.row].title)
-        
+        vc.boardID = dateBoardListData[indexPath.row].id
+        vc.setPushBoardList()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -114,7 +114,6 @@ extension DateBoardListVC: UITableViewDelegate{
         boardListCell.boardListSetCell(model: dateBoardListData[indexPath.row])
         
         return boardListCell
-        
     }
 }
 extension DateBoardListVC {

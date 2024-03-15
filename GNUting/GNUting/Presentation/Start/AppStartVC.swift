@@ -16,11 +16,6 @@ class AppStartVC: UIViewController {
         label.setRangeTextFont(fullText: "경상국립대학교 새로운 만남 과팅앱\n지누팅\n학교 속 새로운 인연을 만나보세요.", range: "지누팅", uiFont: UIFont(name: Pretendard.Bold.rawValue, size: 20)!)
         return label
     }()
-    private lazy var startBackImgView : UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = UIImage(named: "StatBackImg")
-        return imgView
-    }()
     private lazy var loginButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("로그인")
@@ -36,7 +31,7 @@ class AppStartVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        startBackImgView.isUserInteractionEnabled = true
+     
         setAddSubViews()
         setAutoLayout()
     }
@@ -57,18 +52,12 @@ extension AppStartVC{
 }
 extension AppStartVC {
     private func setAddSubViews(){
-        self.view.addSubview(startBackImgView)
-        startBackImgView.addSubViews([explainLabel,loginButton,signUpButton])
+        view.addSubViews([explainLabel,loginButton,signUpButton])
     }
     private func setAutoLayout(){
-        startBackImgView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
-        }
+
         explainLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
@@ -81,7 +70,7 @@ extension AppStartVC {
             make.top.equalTo(loginButton.snp.bottom).offset(18)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalToSuperview().offset(-50)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
         }
     }
 }

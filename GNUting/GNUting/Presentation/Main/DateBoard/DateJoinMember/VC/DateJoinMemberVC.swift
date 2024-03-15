@@ -7,7 +7,16 @@
 import UIKit
 
 class DateJoinMemberVC: UIViewController {
-    private lazy var tempLabel = UILabel()
+    var userInfos : [UserInfosModel] = []
+    
+    private lazy var titleLabel : UILabel = {
+        let label = UILabel()
+        label.text = "과팅 멤버 정보"
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        
+        return label
+    }()
+    
     private lazy var dismissButton : UIButton = {
        let button = UIButton()
         button.setImage(UIImage(named: "DissmissImg"), for: .normal)
@@ -19,7 +28,10 @@ class DateJoinMemberVC: UIViewController {
     private lazy var memberTableView : UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        tableView.register(DateJoinMemberTableViewCell.self, forCellReuseIdentifier: DateJoinMemberTableViewCell.identi)
+        tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: MemberTableViewCell.identi)
+//        tableView.register(MemberTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MemberTableViewHeader.identi)
+        tableView.dataSource = self
+        
         return tableView
     }()
     
@@ -28,52 +40,46 @@ class DateJoinMemberVC: UIViewController {
         self.view.backgroundColor = .white
         setAddSubViews()
         setAutoLayout()
-        setTableView()
     }
 }
 
 extension DateJoinMemberVC {
-    private func setTableView() {
-        memberTableView.delegate = self
-        memberTableView.dataSource = self
-    }
-    
     private func setAddSubViews() {
-        view.addSubViews([dismissButton,memberTableView])
+        view.addSubViews([titleLabel,dismissButton,memberTableView])
     }
     
     private func setAutoLayout(){
         dismissButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
+            make.left.equalToSuperview().offset(Spacing.left)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
+            make.centerX.equalToSuperview()
         }
         
         memberTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
     }
 }
 
-extension DateJoinMemberVC : UITableViewDelegate {
-    
-}
+
 
 extension DateJoinMemberVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return userInfos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateJoinMemberTableViewCell.identi, for: indexPath) as? DateJoinMemberTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell() }
+        cell.setUserInfoViews(model: userInfos[indexPath.row])
+        
         return cell
     }
 
-}
-@available(iOS 17,*)
-
-#Preview(traits: .defaultLayout) {
-return DateJoinMemberVC()
 }

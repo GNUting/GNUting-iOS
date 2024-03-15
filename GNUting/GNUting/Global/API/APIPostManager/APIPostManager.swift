@@ -12,10 +12,84 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
+    func postRequestChat(idList: [RequestChatModel],boardID: Int, completion: @escaping(Int) -> Void){
+        let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
+        guard let url = URL(string: uslString) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        print(token)
+        print(idList)
+        print(boardID)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let requestBody = idList
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if (200..<300).contains(httpResponse.statusCode) {
+                print("postRequestChat Request successful")
+                completion(httpResponse.statusCode)
+            } else {
+                print("postRequestChat Request failed with status code: \(httpResponse.statusCode)")
+                completion(httpResponse.statusCode)
+                // Handle error response
+            }
+        }.resume()
+    }
+    func postReportBoard(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(Int)-> Void) {
+        let url = EndPoint.report.url
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let requestBody = PostReportModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if (200..<300).contains(httpResponse.statusCode) {
+                print("postWriteText Request successful")
+                completion(httpResponse.statusCode)
+            } else {
+                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
+                completion(httpResponse.statusCode)
+                // Handle error response
+            }
+        }.resume()
+    }
+    
     func postWriteText(title: String,detail:String,joinMemberID: [UserIDList],completion: @escaping(Int)->Void) {
         let url = EndPoint.writeText.url
-        let email = UserEmailManager.shard.email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -40,10 +114,10 @@ class APIPostManager {
             }
             
             if (200..<300).contains(httpResponse.statusCode) {
-                print("Request successful")
+                print("postWriteText Request successful")
                 completion(httpResponse.statusCode)
             } else {
-                print("Request failed with status code: \(httpResponse.statusCode)")
+                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
                 completion(httpResponse.statusCode)
                 // Handle error response
             }
@@ -60,13 +134,12 @@ class APIPostManager {
                 switch statusCode {
                 case 200..<300:
                     guard let data = response.value else { return }
-                    guard let authorization = response.response?.allHeaderFields["Authorization"] else { return }
-                    
                     print("postLoginAPI statusCode:\(statusCode)")
                     if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
+                        let authorization = json.result.accessToken
+                        KeyChainManager.shared.create(key: email, token: authorization)
                         completion(json,statusCode)
-                        let email = json.result.email
-                        KeyChainManager.shared.create(key: email, token: authorization as! String)
+                        
                     }
                 default:
                     completion(nil,statusCode)
@@ -103,6 +176,7 @@ class APIPostManager {
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         let parameters : [String : String] = ["birthDate":signUpdata.birthDate,"department":signUpdata.department,"email": signUpdata.email,"gender": signUpdata.gender," name": signUpdata.name,"nickname": signUpdata.nickname, "password": signUpdata.password, "phoneNumber" : signUpdata.phoneNumber, "studentId": signUpdata.studentId,"userSelfIntroduction": signUpdata.userSelfIntroduction]
+        
         let imageData = image.jpegData(compressionQuality: 0.2)
         AF.upload(multipartFormData: { multipartFormData in
             for (key,value) in parameters {

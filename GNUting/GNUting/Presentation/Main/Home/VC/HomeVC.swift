@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 class HomeVC: UIViewController{
     let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
-
+    
     var homeBoardData : [BoardResult] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -19,7 +19,7 @@ class HomeVC: UIViewController{
         }
     }
     var currentPage = 0
-
+    
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
         
@@ -66,6 +66,7 @@ class HomeVC: UIViewController{
         setAutoLayout()
         setCollectionView()
         setTableview()
+    
     }
 }
 extension HomeVC{
@@ -109,7 +110,7 @@ extension HomeVC{
     private func setNavigationBar(){
         let notiButton = UIBarButtonItem(image: UIImage(named: "BellImg"), style: .plain, target: self, action: #selector(tapNotiButton))
         notiButton.tintColor = UIColor(named: "IconColor")
-    
+        
         let userImageButton = UIBarButtonItem(customView: imageButton)
         userImageButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItems = [userImageButton,notiButton]
@@ -157,8 +158,8 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
         }
         return header
     }
-
-  
+    
+    
 }
 extension HomeVC{
     @objc private func tapNotiButton(){
@@ -178,26 +179,18 @@ extension HomeVC {
     }
     private func getUserData(){
         APIGetManager.shared.getUserData { [unowned self] userData in
+            
             guard let userData = userData else { return }
-            self.setExplainLabel(text: userData.result.nickname)
-            self.setImageFromStringURL(stringURL: userData.result.profileImage ?? "")
-        }
-    }
-    private func setImageFromStringURL(stringURL : String) {
-        if let url = URL(string: stringURL) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let imageData = data else { return }
+            self.setExplainLabel(text: userData.result?.name ?? "이름")
+            
+            setImageFromStringURL(stringURL: userData.result?.profileImage) { image in
                 DispatchQueue.main.async {
-                    self.imageButton.setImage(UIImage(data: imageData), for: .normal)
+                    self.imageButton.setImage(image, for: .normal)
                     self.imageButton.layer.cornerRadius = self.imageButton.layer.frame.size.width / 2
                     self.imageButton.layer.masksToBounds = true
                 }
-            }.resume()
-        }else {
-            var config = UIButton.Configuration.plain()
-            config.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0)
-            imageButton.configuration = config
-            self.imageButton.setImage(UIImage(named: "ProfileImg"), for: .normal)
+            }
         }
     }
 }
+
