@@ -39,7 +39,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
     private lazy var subInfoLabel : UILabel = { // 학번 나이
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
-        label.textColor = UIColor(hexCode: "767676")
+        label.textColor = .black
         label.textAlignment = .left
         
         return label
@@ -115,9 +115,8 @@ extension UserInfoDetailView{
     }
     
     func setUserInfoDetailView(name :String?,studentID: String?, age: String?, introduce: String?, image : String? ) {
-        
         self.userNameLabel.text = name
-        self.subInfoLabel.text = "\(studentID ?? "학번") | \(age ?? "학번")"
+        self.subInfoLabel.text = "\(studentID ?? "") | \(age ?? "나이")"
         self.selfIntroduceLabel.text = introduce
         self.setImageFromStringURL(stringURL: image)
     }

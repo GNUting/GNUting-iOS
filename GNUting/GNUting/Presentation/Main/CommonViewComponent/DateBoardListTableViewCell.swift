@@ -47,6 +47,10 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         boardTitleLabel.text = model.title
         majorStudentIDLabel.text = "\(model.department) | \((model.studentID)) "
     }
+    func myPostSetCell(model:MyPostResult){
+        boardTitleLabel.text = model.title
+        majorStudentIDLabel.text = "\(model.user.department) | \((model.user.studentId)) "
+    }
     private func configure(){
         contentView.addSubViews([boardTitleLabel,majorStudentIDLabel,borderView])
         boardTitleLabel.snp.makeConstraints { make in

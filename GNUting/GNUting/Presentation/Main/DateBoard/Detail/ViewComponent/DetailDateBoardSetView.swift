@@ -6,13 +6,19 @@
 //
 
 import UIKit
-protocol DetailDateBoardSetViewButtonAction  : AnyObject {
-    func didTapUpDateButton()
-    func didTapDeleteButton()
+protocol OtherPostDelegate: AnyObject {
+
     func didTapReportButton()
 }
+protocol MyPostDelegate: AnyObject {
+    func didTapUpDateButton()
+    func didTapDeleteButton()
+}
+
+
 class DetailDateBoardSetView: UIView {
-    weak var buttonActionDelegate : DetailDateBoardSetViewButtonAction?
+    weak var otherPostDelegate : OtherPostDelegate?
+    weak var MyPostDelegate : MyPostDelegate?
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -24,46 +30,36 @@ class DetailDateBoardSetView: UIView {
         stackView.layer.masksToBounds = true
         return stackView
     }()
-    private lazy var borderView1 : UIView = {
+    private lazy var borderView : UIView = {
        let view = UIView()
         view.backgroundColor = UIColor(hexCode: "C5C5C5")
+        
         return view
     }()
-    private lazy var updateButton : UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("수정", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 20)!]))
-        config.baseForegroundColor = .black
-        config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 50, bottom: 10, trailing: 50)
-        let button = UIButton(configuration: config)
+    private lazy var updateButton : BoardSettingButton = {
+        let button = BoardSettingButton()
+        button.setButton(text: "수정")
         button.addTarget(self, action: #selector(didTapUpdateButton), for: .touchUpInside)
+        
         return button
     }()
-    private lazy var borderView2 : UIView = {
-       let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "C5C5C5")
-        return view
-    }()
-    private lazy var deleteButon : UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("삭제", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 20)!]))
-        config.baseForegroundColor = .black
-        config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 50, bottom: 10, trailing: 50)
-        let button = UIButton(configuration: config)
+    private lazy var deleteButon : BoardSettingButton = {
+        let button = BoardSettingButton()
         button.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+        button.setButton(text: "삭제")
         return button
     }()
-    private lazy var reportButton : UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("신고", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 20)!]))
-        config.baseForegroundColor = .black
-        config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 50, bottom: 10, trailing: 50)
-        let button = UIButton(configuration: config)
+    private lazy var reportButton : BoardSettingButton = {
+        let button = BoardSettingButton()
         button.addTarget(self, action: #selector(didTapReportButton), for: .touchUpInside)
+        button.setButton(text: "신고")
         return button
     }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -74,25 +70,36 @@ class DetailDateBoardSetView: UIView {
 extension DetailDateBoardSetView{
     private func configure() {
         self.addSubview(upperStackView)
-        upperStackView.addStackSubViews([updateButton,borderView1,deleteButon,borderView2,reportButton])
-        upperStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        [borderView1,borderView2].forEach { borderView in
-            borderView.snp.makeConstraints { make in
-                make.height.equalTo(1)
-            }
-        }
     }
 }
 extension DetailDateBoardSetView{
     @objc private func didTapUpdateButton(){
-        buttonActionDelegate?.didTapUpDateButton()
+        MyPostDelegate?.didTapUpDateButton()
     }
     @objc private func didTapDeleteButton(){
-        buttonActionDelegate?.didTapDeleteButton()
+        MyPostDelegate?.didTapDeleteButton()
     }
     @objc private func didTapReportButton(){
-        buttonActionDelegate?.didTapReportButton()
+        otherPostDelegate?.didTapReportButton()
+    }
+}
+
+extension DetailDateBoardSetView {
+    func myPost(isMypost: Bool) {
+        if isMypost {
+            upperStackView.addStackSubViews([updateButton,borderView,deleteButon])
+            upperStackView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            borderView.snp.makeConstraints { make in
+                make.height.equalTo(1)
+            }
+        } else {
+            upperStackView.addStackSubViews([reportButton])
+            upperStackView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+       
     }
 }
