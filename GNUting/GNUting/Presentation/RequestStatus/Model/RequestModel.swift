@@ -24,5 +24,15 @@ extension RequestState {
             return UIColor(named: "979C9E") ?? .systemGray
         }
     }
+    var statusString: String{
+        switch self {
+        case .waiting:
+            return "대기중"
+        case .Success:
+            return "성공"
+        case .Failure:
+            return "신청 취소"
+        }
+    }
 }
 

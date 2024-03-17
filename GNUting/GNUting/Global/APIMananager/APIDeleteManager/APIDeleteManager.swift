@@ -1,28 +1,21 @@
 //
-//  APIUpdateManager.swift
+//  APIDeleteManager.swift
 //  GNUting
 //
-//  Created by 원동진 on 3/15/24.
+//  Created by 원동진 on 3/17/24.
 //
 
 import Foundation
-class APIUpdateManager {
-    static let shared = APIUpdateManager()
-    func updateWriteText(boardID: Int,title: String,detail:String,joinMemberID: [UserIDList],completion: @escaping(Int)->Void) {
+class APIDeleteManager {
+    static let shared = APIDeleteManager()
+    func deletePostText(boardID: Int,completion: @escaping(Int)->Void) {
         let uslString = "http://localhost:8080/api/v1/board/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         guard let token = UserEmailManager.shard.getToken() else { return }
         var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
+        request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(token, forHTTPHeaderField: "Authorization")
-        let requestBody = WriteTextUserData(title: title, detail: detail, inUser: joinMemberID)
-        do {
-            try request.httpBody = JSONEncoder().encode(requestBody)
-        }catch {
-            print("Error encoding request data: \(error)")
-            return
-        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {

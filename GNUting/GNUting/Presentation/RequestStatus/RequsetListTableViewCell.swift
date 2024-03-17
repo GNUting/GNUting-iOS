@@ -17,10 +17,10 @@ class RequsetListTableViewCell: UITableViewCell {
         view.layer.masksToBounds = true
         return view
     }()
-    private lazy var requestMajorAndMemeberCountLabel : UILabel = {
+    private lazy var majorAndMemeberCountLabel : UILabel = {
        let label = UILabel()
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
-        label.text = "산업시스템 공학부 3명"
+        
         return label
     }()
     private lazy var requestStateLabel : BasePaddingLabel = {
@@ -52,28 +52,30 @@ extension RequsetListTableViewCell{
       
     }
     private func setAutoLayout() {
-        upperView.addSubViews([requestMajorAndMemeberCountLabel,requestStateLabel])
+        upperView.addSubViews([majorAndMemeberCountLabel,requestStateLabel])
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(7)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-7)
         }
-        requestMajorAndMemeberCountLabel.snp.makeConstraints { make in
+        majorAndMemeberCountLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview().offset(Spacing.left)
             make.bottom.equalToSuperview().offset(-10)
         }
         requestStateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
-            make.left.equalTo(requestMajorAndMemeberCountLabel.snp.right).offset(12)
+            make.left.equalTo(majorAndMemeberCountLabel.snp.right).offset(12)
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalToSuperview().offset(-10)
         }
         requestStateLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         requestStateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
-    func setRequestStateLabel(state : RequestState ){
-        requestStateLabel.backgroundColor = state.backgroundColor
+    func setCell(model : DateStateModel ){
+        majorAndMemeberCountLabel.text = "\(model.major) \(model.memeberCount)명"
+        requestStateLabel.text = "\(model.applyStatus.statusString)"
+        requestStateLabel.backgroundColor = model.applyStatus.backgroundColor
     }
     
 }

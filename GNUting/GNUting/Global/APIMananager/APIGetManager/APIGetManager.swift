@@ -11,7 +11,23 @@ import Alamofire
 
 class APIGetManager {
     static let shared = APIGetManager()
-    
+    func getRequestChatState(completion: @escaping(RequestStatusModel?,Int)->Void) {
+        let url = EndPoint.requestStatus.url
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        let headers : HTTPHeaders = ["Authorization": token]
+        AF.request(url,method: .get,headers: headers)
+            .responseDecodable(of:RequestStatusModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                print("getBoardDetail statusCode: \(statusCode)")
+                switch response.result {
+                case .success:
+                    completion(response.value,statusCode)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+    }
     func getMyPost(completion: @escaping(MyPostModel?) -> Void) {
         let url = EndPoint.mypost.url
         guard let token = UserEmailManager.shard.getToken() else { return }
@@ -31,7 +47,7 @@ class APIGetManager {
             }
     }
     
-    func getBoardDetail(id: Int, completion: @escaping(BoardDetailModel?) -> Void) {
+    func getBoardDetail(id: Int, completion: @escaping(BoardDetailModel?,Int) -> Void) {
         let urlString = "http://localhost:8080/api/v1/board/\(id)"
         guard let url = URL(string: urlString) else { return }
         guard let token = UserEmailManager.shard.getToken() else { return }
@@ -42,7 +58,7 @@ class APIGetManager {
                 print("getBoardDetail statusCode: \(statusCode)")
                 switch response.result {
                 case .success:
-                    completion(response.value)
+                    completion(response.value,statusCode)
                 case .failure(let err):
                     print(err)
                     break

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class DetailDateBoardVC: UIViewController {
+class DetailDateBoardVC: UIViewController{
+   
+    
     var boardID: Int = 0
     var UserInfos: [UserInfosModel] = []
     private lazy var titleLabel : UILabel = {
@@ -25,17 +27,11 @@ class DetailDateBoardVC: UIViewController {
         textView.font = UIFont(name: Pretendard.Regular.rawValue, size: 18)
         textView.textColor = .black
         textView.isEditable = false
-        textView.text = "안녕하세요!\n저희는 컴퓨터과학과 1학년 4명입니다.\n저희 모두 23학번이구요\n04년생 3명\n03년생 1명 입니다.\n저희랑 재밌게 과팅해요!!!\n편하게 채팅 신청해주세요~"
+
         return textView
     }()
     private lazy var chatPeopleViewButton : UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("현재채팅/참여중인 사람 4명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!])) // 수정필요
-        config.image = UIImage(named: "ChatImg")
-        config.baseForegroundColor = UIColor(named: "PrimaryColor")
-        config.imagePlacement = .leading
-        config.imagePadding = 5
-        let button = UIButton(configuration: config)
+        let button = UIButton()
         button.addTarget(self, action: #selector(didTapchatPeopleViewButton), for: .touchUpInside)
         return button
     }()
@@ -54,13 +50,13 @@ class DetailDateBoardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        getBoardDetailData()
         addSubViews()
         setAutoLayout()
         bringToDetailDateBoardSetView()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getBoardDetailData()
         setNavigationBar()
     }
 }
@@ -110,7 +106,19 @@ extension DetailDateBoardVC{
         settingButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItem = settingButton
     }
+    private func setChatPeopleViewButton(memeberCount: Int) {
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = AttributedString("현재채팅/참여중인 사람 \(memeberCount)명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+        config.image = UIImage(named: "ChatImg")
+        config.baseForegroundColor = UIColor(named: "PrimaryColor")
+        config.imagePlacement = .leading
+        config.imagePadding = 5
+        chatPeopleViewButton.configuration = config
+    }
+    
 }
+
+
 
 // MARK: - Button Action
 extension DetailDateBoardVC{
@@ -149,12 +157,48 @@ extension DetailDateBoardVC : OtherPostDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
+extension DetailDateBoardVC: MyPostDelegate {
+    func didTapUpDateButton() {
+        detailDateBoardSetView.isHidden = true
+        let vc = UpdatePostVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+        vc.setPostTestView(title: titleLabel.text ?? "", content: contentTextView.text)
+        vc.boardID = boardID
+        vc.memberDataList = UserInfos
+        
+    }
+    
+    func didTapDeleteButton() {
+        APIDeleteManager.shared.deletePostText(boardID: boardID) { statudCode in
+            if statudCode == 200 {
+                let alert = UIAlertController(title: "삭제 성공", message: "삭제가 정상적으로 이루어졌습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel,handler: { _ in
+                    self.popButtonTap()
+                }))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
+            } else {
+                let alert = UIAlertController(title: "삭제 실패", message: "삭제를 다시 진행하세요.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+        
+    }
+}
 // MAKR : 어디서 push 된지 체크
 
 extension DetailDateBoardVC {
     func setPushMypostVersion() {
+        requetChatButton.isHidden = true
+        chatPeopleViewButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
+        }
         detailDateBoardSetView.myPost(isMypost: true)
+        detailDateBoardSetView.MyPostDelegate = self
     }
     func setPushBoardList() {
         detailDateBoardSetView.otherPostDelegate = self
@@ -165,7 +209,8 @@ extension DetailDateBoardVC {
 extension DetailDateBoardVC {
     private func getBoardDetailData() {
         
-        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData in
+        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData,statusCode  in
+            print("게시글 상세 : 상태코드\(statusCode)")
             guard let result = boardDetailData?.result else { return }
             let user = result.user
             
@@ -173,6 +218,7 @@ extension DetailDateBoardVC {
             self.contentTextView.text = result.detail
             self.UserInfos = result.inUser
             self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId, writeDataeLabel: result.time)
+            self.setChatPeopleViewButton(memeberCount: result.inUser.count)
         }
     }
 }

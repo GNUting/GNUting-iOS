@@ -18,6 +18,7 @@ enum EndPoint{
     case writeText
     case report
     case mypost
+    case requestStatus
     var url : URL {
         switch self{
         case .login:
@@ -42,6 +43,8 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "boardReport")
         case .mypost:
             return .makeForEndpoint(endPoint: "board/myboard")
+        case .requestStatus:
+            return .makeForEndpoint(endPoint: "board/applications/applystate")
         }
     }
 }

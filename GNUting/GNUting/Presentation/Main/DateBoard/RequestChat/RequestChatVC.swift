@@ -106,7 +106,7 @@ extension RequestChatVC : UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
-            cell.setUserInfoViews(model: addMemberDataList[indexPath.row])
+            cell.setUserInfoViewsPost(model: addMemberDataList[indexPath.row])
             cell.selectionStyle = .none
             
             return cell
@@ -137,24 +137,46 @@ extension RequestChatVC {
     private func getUserData() {
         APIGetManager.shared.getUserData { userData in
             guard let userData = userData?.result else { return }
-            self.addMemberDataList.append(UserInfosModel(id: userData.id, name: userData.name, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, userSelfIntroduction: userData.userSelfIntroduction, profileImage: userData.profileImage))
+            guard let profileImage = userData.profileImage else { return }
+            self.addMemberDataList.append(UserInfosModel(id: userData.id, name: userData.name, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, userSelfIntroduction: userData.userSelfIntroduction, profileImage: profileImage))
             
         }
     }
 }
 extension RequestChatVC: MemberAddButtonDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        addMemberDataList.append(contentsOf: send)
+        for userInfos in send {
+            guard let profileImage = userInfos.profileImage else { return }
+            self.addMemberDataList.append(UserInfosModel(id: userInfos.id, name: userInfos.name, gender: userInfos.gender, age: userInfos.age, nickname: userInfos.nickname, department: userInfos.department, studentId: userInfos.studentId, userRole: userInfos.userRole, userSelfIntroduction: userInfos.userSelfIntroduction, profileImage: profileImage))
+        }
+        
     }
+    
+    
 }
 extension RequestChatVC {
     @objc private func tapRequestChatButton() {
-        var idList : [RequestChatModel] = []
-        for userInfo in addMemberDataList{
-            idList.append(RequestChatModel(id: userInfo.id))
-        }
-        APIPostManager.shared.postRequestChat(idList: idList, boardID: boardID) { statusCode in
+        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { statusCode in
             print("postRequestChat: \(statusCode)")
+            if statusCode == 200 {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "채팅 신청 완료", message: "채팅 신청이 되었습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "성공", style: .default, handler: { _ in
+                        self.popButtonTap()
+                    }))
+                    self.present(alert, animated: true)
+                }
+                
+            } else {
+                
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "채팅 신청 오류", message: "채팅 멤버수가 동일하지 않습니다. 해당문제가 지속되면 고객센터에 문의해주세요.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    self.present(alert, animated: true)
+                }
+            }
         }
+
+     
     }
 }
