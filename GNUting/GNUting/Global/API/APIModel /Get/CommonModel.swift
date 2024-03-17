@@ -11,3 +11,8 @@ struct UserInfosModel: Codable {
     let name, gender, age, nickname, department, studentId, userRole, userSelfIntroduction: String
     let profileImage: String?
 }
+//struct UserInfosPostModel: Codable {
+//    let id: Int
+//    let name, gender, age, nickname, department, studentId, userRole, userSelfIntroduction: String
+//    let profileImage: String?
+//}

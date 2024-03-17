@@ -7,8 +7,12 @@
 
 import UIKit
 
-class RequestStatusVC: UIViewController {
-    let sampleDate = [RequestState.Success,RequestState.Failure,RequestState.waiting]
+class RequestStateVC: UIViewController {
+    var dateStatusList : [DateStateModel] = []{
+        didSet{
+            requsetListTableView.reloadData()
+        }
+    }
     private lazy var segmentedControl : UnderLineSegmentedControl = {
         let control = UnderLineSegmentedControl(items: ["신청목록","신청 받은 목록"])
         control.addTarget(self, action: #selector(didchangeValue(segment :)), for: .valueChanged)
@@ -42,8 +46,13 @@ class RequestStatusVC: UIViewController {
         addSubViews()
         setAutoLayout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getRequestStatus()
+    }
 }
-extension RequestStatusVC{
+extension RequestStateVC{
     private func addSubViews() {
         self.view.addSubViews([segmentedControl,requsetListTableView])
     }
@@ -61,24 +70,48 @@ extension RequestStatusVC{
     }
     
 }
-extension RequestStatusVC {
+extension RequestStateVC {
     @objc private func didchangeValue(segment: UISegmentedControl) {
         print(segment.selectedSegmentIndex)
     }
 }
-extension RequestStatusVC : UITableViewDelegate,UITableViewDataSource {
+extension RequestStateVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        dateStatusList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RequsetListTableViewCell.identi, for: indexPath) as? RequsetListTableViewCell else { return UITableViewCell() }
-        cell.setRequestStateLabel(state: sampleDate[indexPath.row])
+        cell.setCell(model: dateStatusList[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RequestStatusDetailVC()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+extension RequestStateVC {
+    private func getRequestStatus() {
+        APIGetManager.shared.getRequestChatState { requestStatusData, statusCode in
+            print("getRequestChatState: StatusCode\(statusCode)")
+            guard let results = requestStatusData?.result else { return }
+            for result in results {
+                let participantUserDepartment = result.participantUserDepartment
+                let participantUserCount = result.participantUserCount
+                var applyStatus : RequestState = .waiting
+                switch result.applyStatus{
+                case "성공":
+                    applyStatus = .Success
+                case "신청 취소":
+                    applyStatus = .Failure
+                default:
+                    applyStatus = .waiting
+                }
+                self.dateStatusList.append(DateStateModel(major: participantUserDepartment, memeberCount: participantUserCount, applyStatus: applyStatus))
+            }
+            
+            
+        }
     }
 }

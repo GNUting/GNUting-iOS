@@ -1,14 +1,11 @@
 //
-//  RequestChatModel.swift
+//  RequestPostModel.swift
 //  GNUting
 //
-//  Created by 원동진 on 3/15/24.
+//  Created by 원동진 on 3/18/24.
 //
 
 import Foundation
-
-// MARK: - 채팅
-
-struct RequestChatModel :Codable {
-    let id : Int
+struct RequestChatModel : Codable {
+    
 }

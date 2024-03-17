@@ -12,18 +12,16 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
-    func postRequestChat(idList: [RequestChatModel],boardID: Int, completion: @escaping(Int) -> Void){
+    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(Int) -> Void){
+        
         let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         guard let token = UserEmailManager.shard.getToken() else { return }
-        print(token)
-        print(idList)
-        print(boardID)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let requestBody = idList
+        let requestBody = userInfos
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
         }catch {

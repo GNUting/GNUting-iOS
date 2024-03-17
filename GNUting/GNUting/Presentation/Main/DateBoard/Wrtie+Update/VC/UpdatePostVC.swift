@@ -1,22 +1,23 @@
 //
-//  WriteDateBoardVC.swift
+//  UpdatePostVC.swift
 //  GNUting
 //
-//  Created by 원동진 on 2/19/24.
+//  Created by 원동진 on 3/17/24.
 //
 
 import UIKit
 
-class WriteDateBoardVC: UIViewController {
+class UpdatePostVC: UIViewController {
     let textViewPlaceHolder = "내용을 입력해주세요."
     var writeDateBoardState : Bool = true
-    var addMemberDataList: [UserInfosModel] = [] {
+    var boardID: Int = 0
+    var memberDataList: [UserInfosModel] = [] {
         didSet {
             memberTableView.reloadData()
         }
     }
   
-    private lazy var titleContentView : WrtieUpdatePostTextView = {
+    private lazy var postTextView : WrtieUpdatePostTextView = {
         let customView = WrtieUpdatePostTextView()
         customView.contentTextView.delegate = self
         customView.contentTextView.text = textViewPlaceHolder
@@ -43,7 +44,7 @@ class WriteDateBoardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        getUserData()
+
         addSubViews()
         setAutoLayout()
         
@@ -55,9 +56,9 @@ class WriteDateBoardVC: UIViewController {
     
 
 }
-extension WriteDateBoardVC{
+extension UpdatePostVC{
     private func setNavigationBar(){
-        setNavigationBar(title: "글쓰기")
+        setNavigationBar(title: "수정하기")
         
         let completedButton = UIButton()
         completedButton.setTitle("완료", for: .normal)
@@ -67,17 +68,17 @@ extension WriteDateBoardVC{
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
     }
     private func addSubViews() {
-        view.addSubViews([titleContentView,memberTableView])
+        view.addSubViews([postTextView,memberTableView])
     }
     private func setAutoLayout(){
-        titleContentView.snp.makeConstraints { make in
+        postTextView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
         
         memberTableView.snp.makeConstraints { make in
-            make.top.equalTo(titleContentView.snp.bottom).offset(Spacing.top)
+            make.top.equalTo(postTextView.snp.bottom).offset(Spacing.top)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.height.equalToSuperview().dividedBy(2)
@@ -89,7 +90,7 @@ extension WriteDateBoardVC{
 
 // MARK: - DataSource
 
-extension WriteDateBoardVC: UITableViewDataSource {
+extension UpdatePostVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
@@ -104,13 +105,17 @@ extension WriteDateBoardVC: UITableViewDataSource {
 
 // MARK: - Delegate
 
-extension WriteDateBoardVC : UITextViewDelegate{
+extension UpdatePostVC : UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
            if textView.text == textViewPlaceHolder {
                textView.text = nil
                textView.textColor = .black
                
            }
+        if textView.text != "" {
+            textView.textColor = .black
+        }
+            
        }
 
        func textViewDidEndEditing(_ textView: UITextView) {
@@ -121,7 +126,7 @@ extension WriteDateBoardVC : UITextViewDelegate{
        }
 }
 
-extension WriteDateBoardVC: UITableViewDelegate {
+extension UpdatePostVC: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
@@ -129,7 +134,7 @@ extension WriteDateBoardVC: UITableViewDelegate {
 // MARK: - Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return addMemberDataList.count
+            return memberDataList.count
         } else {
             return 1
         }
@@ -138,7 +143,7 @@ extension WriteDateBoardVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
-            cell.setUserInfoViews(model: addMemberDataList[indexPath.row])
+            cell.setUserInfoViews(model: memberDataList[indexPath.row])
             cell.selectionStyle = .none
             
             return cell
@@ -153,7 +158,7 @@ extension WriteDateBoardVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MemberTableViewHeader.identi) as? MemberTableViewHeader else {return UIView()}
         if section == 0 {
-            headerView.setMemberLabelCount(memberCount: addMemberDataList.count)
+            headerView.setMemberLabelCount(memberCount: memberDataList.count)
             return headerView
         }
         return UIView()
@@ -168,42 +173,47 @@ extension WriteDateBoardVC: UITableViewDelegate {
 
 // MARK: - ButtonAction
 
-extension WriteDateBoardVC{
+extension UpdatePostVC{
     @objc private func tapCompletedButton(){
-        var joinMemberID : [UserIDList] = []
-        for userData in addMemberDataList {
-            joinMemberID.append(UserIDList(id: userData.id))
-        }
+       
+        APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { statusCode in
+            if statusCode == 200 {
+               
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "수정 완료", message: "수정이 완료 되었습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "성공", style: .default, handler: { _ in
+                        self.popButtonTap()
+                    }))
+                    self.present(alert, animated: true)
+                }
+                
+                
+            } else {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "수정 오류", message: "해당 오류가 계속 발생하면 고객센터에 문의하세요.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
 
-        APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { statusCode in
-            print(statusCode)
+                    self.present(alert, animated: true)
+                }
+            }
+            print("글 수정 StatusCode:\(statusCode)")
         }
-        popButtonTap()
+        
     }
 }
-extension WriteDateBoardVC{
-    private func getUserData(){
-        APIGetManager.shared.getUserData { userData in
-            guard let userData = userData?.result else { return }
-            self.addMemberDataList.append(UserInfosModel(id: userData.id, name: userData.nickname, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, userSelfIntroduction: userData.userSelfIntroduction, profileImage: userData.profileImage))
-            
-        }
-    }
-}
 
-
-extension WriteDateBoardVC {
-    public func sendDetailTextData(textTuple : (String,String)) {
-        titleContentView.setTitleTextFieldText(text: textTuple.0)
-        titleContentView.setContentTextView(text: textTuple.1)
-        titleContentView.setContentTextViewTextColor(color: .black)
-    }
-    
-}
-extension WriteDateBoardVC: MemberAddButtonDelegate {
+extension UpdatePostVC: MemberAddButtonDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        addMemberDataList.append(contentsOf: send)
+        
+        memberDataList.append(contentsOf: send)
     }
     
+    
 }
-
+extension UpdatePostVC {
+    func setPostTestView(title: String, content: String){
+        postTextView.setTitleTextFieldText(text: title)
+        postTextView.setContentTextView(text: content)
+        
+    }
+}
