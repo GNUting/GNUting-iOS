@@ -45,6 +45,7 @@ class RequestStateVC: UIViewController {
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
+        print(###Fucntion"")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +73,12 @@ extension RequestStateVC{
 }
 extension RequestStateVC {
     @objc private func didchangeValue(segment: UISegmentedControl) {
-        print(segment.selectedSegmentIndex)
+        if segment.selectedSegmentIndex == 0 {
+            getRequestStatus()
+        } else {
+            
+        }
+        
     }
 }
 extension RequestStateVC : UITableViewDelegate,UITableViewDataSource {
