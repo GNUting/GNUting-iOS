@@ -78,9 +78,11 @@ extension LoginVC{
     @objc func tapLoginButton(){
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        APIPostManager.shared.postLoginAPI(email: email, password: password) { response, statusCode in
+        APIPostManager.shared.postLoginAPI(email: email, password: password) { response, statusCode, authorization in
             switch statusCode {
             case 200..<300:
+                guard let authorization = authorization else { return }
+                KeyChainManager.shared.create(key: email, token: authorization)
                 UserEmailManager.shard.email = email
                 self.view.window?.rootViewController = TabBarController()
             default:

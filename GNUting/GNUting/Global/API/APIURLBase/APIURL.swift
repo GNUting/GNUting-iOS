@@ -22,6 +22,8 @@ enum EndPoint{
     case receivedState
     case fcmToken
     case updateProfile
+    case checkMailVerify
+    case searchMajor
     var url : URL {
         switch self{
         case .login:
@@ -54,6 +56,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "savetoken")
         case .updateProfile:
             return .makeForEndpoint(endPoint: "update")
+        case .checkMailVerify:
+            return .makeForEndpoint(endPoint: "mail/verify")
+        case .searchMajor:
+            return .makeForEndpoint(endPoint: "search-department")
         }
     }
 }

@@ -25,9 +25,6 @@ class APIUpdateManager {
                 multipartFormData.append(image, withName: "profileImage",fileName: "userUpdateImage.jpeg",mimeType: "image/jpg")
             }
         }, to: url,method: .patch,headers:header).response { response in
-//            guard let data = response.data else { return }
-            
-            
             guard let statusCode = response.response?.statusCode else { return }
             completion(statusCode)
         }
