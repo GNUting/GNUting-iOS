@@ -5,9 +5,35 @@
 //  Created by 원동진 on 3/15/24.
 //
 
-import Foundation
+
+import UIKit
+import Alamofire
+
 class APIUpdateManager {
     static let shared = APIUpdateManager()
+    func updateUserProfile(nickname: String, department: String, userSelfIntroduction: String,image: UIImage,completion :@escaping(Int)->Void) {
+        let url = EndPoint.updateProfile.url
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        let header: HTTPHeaders = ["Content-Type": "multipart/form-data","Authorization": token]
+        let parameters : [String : String] = ["department":department,"nickname": nickname,"userSelfIntroduction": userSelfIntroduction]
+        let imageData = image.jpegData(compressionQuality: 0.2)
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key,value) in parameters {
+                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
+            }
+            if let image = imageData {
+                multipartFormData.append(image, withName: "profileImage",fileName: "userUpdateImage.jpeg",mimeType: "image/jpg")
+            }
+        }, to: url,method: .patch,headers:header).response { response in
+//            guard let data = response.data else { return }
+            
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            completion(statusCode)
+        }
+    }
+    
+    
     func updateWriteText(boardID: Int,title: String,detail:String,memeberInfos: [UserInfosModel],completion: @escaping(Int)->Void) {
         let uslString = "http://localhost:8080/api/v1/board/\(boardID)"
         guard let url = URL(string: uslString) else { return }
@@ -39,7 +65,7 @@ class APIUpdateManager {
                 print("postWriteText Request successful")
                 completion(httpResponse.statusCode)
             } else {
-                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
+                print("updateWriteText Request failed with status code: \(httpResponse.statusCode)")
                 completion(httpResponse.statusCode)
                 // Handle error response
             }

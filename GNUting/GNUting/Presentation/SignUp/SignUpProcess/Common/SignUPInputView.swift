@@ -123,6 +123,10 @@ extension SignUPInputView{
     func setPlaceholder(placeholder: String){
         inputTextField.placeholder = placeholder
     }
+    func setTextField(text: String) {
+        inputTextField.text = text
+    }
+    
     func setConfirmButton(text: String){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -181,9 +185,6 @@ extension SignUPInputView {
 }
 extension SignUPInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-     
-        
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
         confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
     }

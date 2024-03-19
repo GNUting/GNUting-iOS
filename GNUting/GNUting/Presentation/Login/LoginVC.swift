@@ -87,8 +87,7 @@ extension LoginVC{
                 let alert = UIAlertController(title: "사용자 정보가 일치하지 않습니다.", message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                 self.present(alert, animated: true)
-            }
-            
+            }   
         }
         
 

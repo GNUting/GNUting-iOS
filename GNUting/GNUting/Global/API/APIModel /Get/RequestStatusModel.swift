@@ -6,24 +6,24 @@
 //
 
 import Foundation
-struct RequestStatusModel: Codable {
+struct ApplicationStatusModel: Codable {
     let isSuccess: Bool
     let code, message: String
-    let result: [RequestStatusResult]
+    let result: [ApplicationStatusResult]
 }
 
 // MARK: - RequestStatusResult
 
-struct RequestStatusResult: Codable {
+struct ApplicationStatusResult: Codable {
     let id: Int
     let applyUserDepartment, participantUserDepartment: String
-    let applyUser, participantUser: [RequestStatusUser]
+    let applyUser, participantUser: [ApplicationStatusUser]
     let applyUserCount, participantUserCount: Int
     let applyStatus: String
 }
 
 // MARK: - User
-struct RequestStatusUser: Codable {
+struct ApplicationStatusUser: Codable {
     let id: Int
     let name, gender, age, nickname: String
     let department: String

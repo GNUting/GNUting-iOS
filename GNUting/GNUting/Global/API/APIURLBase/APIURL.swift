@@ -19,6 +19,9 @@ enum EndPoint{
     case report
     case mypost
     case requestStatus
+    case receivedState
+    case fcmToken
+    case updateProfile
     var url : URL {
         switch self{
         case .login:
@@ -45,6 +48,12 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "board/myboard")
         case .requestStatus:
             return .makeForEndpoint(endPoint: "board/applications/applystate")
+        case .receivedState:
+            return .makeForEndpoint(endPoint: "board/applications/receivedstate")
+        case .fcmToken:
+            return .makeForEndpoint(endPoint: "savetoken")
+        case .updateProfile:
+            return .makeForEndpoint(endPoint: "update")
         }
     }
 }

@@ -17,11 +17,11 @@ extension RequestState {
     var backgroundColor : UIColor {
         switch self {
         case .waiting:
-            return UIColor(named: "PrimaryColor") ?? .systemRed
+            return UIColor(named: "979C9E") ?? .systemGray
         case .Success:
             return UIColor(named: "SecondaryColor") ?? .systemBlue
         case .Failure:
-            return UIColor(named: "979C9E") ?? .systemGray
+            return UIColor(named: "PrimaryColor") ?? .systemRed
         }
     }
     var statusString: String{

@@ -95,7 +95,7 @@ extension WriteDateBoardVC: UITableViewDataSource {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
             let navigationVC = UINavigationController.init(rootViewController: vc)
-            navigationVC.modalPresentationStyle = .fullScreen
+//            navigationVC.modalPresentationStyle =
             present(navigationVC, animated: true)
             
         }

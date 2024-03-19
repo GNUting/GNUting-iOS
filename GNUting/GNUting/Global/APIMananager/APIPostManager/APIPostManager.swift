@@ -12,16 +12,14 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
-    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(Int) -> Void){
-        
-        let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
-        guard let url = URL(string: uslString) else { return }
-        guard let token = UserEmailManager.shard.getToken() else { return }
+    func postFCMToken(fcmToken: String, completion: @escaping(Int) -> Void) {
+        let url = EndPoint.fcmToken.url
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        guard let token = UserEmailManager.shard.getToken() else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let requestBody = userInfos
+        let requestBody = FcmTokenModel(fcmToken: fcmToken)
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
         }catch {
@@ -40,9 +38,50 @@ class APIPostManager {
             }
             
             if (200..<300).contains(httpResponse.statusCode) {
+                print("postFCMToken Request successful")
+                completion(httpResponse.statusCode)
+            } else {
+                print("postFCMToken Request failed with status code: \(httpResponse.statusCode)")
+                completion(httpResponse.statusCode)
+                // Handle error response
+            }
+        }.resume()
+    }
+    
+    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(Int) -> Void){
+        
+        let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
+        guard let url = URL(string: uslString) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let requestBody = userInfos
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+//            guard let data = data else { return }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if (200..<300).contains(httpResponse.statusCode) {
                 print("postRequestChat Request successful")
                 completion(httpResponse.statusCode)
             } else {
+                
                 print("postRequestChat Request failed with status code: \(httpResponse.statusCode)")
                 completion(httpResponse.statusCode)
                 // Handle error response
@@ -75,10 +114,10 @@ class APIPostManager {
             }
             
             if (200..<300).contains(httpResponse.statusCode) {
-                print("postWriteText Request successful")
+                print("postReportBoard Request successful")
                 completion(httpResponse.statusCode)
             } else {
-                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
+                print("postReportBoard Request failed with status code: \(httpResponse.statusCode)")
                 completion(httpResponse.statusCode)
                 // Handle error response
             }
@@ -128,6 +167,7 @@ class APIPostManager {
         let parameters : [String : String] = ["email": email,"password":password]
         AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
             .responseData { response in
+                
                 guard let statusCode = response.response?.statusCode else { return }
                 switch statusCode {
                 case 200..<300:
@@ -181,7 +221,7 @@ class APIPostManager {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
             if let image = imageData {
-                multipartFormData.append(image, withName: "profileImage",fileName: "userImage.jpeg",mimeType: "image/jpg")
+                multipartFormData.append(image, withName: "profileImage",fileName: "UserImage.jpeg",mimeType: "image/jpg")
             }
         }, to: url,method: .post,headers: header).responseData { response in
             switch response.result {

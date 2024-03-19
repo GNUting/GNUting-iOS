@@ -25,7 +25,7 @@ extension UIViewController{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
-        
+        print("df\(stringURL)")
         if let url = URL(string: stringURL ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let imageData = data else { return }

@@ -11,6 +11,7 @@
 		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
 		F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */; };
+		F81895CF2BA82CDD00DF7ABE /* FcmTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81895CE2BA82CDD00DF7ABE /* FcmTokenModel.swift */; };
 		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
@@ -66,7 +67,6 @@
 		F87351862B90B043004E89C5 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351852B90B043004E89C5 /* BasePaddingLabel.swift */; };
 		F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351872B90B21E004E89C5 /* RequestModel.swift */; };
 		F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */; };
-		F873518E2B90B664004E89C5 /* DateMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518D2B90B664004E89C5 /* DateMemberTableViewCell.swift */; };
 		F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */; };
 		F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */; };
 		F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */; };
@@ -130,6 +130,7 @@
 		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
 		F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		F81895CE2BA82CDD00DF7ABE /* FcmTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmTokenModel.swift; sourceTree = "<group>"; };
 		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		F87351852B90B043004E89C5 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F87351872B90B21E004E89C5 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusDetailVC.swift; sourceTree = "<group>"; };
-		F873518D2B90B664004E89C5 /* DateMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemberTableViewCell.swift; sourceTree = "<group>"; };
 		F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemberHeader.swift; sourceTree = "<group>"; };
 		F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddMemberVC.swift; sourceTree = "<group>"; };
 		F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemeberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -293,6 +293,16 @@
 				F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */,
 				F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */,
 				F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */,
+			);
+			path = ViewComponent;
+			sourceTree = "<group>";
+		};
+		F81895CD2BA7E39900DF7ABE /* ViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */,
+				F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */,
+				F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -662,6 +672,7 @@
 				F8AAD3CE2BA36EC90047B8C0 /* WriteTextUserData.swift */,
 				F882DBB82BA43D57009201D2 /* PostReportModel.swift */,
 				F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */,
+				F81895CE2BA82CDD00DF7ABE /* FcmTokenModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -688,9 +699,6 @@
 			isa = PBXGroup;
 			children = (
 				F87D05852B8F915400910773 /* MyPageModel.swift */,
-				F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */,
-				F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */,
-				F87D05892B8F940100910773 /* MyPageTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -698,6 +706,9 @@
 		F8B6ECA72BA495710058C6E8 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */,
+				F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */,
+				F87D05892B8F940100910773 /* MyPageTableViewCell.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -717,12 +728,9 @@
 		F8BE89DB2B807678008E6767 /* RequestStatus */ = {
 			isa = PBXGroup;
 			children = (
+				F81895CD2BA7E39900DF7ABE /* ViewComponent */,
 				F841A7D02BA74E2E00A9F9D4 /* Model */,
 				F841A7CF2BA74BC900A9F9D4 /* VC */,
-				F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */,
-				F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */,
-				F873518D2B90B664004E89C5 /* DateMemberTableViewCell.swift */,
-				F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */,
 			);
 			path = RequestStatus;
 			sourceTree = "<group>";
@@ -1062,6 +1070,7 @@
 				F8BE89E12B80778E008E6767 /* RequestStateVC.swift in Sources */,
 				F88EE4922B9F86310058BC00 /* APIGetManager.swift in Sources */,
 				F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */,
+				F81895CF2BA82CDD00DF7ABE /* FcmTokenModel.swift in Sources */,
 				F87351692B906EE0004E89C5 /* UITableViewHeaderFooterView.swift in Sources */,
 				F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
@@ -1093,7 +1102,6 @@
 				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
 				F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
-				F873518E2B90B664004E89C5 /* DateMemberTableViewCell.swift in Sources */,
 				F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,

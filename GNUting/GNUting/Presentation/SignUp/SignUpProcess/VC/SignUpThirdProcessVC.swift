@@ -10,7 +10,7 @@ import SnapKit
 import PhotosUI
 
 class SignUpThirdProcessVC: UIViewController {
-    
+//    var imageFileName : String = ""
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images,.livePhotos])
@@ -84,15 +84,15 @@ extension SignUpThirdProcessVC{
 
 extension SignUpThirdProcessVC {
     private func setPostData() {
-        let savedSignUpdate = SignUpModelManager.shared.signUpDictionary        
+        let savedSignUpdate = SignUpModelManager.shared.signUpDictionary
         let signUpData : SignUpModel = SignUpModel(birthDate: savedSignUpdate["birthDate"] ?? "", department: savedSignUpdate["department"] ?? "", email: (savedSignUpdate["email"] ?? "") + "@gnu.ac.kr", gender: savedSignUpdate["gender"] ?? "", name: savedSignUpdate["name"] ?? "", nickname: savedSignUpdate["nickname"] ?? "", password: savedSignUpdate["password"] ?? "", phoneNumber: savedSignUpdate["phoneNumber"] ?? "", studentId: savedSignUpdate["studentId"] ?? "", userSelfIntroduction: savedSignUpdate["userSelfIntroduction"] ?? "")
-
+        
         APIPostManager.shared.postSignUP(signUpdata: signUpData, image: phothImageView.image ?? UIImage()) { error,isSuccess  in
             guard error != nil else {
                 print("Error :\(String(describing: error))")
                 return
             }
-    
+            
         }
     }
 }
@@ -127,12 +127,18 @@ extension SignUpThirdProcessVC: PHPickerViewControllerDelegate {
                     self.phothImageView.layer.cornerRadius = 75
                     self.phothImageView.layer.masksToBounds = true
                     self.phothImageView.image = image as? UIImage
+                    
+//                    let identifiers = results.compactMap(\.assetIdentifier)
+//                    let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+//                    
+//                    if let filename = fetchResult.firstObject?.value(forKey: "filename") as? String {
+//                        
+//                        self.imageFileName = filename
+//        
+//                    }
                 }
             }
-        } else {
             
         }
-        
     }
 }
-

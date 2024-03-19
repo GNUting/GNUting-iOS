@@ -10,7 +10,11 @@ import SnapKit
 // MARK: - 마이 페이지
 class MyPageVC: UIViewController {
     let mypageConfiguration = [MyPageModel(title: "", elements: ["작성한 글 목록"]),MyPageModel(title: "고객지원", elements: ["신고하기","고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "안내", elements: ["공지사항","도움말","오픈소스 사용","법적고지"])]
-    
+    var userInfo : GetUserDataModel? {
+        didSet{
+            myPageTabelView.reloadData()
+        }
+    }
     private lazy var myPageTabelView : UITableView = {
         let tableView = UITableView(frame: .zero,style: .grouped)
         tableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.identi)
@@ -26,6 +30,11 @@ class MyPageVC: UIViewController {
         self.view.backgroundColor = .white
         setUpmyPageTabelView()
         self.navigationController?.navigationBar.isHidden = true
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserData()
+        tabBarController?.tabBar.isHidden = false
     }
 }
 
@@ -62,11 +71,10 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
         if section == 0{
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MyPageUserInfoTableViewHeader.identi) as? MyPageUserInfoTableViewHeader else {return UIView()}
             header.profileUpdateButtonDelegate = self
-            APIGetManager.shared.getUserData { userData in
-                guard let userData = userData?.result else { return }
+            
+            if let userData = userInfo?.result {
                 header.setInfoView(image: userData.profileImage, name: userData.name, studentID: userData.studentId, age: userData.age, major: userData.department, introuduce: userData.userSelfIntroduction)
             }
-           
             return header
         }else{
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MyPageTitleTableViewHeader.identi) as? MyPageTitleTableViewHeader else { return UIView()}
@@ -74,17 +82,21 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             return header
         }
     }
-  
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0{
+            return 150
+        } else {
+            return 25
+        }
     }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let vc = UserWriteTextVC()
+            
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -92,9 +104,15 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
 }
 extension MyPageVC : tapProfileUpateButtonDelegate {
     func tapProfileUpdateButton() {
-        let VC = UpdaetProfileVC()
-        self.navigationController?.pushViewController(VC, animated: true)
+        print("tap")
+        let vc = UpdateProfileVC()
+        vc.userInfo = self.userInfo
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+    func getUserData(){
+        APIGetManager.shared.getUserData { userData in
+            self.userInfo = userData
+        }
+    }
 }
 
