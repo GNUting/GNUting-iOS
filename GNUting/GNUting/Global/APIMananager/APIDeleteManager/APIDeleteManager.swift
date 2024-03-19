@@ -8,6 +8,38 @@
 import Foundation
 class APIDeleteManager {
     static let shared = APIDeleteManager()
+    func deleteRequestChat(boardID: Int,completion: @escaping(Int)->Void ) {
+        let uslString = "http://localhost:8080/api/v1/board/applications/cancel/\(boardID)"
+        guard let url = URL(string: uslString) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        print(token)
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+//            guard let data = data else { return }
+//            let responseData = try? JSONDecoder().decode(DefaultResponse.self, from: data)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if (200..<300).contains(httpResponse.statusCode) {
+                print("postWriteText Request successful")
+                completion(httpResponse.statusCode)
+            } else {
+                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
+                completion(httpResponse.statusCode)
+                // Handle error response
+            }
+        }.resume()
+    }
+    
     func deletePostText(boardID: Int,completion: @escaping(Int)->Void) {
         let uslString = "http://localhost:8080/api/v1/board/\(boardID)"
         guard let url = URL(string: uslString) else { return }
@@ -29,10 +61,10 @@ class APIDeleteManager {
             }
             
             if (200..<300).contains(httpResponse.statusCode) {
-                print("postWriteText Request successful")
+                print("deletePostText Request successful")
                 completion(httpResponse.statusCode)
             } else {
-                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
+                print("deletePostText Request failed with status code: \(httpResponse.statusCode)")
                 completion(httpResponse.statusCode)
                 // Handle error response
             }

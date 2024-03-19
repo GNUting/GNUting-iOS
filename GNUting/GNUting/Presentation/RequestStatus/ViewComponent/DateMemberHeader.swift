@@ -17,14 +17,24 @@ class DateMemberHeader: UITableViewHeaderFooterView {
     }()
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(majorLabel)
-        majorLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
-        }
-        setHeader()
+        
+        setUpHeader()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+extension DateMemberHeader {
+    private func setUpHeader() {
+        contentView.addSubview(majorLabel)
+
+        majorLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(10)
+            make.left.equalToSuperview().offset(20)
+        }
+    }
+    func setHeader(major: String?,count: Int?){
+        majorLabel.text = "\(major ?? "학과") \(count ?? 0)명"
     }
 }

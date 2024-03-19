@@ -11,14 +11,32 @@ import Alamofire
 
 class APIGetManager {
     static let shared = APIGetManager()
-    func getRequestChatState(completion: @escaping(RequestStatusModel?,Int)->Void) {
-        let url = EndPoint.requestStatus.url
+    func getReceivedChatState(completion: @escaping(ApplicationStatusModel?,Int)->Void) {
+        let url = EndPoint.receivedState.url
         guard let token = UserEmailManager.shard.getToken() else { return }
         let headers : HTTPHeaders = ["Authorization": token]
         AF.request(url,method: .get,headers: headers)
-            .responseDecodable(of:RequestStatusModel.self) { response in
+            .responseDecodable(of:ApplicationStatusModel.self) { response in
+                
                 guard let statusCode = response.response?.statusCode else { return }
-                print("getBoardDetail statusCode: \(statusCode)")
+                switch response.result {
+                case .success:
+                    completion(response.value,statusCode)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+    }
+    func getRequestChatState(completion: @escaping(ApplicationStatusModel?,Int)->Void) {
+        let url = EndPoint.requestStatus.url
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        
+        let headers : HTTPHeaders = ["Authorization": token]
+        AF.request(url,method: .get,headers: headers)
+            .responseDecodable(of:ApplicationStatusModel.self) { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
                 switch response.result {
                 case .success:
                     completion(response.value,statusCode)

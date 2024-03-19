@@ -6,13 +6,14 @@
 //
 
 import UIKit
+
 protocol tapProfileUpateButtonDelegate : AnyObject{
     func tapProfileUpdateButton()
 }
 class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     static let identi = "MyPageTableViewUserInfoHeaderid"
     var profileUpdateButtonDelegate : tapProfileUpateButtonDelegate?
-    
+    private lazy var upperView = UIView()
     private lazy var userImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "SampleImg1")
@@ -74,22 +75,32 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
 extension MyPageUserInfoTableViewHeader{
     
     private func setAddSubViews() {
-        contentView.addSubViews([userImageView,labelStackView])
+        contentView.addSubview(upperView)
+        upperView.addSubViews([userImageView,labelStackView,updateProfileButton])
         labelStackView.addStackSubViews([nameLabel,subInfoLabel,introduceLabel])
     }
     private func setAutoLayout() {
+        upperView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         userImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
             make.left.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-15)
-            make.height.width.equalTo(70)
+            
+            make.width.equalTo(70)
         }
         
         labelStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
             make.left.equalTo(userImageView.snp.right).offset(10)
             make.right.equalToSuperview()
+            
+        }
+        updateProfileButton.snp.makeConstraints { make in
+            make.top.equalTo(userImageView.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-15)
+            make.height.equalTo(50)
         }
     }
     @objc private func tapUpdateProfileButton() {
@@ -104,7 +115,7 @@ extension MyPageUserInfoTableViewHeader {
         setImageFromStringURL(stringURL: image) { image in
             DispatchQueue.main.async {
                 self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = 35
+                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
                 self.userImageView.layer.masksToBounds = true
             }
             
