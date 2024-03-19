@@ -27,16 +27,14 @@ class UserWriteTextVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
-      
+        tabBarController?.tabBar.isHidden = true
         addSubViews()
         setAutoLayout()
         setNavigationBar(title: "작성한 글 목록")
         setTableView()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getMyPostList()
     }
+    
 }
 extension UserWriteTextVC{
     private func setTableView(){

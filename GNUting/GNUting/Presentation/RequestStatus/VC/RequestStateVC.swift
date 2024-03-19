@@ -8,6 +8,8 @@
 import UIKit
 
 class RequestStateVC: UIViewController {
+    var selectedSegmentIndex: Int = 0
+    var dateStatusAllInfos : [ApplicationStatusResult] = []
     var dateStatusList : [DateStateModel] = []{
         didSet{
             requsetListTableView.reloadData()
@@ -18,21 +20,21 @@ class RequestStateVC: UIViewController {
         control.addTarget(self, action: #selector(didchangeValue(segment :)), for: .valueChanged)
         control.setTitleTextAttributes(
             [
-              NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor")!,
-              .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!            ],
+                NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor")!,
+                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!            ],
             for: .selected
-          )
+        )
         control.setTitleTextAttributes(
             [
-              NSAttributedString.Key.foregroundColor: UIColor(hexCode: "6C7072"),
-              .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!            ],
+                NSAttributedString.Key.foregroundColor: UIColor(hexCode: "6C7072"),
+                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!            ],
             for: .normal
-          )
+        )
         control.selectedSegmentIndex = 0
         return control
     }()
     private lazy var requsetListTableView : UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -41,14 +43,16 @@ class RequestStateVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         getRequestStatus()
     }
 }
@@ -72,10 +76,26 @@ extension RequestStateVC{
 }
 extension RequestStateVC {
     @objc private func didchangeValue(segment: UISegmentedControl) {
-        print(segment.selectedSegmentIndex)
+        if segment.selectedSegmentIndex == 0 {
+            selectedSegmentIndex = 0
+            getRequestStatus()
+        } else {
+            selectedSegmentIndex = 1
+            getReceivedState()
+        }
+        
     }
 }
-extension RequestStateVC : UITableViewDelegate,UITableViewDataSource {
+
+extension RequestStateVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = RequestStatusDetailVC()
+        vc.dedatilData = dateStatusAllInfos[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension RequestStateVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dateStatusList.count
     }
@@ -86,15 +106,37 @@ extension RequestStateVC : UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = RequestStatusDetailVC()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+    
 }
 extension RequestStateVC {
     private func getRequestStatus() {
         APIGetManager.shared.getRequestChatState { requestStatusData, statusCode in
             print("getRequestChatState: StatusCode\(statusCode)")
+            guard let results = requestStatusData?.result else { return }
+            self.dateStatusAllInfos = results
+            self.dateStatusList = []
+            for result in results {
+                let participantUserDepartment = result.participantUserDepartment
+                let participantUserCount = result.participantUserCount
+                var applyStatus : RequestState = .waiting
+                switch result.applyStatus{
+                case "성공":
+                    applyStatus = .Success
+                case "신청 취소":
+                    applyStatus = .Failure
+                default:
+                    applyStatus = .waiting
+                }
+                self.dateStatusList.append(DateStateModel(major: participantUserDepartment, memeberCount: participantUserCount, applyStatus: applyStatus))
+            }
+            
+            
+        }
+    }
+    private func getReceivedState() {
+        APIGetManager.shared.getReceivedChatState{ requestStatusData, statusCode in
+            print("getReceivedChatState: StatusCode\(statusCode)")
+            self.dateStatusList = []
             guard let results = requestStatusData?.result else { return }
             for result in results {
                 let participantUserDepartment = result.participantUserDepartment

@@ -66,7 +66,11 @@ class HomeVC: UIViewController{
         setAutoLayout()
         setCollectionView()
         setTableview()
-    
+
+        APIPostManager.shared.postFCMToken(fcmToken: "") { statusCode in
+            print(statusCode)
+        }
+        
     }
 }
 extension HomeVC{
@@ -179,7 +183,6 @@ extension HomeVC {
     }
     private func getUserData(){
         APIGetManager.shared.getUserData { [unowned self] userData in
-            
             guard let userData = userData else { return }
             self.setExplainLabel(text: userData.result?.name ?? "이름")
             
