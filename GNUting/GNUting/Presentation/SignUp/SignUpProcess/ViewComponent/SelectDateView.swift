@@ -95,7 +95,8 @@ extension SelectDateView {
         }
         upperStackView.snp.makeConstraints { make in
             make.top.equalTo(typeLabel.snp.bottom)
-            make.bottom.left.right.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-14)
         }
     }
     func setDateLabel(date : DateModel){

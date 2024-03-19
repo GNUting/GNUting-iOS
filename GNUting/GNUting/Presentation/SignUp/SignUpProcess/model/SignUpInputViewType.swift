@@ -11,4 +11,5 @@ enum SignUpInputViewType {
     case certified
     case password
     case passwordCheck
+    case phoneNumber
 }

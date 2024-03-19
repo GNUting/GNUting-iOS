@@ -185,12 +185,14 @@ extension HomeVC {
         APIGetManager.shared.getUserData { [unowned self] userData in
             guard let userData = userData else { return }
             self.setExplainLabel(text: userData.result?.name ?? "이름")
-            
-            setImageFromStringURL(stringURL: userData.result?.profileImage) { image in
+            let imageUrl = userData.result?.profileImage
+            setImageFromStringURL(stringURL:imageUrl ) { image in
                 DispatchQueue.main.async {
                     self.imageButton.setImage(image, for: .normal)
-                    self.imageButton.layer.cornerRadius = self.imageButton.layer.frame.size.width / 2
-                    self.imageButton.layer.masksToBounds = true
+                    if imageUrl != nil {
+                        self.imageButton.layer.cornerRadius = self.imageButton.layer.frame.size.width / 2
+                        self.imageButton.layer.masksToBounds = true
+                    }
                 }
             }
         }
