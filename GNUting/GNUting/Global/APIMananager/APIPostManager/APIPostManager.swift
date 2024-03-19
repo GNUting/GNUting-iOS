@@ -12,6 +12,21 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
+    func postAuthenticationCheck(email: String, number: String, completion: @escaping(DefaultResponse?,Int)->Void) {
+        let url = EndPoint.checkMailVerify.url
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let parameters : [String : String] = ["email": email,"number":number]
+        AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers).responseData { response in
+            guard let statusCode = response.response?.statusCode else { return }
+            guard let data = response.value else { return }
+            if let json = try? JSONDecoder().decode(DefaultResponse.self, from: data)  {
+                completion(json,statusCode)
+            }else{
+                completion(nil,statusCode)
+            }
+        }
+        
+    }
     func postFCMToken(fcmToken: String, completion: @escaping(Int) -> Void) {
         let url = EndPoint.fcmToken.url
         var request = URLRequest(url: url)
@@ -161,7 +176,7 @@ class APIPostManager {
         }.resume()
         
     }
-    func postLoginAPI(email: String, password: String, completion: @escaping (LoginSuccessResponse?,Int) -> Void) { // httpbody가아니라 파라미터로 넣는데 통신되는 이유 ?
+    func postLoginAPI(email: String, password: String, completion: @escaping (LoginSuccessResponse?,Int,String?) -> Void) { // httpbody가아니라 파라미터로 넣는데 통신되는 이유 ?
         let url = EndPoint.login.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters : [String : String] = ["email": email,"password":password]
@@ -175,12 +190,11 @@ class APIPostManager {
                     print("postLoginAPI statusCode:\(statusCode)")
                     if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
                         let authorization = json.result.accessToken
-                        KeyChainManager.shared.create(key: email, token: authorization)
-                        completion(json,statusCode)
+                        completion(json,statusCode,authorization)
                         
                     }
                 default:
-                    completion(nil,statusCode)
+                    completion(nil,statusCode,nil)
                 }
             }
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 class SignUPSecondProcessVC: UIViewController{
- 
+    
     var selectedDate : String = ""
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -20,7 +20,7 @@ class SignUPSecondProcessVC: UIViewController{
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.spacing = 10
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         return stackView
     }()
     private lazy var nameInputView : SignUPInputView = {
@@ -33,6 +33,7 @@ class SignUPSecondProcessVC: UIViewController{
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "전화번호")
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
+        signUPInpuView.textFieldType = .phoneNumber
         return signUPInpuView
     }()
     private lazy var genderView : SelectGenderView = {
@@ -52,7 +53,7 @@ class SignUPSecondProcessVC: UIViewController{
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.date = Date()
-        datePicker.preferredDatePickerStyle = .inline
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.isHidden = true
         datePicker.addTarget(self, action: #selector(changeDate(_ :)), for: .valueChanged)
         return datePicker
@@ -97,16 +98,18 @@ class SignUPSecondProcessVC: UIViewController{
         
         return nickNameInputView
     }()
-    private lazy var majorInputView : SignUPInputView = {
-        let majorInputView = SignUPInputView()
-        majorInputView.setInputTextTypeLabel(text: "학과")
-        majorInputView.setPlaceholder(placeholder: "힉과를 입력해주세요.")
+    private lazy var majorInputView : MajorInputView = {
+        let majorInputView = MajorInputView()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMajorInputView))
+        majorInputView.isUserInteractionEnabled = true
+        majorInputView.addGestureRecognizer(tapGesture)
+        
         return majorInputView
     }()
     private lazy var studentIDInputView : SignUPInputView = {
         let studentIDInputView = SignUPInputView()
         studentIDInputView.setInputTextTypeLabel(text: "학번")
-        studentIDInputView.setPlaceholder(placeholder: "학번을 입력해주세요.")
+        studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
         return studentIDInputView
     }()
     
@@ -161,7 +164,7 @@ extension SignUPSecondProcessVC{
             make.width.equalTo(scrollView.snp.width)
             make.bottom.equalToSuperview()
         }
-// MARK: - DateFicker 선택
+        // MARK: - DateFicker 선택
         datePicker.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
@@ -221,11 +224,18 @@ extension SignUPSecondProcessVC {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "gender", setData: genderView.getSelectedGender())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "birthDate", setData: selectedDate)
         SignUpModelManager.shared.setSignUpDictionary(setkey: "nickname", setData: nickNameInputView.getTextFieldText())
-        SignUpModelManager.shared.setSignUpDictionary(setkey: "department", setData: majorInputView.getTextFieldText())
+        SignUpModelManager.shared.setSignUpDictionary(setkey: "department", setData: majorInputView.getContentLabelText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "studentId", setData: studentIDInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "userSelfIntroduction", setData: introduceOneLine.getTextFieldText())
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc private func tapMajorInputView() {
+        let vc = SearchMajorVC()
+        vc.searchMajorSelectCellDelegate = self
+        let navigationVC = UINavigationController(rootViewController: vc)
+        
+        present(navigationVC, animated: true)
     }
 }
 extension SignUPSecondProcessVC :ConfirmButtonDelegate {
@@ -240,5 +250,10 @@ extension SignUPSecondProcessVC :ConfirmButtonDelegate {
             
             self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)")
         }
+    }
+}
+extension SignUPSecondProcessVC: SearchMajorSelectCellDelegate{
+    func sendSeleceted(major: String) {
+        majorInputView.setContentLabelText(text: major)
     }
 }
