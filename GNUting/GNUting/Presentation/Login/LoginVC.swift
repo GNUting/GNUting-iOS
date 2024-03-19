@@ -35,14 +35,13 @@ class LoginVC: UIViewController {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        textField.text = "testDJ1@gnu.ac.kr"
+        
         return textField
     }()
     private lazy var passwordTextField : PaddingTextField = {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        textField.text = "test1234!"
         
         return textField
     }()
