@@ -190,8 +190,6 @@ class APIPostManager {
                     print("postLoginAPI statusCode:\(statusCode)")
                     if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
                         let authorization = json.result.accessToken
-                        
-                        print("t1")
                         completion(json,statusCode,authorization)
                         
                     }
