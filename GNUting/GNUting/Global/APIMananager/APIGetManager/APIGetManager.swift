@@ -11,6 +11,22 @@ import Alamofire
 
 class APIGetManager {
     static let shared = APIGetManager()
+    func searchMajor(major: String,completion:@escaping(SearchMajorModel?,Int) -> Void) {
+        let url = EndPoint.searchMajor.url
+        let parameters: [String:Any] = ["name": major]
+        AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default)
+            .responseDecodable(of: SearchMajorModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    completion(response.value,statusCode)
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
+    }
+    
     func getReceivedChatState(completion: @escaping(ApplicationStatusModel?,Int)->Void) {
         let url = EndPoint.receivedState.url
         guard let token = UserEmailManager.shard.getToken() else { return }
@@ -87,7 +103,7 @@ class APIGetManager {
         let url = EndPoint.searchGetUserData.url
         
         guard let token = UserEmailManager.shard.getToken() else { return }
-  
+        
         let headers : HTTPHeaders = ["Authorization": token]
         let parameters: [String:Any] = ["nickname": searchNickname]
         AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default,headers: headers).responseDecodable(of: SearchUserModel.self) { response in
@@ -142,7 +158,7 @@ class APIGetManager {
     func getUserData(completion: @escaping(GetUserDataModel?) -> Void) {
         let url = EndPoint.getUserData.url
         guard let token = UserEmailManager.shard.getToken() else { return }
-
+        
         let headers : HTTPHeaders = ["Authorization": token]
         AF.request(url,method: .get,headers: headers)
             .responseDecodable(of: GetUserDataModel.self) { response in

@@ -65,10 +65,10 @@ class SignUPInputView : UIView{
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
         return view
     }()
-    lazy var inputCheckLabel : UILabel = {
+    private lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
         label.text = "틀렸습니다."
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 14)
         label.isHidden = true
@@ -104,13 +104,28 @@ extension SignUPInputView{
             make.top.equalTo(bottomLine.snp.bottom).offset(10)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview()
         }
         inputTextField.setContentHuggingPriority(.init(250), for: .horizontal)
         emailLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         confirmButton.setContentHuggingPriority(.init(251), for: .horizontal)
         emailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         confirmButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+    
+    private  func format(mask : String,phone : String) -> String{ // format함수
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                result.append(numbers[index])
+                index = numbers.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
     }
 }
 extension SignUPInputView{
@@ -159,7 +174,12 @@ extension SignUPInputView{
     func setConfrimButton() {
         confirmButton.addTarget(self, action: #selector(confrimButtonAction), for: .touchUpInside)
     }
-    
+    func setInputCheckLabel(textAlignment: NSTextAlignment) {
+        inputCheckLabel.textAlignment = textAlignment
+    }
+    func setPhoneNumbeer() {
+        inputTextField.keyboardType = .numberPad
+    }
 }
 
 
@@ -199,5 +219,14 @@ extension SignUPInputView: UITextFieldDelegate {
             passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
         }
         return textField.resignFirstResponder()
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textFieldType == .phoneNumber {
+            guard let text = textField.text else { return false }
+            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
+            return false
+        }
+        return true
     }
 }

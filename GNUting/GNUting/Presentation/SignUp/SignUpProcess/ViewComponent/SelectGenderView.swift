@@ -77,7 +77,8 @@ extension SelectGenderView {
         }
         buttonStackView.snp.makeConstraints { make in
             make.top.equalTo(typeLabel.snp.bottom).offset(5)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-14)
         }
     }
         

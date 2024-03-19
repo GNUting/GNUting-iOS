@@ -54,6 +54,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.setPlaceholder(placeholder: "인증 번호를 입력해주세요.")
         signUPInpuView.confirmButtonDelegate = self
         signUPInpuView.setConfrimButton()
+        signUPInpuView.setInputCheckLabel(textAlignment: .right)
         return signUPInpuView
     }()
     private lazy var passWordInputView : SignUPInputView = {
@@ -163,21 +164,37 @@ extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
 }
 extension SignUpFirstProcessVC: ConfirmButtonDelegate{
     func action(sendTextFieldText: String) {
-        
-        if checkNumber == sendTextFieldText {
-            limitTime = -1
-            emailSuccess = true
-            certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")
-            nextButtonEnable()
-        } else {
-            emailSuccess = false
-            nextButtonEnable()
-            certifiedInputView.setCheckLabel(isHidden: false, text: "인증번호가 올바르지 않습니다.")
-            let alert = UIAlertController(title: "인증번호가 올바르지 않습니다.", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-            present(alert, animated: true)
+        print(sendTextFieldText)
+        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response,statusCode  in
+            guard let responseResult = response else { return }
+            let isSuccess = responseResult.isSuccess
+            if isSuccess {
+                limitTime = -1
+                emailSuccess = true
+                certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")
+                nextButtonEnable()
+            } else {
+                let alert = UIAlertController(title: "인증번호가 올바르지 않습니다.", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                certifiedInputView.setCheckLabel(isHidden: false, text: "인증 번호가 올바르지 않습니다.")
+                present(alert, animated: true)
+            }
             
         }
+//        if checkNumber == sendTextFieldText {
+//            limitTime = -1
+//            emailSuccess = true
+//            certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")
+//            nextButtonEnable()
+//        } else {
+//            emailSuccess = false
+//            nextButtonEnable()
+//            certifiedInputView.setCheckLabel(isHidden: false, text: "인증번호가 올바르지 않습니다.")
+//            let alert = UIAlertController(title: "인증번호가 올바르지 않습니다.", message: nil, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+//            present(alert, animated: true)
+//            
+//        }
     }
     
 }
