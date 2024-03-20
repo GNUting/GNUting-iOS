@@ -52,8 +52,13 @@ class RequestStateVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        getRequestStatus()
+        self.navigationController?.navigationBar.isHidden = true
+        if selectedSegmentIndex == 0{
+            getRequestStatus()
+        } else {
+            getReceivedState()
+        }
+
     }
 }
 extension RequestStateVC{
@@ -91,6 +96,11 @@ extension RequestStateVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RequestStatusDetailVC()
         vc.dedatilData = dateStatusAllInfos[indexPath.row]
+        if selectedSegmentIndex == 0{
+            vc.requestStatus = true
+        }else {
+            vc.requestStatus = false
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -114,6 +124,7 @@ extension RequestStateVC {
             print("getRequestChatState: StatusCode\(statusCode)")
             guard let results = requestStatusData?.result else { return }
             self.dateStatusAllInfos = results
+            
             self.dateStatusList = []
             for result in results {
                 let participantUserDepartment = result.participantUserDepartment
@@ -123,7 +134,7 @@ extension RequestStateVC {
                 case "성공":
                     applyStatus = .Success
                 case "신청 취소":
-                    applyStatus = .Failure
+                    applyStatus = .cacnel
                 default:
                     applyStatus = .waiting
                 }
@@ -136,21 +147,23 @@ extension RequestStateVC {
     private func getReceivedState() {
         APIGetManager.shared.getReceivedChatState{ requestStatusData, statusCode in
             print("getReceivedChatState: StatusCode\(statusCode)")
+            guard let results = requestStatusData?.result else { return }
+            self.dateStatusAllInfos = results
             self.dateStatusList = []
             guard let results = requestStatusData?.result else { return }
             for result in results {
-                let participantUserDepartment = result.participantUserDepartment
-                let participantUserCount = result.participantUserCount
+                let applyUserDepartment = result.applyUserDepartment
+                let applyUserCount = result.applyUserCount
                 var applyStatus : RequestState = .waiting
                 switch result.applyStatus{
                 case "성공":
                     applyStatus = .Success
-                case "신청 취소":
-                    applyStatus = .Failure
+                case "거절":
+                    applyStatus = .refuse
                 default:
                     applyStatus = .waiting
                 }
-                self.dateStatusList.append(DateStateModel(major: participantUserDepartment, memeberCount: participantUserCount, applyStatus: applyStatus))
+                self.dateStatusList.append(DateStateModel(major: applyUserDepartment, memeberCount: applyUserCount, applyStatus: applyStatus))
             }
             
             
