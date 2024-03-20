@@ -10,6 +10,15 @@ import UIKit
 class RequestStatusDetailVC: UIViewController {
     var dedatilData: ApplicationStatusResult?
     var requestStatus : Bool = true // false : Received
+    private lazy var topStackView : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        
+        return stackView
+    }()
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -33,6 +42,13 @@ class RequestStatusDetailVC: UIViewController {
         button.backgroundColor = UIColor(named: "SecondaryColor")
         return button
     }()
+    private lazy var groupCountLabel: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 20)
+        
+        return label
+    }()
+    
     private lazy var stateLabel : BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
@@ -58,29 +74,32 @@ class RequestStatusDetailVC: UIViewController {
         self.view.backgroundColor = .white
         setAddSubViews()
         setAutoLayout()
-        
+        navigationController?.navigationBar.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setStateLabel(state: dedatilData?.applyStatus ?? "")
+        
+        setStateLabel(state: dedatilData?.applyStatus ?? "", groupCount: dedatilData?.applyUserCount ?? 0)
         setNaviagtionBar()
         setButtonStackView(requestStatus: requestStatus)
     }
 }
 extension RequestStatusDetailVC{
     private func setAddSubViews() {
-        view.addSubViews([stateLabel,dateMemeberTableView,buttonStackView])
+        view.addSubViews([topStackView,dateMemeberTableView,buttonStackView])
+        topStackView.addStackSubViews([groupCountLabel,stateLabel])
         
     }
     private func setAutoLayout(){
-        stateLabel.snp.makeConstraints { make in
+        topStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.centerX.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.left)
         }
+        groupCountLabel.setContentHuggingPriority(.init(249), for: .horizontal)
         dateMemeberTableView.snp.makeConstraints { make in
-            make.top.equalTo(stateLabel.snp.bottom).offset(Spacing.top)
+            make.top.equalTo(topStackView.snp.bottom).offset(Spacing.top)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-65)
         }
         buttonStackView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -106,7 +125,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return dedatilData?.applyUserCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,14 +154,16 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
         return header
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
         return UIView()
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNonzeroMagnitude
+        return 15
     }
 }
 extension RequestStatusDetailVC {
-    private func setStateLabel(state: String) {
+    private func setStateLabel(state: String,groupCount: Int) {
+        groupCountLabel.text = "\(groupCount):\(groupCount) 매칭"
         var applyStatus: RequestState = .waiting
         switch state{
         case "성공":
@@ -150,7 +171,10 @@ extension RequestStatusDetailVC {
             buttonStackView.isHidden = true
         case "신청 취소":
             buttonStackView.isHidden = true
-            applyStatus = .Failure
+            applyStatus = .cacnel
+        case "거절":
+            buttonStackView.isHidden = true
+            applyStatus = .refuse
         default:
             buttonStackView.isHidden = false
             applyStatus = .waiting
@@ -163,12 +187,44 @@ extension RequestStatusDetailVC {
 extension RequestStatusDetailVC {
     @objc private func tapCancelButton(){
         if requestStatus{
-            
             APIDeleteManager.shared.deleteRequestChat(boardID:dedatilData?.id ?? 0) { statusCode in
-                print(statusCode)
+                if statusCode == 200 {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "취소하기 성공", message: "취소가 성공적으로 완료됬습니다.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                            self.popButtonTap()
+                        }))
+                        self.present(alertController, animated: true)
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "취소하기 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                        self.present(alertController, animated: true)
+                    }
+                }
             }
         } else {
-            
+            APIUpdateManager.shared.rejectedApplication(boardID: dedatilData?.id ?? 0) { response in
+                guard let isSuccess = response?.isSuccess else { return }
+                if isSuccess{
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "거절하기 성공", message: "거절이 성공적으로 진행되었습니다.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                            self.popButtonTap()
+                        }))
+                        self.present(alertController, animated: true)
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "거절하기 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                        self.present(alertController, animated: true)
+                    }
+                }
+            }
         }
     }
 }

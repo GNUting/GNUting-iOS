@@ -12,7 +12,6 @@ class APIDeleteManager {
         let uslString = "http://localhost:8080/api/v1/board/applications/cancel/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         guard let token = UserEmailManager.shard.getToken() else { return }
-        print(token)
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue(token, forHTTPHeaderField: "Authorization")
@@ -21,9 +20,6 @@ class APIDeleteManager {
                 print("Error: \(error)")
                 return
             }
-//            guard let data = data else { return }
-//            let responseData = try? JSONDecoder().decode(DefaultResponse.self, from: data)
-            
             guard let httpResponse = response as? HTTPURLResponse else {
                 print("Invalid response")
                 return
