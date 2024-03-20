@@ -12,6 +12,8 @@ import Alamofire
 
 class APIPostManager {
     static let shared = APIPostManager()
+    
+    
     func postAuthenticationCheck(email: String, number: String, completion: @escaping(DefaultResponse?,Int)->Void) {
         let url = EndPoint.checkMailVerify.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
@@ -27,7 +29,7 @@ class APIPostManager {
         }
         
     }
-    func postFCMToken(fcmToken: String, completion: @escaping(Int) -> Void) {
+    func postFCMToken(fcmToken: String, completion: @escaping(DefaultResponse?,Int) -> Void) {
         let url = EndPoint.fcmToken.url
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -51,13 +53,14 @@ class APIPostManager {
                 print("Invalid response")
                 return
             }
-            
+            guard let data = data else { return }
+            let responseBody = try? JSONDecoder().decode(DefaultResponse.self, from: data)
             if (200..<300).contains(httpResponse.statusCode) {
-                print("postFCMToken Request successful")
-                completion(httpResponse.statusCode)
+                print("🟢 successful",#function)
+                completion(responseBody,httpResponse.statusCode)
             } else {
                 print("postFCMToken Request failed with status code: \(httpResponse.statusCode)")
-                completion(httpResponse.statusCode)
+                completion(responseBody,httpResponse.statusCode)
                 // Handle error response
             }
         }.resume()
