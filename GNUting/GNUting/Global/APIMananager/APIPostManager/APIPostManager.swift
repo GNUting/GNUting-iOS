@@ -88,13 +88,10 @@ class APIPostManager {
                 print("Error: \(error)")
                 return
             }
-//            guard let data = data else { return }
-
             guard let httpResponse = response as? HTTPURLResponse else {
                 print("Invalid response")
                 return
             }
-            
             if (200..<300).contains(httpResponse.statusCode) {
                 print("postRequestChat Request successful")
                 completion(httpResponse.statusCode)

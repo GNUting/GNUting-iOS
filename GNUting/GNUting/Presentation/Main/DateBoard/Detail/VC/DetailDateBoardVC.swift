@@ -108,7 +108,7 @@ extension DetailDateBoardVC{
     }
     private func setChatPeopleViewButton(memeberCount: Int) {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("현재채팅/참여중인 사람 \(memeberCount)명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+        config.attributedTitle = AttributedString("과팅 멤버 정보 \(memeberCount)명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
         config.image = UIImage(named: "ChatImg")
         config.baseForegroundColor = UIColor(named: "PrimaryColor")
         config.imagePlacement = .leading
@@ -210,7 +210,7 @@ extension DetailDateBoardVC {
     private func getBoardDetailData() {
         
         APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData,statusCode  in
-            print("게시글 상세 : 상태코드\(statusCode)")
+            print("게시글 상세 : statusCode: \(statusCode)")
             guard let result = boardDetailData?.result else { return }
             let user = result.user
             
