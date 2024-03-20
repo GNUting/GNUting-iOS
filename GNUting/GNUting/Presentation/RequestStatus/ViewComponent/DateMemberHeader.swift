@@ -13,6 +13,8 @@ class DateMemberHeader: UITableViewHeaderFooterView {
        let label = UILabel()
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 18)
         label.text = "미술 교육과"
+        label.textAlignment = .left
+        
         return label
     }()
     override init(reuseIdentifier: String?) {
@@ -28,10 +30,10 @@ class DateMemberHeader: UITableViewHeaderFooterView {
 extension DateMemberHeader {
     private func setUpHeader() {
         contentView.addSubview(majorLabel)
-
+        
         majorLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(10)
-            make.left.equalToSuperview().offset(20)
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.left)
         }
     }
     func setHeader(major: String?,count: Int?){
