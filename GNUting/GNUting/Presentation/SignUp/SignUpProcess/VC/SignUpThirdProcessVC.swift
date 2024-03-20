@@ -125,7 +125,7 @@ extension SignUpThirdProcessVC {
                     guard let authorization = authorization else { return }
                     KeyChainManager.shared.create(key: email, token: authorization)
                     UserEmailManager.shard.email = email
-                    guard let token = UserEmailManager.shard.getToken() else { return }
+     
                     self.navigationController?.setViewControllers([TabBarController()], animated: true)
                 default:
                     let alert = UIAlertController(title: "로그인 오류 로그인을 다시 진행해주세요.", message: nil, preferredStyle: .alert)

@@ -41,7 +41,6 @@ class BoardTextSearchVC: UIViewController{
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
-        searchConfigure()
         setNavigation()
         
     }
@@ -66,13 +65,14 @@ extension BoardTextSearchVC {
             make.right.equalToSuperview()
         }
     }
-    private func searchConfigure(){
-        navigationItem.searchController = searchController
-    }
     private func setNavigation(){
         let dismissButton = UIBarButtonItem(image: UIImage(named: "DissmissImg"), style: .plain, target: self, action: #selector(tapDissmisButton))
         dismissButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.leftBarButtonItem = dismissButton
+        self.navigationItem.title = "게시글 검색"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        navigationItem.searchController = searchController
+
     }
 }
 
