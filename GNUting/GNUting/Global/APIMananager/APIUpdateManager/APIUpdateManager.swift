@@ -11,6 +11,36 @@ import Alamofire
 
 class APIUpdateManager {
     static let shared = APIUpdateManager()
+    func rejectedApplication(boardID: Int, completion: @escaping(DefaultResponse?) -> Void) {
+        let uslString = "http://localhost:8080/api/v1/board/applications/refuse/\(boardID)"
+        guard let url = URL(string: uslString) else { return }
+        guard let token = UserEmailManager.shard.getToken() else { return }
+        let header: HTTPHeaders = ["Content-Type": "application/json","Authorization": token]
+        guard let url = URL(string: uslString) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            guard let data = data else { return }
+            let json = try? JSONDecoder().decode(DefaultResponse.self, from: data)
+            if (200..<300).contains(httpResponse.statusCode) {
+                print("rejectedApplication Request successful")
+                completion(json)
+            } else {
+                print("rejectedApplication Request failed with status code: \(httpResponse.statusCode)")
+                completion(json)
+            }
+        }.resume()
+    }
     func updateUserProfile(nickname: String, department: String, userSelfIntroduction: String,image: UIImage,completion :@escaping(Int)->Void) {
         let url = EndPoint.updateProfile.url
         guard let token = UserEmailManager.shard.getToken() else { return }

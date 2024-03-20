@@ -10,7 +10,8 @@ import UIKit
 enum RequestState {
     case waiting
     case Success
-    case Failure
+    case cacnel
+    case refuse
 }
 
 extension RequestState {
@@ -20,7 +21,9 @@ extension RequestState {
             return UIColor(named: "979C9E") ?? .systemGray
         case .Success:
             return UIColor(named: "SecondaryColor") ?? .systemBlue
-        case .Failure:
+        case .cacnel:
+            return UIColor(named: "PrimaryColor") ?? .systemRed
+        case .refuse:
             return UIColor(named: "PrimaryColor") ?? .systemRed
         }
     }
@@ -30,8 +33,10 @@ extension RequestState {
             return "대기중"
         case .Success:
             return "성공"
-        case .Failure:
+        case .cacnel:
             return "신청 취소"
+        case .refuse:
+            return "거절됨"
         }
     }
 }
