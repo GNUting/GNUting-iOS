@@ -135,7 +135,8 @@ extension RequestChatVC : UITableViewDelegate {
 
 extension RequestChatVC {
     private func getUserData() {
-        APIGetManager.shared.getUserData { userData in
+        APIGetManager.shared.getUserData { userData,response  in
+            self.errorHandling(response: response)
             guard let userData = userData?.result else { return }
             guard let profileImage = userData.profileImage else { return }
             self.addMemberDataList.append(UserInfosModel(id: userData.id, name: userData.name, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, userSelfIntroduction: userData.userSelfIntroduction, profileImage: profileImage))

@@ -24,6 +24,7 @@ enum EndPoint{
     case updateProfile
     case checkMailVerify
     case searchMajor
+    case updateAccessToken
     var url : URL {
         switch self{
         case .login:
@@ -60,6 +61,8 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "mail/verify")
         case .searchMajor:
             return .makeForEndpoint(endPoint: "search-department")
+        case .updateAccessToken:
+            return .makeForEndpoint(endPoint: "reIssueAccessToken")
         }
     }
 }
@@ -69,5 +72,11 @@ private extension URL{
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
-    
+    func getBaseUrl() -> String{
+        return URL.baseURL
+    }
+}
+class BaseURL {
+    static let shared = BaseURL()
+    let urlString = "http://localhost:8080/api/v1/"
 }

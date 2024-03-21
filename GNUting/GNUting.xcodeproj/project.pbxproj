@@ -94,6 +94,7 @@
 		F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */; };
 		F8A15E9A2B60F128001DE5E4 /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E992B60F128001DE5E4 /* FindPasswordVC.swift */; };
 		F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */; };
+		F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */; };
 		F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695572BA0800900BEB0C6 /* LoginResponse.swift */; };
 		F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */; };
 		F8A6955F2BA09B2100BEB0C6 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955E2BA09B2100BEB0C6 /* UserDataManager.swift */; };
@@ -214,6 +215,7 @@
 		F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		F8A15E992B60F128001DE5E4 /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptorManager.swift; sourceTree = "<group>"; };
 		F8A695572BA0800900BEB0C6 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		F8A6955E2BA09B2100BEB0C6 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 		F841A7B72BA72DFE00A9F9D4 /* APIMananager */ = {
 			isa = PBXGroup;
 			children = (
+				F8A179DA2BAC6F15005AAC18 /* APIInterceptorManager */,
 				F841A7BB2BA739C000A9F9D4 /* APIDeleteManager */,
 				F88EE4842B9EE4E20058BC00 /* APIPostManager */,
 				F88EE4902B9F861C0058BC00 /* APIGetManager */,
@@ -632,6 +635,14 @@
 				F8A15E992B60F128001DE5E4 /* FindPasswordVC.swift */,
 			);
 			path = FindPassword;
+			sourceTree = "<group>";
+		};
+		F8A179DA2BAC6F15005AAC18 /* APIInterceptorManager */ = {
+			isa = PBXGroup;
+			children = (
+				F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */,
+			);
+			path = APIInterceptorManager;
 			sourceTree = "<group>";
 		};
 		F8A6955B2BA08DD500BEB0C6 /* KeyChain */ = {
@@ -1044,6 +1055,7 @@
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
+				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,

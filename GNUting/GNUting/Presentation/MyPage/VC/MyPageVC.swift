@@ -109,7 +109,8 @@ extension MyPageVC : tapProfileUpateButtonDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func getUserData(){
-        APIGetManager.shared.getUserData { userData in
+        APIGetManager.shared.getUserData { userData,response  in
+            self.errorHandling(response: response)
             self.userInfo = userData
         }
     }

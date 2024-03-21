@@ -14,6 +14,6 @@ class UserEmailManager {
     func getToken() -> String? {
         let token = KeyChainManager.shared.read(key: email)
         
-        return "bearer " + (token ?? "")
+        return "Bearer " + (token ?? "")
     }
 }

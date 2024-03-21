@@ -81,7 +81,8 @@ extension BoardTextSearchVC : UISearchResultsUpdating{
         guard let text = searchController.searchBar.text else { return}
         searchText = text
 
-        APIGetManager.shared.getSearchBoardText(searchText: text, page: 0) { searchDataInfo in
+        APIGetManager.shared.getSearchBoardText(searchText: text, page: 0) { searchDataInfo,response  in
+            self.errorHandling(response: response)
             guard let searchResultData = searchDataInfo?.result.content else { return }
             self.page = 0
             self.searchResultList = searchResultData
@@ -101,7 +102,8 @@ extension BoardTextSearchVC: UITableViewDelegate {
             if !isFetching {
                 page += 1
                 self.isFetching = true
-                APIGetManager.shared.getSearchBoardText(searchText: searchText, page: page) { searchDataInfo in
+                APIGetManager.shared.getSearchBoardText(searchText: searchText, page: page) { searchDataInfo,response  in
+                    self.errorHandling(response: response)
                     guard let searchResultData = searchDataInfo?.result.content else { return }
                     self.searchResultList.append(contentsOf: searchResultData)
                     if searchResultData.count == 0 {

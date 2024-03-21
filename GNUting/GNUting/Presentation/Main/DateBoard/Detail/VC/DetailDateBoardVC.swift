@@ -207,8 +207,8 @@ extension DetailDateBoardVC {
 extension DetailDateBoardVC {
     private func getBoardDetailData() {
         
-        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData,statusCode  in
-            print("게시글 상세 : statusCode: \(statusCode)")
+        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData,response  in
+            self.errorHandling(response: response)
             guard let result = boardDetailData?.result else { return }
             let user = result.user
             let chatEnabled = result.status
