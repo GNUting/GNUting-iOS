@@ -29,7 +29,6 @@ class DateJoinMemberVC: UIViewController {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: MemberTableViewCell.identi)
-//        tableView.register(MemberTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MemberTableViewHeader.identi)
         tableView.dataSource = self
         
         return tableView
