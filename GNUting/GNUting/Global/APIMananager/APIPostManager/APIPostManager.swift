@@ -66,7 +66,7 @@ class APIPostManager {
         }.resume()
     }
     
-    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(Int) -> Void){
+    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(DefaultResponse,Int) -> Void){
         
         let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
         guard let url = URL(string: uslString) else { return }
@@ -92,13 +92,15 @@ class APIPostManager {
                 print("Invalid response")
                 return
             }
+            guard let data = data else { return }
+            guard let response = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
             if (200..<300).contains(httpResponse.statusCode) {
                 print("postRequestChat Request successful")
-                completion(httpResponse.statusCode)
+                completion(response,httpResponse.statusCode)
             } else {
                 
                 print("postRequestChat Request failed with status code: \(httpResponse.statusCode)")
-                completion(httpResponse.statusCode)
+                completion(response,httpResponse.statusCode)
                 // Handle error response
             }
         }.resume()

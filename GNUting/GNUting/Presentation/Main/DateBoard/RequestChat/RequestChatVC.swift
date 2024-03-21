@@ -156,8 +156,8 @@ extension RequestChatVC: MemberAddButtonDelegate {
 }
 extension RequestChatVC {
     @objc private func tapRequestChatButton() {
-        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { statusCode in
-            print("postRequestChat: \(statusCode)")
+        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { response,statusCode  in
+            
             if statusCode == 200 {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "채팅 신청 완료", message: "채팅 신청이 되었습니다.", preferredStyle: .alert)
@@ -170,7 +170,7 @@ extension RequestChatVC {
             } else {
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "채팅 신청 오류", message: "채팅 멤버수가 동일하지 않습니다. 해당문제가 지속되면 고객센터에 문의해주세요.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "채팅 신청 오류", message: "\(response.message)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                     self.present(alert, animated: true)
                 }
