@@ -26,10 +26,10 @@ class APIDeleteManager {
             }
             
             if (200..<300).contains(httpResponse.statusCode) {
-                print("postWriteText Request successful")
+                print("deleteRequestChat Request successful")
                 completion(httpResponse.statusCode)
             } else {
-                print("postWriteText Request failed with status code: \(httpResponse.statusCode)")
+                print("deleteRequestChat Request failed with status code: \(httpResponse.statusCode)")
                 completion(httpResponse.statusCode)
                 // Handle error response
             }

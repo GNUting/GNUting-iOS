@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 protocol CheckEmailButtonDelegate {
-    func action(number: String)
+    func action(textFieldText: String)
 }
 
 protocol ConfirmButtonDelegate {
@@ -188,15 +188,7 @@ extension SignUPInputView{
 
 extension SignUPInputView {
     @objc private func getEmailAuthNumber(){
-        APIPostManager.shared.postEmailCheck(email: (inputTextField.text ?? "") + "@gnu.ac.kr") { checkNumber,error  in
-            guard let error = error else {
-                self.checkEmailButtonDelegate?.action(number: checkNumber)
-                return
-            }
-            print("error\(error)")
-            
-            
-        }
+        checkEmailButtonDelegate?.action(textFieldText: inputTextField.text ?? "")
         
     }
     @objc private func confrimButtonAction(){

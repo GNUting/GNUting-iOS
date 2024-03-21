@@ -151,23 +151,14 @@ extension RequestChatVC: MemberAddButtonDelegate {
 }
 extension RequestChatVC {
     @objc private func tapRequestChatButton() {
-        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { response,statusCode  in
-            switch statusCode {
-            case 200..<300:
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "채팅 신청 완료", message: "채팅 신청이 되었습니다.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "성공", style: .default, handler: { _ in
-                        self.popButtonTap()
-                    }))
-                    self.present(alert, animated: true)
-                }
-            default:
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "채팅 신청 오류", message: "\(response.result)", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    self.present(alert, animated: true)
-                }
+        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { response  in
+            if response?.isSuccess == true {
+                self.successHandling(message: response?.message ?? "성공")
+                self.popButtonTap()
+            } else {
+                self.showAlert(message: response?.result ?? "다시 시도 해보세요!")
             }
         }
     }
 }
+

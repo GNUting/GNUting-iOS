@@ -10,7 +10,6 @@ import SnapKit
 
 class SignUpFirstProcessVC: UIViewController{
     
-    var checkNumber : String = ""
     var limitTime : Int = 60 // 180 바꿔야함
     var emailSuccess : Bool = false
     var samePasswordSuccess : Bool = false
@@ -142,7 +141,6 @@ extension SignUpFirstProcessVC{
             limitTime -= 1
         } else if limitTime == 0 {
             certifiedInputView.setCheckLabel(isHidden: true, text: nil)
-            checkNumber = "" // 인증시간 만료로 checkNumber 초기화
             emailInputView.setFoucInputTextFiled() // 이메일 다시하라고 포커스 주기
             let alert = UIAlertController(title: "이메일 인증시간 만료", message: "이메일 인증을 다시 시도해주세요.", preferredStyle: .alert)
             
@@ -155,8 +153,8 @@ extension SignUpFirstProcessVC{
     }
 }
 extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
-    func action(number: String) {
-        checkNumber = number
+    func action(textFieldText: String) {
+        APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr")
         certifiedInputView.setFoucInputTextFiled()
         getSetTime()
     }
@@ -164,11 +162,11 @@ extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
 }
 extension SignUpFirstProcessVC: ConfirmButtonDelegate{
     func action(sendTextFieldText: String) {
-        print(sendTextFieldText)
-        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response,statusCode  in
-            guard let responseResult = response else { return }
-            let isSuccess = responseResult.isSuccess
-            if isSuccess {
+    
+        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response  in
+            
+            
+            if response.isSuccess {
                 limitTime = -1
                 emailSuccess = true
                 certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")

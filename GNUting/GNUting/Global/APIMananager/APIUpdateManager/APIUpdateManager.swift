@@ -13,9 +13,8 @@ class APIUpdateManager {
     static let shared = APIUpdateManager()
     func rejectedApplication(boardID: Int, completion: @escaping(DefaultResponse?) -> Void) {
         let uslString = "http://localhost:8080/api/v1/board/applications/refuse/\(boardID)"
-        guard let url = URL(string: uslString) else { return }
+        
         guard let token = UserEmailManager.shard.getToken() else { return }
-        let header: HTTPHeaders = ["Content-Type": "application/json","Authorization": token]
         guard let url = URL(string: uslString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
