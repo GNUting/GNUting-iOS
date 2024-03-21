@@ -119,13 +119,9 @@ extension SignUpThirdProcessVC {
         guard let password = savedSignUpdate["password"] else { return }
         let alert = UIAlertController(title: "가입 완료", message: "가입이 완료 되었습니다", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-            APIPostManager.shared.postLoginAPI(email: email + "@gnu.ac.kr", password: password) { response, statusCode,authorization  in
+            APIPostManager.shared.postLoginAPI(email: email + "@gnu.ac.kr", password: password) { statusCode  in
                 switch statusCode {
                 case 200..<300:
-                    guard let authorization = authorization else { return }
-                    KeyChainManager.shared.create(key: email, token: authorization)
-                    UserEmailManager.shard.email = email
-     
                     self.navigationController?.setViewControllers([TabBarController()], animated: true)
                 default:
                     let alert = UIAlertController(title: "로그인 오류 로그인을 다시 진행해주세요.", message: nil, preferredStyle: .alert)

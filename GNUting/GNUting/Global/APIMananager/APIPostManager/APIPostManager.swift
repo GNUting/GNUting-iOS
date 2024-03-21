@@ -13,6 +13,18 @@ import Alamofire
 class APIPostManager {
     static let shared = APIPostManager()
     
+    func updateAccessToken(refreshToken: String, completion: @escaping(RefreshAccessTokenResponse,Int)->Void){
+        let url = EndPoint.updateAccessToken.url
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let parameters : [String : String] = ["refreshToken": refreshToken]
+        
+        AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
+            .responseDecodable(of:RefreshAccessTokenResponse.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                guard let responseData = response.value else { return }
+               completion(responseData, statusCode)
+            }
+    }
     
     func postAuthenticationCheck(email: String, number: String, completion: @escaping(DefaultResponse?,Int)->Void) {
         let url = EndPoint.checkMailVerify.url
@@ -83,6 +95,7 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error: \(error)")
@@ -178,7 +191,7 @@ class APIPostManager {
         }.resume()
         
     }
-    func postLoginAPI(email: String, password: String, completion: @escaping (LoginSuccessResponse?,Int,String?) -> Void) { // httpbody가아니라 파라미터로 넣는데 통신되는 이유 ?
+    func postLoginAPI(email: String, password: String, completion: @escaping (Int) -> Void) { // httpbody가아니라 파라미터로 넣는데 통신되는 이유 ?
         let url = EndPoint.login.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters : [String : String] = ["email": email,"password":password]
@@ -191,12 +204,16 @@ class APIPostManager {
                     guard let data = response.value else { return }
                     print("postLoginAPI statusCode:\(statusCode)")
                     if let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data){
-                        let authorization = json.result.accessToken
-                        completion(json,statusCode,authorization)
+                        let accessToken = json.result.accessToken
+                        let refrechToken = json.result.refreshToken
+                        KeyChainManager.shared.create(key: email, token: accessToken)
+                        KeyChainManager.shared.create(key: "RefreshToken", token: refrechToken)
+                        UserEmailManager.shard.email = email
+                        completion(statusCode)
                         
                     }
                 default:
-                    completion(nil,statusCode,nil)
+                    completion(statusCode)
                 }
             }
     }
