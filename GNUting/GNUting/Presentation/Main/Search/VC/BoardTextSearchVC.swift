@@ -90,6 +90,12 @@ extension BoardTextSearchVC : UISearchResultsUpdating{
 }
 
 extension BoardTextSearchVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailDateBoardVC()
+        vc.boardID = searchResultList[indexPath.row].boardID
+        vc.setPushBoardList()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
             if !isFetching {
@@ -109,7 +115,6 @@ extension BoardTextSearchVC: UITableViewDelegate {
         }
     }
 }
-
 
 extension BoardTextSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
