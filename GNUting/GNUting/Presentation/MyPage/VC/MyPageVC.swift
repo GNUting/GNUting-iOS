@@ -104,7 +104,6 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
 }
 extension MyPageVC : tapProfileUpateButtonDelegate {
     func tapProfileUpdateButton() {
-        print("tap")
         let vc = UpdateProfileVC()
         vc.userInfo = self.userInfo
         self.navigationController?.pushViewController(vc, animated: true)

@@ -174,7 +174,7 @@ extension SearchAddMemberVC: UITextFieldDelegate{
             searchUserInfoView.isHidden = false
             searchUser = searchUserData?.result
           
-            self.searchUserInfoView.setUserInfoDetailView(name: searchUser?.name, studentID: searchUser?.studentId, age: searchUser?.age, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
+            self.searchUserInfoView.setUserInfoDetailView(name: searchUser?.name, major: searchUser?.department, studentID: searchUser?.studentId, age: searchUser?.age, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
             searchController.searchBar.text = ""
         }
         return true

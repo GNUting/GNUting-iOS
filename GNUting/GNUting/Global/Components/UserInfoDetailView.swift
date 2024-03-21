@@ -114,9 +114,9 @@ extension UserInfoDetailView{
         upperView.layer.borderWidth = 0
     }
     
-    func setUserInfoDetailView(name :String?,studentID: String?, age: String?, introduce: String?, image : String? ) {
+    func setUserInfoDetailView(name :String?,major: String?,studentID: String?, age: String?, introduce: String?, image : String? ) {
         self.userNameLabel.text = name
-        self.subInfoLabel.text = "\(studentID ?? "") | \(age ?? "나이")"
+        self.subInfoLabel.text = "\(major ?? "과") | \(studentID ?? "학번") | \(age ?? "나이")"
         self.selfIntroduceLabel.text = introduce
         self.setImageFromStringURL(stringURL: image)
     }
