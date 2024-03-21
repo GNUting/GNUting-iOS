@@ -39,12 +39,12 @@ extension MemberTableViewCell {
         }
     }
     func setUserInfoViews(model: UserInfosModel ){
-        userInfoView.setUserInfoDetailView(name: model.name, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
     func setUserInfoViewsPost(model: UserInfosModel ){
-        userInfoView.setUserInfoDetailView(name: model.name, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
     func setDateMember(model: ApplicationStatusUser ){
-        userInfoView.setUserInfoDetailView(name: model.name, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
 }
