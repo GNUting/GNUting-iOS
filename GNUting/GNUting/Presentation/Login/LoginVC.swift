@@ -77,18 +77,14 @@ extension LoginVC{
     @objc func tapLoginButton(){
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        APIPostManager.shared.postLoginAPI(email: email, password: password) { statusCode in
-            switch statusCode {
-            case 200..<300:
+        APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
+            if response?.isSuccess == false {
+                self.errorHandling(response: response)
+            }
+            if successResponse?.isSuccess == true {
                 self.view.window?.rootViewController = TabBarController()
-            default:
-                let alert = UIAlertController(title: "로그인 오류 로그인을 다시 진행해주세요.", message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                self.present(alert, animated: true)
-            }   
+            }
         }
-        
-
     }
     
     @objc func tapFindPasswordButton(){

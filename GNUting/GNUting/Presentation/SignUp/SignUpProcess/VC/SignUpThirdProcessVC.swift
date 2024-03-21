@@ -91,13 +91,13 @@ extension SignUpThirdProcessVC {
         if image == UIImage(named: "photoImg") {
             image = nil
         }
-        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: image ?? UIImage()) { error,isSuccess  in
-            self.loginAPI()
-            guard error != nil else {
-                print("Error :\(String(describing: error))")
-                return
+        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: image ?? UIImage()) { response  in
+            if response.isSuccess {
+                self.loginAPI()
+            } else {
+                self.errorHandling(response: response)
+                self.navigationController?.setViewControllers([AppStartVC()], animated: true)
             }
-            
         }
     }
 }
@@ -119,16 +119,12 @@ extension SignUpThirdProcessVC {
         guard let password = savedSignUpdate["password"] else { return }
         let alert = UIAlertController(title: "가입 완료", message: "가입이 완료 되었습니다", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-            APIPostManager.shared.postLoginAPI(email: email + "@gnu.ac.kr", password: password) { statusCode  in
-                switch statusCode {
-                case 200..<300:
-                    self.navigationController?.setViewControllers([TabBarController()], animated: true)
-                default:
-                    let alert = UIAlertController(title: "로그인 오류 로그인을 다시 진행해주세요.", message: nil, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                        self.navigationController?.setViewControllers([AppStartVC()], animated: true)
-                    }))
-                    self.present(alert, animated: true)
+            APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
+                if response?.isSuccess == false {
+                    self.errorHandling(response: response)
+                }
+                if successResponse?.isSuccess == true {
+                    self.view.window?.rootViewController = TabBarController()
                 }
             }
         }))

@@ -17,7 +17,7 @@ struct EmailCheckResponse : Codable {
     let message: String
     let result : Number
 }
-struct requestChatResponse : Codable {
+struct ResponseWithResult : Codable {
     let isSuccess: Bool
     let code: String
     let message: String
