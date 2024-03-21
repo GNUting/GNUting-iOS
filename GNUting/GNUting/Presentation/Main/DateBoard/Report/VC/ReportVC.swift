@@ -173,22 +173,18 @@ extension ReportVC {
             reportCategory = ReportCategory.OTHER.category
         }
     
-        APIPostManager.shared.postReportBoard(boardID: boardID, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { stsatusCode in
-            print("report StatusCode\(stsatusCode)")
-            DispatchQueue.main.async {
-                if stsatusCode == 200 {
-                    let alertController = UIAlertController(title: "신고 완료", message: "신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
-                        self.popButtonTap()
-                    }))
-                    self.present(alertController, animated: true)
-                } else {
-                    let alertController = UIAlertController(title: "오류 발생", message: "신고 하기를 다시 진행해주세요.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    self.present(alertController, animated: true)
-                }
+        APIPostManager.shared.postReportBoard(boardID: boardID, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { response in
+            if response.isSuccess {
+                let alertController = UIAlertController(title: "신고 완료", message: "신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
+                    self.popButtonTap()
+                }))
+                self.present(alertController, animated: true)
+            } else {
+                let alertController = UIAlertController(title: "오류 발생", message: response.message, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                self.present(alertController, animated: true)
             }
-            
         }
     }
     

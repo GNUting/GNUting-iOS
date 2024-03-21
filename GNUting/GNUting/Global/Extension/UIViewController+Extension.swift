@@ -47,8 +47,23 @@ extension UIViewController{
     func errorHandling(response: DefaultResponse?) {
         if response?.isSuccess == false{
             if response?.code != "BOARD4003"{
-                self.showAlert(message: "\(response?.message ?? "재접속 또는 로그아웃후 다시 시도하세요.") \n 지속된 오류 발생시 고객센터로 문의 해주세요. ")
+                self.showAlert(message: "\(response?.message ?? "다시 시도 해보세요.") \n 지속된 오류 발생시 고객센터로 문의 해주세요. ")
             }
+        }
+    }
+    func errorHandlingLogin(response: LoginSuccessResponse?) {
+        if response?.isSuccess == false{
+            if response?.code != "BOARD4003"{
+                self.showAlert(message: "\(response?.message ?? "지속된 오류 발생시 고객센터로 문의 해주세요.")")
+            }
+        }
+    }
+  
+    func successHandling(message: String) {
+        let alertController = UIAlertController(title: "성공", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
         }
     }
 }

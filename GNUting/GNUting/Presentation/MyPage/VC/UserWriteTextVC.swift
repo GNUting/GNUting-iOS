@@ -32,9 +32,12 @@ class UserWriteTextVC: UIViewController {
         setAutoLayout()
         setNavigationBar(title: "작성한 글 목록")
         setTableView()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getMyPostList()
     }
-    
 }
 extension UserWriteTextVC{
     private func setTableView(){

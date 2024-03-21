@@ -175,10 +175,15 @@ extension WriteDateBoardVC{
             joinMemberID.append(UserIDList(id: userData.id))
         }
 
-        APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { statusCode in
-            print(statusCode)
+        APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
+            if response.isSuccess {
+                self.successHandling(message: response.message)
+                self.popButtonTap()
+            } else {
+                self.errorHandling(response: response)
+            }
         }
-        popButtonTap()
+        
     }
 }
 extension WriteDateBoardVC{
