@@ -4,7 +4,7 @@
 //
 //  Created by 원동진 on 3/12/24.
 //
-// ✅ : 분기 천리 완료
+// ✅ : 분기 처리 완료
 import Foundation
 
 import Alamofire
