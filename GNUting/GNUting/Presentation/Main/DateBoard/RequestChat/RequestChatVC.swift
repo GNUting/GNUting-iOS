@@ -81,8 +81,8 @@ extension RequestChatVC: UITableViewDataSource {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
+            vc.addMemberInfos = addMemberDataList
             let navigationVC = UINavigationController.init(rootViewController: vc)
-            navigationVC.modalPresentationStyle = .fullScreen
             present(navigationVC, animated: true)
             
         }
@@ -145,14 +145,8 @@ extension RequestChatVC {
 }
 extension RequestChatVC: MemberAddButtonDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        for userInfos in send {
-            guard let profileImage = userInfos.profileImage else { return }
-            self.addMemberDataList.append(UserInfosModel(id: userInfos.id, name: userInfos.name, gender: userInfos.gender, age: userInfos.age, nickname: userInfos.nickname, department: userInfos.department, studentId: userInfos.studentId, userRole: userInfos.userRole, userSelfIntroduction: userInfos.userSelfIntroduction, profileImage: profileImage))
-        }
-        
+        addMemberDataList = send
     }
-    
-    
 }
 extension RequestChatVC {
     @objc private func tapRequestChatButton() {

@@ -135,8 +135,10 @@ extension SearchAddMemberVC {
 }
 extension SearchAddMemberVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        addMemberInfos.remove(at: indexPath.item)
-        searchUserInfoView.selected(isSelected: false)
+        if indexPath.item != 0 {
+            addMemberInfos.remove(at: indexPath.item)
+            searchUserInfoView.selected(isSelected: false)
+        }
     }
 }
 extension SearchAddMemberVC: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
