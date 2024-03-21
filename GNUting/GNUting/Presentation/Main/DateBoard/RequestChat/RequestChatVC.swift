@@ -81,8 +81,8 @@ extension RequestChatVC: UITableViewDataSource {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
+            vc.addMemberInfos = addMemberDataList
             let navigationVC = UINavigationController.init(rootViewController: vc)
-            navigationVC.modalPresentationStyle = .fullScreen
             present(navigationVC, animated: true)
             
         }
@@ -145,20 +145,14 @@ extension RequestChatVC {
 }
 extension RequestChatVC: MemberAddButtonDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        for userInfos in send {
-            guard let profileImage = userInfos.profileImage else { return }
-            self.addMemberDataList.append(UserInfosModel(id: userInfos.id, name: userInfos.name, gender: userInfos.gender, age: userInfos.age, nickname: userInfos.nickname, department: userInfos.department, studentId: userInfos.studentId, userRole: userInfos.userRole, userSelfIntroduction: userInfos.userSelfIntroduction, profileImage: profileImage))
-        }
-        
+        addMemberDataList = send
     }
-    
-    
 }
 extension RequestChatVC {
     @objc private func tapRequestChatButton() {
-        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { statusCode in
-            print("postRequestChat: \(statusCode)")
-            if statusCode == 200 {
+        APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { response,statusCode  in
+            switch statusCode {
+            case 200..<300:
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "채팅 신청 완료", message: "채팅 신청이 되었습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "성공", style: .default, handler: { _ in
@@ -166,17 +160,13 @@ extension RequestChatVC {
                     }))
                     self.present(alert, animated: true)
                 }
-                
-            } else {
-                
+            default:
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "채팅 신청 오류", message: "채팅 멤버수가 동일하지 않습니다. 해당문제가 지속되면 고객센터에 문의해주세요.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "채팅 신청 오류", message: "\(response.result)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                     self.present(alert, animated: true)
                 }
             }
         }
-
-     
     }
 }

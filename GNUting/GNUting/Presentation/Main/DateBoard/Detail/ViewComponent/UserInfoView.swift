@@ -27,12 +27,9 @@ class UserInfoView: UIView {
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var userImageButton : UIButton = {
-        let imagebutton = UIButton()
-        imagebutton.setImage(UIImage(named: "SampleImg1"), for: .normal)
-     
-        return imagebutton
-    }()
+    
+    private lazy var userImageButton = UIButton()
+
     private lazy var middleStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -51,23 +48,23 @@ class UserInfoView: UIView {
     }()
     private lazy var nickNameLabel : UILabel = {
         let label = UILabel()
-        label.text = "마산 불주먹"
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
         label.textAlignment = .left
+        
         return label
     }()
     private lazy var majorStudentIDLabel : UILabel = {
         let label = UILabel()
-        label.text = "컴퓨터과학과|23학번"
         label.textAlignment = .left
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        
         return label
     }()
     private lazy var writeDateLabel : UILabel = {
         let label = UILabel()
-        label.text = "16분전"
         label.numberOfLines = 0
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        
         return label
     }()
     override init(frame: CGRect) {

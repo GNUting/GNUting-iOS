@@ -21,13 +21,13 @@ class RequestStateVC: UIViewController {
         control.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor")!,
-                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!            ],
+                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!],
             for: .selected
         )
         control.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor(hexCode: "6C7072"),
-                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!            ],
+                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!],
             for: .normal
         )
         control.selectedSegmentIndex = 0
@@ -58,7 +58,7 @@ class RequestStateVC: UIViewController {
         } else {
             getReceivedState()
         }
-
+        
     }
 }
 extension RequestStateVC{

@@ -32,19 +32,19 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 18)
-        label.text = "이름"
+
         return label
     }()
     private lazy var subInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 16)
-        label.text = "학과|나이|학번"
+
         return label
     }()
     private lazy var introduceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 16)
-        label.text = "자기소개"
+ 
         return label
     }()
     private lazy var updateProfileButton : UIButton = {
@@ -87,7 +87,7 @@ extension MyPageUserInfoTableViewHeader{
             make.top.equalToSuperview().offset(Spacing.top)
             make.left.equalToSuperview()
             
-            make.width.equalTo(70)
+            make.width.height.equalTo(70)
         }
         
         labelStackView.snp.makeConstraints { make in
@@ -110,12 +110,12 @@ extension MyPageUserInfoTableViewHeader{
 extension MyPageUserInfoTableViewHeader {
     func setInfoView(image: String?, name: String, studentID: String, age: String, major: String,introuduce: String){
         nameLabel.text = name
-        subInfoLabel.text = "\(major)|\(age)|\(studentID)"
+        subInfoLabel.text = "\(major) | \(studentID) | \(age)"
         introduceLabel.text = "\(introuduce)"
         setImageFromStringURL(stringURL: image) { image in
             DispatchQueue.main.async {
                 self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
+                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.height / 2
                 self.userImageView.layer.masksToBounds = true
             }
             

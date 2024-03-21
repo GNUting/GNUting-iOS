@@ -8,8 +8,6 @@
 import UIKit
 
 class DetailDateBoardVC: UIViewController{
-   
-    
     var boardID: Int = 0
     var UserInfos: [UserInfosModel] = []
     private lazy var titleLabel : UILabel = {
@@ -213,7 +211,13 @@ extension DetailDateBoardVC {
             print("게시글 상세 : statusCode: \(statusCode)")
             guard let result = boardDetailData?.result else { return }
             let user = result.user
-            
+            let chatEnabled = result.status
+            if chatEnabled == "CLOSE" {
+                self.requetChatButton.isHidden = true
+                self.chatPeopleViewButton.snp.makeConstraints { make in
+                    make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
+                }
+            }
             self.titleLabel.text =  result.title
             self.contentTextView.text = result.detail
             self.UserInfos = result.inUser

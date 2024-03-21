@@ -17,6 +17,12 @@ struct EmailCheckResponse : Codable {
     let message: String
     let result : Number
 }
+struct requestChatResponse : Codable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    let result : String
+}
 struct Number : Codable {
     let number : String
 }
