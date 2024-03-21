@@ -132,7 +132,9 @@ extension DateBoardListVC {
 extension DateBoardListVC  {
     private func getBoardData(page: Int) {
         self.isFetching = true
-        APIGetManager.shared.getBoardText(page: page, size: 15) { boardData in
+        
+        APIGetManager.shared.getBoardText(page: page, size: 15) { boardData,response  in
+            self.errorHandling(response: response)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 guard let boardDataList = boardData?.result else { return}
                 self.dateBoardListData.append(contentsOf: boardDataList)

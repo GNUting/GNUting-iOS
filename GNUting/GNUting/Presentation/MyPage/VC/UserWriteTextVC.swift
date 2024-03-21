@@ -76,8 +76,11 @@ extension UserWriteTextVC : UITableViewDataSource{
 }
 extension UserWriteTextVC {
     private func getMyPostList(){
-        APIGetManager.shared.getMyPost { response in
-            guard let result = response?.result else { return }
+        APIGetManager.shared.getMyPost { postListInfo,response  in
+            if response?.isSuccess == false {
+                self.showAlert(message: response?.message ?? "재접속 또는 로그아웃후 다시 시도하세요.")
+            }
+            guard let result = postListInfo?.result else { return }
             self.myPostList = result
         }
     }
