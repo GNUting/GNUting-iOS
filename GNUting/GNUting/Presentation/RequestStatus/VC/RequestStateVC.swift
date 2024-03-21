@@ -120,8 +120,8 @@ extension RequestStateVC : UITableViewDelegate {
 }
 extension RequestStateVC {
     private func getRequestStatus() {
-        APIGetManager.shared.getRequestChatState { requestStatusData, statusCode in
-            print("getRequestChatState: StatusCode\(statusCode)")
+        APIGetManager.shared.getRequestChatState { requestStatusData, response in
+            self.errorHandling(response: response)
             guard let results = requestStatusData?.result else { return }
             self.dateStatusAllInfos = results
             
@@ -145,8 +145,8 @@ extension RequestStateVC {
         }
     }
     private func getReceivedState() {
-        APIGetManager.shared.getReceivedChatState{ requestStatusData, statusCode in
-            print("getReceivedChatState: StatusCode\(statusCode)")
+        APIGetManager.shared.getReceivedChatState{ requestStatusData, response in
+            self.errorHandling(response: response)
             guard let results = requestStatusData?.result else { return }
             self.dateStatusAllInfos = results
             self.dateStatusList = []

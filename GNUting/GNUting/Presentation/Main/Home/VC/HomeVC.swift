@@ -59,15 +59,20 @@ class HomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        getBoardData()
-        getUserData()
+        
+        
         setNavigationBar()
         addSubViews()
         setAutoLayout()
         setCollectionView()
         setTableview()
         postFCMToken()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserData()
+        getBoardData()
     }
 }
 extension HomeVC{
@@ -173,16 +178,17 @@ extension HomeVC{
 // MARK: - Get Data
 extension HomeVC {
     private func getBoardData() {
-        APIGetManager.shared.getBoardText(page: 1, size: 10) { boardData in
+        APIGetManager.shared.getBoardText(page: 1, size: 10) { [unowned self] boardData,response  in
+            errorHandling(response: response)
             guard let boardDataList = boardData?.result else { return}
-            self.homeBoardData = boardDataList
+            homeBoardData = boardDataList
         }
     }
     private func getUserData(){
-        APIGetManager.shared.getUserData { [unowned self] userData in
-            guard let userData = userData else { return }
-            self.setExplainLabel(text: userData.result?.name ?? "이름")
-            let imageUrl = userData.result?.profileImage
+        APIGetManager.shared.getUserData { [unowned self] userData,response  in
+            errorHandling(response: response)
+            let imageUrl = userData?.result?.profileImage
+            setExplainLabel(text: userData?.result?.name ?? "이름")
             setImageFromStringURL(stringURL:imageUrl ) { image in
                 DispatchQueue.main.async {
                     self.imageButton.setImage(image, for: .normal)

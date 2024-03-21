@@ -172,11 +172,12 @@ extension SearchAddMemberVC: UITextFieldDelegate{
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        APIGetManager.shared.getSearchUser(searchNickname: searchText) { [self] searchUserData in
+        APIGetManager.shared.getSearchUser(searchNickname: searchText) { [unowned self] searchUserData,response  in
+            errorHandling(response: response)
             searchUserInfoView.isHidden = false
             searchUser = searchUserData?.result
           
-            self.searchUserInfoView.setUserInfoDetailView(name: searchUser?.name, major: searchUser?.department, studentID: searchUser?.studentId, age: searchUser?.age, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
+            searchUserInfoView.setUserInfoDetailView(name: searchUser?.name, major: searchUser?.department, studentID: searchUser?.studentId, age: searchUser?.age, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
             searchController.searchBar.text = ""
         }
         return true
