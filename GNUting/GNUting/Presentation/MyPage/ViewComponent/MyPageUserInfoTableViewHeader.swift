@@ -84,10 +84,10 @@ extension MyPageUserInfoTableViewHeader{
             make.edges.equalToSuperview()
         }
         userImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Spacing.top)
+            make.top.equalToSuperview()
             make.left.equalToSuperview()
             
-            make.width.height.equalTo(70)
+            make.width.equalTo(70)
         }
         
         labelStackView.snp.makeConstraints { make in

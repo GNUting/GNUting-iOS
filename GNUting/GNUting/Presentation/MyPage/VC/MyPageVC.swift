@@ -28,7 +28,7 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setUpmyPageTabelView()
+        setupMyPageTabelView()
         self.navigationController?.navigationBar.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +39,7 @@ class MyPageVC: UIViewController {
 }
 
 extension MyPageVC {
-    private func setUpmyPageTabelView() {
+    private func setupMyPageTabelView() {
         view.addSubview(myPageTabelView)
         myPageTabelView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
