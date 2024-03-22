@@ -37,8 +37,10 @@ class APIUpdateManager {
     // MARK: - 유저 정보 수정 ✅
     func updateUserProfile(nickname: String, department: String, userSelfIntroduction: String,image: UIImage,completion :@escaping(DefaultResponse)->Void) {
         let url = EndPoint.updateProfile.url
-        guard let token = UserEmailManager.shard.getToken() else { return }
-        let header: HTTPHeaders = ["Content-Type": "multipart/form-data","Authorization": token]
+        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        
+        let header: HTTPHeaders = ["Content-Type": "multipart/form-data","Authorization": "Bearer " + token]
         let parameters : [String : String] = ["department":department,"nickname": nickname,"userSelfIntroduction": userSelfIntroduction]
         let imageData = image.jpegData(compressionQuality: 0.2)
         

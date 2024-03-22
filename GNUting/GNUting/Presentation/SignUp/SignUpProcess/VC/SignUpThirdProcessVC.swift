@@ -122,6 +122,9 @@ extension SignUpThirdProcessVC {
             APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
                 if response?.isSuccess == false {
                     self.errorHandling(response: response)
+                    KeyChainManager.shared.create(key: "email", token: email)
+                    UserDefaultsManager.shared.setLogin()
+                 
                 }
                 if successResponse?.isSuccess == true {
                     self.view.window?.rootViewController = TabBarController()

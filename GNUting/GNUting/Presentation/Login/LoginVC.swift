@@ -67,6 +67,7 @@ class LoginVC: UIViewController {
         setNavigationBar(title: "")
         addSubViews()
         setAutoLayout()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -80,6 +81,7 @@ extension LoginVC{
         APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
             if response?.isSuccess == false {
                 self.errorHandling(response: response)
+            
             }
             if successResponse?.isSuccess == true {
                 self.view.window?.rootViewController = TabBarController()
