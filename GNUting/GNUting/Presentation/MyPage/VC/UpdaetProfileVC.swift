@@ -11,7 +11,7 @@ import PhotosUI
 
 class UpdateProfileVC: UIViewController {
     var userInfo: GetUserDataModel?
-    var nicknameCheck: Bool = false
+    
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images,.livePhotos])
@@ -46,14 +46,14 @@ class UpdateProfileVC: UIViewController {
     }()
     
     private lazy var majorInputView : SignUPInputView = {
-       let majorInputView = SignUPInputView()
+        let majorInputView = SignUPInputView()
         majorInputView.setInputTextTypeLabel(text: "학과")
         majorInputView.setPlaceholder(placeholder: "힉과를 입력해주세요.")
         return majorInputView
     }()
     
     private lazy var introduceInputView : SignUPInputView = {
-       let majorInputView = SignUPInputView()
+        let majorInputView = SignUPInputView()
         majorInputView.setInputTextTypeLabel(text: "한줄 소개")
         majorInputView.setPlaceholder(placeholder: "한줄 소개를 입력해주세요.")
         return majorInputView
@@ -61,9 +61,9 @@ class UpdateProfileVC: UIViewController {
     
     private lazy var updateProfileButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
-        button.backgroundColor = UIColor(hexCode: "F5F5F5")
+        button.backgroundColor = UIColor(named: "PrimaryColor")
         button.setText("프로필 수정")
-        button.isEnabled = false
+        
         button.addTarget(self, action: #selector(tapUpdateProfileButton), for: .touchUpInside)
         
         return button
@@ -79,7 +79,7 @@ class UpdateProfileVC: UIViewController {
         setUserInfo()
         setNavigationBar(title: "프로필수정")
     }
- 
+    
 }
 
 extension UpdateProfileVC{
@@ -93,7 +93,7 @@ extension UpdateProfileVC{
             make.height.width.equalTo(200)
         }
         nickNameInputView.snp.makeConstraints { make in
-            make.top.equalTo(userImageView.snp.bottom).offset(80)
+            make.top.equalTo(userImageView.snp.bottom).offset(50)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
@@ -121,10 +121,30 @@ extension UpdateProfileVC{
 extension UpdateProfileVC {
     @objc private func tapUpdateProfileButton() {
         
-        APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImageView.image ?? UIImage()) { statuCode in
-            print("updateUserProfile : statusCode\(statuCode)")
+        APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImageView.image ?? UIImage()) { response in
+            if response.isSuccess {
+                self.successHandling(message: response.message)
+            } else {
+                if response.code == "TOKEN4001-1" {
+                    guard let refreshToken = KeyChainManager.shared.read(key: "RefreshToken") else { return }
+                    APIPostManager.shared.updateAccessToken(refreshToken: refreshToken) { response,statusCode  in
+                        switch statusCode {
+                        case 200..<300:
+                            print("🟢 updateAccessToken Success:\(statusCode)")
+                            KeyChainManager.shared.create(key: UserEmailManager.shard.email, token: response.result.accessToken)
+                            self.tapUpdateProfileButton()
+                        default:
+                            print("🔴 updateAccessToken Success:\(statusCode)")
+                        }
+                    }
+                    
+                } else {
+                    self.errorHandling(response: response)
+                }
+            }
         }
     }
+    
     @objc private func tapPhothImageView() {
         present(imagePicker,animated: true)
     }
@@ -158,10 +178,7 @@ extension UpdateProfileVC: PHPickerViewControllerDelegate {
                     self.userImageView.image = image as? UIImage
                 }
             }
-        } else {
-            
         }
-        
     }
 }
 extension UpdateProfileVC :ConfirmButtonDelegate {
@@ -169,11 +186,10 @@ extension UpdateProfileVC :ConfirmButtonDelegate {
         APIGetManager.shared.checkNickname(nickname: sendTextFieldText) { response,statuscode  in
             guard let message = response?.message else { return }
             if statuscode == 200 {
-                self.nicknameCheck = true
+                self.updateProfileButton.isEnabled = true
             }else {
-                self.nicknameCheck = false
+                self.updateProfileButton.isEnabled = false
             }
-            
             self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)")
         }
     }

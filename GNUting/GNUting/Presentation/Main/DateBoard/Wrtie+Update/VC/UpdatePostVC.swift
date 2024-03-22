@@ -16,7 +16,7 @@ class UpdatePostVC: UIViewController {
             memberTableView.reloadData()
         }
     }
-  
+    
     private lazy var postTextView : WrtieUpdatePostTextView = {
         let customView = WrtieUpdatePostTextView()
         customView.contentTextView.delegate = self
@@ -44,7 +44,7 @@ class UpdatePostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-
+        
         addSubViews()
         setAutoLayout()
         
@@ -54,7 +54,7 @@ class UpdatePostVC: UIViewController {
         setNavigationBar()
     }
     
-
+    
 }
 extension UpdatePostVC{
     private func setNavigationBar(){
@@ -95,8 +95,8 @@ extension UpdatePostVC: UITableViewDataSource {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
+            vc.addMemberInfos = memberDataList
             let navigationVC = UINavigationController.init(rootViewController: vc)
-            navigationVC.modalPresentationStyle = .fullScreen
             present(navigationVC, animated: true)
             
         }
@@ -107,23 +107,23 @@ extension UpdatePostVC: UITableViewDataSource {
 
 extension UpdatePostVC : UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
-           if textView.text == textViewPlaceHolder {
-               textView.text = nil
-               textView.textColor = .black
-               
-           }
+        if textView.text == textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+            
+        }
         if textView.text != "" {
             textView.textColor = .black
         }
-            
-       }
-
-       func textViewDidEndEditing(_ textView: UITextView) {
-           if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-               textView.text = textViewPlaceHolder
-               textView.textColor = UIColor(hexCode: "9F9F9F")
-           }
-       }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = UIColor(hexCode: "9F9F9F")
+        }
+    }
 }
 
 extension UpdatePostVC: UITableViewDelegate {
@@ -131,7 +131,7 @@ extension UpdatePostVC: UITableViewDelegate {
         2
     }
     
-// MARK: - Cell
+    // MARK: - Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return memberDataList.count
@@ -154,7 +154,7 @@ extension UpdatePostVC: UITableViewDelegate {
         }
     }
     
-// MARK: - Header
+    // MARK: - Header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MemberTableViewHeader.identi) as? MemberTableViewHeader else {return UIView()}
         if section == 0 {
@@ -175,37 +175,21 @@ extension UpdatePostVC: UITableViewDelegate {
 
 extension UpdatePostVC{
     @objc private func tapCompletedButton(){
-       
-        APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { statusCode in
-            if statusCode == 200 {
-               
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "수정 완료", message: "수정이 완료 되었습니다.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "성공", style: .default, handler: { _ in
-                        self.popButtonTap()
-                    }))
-                    self.present(alert, animated: true)
-                }
-                
-                
-            } else {
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "수정 오류", message: "해당 오류가 계속 발생하면 고객센터에 문의하세요.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-
-                    self.present(alert, animated: true)
-                }
-            }
-            print("글 수정 StatusCode:\(statusCode)")
-        }
         
+        APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { response in
+            if response.isSuccess {
+                self.successHandlingPopAction(message: response.message)
+            } else {
+                self.errorHandling(response: response)
+            }
+        }
     }
 }
 
 extension UpdatePostVC: MemberAddButtonDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
         
-        memberDataList.append(contentsOf: send)
+        memberDataList = send
     }
     
     

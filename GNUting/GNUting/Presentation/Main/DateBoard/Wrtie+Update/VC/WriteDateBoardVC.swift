@@ -94,8 +94,9 @@ extension WriteDateBoardVC: UITableViewDataSource {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
+            vc.addMemberInfos = addMemberDataList
             let navigationVC = UINavigationController.init(rootViewController: vc)
-//            navigationVC.modalPresentationStyle =
+
             present(navigationVC, animated: true)
             
         }
@@ -208,7 +209,7 @@ extension WriteDateBoardVC {
 }
 extension WriteDateBoardVC: MemberAddButtonDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        addMemberDataList.append(contentsOf: send)
+        addMemberDataList = send
     }
     
 }
