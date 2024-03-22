@@ -131,7 +131,8 @@ extension UpdateProfileVC {
                         switch statusCode {
                         case 200..<300:
                             print("🟢 updateAccessToken Success:\(statusCode)")
-                            KeyChainManager.shared.create(key: UserEmailManager.shard.email, token: response.result.accessToken)
+                            guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨
+                            KeyChainManager.shared.create(key: email, token: response.result.accessToken)
                             self.tapUpdateProfileButton()
                         default:
                             print("🔴 updateAccessToken Success:\(statusCode)")

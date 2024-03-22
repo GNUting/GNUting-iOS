@@ -10,14 +10,18 @@ import Alamofire
 
 final class APIInterceptorManager: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        
+        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨
+        
         guard urlRequest.url?.absoluteString.hasPrefix(BaseURL.shared.urlString) == true,
-              let accessToken = UserEmailManager.shard.getToken() else {
+              let accessToken = KeyChainManager.shared.read(key: email) else {
             
             completion(.success(urlRequest))
             return
         }
+        
         var urlRequest = urlRequest
-        urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
+        urlRequest.headers.add(.authorization(bearerToken: accessToken))
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         completion(.success(urlRequest))
     }
@@ -31,7 +35,8 @@ final class APIInterceptorManager: RequestInterceptor {
             switch statusCode {
             case 200..<300:
                 print("🟢 updateAccessToken Success:\(statusCode)")
-                KeyChainManager.shared.create(key: UserEmailManager.shard.email, token: response.result.accessToken)
+                guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨//🔨
+                KeyChainManager.shared.create(key: email, token: response.result.accessToken)
                 completion(.retry)
             default:
                 print("🔴 updateAccessToken Success:\(statusCode)")

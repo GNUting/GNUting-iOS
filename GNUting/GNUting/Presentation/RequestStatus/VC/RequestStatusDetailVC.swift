@@ -187,22 +187,11 @@ extension RequestStatusDetailVC {
 extension RequestStatusDetailVC {
     @objc private func tapCancelButton(){
         if requestStatus{
-            APIDeleteManager.shared.deleteRequestChat(boardID:dedatilData?.id ?? 0) { statusCode in
-                if statusCode == 200 {
-                    DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: "취소하기 성공", message: "취소가 성공적으로 완료됬습니다.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                            self.popButtonTap()
-                        }))
-                        self.present(alertController, animated: true)
-                    }
-                    
+            APIDeleteManager.shared.deleteRequestChat(boardID:dedatilData?.id ?? 0) { response in
+                if response.isSuccess {
+                    self.successHandlingPopAction(message: response.message)
                 } else {
-                    DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: "취소하기 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                        self.present(alertController, animated: true)
-                    }
+                    self.errorHandling(response: response)
                 }
             }
         } else {

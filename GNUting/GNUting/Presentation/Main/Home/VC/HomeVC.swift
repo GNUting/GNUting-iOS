@@ -67,6 +67,7 @@ class HomeVC: UIViewController{
         setCollectionView()
         setTableview()
         postFCMToken()
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -205,14 +206,13 @@ extension HomeVC {
 extension HomeVC {
     private func postFCMToken(){
         guard let fcmToken = KeyChainManager.shared.read(key: "fcmToken") else { return }
-        APIPostManager.shared.postFCMToken(fcmToken: fcmToken) { responseBody, statusCode in
-            guard let response = responseBody else { return }
-            if !response.isSuccess{
-                DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "에러", message: "\(response.message)", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    self.present(alertController, animated: true)
+        APIPostManager.shared.postFCMToken(fcmToken: fcmToken) { response in
+            if !(response?.isSuccess ?? false){
+                guard let code = response?.code else { return }
+                if response?.code != "FIREBASE4000" {
+                    self.errorHandling(response: response)
                 }
+                
             }
         }
     }
