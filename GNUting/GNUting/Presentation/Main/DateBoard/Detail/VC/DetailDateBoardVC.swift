@@ -167,21 +167,11 @@ extension DetailDateBoardVC: MyPostDelegate {
     }
     
     func didTapDeleteButton() {
-        APIDeleteManager.shared.deletePostText(boardID: boardID) { statudCode in
-            if statudCode == 200 {
-                let alert = UIAlertController(title: "삭제 성공", message: "삭제가 정상적으로 이루어졌습니다.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel,handler: { _ in
-                    self.popButtonTap()
-                }))
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true)
-                }
+        APIDeleteManager.shared.deletePostText(boardID: boardID) { response in
+            if response.isSuccess {
+                self.successHandlingPopAction(message: response.message)
             } else {
-                let alert = UIAlertController(title: "삭제 실패", message: "삭제를 다시 진행하세요.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true)
-                }
+                self.errorHandling(response: response)
             }
         }
         

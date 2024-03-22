@@ -65,6 +65,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageTableViewCell.identi, for: indexPath) as? MyPageTableViewCell else { return MyPageTableViewCell()}
         cell.setCell(text: mypageConfiguration[indexPath.section].elements[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -98,6 +99,25 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             let vc = UserWriteTextVC()
             
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath == [2,0] {
+            APIPostManager.shared.postLogout { response in
+                if response?.isSuccess ?? false {
+                    let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+                        self.navigationController?.setViewControllers([AppStartVC()], animated: true)
+                    }))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                } else { //🔨 추후 분기처리하기
+                    let alertController = UIAlertController(title: "로그아웃 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                }
+            }
         }
         
     }

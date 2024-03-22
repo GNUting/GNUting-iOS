@@ -28,13 +28,10 @@ class APIPostManager {
     
     // MARK: - 토큰 : FCM토큰
     
-    func postFCMToken(fcmToken: String, completion: @escaping(DefaultResponse?,Int) -> Void) {
+    func postFCMToken(fcmToken: String, completion: @escaping(DefaultResponse?) -> Void) {
         let url = EndPoint.fcmToken.url
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        guard let token = UserEmailManager.shard.getToken() else { return }
-        request.setValue(token, forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let requestBody = FcmTokenModel(fcmToken: fcmToken)
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
@@ -42,27 +39,23 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 postFCMToken statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postFCMToken statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+                
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                print("Invalid response")
-                return
-            }
-            guard let data = data else { return }
-            let responseBody = try? JSONDecoder().decode(DefaultResponse.self, from: data)
-            if (200..<300).contains(httpResponse.statusCode) {
-                print("🟢 successful",#function)
-                completion(responseBody,httpResponse.statusCode)
-            } else {
-                print("postFCMToken Request failed with status code: \(httpResponse.statusCode)")
-                completion(responseBody,httpResponse.statusCode)
-                // Handle error response
-            }
-        }.resume()
+    
     }
     // MARK: - 회원가입 : 이메일 인증 번호 전송 ✅
     
@@ -160,8 +153,12 @@ class APIPostManager {
                     let accessToken = json.result.accessToken
                     let refrechToken = json.result.refreshToken
                     KeyChainManager.shared.create(key: email, token: accessToken)
+                    KeyChainManager.shared.create(key: "UserEmail", token: email)
                     KeyChainManager.shared.create(key: "RefreshToken", token: refrechToken)
-                    UserEmailManager.shard.email = email
+                    
+                    
+                    UserDefaultsManager.shared.setLogin()
+                    
                     completion(nil,json)
                 case .failure:
                     guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
@@ -171,6 +168,41 @@ class APIPostManager {
                 }
             }
     }
+    // MARK: - 로그 아웃
+    func postLogout(completion: @escaping(ResponseWithResult?)->Void) {
+        let url = EndPoint.logout.url
+        guard let refreshToken = KeyChainManager.shared.read(key:"RefreshToken") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+  
+        let requestBody = RefreshTokenModel(refreshToken: refreshToken)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
+                
+                switch response.result {
+                case .success:
+                    print("🟢 postLogout statusCode :\(statusCode)")
+                    UserDefaultsManager.shared.setLogout()
+                    completion(json)
+                case .failure:
+                    
+                    print("🔴 postLogout statusCode :\(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
     
     // MARK: - 글쓰기 ✅
     func postWriteText(title: String,detail:String,joinMemberID: [UserIDList],completion: @escaping(DefaultResponse)->Void) {

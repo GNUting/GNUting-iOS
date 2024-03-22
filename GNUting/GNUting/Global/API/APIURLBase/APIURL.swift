@@ -11,6 +11,7 @@ enum EndPoint{
     case emailCheck
     case checkNickname
     case login
+    case logout
     case getUserData
     case getBoardData
     case searchGetBoardData
@@ -63,6 +64,8 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "search-department")
         case .updateAccessToken:
             return .makeForEndpoint(endPoint: "reIssueAccessToken")
+        case .logout:
+            return .makeForEndpoint(endPoint: "logout")
         }
     }
 }
