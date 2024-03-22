@@ -207,23 +207,12 @@ extension RequestStatusDetailVC {
             }
         } else {
             APIUpdateManager.shared.rejectedApplication(boardID: dedatilData?.id ?? 0) { response in
-                guard let isSuccess = response?.isSuccess else { return }
-                if isSuccess{
-                    DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: "거절하기 성공", message: "거절이 성공적으로 진행되었습니다.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                            self.popButtonTap()
-                        }))
-                        self.present(alertController, animated: true)
-                    }
-                    
+                if response.isSuccess {
+                    self.successHandlingPopAction(message: response.message)
                 } else {
-                    DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: "거절하기 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                        self.present(alertController, animated: true)
-                    }
+                    self.errorHandling(response: response)
                 }
+                
             }
         }
     }
