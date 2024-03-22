@@ -66,4 +66,13 @@ extension UIViewController{
             self.present(alertController, animated: true)
         }
     }
+    func successHandlingPopAction(message: String) {
+        let alertController = UIAlertController(title: "성공", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+            self.popButtonTap()
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+    }
 }
