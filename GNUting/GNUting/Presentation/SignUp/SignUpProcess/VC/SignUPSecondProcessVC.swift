@@ -208,8 +208,10 @@ extension SignUPSecondProcessVC {
         buttonStackView.isHidden = true
         bluerEffectView.alpha = 0
         let dateArr = selectedDate.split(separator: "-").map{String($0)}
-        selectDateView.setDateLabel(date: DateModel(year: dateArr[0], momth: dateArr[1], day: dateArr[2]))
-        
+        if !dateArr.isEmpty {
+            selectDateView.setDateLabel(date: DateModel(year: dateArr[0], momth: dateArr[1], day: dateArr[2]))
+        }
+
     }
     @objc private func tapCanelButton(){
         datePicker.isHidden = true
