@@ -10,7 +10,7 @@ import SnapKit
 
 class SignUpFirstProcessVC: UIViewController{
     
-    var limitTime : Int = 60 // 180 바꿔야함
+    var limitTime : Int = 180 // 180 바꿔야함
     var emailSuccess : Bool = false
     var samePasswordSuccess : Bool = false
     private lazy var scrollView : UIScrollView = {
@@ -147,7 +147,7 @@ extension SignUpFirstProcessVC{
             alert.addAction(UIAlertAction(title: "확인", style: .cancel))
             present(alert, animated: true)
             
-            limitTime = 60 // 180 바꿔야함
+            limitTime = 180 // 180 바꿔야함
             
         }
     }

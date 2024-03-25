@@ -14,11 +14,8 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     static let identi = "MyPageTableViewUserInfoHeaderid"
     var profileUpdateButtonDelegate : tapProfileUpateButtonDelegate?
     private lazy var upperView = UIView()
-    private lazy var userImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "SampleImg1")
-        return imageView
-    }()
+    private lazy var userImageView = UIImageView()
+    
     private lazy var labelStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

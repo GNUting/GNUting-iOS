@@ -83,7 +83,7 @@ extension SignUpThirdProcessVC{
 }
 
 extension SignUpThirdProcessVC {
-    private func setPostData() {
+    private func setAndPostSignUp() {
         let savedSignUpdate = SignUpModelManager.shared.signUpDictionary
         
         let signUpData : SignUpModel = SignUpModel(birthDate: savedSignUpdate["birthDate"] ?? "", department: savedSignUpdate["department"] ?? "", email: (savedSignUpdate["email"] ?? "") + "@gnu.ac.kr", gender: savedSignUpdate["gender"] ?? "", name: savedSignUpdate["name"] ?? "", nickname: savedSignUpdate["nickname"] ?? "", password: savedSignUpdate["password"] ?? "", phoneNumber: savedSignUpdate["phoneNumber"] ?? "", studentId: savedSignUpdate["studentId"] ?? "", userSelfIntroduction: savedSignUpdate["userSelfIntroduction"] ?? "")
@@ -91,9 +91,19 @@ extension SignUpThirdProcessVC {
         if image == UIImage(named: "photoImg") {
             image = nil
         }
+    
         APIPostManager.shared.postSignUP(signUpdata: signUpData, image: image ?? UIImage()) { response  in
             if response.isSuccess {
-                self.loginAPI()
+                let alertController = UIAlertController(title: "회원가입 성공", message: "로그인을 진행하시겠습니까?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "아니요", style: .cancel,handler: { _ in
+                    self.navigationController?.setViewControllers([AppStartVC()], animated: true)
+                }))
+                alertController.addAction(UIAlertAction(title: "네", style: .default, handler: { _ in
+                    self.loginAPI()
+                }))
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
             } else {
                 self.errorHandling(response: response)
                 self.navigationController?.setViewControllers([AppStartVC()], animated: true)
@@ -103,11 +113,9 @@ extension SignUpThirdProcessVC {
 }
 
 extension SignUpThirdProcessVC {
-    
     @objc private func tapSignUpCompltedButton(){
-        setPostData()
+        setAndPostSignUp()
   
-        
     }
     
     @objc private func tapPhothImageView() {
@@ -117,23 +125,16 @@ extension SignUpThirdProcessVC {
         let savedSignUpdate = SignUpModelManager.shared.signUpDictionary
         guard let email = savedSignUpdate["email"] else { return }
         guard let password = savedSignUpdate["password"] else { return }
-        let alert = UIAlertController(title: "가입 완료", message: "가입이 완료 되었습니다", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-            APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
-                if response?.isSuccess == false {
-                    self.errorHandling(response: response)
-                    KeyChainManager.shared.create(key: "email", token: email)
-                    UserDefaultsManager.shared.setLogin()
-                 
-                }
-                if successResponse?.isSuccess == true {
-                    self.view.window?.rootViewController = TabBarController()
-                }
+        
+        APIPostManager.shared.postLoginAPI(email: email+"@gnu.ac.kr", password: password) { response,successResponse  in
+            if response?.isSuccess == false {
+                self.errorHandling(response: response)
+            
             }
-        }))
-       
-       
-        self.present(alert, animated: true)
+            if successResponse?.isSuccess == true {
+                self.view.window?.rootViewController = TabBarController()
+            }
+        }
     }
 }
 

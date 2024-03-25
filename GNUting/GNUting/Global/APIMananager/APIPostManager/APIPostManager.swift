@@ -148,7 +148,7 @@ class APIPostManager {
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 switch response.result {
                 case .success:
-                    print("🟢 postSignUP statusCode :\(statusCode)")
+                    print("🟢 postLoginAPI statusCode :\(statusCode)")
                     guard let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data) else { return }
                     let accessToken = json.result.accessToken
                     let refrechToken = json.result.refreshToken
@@ -162,7 +162,7 @@ class APIPostManager {
                     completion(nil,json)
                 case .failure:
                     guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-                    print("🔴 postSignUP statusCode :\(statusCode)")
+                    print("🔴 postLoginAPI statusCode :\(statusCode)")
                     completion(json,nil)
                     break
                 }
