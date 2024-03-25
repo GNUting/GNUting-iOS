@@ -59,4 +59,27 @@ class APIDeleteManager {
                 }
             }
     }
+    
+    func deleteUser(completion:@escaping(ResponseWithResult)-> Void){
+        let url = EndPoint.deleteUser.url
+        AF.request(url,method: .delete,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response {
+                response in
+                   guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                   guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
+                   
+                   switch response.result {
+                   case .success:
+                       print("🟢 deleteUser statusCode :\(statusCode)")
+                       completion(json)
+                   case .failure:
+                       print(json)
+                       print("🔴 deleteUser statusCode :\(statusCode)")
+                       completion(json)
+                       break
+                   }
+            }
+        
+    }
 }

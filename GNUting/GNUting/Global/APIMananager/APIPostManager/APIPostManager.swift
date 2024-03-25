@@ -148,7 +148,7 @@ class APIPostManager {
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 switch response.result {
                 case .success:
-                    print("🟢 postSignUP statusCode :\(statusCode)")
+                    print("🟢 postLoginAPI statusCode :\(statusCode)")
                     guard let json = try? JSONDecoder().decode(LoginSuccessResponse.self, from: data) else { return }
                     let accessToken = json.result.accessToken
                     let refrechToken = json.result.refreshToken
@@ -162,7 +162,7 @@ class APIPostManager {
                     completion(nil,json)
                 case .failure:
                     guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-                    print("🔴 postSignUP statusCode :\(statusCode)")
+                    print("🔴 postLoginAPI statusCode :\(statusCode)")
                     completion(json,nil)
                     break
                 }
@@ -248,10 +248,11 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
-        
+  
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
+                print(response)
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
                 switch response.result {
@@ -269,7 +270,7 @@ class APIPostManager {
     // MARK: - 신고하기 ✅
     func postReportBoard(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
         let url = EndPoint.report.url
-        print(boardID)
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let requestBody = PostReportModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
@@ -282,6 +283,7 @@ class APIPostManager {
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response { response in
+              
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 switch response.result {

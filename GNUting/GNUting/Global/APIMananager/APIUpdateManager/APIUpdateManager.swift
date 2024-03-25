@@ -100,4 +100,25 @@ class APIUpdateManager {
                 }
             }
     }
+    func updatePassword(email: String,password: String, completion: @escaping(DefaultResponse)-> Void) {
+        let url = EndPoint.setNewPassword.url
+        let parameters : [String : String] = ["email": email + "@gnu.ac.kr","password":password]
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        AF.request(url,method: .patch,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 updatePassword statusCode :\(statusCode)")
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                    completion(json)
+                case .failure:
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                    print("🔴 updatePassword statusCode :\(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
 }
