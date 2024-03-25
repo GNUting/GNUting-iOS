@@ -25,6 +25,7 @@ class FindPasswordVC: UIViewController {
     private lazy var emailCertifiedButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("메일 인증하기")
+        button.addTarget(self, action: #selector(tapEmailCertifiedButton), for: .touchUpInside)
         return button
     }()
     override func viewDidLoad() {
@@ -63,5 +64,12 @@ extension FindPasswordVC {
         self.navigationItem.leftBarButtonItem = popButton
         self.navigationItem.title = "비밀번호 찾기"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+    }
+}
+extension FindPasswordVC {
+    @objc private func tapEmailCertifiedButton() {
+        let vc = UpdatePasswordViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
 }

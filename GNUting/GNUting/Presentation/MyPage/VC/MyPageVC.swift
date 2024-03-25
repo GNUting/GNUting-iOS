@@ -118,6 +118,24 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
                     }
                 }
             }
+        } else if indexPath == [2,1] {
+            APIDeleteManager.shared.deleteUser { response in
+                if response.isSuccess {
+                    let alertController = UIAlertController(title: "회원탈퇴", message: "회원 탈퇴되었습니다..", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+                        self.navigationController?.setViewControllers([AppStartVC()], animated: true)
+                    }))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                } else {
+                    let alertController = UIAlertController(title: "회원탈퇴 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                }
+            }
         }
         
     }

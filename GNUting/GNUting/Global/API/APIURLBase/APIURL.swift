@@ -26,6 +26,8 @@ enum EndPoint{
     case checkMailVerify
     case searchMajor
     case updateAccessToken
+    case setNewPassword
+    case deleteUser
     var url : URL {
         switch self{
         case .login:
@@ -66,6 +68,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "reIssueAccessToken")
         case .logout:
             return .makeForEndpoint(endPoint: "logout")
+        case .setNewPassword:
+            return .makeForEndpoint(endPoint: "setNewPassword")
+        case .deleteUser:
+            return .makeForEndpoint(endPoint: "deleteUser")
         }
     }
 }
