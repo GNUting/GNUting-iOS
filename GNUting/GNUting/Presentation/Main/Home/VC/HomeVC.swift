@@ -29,10 +29,24 @@ class HomeVC: UIViewController{
         pageControl.pageIndicatorTintColor = UIColor(hexCode: "D9D9D9")
         return pageControl
     }()
-    private lazy var explainLabel : UILabel = {
+    private lazy var explainStackView : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 5
+        
+        return stackView
+    }()
+    private lazy var explainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 22)
         return label
+    }()
+    private lazy var explainImage: UIImageView = {
+       let imageView = UIImageView()
+        imageView.image = UIImage(named: "ExplainImage")
+        return imageView
     }()
     private lazy var flowLayout : UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -52,6 +66,7 @@ class HomeVC: UIViewController{
         tableview.register(HomeDateBoardListTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HomeDateBoardListTableViewHeader.identi)
         tableview.register(HomeDateBoardListTableViewCell.self, forCellReuseIdentifier: HomeDateBoardListTableViewCell.identi)
         tableview.showsVerticalScrollIndicator = false
+        tableview.bounces = false
         return tableview
     }()
     private lazy var imageButton = UIButton()
@@ -86,16 +101,20 @@ extension HomeVC{
         advertCollectionView.dataSource = self
     }
     private func addSubViews() {
-        self.view.addSubViews([explainLabel,advertCollectionView,pageControl,dateBoardTableView])
+        self.view.addSubViews([explainStackView,advertCollectionView,pageControl,dateBoardTableView])
+        explainStackView.addStackSubViews([explainLabel,explainImage])
     }
     private func setAutoLayout(){
-        explainLabel.snp.makeConstraints { make in
+        explainStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.right.lessThanOrEqualToSuperview().offset(Spacing.right)
         }
+
+        
+        explainImage.setContentCompressionResistancePriority(.required, for: .horizontal)
         advertCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(explainLabel.snp.bottom).offset(Spacing.top)
+            make.top.equalTo(explainStackView.snp.bottom).offset(Spacing.top)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
             make.height.equalTo(80)
@@ -124,7 +143,7 @@ extension HomeVC{
     }
     
     private func setExplainLabel(text: String) {
-        explainLabel.text = "\(text)님 안녕하세요 😄"
+        explainLabel.text = "\(text)님 안녕하세요"
     }
 }
 

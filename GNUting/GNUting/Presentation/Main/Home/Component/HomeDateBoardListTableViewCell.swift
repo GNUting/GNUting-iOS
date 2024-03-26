@@ -46,8 +46,8 @@ class HomeDateBoardListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func setCell(model : BoardResult){
-        majorLabel.text = model.title
-        boardTitleLabel.text = model.detail
+        majorLabel.text = model.user.department
+        boardTitleLabel.text = model.title
     }
     private func configure(){
         contentView.addSubview(upperStackView)

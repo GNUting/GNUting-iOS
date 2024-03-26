@@ -42,6 +42,7 @@ class SignUPInputView : UIView{
         let textField = UITextField()
         textField.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
         textField.delegate = self
+        textField.addTarget(self, action: #selector(changeInputTextField(_:)), for: .editingChanged)
         
         return textField
     }()
@@ -177,8 +178,11 @@ extension SignUPInputView{
     func setInputCheckLabel(textAlignment: NSTextAlignment) {
         inputCheckLabel.textAlignment = textAlignment
     }
-    func setPhoneNumbeer() {
+    func setKeyboardTypeNumberPad() {
         inputTextField.keyboardType = .numberPad
+    }
+    func setSecureTextEntry() {
+        inputTextField.isSecureTextEntry = true
     }
 }
 
@@ -187,6 +191,14 @@ extension SignUPInputView{
 
 
 extension SignUPInputView {
+    @objc private func changeInputTextField(_ sender: UITextField){
+        if sender.text?.count == 0 {
+            confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+        } else {
+            confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+        }
+        
+    }
     @objc private func getEmailAuthNumber(){
         checkEmailButtonDelegate?.action(textFieldText: inputTextField.text ?? "")
         
@@ -198,11 +210,11 @@ extension SignUPInputView {
 extension SignUPInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-        confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+       
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+      
         return true
     }
     
@@ -219,6 +231,9 @@ extension SignUPInputView: UITextFieldDelegate {
             textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
             return false
         }
+        
+        
         return true
     }
+    
 }

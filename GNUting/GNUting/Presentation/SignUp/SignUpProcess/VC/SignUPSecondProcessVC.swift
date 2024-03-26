@@ -34,6 +34,7 @@ class SignUPSecondProcessVC: UIViewController{
         signUPInpuView.setInputTextTypeLabel(text: "전화번호")
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
         signUPInpuView.textFieldType = .phoneNumber
+        signUPInpuView.setKeyboardTypeNumberPad()
         return signUPInpuView
     }()
     private lazy var genderView : SelectGenderView = {
@@ -110,6 +111,7 @@ class SignUPSecondProcessVC: UIViewController{
         let studentIDInputView = SignUPInputView()
         studentIDInputView.setInputTextTypeLabel(text: "학번")
         studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
+        studentIDInputView.setKeyboardTypeNumberPad()
         return studentIDInputView
     }()
     
