@@ -50,7 +50,7 @@ class SignUpFirstProcessVC: UIViewController{
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "인증번호")
         signUPInpuView.setConfirmButton(text: "확인")
-        signUPInpuView.setPlaceholder(placeholder: "인증 번호를 입력해주세요.")
+        signUPInpuView.setPlaceholder(placeholder: "인증번호를 입력해주세요.")
         signUPInpuView.confirmButtonDelegate = self
         signUPInpuView.setConfrimButton()
         signUPInpuView.setInputCheckLabel(textAlignment: .right)
@@ -59,9 +59,9 @@ class SignUpFirstProcessVC: UIViewController{
     private lazy var passWordInputView : SignUPInputView = {
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "비밀번호")
-        signUPInpuView.setPlaceholder(placeholder: "비밀 번호를 입력해주세요.")
+        signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자 한개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
-        
+        signUPInpuView.setSecureTextEntry()
         return signUPInpuView
     }()
     private lazy var passWordCheckInputView : SignUPInputView = {
@@ -70,6 +70,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.setPlaceholder(placeholder: "비밀번호와 동일하게 입력해주세요.")
         signUPInpuView.textFieldType = .passwordCheck
         signUPInpuView.passwordCheckDelegate = self
+        signUPInpuView.setSecureTextEntry()
         
         return signUPInpuView
     }()

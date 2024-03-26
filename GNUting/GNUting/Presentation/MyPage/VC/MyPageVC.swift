@@ -23,6 +23,7 @@ class MyPageVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.bounces = false
         tableView.backgroundColor = .white
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override func viewDidLoad() {
