@@ -34,9 +34,9 @@ class PrimaryColorButton : UIButton {
     public func setText(_ text : String,fointSize: Int = 20){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: 10, bottom: 22, trailing: 10)
-        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: CGFloat(fointSize))!]))
+        
+        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: CGFloat(fointSize))!,NSAttributedString.Key.foregroundColor : UIColor.white]))
         config.titleAlignment = .center
-        config.baseForegroundColor = .white
         self.configuration = config
     }
     func setHeight(height: Int = 60) {
