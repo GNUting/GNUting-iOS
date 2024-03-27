@@ -59,7 +59,7 @@ class SignUpFirstProcessVC: UIViewController{
     private lazy var passWordInputView : SignUPInputView = {
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "비밀번호")
-        signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자 한개 이상 포함 8~15자")
+        signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
         signUPInpuView.setSecureTextEntry()
         return signUPInpuView
