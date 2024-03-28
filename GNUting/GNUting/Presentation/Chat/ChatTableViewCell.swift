@@ -124,11 +124,18 @@ extension ChatTableViewCell{
             make.right.lessThanOrEqualToSuperview().offset(-12)
             make.bottom.equalToSuperview().offset(-12)
         }
-//        newChatLabel.setContentHuggingPriority(.init(250), for: .horizontal)
+
         newChatImage.setContentHuggingPriority(.init(251), for: .horizontal)
         newChatImage.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         
     }
     
+}
+extension ChatTableViewCell {
+    func setChatTableViewCell(title: String, leaderUserDepartment: String, applyLeaderDepartment: String,newChatMessage: String) {
+        chatTitleLabel.text = title
+        majorLabel.text = "\(leaderUserDepartment) | \(applyLeaderDepartment)"
+        newChatLabel.text = newChatMessage
+    }
 }

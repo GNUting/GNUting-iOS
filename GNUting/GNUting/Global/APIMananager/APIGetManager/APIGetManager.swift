@@ -221,7 +221,7 @@ class APIGetManager: RequestInterceptor {
             .responseDecodable(of: SearchUserModel.self) { response in
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-     
+                
                 switch response.result {
                 case .success:
                     print("🟢 getSearchUser statusCode: \(statusCode)")
@@ -230,8 +230,26 @@ class APIGetManager: RequestInterceptor {
                     print("🔴 getSearchUser statusCode: \(statusCode)")
                     completion(response.value,json)
                     break
-                }        }
+                }
+            }
     }
-    
+    func getChatRoomData(completion: @escaping(ChatRoomModel?,DefaultResponse)->Void) {
+        let url = EndPoint.chatRoom.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .responseDecodable(of: ChatRoomModel.self) { response in
+                    guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                    
+                    switch response.result {
+                    case .success:
+                        print("🟢 getChatRoomData statusCode: \(statusCode)")
+                        completion(response.value,json)
+                    case .failure:
+                        print("🔴 getChatRoomData statusCode: \(statusCode)")
+                        completion(response.value,json)
+                        break
+                    }
+            }
+    }
 }
 

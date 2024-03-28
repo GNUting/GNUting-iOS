@@ -248,19 +248,40 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
-  
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
                 print(response)
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
+                
                 switch response.result {
                 case .success:
                     print("🟢 postRequestChat statusCode: \(statusCode)")
                     completion(json)
                 case .failure:
                     print("🔴 postRequestChat statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
+    // MARK: - 채팅 신청 : 승인하기
+    func chatConfirmed(id: Int, completion: @escaping(DefaultResponse) -> Void) {
+        let uslString = "http://localhost:8080/api/v1/board/applications/accept/\(id)"
+        guard let url = URL(string: uslString) else { return }
+        AF.request(url,method: .post,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 chatConfirmed statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 chatConfirmed statusCode: \(statusCode)")
                     completion(json)
                     break
                 }
