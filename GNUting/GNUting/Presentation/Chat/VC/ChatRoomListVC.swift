@@ -8,6 +8,7 @@
 import UIKit
 
 class ChatVC: UIViewController {
+    var userName : String = ""
     var chatRoomData: ChatRoomModel? {
         didSet{
             chatTableView.reloadData()
@@ -34,6 +35,7 @@ class ChatVC: UIViewController {
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -97,4 +99,5 @@ extension ChatVC {
             
         }
     }
+    
 }

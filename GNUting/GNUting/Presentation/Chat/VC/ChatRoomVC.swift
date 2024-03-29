@@ -6,15 +6,23 @@
 //
 
 import UIKit
+import SwiftStomp
 import Starscream
 class ChatRoomVC: UIViewController {
     
+    var chatMessageList: [ChatRoomMessageModelResult] = []{
+        didSet{
+            chatRoomTableView.reloadData()
+        }
+    }
     
+    var accessToken = ""
     var chatRoomID: Int = 0
     var navigationTitle: String = "게시글 제목"
     var subTitleSting: String = "학과|학과"
-    
-    var socket: WebSocket!
+    var message: String = ""
+    var userName : String = ""
+    private var swiftStomp : SwiftStomp!
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         label.text = subTitleSting
@@ -40,6 +48,7 @@ class ChatRoomVC: UIViewController {
         tableView.dataSource = self
         tableView.register(ChatRoomTableViewSendMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewSendMessageCell.identi)
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
+        tableView.bounces = false
         return tableView
     }()
     private lazy var textField: PaddingTextField = {
@@ -48,6 +57,7 @@ class ChatRoomVC: UIViewController {
         textField.backgroundColor = UIColor(hexCode: "F5F5F5")
         textField.layer.cornerRadius = 10
         textField.layer.masksToBounds = true
+        textField.addTarget(self, action: #selector(changeValueTextField(_ :)), for: .editingChanged)
         return textField
     }()
     private lazy var sendStackView: UIStackView = {
@@ -61,21 +71,25 @@ class ChatRoomVC: UIViewController {
     private lazy var sendMessageButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "SendImg"), for: .normal)
+        button.addTarget(self, action: #selector(tapSendMessageButton), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        connect()
+        getAccessToken()
         view.backgroundColor = .white
+        tabBarController?.tabBar.isHidden = true
+        
         setAddSubViews()
         setAutoLayout()
         setNavigationBar()
-        tabBarController?.tabBar.isHidden = true
+        getChatMessageList()
+        initStomp()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        disconnect()
+        self.swiftStomp.disconnect()
     }
 }
 extension ChatRoomVC{
@@ -119,11 +133,11 @@ extension ChatRoomVC {
 }
 extension ChatRoomVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+
+        return chatMessageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.row)
         if indexPath.row == 0 {
             guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
             return sendCell
@@ -136,70 +150,95 @@ extension ChatRoomVC: UITableViewDataSource{
     
 }
 extension ChatRoomVC {
-    func connect() {
-        let url = URL(string: "ws://localhost:8080/chat")!
-        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
-        guard let accessToken = KeyChainManager.shared.read(key: email) else { return }
-        //
-        var request = URLRequest(url: url)
-
-        request.timeoutInterval = 5
-        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    @objc private func tapSendMessageButton() {
+//        do {
+//            let encondingData = try JSONEncoder().encode(SendMessageModel(messageType: "CHAT", message: message))
+//            self.swiftStomp.send(body: encondingData, to: "pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
+//        } catch {
+//            print(error)
+//            
+//        }
         
-        
-        socket = WebSocket(request: request)
-        
-        socket.delegate = self
-        socket.connect()
-        
+        swiftStomp.send(body: SendMessageModel(messageType: "CHAT", message: message), to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
+        //        swiftStomp.send(body: message, to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
     }
-    func disconnect() {
-        socket?.disconnect()
+    @objc private func changeValueTextField(_ sender: UITextField) {
+        guard let textFieldText = sender.text else { return }
+        self.message = textFieldText
     }
 }
-
-extension ChatRoomVC: WebSocketDelegate {
-    func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
-        print("event:\(event)")
+extension ChatRoomVC {
+    private func getAccessToken(){
+        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        self.accessToken = token
+    }
+    private func initStomp(){
+        let url = URL(string: "ws://localhost:8080/chat")!
         
-        switch event{
-        case .viabilityChanged:
-            print("[Websocket] Viability changed")
-        case .connected(_):
-            
-            print("[WebSocket] Connected")
-            socket?.write(string: "dongjin")
-  
-        case .disconnected(let reason,let code):
-            print("[Websocket] Disconnected")
-            print("\(reason) with code \(code)")
-        case .text(let text):
-            do {
-                let result = try JSONDecoder().decode(ChatRoomModel.self, from: Data(text.utf8))
-                print(result)
-            } catch {
-                print(error)
+        
+        self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
+        self.swiftStomp.enableLogging = true
+        self.swiftStomp.delegate = self
+        self.swiftStomp.connect()
+    }
+    private func getChatMessageList() {
+        APIGetManager.shared.getChatMessageData(chatRoomID: chatRoomID) { chatMessageListData, response in
+            if response.isSuccess {
+                guard let result = chatMessageListData?.result else { return }
+                self.chatMessageList = result
             }
-        case .binary(_): break
-            
-        case .error(let error):
-            print("[WebSocket] Error")
-            print(String(describing: error))
-            
-            
-            
-        case .reconnectSuggested(_):
-            print("[Websocket] reconnectSuggested")
-            
-        case .cancelled:
-            print("[Websocket] cancelled")
-            
-        default:
-            print("[WebSocket] Did receive something")
+        }
+    }
+}
+extension ChatRoomVC: SwiftStompDelegate{
+    func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
+        
+        if connectType == .toSocketEndpoint{
+            print("Connected to socket")
+        } else if connectType == .toStomp{
+            print("Connected to stomp")
+            swiftStomp.subscribe(to: "/sub/chatRoom/\(chatRoomID)")
+     
         }
     }
     
+    func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
+        if disconnectType == .fromSocket{
+            print("Socket disconnected. Disconnect completed")
+        } else if disconnectType == .fromStomp{
+            print("Client disconnected from stomp but socket is still connected!")
+        }
+    }
+    
+    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
+        
+        if let message = message{
+            
+            print("message : \(message)")
+        } else if let message = message as? Data{
+            print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
+        }
+        
+        print()
+    }
+    
+    func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
+        print("Receipt with id `\(receiptId)` received")
+    }
+    
+    func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
+        if type == .fromSocket{
+            print("Socket error occurred! [\(briefDescription)]")
+        } else if type == .fromStomp{
+            print("Stomp error occurred! [\(briefDescription)] : \(String(describing: fullDescription))")
+        } else {
+            print("Unknown error occured!")
+        }
+    }
+    
+    func onSocketEvent(eventName: String, description: String) {
+        print("Socket event occured: \(eventName) => \(description)")
+    }
     
 }
-//

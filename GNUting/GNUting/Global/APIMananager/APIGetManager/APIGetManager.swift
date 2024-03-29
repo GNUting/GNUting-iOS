@@ -251,5 +251,26 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    func getChatMessageData(chatRoomID: Int,completion: @escaping(ChatRoomMessageModel?,DefaultResponse)->Void) {
+        let urlString = "http://localhost:8080/api/v1/chatRoom/\(chatRoomID)/chats"
+        guard let url = URL(string: urlString) else { return }
+        AF.request(url,method: .get,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of:ChatRoomMessageModel.self) { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+     
+                switch response.result {
+                case .success:
+                    print("🟢 getChatMessageData statusCode: \(statusCode)")
+                    completion(response.value,json)
+                case .failure:
+                    print("🔴 getChatMessageData statusCode: \(statusCode)")
+                    completion(response.value,json)
+                    break
+                }
+            }
+        
+    }
 }
 
