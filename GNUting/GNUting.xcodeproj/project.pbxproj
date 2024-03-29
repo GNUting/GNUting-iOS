@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A4860BEE577AFE9533473F /* Pods_GNUting.framework */; };
 		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
 		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
@@ -35,7 +36,6 @@
 		F85344FE2B5F710A001EADE6 /* AppStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85344FD2B5F710A001EADE6 /* AppStartVC.swift */; };
 		F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F85345022B5F710B001EADE6 /* Assets.xcassets */; };
 		F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F85345042B5F710B001EADE6 /* LaunchScreen.storyboard */; };
-		F853450F2B5F7152001EADE6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F853450E2B5F7152001EADE6 /* SnapKit */; };
 		F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F853451A2B5F7A49001EADE6 /* Pretendard-ExtraBold.otf */; };
 		F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F853451B2B5F7A49001EADE6 /* Pretendard-Regular.otf */; };
 		F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F853451C2B5F7A49001EADE6 /* Pretendard-ExtraLight.otf */; };
@@ -49,9 +49,6 @@
 		F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */; };
 		F85345362B5F8961001EADE6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345352B5F8961001EADE6 /* Spacing.swift */; };
 		F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */; };
-		F85C432E2BAAAAA900121442 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F85C432D2BAAAAA900121442 /* FirebaseAnalytics */; };
-		F85C43302BAAAAA900121442 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F85C432F2BAAAAA900121442 /* FirebaseMessaging */; };
-		F85C43322BAAAAA900121442 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = F85C43312BAAAAA900121442 /* FirebaseStorageCombine-Community */; };
 		F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */; };
 		F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862C80F2B622601008120FA /* UILabel+Extension.swift */; };
 		F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */; };
@@ -117,10 +114,17 @@
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
 		F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */; };
 		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
+		F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */; };
+		F8CD76A72BB6F319001B141F /* SendMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD76A62BB6F319001B141F /* SendMessageModel.swift */; };
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
 		F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */; };
-		F8D10F402BA0720400B795FD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F8D10F3F2BA0720400B795FD /* Alamofire */; };
+		F8D627372BB6AD3300725BE4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627362BB6AD3300725BE4 /* SnapKit */; };
+		F8D627392BB6AD3300725BE4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */; };
+		F8D6273C2BB6AD3E00725BE4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F8D6273B2BB6AD3E00725BE4 /* Alamofire */; };
+		F8D6273E2BB6AD3E00725BE4 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */; };
+		F8D627412BB6ADAC00725BE4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627402BB6ADAC00725BE4 /* FirebaseAnalytics */; };
+		F8D627432BB6ADAC00725BE4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627422BB6ADAC00725BE4 /* FirebaseMessaging */; };
 		F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D96F6D2B99A8D5009409A3 /* BackButton.swift */; };
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
 		F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */; };
@@ -137,6 +141,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03A4860BEE577AFE9533473F /* Pods_GNUting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GNUting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0E8E0639216DE4D6A431C6A /* Pods-GNUting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.release.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.release.xcconfig"; sourceTree = "<group>"; };
+		F272B29E19B4176D6274BFBD /* Pods-GNUting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.debug.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.debug.xcconfig"; sourceTree = "<group>"; };
 		F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDateBoardVC.swift; sourceTree = "<group>"; };
 		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
@@ -246,6 +253,8 @@
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
+		F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMessageModel.swift; sourceTree = "<group>"; };
+		F8CD76A62BB6F319001B141F /* SendMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageModel.swift; sourceTree = "<group>"; };
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewType.swift; sourceTree = "<group>"; };
@@ -269,17 +278,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F85C43302BAAAAA900121442 /* FirebaseMessaging in Frameworks */,
-				F853450F2B5F7152001EADE6 /* SnapKit in Frameworks */,
-				F85C43322BAAAAA900121442 /* FirebaseStorageCombine-Community in Frameworks */,
-				F8D10F402BA0720400B795FD /* Alamofire in Frameworks */,
-				F85C432E2BAAAAA900121442 /* FirebaseAnalytics in Frameworks */,
+				F8D6273C2BB6AD3E00725BE4 /* Alamofire in Frameworks */,
+				F8D627432BB6ADAC00725BE4 /* FirebaseMessaging in Frameworks */,
+				F8D627412BB6ADAC00725BE4 /* FirebaseAnalytics in Frameworks */,
+				F8D6273E2BB6AD3E00725BE4 /* AlamofireDynamic in Frameworks */,
+				F8D627372BB6AD3300725BE4 /* SnapKit in Frameworks */,
+				F8D627392BB6AD3300725BE4 /* SnapKit-Dynamic in Frameworks */,
+				9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0383C2930558C4EAC52EA087 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F272B29E19B4176D6274BFBD /* Pods-GNUting.debug.xcconfig */,
+				B0E8E0639216DE4D6A431C6A /* Pods-GNUting.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +488,8 @@
 			children = (
 				F85344F82B5F710A001EADE6 /* GNUting */,
 				F85344F72B5F710A001EADE6 /* Products */,
+				0383C2930558C4EAC52EA087 /* Pods */,
+				FE3AB1D242DF68A2F8B939AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -710,6 +732,7 @@
 				F841A7CD2BA74AF700A9F9D4 /* RequestStatusModel.swift */,
 				F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */,
 				F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */,
+				F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -834,6 +857,7 @@
 			isa = PBXGroup;
 			children = (
 				F8DB022C2BB412FE0067CED2 /* ChatMessageModel.swift */,
+				F8CD76A62BB6F319001B141F /* SendMessageModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1019,6 +1043,14 @@
 			path = Report;
 			sourceTree = "<group>";
 		};
+		FE3AB1D242DF68A2F8B939AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				03A4860BEE577AFE9533473F /* Pods_GNUting.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1026,9 +1058,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F853450A2B5F710B001EADE6 /* Build configuration list for PBXNativeTarget "GNUting" */;
 			buildPhases = (
+				1F4E25C9C27428048EE4D798 /* [CP] Check Pods Manifest.lock */,
 				F85344F22B5F710A001EADE6 /* Sources */,
 				F85344F32B5F710A001EADE6 /* Frameworks */,
 				F85344F42B5F710A001EADE6 /* Resources */,
+				16CED0D7AC60AFF8C747962B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1036,11 +1070,12 @@
 			);
 			name = GNUting;
 			packageProductDependencies = (
-				F853450E2B5F7152001EADE6 /* SnapKit */,
-				F8D10F3F2BA0720400B795FD /* Alamofire */,
-				F85C432D2BAAAAA900121442 /* FirebaseAnalytics */,
-				F85C432F2BAAAAA900121442 /* FirebaseMessaging */,
-				F85C43312BAAAAA900121442 /* FirebaseStorageCombine-Community */,
+				F8D627362BB6AD3300725BE4 /* SnapKit */,
+				F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */,
+				F8D6273B2BB6AD3E00725BE4 /* Alamofire */,
+				F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */,
+				F8D627402BB6ADAC00725BE4 /* FirebaseAnalytics */,
+				F8D627422BB6ADAC00725BE4 /* FirebaseMessaging */,
 			);
 			productName = GNUting;
 			productReference = F85344F62B5F710A001EADE6 /* GNUting.app */;
@@ -1071,9 +1106,9 @@
 			);
 			mainGroup = F85344ED2B5F710A001EADE6;
 			packageReferences = (
-				F853450D2B5F7152001EADE6 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire" */,
-				F85C432C2BAAAAA900121442 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F85344F72B5F710A001EADE6 /* Products */;
 			projectDirPath = "";
@@ -1106,12 +1141,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		16CED0D7AC60AFF8C747962B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GNUting/Pods-GNUting-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GNUting/Pods-GNUting-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GNUting/Pods-GNUting-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1F4E25C9C27428048EE4D798 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GNUting-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F85344F22B5F710A001EADE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F882DBAF2BA42A29009201D2 /* MemBerAddTableViewCell.swift in Sources */,
+				F8CD76A72BB6F319001B141F /* SendMessageModel.swift in Sources */,
 				F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */,
 				F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */,
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
@@ -1125,6 +1203,7 @@
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
+				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
 				F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */,
 				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
@@ -1356,6 +1435,7 @@
 		};
 		F853450B2B5F710B001EADE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F272B29E19B4176D6274BFBD /* Pods-GNUting.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1391,6 +1471,7 @@
 		};
 		F853450C2B5F710B001EADE6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0E8E0639216DE4D6A431C6A /* Pods-GNUting.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1448,23 +1529,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F853450D2B5F7152001EADE6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.7.1;
 			};
 		};
-		F85C432C2BAAAAA900121442 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.23.0;
-			};
-		};
-		F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1472,33 +1545,46 @@
 				minimumVersion = 5.9.0;
 			};
 		};
+		F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.23.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F853450E2B5F7152001EADE6 /* SnapKit */ = {
+		F8D627362BB6AD3300725BE4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F853450D2B5F7152001EADE6 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		F85C432D2BAAAAA900121442 /* FirebaseAnalytics */ = {
+		F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F85C432C2BAAAAA900121442 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		F8D6273B2BB6AD3E00725BE4 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		F8D627402BB6ADAC00725BE4 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
 		};
-		F85C432F2BAAAAA900121442 /* FirebaseMessaging */ = {
+		F8D627422BB6ADAC00725BE4 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F85C432C2BAAAAA900121442 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		F85C43312BAAAAA900121442 /* FirebaseStorageCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F85C432C2BAAAAA900121442 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseStorageCombine-Community";
-		};
-		F8D10F3F2BA0720400B795FD /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
