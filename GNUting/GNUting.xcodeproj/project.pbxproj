@@ -130,6 +130,9 @@
 		F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */; };
 		F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */; };
 		F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */; };
+		F8E993E52BB552C8002A8A5F /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993E42BB552C8002A8A5F /* WebSocketManager.swift */; };
+		F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */; };
+		F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */; };
 		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -255,6 +258,9 @@
 		F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCheckButton.swift; sourceTree = "<group>"; };
 		F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateJoinMemberVC.swift; sourceTree = "<group>"; };
 		F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDetailView.swift; sourceTree = "<group>"; };
+		F8E993E42BB552C8002A8A5F /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
+		F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewSendMessageCell.swift; sourceTree = "<group>"; };
+		F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewReceiveMessageCell.swift; sourceTree = "<group>"; };
 		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,13 +280,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D380DD48A5A360D317A07C24 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +393,7 @@
 		F841A7B72BA72DFE00A9F9D4 /* APIMananager */ = {
 			isa = PBXGroup;
 			children = (
+				F8E993E32BB552B3002A8A5F /* WebSocket */,
 				F8A179DA2BAC6F15005AAC18 /* APIInterceptorManager */,
 				F841A7BB2BA739C000A9F9D4 /* APIDeleteManager */,
 				F88EE4842B9EE4E20058BC00 /* APIPostManager */,
@@ -468,7 +468,6 @@
 			children = (
 				F85344F82B5F710A001EADE6 /* GNUting */,
 				F85344F72B5F710A001EADE6 /* Products */,
-				D380DD48A5A360D317A07C24 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -798,9 +797,8 @@
 		F8BE89DD2B8076CA008E6767 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				F8BE89E22B8077A9008E6767 /* ChatRoomListVC.swift */,
-				F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */,
-				F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */,
+				F8E993EA2BB5A4C3002A8A5F /* Viewcomponent */,
+				F8E993E92BB5A4B6002A8A5F /* VC */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -984,6 +982,33 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		F8E993E32BB552B3002A8A5F /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				F8E993E42BB552C8002A8A5F /* WebSocketManager.swift */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		F8E993E92BB5A4B6002A8A5F /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */,
+				F8BE89E22B8077A9008E6767 /* ChatRoomListVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		F8E993EA2BB5A4C3002A8A5F /* Viewcomponent */ = {
+			isa = PBXGroup;
+			children = (
+				F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */,
+				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
+				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
+			);
+			path = Viewcomponent;
+			sourceTree = "<group>";
+		};
 		F8F3E51D2B8835E300827BB0 /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -1047,7 +1072,7 @@
 			mainGroup = F85344ED2B5F710A001EADE6;
 			packageReferences = (
 				F853450D2B5F7152001EADE6 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire.git" */,
+				F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F85C432C2BAAAAA900121442 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F85344F72B5F710A001EADE6 /* Products */;
@@ -1104,6 +1129,7 @@
 				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
 				F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */,
+				F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */,
 				F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */,
 				F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
@@ -1145,6 +1171,7 @@
 				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
 				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
+				F8E993E52BB552C8002A8A5F /* WebSocketManager.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
 				F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */,
@@ -1178,6 +1205,7 @@
 				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
 				F8B6ECA12BA4781F0058C6E8 /* MyPostModel.swift in Sources */,
 				F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */,
+				F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */,
 				F882DBB52BA432B5009201D2 /* CommonModel.swift in Sources */,
 				F841A7CC2BA73E0E00A9F9D4 /* RequestChatModel.swift in Sources */,
 				F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */,
@@ -1246,7 +1274,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1307,7 +1335,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1436,7 +1464,7 @@
 				minimumVersion = 10.23.0;
 			};
 		};
-		F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1469,7 +1497,7 @@
 		};
 		F8D10F3F2BA0720400B795FD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = F8D10F3E2BA0720400B795FD /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
