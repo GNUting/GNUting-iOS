@@ -17,5 +17,7 @@ struct ChatRoomModel: Codable {
 struct ChatRoomModelResult: Codable {
     let id: Int
     let title, leaderUserDepartment, applyLeaderDepartment: String
+    let chatRoomUserProfileImages : [String?]
+    let hasNewMessage: Bool
 }
 

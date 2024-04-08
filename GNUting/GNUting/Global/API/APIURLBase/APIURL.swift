@@ -29,6 +29,8 @@ enum EndPoint{
     case setNewPassword
     case deleteUser
     case chatRoom
+    case notification
+    case notificationCheck
     var url : URL {
         switch self{
         case .login:
@@ -75,6 +77,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "deleteUser")
         case .chatRoom:
             return .makeForEndpoint(endPoint: "chatRoom")
+        case .notification:
+            return .makeForEndpoint(endPoint: "notification")
+        case .notificationCheck:
+            return .makeForEndpoint(endPoint: "notification/check")
         }
     }
 }

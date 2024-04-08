@@ -77,13 +77,15 @@ extension ChatVC: UITableViewDelegate {
 extension ChatVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatRoomData?.result.count ?? 0
+        guard let count = chatRoomData?.result.count else { return 0}
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
+        
         if let result = chatRoomData?.result[indexPath.row] {
-            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, newChatMessage: "메세지없음")
+            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         }
         return cell
     }
@@ -95,6 +97,7 @@ extension ChatVC : UITableViewDataSource {
 extension ChatVC {
     private func getChatRoomData() {
         APIGetManager.shared.getChatRoomData { getChatRoomData, response in
+            
             self.chatRoomData = getChatRoomData
             
         }

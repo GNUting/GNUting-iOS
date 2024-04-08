@@ -318,5 +318,24 @@ class APIPostManager {
                 }
             }
     }
+    func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
+        let uslString = "http://localhost:8080/api/v1/chatRoom/\(chatRoomID)/leave"
+        guard let url = URL(string: uslString) else { return }
+        AF.request(url,method: .post,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 postLeavetChatRoom statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postLeavetChatRoom statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
 }
 

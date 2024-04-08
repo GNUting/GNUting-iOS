@@ -19,7 +19,7 @@ final class APIInterceptorManager: RequestInterceptor {
             completion(.success(urlRequest))
             return
         }
-        
+
         var urlRequest = urlRequest
         urlRequest.headers.add(.authorization(bearerToken: accessToken))
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
