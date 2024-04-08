@@ -26,12 +26,10 @@ class SearchAddMemberVC: UIViewController{
     
     var memberAddButtonDelegate: MemberAddButtonDelegate?
     
-    private lazy var dismissButton : UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "DissmissImg"), for: .normal)
-        button.tintColor = UIColor(named: "IconColor")
-        button.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
-        return button
+    private lazy var naviBorderView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "BorderImage")
+        return imageView
     }()
     private lazy var memberAddButton : UIButton = {
         var config = UIButton.Configuration.plain()
@@ -105,8 +103,10 @@ extension SearchAddMemberVC{
         }
     }
     private func setNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: memberAddButton)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: memberAddButton)
+        setNavigationBarPresentType(title: "")
+        self.navigationItem.titleView = naviBorderView
         navigationItem.searchController = searchController
     }
 }

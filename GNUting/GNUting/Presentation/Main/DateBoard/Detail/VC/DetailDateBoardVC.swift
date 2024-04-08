@@ -148,11 +148,12 @@ extension DetailDateBoardVC{
 extension DetailDateBoardVC : OtherPostDelegate {
     func didTapReportButton() { // 신고하기
         let vc = ReportVC()
+        let navigationVC = UINavigationController.init(rootViewController: vc)
+        navigationVC.modalPresentationStyle = .fullScreen
+        self.navigationItem.rightBarButtonItem?.isSelected = false
         vc.boardID = boardID
         detailDateBoardSetView.isHidden = true
-        
-        self.navigationItem.rightBarButtonItem?.isSelected = false
-        self.navigationController?.pushViewController(vc, animated: true)
+        present(navigationVC, animated: true)
     }
 }
 extension DetailDateBoardVC: MyPostDelegate {

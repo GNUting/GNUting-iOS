@@ -8,6 +8,7 @@
 import UIKit
 
 class ReportVC: UIViewController {
+    var userNickname: String = ""
     let textViewPlaceHolder = "기타 사유를 입력해주세요."
     var boardID: Int = 0
     var tag : Int = 0
@@ -103,7 +104,7 @@ extension ReportVC{
         view.backgroundColor = .white
     }
     private func setNavigationBar(){
-        setNavigationBar(title: "신고하기")
+        setNavigationBarPresentType(title: "신고하기")
     }
     
 }
