@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 class HomeVC: UIViewController{
     let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
-    
+    var imageURL : String?
+    var userNickname: String?
     var homeBoardData : [BoardResult] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -142,6 +143,7 @@ extension HomeVC{
         }
     }
     private func setNavigationBar(){
+        imageButton.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
         let userImageButton = UIBarButtonItem(customView: imageButton)
         userImageButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.rightBarButtonItems = [userImageButton]
@@ -195,13 +197,18 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
 extension HomeVC{
     @objc private func tapNotiButton(){
         let vc = NotificationVC()
-        
         let navigationVC = UINavigationController.init(rootViewController: vc)
         navigationVC.modalPresentationStyle = .fullScreen
+        
         present(navigationVC, animated: true)
     }
     @objc private func tapUserImageButton(){
-        
+        let vc = UserDetailVC()
+        vc.imaegURL = self.imageURL
+        vc.userNickName = self.userNickname
+        let navigationVC = UINavigationController.init(rootViewController: vc)
+        navigationVC.modalPresentationStyle = .fullScreen
+        present(navigationVC, animated: true)
     }
 }
 // MARK: - Get Data
@@ -216,12 +223,14 @@ extension HomeVC {
     private func getUserData(){
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
-            let imageUrl = userData?.result?.profileImage
+            self.imageURL = userData?.result?.profileImage
+            self.userNickname = userData?.result?.name ?? "유저이름"
             setExplainLabel(text: userData?.result?.name ?? "이름")
-            setImageFromStringURL(stringURL:imageUrl ) { image in
+            
+            setImageFromStringURL(stringURL:self.imageURL ) { image in
                 DispatchQueue.main.async {
                     self.imageButton.setImage(image, for: .normal)
-                    if imageUrl != nil {
+                    if self.imageURL != nil {
                         self.imageButton.layer.cornerRadius = self.imageButton.layer.frame.size.width / 2
                         self.imageButton.layer.masksToBounds = true
                     }

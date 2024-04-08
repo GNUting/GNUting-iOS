@@ -23,22 +23,16 @@ class NotificationVC: UIViewController {
         
         return tableView
     }()
-    private lazy var dismissButton : UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "DissmissImg"), for: .normal)
-        button.tintColor = UIColor(named: "IconColor")
-        button.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
-        return button
-    }()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
         setAddSubViews()
         setAutoLayout()
-        setNavigationBar()
-        getNotificationData()
         
+        getNotificationData()
+        setNavigationBarPresentType(title: "알림")
     }
     
     
@@ -54,11 +48,7 @@ extension NotificationVC{
             make.bottom.equalToSuperview()
         }
     }
-    private func setNavigationBar(){
-        
-        setNavigationBar(title: "알림")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
-    }
+  
 }
 
 extension NotificationVC: UITableViewDataSource{

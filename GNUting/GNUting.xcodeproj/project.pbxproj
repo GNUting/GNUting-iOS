@@ -120,6 +120,8 @@
 		F8C7DE552BC41F8200923EF5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C7DE542BC41F8200923EF5 /* GoogleService-Info.plist */; };
 		F8C7DE582BC42DB300923EF5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F8C7DE572BC42DB300923EF5 /* FirebaseAnalytics */; };
 		F8C7DE5A2BC42DB300923EF5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F8C7DE592BC42DB300923EF5 /* FirebaseMessaging */; };
+		F8C7DE5F2BC44B3000923EF5 /* UserDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE5E2BC44B3000923EF5 /* UserDetailVC.swift */; };
+		F8C7DE612BC44F6600923EF5 /* DismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE602BC44F6600923EF5 /* DismissButton.swift */; };
 		F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */; };
 		F8CD76A72BB6F319001B141F /* SendMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD76A62BB6F319001B141F /* SendMessageModel.swift */; };
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
@@ -261,6 +263,8 @@
 		F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCheckModel.swift; sourceTree = "<group>"; };
 		F8C7DE542BC41F8200923EF5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F8C7DE5E2BC44B3000923EF5 /* UserDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailVC.swift; sourceTree = "<group>"; };
+		F8C7DE602BC44F6600923EF5 /* DismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissButton.swift; sourceTree = "<group>"; };
 		F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMessageModel.swift; sourceTree = "<group>"; };
 		F8CD76A62BB6F319001B141F /* SendMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageModel.swift; sourceTree = "<group>"; };
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
@@ -554,6 +558,7 @@
 				F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */,
 				F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */,
 				F8D96F6D2B99A8D5009409A3 /* BackButton.swift */,
+				F8C7DE602BC44F6600923EF5 /* DismissButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -848,6 +853,14 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		F8C7DE5B2BC44AFB00923EF5 /* UserDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F8C7DE5E2BC44B3000923EF5 /* UserDetailVC.swift */,
+			);
+			path = UserDetail;
+			sourceTree = "<group>";
+		};
 		F8CDE34D2B849AA400E5598D /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -903,6 +916,7 @@
 		F8E3CD4B2B8CE82800712CBF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F8C7DE5B2BC44AFB00923EF5 /* UserDetail */,
 				F853452E2B5F88A8001EADE6 /* Start */,
 				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F8A15E982B60F0C4001DE5E4 /* FindPassword */,
@@ -1204,6 +1218,7 @@
 				F8CD76A72BB6F319001B141F /* SendMessageModel.swift in Sources */,
 				F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */,
 				F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */,
+				F8C7DE5F2BC44B3000923EF5 /* UserDetailVC.swift in Sources */,
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
@@ -1241,6 +1256,7 @@
 				F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */,
 				F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */,
 				F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */,
+				F8C7DE612BC44F6600923EF5 /* DismissButton.swift in Sources */,
 				F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */,
 				F882DBB92BA43D57009201D2 /* PostReportModel.swift in Sources */,
 				F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */,

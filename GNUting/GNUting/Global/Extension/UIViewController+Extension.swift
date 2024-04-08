@@ -24,6 +24,13 @@ extension UIViewController{
         self.navigationItem.title = title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
+    func setNavigationBarPresentType(title: String) {
+        let dismissButton = DismissButton()
+        dismissButton.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dismissButton)
+        self.navigationItem.title = title
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+    }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
         if let url = URL(string: stringURL ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
