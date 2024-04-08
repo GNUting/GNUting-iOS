@@ -70,25 +70,33 @@ class HomeVC: UIViewController{
         return tableview
     }()
     private lazy var imageButton = UIButton()
-    
+
+    private lazy var bellImage : UIImageView = {
+        let imageView = UIImageView()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapNotiButton))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        
-        setNavigationBar()
         addSubViews()
         setAutoLayout()
         setCollectionView()
         setTableview()
-        postFCMToken()
-      
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationBar()
+        getNotificationCheckData()
         getUserData()
         getBoardData()
+        postFCMToken()
     }
 }
 extension HomeVC{
@@ -134,12 +142,9 @@ extension HomeVC{
         }
     }
     private func setNavigationBar(){
-        let notiButton = UIBarButtonItem(image: UIImage(named: "BellImg"), style: .plain, target: self, action: #selector(tapNotiButton))
-        notiButton.tintColor = UIColor(named: "IconColor")
-        
         let userImageButton = UIBarButtonItem(customView: imageButton)
         userImageButton.tintColor = UIColor(named: "IconColor")
-        self.navigationItem.rightBarButtonItems = [userImageButton,notiButton]
+        self.navigationItem.rightBarButtonItems = [userImageButton]
     }
     
     private func setExplainLabel(text: String) {
@@ -189,7 +194,11 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
 }
 extension HomeVC{
     @objc private func tapNotiButton(){
+        let vc = NotificationVC()
         
+        let navigationVC = UINavigationController.init(rootViewController: vc)
+        navigationVC.modalPresentationStyle = .fullScreen
+        present(navigationVC, animated: true)
     }
     @objc private func tapUserImageButton(){
         
@@ -220,20 +229,31 @@ extension HomeVC {
             }
         }
     }
+    private func getNotificationCheckData(){
+        APIGetManager.shared.getNotificationCheck { notificationCheckModel in
+            guard let notificationCheckData = notificationCheckModel?.result else { return }
+            
+            if notificationCheckData {
+                self.bellImage.image = UIImage(named: "NewBellImg")
+                let bellImageButton = UIBarButtonItem(customView: self.bellImage)
+                
+                self.navigationItem.rightBarButtonItems?.append(bellImageButton)
+            } else {
+                self.bellImage.image = UIImage(named: "BellImg")
+                let bellImageButton = UIBarButtonItem(customView: self.bellImage)
+                self.navigationItem.rightBarButtonItems?.append(bellImageButton)
+            }
+        }
+    }
 }
 // MARK: - Post FCMToken
 extension HomeVC {
     private func postFCMToken(){
         guard let fcmToken = KeyChainManager.shared.read(key: "fcmToken") else { return }
         APIPostManager.shared.postFCMToken(fcmToken: fcmToken) { response in
-            if !(response?.isSuccess ?? false){
-                guard let code = response?.code else { return }
-                if response?.code != "FIREBASE4000" {
-                    self.errorHandling(response: response)
-                }
-                
+            if response?.code != "FIREBASE4000" {
+                self.errorHandling(response: response)
             }
-            
         }
     }
 }

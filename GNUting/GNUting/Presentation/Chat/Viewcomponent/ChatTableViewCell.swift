@@ -18,8 +18,8 @@ class ChatTableViewCell: UITableViewCell {
         return view
     }()
     private lazy var userImageView : UIImageView = {
-       let imageView = UIImageView()
-        imageView.image = UIImage(named: "SampleImg1")
+        let imageView = UIImageView()
+        
         imageView.layer.cornerRadius = imageView.layer.frame.size.width / 2
         return imageView
     }()
@@ -44,36 +44,29 @@ class ChatTableViewCell: UITableViewCell {
     private lazy var chatTitleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 16)
-        label.text = "4:4 과팅 하실분 알려주세요"
+        
         return label
     }()
     
     private lazy var majorLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
-        label.text = "컴퓨터 과학과"
-        label.textColor = UIColor(hexCode: "767676")
-        return label
-    }()
-    private lazy var newChatLabel : UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
-        label.text = "저희 주당에서 7시에 볼까요?"
-        label.textColor = UIColor(hexCode: "767676")
         
+        label.textColor = UIColor(hexCode: "767676")
         return label
     }()
     
+    
     private lazy var newChatImage : UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "NewChatImage")
+        
         return imageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        newChatLabel.sizeToFit()
         setAddSubViews()
         setAutoLayout()
         
@@ -92,12 +85,15 @@ class ChatTableViewCell: UITableViewCell {
 }
 extension ChatTableViewCell{
     private func setAddSubViews() {
-        contentView.addSubview(upperView)
-        upperView.addSubViews([firstStackView,userImageView,secondStackView])
+        contentView.addSubViews([upperView,newChatImage])
+        upperView.addSubViews([firstStackView,userImageView])
         firstStackView.addStackSubViews([chatTitleLabel,majorLabel])
-        secondStackView.addStackSubViews([newChatLabel,newChatImage])
     }
     private func setAutoLayout(){
+        newChatImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().offset(25)
+        }
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview().offset(Spacing.left)
@@ -107,35 +103,40 @@ extension ChatTableViewCell{
         firstStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.left.equalToSuperview().offset(12)
+            make.bottom.equalToSuperview().offset(-12)
         }
         userImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-12)
             make.left.equalTo(firstStackView.snp.right).offset(5)
+            make.bottom.equalToSuperview().offset(-12)
+            make.height.width.equalTo(45)
         }
         
         firstStackView.setContentHuggingPriority(.init(250), for: .horizontal)
         userImageView.setContentHuggingPriority(.init(251), for: .horizontal)
         userImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         
-        secondStackView.snp.makeConstraints { make in
-            make.top.equalTo(firstStackView.snp.bottom).offset(24)
-            make.left.equalToSuperview().offset(12)
-            make.right.lessThanOrEqualToSuperview().offset(-12)
-            make.bottom.equalToSuperview().offset(-12)
-        }
-
-        newChatImage.setContentHuggingPriority(.init(251), for: .horizontal)
-        newChatImage.setContentCompressionResistancePriority(.required, for: .horizontal)
-        
-        
     }
     
 }
 extension ChatTableViewCell {
-    func setChatTableViewCell(title: String, leaderUserDepartment: String, applyLeaderDepartment: String,newChatMessage: String) {
+    func setChatTableViewCell(title: String, leaderUserDepartment: String, applyLeaderDepartment: String,chatRoomUserProfileImages: [String?],hasNewMessage: Bool) {
         chatTitleLabel.text = title
         majorLabel.text = "\(leaderUserDepartment) | \(applyLeaderDepartment)"
-        newChatLabel.text = newChatMessage
+        if hasNewMessage {
+            newChatImage.isHidden = false
+        } else {
+            newChatImage.isHidden = true
+        }
+        if !chatRoomUserProfileImages.isEmpty{
+            self.setImageFromStringURL(stringURL: chatRoomUserProfileImages[0]) { image in
+                DispatchQueue.main.async {
+                    self.userImageView.image = image
+                    self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
+                    self.userImageView.layer.masksToBounds = true
+                }
+            }
+        }
     }
 }

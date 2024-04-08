@@ -80,7 +80,6 @@
 		F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */; };
 		F88D97A22BA9C3D7009BAEEF /* SearchMajorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */; };
 		F88D97A42BA9C55A009BAEEF /* MajorSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */; };
-		F88D97A62BA9EAC8009BAEEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88D97A52BA9EAC8009BAEEF /* GoogleService-Info.plist */; };
 		F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EE47E2B9ED94E0058BC00 /* SignUpModel.swift */; };
 		F88EE4822B9EE3420058BC00 /* APIURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EE4812B9EE3420058BC00 /* APIURL.swift */; };
 		F88EE4862B9EE4F80058BC00 /* APIPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EE4852B9EE4F80058BC00 /* APIPostManager.swift */; };
@@ -114,6 +113,13 @@
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
 		F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */; };
 		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
+		F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */; };
+		F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */; };
+		F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */; };
+		F8C7DE532BC4155700923EF5 /* NotificationCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */; };
+		F8C7DE552BC41F8200923EF5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C7DE542BC41F8200923EF5 /* GoogleService-Info.plist */; };
+		F8C7DE582BC42DB300923EF5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F8C7DE572BC42DB300923EF5 /* FirebaseAnalytics */; };
+		F8C7DE5A2BC42DB300923EF5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F8C7DE592BC42DB300923EF5 /* FirebaseMessaging */; };
 		F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */; };
 		F8CD76A72BB6F319001B141F /* SendMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD76A62BB6F319001B141F /* SendMessageModel.swift */; };
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
@@ -123,8 +129,6 @@
 		F8D627392BB6AD3300725BE4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */; };
 		F8D6273C2BB6AD3E00725BE4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F8D6273B2BB6AD3E00725BE4 /* Alamofire */; };
 		F8D6273E2BB6AD3E00725BE4 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */; };
-		F8D627412BB6ADAC00725BE4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627402BB6ADAC00725BE4 /* FirebaseAnalytics */; };
-		F8D627432BB6ADAC00725BE4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627422BB6ADAC00725BE4 /* FirebaseMessaging */; };
 		F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D96F6D2B99A8D5009409A3 /* BackButton.swift */; };
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
 		F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */; };
@@ -219,7 +223,6 @@
 		F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorInputView.swift; sourceTree = "<group>"; };
 		F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMajorModel.swift; sourceTree = "<group>"; };
 		F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorSearchTableViewCell.swift; sourceTree = "<group>"; };
-		F88D97A52BA9EAC8009BAEEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F88EE47E2B9ED94E0058BC00 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		F88EE4812B9EE3420058BC00 /* APIURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIURL.swift; path = GNUting/Global/API/APIURLBase/APIURL.swift; sourceTree = SOURCE_ROOT; };
 		F88EE4852B9EE4F80058BC00 /* APIPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostManager.swift; sourceTree = "<group>"; };
@@ -253,6 +256,11 @@
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
+		F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCheckModel.swift; sourceTree = "<group>"; };
+		F8C7DE542BC41F8200923EF5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMessageModel.swift; sourceTree = "<group>"; };
 		F8CD76A62BB6F319001B141F /* SendMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageModel.swift; sourceTree = "<group>"; };
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
@@ -279,9 +287,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8D6273C2BB6AD3E00725BE4 /* Alamofire in Frameworks */,
-				F8D627432BB6ADAC00725BE4 /* FirebaseMessaging in Frameworks */,
-				F8D627412BB6ADAC00725BE4 /* FirebaseAnalytics in Frameworks */,
 				F8D6273E2BB6AD3E00725BE4 /* AlamofireDynamic in Frameworks */,
+				F8C7DE5A2BC42DB300923EF5 /* FirebaseMessaging in Frameworks */,
+				F8C7DE582BC42DB300923EF5 /* FirebaseAnalytics in Frameworks */,
 				F8D627372BB6AD3300725BE4 /* SnapKit in Frameworks */,
 				F8D627392BB6AD3300725BE4 /* SnapKit-Dynamic in Frameworks */,
 				9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */,
@@ -509,7 +517,7 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F88D97A52BA9EAC8009BAEEF /* GoogleService-Info.plist */,
+				F8C7DE542BC41F8200923EF5 /* GoogleService-Info.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -621,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
+				F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -733,6 +742,8 @@
 				F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */,
 				F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */,
 				F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */,
+				F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */,
+				F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -832,6 +843,7 @@
 				F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */,
 				F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */,
 				F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */,
+				F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1074,8 +1086,8 @@
 				F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */,
 				F8D6273B2BB6AD3E00725BE4 /* Alamofire */,
 				F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */,
-				F8D627402BB6ADAC00725BE4 /* FirebaseAnalytics */,
-				F8D627422BB6ADAC00725BE4 /* FirebaseMessaging */,
+				F8C7DE572BC42DB300923EF5 /* FirebaseAnalytics */,
+				F8C7DE592BC42DB300923EF5 /* FirebaseMessaging */,
 			);
 			productName = GNUting;
 			productReference = F85344F62B5F710A001EADE6 /* GNUting.app */;
@@ -1108,7 +1120,7 @@
 			packageReferences = (
 				F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F8C7DE562BC42DB300923EF5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F85344F72B5F710A001EADE6 /* Products */;
 			projectDirPath = "";
@@ -1128,7 +1140,7 @@
 				F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */,
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
-				F88D97A62BA9EAC8009BAEEF /* GoogleService-Info.plist in Resources */,
+				F8C7DE552BC41F8200923EF5 /* GoogleService-Info.plist in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
@@ -1201,11 +1213,14 @@
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
+				F8C7DE532BC4155700923EF5 /* NotificationCheckModel.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
 				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
+				F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */,
 				F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */,
 				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,
+				F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
 				F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */,
 				F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */,
@@ -1221,6 +1236,7 @@
 				F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatRoomListVC.swift in Sources */,
 				F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */,
+				F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */,
 				F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */,
@@ -1529,6 +1545,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F8C7DE562BC42DB300923EF5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.23.1;
+			};
+		};
 		F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1545,17 +1569,19 @@
 				minimumVersion = 5.9.0;
 			};
 		};
-		F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.23.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F8C7DE572BC42DB300923EF5 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C7DE562BC42DB300923EF5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F8C7DE592BC42DB300923EF5 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C7DE562BC42DB300923EF5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		F8D627362BB6AD3300725BE4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -1575,16 +1601,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = AlamofireDynamic;
-		};
-		F8D627402BB6ADAC00725BE4 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		F8D627422BB6ADAC00725BE4 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D6273F2BB6ADAC00725BE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

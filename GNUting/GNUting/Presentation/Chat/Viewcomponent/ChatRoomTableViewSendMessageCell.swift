@@ -20,7 +20,7 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
     
     private lazy var userImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "SampleImg1")
+//        imageView.image = UIImage(named: "SampleImg1")
         return imageView
     }()
     private lazy var middleStackView: UIStackView = {
@@ -59,7 +59,6 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        print("1")
         setAddSubViews()
         setAutoLayout()
     }
@@ -95,5 +94,24 @@ extension ChatRoomTableViewSendMessageCell{
         sendDateLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
         }
+    }
+}
+extension ChatRoomTableViewSendMessageCell {
+    func setCell(nickName: String, UserImage: String, message:String,sendDate: String){
+        nickNameLabel.text = nickName
+        messageLabel.text = message
+        
+        let date = sendDate.split(separator: "T")[0]
+        let time = sendDate.split(separator: "T")[1].split(separator: ":")
+        sendDateLabel.text = "\(date) \(time[0]):\(time[1])"
+        setImageFromStringURL(stringURL: UserImage) { image in
+            DispatchQueue.main.async {
+                self.userImageView.image = image
+                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
+                self.userImageView.layer.masksToBounds = true
+            }
+            
+        }
+        
     }
 }

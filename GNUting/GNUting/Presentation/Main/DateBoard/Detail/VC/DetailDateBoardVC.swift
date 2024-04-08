@@ -203,7 +203,7 @@ extension DetailDateBoardVC {
             let user = result.user
             let chatEnabled = result.status
             if chatEnabled == "CLOSE" {
-                self.requetChatButton.isHidden = true
+                self.requetChatButton.backgroundColor = UIColor(hexCode: "979C9E")
                 self.chatPeopleViewButton.snp.makeConstraints { make in
                     make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
                 }
