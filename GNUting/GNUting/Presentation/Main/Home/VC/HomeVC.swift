@@ -197,18 +197,14 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
 extension HomeVC{
     @objc private func tapNotiButton(){
         let vc = NotificationVC()
-        let navigationVC = UINavigationController.init(rootViewController: vc)
-        navigationVC.modalPresentationStyle = .fullScreen
-        
-        present(navigationVC, animated: true)
+        presentFullScreenVC(viewController: vc)
     }
     @objc private func tapUserImageButton(){
         let vc = UserDetailVC()
         vc.imaegURL = self.imageURL
         vc.userNickName = self.userNickname
-        let navigationVC = UINavigationController.init(rootViewController: vc)
-        navigationVC.modalPresentationStyle = .fullScreen
-        present(navigationVC, animated: true)
+        
+        presentFullScreenVC(viewController: vc)
     }
 }
 // MARK: - Get Data

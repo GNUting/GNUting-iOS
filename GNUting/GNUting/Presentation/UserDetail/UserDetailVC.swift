@@ -20,16 +20,19 @@ class UserDetailVC: UIViewController {
         button.tintColor = UIColor(named: "IconColor")
         button.setImage(UIImage(named: "ReportImage"), for: .normal)
         button.addTarget(self, action: #selector(tapReportButton), for: .touchUpInside)
+        
         return button
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+        getUserData()
         setAddSubViews()
         setAutoLayout()
         setUserImageView()
         setNavigationBar()
+        
     }
 }
 extension UserDetailVC{
@@ -57,7 +60,19 @@ extension UserDetailVC{
     @objc private func tapReportButton() {
         let vc = ReportVC()
         vc.userNickname = self.userNickName ?? "유저이름"
-        self.navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.presentFullScreenVC(viewController: vc)
     }
 }
 
+extension UserDetailVC {
+
+    func getUserData(){
+        APIGetManager.shared.getUserData { userData,response  in
+            self.errorHandling(response: response)
+            if self.userNickName == userData?.result?.nickname {
+                self.reportButton.isHidden = true
+            }
+        }
+    }
+}

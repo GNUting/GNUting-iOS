@@ -288,13 +288,13 @@ class APIPostManager {
             }
     }
     
-    // MARK: - 신고하기 ✅
-    func postReportBoard(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
-        let url = EndPoint.report.url
+    // MARK: - 글 신고하기 ✅
+    func reportBoardPost(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
+        let url = EndPoint.reportPost.url
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let requestBody = PostReportModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
+        let requestBody = ReportPostModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
         }catch {
@@ -313,6 +313,36 @@ class APIPostManager {
                     completion(json)
                 case .failure:
                     print("🔴 postReportBoard statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    // MARK: - 유저신고하기 ✅
+    func reportUser(nickName: String,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
+        let url = EndPoint.reportUser.url
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let requestBody = ReportUserModel(nickName: nickName, reportCategory: reportCategory, reportReason: reportReason)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+              
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 reportUser statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 reportUser statusCode: \(statusCode)")
                     completion(json)
                     break
                 }
