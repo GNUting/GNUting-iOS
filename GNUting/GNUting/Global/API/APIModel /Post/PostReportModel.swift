@@ -9,8 +9,14 @@ import Foundation
 
 //MARK: - 신고하기
 
-struct PostReportModel: Codable {
+struct ReportPostModel: Codable {
     let boardId: Int
+    let reportCategory: String
+    let reportReason: String
+}
+
+struct ReportUserModel: Codable {
+    let nickName: String
     let reportCategory: String
     let reportReason: String
 }

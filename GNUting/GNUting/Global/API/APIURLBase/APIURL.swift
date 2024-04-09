@@ -17,7 +17,8 @@ enum EndPoint{
     case searchGetBoardData
     case searchGetUserData
     case writeText
-    case report
+    case reportPost
+    case reportUser
     case mypost
     case requestStatus
     case receivedState
@@ -51,8 +52,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "board/user/search")
         case .writeText:
             return .makeForEndpoint(endPoint: "board/save")
-        case .report:
+        case .reportPost:
             return .makeForEndpoint(endPoint: "boardReport")
+        case .reportUser:
+            return .makeForEndpoint(endPoint: "userReport")
         case .mypost:
             return .makeForEndpoint(endPoint: "board/myboard")
         case .requestStatus:

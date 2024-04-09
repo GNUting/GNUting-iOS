@@ -134,11 +134,22 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             if let applyUserData = dedatilData?.applyUser{
                 cell.setDateMember(model: applyUserData[indexPath.row])
+                cell.userImageTappedClosure = {
+                    let vc = UserDetailVC()
+                    vc.userNickName = applyUserData[indexPath.row].nickname
+                    vc.imaegURL = applyUserData[indexPath.row].profileImage
+                    self.presentFullScreenVC(viewController: vc)
+                }
             }
-            
         }else {
             if let participantUser = dedatilData?.participantUser{
                 cell.setDateMember(model: participantUser[indexPath.row])
+                cell.userImageTappedClosure = {
+                    let vc = UserDetailVC()
+                    vc.userNickName = participantUser[indexPath.row].nickname
+                    vc.imaegURL = participantUser[indexPath.row].profileImage
+                    self.presentFullScreenVC(viewController: vc)
+                }
             }
         }
         return cell

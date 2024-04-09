@@ -14,6 +14,8 @@ protocol MemberAddButtonDelegate: AnyObject{
 }
 
 class SearchAddMemberVC: UIViewController{
+  
+    
     var searchUser : UserInfosModel?
     var addMemberInfos: [UserInfosModel] = [] {
         didSet {

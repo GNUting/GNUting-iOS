@@ -82,4 +82,9 @@ extension UIViewController{
             self.present(alertController, animated: true)
         }
     }
+    func presentFullScreenVC(viewController: UIViewController) {
+        let navigationVC = UINavigationController.init(rootViewController: viewController)
+        navigationVC.modalPresentationStyle = .fullScreen
+        self.present(navigationVC, animated: true)
+    }
 }
