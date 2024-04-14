@@ -16,6 +16,10 @@ struct ChatRoomMessageModel: Codable {
 // MARK: - Result
 struct ChatRoomMessageModelResult: Codable {
     let id, chatRoomId: Int
-    let messageType, email, profileImage, nickname: String
-    let message, createdDate: String
+    let messageType : String
+    let email: String?
+    let nickname: String?
+    let profileImage: String?
+    let message: String
+    let createdDate: String
 }

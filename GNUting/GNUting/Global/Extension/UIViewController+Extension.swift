@@ -87,4 +87,10 @@ extension UIViewController{
         navigationVC.modalPresentationStyle = .fullScreen
         self.present(navigationVC, animated: true)
     }
+    func hideKeyboardWhenTappedAround(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
