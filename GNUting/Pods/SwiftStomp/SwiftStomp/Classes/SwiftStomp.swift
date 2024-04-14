@@ -430,7 +430,7 @@ fileprivate extension SwiftStomp{
 
         switch frame.name {
         case .message:
-            stompLog(type: .info, message: "Stomp: Message received: \(String(describing: frame.body))")
+            stompLog(type: .info, message: "Stomp: Message received: success")
             
             let messageId = frame.getCommonHeader(.messageId) ?? ""
             let destination = frame.getCommonHeader(.destination) ?? ""

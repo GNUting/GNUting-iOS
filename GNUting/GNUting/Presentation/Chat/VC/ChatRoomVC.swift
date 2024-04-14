@@ -12,8 +12,8 @@ class ChatRoomVC: UIViewController {
     
     var chatMessageList: [ChatRoomMessageModelResult] = []{
         didSet{
-            chatRoomTableView.reloadData()
-            chatRoomTableViewMoveToBottom()
+            self.chatRoomTableView.reloadData()
+            self.chatRoomTableViewMoveToBottom()
         }
     }
     
@@ -47,6 +47,7 @@ class ChatRoomVC: UIViewController {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.dataSource = self
+        tableView.register(ChatRoomEnterTableViewCell.self, forCellReuseIdentifier: ChatRoomEnterTableViewCell.identi)
         tableView.register(ChatRoomTableViewSendMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewSendMessageCell.identi)
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
         tableView.bounces = false
@@ -161,19 +162,23 @@ extension ChatRoomVC {
 }
 extension ChatRoomVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         return chatMessageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellData = chatMessageList[indexPath.row]
-        if chatMessageList[indexPath.row].email == userEmail{
+        if cellData.email == userEmail{
             guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
-            sendCell.setCell(nickName: cellData.nickname, UserImage: cellData.profileImage, message: cellData.message, sendDate: cellData.createdDate)
+            sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
             return sendCell
+        } else if cellData.email == nil{
+            guard let enterCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomEnterTableViewCell.identi, for: indexPath) as? ChatRoomEnterTableViewCell else { return UITableViewCell() }
+            enterCell.setCell(message: cellData.message)
+            return enterCell
         } else {
             guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewReceiveMessageCell.identi, for: indexPath) as? ChatRoomTableViewReceiveMessageCell else { return UITableViewCell() }
-            receiveCell.setCell(nickName: cellData.nickname, UserImage: cellData.profileImage, message: cellData.message, sendDate: cellData.createdDate)
+            receiveCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
             return  receiveCell
         }
     }
@@ -246,7 +251,7 @@ extension ChatRoomVC: SwiftStompDelegate{
         } else if connectType == .toStomp{
             print("Connected to stomp")
             swiftStomp.subscribe(to: "/sub/chatRoom/\(chatRoomID)")
-     
+            
         }
     }
     
@@ -259,10 +264,34 @@ extension ChatRoomVC: SwiftStompDelegate{
     }
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
+        print("Received")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.getChatMessageList()
+        }
         
         if let message = message{
             
-            print("message : \(message)")
+//
+            var stringMessage = message as! String
+            stringMessage = stringMessage.replacingOccurrences(of: "\"", with: "")
+            stringMessage = stringMessage.replacingOccurrences(of: "{", with: "")
+            stringMessage = stringMessage.replacingOccurrences(of: "}", with: "")
+            
+            let messageArr = stringMessage.split(separator: ",")
+            var contentArr : [String] = []
+            for content in messageArr{
+                let splitContent = content.split(separator: ":").map{String($0)}
+                if splitContent[0] == "profileImage"{
+                    contentArr.append(splitContent[1]+splitContent[2])
+                } else if splitContent[0] == "createdDate"{
+                    contentArr.append(splitContent[1]+splitContent[2]+splitContent[3])
+                } else{
+                    contentArr.append(splitContent[1])
+                }
+            }
+            let messagStruct = ChatRoomMessageModelResult(id: Int(contentArr[0]) ?? 0, chatRoomId: Int(contentArr[1]) ?? self.chatRoomID, messageType: contentArr[2], email: contentArr[3], nickname: contentArr[4], profileImage: contentArr[5], message: contentArr[6], createdDate: contentArr[7])
+//            self.chatMessageList.append(messagStruct)
+            
         } else if let message = message as? Data{
             print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
         }

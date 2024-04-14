@@ -237,7 +237,7 @@ class APIPostManager {
     // MARK: - 채팅 신청 ✅
     func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(ResponseWithResult?) -> Void){
         
-        let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/apply/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -269,7 +269,7 @@ class APIPostManager {
     
     // MARK: - 채팅 신청 : 승인하기
     func chatConfirmed(id: Int, completion: @escaping(DefaultResponse) -> Void) {
-        let uslString = "http://localhost:8080/api/v1/board/applications/accept/\(id)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/applications/accept/\(id)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .post,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
@@ -349,7 +349,7 @@ class APIPostManager {
             }
     }
     func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
-        let uslString = "http://localhost:8080/api/v1/chatRoom/\(chatRoomID)/leave"
+        let uslString = "http://203.255.3.66:10001/api/v1/chatRoom/\(chatRoomID)/leave"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .post,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)

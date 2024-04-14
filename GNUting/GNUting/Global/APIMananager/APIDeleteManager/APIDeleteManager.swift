@@ -13,7 +13,7 @@ class APIDeleteManager {
     
     // MARK: - 채팅 신청 취소하기 ✅
     func deleteRequestChat(boardID: Int,completion: @escaping(DefaultResponse)->Void ) {
-        let uslString = "http://localhost:8080/api/v1/board/applications/cancel/\(boardID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/applications/cancel/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         
         var request = URLRequest(url: url)
@@ -40,7 +40,7 @@ class APIDeleteManager {
     // MARK: - 내글 삭제 ✅
     
     func deletePostText(boardID: Int,completion: @escaping(DefaultResponse)->Void) {
-        let uslString = "http://localhost:8080/api/v1/board/\(boardID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .delete,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
@@ -83,7 +83,7 @@ class APIDeleteManager {
         
     }
     func deleteNotification(notificationID: Int,completion: @escaping(DefaultResponse)->Void) {
-        let uslString = "http://localhost:8080/api/v1/notification/\(notificationID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/notification/\(notificationID)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .delete,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)

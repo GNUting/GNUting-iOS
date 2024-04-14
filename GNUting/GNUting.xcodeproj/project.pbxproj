@@ -21,6 +21,7 @@
 		F8235CF92B765E2200E49073 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF82B765E2200E49073 /* DateModel.swift */; };
 		F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */; };
 		F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153C2BC5185900334A6A /* UserImageButton.swift */; };
+		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
 		F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */; };
 		F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */; };
 		F841A7BD2BA739D300A9F9D4 /* APIDeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7BC2BA739D300A9F9D4 /* APIDeleteManager.swift */; };
@@ -165,6 +166,7 @@
 		F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpThirdProcessVC.swift; sourceTree = "<group>"; };
 		F830FE972BAA040900ADC7B5 /* GNUting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GNUting.entitlements; sourceTree = "<group>"; };
 		F841153C2BC5185900334A6A /* UserImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageButton.swift; sourceTree = "<group>"; };
+		F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomEnterTableViewCell.swift; sourceTree = "<group>"; };
 		F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostVC.swift; sourceTree = "<group>"; };
 		F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMypostModel.swift; sourceTree = "<group>"; };
 		F841A7BC2BA739D300A9F9D4 /* APIDeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDeleteManager.swift; sourceTree = "<group>"; };
@@ -1058,6 +1060,7 @@
 				F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */,
 				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
 				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
+				F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */,
 			);
 			path = Viewcomponent;
 			sourceTree = "<group>";
@@ -1235,6 +1238,7 @@
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
 				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
+				F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */,
 				F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */,
 				F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */,
 				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,

@@ -67,7 +67,7 @@ class LoginVC: UIViewController {
         setNavigationBar(title: "")
         addSubViews()
         setAutoLayout()
-
+        hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
