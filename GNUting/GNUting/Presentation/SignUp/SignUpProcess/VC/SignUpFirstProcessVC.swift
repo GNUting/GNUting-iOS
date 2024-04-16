@@ -54,6 +54,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.confirmButtonDelegate = self
         signUPInpuView.setConfrimButton()
         signUPInpuView.setInputCheckLabel(textAlignment: .right)
+        signUPInpuView.setKeyboardTypeNumberPad()
         return signUPInpuView
     }()
     private lazy var passWordInputView : SignUPInputView = {
@@ -118,12 +119,10 @@ extension SignUpFirstProcessVC{
         inputViewUpperStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
             make.left.right.equalToSuperview()
-            
             make.width.equalTo(scrollView.snp.width)
-            
         }
         nextButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom)
+            make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom).offset(20)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -164,6 +163,7 @@ extension SignUpFirstProcessVC: ConfirmButtonDelegate{
                 
                 emailSuccess = true
                 certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")
+                timer.invalidate()
                 nextButtonEnable()
             } else {
                 let alert = UIAlertController(title: "인증번호가 올바르지 않습니다.", message: nil, preferredStyle: .alert)
@@ -198,7 +198,7 @@ extension SignUpFirstProcessVC {
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 let elapsedTimeSeconds = Int(Date().timeIntervalSince(limitSecond))
-                let expireLimit = 10
+                let expireLimit = 180
                 
                 guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
                     timer.invalidate()
