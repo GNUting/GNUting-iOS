@@ -106,7 +106,7 @@ extension SearchAddMemberVC{
     }
     private func setNavigationBar() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: memberAddButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: memberAddButton)
 
         self.navigationItem.titleView = naviBorderView
         navigationItem.searchController = searchController
