@@ -14,7 +14,9 @@ protocol CheckEmailButtonDelegate {
 protocol ConfirmButtonDelegate {
     func action(sendTextFieldText: String)
 }
-
+protocol PasswordInputDelegate {
+    func passwordKeyboarReturn(text: String)
+}
 protocol PasswordCheckDelegate {
     func keyboarReturn(text: String)
 }
@@ -22,6 +24,7 @@ protocol PasswordCheckDelegate {
 class SignUPInputView : UIView{
     var checkEmailButtonDelegate: CheckEmailButtonDelegate?
     var confirmButtonDelegate: ConfirmButtonDelegate?
+    var passwordInputDelegate : PasswordInputDelegate?
     var passwordCheckDelegate : PasswordCheckDelegate?
     var textFieldType : SignUpInputViewType = .email
     
@@ -68,11 +71,11 @@ class SignUPInputView : UIView{
     }()
     private lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
-        label.text = "틀렸습니다."
         label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 14)
         label.isHidden = true
+        label.numberOfLines = 2
         return label
     }()
     override init(frame: CGRect) {
@@ -221,6 +224,8 @@ extension SignUPInputView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textFieldType == .passwordCheck {
             passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
+        } else if textFieldType == .password {
+            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
         }
         return textField.resignFirstResponder()
     }

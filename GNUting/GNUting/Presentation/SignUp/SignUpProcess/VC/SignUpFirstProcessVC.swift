@@ -63,6 +63,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
         signUPInpuView.setSecureTextEntry()
+        signUPInpuView.passwordInputDelegate = self
         return signUPInpuView
     }()
     private lazy var passWordCheckInputView : SignUPInputView = {
@@ -191,7 +192,16 @@ extension SignUpFirstProcessVC: PasswordCheckDelegate {
         }
     }
 }
-
+extension SignUpFirstProcessVC: PasswordInputDelegate {
+    func passwordKeyboarReturn(text: String) {
+        let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
+        let checkPassword = text.range(of: regex,options: .regularExpression) != nil
+        if !checkPassword {
+            passWordInputView.setCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.")
+        }
+    }
+  
+}
 
 extension SignUpFirstProcessVC {
     private func setEmailCheckTime(limitSecond : Date) {
