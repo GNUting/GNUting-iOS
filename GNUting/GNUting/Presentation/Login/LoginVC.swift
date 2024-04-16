@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
         let textField = PaddingTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        
+        textField.delegate = self
         return textField
     }()
     private lazy var passwordTextField : PaddingTextField = {
@@ -43,6 +43,7 @@ class LoginVC: UIViewController {
         textField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
         textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
         textField.isSecureTextEntry = true
+        textField.delegate = self
         return textField
     }()
     private lazy var findPasswordButton : UIButton = {
@@ -108,5 +109,10 @@ extension LoginVC {
             make.bottom.lessThanOrEqualTo(self.view.safeAreaLayoutGuide).offset(-100)
         }
         loginButton.setContentCompressionResistancePriority(.required, for: .vertical)
+    }
+}
+extension LoginVC: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
 }
