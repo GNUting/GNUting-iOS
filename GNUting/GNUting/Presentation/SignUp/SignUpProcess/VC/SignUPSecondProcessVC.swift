@@ -137,6 +137,7 @@ class SignUPSecondProcessVC: UIViewController{
         setNavigationBar(title: "2/3")
         addSubViews()
         setAutoLayout()
+        hideKeyboardWhenTappedAround()
     }
     
 }

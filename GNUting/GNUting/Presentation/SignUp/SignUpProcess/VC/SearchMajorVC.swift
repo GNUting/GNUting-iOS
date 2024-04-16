@@ -49,6 +49,7 @@ class SearchMajorVC: UIViewController {
         setAutoLayout()
         searchConfigure()
         setNavigation()
+        hideKeyboardWhenTappedAround()
     }
     
 }
