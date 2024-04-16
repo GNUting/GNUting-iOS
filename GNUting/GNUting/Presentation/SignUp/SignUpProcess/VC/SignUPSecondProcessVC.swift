@@ -27,6 +27,7 @@ class SignUPSecondProcessVC: UIViewController{
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "이름")
         signUPInpuView.setPlaceholder(placeholder: "이름을 입력해주세요.")
+        signUPInpuView.textFieldType = .name
         return signUPInpuView
     }()
     private lazy var phoneNumberInputView : SignUPInputView = {
@@ -92,11 +93,11 @@ class SignUPSecondProcessVC: UIViewController{
     private lazy var nickNameInputView : SignUPInputView = {
         let nickNameInputView = SignUPInputView()
         nickNameInputView.setInputTextTypeLabel(text: "닉네임")
-        nickNameInputView.setPlaceholder(placeholder: "닉네임을 입력해주세요.")
+        nickNameInputView.setPlaceholder(placeholder: "닉네임을 입력해주세요. (10자 제한)")
         nickNameInputView.setConfirmButton(text: "중복확인")
         nickNameInputView.confirmButtonDelegate = self
         nickNameInputView.setConfrimButton()
-        
+        nickNameInputView.textFieldType = .nickname
         return nickNameInputView
     }()
     private lazy var majorInputView : MajorInputView = {
@@ -112,13 +113,15 @@ class SignUPSecondProcessVC: UIViewController{
         studentIDInputView.setInputTextTypeLabel(text: "학번")
         studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
         studentIDInputView.setKeyboardTypeNumberPad()
+        studentIDInputView.textFieldType = .studentID
         return studentIDInputView
     }()
     
     private lazy var introduceOneLine : SignUPInputView = {
         let studentIDInputView = SignUPInputView()
         studentIDInputView.setInputTextTypeLabel(text: "한줄소개")
-        studentIDInputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.")
+        studentIDInputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
+        studentIDInputView.textFieldType = .introduce
         return studentIDInputView
     }()
     
@@ -195,6 +198,7 @@ extension SignUPSecondProcessVC: UIScrollViewDelegate {
 
 extension SignUPSecondProcessVC {
     @objc private func tapSelectDateView(){
+        view.endEditing(true)
         datePicker.isHidden = false
         buttonStackView.isHidden = false
         view.bringSubviewToFront(datePicker)
@@ -236,9 +240,11 @@ extension SignUPSecondProcessVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func tapMajorInputView() {
+        
         let vc = SearchMajorVC()
         vc.searchMajorSelectCellDelegate = self
-        let navigationVC = UINavigationController(rootViewController: vc)        
+        
+        let navigationVC = UINavigationController(rootViewController: vc)
         present(navigationVC, animated: true)
     }
 }

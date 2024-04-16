@@ -213,11 +213,11 @@ extension SignUPInputView {
 extension SignUPInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-       
+        
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-      
+        
         return true
     }
     
@@ -230,14 +230,29 @@ extension SignUPInputView: UITextFieldDelegate {
         return textField.resignFirstResponder()
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textFieldType == .phoneNumber {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        switch textFieldType {
+        case .phoneNumber:
             guard let text = textField.text else { return false }
             let newString = (text as NSString).replacingCharacters(in: range, with: string)
             textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
             return false
+        case .name:
+            guard textField.text?.count ?? 0 < 8 else { return false }
+        case .nickname:
+            guard textField.text?.count ?? 0 < 10 else { return false }
+        case .studentID:
+            guard textField.text?.count ?? 0 < 2 else { return false }
+        case .introduce:
+            guard textField.text?.count ?? 0 < 30 else { return false }
+        default:
+            break
         }
-        
-        
         return true
     }
     
