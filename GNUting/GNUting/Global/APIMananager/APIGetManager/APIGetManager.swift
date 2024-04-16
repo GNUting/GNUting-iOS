@@ -221,7 +221,7 @@ class APIGetManager: RequestInterceptor {
             .responseDecodable(of: SearchUserModel.self) { response in
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-     
+                
                 switch response.result {
                 case .success:
                     print("🟢 getSearchUser statusCode: \(statusCode)")
@@ -230,8 +230,89 @@ class APIGetManager: RequestInterceptor {
                     print("🔴 getSearchUser statusCode: \(statusCode)")
                     completion(response.value,json)
                     break
-                }        }
+                }
+            }
+    }
+    func getChatRoomData(completion: @escaping(ChatRoomModel?,DefaultResponse)->Void) {
+        let url = EndPoint.chatRoom.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ChatRoomModel.self) { response in
+                    guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                
+                    switch response.result {
+                    case .success:
+                        print("🟢 getChatRoomData statusCode: \(statusCode)")
+                        completion(response.value,json)
+                    case .failure:
+                        print("🔴 getChatRoomData statusCode: \(statusCode)")
+                        
+                        completion(response.value,json)
+                        break
+                    }
+            }
+    }
+    func getChatMessageData(chatRoomID: Int,completion: @escaping(ChatRoomMessageModel?,DefaultResponse)->Void) {
+        let urlString = "http://203.255.3.66:10001/api/v1/chatRoom/\(chatRoomID)/chats"
+        guard let url = URL(string: urlString) else { return }
+        
+        AF.request(url,method: .get,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of:ChatRoomMessageModel.self) { response in
+                
+                
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getChatMessageData statusCode: \(statusCode)")
+                    completion(response.value,json)
+                case .failure:
+                    print("🔴 getChatMessageData statusCode: \(statusCode)")
+                    
+                    completion(response.value,json)
+                    break
+                }
+            }
+        
     }
     
+    func getNotificationData(completion: @escaping(NotificationModel?)->Void) {
+        let url = EndPoint.notification.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .responseDecodable(of: NotificationModel.self) { response in
+                    guard let statusCode = response.response?.statusCode else { return }
+
+                    
+                    switch response.result {
+                    case .success:
+                        print("🟢 getNotificationData statusCode: \(statusCode)")
+                        completion(response.value)
+                    case .failure:
+                        print("🔴 getNotificationData statusCode: \(statusCode)")
+                        completion(response.value)
+                        break
+                    }
+            }
+    }
+    func getNotificationCheck(completion: @escaping(NotificationCheckModel?)->Void){
+        let url = EndPoint.notificationCheck.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .responseDecodable(of: NotificationCheckModel.self) { response in
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    
+                    switch response.result {
+                    case .success:
+                        print("🟢 getNotificationCheck statusCode: \(statusCode)")
+                        completion(response.value)
+                    case .failure:
+                        print("🔴 getNotificationCheck statusCode: \(statusCode)")
+                        completion(response.value)
+                        break
+                    }
+            }
+    }
 }
 

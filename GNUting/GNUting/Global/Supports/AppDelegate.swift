@@ -60,21 +60,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     
     /// 앱화면 보고있는중에 푸시올 때
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        print("🟢", #function)
-        return [.sound, .banner, .list]
+        print("🟢 userNotificationCenter", #function)
+        
+        return [.sound, .banner, .list,.badge]
     }
     
     /// FCMToken 업데이트시
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else { return }
         KeyChainManager.shared.create(key: "fcmToken", token: fcmToken)
-//        print("🟢", #function, "Token : \(fcmToken)")
+        
+        print("🟢", #function, "Token : \(fcmToken)")
     }
     
 
-//    /// error발생시
-//    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-//        print("🟢", error)
-//    }
+    /// error발생시
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("🟢", error)
+    }
+   
+
 }
 

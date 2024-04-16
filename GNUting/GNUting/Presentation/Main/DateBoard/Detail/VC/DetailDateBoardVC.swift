@@ -9,7 +9,8 @@ import UIKit
 
 class DetailDateBoardVC: UIViewController{
     var boardID: Int = 0
-    var UserInfos: [UserInfosModel] = []
+    var userInfos: [UserInfosModel] = []
+    var postUserInfos : User?
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 20)
@@ -18,6 +19,7 @@ class DetailDateBoardVC: UIViewController{
     }()
     private lazy var userInfoView : UserInfoView = {
         let view = UserInfoView()
+        view.userImageButton.userImageButtonDelegate = self
         return view
     }()
     private lazy var contentTextView : UITextView  = {
@@ -132,7 +134,7 @@ extension DetailDateBoardVC{
     @objc private func didTapchatPeopleViewButton(){
         let vc = DateJoinMemberVC()
         vc.modalPresentationStyle = .fullScreen
-        vc.userInfos = self.UserInfos
+        vc.userInfos = self.userInfos
         self.present(vc, animated: true)
     }
     
@@ -148,11 +150,11 @@ extension DetailDateBoardVC{
 extension DetailDateBoardVC : OtherPostDelegate {
     func didTapReportButton() { // 신고하기
         let vc = ReportVC()
-        vc.boardID = boardID
-        detailDateBoardSetView.isHidden = true
         
         self.navigationItem.rightBarButtonItem?.isSelected = false
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.boardID = boardID
+        detailDateBoardSetView.isHidden = true
+        presentFullScreenVC(viewController: vc)
     }
 }
 extension DetailDateBoardVC: MyPostDelegate {
@@ -162,7 +164,7 @@ extension DetailDateBoardVC: MyPostDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
         vc.setPostTestView(title: titleLabel.text ?? "", content: contentTextView.text)
         vc.boardID = boardID
-        vc.memberDataList = UserInfos
+        vc.memberDataList = userInfos
         
     }
     
@@ -203,16 +205,28 @@ extension DetailDateBoardVC {
             let user = result.user
             let chatEnabled = result.status
             if chatEnabled == "CLOSE" {
-                self.requetChatButton.isHidden = true
+                self.requetChatButton.backgroundColor = UIColor(hexCode: "979C9E")
                 self.chatPeopleViewButton.snp.makeConstraints { make in
                     make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
                 }
             }
+            self.postUserInfos = user
             self.titleLabel.text =  result.title
             self.contentTextView.text = result.detail
-            self.UserInfos = result.inUser
+            self.userInfos = result.inUser
             self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId, writeDataeLabel: result.time)
             self.setChatPeopleViewButton(memeberCount: result.inUser.count)
         }
     }
+}
+extension DetailDateBoardVC: UserImageButtonDelegate {
+    func tappedAction() {
+        let vc = UserDetailVC()
+        vc.userNickName = postUserInfos?.nickname
+        vc.imaegURL = postUserInfos?.image
+        
+        presentFullScreenVC(viewController: vc)
+    }
+    
+    
 }

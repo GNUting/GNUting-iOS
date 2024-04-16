@@ -10,6 +10,10 @@ import UIKit
 
 class PaddingTextField : UITextField {
     var textPadding = UIEdgeInsets(top: 20, left: 25, bottom: 20, right: 25)
+    convenience init(textPadding: UIEdgeInsets) {
+        self.init()
+        self.textPadding = textPadding
+    }
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.textRect(forBounds: bounds)
         return rect.inset(by: textPadding)

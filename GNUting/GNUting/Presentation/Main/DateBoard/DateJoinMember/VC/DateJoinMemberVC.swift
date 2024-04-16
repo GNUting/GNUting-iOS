@@ -77,7 +77,13 @@ extension DateJoinMemberVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell() }
         cell.setUserInfoViews(model: userInfos[indexPath.row])
-        
+        cell.userImageTappedClosure = {
+            let vc = UserDetailVC()
+            vc.imaegURL = self.userInfos[indexPath.row].profileImage
+            vc.userNickName = self.userInfos[indexPath.row].nickname
+            
+            self.presentFullScreenVC(viewController: vc)
+        }
         return cell
     }
 

@@ -6,10 +6,13 @@
 //
 
 import UIKit
-
+protocol PushButtonDelegate: AnyObject {
+    func buttonAction()
+}
 class TermsTableViewCell: UITableViewCell {
     static let identi = "TermsTableViewCellid"
     var tapCheckButtonClosure : ((Bool)->())?
+    var pushButtonDelegate : PushButtonDelegate?
     var selectedState : Bool = false
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
@@ -34,6 +37,7 @@ class TermsTableViewCell: UITableViewCell {
     private lazy var pushButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "pushImg"), for: .normal)
+        button.addTarget(self, action: #selector(tapPushButton), for: .touchUpInside)
         return button
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -96,5 +100,12 @@ extension TermsTableViewCell {
         termsTextLabel.text = text
     }
     
-    
+    func pushButtonHidden() {
+        pushButton.isHidden = true
+    }
+}
+extension TermsTableViewCell {
+    @objc private func tapPushButton(){
+        pushButtonDelegate?.buttonAction()
+    }
 }

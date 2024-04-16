@@ -67,9 +67,8 @@ extension SearchMajorVC {
         navigationItem.searchController = searchController
     }
     private func setNavigation(){
-        let dismissButton = UIBarButtonItem(image: UIImage(named: "DissmissImg"), style: .plain, target: self, action: #selector(tapDissmisButton))
-        dismissButton.tintColor = UIColor(named: "IconColor")
-        self.navigationItem.leftBarButtonItem = dismissButton
+        setNavigationBarPresentType(title: "")
+        
         self.navigationItem.titleView = naviBorderView
     }
 }

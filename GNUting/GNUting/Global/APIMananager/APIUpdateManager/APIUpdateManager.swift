@@ -14,7 +14,7 @@ class APIUpdateManager {
     
     // MARK: - 과팅 신청 거절하기 ✅
     func rejectedApplication(boardID: Int, completion: @escaping(DefaultResponse) -> Void) {
-        let uslString = "http://localhost:8080/api/v1/board/applications/refuse/\(boardID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/applications/refuse/\(boardID)"
         
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .patch,interceptor: APIInterceptorManager())
@@ -70,7 +70,7 @@ class APIUpdateManager {
     
     // MARK: - 글 수정 ✅
     func updateWriteText(boardID: Int,title: String,detail:String,memeberInfos: [UserInfosModel],completion: @escaping(DefaultResponse)->Void) {
-        let uslString = "http://localhost:8080/api/v1/board/\(boardID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/\(boardID)"
         guard let url = URL(string: uslString) else { return }
   
         var request = URLRequest(url: url)

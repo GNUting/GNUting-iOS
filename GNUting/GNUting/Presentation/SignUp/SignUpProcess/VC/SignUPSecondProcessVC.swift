@@ -237,8 +237,7 @@ extension SignUPSecondProcessVC {
     @objc private func tapMajorInputView() {
         let vc = SearchMajorVC()
         vc.searchMajorSelectCellDelegate = self
-        let navigationVC = UINavigationController(rootViewController: vc)
-        
+        let navigationVC = UINavigationController(rootViewController: vc)        
         present(navigationVC, animated: true)
     }
 }

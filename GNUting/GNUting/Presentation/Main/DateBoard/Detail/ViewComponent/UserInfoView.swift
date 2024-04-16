@@ -8,7 +8,12 @@
 import UIKit
 import SnapKit
 // 한줄 소개 없는 버젼
+
+
 class UserInfoView: UIView {
+ 
+    
+
     private lazy var border1 : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "E9E9E9")
@@ -28,8 +33,8 @@ class UserInfoView: UIView {
         return stackView
     }()
     
-    private lazy var userImageButton = UIButton()
-
+    lazy var userImageButton = UserImageButton()
+    
     private lazy var middleStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -126,4 +131,6 @@ extension UserInfoView {
             }
         }
     }
+    
 }
+

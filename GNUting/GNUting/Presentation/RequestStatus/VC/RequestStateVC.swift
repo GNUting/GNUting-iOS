@@ -163,6 +163,7 @@ extension RequestStateVC {
                 default:
                     applyStatus = .waiting
                 }
+
                 self.dateStatusList.append(DateStateModel(major: applyUserDepartment, memeberCount: applyUserCount, applyStatus: applyStatus))
             }
             

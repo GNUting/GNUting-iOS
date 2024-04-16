@@ -40,6 +40,7 @@ class RequestStatusDetailVC: UIViewController {
         button.setText("수락하기",fointSize: 15)
         button.setHeight(height: 50)
         button.backgroundColor = UIColor(named: "SecondaryColor")
+        button.addTarget(self, action: #selector(tapAcceptButton), for: .touchUpInside)
         return button
     }()
     private lazy var groupCountLabel: UILabel = {
@@ -133,11 +134,22 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             if let applyUserData = dedatilData?.applyUser{
                 cell.setDateMember(model: applyUserData[indexPath.row])
+                cell.userImageTappedClosure = {
+                    let vc = UserDetailVC()
+                    vc.userNickName = applyUserData[indexPath.row].nickname
+                    vc.imaegURL = applyUserData[indexPath.row].profileImage
+                    self.presentFullScreenVC(viewController: vc)
+                }
             }
-            
         }else {
             if let participantUser = dedatilData?.participantUser{
                 cell.setDateMember(model: participantUser[indexPath.row])
+                cell.userImageTappedClosure = {
+                    let vc = UserDetailVC()
+                    vc.userNickName = participantUser[indexPath.row].nickname
+                    vc.imaegURL = participantUser[indexPath.row].profileImage
+                    self.presentFullScreenVC(viewController: vc)
+                }
             }
         }
         return cell
@@ -202,6 +214,15 @@ extension RequestStatusDetailVC {
                     self.errorHandling(response: response)
                 }
                 
+            }
+        }
+    }
+    @objc private func tapAcceptButton() {
+        APIPostManager.shared.chatConfirmed(id: dedatilData?.id ?? 0) { response in
+            if response.isSuccess {
+                self.successHandling(message: response.message)
+            } else {
+                self.errorHandling(response: response)
             }
         }
     }
