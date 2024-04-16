@@ -93,6 +93,7 @@ class SignUpFirstProcessVC: UIViewController{
         setNavigationBar(title: "1/3")
         addSubViews()
         setAutoLayout()
+        hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
