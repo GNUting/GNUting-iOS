@@ -7,6 +7,10 @@
 
 import Foundation
 enum SignUpInputViewType {
+    case name
+    case nickname
+    case studentID
+    case introduce
     case email
     case certified
     case password

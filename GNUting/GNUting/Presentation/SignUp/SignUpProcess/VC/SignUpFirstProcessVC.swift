@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 class SignUpFirstProcessVC: UIViewController{
-    
-    var limitTime : Int = 180 // 180 바꿔야함
+    var timer = Timer()
+    var startTime : Date?
     var emailSuccess : Bool = false
     var samePasswordSuccess : Bool = false
     private lazy var scrollView : UIScrollView = {
@@ -54,6 +54,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.confirmButtonDelegate = self
         signUPInpuView.setConfrimButton()
         signUPInpuView.setInputCheckLabel(textAlignment: .right)
+        signUPInpuView.setKeyboardTypeNumberPad()
         return signUPInpuView
     }()
     private lazy var passWordInputView : SignUPInputView = {
@@ -62,6 +63,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
         signUPInpuView.setSecureTextEntry()
+        signUPInpuView.passwordInputDelegate = self
         return signUPInpuView
     }()
     private lazy var passWordCheckInputView : SignUPInputView = {
@@ -82,12 +84,16 @@ class SignUpFirstProcessVC: UIViewController{
         
         return button
     }()
+    deinit {
+        timer.invalidate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setNavigationBar(title: "1/3")
         addSubViews()
         setAutoLayout()
+        hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -115,12 +121,10 @@ extension SignUpFirstProcessVC{
         inputViewUpperStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
             make.left.right.equalToSuperview()
-            
             make.width.equalTo(scrollView.snp.width)
-            
         }
         nextButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom)
+            make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom).offset(20)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -136,21 +140,11 @@ extension SignUpFirstProcessVC{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc func getSetTime() {
-        
-        if limitTime > 0 {
-            setEmailCheckTime(limitSecond: limitTime)
-            limitTime -= 1
-        } else if limitTime == 0 {
-            certifiedInputView.setCheckLabel(isHidden: true, text: nil)
-            emailInputView.setFoucInputTextFiled() // 이메일 다시하라고 포커스 주기
-            let alert = UIAlertController(title: "이메일 인증시간 만료", message: "이메일 인증을 다시 시도해주세요.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-            present(alert, animated: true)
-            
-            limitTime = 180 // 180 바꿔야함
-            
+        guard let startTime = startTime else {
+            setEmailCheckTime(limitSecond: Date())
+            return
         }
+        setEmailCheckTime(limitSecond: startTime)
     }
 }
 extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
@@ -163,14 +157,15 @@ extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
 }
 extension SignUpFirstProcessVC: ConfirmButtonDelegate{
     func action(sendTextFieldText: String) {
-    
+        
         APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response  in
             
             
             if response.isSuccess {
-                limitTime = -1
+                
                 emailSuccess = true
                 certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")
+                timer.invalidate()
                 nextButtonEnable()
             } else {
                 let alert = UIAlertController(title: "인증번호가 올바르지 않습니다.", message: nil, preferredStyle: .alert)
@@ -198,21 +193,43 @@ extension SignUpFirstProcessVC: PasswordCheckDelegate {
         }
     }
 }
-
+extension SignUpFirstProcessVC: PasswordInputDelegate {
+    func passwordKeyboarReturn(text: String) {
+        let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
+        let checkPassword = text.range(of: regex,options: .regularExpression) != nil
+        if !checkPassword {
+            passWordInputView.setCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.")
+        }
+    }
+  
+}
 
 extension SignUpFirstProcessVC {
-    private func setEmailCheckTime(limitSecond : Int) {
-        let min = (limitSecond % 3600) / 60
-        let second = (limitSecond % 3600) % 60
-        
-        if second < 10 {
-            certifiedInputView.setCheckLabel(isHidden: false, text: String(min) + ":" + "0" + String(second))
-            
-        } else {
-            certifiedInputView.setCheckLabel(isHidden: false, text: String(min) + ":" + String(second))
-        }
-        if limitTime != 0 {
-            perform(#selector(getSetTime), with: nil, afterDelay: 1.0)
+    private func setEmailCheckTime(limitSecond : Date) {
+        DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                let elapsedTimeSeconds = Int(Date().timeIntervalSince(limitSecond))
+                let expireLimit = 180
+                
+                guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
+                    timer.invalidate()
+                    self?.certifiedInputView.setCheckLabel(isHidden: false, text: "이메일 인증 시간 만료. 다시 시도해 주세요.")
+                    self?.emailInputView.setFoucInputTextFiled() // 이메일 다시하라고 포커스 주기
+                    return
+                }
+                
+                let remainSeconds = expireLimit - elapsedTimeSeconds
+                let min = (remainSeconds % 3600) / 60
+                let second = (remainSeconds % 3600) % 60
+                
+                if second < 10 {
+                    self?.certifiedInputView.setCheckLabel(isHidden: false, text: String(min) + ":" + "0" + String(second))
+                    
+                } else {
+                    self?.certifiedInputView.setCheckLabel(isHidden: false, text: String(min) + ":" + String(second))
+                }
+                
+            }
         }
     }
     private func nextButtonEnable() {
