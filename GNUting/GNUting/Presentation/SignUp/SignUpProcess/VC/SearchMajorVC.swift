@@ -68,8 +68,6 @@ extension SearchMajorVC {
         navigationItem.searchController = searchController
     }
     private func setNavigation(){
-        setNavigationBarPresentType(title: "")
-        
         self.navigationItem.titleView = naviBorderView
     }
 }
