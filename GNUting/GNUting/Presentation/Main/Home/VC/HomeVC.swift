@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 class HomeVC: UIViewController{
     let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
-    
+    var imageURL : String?
+    var userNickname: String?
     var homeBoardData : [BoardResult] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -70,25 +71,33 @@ class HomeVC: UIViewController{
         return tableview
     }()
     private lazy var imageButton = UIButton()
-    
+
+    private lazy var bellImage : UIImageView = {
+        let imageView = UIImageView()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapNotiButton))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        
-        setNavigationBar()
         addSubViews()
         setAutoLayout()
         setCollectionView()
         setTableview()
-        postFCMToken()
-      
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationBar()
+        getNotificationCheckData()
         getUserData()
         getBoardData()
+        postFCMToken()
     }
 }
 extension HomeVC{
@@ -134,12 +143,10 @@ extension HomeVC{
         }
     }
     private func setNavigationBar(){
-        let notiButton = UIBarButtonItem(image: UIImage(named: "BellImg"), style: .plain, target: self, action: #selector(tapNotiButton))
-        notiButton.tintColor = UIColor(named: "IconColor")
-        
+        imageButton.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
         let userImageButton = UIBarButtonItem(customView: imageButton)
         userImageButton.tintColor = UIColor(named: "IconColor")
-        self.navigationItem.rightBarButtonItems = [userImageButton,notiButton]
+        self.navigationItem.rightBarButtonItems = [userImageButton]
     }
     
     private func setExplainLabel(text: String) {
@@ -189,10 +196,15 @@ extension HomeVC : UITableViewDataSource,UITableViewDelegate{
 }
 extension HomeVC{
     @objc private func tapNotiButton(){
-        
+        let vc = NotificationVC()
+        presentFullScreenVC(viewController: vc)
     }
     @objc private func tapUserImageButton(){
+        let vc = UserDetailVC()
+        vc.imaegURL = self.imageURL
+        vc.userNickName = self.userNickname
         
+        presentFullScreenVC(viewController: vc)
     }
 }
 // MARK: - Get Data
@@ -207,16 +219,34 @@ extension HomeVC {
     private func getUserData(){
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
-            let imageUrl = userData?.result?.profileImage
+            self.imageURL = userData?.result?.profileImage
+            self.userNickname = userData?.result?.name ?? "유저이름"
             setExplainLabel(text: userData?.result?.name ?? "이름")
-            setImageFromStringURL(stringURL:imageUrl ) { image in
+            
+            setImageFromStringURL(stringURL:self.imageURL ) { image in
                 DispatchQueue.main.async {
                     self.imageButton.setImage(image, for: .normal)
-                    if imageUrl != nil {
+                    if self.imageURL != nil {
                         self.imageButton.layer.cornerRadius = self.imageButton.layer.frame.size.width / 2
                         self.imageButton.layer.masksToBounds = true
                     }
                 }
+            }
+        }
+    }
+    private func getNotificationCheckData(){
+        APIGetManager.shared.getNotificationCheck { notificationCheckModel in
+            guard let notificationCheckData = notificationCheckModel?.result else { return }
+            
+            if notificationCheckData {
+                self.bellImage.image = UIImage(named: "NewBellImg")
+                let bellImageButton = UIBarButtonItem(customView: self.bellImage)
+                
+                self.navigationItem.rightBarButtonItems?.append(bellImageButton)
+            } else {
+                self.bellImage.image = UIImage(named: "BellImg")
+                let bellImageButton = UIBarButtonItem(customView: self.bellImage)
+                self.navigationItem.rightBarButtonItems?.append(bellImageButton)
             }
         }
     }
@@ -226,12 +256,8 @@ extension HomeVC {
     private func postFCMToken(){
         guard let fcmToken = KeyChainManager.shared.read(key: "fcmToken") else { return }
         APIPostManager.shared.postFCMToken(fcmToken: fcmToken) { response in
-            if !(response?.isSuccess ?? false){
-                guard let code = response?.code else { return }
-                if response?.code != "FIREBASE4000" {
-                    self.errorHandling(response: response)
-                }
-                
+            if response?.code != "FIREBASE4000" {
+                self.errorHandling(response: response)
             }
         }
     }

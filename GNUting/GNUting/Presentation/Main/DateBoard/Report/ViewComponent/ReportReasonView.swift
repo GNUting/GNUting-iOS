@@ -8,7 +8,7 @@
 import UIKit
 
 class ReportReasonView: UIView {
-    var buttonTagClouser: ((Int)->())?
+    var buttonTagClosure: ((Int)->())?
     private let reportResonLabel : UILabel =  {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 12)
@@ -124,7 +124,7 @@ extension ReportReasonView {
         }
         sender.isSelected = true
         
-        buttonTagClouser?(sender.tag)
+        buttonTagClosure?(sender.tag)
     }
 }
 

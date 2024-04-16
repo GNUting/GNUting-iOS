@@ -17,7 +17,8 @@ enum EndPoint{
     case searchGetBoardData
     case searchGetUserData
     case writeText
-    case report
+    case reportPost
+    case reportUser
     case mypost
     case requestStatus
     case receivedState
@@ -28,6 +29,9 @@ enum EndPoint{
     case updateAccessToken
     case setNewPassword
     case deleteUser
+    case chatRoom
+    case notification
+    case notificationCheck
     var url : URL {
         switch self{
         case .login:
@@ -48,8 +52,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "board/user/search")
         case .writeText:
             return .makeForEndpoint(endPoint: "board/save")
-        case .report:
+        case .reportPost:
             return .makeForEndpoint(endPoint: "boardReport")
+        case .reportUser:
+            return .makeForEndpoint(endPoint: "userReport")
         case .mypost:
             return .makeForEndpoint(endPoint: "board/myboard")
         case .requestStatus:
@@ -72,12 +78,18 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "setNewPassword")
         case .deleteUser:
             return .makeForEndpoint(endPoint: "deleteUser")
+        case .chatRoom:
+            return .makeForEndpoint(endPoint: "chatRoom")
+        case .notification:
+            return .makeForEndpoint(endPoint: "notification")
+        case .notificationCheck:
+            return .makeForEndpoint(endPoint: "notification/check")
         }
     }
 }
 
 private extension URL{
-    static let baseURL = "http://localhost:8080/api/v1/"
+    static let baseURL = "http://203.255.3.66:10001/api/v1/"
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
@@ -87,5 +99,5 @@ private extension URL{
 }
 class BaseURL {
     static let shared = BaseURL()
-    let urlString = "http://localhost:8080/api/v1/"
+    let urlString = "http://203.255.3.66:10001/api/v1/"
 }

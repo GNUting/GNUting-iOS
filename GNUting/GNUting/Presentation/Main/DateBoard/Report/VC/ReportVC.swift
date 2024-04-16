@@ -8,6 +8,7 @@
 import UIKit
 
 class ReportVC: UIViewController {
+    var userNickname: String = ""
     let textViewPlaceHolder = "기타 사유를 입력해주세요."
     var boardID: Int = 0
     var tag : Int = 0
@@ -31,7 +32,7 @@ class ReportVC: UIViewController {
     }()
     private lazy var reportReasonView : ReportReasonView = {
         let view = ReportReasonView()
-        view.buttonTagClouser = { selectedTag in
+        view.buttonTagClosure = { selectedTag in
             self.tag = selectedTag
         }
         return view
@@ -70,7 +71,7 @@ class ReportVC: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(hexCode: "BEBDBD").cgColor
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(tapDissmis), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
         
         return button
     }()
@@ -95,7 +96,7 @@ class ReportVC: UIViewController {
         addSubViews()
         setAutoLayout()
         setNavigationBar()
-       
+        
     }
 }
 extension ReportVC{
@@ -103,7 +104,7 @@ extension ReportVC{
         view.backgroundColor = .white
     }
     private func setNavigationBar(){
-        setNavigationBar(title: "신고하기")
+        setNavigationBarPresentType(title: "신고하기")
     }
     
 }
@@ -172,24 +173,47 @@ extension ReportVC {
         default:
             reportCategory = ReportCategory.OTHER.category
         }
-    
-        APIPostManager.shared.postReportBoard(boardID: boardID, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { response in
-            if response.isSuccess {
-                let alertController = UIAlertController(title: "신고 완료", message: "신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
-                    self.popButtonTap()
-                }))
-                self.present(alertController, animated: true)
-            } else {
-                let alertController = UIAlertController(title: "오류 발생", message: response.message, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                self.present(alertController, animated: true)
+        if userNickname == "" {
+            
+            APIPostManager.shared.reportBoardPost(boardID: boardID, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { response in
+                if response.isSuccess {
+                    let alertController = UIAlertController(title: "글 신고 완료", message: "해당 글이 신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
+                        self.tapDissmisButton()
+                    }))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                    
+                } else {
+                    let alertController = UIAlertController(title: "오류 발생", message: response.message, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                }
+            }
+            
+        } else {
+            APIPostManager.shared.reportUser(nickName: self.userNickname, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { response in
+                if response.isSuccess {
+                    let alertController = UIAlertController(title: "유저 신고 완료", message: "해당 유저가신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
+                        self.tapDissmisButton()
+                    }))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                }else {
+                    let alertController = UIAlertController(title: "오류 발생", message: response.message, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true)
+                    }
+                }
             }
         }
     }
-    
-    @objc private func tapDissmis() {
-        tapDissmisButton()
-    }
+
 }
 

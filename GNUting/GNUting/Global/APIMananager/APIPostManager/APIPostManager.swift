@@ -237,7 +237,7 @@ class APIPostManager {
     // MARK: - 채팅 신청 ✅
     func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(ResponseWithResult?) -> Void){
         
-        let uslString = "http://localhost:8080/api/v1/board/apply/\(boardID)"
+        let uslString = "http://203.255.3.66:10001/api/v1/board/apply/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -248,13 +248,13 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
-  
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
                 print(response)
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
+                
                 switch response.result {
                 case .success:
                     print("🟢 postRequestChat statusCode: \(statusCode)")
@@ -267,13 +267,34 @@ class APIPostManager {
             }
     }
     
-    // MARK: - 신고하기 ✅
-    func postReportBoard(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
-        let url = EndPoint.report.url
+    // MARK: - 채팅 신청 : 승인하기
+    func chatConfirmed(id: Int, completion: @escaping(DefaultResponse) -> Void) {
+        let uslString = "http://203.255.3.66:10001/api/v1/board/applications/accept/\(id)"
+        guard let url = URL(string: uslString) else { return }
+        AF.request(url,method: .post,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 chatConfirmed statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 chatConfirmed statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
+    // MARK: - 글 신고하기 ✅
+    func reportBoardPost(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
+        let url = EndPoint.reportPost.url
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let requestBody = PostReportModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
+        let requestBody = ReportPostModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
         }catch {
@@ -292,6 +313,55 @@ class APIPostManager {
                     completion(json)
                 case .failure:
                     print("🔴 postReportBoard statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    // MARK: - 유저신고하기 ✅
+    func reportUser(nickName: String,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
+        let url = EndPoint.reportUser.url
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let requestBody = ReportUserModel(nickName: nickName, reportCategory: reportCategory, reportReason: reportReason)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        }catch {
+            print("Error encoding request data: \(error)")
+            return
+        }
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+              
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 reportUser statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 reportUser statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
+        let uslString = "http://203.255.3.66:10001/api/v1/chatRoom/\(chatRoomID)/leave"
+        guard let url = URL(string: uslString) else { return }
+        AF.request(url,method: .post,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 postLeavetChatRoom statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postLeavetChatRoom statusCode: \(statusCode)")
                     completion(json)
                     break
                 }

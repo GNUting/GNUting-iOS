@@ -7,7 +7,9 @@
 
 import UIKit
 
+
 class UserInfoDetailView: UIView { // 한줄소개 있음
+
     private lazy var upperView : UIView = {
         let stackView = UIView()
         stackView.layer.cornerRadius = 10
@@ -26,7 +28,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
         return stackView
     }()
     
-    private lazy var userImageButton = UIButton()
+    lazy var userImageButton = UserImageButton()
  
     private lazy var userNameLabel : UILabel = {
         let label = UILabel()

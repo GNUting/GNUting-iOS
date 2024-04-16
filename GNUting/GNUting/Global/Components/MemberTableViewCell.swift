@@ -7,14 +7,20 @@
 
 import UIKit
 
-class MemberTableViewCell: UITableViewCell { // 유저 이미지, 이름, 학번,나이 ,한줄소개
+class MemberTableViewCell: UITableViewCell {
+    var userImageTappedClosure: (()->())?
+    // 유저 이미지, 이름, 학번,나이 ,한줄소개
     static let identi = "MemberTableViewCellid"
-    private lazy var userInfoView = UserInfoDetailView()
+    private lazy var userInfoView : UserInfoDetailView = {
+        let view = UserInfoDetailView()
+        view.userImageButton.userImageButtonDelegate = self
+        return view
+    }()
     
-   
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-       configure()
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -27,7 +33,7 @@ class MemberTableViewCell: UITableViewCell { // 유저 이미지, 이름, 학번
         
         // Configure the view for the selected state
     }
-  
+    
 }
 extension MemberTableViewCell {
     private func configure(){
@@ -46,5 +52,11 @@ extension MemberTableViewCell {
     }
     func setDateMember(model: ApplicationStatusUser ){
         userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, age: model.age, introduce: model.userSelfIntroduction, image: model.profileImage)
+    }
+}
+
+extension MemberTableViewCell: UserImageButtonDelegate{
+    func tappedAction() {
+        userImageTappedClosure?()
     }
 }
