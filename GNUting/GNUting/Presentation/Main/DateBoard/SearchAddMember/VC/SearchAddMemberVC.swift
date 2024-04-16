@@ -106,8 +106,8 @@ extension SearchAddMemberVC{
     }
     private func setNavigationBar() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: memberAddButton)
-        setNavigationBarPresentType(title: "")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: memberAddButton)
+
         self.navigationItem.titleView = naviBorderView
         navigationItem.searchController = searchController
     }
@@ -179,7 +179,7 @@ extension SearchAddMemberVC: UITextFieldDelegate{
             searchUserInfoView.isHidden = false
             searchUser = searchUserData?.result
           
-            searchUserInfoView.setUserInfoDetailView(name: searchUser?.name, major: searchUser?.department, studentID: searchUser?.studentId, age: searchUser?.age, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
+            searchUserInfoView.setUserInfoDetailView(name: searchUser?.nickname, major: searchUser?.department, studentID: searchUser?.studentId, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
             searchController.searchBar.text = ""
         }
         return true

@@ -14,7 +14,9 @@ protocol CheckEmailButtonDelegate {
 protocol ConfirmButtonDelegate {
     func action(sendTextFieldText: String)
 }
-
+protocol PasswordInputDelegate {
+    func passwordKeyboarReturn(text: String)
+}
 protocol PasswordCheckDelegate {
     func keyboarReturn(text: String)
 }
@@ -22,6 +24,7 @@ protocol PasswordCheckDelegate {
 class SignUPInputView : UIView{
     var checkEmailButtonDelegate: CheckEmailButtonDelegate?
     var confirmButtonDelegate: ConfirmButtonDelegate?
+    var passwordInputDelegate : PasswordInputDelegate?
     var passwordCheckDelegate : PasswordCheckDelegate?
     var textFieldType : SignUpInputViewType = .email
     
@@ -68,11 +71,11 @@ class SignUPInputView : UIView{
     }()
     private lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
-        label.text = "틀렸습니다."
         label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 14)
         label.isHidden = true
+        label.numberOfLines = 2
         return label
     }()
     override init(frame: CGRect) {
@@ -210,29 +213,46 @@ extension SignUPInputView {
 extension SignUPInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-       
+        
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-      
+        
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textFieldType == .passwordCheck {
             passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
+        } else if textFieldType == .password {
+            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
         }
         return textField.resignFirstResponder()
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textFieldType == .phoneNumber {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        switch textFieldType {
+        case .phoneNumber:
             guard let text = textField.text else { return false }
             let newString = (text as NSString).replacingCharacters(in: range, with: string)
             textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
             return false
+        case .name:
+            guard textField.text?.count ?? 0 < 8 else { return false }
+        case .nickname:
+            guard textField.text?.count ?? 0 < 10 else { return false }
+        case .studentID:
+            guard textField.text?.count ?? 0 < 2 else { return false }
+        case .introduce:
+            guard textField.text?.count ?? 0 < 30 else { return false }
+        default:
+            break
         }
-        
-        
         return true
     }
     

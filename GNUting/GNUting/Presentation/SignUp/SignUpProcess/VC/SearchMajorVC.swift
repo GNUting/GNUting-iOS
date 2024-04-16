@@ -49,6 +49,7 @@ class SearchMajorVC: UIViewController {
         setAutoLayout()
         searchConfigure()
         setNavigation()
+        hideKeyboardWhenTappedAround()
     }
     
 }
@@ -67,8 +68,6 @@ extension SearchMajorVC {
         navigationItem.searchController = searchController
     }
     private func setNavigation(){
-        setNavigationBarPresentType(title: "")
-        
         self.navigationItem.titleView = naviBorderView
     }
 }
