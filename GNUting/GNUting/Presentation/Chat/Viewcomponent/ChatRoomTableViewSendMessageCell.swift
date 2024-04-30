@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatRoomTableViewSendMessageCell: UITableViewCell {
+class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     static let identi = "ChatRoomTableViewSendMessageCellid"
     private lazy var upperView : UIStackView = {
         let stackView = UIStackView()
@@ -35,14 +35,14 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
         label.textColor = .black
-        label.text = "닉네임1"
+        
         return label
     }()
     private lazy var messageLabel : BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textColor = UIColor(named: "6B6B6B")
-        label.text = "안녕하세요sdfsdfsdfsdfsdfsdfs\ndfsdfsdfsdfsdwerwerwerwer"
+        
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.layer.borderWidth = 1
@@ -75,7 +75,7 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
     }
     
 }
-extension ChatRoomTableViewSendMessageCell{
+extension ChatRoomTableViewReceiveMessageCell{
     private func setAddSubViews() {
         contentView.addSubview(upperView)
         
@@ -96,14 +96,14 @@ extension ChatRoomTableViewSendMessageCell{
         }
     }
 }
-extension ChatRoomTableViewSendMessageCell {
+extension ChatRoomTableViewReceiveMessageCell {
     func setCell(nickName: String, UserImage: String, message:String,sendDate: String){
         nickNameLabel.text = nickName
         messageLabel.text = message
         
-        let date = sendDate.split(separator: "T")[0]
+        
         let time = sendDate.split(separator: "T")[1].split(separator: ":")
-        sendDateLabel.text = "\(date) \(time[0]):\(time[1])"
+        sendDateLabel.text = "\(time[0]):\(time[1])"
         setImageFromStringURL(stringURL: UserImage) { image in
             DispatchQueue.main.async {
                 self.userImageView.image = image

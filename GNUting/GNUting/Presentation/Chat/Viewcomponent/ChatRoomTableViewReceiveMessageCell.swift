@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
+class ChatRoomTableViewSendMessageCell: UITableViewCell {
     static let identi = "ChatRoomTableViewReceiveMessageCellid"
     private lazy var upperView : UIStackView = {
         let stackView = UIStackView()
@@ -18,11 +18,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var userImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "SampleImg1")
-        return imageView
-    }()
+
     private lazy var middleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -79,11 +75,11 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     }
     
 }
-extension ChatRoomTableViewReceiveMessageCell{
+extension ChatRoomTableViewSendMessageCell{
     private func setAddSubViews() {
         contentView.addSubview(upperView)
         
-        upperView.addStackSubViews([sendDateLabel,middleStackView,userImageView])
+        upperView.addStackSubViews([sendDateLabel,middleStackView])
         middleStackView.addStackSubViews([nickNameLabel,messageLabel])
     }
     private func setAutoLayout(){
@@ -92,30 +88,20 @@ extension ChatRoomTableViewReceiveMessageCell{
             make.left.right.equalToSuperview().inset(5)
             make.bottom.equalToSuperview().offset(-10)
         }
-        userImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(45)
-        }
+
         sendDateLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
         }
     }
 }
-extension ChatRoomTableViewReceiveMessageCell {
+extension ChatRoomTableViewSendMessageCell {
     func setCell(nickName: String, UserImage: String, message:String,sendDate: String){
         nickNameLabel.text = nickName
         messageLabel.text = message
         
-        let date = sendDate.split(separator: "T")[0]
         let time = sendDate.split(separator: "T")[1].split(separator: ":")
-        sendDateLabel.text = "\(date) \(time[0]):\(time[1])"
-        setImageFromStringURL(stringURL: UserImage) { image in
-            DispatchQueue.main.async {
-                self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
-                self.userImageView.layer.masksToBounds = true
-            }
-            
-        }
+        sendDateLabel.text = "\(time[0]):\(time[1])"
+
         
     }
 }

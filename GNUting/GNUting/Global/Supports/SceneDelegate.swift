@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return TabBarController()
             } else {
                 
-                return UINavigationController.init(rootViewController: AppStartVC())
+                return UINavigationController.init(rootViewController: LoginVC())
             }
         }()
         

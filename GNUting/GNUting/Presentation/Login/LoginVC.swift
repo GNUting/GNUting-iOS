@@ -6,53 +6,41 @@
 //
 
 import UIKit
-// MARK: - 오토레이아웃 설정 다시 필요
+
 class LoginVC: UIViewController {
-    private lazy var upperStackView : UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 40
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        return stackView
+    private lazy var appLogiImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "AppLogoImage")
+        return imageView
     }()
-    private lazy var LoginLabel : UILabel = {
+    private lazy var explainLabel : UILabel = {
         let label = UILabel()
-        label.text = "로그인"
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 30)
+        label.text = "경상국립대학교 재학생 전용 과팅앱\n학교 속 새로운 인연을 만나보세요 :)"
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
+
     private lazy var textFieldStackView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 12
+        stackView.spacing = 19
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
     }()
-    private lazy var emailTextField : PaddingTextField = {
-        let textField = PaddingTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "email",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
-        textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        textField.delegate = self
-        return textField
+    private lazy var emailTextFieldView : LoginTextFieldView = {
+        let loginTextFieldView = LoginTextFieldView()
+        loginTextFieldView.setTextFieldPlaceHolder(text: "학교 이메일")
+        
+        return loginTextFieldView
     }()
-    private lazy var passwordTextField : PaddingTextField = {
-        let textField = PaddingTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(named: "Gray")!])
-        textField.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.1)
-        textField.isSecureTextEntry = true
-        textField.delegate = self
-        return textField
-    }()
-    private lazy var findPasswordButton : UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("비밀번호를 잊어버리셨나요?", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 15)!]))
-        config.baseForegroundColor = UIColor(named: "LightGray")
-        let button = UIButton(configuration: config)
-        button.addTarget(self, action: #selector(tapFindPasswordButton), for: .touchUpInside)
-        return button
+    private lazy var passwordTextField : LoginTextFieldView = {
+        let loginTextFieldView = LoginTextFieldView()
+        loginTextFieldView.setTextFieldPlaceHolder(text: "비밀번호")
+        loginTextFieldView.setPasswordTypeTextField()
+        return loginTextFieldView
     }()
     private lazy var loginButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
@@ -62,23 +50,50 @@ class LoginVC: UIViewController {
         
         return button
     }()
+    private lazy var bottomStackView: UIStackView = {
+        let bottomStackView = UIStackView()
+        bottomStackView.axis = .horizontal
+        bottomStackView.spacing = 20
+        bottomStackView.distribution = .equalSpacing
+        bottomStackView.alignment = .fill
+        return bottomStackView
+    }()
+    private lazy var findPasswordButton : UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = AttributedString("비밀번호 찾기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.baseForegroundColor = UIColor(named: "Gray")
+        let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(tapFindPasswordButton), for: .touchUpInside)
+        return button
+    }()
+    private lazy var borderLabel : UILabel = {
+        let label = UILabel()
+        label.text = "|"
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.textColor = UIColor(named: "Gray")
+        return label
+    }()
+    private lazy var signUpButton : UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = AttributedString("회원가입", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.baseForegroundColor = UIColor(named: "Gray")
+        let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(tapSingupButton), for: .touchUpInside)
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setNavigationBar(title: "")
         addSubViews()
         setAutoLayout()
         hideKeyboardWhenTappedAround()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = false
-    }
+
 }
 extension LoginVC{
     @objc func tapLoginButton(){
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
+        let email = emailTextFieldView.getTextFieldString()
+        let password = passwordTextField.getTextFieldString()
         APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
             if response?.isSuccess == false {
                 self.errorHandling(response: response)
@@ -91,28 +106,36 @@ extension LoginVC{
     }
     
     @objc func tapFindPasswordButton(){
-        let findPasswordVC = FindPasswordVC()
-        self.navigationController?.pushViewController(findPasswordVC, animated: true)
+        pushViewContoller(viewController: FindPasswordVC())
+    }
+    @objc func tapSingupButton(){
+        pushViewContoller(viewController: TermsVC())
     }
 }
 extension LoginVC {
     private func addSubViews(){
-        self.view.addSubViews([upperStackView])
-        upperStackView.addStackSubViews([LoginLabel,textFieldStackView,findPasswordButton,loginButton])
-        textFieldStackView.addStackSubViews([emailTextField,passwordTextField])
+        view.addSubViews([appLogiImageView,explainLabel,textFieldStackView,bottomStackView])
+        textFieldStackView.addStackSubViews([emailTextFieldView,passwordTextField,loginButton])
+        bottomStackView.addStackSubViews([findPasswordButton,borderLabel,signUpButton])
     }
     private func setAutoLayout(){
-        upperStackView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(100)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.lessThanOrEqualTo(self.view.safeAreaLayoutGuide).offset(-100)
+        appLogiImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(95)
+            make.centerX.equalToSuperview()
         }
-        loginButton.setContentCompressionResistancePriority(.required, for: .vertical)
+        explainLabel.snp.makeConstraints { make in
+            make.top.equalTo(appLogiImageView.snp.bottom).offset(13)
+            make.centerX.equalToSuperview()
+        }
+        textFieldStackView.snp.makeConstraints { make in
+            make.top.equalTo(explainLabel.snp.bottom).offset(70)
+            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+        }
+        bottomStackView.snp.makeConstraints { make in
+            make.top.equalTo(textFieldStackView.snp.bottom).offset(25)
+            make.centerX.equalToSuperview()
+            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).offset(-50)
+        }
     }
 }
-extension LoginVC: UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
-    }
-}
+

@@ -90,14 +90,10 @@ class SignUPSecondProcessVC: UIViewController{
         button.addTarget(self, action: #selector(tapSelectButton), for: .touchUpInside)
         return button
     }()
-    private lazy var nickNameInputView : SignUPInputView = {
-        let nickNameInputView = SignUPInputView()
-        nickNameInputView.setInputTextTypeLabel(text: "닉네임")
-        nickNameInputView.setPlaceholder(placeholder: "닉네임을 입력해주세요. (10자 제한)")
-        nickNameInputView.setConfirmButton(text: "중복확인")
-        nickNameInputView.confirmButtonDelegate = self
-        nickNameInputView.setConfrimButton()
-        nickNameInputView.textFieldType = .nickname
+    private lazy var nickNameInputView : SignUpInputViewNicknameType = {
+        let nickNameInputView = SignUpInputViewNicknameType()
+        nickNameInputView.nicknameCheckButtonDelegate = self
+    
         return nickNameInputView
     }()
     private lazy var majorInputView : MajorInputView = {
@@ -137,7 +133,7 @@ class SignUPSecondProcessVC: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        setNavigationBar(title: "2/3")
+        setNavigationBarSignUpProcess(imageName: "SignupImage2")
         addSubViews()
         setAutoLayout()
         hideKeyboardWhenTappedAround()
@@ -227,7 +223,6 @@ extension SignUPSecondProcessVC {
         
     }
     @objc private func tapNextButton(){
-        let vc = SignUpThirdProcessVC()
         SignUpModelManager.shared.setSignUpDictionary(setkey: "name", setData: nameInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "phoneNumber", setData: phoneNumberInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "gender", setData: genderView.getSelectedGender())
@@ -237,7 +232,7 @@ extension SignUPSecondProcessVC {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "studentId", setData: studentIDInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "userSelfIntroduction", setData: introduceOneLine.getTextFieldText())
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: SignUpThirdProcessVC())
     }
     @objc private func tapMajorInputView() {
         
@@ -248,17 +243,19 @@ extension SignUPSecondProcessVC {
         present(navigationVC, animated: true)
     }
 }
-extension SignUPSecondProcessVC :ConfirmButtonDelegate {
-    func action(sendTextFieldText: String) {
-        APIGetManager.shared.checkNickname(nickname: sendTextFieldText) { response,statuscode  in
+extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
+    func action(textFieldText: String) {
+        APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
             guard let message = response?.message else { return }
             if statuscode == 200 {
                 self.nextButton.isEnabled = true
+                self.nickNameInputView.setCheckLabel(isHidden: false, text: "사용할 수 있는 닉네임 입니다.", success: true)
             }else {
                 self.nextButton.isEnabled = false
+                self.nickNameInputView.setCheckLabel(isHidden: false, text: "중복된 닉네임입니다.", success: false)
             }
             
-            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)")
+            
         }
     }
 }
