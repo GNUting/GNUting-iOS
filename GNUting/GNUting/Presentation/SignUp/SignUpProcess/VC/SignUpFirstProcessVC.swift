@@ -9,9 +9,8 @@ import UIKit
 import SnapKit
 
 class SignUpFirstProcessVC: UIViewController{
-    
-    var checkNumber : String = ""
-    var limitTime : Int = 60 // 180 바꿔야함
+    var timer = Timer()
+    var startTime : Date?
     var emailSuccess : Bool = false
     var samePasswordSuccess : Bool = false
     private lazy var scrollView : UIScrollView = {
@@ -22,10 +21,15 @@ class SignUpFirstProcessVC: UIViewController{
     }()
     private let explainLabel : UILabel = {
         let label = UILabel()
-        label.text = "지누팅 서비스 이용을 위해서\n회원님의 정보가 필요해요."
+        let text = "지누팅 서비스 이용을 위해서\n회원님의 정보가 필요해요:)"
+        label.text = text
         label.numberOfLines = 2
         label.textAlignment = .left
         label.font = UIFont(name: Pretendard.Bold.rawValue, size: 22)
+        let range = (text as NSString).range(of: "정보")
+        let attribtuedString = NSMutableAttributedString(string: text)
+        attribtuedString.addAttribute(.foregroundColor, value: UIColor(named: "PrimaryColor") ?? .red, range: range)
+        label.attributedText = attribtuedString
         return label
     }()
     private lazy var inputViewUpperStackView : UIStackView = {
@@ -36,32 +40,25 @@ class SignUpFirstProcessVC: UIViewController{
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var emailInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
-        signUPInpuView.setInputTextTypeLabel(text: "이메일")
-        signUPInpuView.setConfirmButton(text: "인증받기")
-        signUPInpuView.setPlaceholder(placeholder: "이메일을 입력해주세요.")
-        signUPInpuView.isEmailTextField(emailField: true)
+    private lazy var emailInputView : SignUpInputViewEmailCheckType = {
+        let signUPInpuView = SignUpInputViewEmailCheckType()
         signUPInpuView.checkEmailButtonDelegate = self
-        signUPInpuView.setCheckEmailAction()
         
         return signUPInpuView
     }()
-    private lazy var certifiedInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
-        signUPInpuView.setInputTextTypeLabel(text: "인증번호")
-        signUPInpuView.setConfirmButton(text: "확인")
-        signUPInpuView.setPlaceholder(placeholder: "인증 번호를 입력해주세요.")
+    private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
+        let signUPInpuView = SignUpInputViewAuthNumType()
         signUPInpuView.confirmButtonDelegate = self
-        signUPInpuView.setConfrimButton()
+        
         return signUPInpuView
     }()
     private lazy var passWordInputView : SignUPInputView = {
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "비밀번호")
-        signUPInpuView.setPlaceholder(placeholder: "비밀 번호를 입력해주세요.")
+        signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
-        
+        signUPInpuView.setSecureTextEntry()
+        signUPInpuView.passwordInputDelegate = self
         return signUPInpuView
     }()
     private lazy var passWordCheckInputView : SignUPInputView = {
@@ -70,6 +67,7 @@ class SignUpFirstProcessVC: UIViewController{
         signUPInpuView.setPlaceholder(placeholder: "비밀번호와 동일하게 입력해주세요.")
         signUPInpuView.textFieldType = .passwordCheck
         signUPInpuView.passwordCheckDelegate = self
+        signUPInpuView.setSecureTextEntry()
         
         return signUPInpuView
     }()
@@ -81,12 +79,16 @@ class SignUpFirstProcessVC: UIViewController{
         
         return button
     }()
+    deinit {
+        timer.invalidate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setNavigationBar(title: "1/3")
+        setNavigationBarSignUpProcess(imageName: "SignupImage1")
         addSubViews()
         setAutoLayout()
+        hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,14 +114,12 @@ extension SignUpFirstProcessVC{
         }
         
         inputViewUpperStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Spacing.top)
+            make.top.equalToSuperview().offset(70)
             make.left.right.equalToSuperview()
-            
             make.width.equalTo(scrollView.snp.width)
-            
         }
         nextButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom)
+            make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom).offset(20)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -127,55 +127,43 @@ extension SignUpFirstProcessVC{
 //MARK: - Action
 extension SignUpFirstProcessVC{
     @objc private func tapNextButton(){
-        let vc = SignUPSecondProcessVC()
         SignUpModelManager.shared.setSignUpDictionary(setkey: "email", setData: emailInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "password", setData: passWordInputView.getTextFieldText())
-        
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: SignUPSecondProcessVC())
     }
     @objc func getSetTime() {
-        
-        if limitTime > 0 {
-            setEmailCheckTime(limitSecond: limitTime)
-            limitTime -= 1
-        } else if limitTime == 0 {
-            certifiedInputView.setCheckLabel(isHidden: true, text: nil)
-            checkNumber = "" // 인증시간 만료로 checkNumber 초기화
-            emailInputView.setFoucInputTextFiled() // 이메일 다시하라고 포커스 주기
-            let alert = UIAlertController(title: "이메일 인증시간 만료", message: "이메일 인증을 다시 시도해주세요.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-            present(alert, animated: true)
-            
-            limitTime = 60 // 180 바꿔야함
-            
+        guard let startTime = startTime else {
+            setEmailCheckTime(limitSecond: Date())
+            return
         }
+        setEmailCheckTime(limitSecond: startTime)
     }
 }
 extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
-    func action(number: String) {
-        checkNumber = number
-        certifiedInputView.setFoucInputTextFiled()
-        getSetTime()
+    func action(textFieldText: String) {
+        APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr") { response in
+            if response.isSuccess {
+                print(response)
+                self.certifiedInputView.setFoucInputTextFiled()
+                self.getSetTime()
+            }
+        }
+        
     }
     
 }
 extension SignUpFirstProcessVC: ConfirmButtonDelegate{
     func action(sendTextFieldText: String) {
         
-        if checkNumber == sendTextFieldText {
-            limitTime = -1
-            emailSuccess = true
-            certifiedInputView.setCheckLabel(isHidden: false, text: "올바른 인증번호입니다.")
-            nextButtonEnable()
-        } else {
-            emailSuccess = false
-            nextButtonEnable()
-            certifiedInputView.setCheckLabel(isHidden: false, text: "인증번호가 올바르지 않습니다.")
-            let alert = UIAlertController(title: "인증번호가 올바르지 않습니다.", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-            present(alert, animated: true)
+        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response  in
+            if response.isSuccess {
+                emailSuccess = true
+                certifiedInputView.setCheckLabel(isHidden: false, text: "인증이 완료되었습니다.", success: true)
+                timer.invalidate()
+                nextButtonEnable()
+            } else {
+                certifiedInputView.setCheckLabel(isHidden: false, text: "인증번호가 일치하지 않습니다.", success: false)
+            }
             
         }
     }
@@ -187,30 +175,55 @@ extension SignUpFirstProcessVC: PasswordCheckDelegate {
         if passwordTestFiledText == text {
             samePasswordSuccess = true
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: true, text: nil)
+            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
         }else {
             samePasswordSuccess = false
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.")
+            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.", success: false)
             
         }
     }
 }
-
+extension SignUpFirstProcessVC: PasswordInputDelegate {
+    func passwordKeyboarReturn(text: String) {
+        let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
+        let checkPassword = text.range(of: regex,options: .regularExpression) != nil
+        if !checkPassword {
+            passWordInputView.setCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
+        } else {
+            passWordInputView.setCheckLabel(isHidden: true, text: nil, success: false)
+        }
+    }
+  
+}
 
 extension SignUpFirstProcessVC {
-    private func setEmailCheckTime(limitSecond : Int) {
-        let min = (limitSecond % 3600) / 60
-        let second = (limitSecond % 3600) % 60
-        
-        if second < 10 {
-            certifiedInputView.setCheckLabel(isHidden: false, text: String(min) + ":" + "0" + String(second))
-            
-        } else {
-            certifiedInputView.setCheckLabel(isHidden: false, text: String(min) + ":" + String(second))
-        }
-        if limitTime != 0 {
-            perform(#selector(getSetTime), with: nil, afterDelay: 1.0)
+    private func setEmailCheckTime(limitSecond : Date) {
+        DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                let elapsedTimeSeconds = Int(Date().timeIntervalSince(limitSecond))
+                let expireLimit = 180
+                
+                guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
+                    timer.invalidate()
+                    self?.certifiedInputView.setCheckLabel(isHidden: false, text: "이메일 인증 시간 만료. 다시 시도해 주세요.",success: false)
+                    self?.emailInputView.setFoucInputTextFiled() // 이메일 다시하라고 포커스 주기
+                    return
+                }
+                
+                let remainSeconds = expireLimit - elapsedTimeSeconds
+                let min = (remainSeconds % 3600) / 60
+                let second = (remainSeconds % 3600) % 60
+                
+                if second < 10 {
+                    self?.certifiedInputView.setRemainLabel(text: String(min) + ":" + "0" + String(second))
+                    
+                    
+                } else {
+                    self?.certifiedInputView.setRemainLabel(text: String(min) + ":" + String(second))
+                }
+                
+            }
         }
     }
     private func nextButtonEnable() {

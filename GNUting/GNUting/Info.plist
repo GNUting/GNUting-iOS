@@ -2,8 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;사진 앨범에 접근하시는것을 허용하시겠습니까?&quot;</string>
+	<key>FirebaseAppDeleagteProxyEnabled</key>
+	<string>NO</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Black.otf</string>
@@ -33,5 +33,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

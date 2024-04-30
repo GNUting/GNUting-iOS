@@ -15,4 +15,5 @@ extension UILabel {
         attributedString.addAttribute(.font, value: uiFont, range: range)
         self.attributedText = attributedString
     }
+    
 }

@@ -14,9 +14,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let loginState = UserDefaultsManager.shared.getLoginState() as? Bool
+        
+        let rootViewController: UIViewController = {
+            if loginState ?? false {
+                return TabBarController()
+            } else {
+                
+                return UINavigationController.init(rootViewController: LoginVC())
+            }
+        }()
+        
         window = UIWindow(windowScene: windowScene)
-        let mainVC = UINavigationController.init(rootViewController: AppStartVC())
-        window?.rootViewController = mainVC
+        
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
 

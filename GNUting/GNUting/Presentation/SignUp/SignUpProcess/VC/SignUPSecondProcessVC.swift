@@ -8,7 +8,7 @@
 import UIKit
 
 class SignUPSecondProcessVC: UIViewController{
- 
+    
     var selectedDate : String = ""
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -20,19 +20,22 @@ class SignUPSecondProcessVC: UIViewController{
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.spacing = 10
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         return stackView
     }()
     private lazy var nameInputView : SignUPInputView = {
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "이름")
         signUPInpuView.setPlaceholder(placeholder: "이름을 입력해주세요.")
+        signUPInpuView.textFieldType = .name
         return signUPInpuView
     }()
     private lazy var phoneNumberInputView : SignUPInputView = {
         let signUPInpuView = SignUPInputView()
         signUPInpuView.setInputTextTypeLabel(text: "전화번호")
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
+        signUPInpuView.textFieldType = .phoneNumber
+        signUPInpuView.setKeyboardTypeNumberPad()
         return signUPInpuView
     }()
     private lazy var genderView : SelectGenderView = {
@@ -52,7 +55,7 @@ class SignUPSecondProcessVC: UIViewController{
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.date = Date()
-        datePicker.preferredDatePickerStyle = .inline
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.isHidden = true
         datePicker.addTarget(self, action: #selector(changeDate(_ :)), for: .valueChanged)
         return datePicker
@@ -87,33 +90,34 @@ class SignUPSecondProcessVC: UIViewController{
         button.addTarget(self, action: #selector(tapSelectButton), for: .touchUpInside)
         return button
     }()
-    private lazy var nickNameInputView : SignUPInputView = {
-        let nickNameInputView = SignUPInputView()
-        nickNameInputView.setInputTextTypeLabel(text: "닉네임")
-        nickNameInputView.setPlaceholder(placeholder: "닉네임을 입력해주세요.")
-        nickNameInputView.setConfirmButton(text: "중복확인")
-        nickNameInputView.confirmButtonDelegate = self
-        nickNameInputView.setConfrimButton()
-        
+    private lazy var nickNameInputView : SignUpInputViewNicknameType = {
+        let nickNameInputView = SignUpInputViewNicknameType()
+        nickNameInputView.nicknameCheckButtonDelegate = self
+    
         return nickNameInputView
     }()
-    private lazy var majorInputView : SignUPInputView = {
-        let majorInputView = SignUPInputView()
-        majorInputView.setInputTextTypeLabel(text: "학과")
-        majorInputView.setPlaceholder(placeholder: "힉과를 입력해주세요.")
+    private lazy var majorInputView : MajorInputView = {
+        let majorInputView = MajorInputView()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMajorInputView))
+        majorInputView.isUserInteractionEnabled = true
+        majorInputView.addGestureRecognizer(tapGesture)
+        
         return majorInputView
     }()
     private lazy var studentIDInputView : SignUPInputView = {
         let studentIDInputView = SignUPInputView()
         studentIDInputView.setInputTextTypeLabel(text: "학번")
-        studentIDInputView.setPlaceholder(placeholder: "학번을 입력해주세요.")
+        studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
+        studentIDInputView.setKeyboardTypeNumberPad()
+        studentIDInputView.textFieldType = .studentID
         return studentIDInputView
     }()
     
     private lazy var introduceOneLine : SignUPInputView = {
         let studentIDInputView = SignUPInputView()
         studentIDInputView.setInputTextTypeLabel(text: "한줄소개")
-        studentIDInputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.")
+        studentIDInputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
+        studentIDInputView.textFieldType = .introduce
         return studentIDInputView
     }()
     
@@ -129,9 +133,10 @@ class SignUPSecondProcessVC: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        setNavigationBar(title: "2/3")
+        setNavigationBarSignUpProcess(imageName: "SignupImage2")
         addSubViews()
         setAutoLayout()
+        hideKeyboardWhenTappedAround()
     }
     
 }
@@ -161,7 +166,7 @@ extension SignUPSecondProcessVC{
             make.width.equalTo(scrollView.snp.width)
             make.bottom.equalToSuperview()
         }
-// MARK: - DateFicker 선택
+        // MARK: - DateFicker 선택
         datePicker.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
@@ -189,6 +194,7 @@ extension SignUPSecondProcessVC: UIScrollViewDelegate {
 
 extension SignUPSecondProcessVC {
     @objc private func tapSelectDateView(){
+        view.endEditing(true)
         datePicker.isHidden = false
         buttonStackView.isHidden = false
         view.bringSubviewToFront(datePicker)
@@ -205,8 +211,10 @@ extension SignUPSecondProcessVC {
         buttonStackView.isHidden = true
         bluerEffectView.alpha = 0
         let dateArr = selectedDate.split(separator: "-").map{String($0)}
-        selectDateView.setDateLabel(date: DateModel(year: dateArr[0], momth: dateArr[1], day: dateArr[2]))
-        
+        if !dateArr.isEmpty {
+            selectDateView.setDateLabel(date: DateModel(year: dateArr[0], momth: dateArr[1], day: dateArr[2]))
+        }
+
     }
     @objc private func tapCanelButton(){
         datePicker.isHidden = true
@@ -215,30 +223,44 @@ extension SignUPSecondProcessVC {
         
     }
     @objc private func tapNextButton(){
-        let vc = SignUpThirdProcessVC()
         SignUpModelManager.shared.setSignUpDictionary(setkey: "name", setData: nameInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "phoneNumber", setData: phoneNumberInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "gender", setData: genderView.getSelectedGender())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "birthDate", setData: selectedDate)
-        SignUpModelManager.shared.setSignUpDictionary(setkey: "nickName", setData: nickNameInputView.getTextFieldText())
-        SignUpModelManager.shared.setSignUpDictionary(setkey: "department", setData: majorInputView.getTextFieldText())
+        SignUpModelManager.shared.setSignUpDictionary(setkey: "nickname", setData: nickNameInputView.getTextFieldText())
+        SignUpModelManager.shared.setSignUpDictionary(setkey: "department", setData: majorInputView.getContentLabelText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "studentId", setData: studentIDInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "userSelfIntroduction", setData: introduceOneLine.getTextFieldText())
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: SignUpThirdProcessVC())
+    }
+    @objc private func tapMajorInputView() {
+        
+        let vc = SearchMajorVC()
+        vc.searchMajorSelectCellDelegate = self
+        
+        let navigationVC = UINavigationController(rootViewController: vc)
+        present(navigationVC, animated: true)
     }
 }
-extension SignUPSecondProcessVC :ConfirmButtonDelegate {
-    func action(sendTextFieldText: String) {
-        APIGetManager.shared.checkNickname(nickname: sendTextFieldText) { response,statuscode  in
+extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
+    func action(textFieldText: String) {
+        APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
             guard let message = response?.message else { return }
             if statuscode == 200 {
                 self.nextButton.isEnabled = true
+                self.nickNameInputView.setCheckLabel(isHidden: false, text: "사용할 수 있는 닉네임 입니다.", success: true)
             }else {
                 self.nextButton.isEnabled = false
+                self.nickNameInputView.setCheckLabel(isHidden: false, text: "중복된 닉네임입니다.", success: false)
             }
             
-            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)")
+            
         }
+    }
+}
+extension SignUPSecondProcessVC: SearchMajorSelectCellDelegate{
+    func sendSeleceted(major: String) {
+        majorInputView.setContentLabelText(text: major)
     }
 }
