@@ -15,12 +15,28 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         label.textAlignment = .left
         return label
     }()
+    private lazy var subTitleLableStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        return stackView
+    }()
     private lazy var majorStudentIDLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
         label.textAlignment = .left
         return label
     }()
+    
+    private lazy var userCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.textAlignment = .left
+        return label
+    }()
+    
     private let borderView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "E9E9E9")
@@ -39,25 +55,35 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         
         // Configure the view for the selected state
     }
-    public func boardListSetCell(model:BoardResult){
+    func boardListSetCell(model:BoardResult){
         boardTitleLabel.text = model.title
         majorStudentIDLabel.text = "\(model.user.department) | \((model.user.studentId)) "
+        userCountLabel.text = "인원 : \(model.inUserCount)명"
     }
     func searchSetCell(model: SearchResultContent) {
         boardTitleLabel.text = model.title
         majorStudentIDLabel.text = "\(model.department) | \((model.studentID)) "
+        userCountLabel.text = "인원 : \(model.inUserCount)명"
+    }
+    func myPostSetCell(model:MyPostResult){
+        boardTitleLabel.text = model.title
+        majorStudentIDLabel.text = "\(model.user.department) | \((model.user.studentId)) "
+        userCountLabel.text = "인원 : \(model.inUserCount)명"
     }
     private func configure(){
-        contentView.addSubViews([boardTitleLabel,majorStudentIDLabel,borderView])
+        contentView.addSubViews([boardTitleLabel,subTitleLableStackView,borderView])
+        subTitleLableStackView.addStackSubViews([majorStudentIDLabel,userCountLabel])
         boardTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
             make.left.right.equalToSuperview().inset(Spacing.left)
         }
-        majorStudentIDLabel.snp.makeConstraints { make in
+        subTitleLableStackView.snp.makeConstraints { make in
             make.top.equalTo(boardTitleLabel.snp.bottom).offset(5)
             make.left.right.equalToSuperview().inset(Spacing.left)
             
         }
+        majorStudentIDLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+       
         borderView.snp.makeConstraints { make in
             make.top.equalTo(majorStudentIDLabel.snp.bottom).offset(Spacing.top)
             make.left.right.equalToSuperview().inset(Spacing.left)

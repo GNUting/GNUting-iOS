@@ -41,7 +41,6 @@ class BoardTextSearchVC: UIViewController{
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
-        searchConfigure()
         setNavigation()
         
     }
@@ -66,13 +65,14 @@ extension BoardTextSearchVC {
             make.right.equalToSuperview()
         }
     }
-    private func searchConfigure(){
-        navigationItem.searchController = searchController
-    }
     private func setNavigation(){
         let dismissButton = UIBarButtonItem(image: UIImage(named: "DissmissImg"), style: .plain, target: self, action: #selector(tapDissmisButton))
         dismissButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.leftBarButtonItem = dismissButton
+        self.navigationItem.title = "게시글 검색"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        navigationItem.searchController = searchController
+
     }
 }
 
@@ -81,7 +81,8 @@ extension BoardTextSearchVC : UISearchResultsUpdating{
         guard let text = searchController.searchBar.text else { return}
         searchText = text
 
-        APIGetManager.shared.getSearchBoardText(searchText: text, page: 0) { searchDataInfo in
+        APIGetManager.shared.getSearchBoardText(searchText: text, page: 0) { searchDataInfo,response  in
+            self.errorHandling(response: response)
             guard let searchResultData = searchDataInfo?.result.content else { return }
             self.page = 0
             self.searchResultList = searchResultData
@@ -90,12 +91,19 @@ extension BoardTextSearchVC : UISearchResultsUpdating{
 }
 
 extension BoardTextSearchVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailDateBoardVC()
+        vc.boardID = searchResultList[indexPath.row].boardID
+        vc.setPushBoardList()
+        pushViewContoller(viewController: vc)
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
             if !isFetching {
                 page += 1
                 self.isFetching = true
-                APIGetManager.shared.getSearchBoardText(searchText: searchText, page: page) { searchDataInfo in
+                APIGetManager.shared.getSearchBoardText(searchText: searchText, page: page) { searchDataInfo,response  in
+                    self.errorHandling(response: response)
                     guard let searchResultData = searchDataInfo?.result.content else { return }
                     self.searchResultList.append(contentsOf: searchResultData)
                     if searchResultData.count == 0 {
@@ -109,7 +117,6 @@ extension BoardTextSearchVC: UITableViewDelegate {
         }
     }
 }
-
 
 extension BoardTextSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

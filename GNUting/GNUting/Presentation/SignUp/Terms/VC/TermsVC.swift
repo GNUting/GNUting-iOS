@@ -7,11 +7,11 @@
 
 import UIKit
 import SnapKit
-class TermsVC: UIViewController {
-    let textArr = ["만 18세이상입니다. ","(필수)서비스 이용약관","(필수) 개인 정보 처리 방침","(선택) 위치정보 제공","(선택) 마케팅 수신 동의)"]
+class TermsVC: UIViewController{
+    let textArr = ["(필수) 경상국립대학교 재학중입니다.","(필수) 개인 정보 처리 방침"]
     var allCheckSelected : Bool = false
-    var nextMoveStatus : Bool = false
-    var selectedState : [Bool] = [false,false,false,false,false]
+
+    var selectedState : [Bool] = [false,false]
     private lazy var allCheckTermsView : AllCheckTermsView = {
         let view = AllCheckTermsView()
         view.tapAllCheckButtonClosure = { [unowned self] selected in
@@ -24,7 +24,7 @@ class TermsVC: UIViewController {
     }()
     private lazy var termsTableView : UITableView = {
        let tableView = UITableView()
-        tableView.delegate = self
+        
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(TermsTableViewCell.self, forCellReuseIdentifier: TermsTableViewCell.identi)
@@ -45,7 +45,7 @@ class TermsVC: UIViewController {
         self.view.backgroundColor =  .white
         addSubViews()
         setAutoLayout()
-        setNavigationBar(title: "서비스 이용 동의")
+        setNavigationBar(title: "서비스 이용 약관 동의")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,9 +53,6 @@ class TermsVC: UIViewController {
     }
 }
 extension TermsVC: UITableViewDataSource{
-    
-}
-extension TermsVC : UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         textArr.count
     }
@@ -63,13 +60,16 @@ extension TermsVC : UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TermsTableViewCell.identi, for: indexPath) as? TermsTableViewCell else {return UITableViewCell()}
         cell.selectionStyle = .none
-        
+        if indexPath.row == 0{
+            cell.pushButtonHidden()
+        }
+        cell.pushButtonDelegate = self
         cell.tapCheckButtonClosure = { [unowned self] selected in
             if !selected{
                 allCheckTermsView.checkButtonSelected(isSelected: selected)
             }
             selectedState[indexPath.row] = selected
-            if selectedState.filter({$0 == true}).count == 5 {
+            if selectedState.filter({$0 == true}).count == 2 {
                 allCheckTermsView.checkButtonSelected(isSelected: true)
             }
             setNextButton()
@@ -81,6 +81,7 @@ extension TermsVC : UITableViewDelegate{
     }
     
 }
+
 extension TermsVC{
     private func addSubViews(){
         self.view.addSubViews([allCheckTermsView,termsTableView,nextButton])
@@ -108,7 +109,7 @@ extension TermsVC{
 // MARK: - Method
 extension TermsVC{
     private func setNextButton(){
-        if selectedState[0] == true && selectedState[1] == true && selectedState[2] == true {
+        if selectedState[0] == true && selectedState[1] == true{
             nextButton.backgroundColor = UIColor(named: "PrimaryColor")
             nextButton.isEnabled = true
         } else {
@@ -118,11 +119,11 @@ extension TermsVC{
     }
     private func allCheckButton(selected : Bool) {
         if selected {
-            selectedState = [true,true,true,true,true]
+            selectedState = [true,true]
             nextButton.backgroundColor = UIColor(named: "PrimaryColor")
             nextButton.isEnabled = true
         } else {
-            selectedState = [false,false,false,false,false]
+            selectedState = [false,false]
             nextButton.backgroundColor = UIColor(named: "DisableColor")
             nextButton.isEnabled = false
         }
@@ -131,8 +132,13 @@ extension TermsVC{
 //MARK : - Action
 extension TermsVC{
     @objc private func tapNextButton(){
-        let vc = SignUpFirstProcessVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: SignUpFirstProcessVC())
     }
     
+}
+extension TermsVC: PushButtonDelegate{
+    func buttonAction() {
+        guard let url = URL(string: "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+    }
 }

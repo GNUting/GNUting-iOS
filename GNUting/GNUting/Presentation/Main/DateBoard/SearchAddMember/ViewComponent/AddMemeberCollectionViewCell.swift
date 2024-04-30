@@ -9,7 +9,7 @@ import UIKit
 
 class AddMemeberCollectionViewCell: UICollectionViewCell {
     static let identi = "AddMemeberCollectionViewCellid"
-   
+    var config = UIButton.Configuration.plain()
     private lazy var containerView = UIView()
     private lazy var userIDNameLabel : UILabel = {
        let label = UILabel()
@@ -28,7 +28,7 @@ class AddMemeberCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor(hexCode: "D5CFCF")
         setAddSubViews()
         setAutoLayout()
-        setCell()
+        setlayer()
     }
     
     required init?(coder: NSCoder) {
@@ -57,8 +57,11 @@ extension AddMemeberCollectionViewCell{
             make.bottom.equalToSuperview().offset(-10)
         }
     }
-    private func setCell(){
+    private func setlayer() {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
+    }
+    func setCell(text: String) {
+        userIDNameLabel.text = text
     }
 }

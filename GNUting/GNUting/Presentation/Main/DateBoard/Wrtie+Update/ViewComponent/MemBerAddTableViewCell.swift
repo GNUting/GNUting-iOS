@@ -2,11 +2,10 @@
 //  MemBerAddTableViewCell.swift
 //  GNUting
 //
-//  Created by 원동진 on 2/19/24.
+//  Created by 원동진 on 3/15/24.
 //
 
 import UIKit
-
 
 class MemBerAddTableViewCell: UITableViewCell {
     static let identi = "MemBerAddTableViewCell"

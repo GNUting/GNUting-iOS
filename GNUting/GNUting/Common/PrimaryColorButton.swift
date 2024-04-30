@@ -17,9 +17,7 @@ class PrimaryColorButton : UIButton {
         self.layer.masksToBounds = true
         self.isUserInteractionEnabled = true
         self.setTitleColor(.white, for: .disabled)
-        self.snp.makeConstraints { make in
-            make.height.equalTo(65)
-        }
+     
     }
     override var isEnabled: Bool {
         didSet {
@@ -33,14 +31,18 @@ class PrimaryColorButton : UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    public func setText(_ text : String){
+    public func setText(_ text : String,fointSize: Int = 20){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: 10, bottom: 22, trailing: 10)
-        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 20)!]))
+        
+        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: CGFloat(fointSize))!,NSAttributedString.Key.foregroundColor : UIColor.white]))
         config.titleAlignment = .center
-        config.baseForegroundColor = .white
         self.configuration = config
     }
-    
+    func setHeight(height: Int = 60) {
+        self.snp.makeConstraints { make in
+            make.height.equalTo(height)
+        }
+    }
 }
  
