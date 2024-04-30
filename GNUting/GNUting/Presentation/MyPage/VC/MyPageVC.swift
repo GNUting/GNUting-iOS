@@ -97,16 +97,14 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let vc = UserWriteTextVC()
-            
-            self.navigationController?.pushViewController(vc, animated: true)
+            pushViewContoller(viewController: UserWriteTextVC())
         }
         if indexPath == [2,0] {
             APIPostManager.shared.postLogout { response in
                 if response?.isSuccess ?? false {
                     let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                        self.navigationController?.setViewControllers([AppStartVC()], animated: true)
+                        self.navigationController?.setViewControllers([LoginVC()], animated: true)
                     }))
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true)
@@ -124,7 +122,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
                 if response.isSuccess {
                     let alertController = UIAlertController(title: "회원탈퇴", message: "회원 탈퇴되었습니다..", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                        self.navigationController?.setViewControllers([AppStartVC()], animated: true)
+                        self.navigationController?.setViewControllers([LoginVC()], animated: true)
                     }))
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true)
@@ -148,7 +146,7 @@ extension MyPageVC : tapProfileUpateButtonDelegate {
     func tapProfileUpdateButton() {
         let vc = UpdateProfileVC()
         vc.userInfo = self.userInfo
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: vc)
     }
     func getUserData(){
         APIGetManager.shared.getUserData { userData,response  in

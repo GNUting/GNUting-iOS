@@ -92,7 +92,7 @@ extension DateBoardListVC: UITableViewDataSource{
         let vc = DetailDateBoardVC()
         vc.boardID = dateBoardListData[indexPath.row].id
         vc.setPushBoardList()
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: vc)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
@@ -123,8 +123,7 @@ extension DateBoardListVC {
         present(vc, animated: true)
     }
     @objc private func tapWriteTextButton(){
-        let vc = WriteDateBoardVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: WriteDateBoardVC())
     }
 }
 

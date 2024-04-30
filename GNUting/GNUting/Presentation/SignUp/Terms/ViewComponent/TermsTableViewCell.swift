@@ -24,14 +24,14 @@ class TermsTableViewCell: UITableViewCell {
     }()
     private lazy var checkButton  : UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "circle"), for: .normal)
-        button.tintColor = UIColor(hexCode: "DFDFDF")
+        button.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
         button.addTarget(self, action: #selector(tapCheckButton(_:)), for: .touchUpInside)
+        
         return button
     }()
     private lazy var termsTextLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 18)
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 15)
         return label
     }()
     private lazy var pushButton : UIButton = {
@@ -76,9 +76,9 @@ extension TermsTableViewCell {
         selectedState = sender.isSelected
         tapCheckButtonClosure?(sender.isSelected)
         if sender.isSelected {
-            checkButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
+            checkButton.setImage(UIImage(named: "SelectedCheckImage"), for: .selected)
         }else{
-            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            checkButton.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
         }
     }
 }
@@ -89,15 +89,26 @@ extension TermsTableViewCell {
     func setAllCheckButton(AllCheckButtonSelected : Bool){
         if AllCheckButtonSelected{
             checkButton.isSelected = true
-            checkButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
+            checkButton.setImage(UIImage(named: "SelectedCheckImage"), for: .selected)
         }else{
             checkButton.isSelected = false
-            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            checkButton.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
         }
     }
     
     func setTextLabel(_ text : String){
         termsTextLabel.text = text
+        let attribtuedString = NSMutableAttributedString(string: text)
+        let range = (text as NSString).range(of: "(필수)")
+        if text == "(필수) 경상국립대학교 재학중입니다." {
+            let range = (text as NSString).range(of: "경상국립대학교")
+            attribtuedString.addAttribute(.font, value: UIFont(name: Pretendard.Bold.rawValue, size: 15) ?? .boldSystemFont(ofSize: 15), range: range)
+            
+        }
+        attribtuedString.addAttribute(.foregroundColor, value: UIColor(named: "PrimaryColor") ?? .red, range: range)
+        termsTextLabel.attributedText = attribtuedString
+        
+        
     }
     
     func pushButtonHidden() {

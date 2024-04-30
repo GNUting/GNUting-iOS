@@ -187,8 +187,9 @@ extension ChatRoomVC: UITableViewDataSource{
 }
 extension ChatRoomVC {
     @objc private func tapSendMessageButton() {
-        
+        textField.text = ""
         swiftStomp.send(body: SendMessageModel(messageType: "CHAT", message: message), to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
+        
     }
     @objc private func changeValueTextField(_ sender: UITextField) {
         guard let textFieldText = sender.text else { return }
@@ -225,7 +226,7 @@ extension ChatRoomVC {
         self.accessToken = token
     }
     private func initStomp(){
-        let url = URL(string: "ws://localhost:8080/chat")!
+        let url = URL(string: "ws://203.255.3.66:10001/chat")!
         
         
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
@@ -238,7 +239,6 @@ extension ChatRoomVC {
             if response.isSuccess {
                 guard let result = chatMessageListData?.result else { return }
                 self.chatMessageList = result
-                
             }
         }
     }
@@ -265,6 +265,7 @@ extension ChatRoomVC: SwiftStompDelegate{
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
         print("Received")
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.getChatMessageList()
         }
@@ -279,17 +280,19 @@ extension ChatRoomVC: SwiftStompDelegate{
             
             let messageArr = stringMessage.split(separator: ",")
             var contentArr : [String] = []
-            for content in messageArr{
-                let splitContent = content.split(separator: ":").map{String($0)}
-                if splitContent[0] == "profileImage"{
-                    contentArr.append(splitContent[1]+splitContent[2])
-                } else if splitContent[0] == "createdDate"{
-                    contentArr.append(splitContent[1]+splitContent[2]+splitContent[3])
-                } else{
-                    contentArr.append(splitContent[1])
-                }
-            }
-            let messagStruct = ChatRoomMessageModelResult(id: Int(contentArr[0]) ?? 0, chatRoomId: Int(contentArr[1]) ?? self.chatRoomID, messageType: contentArr[2], email: contentArr[3], nickname: contentArr[4], profileImage: contentArr[5], message: contentArr[6], createdDate: contentArr[7])
+
+//            for content in messageArr{
+//                let splitContent = content.split(separator: ":").map{String($0)}
+//                if splitContent[0] == "profileImage"{
+//                    contentArr.append(splitContent[1]+splitContent[2])
+//                } else if splitContent[0] == "createdDate"{
+//                    contentArr.append(splitContent[1]+splitContent[2]+splitContent[3])
+//                } else{
+//                    contentArr.append(splitContent[1])
+//                }
+//            }
+            
+//            let messagStruct = ChatRoomMessageModelResult(id: Int(contentArr[0]) ?? 0, chatRoomId: Int(contentArr[1]) ?? self.chatRoomID, messageType: contentArr[2], email: contentArr[3], nickname: contentArr[4], profileImage: contentArr[5], message: contentArr[6], createdDate: contentArr[7])
 //            self.chatMessageList.append(messagStruct)
             
         } else if let message = message as? Data{

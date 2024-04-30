@@ -22,7 +22,14 @@ extension UIViewController{
         backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.title = title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 18)!]
+    }
+    func setNavigationBarSignUpProcess(imageName: String){
+        let backButton = BackButton()
+        backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        let image = UIImage(named: imageName)
+        self.navigationItem.titleView = UIImageView(image: image)
     }
     func setNavigationBarPresentType(title: String) {
         let dismissButton = DismissButton()
@@ -94,5 +101,8 @@ extension UIViewController{
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    func pushViewContoller(viewController: UIViewController) {
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

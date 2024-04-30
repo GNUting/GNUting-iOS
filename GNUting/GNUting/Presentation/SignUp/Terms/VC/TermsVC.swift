@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 class TermsVC: UIViewController{
-    let textArr = ["경상국립대학교 재학중입니다. ","개인 정보 처리방침"]
+    let textArr = ["(필수) 경상국립대학교 재학중입니다.","(필수) 개인 정보 처리 방침"]
     var allCheckSelected : Bool = false
 
     var selectedState : [Bool] = [false,false]
@@ -45,7 +45,7 @@ class TermsVC: UIViewController{
         self.view.backgroundColor =  .white
         addSubViews()
         setAutoLayout()
-        setNavigationBar(title: "서비스 이용 동의")
+        setNavigationBar(title: "서비스 이용 약관 동의")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -132,8 +132,7 @@ extension TermsVC{
 //MARK : - Action
 extension TermsVC{
     @objc private func tapNextButton(){
-        let vc = SignUpFirstProcessVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: SignUpFirstProcessVC())
     }
     
 }

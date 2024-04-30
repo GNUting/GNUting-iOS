@@ -95,7 +95,7 @@ extension BoardTextSearchVC: UITableViewDelegate {
         let vc = DetailDateBoardVC()
         vc.boardID = searchResultList[indexPath.row].boardID
         vc.setPushBoardList()
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: vc)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {

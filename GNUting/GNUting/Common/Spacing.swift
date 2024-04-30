@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 enum Spacing {
-    static let left : CGFloat = 30
-    static let right : CGFloat = -30
+    static let UpperInset : CGFloat = 25
+    static let left : CGFloat = 25
+    static let right : CGFloat = -25
     static let top : CGFloat = 10
 }
