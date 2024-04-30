@@ -141,7 +141,7 @@ extension DetailDateBoardVC{
     @objc private func tapRequetChatButton(){
         let vc = RequestChatVC()
         vc.boardID = boardID
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: vc)
     }
 }
 
@@ -161,11 +161,10 @@ extension DetailDateBoardVC: MyPostDelegate {
     func didTapUpDateButton() {
         detailDateBoardSetView.isHidden = true
         let vc = UpdatePostVC()
-        self.navigationController?.pushViewController(vc, animated: true)
         vc.setPostTestView(title: titleLabel.text ?? "", content: contentTextView.text)
         vc.boardID = boardID
         vc.memberDataList = userInfos
-        
+        pushViewContoller(viewController: vc)
     }
     
     func didTapDeleteButton() {

@@ -59,25 +59,49 @@ class APIPostManager {
     }
     // MARK: - 회원가입 : 이메일 인증 번호 전송 ✅
     
-    func postEmailCheck(email: String) {
+    func postEmailCheck(email: String,completion: @escaping(EmailCheckResponse)->Void) {
         let url = EndPoint.emailCheck.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters : [String : String] = ["email": email]
         AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
+            .validate(statusCode: 200..<300)
             .responseData { response in
+                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
-                print(json)
+                
                 switch response.result {
                 case .success:
                     print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
+                    completion(json)
                 case .failure:
                     print("🔴 postAuthenticationCheck statusCode :\(statusCode)")
-                    break
+                    completion(json)
                 }
             }
     }
-    
+    // MARK: - 비밀번호 변경 : 이메일 인증 번호 전송
+    func postEmailCheckChangePassword(email: String,completion: @escaping(EmailCheckResponse)->Void) {
+        let url = EndPoint.emailCheckChangePassword.url
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let parameters : [String : String] = ["email": email]
+        AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
+                
+                switch response.result {
+                case .success:
+                    print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postAuthenticationCheck statusCode :\(statusCode)")
+                    completion(json)
+                }
+            }
+    }
     // MARK: - 회원가입 : 인증 번호 확인 ✅
     func postAuthenticationCheck(email: String, number: String, completion: @escaping(DefaultResponse)->Void) {
         let url = EndPoint.checkMailVerify.url
@@ -91,7 +115,7 @@ class APIPostManager {
                 switch response.result {
                 case .success:
                     print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
-                    print(json)
+                    
                     completion(json)
                 case .failure:
                     print("🔴 postAuthenticationCheck statusCode :\(statusCode)")

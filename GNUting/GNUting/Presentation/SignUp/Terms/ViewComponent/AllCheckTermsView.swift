@@ -19,14 +19,13 @@ class AllCheckTermsView: UIView {
     }()
     private lazy var checkButton  : UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "circle"), for: .normal)
-        button.tintColor = UIColor(hexCode: "DFDFDF")
+        button.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
         button.addTarget(self, action: #selector(tapCheckButton(_:)), for: .touchUpInside)
         return button
     }()
     let termsTextLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 18)
+        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 20)
         label.text = "약관 전체 동의"
         return label
     }()
@@ -62,9 +61,9 @@ class AllCheckTermsView: UIView {
         sender.isSelected.toggle()
         tapAllCheckButtonClosure?(sender.isSelected)
         if sender.isSelected {
-            checkButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
+            checkButton.setImage(UIImage(named: "SelectedCheckImage"), for: .selected)
         }else{
-            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            checkButton.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
         }
     }
 }
