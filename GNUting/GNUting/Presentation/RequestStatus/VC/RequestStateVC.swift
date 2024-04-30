@@ -101,7 +101,7 @@ extension RequestStateVC: UITableViewDataSource{
         }else {
             vc.requestStatus = false
         }
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: vc)
     }
 }
 

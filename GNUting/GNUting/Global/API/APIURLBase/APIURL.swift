@@ -9,6 +9,7 @@ import Foundation
 enum EndPoint{
     case signUp
     case emailCheck
+    case emailCheckChangePassword
     case checkNickname
     case login
     case logout
@@ -40,6 +41,8 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "signup")
         case .emailCheck:
             return .makeForEndpoint(endPoint: "mail")
+        case .emailCheckChangePassword:
+            return .makeForEndpoint(endPoint: "mail/findPassword")
         case .checkNickname:
             return .makeForEndpoint(endPoint: "check-nickname")
         case .getUserData:
@@ -84,6 +87,7 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "notification")
         case .notificationCheck:
             return .makeForEndpoint(endPoint: "notification/check")
+        
         }
     }
 }

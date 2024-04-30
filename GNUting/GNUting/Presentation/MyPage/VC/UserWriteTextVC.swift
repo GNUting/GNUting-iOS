@@ -61,7 +61,7 @@ extension UserWriteTextVC: UITableViewDelegate{
         let vc = DetailDateBoardVC()
         vc.boardID = myPostList[indexPath.row].id
         vc.setPushMypostVersion()
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewContoller(viewController: vc)
     }
 }
 extension UserWriteTextVC : UITableViewDataSource{

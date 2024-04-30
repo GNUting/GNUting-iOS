@@ -34,13 +34,9 @@ class UpdateProfileVC: UIViewController {
         return imageView
     }()
     
-    private lazy var nickNameInputView : SignUPInputView = {
-        let inputView = SignUPInputView()
-        inputView.setInputTextTypeLabel(text: "닉네임")
-        inputView.setPlaceholder(placeholder: "닉네임을 입력해주세요.")
-        inputView.setConfirmButton(text: "중복확인")
-        inputView.confirmButtonDelegate = self
-        inputView.setConfrimButton()
+    private lazy var nickNameInputView : SignUpInputViewNicknameType = {
+        let inputView = SignUpInputViewNicknameType()
+        inputView.nicknameCheckButtonDelegate = self
         
         return inputView
     }()
@@ -182,16 +178,16 @@ extension UpdateProfileVC: PHPickerViewControllerDelegate {
         }
     }
 }
-extension UpdateProfileVC :ConfirmButtonDelegate {
-    func action(sendTextFieldText: String) {
-        APIGetManager.shared.checkNickname(nickname: sendTextFieldText) { response,statuscode  in
+extension UpdateProfileVC :NicknameCheckButtonDelegate {
+    func action(textFieldText: String) {
+        APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
             guard let message = response?.message else { return }
             if statuscode == 200 {
                 self.updateProfileButton.isEnabled = true
             }else {
                 self.updateProfileButton.isEnabled = false
             }
-            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)")
+            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)", success: false)
         }
     }
 }
