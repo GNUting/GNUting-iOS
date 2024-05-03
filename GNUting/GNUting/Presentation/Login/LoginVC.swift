@@ -10,7 +10,7 @@ import UIKit
 class LoginVC: UIViewController {
     private lazy var appLogiImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "AppLogoImage")
+        imageView.image = UIImage(named: "AppNameImage")
         return imageView
     }()
     private lazy var explainLabel : UILabel = {

@@ -11,9 +11,17 @@ class MemberTableViewCell: UITableViewCell {
     var userImageTappedClosure: (()->())?
     // 유저 이미지, 이름, 학번,나이 ,한줄소개
     static let identi = "MemberTableViewCellid"
+    private lazy var upperView : UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
+        return view
+    }()
     private lazy var userInfoView : UserInfoDetailView = {
         let view = UserInfoDetailView()
         view.userImageButton.userImageButtonDelegate = self
+        
         return view
     }()
     
@@ -37,11 +45,18 @@ class MemberTableViewCell: UITableViewCell {
 }
 extension MemberTableViewCell {
     private func configure(){
-        contentView.addSubview(userInfoView)
+        contentView.addSubview(upperView)
+   
+        upperView.addSubview(userInfoView)
+        upperView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-5)
+        }
         userInfoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Spacing.top)
+            make.top.equalToSuperview().offset(20)
             make.left.right.equalToSuperview().inset(Spacing.left)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     func setUserInfoViews(model: UserInfosModel ){

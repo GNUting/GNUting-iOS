@@ -22,7 +22,7 @@ class MemberTableViewHeader: UITableViewHeaderFooterView {
         contentView.addSubview(memberLabel)
         memberLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.left.equalToSuperview().offset(Spacing.left)
+            make.left.equalToSuperview()
         }
     }
     

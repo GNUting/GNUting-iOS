@@ -26,11 +26,11 @@ struct SearchResult: Codable {
 // MARK: - Content
 struct SearchResultContent: Codable {
     let boardID, inUserCount: Int
-    let title, department, studentID: String
+    let title, department, studentID,time,status: String
 
     enum CodingKeys: String, CodingKey {
         case boardID = "boardId"
-        case title, department,inUserCount
+        case title, department,inUserCount,time, status
         case studentID = "studentId"
     }
 }

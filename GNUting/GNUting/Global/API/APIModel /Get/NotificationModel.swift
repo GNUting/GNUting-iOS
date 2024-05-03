@@ -16,5 +16,6 @@ struct NotificationModel: Codable {
 // MARK: - Result
 struct NotificationModelResult: Codable {
     let id: Int
-    let title, body, time, status: String
+    let title, body, time: String
+    let status: String?
 }

@@ -10,9 +10,22 @@ import UIKit
 class NotificationVC: UIViewController {
     var notificationList : [NotificationModelResult] = [] {
         didSet{
+            if notificationList.count == 0 {
+                noDataScreenView.isHidden = false
+                
+            } else {
+                noDataScreenView.isHidden = true
+                
+            }
             notificationTableView.reloadData()
         }
     }
+    private lazy var noDataScreenView: NoDataScreenView = {
+       let view = NoDataScreenView()
+        
+        view.setLabel(text: "도착한 알림이 없습니다.\n조금만 기다려 볼까요?", range: "조금만 기다려 볼까요?")
+        return view
+    }()
     private lazy var  notificationTableView : UITableView = {
         let tableView = UITableView()
         tableView.bounces = false
@@ -39,13 +52,16 @@ class NotificationVC: UIViewController {
 }
 extension NotificationVC{
     private func setAddSubViews() {
-        view.addSubview(notificationTableView)
+        view.addSubViews([notificationTableView,noDataScreenView])
     }
     private func setAutoLayout(){
         notificationTableView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.left)
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
   
