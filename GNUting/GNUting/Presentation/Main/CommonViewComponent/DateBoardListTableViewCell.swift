@@ -9,9 +9,14 @@ import UIKit
 
 class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이틀/학과/학번
     static let identi = "DetailDateBoardTableViewCellid"
+    private lazy var statsuLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 12)
+        return label
+    }()
     private lazy var boardTitleLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 16)
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
         label.textAlignment = .left
         return label
     }()
@@ -23,17 +28,18 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         stackView.alignment = .fill
         return stackView
     }()
-    private lazy var majorStudentIDLabel : UILabel = {
+    private lazy var subInfoLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.textColor = UIColor(named: "DisableColor")
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textAlignment = .left
         return label
     }()
     
     private lazy var userCountLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
-        label.textAlignment = .left
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.textColor = UIColor(named: "DisableColor")
         return label
     }()
     
@@ -56,25 +62,58 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         // Configure the view for the selected state
     }
     func boardListSetCell(model:BoardResult){
+        if model.status == "OPEN"{
+            statsuLabel.text = "신청 가능"
+            statsuLabel.textColor = UIColor(named: "SecondaryColor")
+            boardTitleLabel.textColor = .black
+        } else {
+            statsuLabel.text = "신청 마감"
+            statsuLabel.textColor = UIColor(named: "PrimaryColor")
+            boardTitleLabel.textColor = UIColor(named: "DisableColor")
+        }
+        
         boardTitleLabel.text = model.title
-        majorStudentIDLabel.text = "\(model.user.department) | \((model.user.studentId)) "
+        subInfoLabel.text = "\(model.time) | \(model.user.department) | \((model.user.studentId)) "
         userCountLabel.text = "인원 : \(model.inUserCount)명"
+        
     }
     func searchSetCell(model: SearchResultContent) {
+        if model.status == "OPEN"{
+            statsuLabel.text = "신청 가능"
+            statsuLabel.textColor = UIColor(named: "SecondaryColor")
+            boardTitleLabel.textColor = .black
+        } else {
+            statsuLabel.text = "신청 마감"
+            statsuLabel.textColor = UIColor(named: "PrimaryColor")
+            boardTitleLabel.textColor = UIColor(named: "DisableColor")
+        }
         boardTitleLabel.text = model.title
-        majorStudentIDLabel.text = "\(model.department) | \((model.studentID)) "
+        subInfoLabel.text = "\(model.time)|\(model.department) | \((model.studentID)) "
         userCountLabel.text = "인원 : \(model.inUserCount)명"
     }
     func myPostSetCell(model:MyPostResult){
+        if model.status == "OPEN"{
+            statsuLabel.text = "신청 가능"
+            statsuLabel.textColor = UIColor(named: "SecondaryColor")
+            boardTitleLabel.textColor = .black
+        } else {
+            statsuLabel.text = "신청 마감"
+            statsuLabel.textColor = UIColor(named: "PrimaryColor")
+            boardTitleLabel.textColor = UIColor(named: "DisableColor")
+        } 
         boardTitleLabel.text = model.title
-        majorStudentIDLabel.text = "\(model.user.department) | \((model.user.studentId)) "
+        subInfoLabel.text = "\(model.time) | \(model.user.department) | \((model.user.studentId)) "
         userCountLabel.text = "인원 : \(model.inUserCount)명"
     }
     private func configure(){
-        contentView.addSubViews([boardTitleLabel,subTitleLableStackView,borderView])
-        subTitleLableStackView.addStackSubViews([majorStudentIDLabel,userCountLabel])
+        contentView.addSubViews([statsuLabel,boardTitleLabel,subTitleLableStackView,borderView])
+        subTitleLableStackView.addStackSubViews([subInfoLabel,userCountLabel])
+        statsuLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(22)
+            make.left.right.equalToSuperview().inset(Spacing.left)
+        }
         boardTitleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Spacing.top)
+            make.top.equalTo(statsuLabel.snp.bottom).offset(3)
             make.left.right.equalToSuperview().inset(Spacing.left)
         }
         subTitleLableStackView.snp.makeConstraints { make in
@@ -82,10 +121,10 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
             make.left.right.equalToSuperview().inset(Spacing.left)
             
         }
-        majorStudentIDLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        subInfoLabel.setContentHuggingPriority(.init(249), for: .horizontal)
        
         borderView.snp.makeConstraints { make in
-            make.top.equalTo(majorStudentIDLabel.snp.bottom).offset(Spacing.top)
+            make.top.equalTo(subInfoLabel.snp.bottom).offset(22)
             make.left.right.equalToSuperview().inset(Spacing.left)
             make.bottom.equalToSuperview()
             make.height.equalTo(1)

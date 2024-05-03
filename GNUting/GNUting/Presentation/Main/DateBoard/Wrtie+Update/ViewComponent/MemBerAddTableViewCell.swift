@@ -34,15 +34,14 @@ class MemBerAddTableViewCell: UITableViewCell {
     }
     private func configure(){
         upperView.layer.cornerRadius = 10
-        upperView.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
+        upperView.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
         upperView.layer.borderWidth = 1
         upperView.layer.masksToBounds = true
         contentView.addSubview(upperView)
         upperView.addSubview(plusImageView)
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-5)
         }
         plusImageView.snp.makeConstraints { make in

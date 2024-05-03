@@ -8,17 +8,28 @@
 import UIKit
 
 class BoardTextSearchVC: UIViewController{
-    var isFetching : Bool = false
+    var isFetching : Bool = true
     var page = 0
     var searchText = ""
     
     var searchResultList: [SearchResultContent] = [] {
         didSet{
+            if searchResultList.count == 0 {
+                noDataScreenView.isHidden = false
+            } else {
+                noDataScreenView.isHidden = true
+            }
             DispatchQueue.main.async {
                 self.searchResultTableView.reloadData()
             }
         }
     }
+    private lazy var noDataScreenView: NoDataScreenView = {
+       let view = NoDataScreenView()
+        
+        view.setLabel(text: "검색 결과가 없습니다. ", range: "")
+        return view
+    }()
     private lazy var searchController : UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
@@ -41,12 +52,13 @@ class BoardTextSearchVC: UIViewController{
         self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
-        setNavigation()
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+        setNavigation()
     }
     
 }
@@ -56,13 +68,17 @@ extension BoardTextSearchVC {
         searchResultTableView.dataSource = self
     }
     private func addSubViews() {
-        self.view.addSubview(searchResultTableView)
+        self.view.addSubViews([searchResultTableView,noDataScreenView])
     }
     private func setAutoLayout(){
         searchResultTableView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+        }
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
     private func setNavigation(){
@@ -80,7 +96,7 @@ extension BoardTextSearchVC : UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return}
         searchText = text
-
+        
         APIGetManager.shared.getSearchBoardText(searchText: text, page: 0) { searchDataInfo,response  in
             self.errorHandling(response: response)
             guard let searchResultData = searchDataInfo?.result.content else { return }
@@ -99,6 +115,7 @@ extension BoardTextSearchVC: UITableViewDelegate {
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
+            
             if !isFetching {
                 page += 1
                 self.isFetching = true

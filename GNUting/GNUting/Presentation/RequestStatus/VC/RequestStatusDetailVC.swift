@@ -15,7 +15,7 @@ class RequestStatusDetailVC: UIViewController {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         
         return stackView
     }()
@@ -43,31 +43,25 @@ class RequestStatusDetailVC: UIViewController {
         button.addTarget(self, action: #selector(tapAcceptButton), for: .touchUpInside)
         return button
     }()
-    private lazy var groupCountLabel: UILabel = {
-       let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 20)
-        
-        return label
-    }()
+    private lazy var groupCountView = ImagePlusLabelView()
     
-    private lazy var stateLabel : BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
-        label.textColor = .white
-        
-        label.layer.cornerRadius = 10
-        label.layer.masksToBounds = true
+    private lazy var stateLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.textColor = UIColor(named: "DisableColor")
+        label.textAlignment = .right
         return label
     }()
     private lazy var dateMemeberTableView : UITableView = {
-        let tableView = UITableView(frame: .zero,style: .grouped)
-        tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: MemberTableViewCell.identi)
+        let tableView = UITableView()
+        tableView.register(DateMemeberTableViewCell.self, forCellReuseIdentifier: DateMemeberTableViewCell.identi)
         tableView.register(DateMemberHeader.self, forHeaderFooterViewReuseIdentifier: DateMemberHeader.identi)
         tableView.separatorStyle = .none
         tableView.bounces = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .white
+        
         return tableView
     }()
     override func viewDidLoad() {
@@ -88,22 +82,23 @@ class RequestStatusDetailVC: UIViewController {
 extension RequestStatusDetailVC{
     private func setAddSubViews() {
         view.addSubViews([topStackView,dateMemeberTableView,buttonStackView])
-        topStackView.addStackSubViews([groupCountLabel,stateLabel])
+        topStackView.addStackSubViews([groupCountView,stateLabel])
         
     }
     private func setAutoLayout(){
         topStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.right.equalToSuperview().inset(Spacing.left)
+            
         }
-        groupCountLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+   
         dateMemeberTableView.snp.makeConstraints { make in
             make.top.equalTo(topStackView.snp.bottom).offset(Spacing.top)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(25)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-65)
         }
         buttonStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-38)
             make.left.right.equalToSuperview().inset(Spacing.left)
         }
         
@@ -130,24 +125,35 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateMemeberTableViewCell.identi, for: indexPath) as? DateMemeberTableViewCell else {return UITableViewCell()}
+       
+        if indexPath.row == (dedatilData?.applyUserCount ?? 0) - 1 {
+            cell.addBorders(to: [.bottom], in: UIColor(named: "BorderColor")!, width: 1)
+        }
+      
+        cell.addBorders(to: [.left,.right], in: UIColor(named: "BorderColor")!, width: 1)
         if indexPath.section == 0 {
-            if let applyUserData = dedatilData?.applyUser{
-                cell.setDateMember(model: applyUserData[indexPath.row])
-                cell.userImageTappedClosure = {
-                    let vc = UserDetailVC()
-                    vc.userNickName = applyUserData[indexPath.row].nickname
-                    vc.imaegURL = applyUserData[indexPath.row].profileImage
-                    self.presentFullScreenVC(viewController: vc)
-                }
-            }
-        }else {
             if let participantUser = dedatilData?.participantUser{
                 cell.setDateMember(model: participantUser[indexPath.row])
                 cell.userImageTappedClosure = {
                     let vc = UserDetailVC()
                     vc.userNickName = participantUser[indexPath.row].nickname
                     vc.imaegURL = participantUser[indexPath.row].profileImage
+                    vc.userDepartment = participantUser[indexPath.row].department
+                    vc.userStudentID = participantUser[indexPath.row].studentId
+                    self.presentFullScreenVC(viewController: vc)
+                }
+            }
+          
+        }else {
+            if let applyUserData = dedatilData?.applyUser{
+                cell.setDateMember(model: applyUserData[indexPath.row])
+                cell.userImageTappedClosure = {
+                    let vc = UserDetailVC()
+                    vc.userNickName = applyUserData[indexPath.row].nickname
+                    vc.imaegURL = applyUserData[indexPath.row].profileImage
+                    vc.userDepartment = applyUserData[indexPath.row].department
+                    vc.userStudentID = applyUserData[indexPath.row].studentId
                     self.presentFullScreenVC(viewController: vc)
                 }
             }
@@ -157,10 +163,15 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateMemberHeader.identi) as? DateMemberHeader else { return UIView()}
+        
         if section == 0 {
-            header.setHeader(major: dedatilData?.applyUserDepartment, count: dedatilData?.applyUserCount)
+            header.requestStatus = true
+            header.setHeader(major: dedatilData?.participantUserDepartment)
+            
         }else {
-            header.setHeader(major: dedatilData?.participantUserDepartment, count: dedatilData?.participantUserCount)
+            header.requestStatus = false
+            
+            header.setHeader(major: dedatilData?.applyUserDepartment)
         }
         
         return header
@@ -170,15 +181,15 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
         return UIView()
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
+        return .leastNonzeroMagnitude
     }
 }
 extension RequestStatusDetailVC {
     private func setStateLabel(state: String,groupCount: Int) {
-        groupCountLabel.text = "\(groupCount):\(groupCount) 매칭"
+        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 16)!, labelText: "\(groupCount):\(groupCount) 매칭")
         var applyStatus: RequestState = .waiting
         switch state{
-        case "성공":
+        case "승인":
             applyStatus = .Success
             buttonStackView.isHidden = true
         case "신청 취소":
@@ -192,7 +203,7 @@ extension RequestStatusDetailVC {
             applyStatus = .waiting
         }
         stateLabel.text = applyStatus.statusString
-        stateLabel.backgroundColor = applyStatus.backgroundColor
+        stateLabel.textColor = applyStatus.textColor
     }
 }
 

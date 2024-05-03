@@ -25,15 +25,14 @@ class DetailDateBoardSetView: UIView {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 7
-        stackView.backgroundColor = UIColor(hexCode: "EEEEEE")
-        stackView.layer.cornerRadius = 18
+        stackView.backgroundColor = .white
+        stackView.layer.cornerRadius = 10
         stackView.layer.masksToBounds = true
         return stackView
     }()
     private lazy var borderView : UIView = {
        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "C5C5C5")
-        
+        view.backgroundColor = UIColor(hexCode: "F3F3F3")
         return view
     }()
     private lazy var updateButton : BoardSettingButton = {
@@ -59,7 +58,7 @@ class DetailDateBoardSetView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        
+    
     }
     
     required init?(coder: NSCoder) {
