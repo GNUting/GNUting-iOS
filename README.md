@@ -11,30 +11,22 @@
 - 채팅
 
 ### Language
-- Kotlin
+- Swift
 
-### Libraries
-- Navigation Component
-- ViewModel
-- LiveData
-- Room
-- Paging3
-- DataStore
-- Coroutine & Flow
-- Hilt
-- Glide
-- Splash Screen
-- Retrofit2, OkHttp3
-- Gson
+### Libraries & Framework
+- UIKit
+- PhotosUI
 - FCM
-- NaikSoftware StompProtocolAndroid (STOMP)
+- Alamofire
+- Snapkit
+- SystemConfiguration
+- Network
+- zlib
+- Starcream
+- SwiftStomp
+
 
 ### Architecture
-GNUting is based on MVVM design pattern and repository pattern
-<p align="center">
-  <img src="https://gnuting.github.io/GNUting-PrivacyPolicy/gunting_arc.webp" width="50%">
-</p>
+GNUting is based on MVC design pattern and repository pattern
 
-## 🧩 Google Play
-구글 플레이 스토어에서 지누팅을 다운로드 받을 수 있습니다.<br/>
-<a href="https://play.google.com/store/apps/details?id=com.changs.android.gnuting_android"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="20%"></a>
+
