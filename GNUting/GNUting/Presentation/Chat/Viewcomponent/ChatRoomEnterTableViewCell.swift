@@ -15,6 +15,7 @@ class ChatRoomEnterTableViewCell: UITableViewCell {
         label.backgroundColor = UIColor(hexCode: "F5F5F5")
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
+        label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         return label
@@ -24,7 +25,7 @@ class ChatRoomEnterTableViewCell: UITableViewCell {
         contentView.addSubview(enterExplainLabel)
         enterExplainLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(12)
-            make.left.right.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
         }
     }
     
@@ -42,5 +43,8 @@ class ChatRoomEnterTableViewCell: UITableViewCell {
 extension ChatRoomEnterTableViewCell {
     func setCell(message: String){
         enterExplainLabel.text = message
+    }
+    func setSizeToFitMessageLabel() {
+        enterExplainLabel.adjustsFontSizeToFitWidth = true
     }
 }

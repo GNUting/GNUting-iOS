@@ -28,6 +28,11 @@
 		F841A7CC2BA73E0E00A9F9D4 /* RequestChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */; };
 		F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7CD2BA74AF700A9F9D4 /* RequestStatusModel.swift */; };
 		F841A7D22BA74EA300A9F9D4 /* DateStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7D12BA74EA300A9F9D4 /* DateStatusModel.swift */; };
+		F8483F2A2BE23DE400FC3AB6 /* WritePostButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F292BE23DE400FC3AB6 /* WritePostButton.swift */; };
+		F8483F2E2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */; };
+		F8483F302BE4892600FC3AB6 /* NoDataScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */; };
+		F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */; };
+		F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */; };
 		F850061B2B738D78007AB351 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061A2B738D78007AB351 /* TermsVC.swift */; };
 		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
 		F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061F2B739488007AB351 /* UIColor+Extension.swift */; };
@@ -144,8 +149,8 @@
 		F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */; };
 		F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */; };
 		F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */; };
-		F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */; };
-		F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */; };
+		F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */; };
+		F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */; };
 		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +179,11 @@
 		F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestChatModel.swift; sourceTree = "<group>"; };
 		F841A7CD2BA74AF700A9F9D4 /* RequestStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusModel.swift; sourceTree = "<group>"; };
 		F841A7D12BA74EA300A9F9D4 /* DateStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStatusModel.swift; sourceTree = "<group>"; };
+		F8483F292BE23DE400FC3AB6 /* WritePostButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostButton.swift; sourceTree = "<group>"; };
+		F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlusLabelView.swift; sourceTree = "<group>"; };
+		F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataScreenView.swift; sourceTree = "<group>"; };
+		F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemeberTableViewCell.swift; sourceTree = "<group>"; };
+		F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		F850061A2B738D78007AB351 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		F850061F2B739488007AB351 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -286,8 +296,8 @@
 		F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCheckButton.swift; sourceTree = "<group>"; };
 		F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateJoinMemberVC.swift; sourceTree = "<group>"; };
 		F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDetailView.swift; sourceTree = "<group>"; };
-		F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewSendMessageCell.swift; sourceTree = "<group>"; };
-		F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewReceiveMessageCell.swift; sourceTree = "<group>"; };
+		F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewReceiveMessageCell.swift; sourceTree = "<group>"; };
+		F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewSendMessageCell.swift; sourceTree = "<group>"; };
 		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +374,7 @@
 				F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */,
 				F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */,
 				F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */,
+				F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -575,6 +586,7 @@
 				F850061F2B739488007AB351 /* UIColor+Extension.swift */,
 				F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */,
 				F88EE4872B9F06550058BC00 /* UIImage+Extension.swift */,
+				F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -850,6 +862,7 @@
 				F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */,
 				F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */,
 				F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */,
+				F8483F292BE23DE400FC3AB6 /* WritePostButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -946,6 +959,8 @@
 				F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */,
 				F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */,
 				F87351852B90B043004E89C5 /* BasePaddingLabel.swift */,
+				F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */,
+				F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1045,8 +1060,8 @@
 			isa = PBXGroup;
 			children = (
 				F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */,
-				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
-				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
+				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
+				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
 				F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */,
 			);
 			path = Viewcomponent;
@@ -1232,7 +1247,7 @@
 				F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
 				F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */,
-				F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */,
+				F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */,
 				F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */,
 				F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
@@ -1272,6 +1287,7 @@
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */,
 				F88EE4882B9F06550058BC00 /* UIImage+Extension.swift in Sources */,
+				F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
@@ -1295,23 +1311,27 @@
 				F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */,
 				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
+				F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */,
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,
 				F8510D0A2B98B09A00CF1055 /* SignUpModelManager.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
 				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
 				F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */,
+				F8483F2A2BE23DE400FC3AB6 /* WritePostButton.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
 				F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */,
 				F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */,
+				F8483F302BE4892600FC3AB6 /* NoDataScreenView.swift in Sources */,
 				F85E0AE02BD128BA00ADBE7C /* LoginTextFieldView.swift in Sources */,
 				F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */,
 				F8DB022D2BB412FE0067CED2 /* ChatMessageModel.swift in Sources */,
 				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
 				F8B6ECA12BA4781F0058C6E8 /* MyPostModel.swift in Sources */,
+				F8483F2E2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift in Sources */,
 				F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */,
-				F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */,
+				F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */,
 				F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */,
 				F882DBB52BA432B5009201D2 /* CommonModel.swift in Sources */,
 				F841A7CC2BA73E0E00A9F9D4 /* RequestChatModel.swift in Sources */,
@@ -1396,7 +1416,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1451,7 +1471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1487,14 +1507,18 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "원동진";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1523,14 +1547,18 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "원동진";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

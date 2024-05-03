@@ -94,7 +94,7 @@ extension UpdateProfileVC{
             make.right.equalToSuperview().offset(Spacing.right)
         }
         majorInputView.snp.makeConstraints { make in
-            make.top.equalTo(nickNameInputView.snp.bottom).offset(12)
+            make.top.equalTo(nickNameInputView.snp.bottom)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
@@ -104,7 +104,7 @@ extension UpdateProfileVC{
             make.right.equalToSuperview().offset(Spacing.right)
         }
         updateProfileButton.snp.makeConstraints { make in
-            make.top.equalTo(introduceInputView.snp.bottom).offset(24)
+            
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
             make.height.equalTo(50)

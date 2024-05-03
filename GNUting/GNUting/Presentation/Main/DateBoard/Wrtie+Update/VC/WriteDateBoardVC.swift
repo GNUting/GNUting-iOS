@@ -46,7 +46,7 @@ class WriteDateBoardVC: UIViewController {
         getUserData()
         addSubViews()
         setAutoLayout()
-        
+        self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,8 +78,8 @@ extension WriteDateBoardVC{
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(titleContentView.snp.bottom).offset(Spacing.top)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            
             make.height.equalToSuperview().dividedBy(2)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }

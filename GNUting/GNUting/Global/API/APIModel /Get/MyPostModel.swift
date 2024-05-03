@@ -14,9 +14,10 @@ struct MyPostModel : Codable{
 // MARK: - Result
 struct MyPostResult: Codable {
     let id: Int
-    let title, detail, status, gender: String
+    let title, detail, status, gender, time: String
     let user: MyInfo
     let inUserCount: Int
+    
 }
 
 // MARK: - User

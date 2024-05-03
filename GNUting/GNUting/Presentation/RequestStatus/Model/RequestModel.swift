@@ -15,6 +15,18 @@ enum RequestState {
 }
 
 extension RequestState {
+    var textColor : UIColor {
+        switch self {
+        case .waiting:
+            return UIColor(named: "979C9E") ?? .systemGray
+        case .Success:
+            return UIColor(named: "SecondaryColor") ?? .systemBlue
+        case .cacnel:
+            return UIColor(named: "PrimaryColor") ?? .systemRed
+        case .refuse:
+            return UIColor(named: "PrimaryColor") ?? .systemRed
+        }
+    }
     var backgroundColor : UIColor {
         switch self {
         case .waiting:
@@ -32,11 +44,11 @@ extension RequestState {
         case .waiting:
             return "대기중"
         case .Success:
-            return "성공"
+            return "수락 완료"
         case .cacnel:
             return "신청 취소"
         case .refuse:
-            return "거절됨"
+            return "거절 완료"
         }
     }
 }

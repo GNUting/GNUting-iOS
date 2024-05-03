@@ -14,8 +14,8 @@ class AddMemeberCollectionViewCell: UICollectionViewCell {
     private lazy var userIDNameLabel : UILabel = {
        let label = UILabel()
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 15)
-        label.text = "짱짱맨(asd123)"
-        label.textColor = .white
+        
+        label.textColor = UIColor(named: "DisableColor")
         return label
     }()
     private lazy var cancelImageView : UIImageView = {
@@ -25,7 +25,7 @@ class AddMemeberCollectionViewCell: UICollectionViewCell {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(hexCode: "D5CFCF")
+        self.backgroundColor = .white
         setAddSubViews()
         setAutoLayout()
         setlayer()
@@ -46,9 +46,9 @@ extension AddMemeberCollectionViewCell{
             make.edges.equalToSuperview()
         }
         userIDNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(8)
             make.left.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-8)
         }
         cancelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
@@ -59,6 +59,8 @@ extension AddMemeberCollectionViewCell{
     }
     private func setlayer() {
         self.layer.cornerRadius = 10
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(named: "SecondaryColor")?.cgColor
         self.layer.masksToBounds = true
     }
     func setCell(text: String) {
