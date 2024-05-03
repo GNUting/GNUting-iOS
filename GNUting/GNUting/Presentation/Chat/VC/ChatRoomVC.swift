@@ -121,13 +121,15 @@ extension ChatRoomVC{
         }
         chatRoomTableView.snp.makeConstraints { make in
             make.top.equalTo(borderView1.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(25)
             
         }
         sendStackView.snp.makeConstraints { make in
             make.bottom.greaterThanOrEqualTo(view.keyboardLayoutGuide.snp.top)
             make.left.right.equalToSuperview().inset(5)
         }
+        textField.setContentHuggingPriority(.init(249), for: .horizontal)
+        sendMessageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         borderView2.snp.makeConstraints { make in
             make.top.equalTo(chatRoomTableView.snp.bottom)
             make.bottom.equalTo(sendStackView.snp.top).offset(-5)
@@ -156,6 +158,7 @@ extension ChatRoomVC {
         DispatchQueue.main.async {
             if chatMessageCount != 0{
                 self.chatRoomTableView.scrollToRow(at: IndexPath(row: chatMessageCount - 1, section: 0), at: .bottom, animated: true)
+                
             }
         }
     }
@@ -171,14 +174,17 @@ extension ChatRoomVC: UITableViewDataSource{
         if cellData.email == userEmail{
             guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
             sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+            sendCell.setSizeToFitMessageLabel()
             return sendCell
         } else if cellData.email == nil{
             guard let enterCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomEnterTableViewCell.identi, for: indexPath) as? ChatRoomEnterTableViewCell else { return UITableViewCell() }
             enterCell.setCell(message: cellData.message)
+            enterCell.setSizeToFitMessageLabel()
             return enterCell
         } else {
             guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewReceiveMessageCell.identi, for: indexPath) as? ChatRoomTableViewReceiveMessageCell else { return UITableViewCell() }
             receiveCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+            receiveCell.setSizeToFitMessageLabel()
             return  receiveCell
         }
     }
@@ -278,8 +284,8 @@ extension ChatRoomVC: SwiftStompDelegate{
             stringMessage = stringMessage.replacingOccurrences(of: "{", with: "")
             stringMessage = stringMessage.replacingOccurrences(of: "}", with: "")
             
-            let messageArr = stringMessage.split(separator: ",")
-            var contentArr : [String] = []
+//            let messageArr = stringMessage.split(separator: ",")
+//            var contentArr : [String] = []
 
 //            for content in messageArr{
 //                let splitContent = content.split(separator: ":").map{String($0)}

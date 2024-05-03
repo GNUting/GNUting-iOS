@@ -21,6 +21,7 @@ struct BoardResult: Codable {
     let gender: String
     let user : BoardUser
     let inUserCount: Int
+    let time: String
 }
 
 struct BoardUser: Codable {

@@ -60,7 +60,7 @@ extension DateJoinMemberVC {
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(24)
-            make.left.equalToSuperview()
+            make.left.right.equalToSuperview().inset(25)
             make.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
@@ -81,7 +81,8 @@ extension DateJoinMemberVC : UITableViewDataSource {
             let vc = UserDetailVC()
             vc.imaegURL = self.userInfos[indexPath.row].profileImage
             vc.userNickName = self.userInfos[indexPath.row].nickname
-            
+            vc.userDepartment = self.userInfos[indexPath.row].department
+            vc.userStudentID = self.userInfos[indexPath.row].studentId
             self.presentFullScreenVC(viewController: vc)
         }
         return cell

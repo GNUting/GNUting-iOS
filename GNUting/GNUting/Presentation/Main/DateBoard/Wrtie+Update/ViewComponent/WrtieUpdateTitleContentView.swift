@@ -7,7 +7,7 @@
 
 import UIKit
 //MARK: - 제목, 내용 입력 화면
-class WrtieUpdatePostTextView: UIView, UITextViewDelegate{
+class WrtieUpdatePostTextView: UIView{
     private lazy var upperView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
@@ -39,6 +39,7 @@ class WrtieUpdatePostTextView: UIView, UITextViewDelegate{
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -85,3 +86,11 @@ extension WrtieUpdatePostTextView: UITextFieldDelegate {
     }
 }
 
+extension WrtieUpdatePostTextView: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            contentTextView.resignFirstResponder()
+        }
+        return true
+    }
+}

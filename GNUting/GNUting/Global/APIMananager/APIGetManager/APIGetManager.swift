@@ -281,10 +281,9 @@ class APIGetManager: RequestInterceptor {
     func getNotificationData(completion: @escaping(NotificationModel?)->Void) {
         let url = EndPoint.notification.url
         AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
             .responseDecodable(of: NotificationModel.self) { response in
                     guard let statusCode = response.response?.statusCode else { return }
-
-                    
                     switch response.result {
                     case .success:
                         print("🟢 getNotificationData statusCode: \(statusCode)")

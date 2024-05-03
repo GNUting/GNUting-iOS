@@ -39,6 +39,7 @@ extension UIViewController{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
+    
         if let url = URL(string: stringURL ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let imageData = data else { return }
@@ -46,8 +47,7 @@ extension UIViewController{
                 completion(image)
             }.resume()
         }else {
-            
-            guard let image = UIImage(named: "ProfileImg") else { return }
+            guard let image = UIImage(named: "photoImg") else { return }
             completion(image)
         }
     }
@@ -105,4 +105,8 @@ extension UIViewController{
     func pushViewContoller(viewController: UIViewController) {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+    @objc func tapWriteTextButton(){
+        pushViewContoller(viewController: WriteDateBoardVC())
+    }
+  
 }
