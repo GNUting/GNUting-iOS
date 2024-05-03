@@ -12,9 +12,23 @@ class RequestStateVC: UIViewController {
     var dateStatusAllInfos : [ApplicationStatusResult] = []
     var dateStatusList : [DateStateModel] = []{
         didSet{
+            if dateStatusList.count == 0 {
+                noDataScreenView.isHidden = false
+                
+            } else {
+                noDataScreenView.isHidden = true
+                
+            }
             requsetListTableView.reloadData()
         }
     }
+    
+    private lazy var noDataScreenView: NoDataScreenView = {
+       let view = NoDataScreenView()
+        
+        view.setLabel(text: "신청현황이 비어있습니다.\n과팅 게시판을 이용하거나 게시글을 써보세요!", range: "과팅 게시판을 이용하거나 게시글을 써보세요!")
+        return view
+    }()
     private lazy var segmentedControl : UnderLineSegmentedControl = {
         let control = UnderLineSegmentedControl(items: ["신청목록","신청 받은 목록"])
         control.addTarget(self, action: #selector(didchangeValue(segment :)), for: .valueChanged)
@@ -53,6 +67,7 @@ class RequestStateVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
         if selectedSegmentIndex == 0{
             getRequestStatus()
         } else {
@@ -63,7 +78,7 @@ class RequestStateVC: UIViewController {
 }
 extension RequestStateVC{
     private func addSubViews() {
-        self.view.addSubViews([segmentedControl,requsetListTableView])
+        self.view.addSubViews([segmentedControl,requsetListTableView,noDataScreenView])
     }
     private func setAutoLayout(){
         segmentedControl.snp.makeConstraints { make in
@@ -75,6 +90,9 @@ extension RequestStateVC{
             make.top.equalTo(segmentedControl.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
     
@@ -124,17 +142,17 @@ extension RequestStateVC {
             self.errorHandling(response: response)
             guard let results = requestStatusData?.result else { return }
             self.dateStatusAllInfos = results
-            
             self.dateStatusList = []
             for result in results {
                 let participantUserDepartment = result.participantUserDepartment
                 let participantUserCount = result.participantUserCount
                 var applyStatus : RequestState = .waiting
+            
                 switch result.applyStatus{
-                case "성공":
+                case "승인":
                     applyStatus = .Success
-                case "신청 취소":
-                    applyStatus = .cacnel
+                case "거절":
+                    applyStatus = .refuse
                 default:
                     applyStatus = .waiting
                 }
@@ -149,6 +167,7 @@ extension RequestStateVC {
             self.errorHandling(response: response)
             guard let results = requestStatusData?.result else { return }
             self.dateStatusAllInfos = results
+            
             self.dateStatusList = []
             guard let results = requestStatusData?.result else { return }
             for result in results {
@@ -156,7 +175,7 @@ extension RequestStateVC {
                 let applyUserCount = result.applyUserCount
                 var applyStatus : RequestState = .waiting
                 switch result.applyStatus{
-                case "성공":
+                case "승인":
                     applyStatus = .Success
                 case "거절":
                     applyStatus = .refuse

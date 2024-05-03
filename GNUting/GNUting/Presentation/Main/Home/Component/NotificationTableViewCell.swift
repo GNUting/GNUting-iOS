@@ -9,22 +9,38 @@ import UIKit
 
 class NotificationTableViewCell: UITableViewCell {
     static let identi = "NotificationTableViewCellid"
-    private lazy var notificationBodyLabel : UILabel = {
-       let label = UILabel()
+    private lazy var notificationImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "MeetingAlertImage")
+        return imageView
+    }()
+    private lazy var labelStackView : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        stackView.alignment = .fill
+        return stackView
+    }()
+    private lazy var notificationTitleLabel : UILabel = {
+        let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        return label
+    }()
+    private lazy var notificationBodyLabel : UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 13)
         return label
     }()
     private lazy var dateLabel : UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(named: "DisableColor")
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         return label
     }()
-    private let borderView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -38,38 +54,35 @@ class NotificationTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
 extension NotificationTableViewCell{
     private func setAddSubViews() {
-        contentView.addSubViews([notificationBodyLabel,dateLabel,borderView])
+        contentView.addSubViews([notificationImageView,labelStackView])
+        labelStackView.addStackSubViews([notificationTitleLabel,notificationBodyLabel,dateLabel])
     }
     private func setAutoLayout(){
-        notificationBodyLabel.snp.makeConstraints { make in
+        notificationImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(25)
             
+            make.width.height.equalTo(40)
         }
-        dateLabel.snp.makeConstraints { make in
+        labelStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
-            make.right.equalToSuperview()
-            make.left.equalTo(notificationBodyLabel.snp.right).offset(10)
-            
+            make.left.equalTo(notificationImageView.snp.right).offset(15)
+            make.bottom.equalToSuperview().offset(-12)
+            make.right.equalToSuperview().offset(-25)
         }
-        borderView.snp.makeConstraints { make in
-            make.top.equalTo(notificationBodyLabel.snp.bottom).offset(12)
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
-        dateLabel.setContentHuggingPriority(.init(251), for: .horizontal)
-        dateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
+    
 }
 extension NotificationTableViewCell{
     func setCell(model : NotificationModelResult){
+        notificationTitleLabel.text = model.title
         notificationBodyLabel.text = model.body
         dateLabel.text = model.time
     }
