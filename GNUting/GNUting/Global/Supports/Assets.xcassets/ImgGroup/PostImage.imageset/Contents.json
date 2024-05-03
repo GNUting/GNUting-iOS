@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Ellipse 152.svg",
+      "filename" : "fluent-emoji_memo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "fluent-emoji_memo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "fluent-emoji_memo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

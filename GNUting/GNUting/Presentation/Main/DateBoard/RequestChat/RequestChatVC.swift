@@ -25,7 +25,7 @@ class RequestChatVC: UIViewController{
         tableView.register(MemberTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MemberTableViewHeader.identi)
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.sectionHeaderTopPadding = 0
         return tableView
     }()
     
@@ -59,7 +59,7 @@ extension RequestChatVC{
       
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
         }
         
         chatRequestCompletedButton.snp.makeConstraints { make in
@@ -138,8 +138,9 @@ extension RequestChatVC {
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
             guard let userData = userData?.result else { return }
-            guard let profileImage = userData.profileImage else { return }
-            self.addMemberDataList.append(UserInfosModel(id: userData.id, name: userData.name, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, userSelfIntroduction: userData.userSelfIntroduction, profileImage: profileImage))
+            
+            
+            self.addMemberDataList.append(UserInfosModel(id: userData.id, name: userData.name, gender: userData.gender, age: userData.age, nickname: userData.nickname, department: userData.department, studentId: userData.studentId, userRole: userData.userRole, userSelfIntroduction: userData.userSelfIntroduction, profileImage: userData.profileImage))
             
         }
     }

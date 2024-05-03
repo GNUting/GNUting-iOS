@@ -1,5 +1,5 @@
 //
-//  ChatRoomTableViewSendMessageCell.swift
+//  ChatRoomTableViewReceiveMessageCell.swift
 //  GNUting
 //
 //  Created by 원동진 on 3/28/24.
@@ -7,58 +7,41 @@
 
 import UIKit
 
-class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
-    static let identi = "ChatRoomTableViewSendMessageCellid"
+class ChatRoomTableViewSendMessageCell: UITableViewCell {
+    static let identi = "ChatRoomTableViewReceiveMessageCellid"
     private lazy var upperView : UIStackView = {
-        let stackView = UIStackView()
+       let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 5
+        stackView.distribution = .fill
         stackView.alignment = .bottom
-        stackView.distribution = .fill
+        stackView.spacing = 5
         return stackView
     }()
-    
-    private lazy var userImageView: UIImageView = {
-        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "SampleImg1")
-        return imageView
-    }()
-    private lazy var middleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 2
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        return stackView
-    }()
-    private lazy var nickNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
-        label.textColor = .black
         
-        return label
-    }()
+    
+
     private lazy var messageLabel : BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textColor = UIColor(named: "6B6B6B")
-        
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
+        
         label.layer.masksToBounds = true
+        label.backgroundColor = UIColor(hexCode: "FFE2E0")
         return label
     }()
     private lazy var sendDateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
-        label.textColor = UIColor(named: "979C9E")
-        label.text = "16:43"
+        label.textColor = UIColor(named: "DisableColor")
+        
+        label.textAlignment = .right
         return label
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setAddSubViews()
         setAutoLayout()
     }
@@ -75,43 +58,34 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     }
     
 }
-extension ChatRoomTableViewReceiveMessageCell{
+extension ChatRoomTableViewSendMessageCell{
     private func setAddSubViews() {
         contentView.addSubview(upperView)
         
-        upperView.addStackSubViews([userImageView,middleStackView,sendDateLabel])
-        middleStackView.addStackSubViews([nickNameLabel,messageLabel])
+        upperView.addStackSubViews([sendDateLabel,messageLabel])
+        
     }
     private func setAutoLayout(){
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
-            make.left.right.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().offset(-10)
-        }
-        userImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(45)
-        }
-        sendDateLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+       
+        sendDateLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        sendDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }
-extension ChatRoomTableViewReceiveMessageCell {
+extension ChatRoomTableViewSendMessageCell {
     func setCell(nickName: String, UserImage: String, message:String,sendDate: String){
-        nickNameLabel.text = nickName
-        messageLabel.text = message
-        
+        messageLabel.text = "\(message)"
         
         let time = sendDate.split(separator: "T")[1].split(separator: ":")
         sendDateLabel.text = "\(time[0]):\(time[1])"
-        setImageFromStringURL(stringURL: UserImage) { image in
-            DispatchQueue.main.async {
-                self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
-                self.userImageView.layer.masksToBounds = true
-            }
-            
-        }
+
         
+    }
+    func setSizeToFitMessageLabel() {
+        messageLabel.adjustsFontSizeToFitWidth = true
     }
 }

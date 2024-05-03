@@ -9,190 +9,192 @@
 import UIKit
 import SnapKit
 class HomeVC: UIViewController{
-    let sampleAdvertImage : [UIImage] = [UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!,UIImage(named: "SampleImg2")!]
     var imageURL : String?
-    var userNickname: String?
-    var homeBoardData : [BoardResult] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.dateBoardTableView.reloadData()
-            }
-        }
-    }
+    var username: String?
+    var userStudentID: String?
+    var userDepartment: String?
     var currentPage = 0
     
-    private lazy var pageControl : UIPageControl = {
-        let pageControl = UIPageControl()
+    private lazy var bellImage : UIImageView = {
+        let imageView = UIImageView()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapNotiButton))
         
-        pageControl.currentPage = 0
-        pageControl.numberOfPages = sampleAdvertImage.count
-        pageControl.currentPageIndicatorTintColor = UIColor(hexCode: "A0A0A0")
-        pageControl.pageIndicatorTintColor = UIColor(hexCode: "D9D9D9")
-        return pageControl
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+        
+        return imageView
+    }()
+    private lazy var homeTopView : UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner,.layerMaxXMinYCorner])
+        return view
+    }()
+    private lazy var homeBottomView : UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
     }()
     private lazy var explainStackView : UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.alignment = .leading
-        stackView.spacing = 5
         
         return stackView
     }()
-    private lazy var explainLabel: UILabel = {
+    private lazy var userNameLabel:  UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 22)
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 22)
+        
         return label
     }()
-    private lazy var explainImage: UIImageView = {
-       let imageView = UIImageView()
-        imageView.image = UIImage(named: "ExplainImage")
+    
+    private lazy var explainLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.text = "지누팅에서 아름다운 만남을 가져보세요!"
+        label.textColor = UIColor(named: "DisableColor")
+        
+        return label
+    }()
+    
+    private lazy var writePostButton : WritePostButton = {
+        let button = WritePostButton()
+        button.writePostButtonDelegate = self
+        return button
+    }()
+    
+    private lazy var imageButton = UIButton()
+    
+    private lazy var bannerImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "bannerImage")
+        imageView.layer.cornerRadius = 10
+        imageView.layer.masksToBounds = true
+        imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapBannerImageView))
+        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
-    private lazy var flowLayout : UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        return layout
+    private lazy var postSubView: ImagePlusLabelView = {
+        let view = ImagePlusLabelView()
+        view.setImagePlusLabelView(imageName: "PostImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 14) ?? .boldSystemFont(ofSize: 14), labelText: "모든 글은 여기서 볼수 있어요")
+        return view
     }()
-    private lazy var advertCollectionView : UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(AdvertCollectionViewCell.self, forCellWithReuseIdentifier: AdvertCollectionViewCell.identi)
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
+    private lazy var cardStackView : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 15
+        return stackView
     }()
-    private lazy var dateBoardTableView : UITableView = { // 과팅 게시판
-        let tableview = UITableView()
-        tableview.separatorStyle = .none
-        tableview.register(HomeDateBoardListTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HomeDateBoardListTableViewHeader.identi)
-        tableview.register(HomeDateBoardListTableViewCell.self, forCellReuseIdentifier: HomeDateBoardListTableViewCell.identi)
-        tableview.showsVerticalScrollIndicator = false
-        tableview.bounces = false
-        return tableview
-    }()
-    private lazy var imageButton = UIButton()
-
-    private lazy var bellImage : UIImageView = {
+    private lazy var postBoardCardView : UIImageView = {
         let imageView = UIImageView()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapNotiButton))
-        imageView.addGestureRecognizer(tapGesture)
+        imageView.image = UIImage(named: "PostBoardCardImage")
         imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPostBoardCardView))
+        imageView.addGestureRecognizer(tapGesture)
+        return imageView
+    }()
+    private lazy var mypostCardView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "MypostCardImage")
+        imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMypostCardView))
+        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        
+        self.view.backgroundColor = UIColor(hexCode: "FFF0F0")
         addSubViews()
         setAutoLayout()
-        setCollectionView()
-        setTableview()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationBar()
         getNotificationCheckData()
         getUserData()
-        getBoardData()
         postFCMToken()
+        
     }
 }
 extension HomeVC{
-    private func setTableview(){
-        dateBoardTableView.delegate = self
-        dateBoardTableView.dataSource = self
-    }
-    private func setCollectionView(){
-        advertCollectionView.delegate = self
-        advertCollectionView.dataSource = self
-    }
+    
+    
     private func addSubViews() {
-        self.view.addSubViews([explainStackView,advertCollectionView,pageControl,dateBoardTableView])
-        explainStackView.addStackSubViews([explainLabel,explainImage])
+        view.addSubViews([homeTopView,homeBottomView])
+        homeTopView.addSubViews([explainStackView,writePostButton,imageButton])
+        explainStackView.addStackSubViews([userNameLabel,explainLabel])
+        homeBottomView.addSubViews([bannerImageView,postSubView,cardStackView])
+        cardStackView.addStackSubViews([postBoardCardView,mypostCardView])
     }
     private func setAutoLayout(){
+        homeTopView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.equalToSuperview().inset(25)
+        }
         explainStackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.lessThanOrEqualToSuperview().offset(Spacing.right)
+            make.top.equalToSuperview().offset(28)
+            make.left.equalToSuperview().offset(25)
         }
-
         
-        explainImage.setContentCompressionResistancePriority(.required, for: .horizontal)
-        advertCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(explainStackView.snp.bottom).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
-            make.height.equalTo(80)
-        }
-        pageControl.snp.makeConstraints { make in
-            make.top.equalTo(advertCollectionView.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
-        dateBoardTableView.snp.makeConstraints { make in
-            make.top.equalTo(pageControl.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        writePostButton.snp.makeConstraints { make in
+            make.top.equalTo(explainStackView.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(25)
+            make.bottom.equalToSuperview().offset(-16)
         }
         imageButton.snp.makeConstraints { make in
-            make.height.width.equalTo(40)
+            make.top.equalToSuperview().offset(28)
+            make.left.equalTo(explainStackView.snp.right).offset(16)
+            make.right.equalToSuperview().offset(-25)
+            make.height.width.equalTo(60)
+        }
+        
+        homeBottomView.snp.makeConstraints { make in
+            make.top.equalTo(homeTopView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        bannerImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(25)
+            make.left.right.equalToSuperview().inset(25)
+        }
+        postSubView.snp.makeConstraints { make in
+            make.top.equalTo(bannerImageView.snp.bottom).offset(27)
+            make.left.right.equalToSuperview().inset(25)
+        }
+        cardStackView.snp.makeConstraints { make in
+            make.top.equalTo(postSubView.snp.bottom).offset(12)
+            make.left.right.equalToSuperview().inset(25)
         }
     }
-    private func setNavigationBar(){
-        imageButton.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
-        let userImageButton = UIBarButtonItem(customView: imageButton)
-        userImageButton.tintColor = UIColor(named: "IconColor")
-        self.navigationItem.rightBarButtonItems = [userImageButton]
-    }
     
+    private func setUserNaemLabel(username: String) {
+        let text = "\(username) 님 안녕하세요 :)"
+        userNameLabel.text = text
+        userNameLabel.setRangeTextFont(fullText: text, range: username, uiFont: UIFont(name: Pretendard.Bold.rawValue, size: 22) ?? .boldSystemFont(ofSize: 22))
+    }
     private func setExplainLabel(text: String) {
-        explainLabel.text = "\(text)님 안녕하세요"
+        
+    }
+    private func setNavigationBar() {
+        let appLogoButtonItem = UIBarButtonItem(image: UIImage(named: "AppLogoImage"), style: .plain, target: self, action: nil)
+        appLogoButtonItem.tintColor = UIColor(named: "PrimaryColor")
+        self.navigationItem.leftBarButtonItem = appLogoButtonItem
+        let searchButtonItem = UIBarButtonItem(image: UIImage(named: "SearchImg"), style: .plain, target: self, action: #selector(self.tapSearchButton))
+        searchButtonItem.tintColor = UIColor(named: "IconColor")
+        let bellImageButton = UIBarButtonItem(customView: self.bellImage)
+        self.navigationItem.rightBarButtonItems = [bellImageButton,searchButtonItem]
+        
     }
 }
 
-extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sampleAdvertImage.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdvertCollectionViewCell.identi, for: indexPath) as? AdvertCollectionViewCell else {return UICollectionViewCell()}
-        cell.setCell(sampleAdvertImage[indexPath.item])
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 80)
-    }
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let page = Int(targetContentOffset.pointee.x / advertCollectionView.frame.width)
-        self.pageControl.currentPage = page
-    }
-}
-extension HomeVC : UITableViewDataSource,UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return homeBoardData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeDateBoardListTableViewCell.identi, for: indexPath) as? HomeDateBoardListTableViewCell else { return UITableViewCell()}
-        cell.setCell(model: homeBoardData[indexPath.row])
-        
-        return cell
-    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeDateBoardListTableViewHeader.identi) as? HomeDateBoardListTableViewHeader else {return UIView()}
-        header.tapMoreViewButtonCompletion = { [unowned self] in
-            self.pushViewContoller(viewController: DateBoardListVC())
-        }
-        return header
-    }
-    
-    
-}
+
+
 extension HomeVC{
     @objc private func tapNotiButton(){
         let vc = NotificationVC()
@@ -201,28 +203,51 @@ extension HomeVC{
     @objc private func tapUserImageButton(){
         let vc = UserDetailVC()
         vc.imaegURL = self.imageURL
-        vc.userNickName = self.userNickname
+        vc.userNickName = self.username
+        vc.userStudentID = self.userStudentID
+        vc.userDepartment = self.userDepartment
         
         presentFullScreenVC(viewController: vc)
+    }
+    @objc private func tapSearchButton(){
+        let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    @objc private func tapBannerImageView() {
+        let instagram = "https://www.instagram.com/gnu_ting?igsh=MXh1anNvY2N6cnhv" //2
+        let instagramURL = NSURL(string: instagram) //3
+        if UIApplication.shared.canOpenURL(instagramURL! as URL) { //4
+            UIApplication.shared.open( //5
+                instagramURL! as URL,
+                options: [:],
+                completionHandler: nil
+            )
+        }
+    }
+    @objc private func tapPostBoardCardView() {
+        pushViewContoller(viewController: DateBoardListVC())
+    }
+    @objc private func tapMypostCardView() {
+        pushViewContoller(viewController: UserWriteTextVC())
     }
 }
 // MARK: - Get Data
 extension HomeVC {
-    private func getBoardData() {
-        APIGetManager.shared.getBoardText(page: 1, size: 10) { [unowned self] boardData,response  in
-            errorHandling(response: response)
-            guard let boardDataList = boardData?.result else { return}
-            homeBoardData = boardDataList
-        }
-    }
+    
     private func getUserData(){
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
             self.imageURL = userData?.result?.profileImage
-            self.userNickname = userData?.result?.name ?? "유저이름"
+            self.username = userData?.result?.name ?? "유저이름"
+            self.userStudentID = userData?.result?.studentId ?? "학번"
+            self.userDepartment = userData?.result?.department ?? "학과"
             setExplainLabel(text: userData?.result?.name ?? "이름")
+            self.setUserNaemLabel(username: username ?? "유저 이름")
             
             setImageFromStringURL(stringURL:self.imageURL ) { image in
+                
                 DispatchQueue.main.async {
                     self.imageButton.setImage(image, for: .normal)
                     if self.imageURL != nil {
@@ -236,17 +261,12 @@ extension HomeVC {
     private func getNotificationCheckData(){
         APIGetManager.shared.getNotificationCheck { notificationCheckModel in
             guard let notificationCheckData = notificationCheckModel?.result else { return }
-            
             if notificationCheckData {
                 self.bellImage.image = UIImage(named: "NewBellImg")
-                let bellImageButton = UIBarButtonItem(customView: self.bellImage)
-                
-                self.navigationItem.rightBarButtonItems?.append(bellImageButton)
             } else {
                 self.bellImage.image = UIImage(named: "BellImg")
-                let bellImageButton = UIBarButtonItem(customView: self.bellImage)
-                self.navigationItem.rightBarButtonItems?.append(bellImageButton)
             }
+            self.setNavigationBar()
         }
     }
 }
@@ -259,5 +279,12 @@ extension HomeVC {
                 self.errorHandling(response: response)
             }
         }
+    }
+}
+
+//MARK: - Delegate
+extension HomeVC: WritePostButtonDelegate {
+    func tapButton() {
+        pushViewContoller(viewController: WriteDateBoardVC())
     }
 }

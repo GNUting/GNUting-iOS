@@ -11,9 +11,6 @@ import SnapKit
 
 
 class UserInfoView: UIView {
- 
-    
-
     private lazy var border1 : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "E9E9E9")
@@ -43,17 +40,10 @@ class UserInfoView: UIView {
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var middleBottomStackView : UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        return stackView
-    }()
+ 
     private lazy var nickNameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
         label.textAlignment = .left
         
         return label
@@ -61,17 +51,11 @@ class UserInfoView: UIView {
     private lazy var majorStudentIDLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
-        
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.textColor = UIColor(named: "DisableColor")
         return label
     }()
-    private lazy var writeDateLabel : UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
-        
-        return label
-    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubViews()
@@ -87,13 +71,9 @@ extension UserInfoView {
     private func addSubViews(){
         self.addSubViews([border1,upperStackView,border2])
         upperStackView.addStackSubViews([userImageButton,middleStackView])
-        middleStackView.addStackSubViews([nickNameLabel,middleBottomStackView])
-        middleBottomStackView.addStackSubViews([majorStudentIDLabel,writeDateLabel])
+        middleStackView.addStackSubViews([nickNameLabel,majorStudentIDLabel])
         middleStackView.setContentHuggingPriority(.init(250), for: .horizontal)
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
-        majorStudentIDLabel.setContentHuggingPriority(.init(250), for: .horizontal)
-        writeDateLabel.setContentHuggingPriority(.init(251), for: .horizontal)
-        writeDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
     }
     private func setAutoLayout(){
@@ -119,11 +99,13 @@ extension UserInfoView {
             make.height.equalTo(1)
         }
     }
-    func setUserInfoView(userImage: String?,userNickname: String, major: String, StudentID: String, writeDataeLabel: String) {
+    func setUserInfoView(userImage: String?,userNickname: String, major: String, StudentID: String) {
         nickNameLabel.text = userNickname
         majorStudentIDLabel.text = major + " | " + StudentID
-        writeDateLabel.text = writeDataeLabel
+
+        
         setImageFromStringURL(stringURL: userImage) { image in
+   
             DispatchQueue.main.async {
                 self.userImageButton.setImage(image, for: .normal)
                 self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2

@@ -15,11 +15,22 @@ class DateBoardListVC: UIViewController {
     var isFetching : Bool = true
     var dateBoardListData: [BoardResult] = [] {
         didSet{
+            if dateBoardListData.count == 0 {
+                noDataScreenView.isHidden = false
+            } else {
+                noDataScreenView.isHidden = true
+            }
             DispatchQueue.main.async {
                 self.dateBoardTableView.reloadData()
             }
         }
     }
+    private lazy var noDataScreenView: NoDataScreenView = {
+       let view = NoDataScreenView()
+        view.isHidden = true
+        view.setLabel(text: "게시글이 비어있습니다.", range: "")
+        return view
+    }()
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
         tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
@@ -31,20 +42,8 @@ class DateBoardListVC: UIViewController {
     }()
     
     private lazy var writeTextButton : UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("글쓰기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
-        config.image = UIImage(named: "Edit")
-        config.baseForegroundColor = .black
-        config.imagePlacement = .leading
-        config.imagePadding = 5
-        config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
-        let button = UIButton(configuration: config)
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowOffset = .zero
-        button.layer.shadowRadius = 20
+        let button = UIButton()
+        button.setImage(UIImage(named: "WritePostImage"), for: .normal)
         button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
         return button
     }()
@@ -65,25 +64,27 @@ class DateBoardListVC: UIViewController {
 }
 extension DateBoardListVC{
     private func addSubViews() {
-        view.addSubViews([dateBoardTableView,writeTextButton])
+        view.addSubViews([dateBoardTableView,noDataScreenView,writeTextButton])
     }
     private func setAutoLayout(){
         dateBoardTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         writeTextButton.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
+            make.right.equalToSuperview().offset(-25)
+            make.height.width.equalTo(40)
+        }
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
     private func setNavigationBar(){
         setNavigationBar(title: "과팅 게시판")
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "SearchImg"), style: .plain, target: self, action: #selector(tapSearchButton))
-        rightBarButtonItem.tintColor = UIColor(named: "IconColor")
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
     }
 }
 
@@ -92,7 +93,9 @@ extension DateBoardListVC: UITableViewDataSource{
         let vc = DetailDateBoardVC()
         vc.boardID = dateBoardListData[indexPath.row].id
         vc.setPushBoardList()
-        pushViewContoller(viewController: vc)
+        if dateBoardListData[indexPath.row].status == "OPEN" {
+            pushViewContoller(viewController: vc)
+        }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
@@ -114,16 +117,6 @@ extension DateBoardListVC: UITableViewDelegate{
         boardListCell.boardListSetCell(model: dateBoardListData[indexPath.row])
         boardListCell.selectionStyle = .none
         return boardListCell
-    }
-}
-extension DateBoardListVC {
-    @objc private func tapSearchButton(){
-        let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-    @objc private func tapWriteTextButton(){
-        pushViewContoller(viewController: WriteDateBoardVC())
     }
 }
 

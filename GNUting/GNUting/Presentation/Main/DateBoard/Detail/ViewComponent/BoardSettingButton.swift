@@ -19,9 +19,10 @@ class BoardSettingButton: UIButton {
 extension BoardSettingButton {
     func setButton(text: String) {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 20)!]))
+        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 12)!]))
         config.baseForegroundColor = .black
-        config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 50, bottom: 10, trailing: 50)
+        config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 15, bottom: 10, trailing: 130)
         self.configuration = config
+        
     }
 }

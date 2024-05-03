@@ -84,7 +84,7 @@ extension SignUpInputViewNicknameType{
     private func setAutoLayout(){
         inputTypeLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            
+
         }
         inputTextField.snp.makeConstraints { make in
             make.top.equalTo(inputTypeLabel.snp.bottom).offset(6)

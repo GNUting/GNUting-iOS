@@ -12,10 +12,28 @@ import UIKit
 class UserWriteTextVC: UIViewController {
     var myPostList : [MyPostResult] = [] {
         didSet{
+            if myPostList.count == 0 {
+                noDataScreenView.isHidden = false
+                writeTextButton.isHidden = false
+            } else {
+                noDataScreenView.isHidden = true
+                writeTextButton.isHidden = true
+            }
             dateBoardTableView.reloadData()
         }
     }
-    
+    private lazy var noDataScreenView: NoDataScreenView = {
+       let view = NoDataScreenView()
+        
+        view.setLabel(text: "내가 쓴 게시글이없습니다.\n아래 버튼을 눌러 과팅 게시글을 써 보세요!", range: "아래 버튼을 눌러 과팅 게시글을 써 보세요!")
+        return view
+    }()
+    private lazy var writeTextButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "WritePostImage"), for: .normal)
+        button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
+        return button
+    }()
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
         tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
@@ -30,7 +48,7 @@ class UserWriteTextVC: UIViewController {
         tabBarController?.tabBar.isHidden = true
         addSubViews()
         setAutoLayout()
-        setNavigationBar(title: "작성한 글 목록")
+        setNavigationBar(title: "내가 쓴 게시글")
         setTableView()
         
     }
@@ -45,14 +63,22 @@ extension UserWriteTextVC{
         dateBoardTableView.dataSource = self
     }
     private func addSubViews() {
-        view.addSubViews([dateBoardTableView])
+        view.addSubViews([dateBoardTableView,noDataScreenView,writeTextButton])
     }
     private func setAutoLayout(){
         dateBoardTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.top)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        writeTextButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
+            make.right.equalToSuperview().offset(-25)
+            make.height.width.equalTo(40)
         }
     }
 }
@@ -86,5 +112,11 @@ extension UserWriteTextVC {
             guard let result = postListInfo?.result else { return }
             self.myPostList = result
         }
+    }
+}
+//MARK: - Delegate
+extension UserWriteTextVC: WritePostButtonDelegate {
+    func tapButton() {
+        pushViewContoller(viewController: WriteDateBoardVC())
     }
 }
