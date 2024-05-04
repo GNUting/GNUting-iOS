@@ -105,7 +105,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
                 if response?.isSuccess ?? false {
                     let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                        self.navigationController?.setViewControllers([LoginVC()], animated: true)
+                        self.view.window?.rootViewController = LoginVC()
                     }))
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true)
