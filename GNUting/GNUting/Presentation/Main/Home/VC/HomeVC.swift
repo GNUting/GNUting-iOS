@@ -216,15 +216,7 @@ extension HomeVC{
     }
     
     @objc private func tapBannerImageView() {
-        let instagram = "https://www.instagram.com/gnu_ting?igsh=MXh1anNvY2N6cnhv" //2
-        let instagramURL = NSURL(string: instagram) //3
-        if UIApplication.shared.canOpenURL(instagramURL! as URL) { //4
-            UIApplication.shared.open( //5
-                instagramURL! as URL,
-                options: [:],
-                completionHandler: nil
-            )
-        }
+        instagramOpen()
     }
     @objc private func tapPostBoardCardView() {
         pushViewContoller(viewController: DateBoardListVC())

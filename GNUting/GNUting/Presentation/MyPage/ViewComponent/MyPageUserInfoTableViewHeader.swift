@@ -107,7 +107,7 @@ extension MyPageUserInfoTableViewHeader{
 extension MyPageUserInfoTableViewHeader {
     func setInfoView(image: String?, name: String, studentID: String, age: String, major: String,introuduce: String){
         nameLabel.text = name
-        subInfoLabel.text = "\(major) | \(studentID) | \(age)"
+        subInfoLabel.text = "\(studentID) | \(major)"
         introduceLabel.text = "\(introuduce)"
         setImageFromStringURL(stringURL: image) { image in
             DispatchQueue.main.async {
