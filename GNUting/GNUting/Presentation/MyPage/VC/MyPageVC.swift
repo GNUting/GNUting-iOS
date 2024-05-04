@@ -30,11 +30,12 @@ class MyPageVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupMyPageTabelView()
-        self.navigationController?.navigationBar.isHidden = true
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserData()
+        self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
     }
 }
@@ -105,9 +106,9 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
         case [2,1]:
             userDelete()
         case [3,0]:
-            break
+            pushViewContoller(viewController: TotalAlertVC())
         case [4,0]:
-            instagramOpen()
+            useLicense()
         case [4,1]:
             personalInformation()
         default:
@@ -172,5 +173,8 @@ extension MyPageVC {
         guard let url = URL(string: "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url)
     }
-   
+    private func useLicense() { // 오픈 소스 사용
+        guard let url = URL(string: "https://github.com/GNUting/GNUting-iOS/blob/main/Using%20Open%20Source"), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+    }
 }
