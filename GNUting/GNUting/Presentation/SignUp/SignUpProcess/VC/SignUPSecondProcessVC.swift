@@ -246,7 +246,7 @@ extension SignUPSecondProcessVC {
 extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
     func action(textFieldText: String) {
         APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
-            guard let message = response?.message else { return }
+//            guard let message = response?.message else { return }
             if statuscode == 200 {
                 self.nextButton.isEnabled = true
                 self.nickNameInputView.setCheckLabel(isHidden: false, text: "사용할 수 있는 닉네임 입니다.", success: true)
