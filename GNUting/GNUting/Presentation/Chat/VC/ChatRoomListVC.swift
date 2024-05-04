@@ -69,7 +69,7 @@ extension ChatVC: UITableViewDelegate {
         let result = chatRoomData?.result[indexPath.row]
         vc.chatRoomID = result?.id ?? 0
         vc.navigationTitle = result?.title ?? "채팅방"
-        vc.subTitleSting = "\(result?.leaderUserDepartment ?? "학과") | \(result?.applyLeaderDepartment ?? "학과")"
+        vc.subTitleSting = "\(result?.leaderUserDepartment ?? "학과")*\(result?.applyLeaderDepartment ?? "학과")"
         pushViewContoller(viewController: vc)
     }
 }
