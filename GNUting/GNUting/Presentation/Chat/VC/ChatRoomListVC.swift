@@ -86,6 +86,7 @@ extension ChatVC : UITableViewDataSource {
         if let result = chatRoomData?.result[indexPath.row] {
             cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         }
+        cell.selectionStyle = .none
         return cell
     }
     
