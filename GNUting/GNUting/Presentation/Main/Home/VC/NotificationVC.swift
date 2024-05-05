@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotificationVC: UIViewController {
+class NotificationVC: BaseViewController {
     var notificationList : [NotificationModelResult] = [] {
         didSet{
             if notificationList.count == 0 {
@@ -40,7 +40,6 @@ class NotificationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
         setAddSubViews()
         setAutoLayout()
         

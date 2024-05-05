@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-class HomeVC: UIViewController{
+class HomeVC: BaseViewController{
     var imageURL : String?
     var username: String?
     var userStudentID: String?

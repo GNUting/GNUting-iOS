@@ -28,4 +28,23 @@ class APIPutManager {
                 }
             }
     }
+    func putAlertNotification(alertStatus: String,chatRoomID: Int,completion: @escaping(DefaultResponse) -> Void) {
+        let url = BaseURL.shared.urlString + "\(chatRoomID)" + "/notificationSetting"
+        let parameters : [String : String] = ["notificationSetting": alertStatus]
+        AF.request(url,method: .put,parameters: parameters,encoding: JSONEncoding.default,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                
+                switch response.result {
+                case .success:
+                    print("🟢 putAlertNotification statusCode :\(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 putAlertNotification statusCode :\(statusCode)")
+                    completion(json)
+                }
+            }
+    }
 }

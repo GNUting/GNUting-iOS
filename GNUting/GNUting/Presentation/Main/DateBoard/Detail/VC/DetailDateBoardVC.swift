@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailDateBoardVC: UIViewController{
+class DetailDateBoardVC: BaseViewController{
     var boardID: Int = 0
     var userInfos: [UserInfosModel] = []
     var postUserInfos : User?
@@ -68,7 +68,7 @@ class DetailDateBoardVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         addSubViews()
         setAutoLayout()
         bringToDetailDateBoardSetView()

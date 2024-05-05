@@ -13,7 +13,7 @@ protocol MemberAddButtonDelegate: AnyObject{
     func sendAddMemberData(send: [UserInfosModel])
 }
 
-class SearchAddMemberVC: UIViewController{
+class SearchAddMemberVC: BaseViewController{
     
     
     var searchUser : UserInfosModel?
@@ -91,7 +91,7 @@ class SearchAddMemberVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         self.navigationController?.navigationBar.isHidden = false
         setAddSubViews()
         setAutoLayout()

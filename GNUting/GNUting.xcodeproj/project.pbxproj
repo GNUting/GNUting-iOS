@@ -17,6 +17,13 @@
 		F81D08B72BE689F000219CEA /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08B62BE689F000219CEA /* BorderView.swift */; };
 		F81D08B92BE6904000219CEA /* AlertState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08B82BE6904000219CEA /* AlertState.swift */; };
 		F81D08BC2BE690DD00219CEA /* APIPutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08BB2BE690DD00219CEA /* APIPutManager.swift */; };
+		F81D08C12BE6BDA200219CEA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F81D08C02BE6BDA200219CEA /* Alamofire */; };
+		F81D08C42BE6BDB000219CEA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F81D08C32BE6BDB000219CEA /* SnapKit */; };
+		F81D08C92BE75BFC00219CEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08C82BE75BFC00219CEA /* BaseViewController.swift */; };
+		F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */; };
+		F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */; };
+		F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */; };
+		F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08D62BE7839100219CEA /* MessageModel.swift */; };
 		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
@@ -140,10 +147,6 @@
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
 		F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */; };
-		F8D627372BB6AD3300725BE4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627362BB6AD3300725BE4 /* SnapKit */; };
-		F8D627392BB6AD3300725BE4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */; };
-		F8D6273C2BB6AD3E00725BE4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F8D6273B2BB6AD3E00725BE4 /* Alamofire */; };
-		F8D6273E2BB6AD3E00725BE4 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */; };
 		F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D96F6D2B99A8D5009409A3 /* BackButton.swift */; };
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
 		F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */; };
@@ -171,6 +174,11 @@
 		F81D08B62BE689F000219CEA /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		F81D08B82BE6904000219CEA /* AlertState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertState.swift; sourceTree = "<group>"; };
 		F81D08BB2BE690DD00219CEA /* APIPutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPutManager.swift; sourceTree = "<group>"; };
+		F81D08C82BE75BFC00219CEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomAlertStatusModel.swift; sourceTree = "<group>"; };
+		F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMemberTableViewCell.swift; sourceTree = "<group>"; };
+		F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomSideView.swift; sourceTree = "<group>"; };
+		F81D08D62BE7839100219CEA /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
@@ -314,13 +322,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8D6273C2BB6AD3E00725BE4 /* Alamofire in Frameworks */,
-				F8D6273E2BB6AD3E00725BE4 /* AlamofireDynamic in Frameworks */,
 				F86A17FC2BCE660C00AC0D92 /* FirebaseMessaging in Frameworks */,
+				F81D08C12BE6BDA200219CEA /* Alamofire in Frameworks */,
 				F86A17FA2BCE660C00AC0D92 /* FirebaseAnalytics in Frameworks */,
-				F8D627372BB6AD3300725BE4 /* SnapKit in Frameworks */,
-				F8D627392BB6AD3300725BE4 /* SnapKit-Dynamic in Frameworks */,
 				9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */,
+				F81D08C42BE6BDB000219CEA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +399,22 @@
 				F81D08BB2BE690DD00219CEA /* APIPutManager.swift */,
 			);
 			path = APIPutManager;
+			sourceTree = "<group>";
+		};
+		F81D08C72BE75BEA00219CEA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F81D08C82BE75BFC00219CEA /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		F81D08D52BE7837F00219CEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F81D08D62BE7839100219CEA /* MessageModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F8235CE42B749E5300E49073 /* Common */ = {
@@ -779,6 +801,7 @@
 				F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */,
 				F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */,
 				F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */,
+				F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -868,6 +891,7 @@
 		F8BE89DD2B8076CA008E6767 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				F81D08D52BE7837F00219CEA /* Model */,
 				F8E993EA2BB5A4C3002A8A5F /* Viewcomponent */,
 				F8E993E92BB5A4B6002A8A5F /* VC */,
 			);
@@ -932,6 +956,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F81D08C72BE75BEA00219CEA /* Base */,
 				F8813E402BAD8235008AF204 /* UserDefaultsManager */,
 				F841A7B72BA72DFE00A9F9D4 /* APIMananager */,
 				F8A6955B2BA08DD500BEB0C6 /* KeyChain */,
@@ -1083,6 +1108,8 @@
 				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
 				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
 				F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */,
+				F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */,
+				F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */,
 			);
 			path = Viewcomponent;
 			sourceTree = "<group>";
@@ -1124,12 +1151,10 @@
 			);
 			name = GNUting;
 			packageProductDependencies = (
-				F8D627362BB6AD3300725BE4 /* SnapKit */,
-				F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */,
-				F8D6273B2BB6AD3E00725BE4 /* Alamofire */,
-				F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */,
 				F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */,
 				F86A17FB2BCE660C00AC0D92 /* FirebaseMessaging */,
+				F81D08C02BE6BDA200219CEA /* Alamofire */,
+				F81D08C32BE6BDB000219CEA /* SnapKit */,
 			);
 			productName = GNUting;
 			productReference = F85344F62B5F710A001EADE6 /* GNUting.app */;
@@ -1160,9 +1185,9 @@
 			);
 			mainGroup = F85344ED2B5F710A001EADE6;
 			packageReferences = (
-				F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F86A17F82BCE660C00AC0D92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F81D08BF2BE6BDA200219CEA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F81D08C22BE6BDB000219CEA /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = F85344F72B5F710A001EADE6 /* Products */;
 			projectDirPath = "";
@@ -1250,6 +1275,7 @@
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
+				F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
 				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
@@ -1311,12 +1337,14 @@
 				F88EE4882B9F06550058BC00 /* UIImage+Extension.swift in Sources */,
 				F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
+				F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */,
 				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
 				F8A5B6272BE11B500054E324 /* SignUpInputViewAuthNumType.swift in Sources */,
 				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
+				F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */,
 				F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */,
 				F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
@@ -1335,6 +1363,7 @@
 				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
 				F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */,
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,
+				F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */,
 				F8510D0A2B98B09A00CF1055 /* SignUpModelManager.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
 				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
@@ -1342,6 +1371,7 @@
 				F8483F2A2BE23DE400FC3AB6 /* WritePostButton.swift in Sources */,
 				F81D08BC2BE690DD00219CEA /* APIPutManager.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
+				F81D08C92BE75BFC00219CEA /* BaseViewController.swift in Sources */,
 				F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F81D08B72BE689F000219CEA /* BorderView.swift in Sources */,
@@ -1610,6 +1640,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F81D08BF2BE6BDA200219CEA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		F81D08C22BE6BDB000219CEA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 		F86A17F82BCE660C00AC0D92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1618,25 +1664,19 @@
 				minimumVersion = 10.24.0;
 			};
 		};
-		F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
-		F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F81D08C02BE6BDA200219CEA /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F81D08BF2BE6BDA200219CEA /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F81D08C32BE6BDB000219CEA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F81D08C22BE6BDB000219CEA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F86A17F82BCE660C00AC0D92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1646,26 +1686,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F86A17F82BCE660C00AC0D92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		F8D627362BB6AD3300725BE4 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		F8D627382BB6AD3300725BE4 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D627352BB6AD3300725BE4 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
-		F8D6273B2BB6AD3E00725BE4 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		F8D6273D2BB6AD3E00725BE4 /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D6273A2BB6AD3E00725BE4 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RequestStatusDetailVC: UIViewController {
+class RequestStatusDetailVC: BaseViewController {
     var dedatilData: ApplicationStatusResult?
     var requestStatus : Bool = true // false : Received
     private lazy var topStackView : UIStackView = {
@@ -66,7 +66,7 @@ class RequestStatusDetailVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         setAddSubViews()
         setAutoLayout()
         navigationController?.navigationBar.isHidden = false

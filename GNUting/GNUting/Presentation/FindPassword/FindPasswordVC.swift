@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FindPasswordVC: UIViewController {
+class FindPasswordVC: BaseViewController {
     var timer = Timer()
     var startTime : Date?
     var emailSuccess : Bool = false
@@ -62,7 +62,6 @@ class FindPasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
         setAddView()
         setAutoLayout()
         setNavigationBar()
