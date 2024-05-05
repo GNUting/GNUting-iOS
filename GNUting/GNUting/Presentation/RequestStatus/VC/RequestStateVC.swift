@@ -22,7 +22,12 @@ class RequestStateVC: BaseViewController {
             requsetListTableView.reloadData()
         }
     }
-    
+    private lazy var titleLabel : UILabel = {
+        let label = UILabel()
+        label.text = "신청 현황"
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        return label
+    }()
     private lazy var noDataScreenView: NoDataScreenView = {
        let view = NoDataScreenView()
         
@@ -77,11 +82,15 @@ class RequestStateVC: BaseViewController {
 }
 extension RequestStateVC{
     private func addSubViews() {
-        self.view.addSubViews([segmentedControl,requsetListTableView,noDataScreenView])
+        self.view.addSubViews([titleLabel,segmentedControl,requsetListTableView,noDataScreenView])
     }
     private func setAutoLayout(){
-        segmentedControl.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.centerX.equalToSuperview()
+        }
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
             make.left.right.equalToSuperview()
             make.height.equalTo(40)
         }

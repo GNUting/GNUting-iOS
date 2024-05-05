@@ -50,7 +50,7 @@ class DateBoardListVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         getBoardData(page: page)
         addSubViews()
         setAutoLayout()

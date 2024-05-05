@@ -120,6 +120,12 @@ extension WriteDateBoardVC : UITextViewDelegate{
                textView.textColor = UIColor(hexCode: "9F9F9F")
            }
        }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range,in: currentText) else { return false}
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return changedText.count <= 300
+    }
 }
 
 extension WriteDateBoardVC: UITableViewDelegate {
@@ -178,7 +184,7 @@ extension WriteDateBoardVC{
 
         APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
             if response.isSuccess {
-                self.successHandling(message: response.message)
+                self.successHandling(message: "게시물 작성이 완료되었습니다.")
                 self.popButtonTap()
             } else {
                 self.errorHandling(response: response)

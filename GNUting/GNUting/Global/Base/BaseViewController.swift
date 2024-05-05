@@ -12,6 +12,7 @@ class BaseViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        swipeRecognizer()
     }
     func setBackgroundColor() {
         view.backgroundColor = .white

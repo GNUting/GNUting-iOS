@@ -119,7 +119,7 @@ class HomeVC: BaseViewController{
         getNotificationCheckData()
         getUserData()
         postFCMToken()
-        
+        tabBarController?.tabBar.isHidden = false
     }
 }
 extension HomeVC{
