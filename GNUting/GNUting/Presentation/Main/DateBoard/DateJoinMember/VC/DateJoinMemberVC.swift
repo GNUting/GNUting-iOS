@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class DateJoinMemberVC: UIViewController {
+class DateJoinMemberVC: BaseViewController {
     var userInfos : [UserInfosModel] = []
     
     private lazy var titleLabel : UILabel = {
@@ -36,7 +36,7 @@ class DateJoinMemberVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         setAddSubViews()
         setAutoLayout()
     }

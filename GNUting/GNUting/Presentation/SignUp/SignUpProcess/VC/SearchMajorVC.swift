@@ -9,7 +9,7 @@ import UIKit
 protocol SearchMajorSelectCellDelegate : AnyObject{
     func sendSeleceted(major: String)
 }
-class SearchMajorVC: UIViewController {
+class SearchMajorVC: BaseViewController {
     var searchMajorSelectCellDelegate: SearchMajorSelectCellDelegate?
     
     var searchResultList: [SearchMajorModelResult] = [] {
@@ -44,7 +44,6 @@ class SearchMajorVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
         searchConfigure()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RequestStateVC: UIViewController {
+class RequestStateVC: BaseViewController {
     var selectedSegmentIndex: Int = 0
     var dateStatusAllInfos : [ApplicationStatusResult] = []
     var dateStatusList : [DateStateModel] = []{
@@ -58,7 +58,6 @@ class RequestStateVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
         

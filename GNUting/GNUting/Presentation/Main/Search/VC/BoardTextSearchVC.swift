@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoardTextSearchVC: UIViewController{
+class BoardTextSearchVC: BaseViewController{
     var isFetching : Bool = true
     var page = 0
     var searchText = ""
@@ -49,7 +49,7 @@ class BoardTextSearchVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         addSubViews()
         setAutoLayout()
         

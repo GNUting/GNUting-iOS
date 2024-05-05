@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UpdatePostVC: UIViewController {
+class UpdatePostVC: BaseViewController {
     let textViewPlaceHolder = "내용을 입력해주세요."
     var writeDateBoardState : Bool = true
     var boardID: Int = 0
@@ -43,7 +43,6 @@ class UpdatePostVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
         addSubViews()
         setAutoLayout()

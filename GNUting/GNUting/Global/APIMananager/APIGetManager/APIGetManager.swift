@@ -313,5 +313,21 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    func getChatRoomSetAlertStatus(chatRoomID: Int, completion: @escaping(ChatRoomAlertStatusModel?) -> Void) {
+        let url = BaseURL.shared.urlString + "\(chatRoomID)" + "/show/notificationSetting"
+        AF.request(url,interceptor: APIInterceptorManager())
+            .responseDecodable(of: ChatRoomAlertStatusModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getNotificationCheck statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getNotificationCheck statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+        }
+    }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+class LoginVC: BaseViewController {
     private lazy var appLogiImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "AppNameImage")
@@ -83,7 +83,7 @@ class LoginVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+
         addSubViews()
         setAutoLayout()
         hideKeyboardWhenTappedAround()
