@@ -103,10 +103,9 @@ class ChatRoomVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAccessToken()
-        view.backgroundColor = .white
-        tabBarController?.tabBar.isHidden = true
         
+        tabBarController?.tabBar.isHidden = true
+        getAccessToken()
         setAddSubViews()
         setAutoLayout()
         setNavigationBar()

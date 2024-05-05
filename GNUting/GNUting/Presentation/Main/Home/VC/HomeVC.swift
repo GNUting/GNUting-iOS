@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-class HomeVC: UIViewController{
+class HomeVC: BaseViewController{
     var imageURL : String?
     var username: String?
     var userStudentID: String?
@@ -26,7 +26,7 @@ class HomeVC: UIViewController{
     }()
     private lazy var homeTopView : UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        
         view.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner,.layerMaxXMinYCorner])
         return view
     }()

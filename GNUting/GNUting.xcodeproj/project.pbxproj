@@ -19,6 +19,8 @@
 		F81D08BC2BE690DD00219CEA /* APIPutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08BB2BE690DD00219CEA /* APIPutManager.swift */; };
 		F81D08C12BE6BDA200219CEA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F81D08C02BE6BDA200219CEA /* Alamofire */; };
 		F81D08C42BE6BDB000219CEA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F81D08C32BE6BDB000219CEA /* SnapKit */; };
+		F81D08C62BE753FC00219CEA /* ChatRoomSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08C52BE753FC00219CEA /* ChatRoomSideView.swift */; };
+		F81D08C92BE75BFC00219CEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08C82BE75BFC00219CEA /* BaseViewController.swift */; };
 		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
@@ -169,6 +171,8 @@
 		F81D08B62BE689F000219CEA /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		F81D08B82BE6904000219CEA /* AlertState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertState.swift; sourceTree = "<group>"; };
 		F81D08BB2BE690DD00219CEA /* APIPutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPutManager.swift; sourceTree = "<group>"; };
+		F81D08C52BE753FC00219CEA /* ChatRoomSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomSideView.swift; sourceTree = "<group>"; };
+		F81D08C82BE75BFC00219CEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
@@ -389,6 +393,14 @@
 				F81D08BB2BE690DD00219CEA /* APIPutManager.swift */,
 			);
 			path = APIPutManager;
+			sourceTree = "<group>";
+		};
+		F81D08C72BE75BEA00219CEA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F81D08C82BE75BFC00219CEA /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		F8235CE42B749E5300E49073 /* Common */ = {
@@ -928,6 +940,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F81D08C72BE75BEA00219CEA /* Base */,
 				F8813E402BAD8235008AF204 /* UserDefaultsManager */,
 				F841A7B72BA72DFE00A9F9D4 /* APIMananager */,
 				F8A6955B2BA08DD500BEB0C6 /* KeyChain */,
@@ -1079,6 +1092,7 @@
 				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
 				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
 				F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */,
+				F81D08C52BE753FC00219CEA /* ChatRoomSideView.swift */,
 			);
 			path = Viewcomponent;
 			sourceTree = "<group>";
@@ -1248,6 +1262,7 @@
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
 				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
+				F81D08C62BE753FC00219CEA /* ChatRoomSideView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F8C7DE532BC4155700923EF5 /* NotificationCheckModel.swift in Sources */,
@@ -1336,6 +1351,7 @@
 				F8483F2A2BE23DE400FC3AB6 /* WritePostButton.swift in Sources */,
 				F81D08BC2BE690DD00219CEA /* APIPutManager.swift in Sources */,
 				F8BE89DF2B80770F008E6767 /* HomeVC.swift in Sources */,
+				F81D08C92BE75BFC00219CEA /* BaseViewController.swift in Sources */,
 				F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */,
 				F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */,
 				F81D08B72BE689F000219CEA /* BorderView.swift in Sources */,

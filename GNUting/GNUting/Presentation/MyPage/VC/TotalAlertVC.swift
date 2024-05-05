@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TotalAlertVC: UIViewController {
+class TotalAlertVC: BaseViewController {
     
     private lazy var bellImageView : UIImageView = {
         let imageView = UIImageView()
@@ -58,7 +58,6 @@ class TotalAlertVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
         setAddSubViews()
         setAutoLayout()
