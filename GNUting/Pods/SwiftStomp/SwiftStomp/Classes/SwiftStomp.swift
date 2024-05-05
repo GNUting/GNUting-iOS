@@ -496,8 +496,8 @@ fileprivate extension SwiftStomp{
             
         let rawFrameToSend = frame.serialize()
         
-        stompLog(type: .info, message: "Stomp: Sending...\n\(rawFrameToSend)\n")
-//        stompLog(type: .info, message: "Stomp: Sending...\n\n")
+// 기존 log        stompLog(type: .info, message: "Stomp: Sending...\n\(rawFrameToSend)\n")
+        stompLog(type: .info, message: "Stomp: Sending...\n\n")
         self.socket.write(string: rawFrameToSend, completion: completion)
         
         //** Reset ping timer
