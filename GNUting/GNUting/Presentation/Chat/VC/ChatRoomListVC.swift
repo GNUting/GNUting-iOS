@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatVC: UIViewController {
+class ChatVC: BaseViewController {
     var userName : String = ""
     var chatRoomData: ChatRoomModel? {
         didSet{
@@ -32,7 +32,6 @@ class ChatVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
         

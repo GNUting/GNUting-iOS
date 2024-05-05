@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - 내가 작성한글
 
-class UserWriteTextVC: UIViewController {
+class UserWriteTextVC: BaseViewController {
     var myPostList : [MyPostResult] = [] {
         didSet{
             if myPostList.count == 0 {
@@ -43,7 +43,7 @@ class UserWriteTextVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         navigationController?.navigationBar.isHidden = false
         tabBarController?.tabBar.isHidden = true
         addSubViews()

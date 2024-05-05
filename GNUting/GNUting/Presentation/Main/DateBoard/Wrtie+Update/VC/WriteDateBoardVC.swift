@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteDateBoardVC: UIViewController {
+class WriteDateBoardVC: BaseViewController {
     let textViewPlaceHolder = "내용을 입력해주세요."
     var writeDateBoardState : Bool = true
     var addMemberDataList: [UserInfosModel] = [] {
@@ -42,7 +42,7 @@ class WriteDateBoardVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         getUserData()
         addSubViews()
         setAutoLayout()

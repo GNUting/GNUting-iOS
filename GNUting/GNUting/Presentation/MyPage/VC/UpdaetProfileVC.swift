@@ -9,7 +9,7 @@ import UIKit
 import PhotosUI
 // MARK: - 프로필 수정화면
 
-class UpdateProfileVC: UIViewController {
+class UpdateProfileVC: BaseViewController {
     var userInfo: GetUserDataModel?
     
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
@@ -67,7 +67,7 @@ class UpdateProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         setAddSubViews()
         setAutoLayout()
         self.navigationController?.navigationBar.isHidden = false
