@@ -26,7 +26,7 @@ class HomeVC: BaseViewController{
     }()
     private lazy var homeTopView : UIView = {
         let view = UIView()
-        
+        view.backgroundColor = .white
         view.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner,.layerMaxXMinYCorner])
         return view
     }()

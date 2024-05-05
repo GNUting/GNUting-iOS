@@ -19,8 +19,11 @@
 		F81D08BC2BE690DD00219CEA /* APIPutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08BB2BE690DD00219CEA /* APIPutManager.swift */; };
 		F81D08C12BE6BDA200219CEA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F81D08C02BE6BDA200219CEA /* Alamofire */; };
 		F81D08C42BE6BDB000219CEA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F81D08C32BE6BDB000219CEA /* SnapKit */; };
-		F81D08C62BE753FC00219CEA /* ChatRoomSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08C52BE753FC00219CEA /* ChatRoomSideView.swift */; };
 		F81D08C92BE75BFC00219CEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08C82BE75BFC00219CEA /* BaseViewController.swift */; };
+		F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */; };
+		F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */; };
+		F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */; };
+		F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08D62BE7839100219CEA /* MessageModel.swift */; };
 		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
@@ -171,8 +174,11 @@
 		F81D08B62BE689F000219CEA /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		F81D08B82BE6904000219CEA /* AlertState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertState.swift; sourceTree = "<group>"; };
 		F81D08BB2BE690DD00219CEA /* APIPutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPutManager.swift; sourceTree = "<group>"; };
-		F81D08C52BE753FC00219CEA /* ChatRoomSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomSideView.swift; sourceTree = "<group>"; };
 		F81D08C82BE75BFC00219CEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomAlertStatusModel.swift; sourceTree = "<group>"; };
+		F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMemberTableViewCell.swift; sourceTree = "<group>"; };
+		F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomSideView.swift; sourceTree = "<group>"; };
+		F81D08D62BE7839100219CEA /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
@@ -401,6 +407,14 @@
 				F81D08C82BE75BFC00219CEA /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		F81D08D52BE7837F00219CEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F81D08D62BE7839100219CEA /* MessageModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F8235CE42B749E5300E49073 /* Common */ = {
@@ -787,6 +801,7 @@
 				F8CD76A42BB6E8F0001B141F /* ChatRoomMessageModel.swift */,
 				F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */,
 				F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */,
+				F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -876,6 +891,7 @@
 		F8BE89DD2B8076CA008E6767 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				F81D08D52BE7837F00219CEA /* Model */,
 				F8E993EA2BB5A4C3002A8A5F /* Viewcomponent */,
 				F8E993E92BB5A4B6002A8A5F /* VC */,
 			);
@@ -1092,7 +1108,8 @@
 				F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */,
 				F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */,
 				F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */,
-				F81D08C52BE753FC00219CEA /* ChatRoomSideView.swift */,
+				F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */,
+				F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */,
 			);
 			path = Viewcomponent;
 			sourceTree = "<group>";
@@ -1258,11 +1275,11 @@
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
+				F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
 				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
-				F81D08C62BE753FC00219CEA /* ChatRoomSideView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F8C7DE532BC4155700923EF5 /* NotificationCheckModel.swift in Sources */,
@@ -1320,12 +1337,14 @@
 				F88EE4882B9F06550058BC00 /* UIImage+Extension.swift in Sources */,
 				F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
+				F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */,
 				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
 				F8A5B6272BE11B500054E324 /* SignUpInputViewAuthNumType.swift in Sources */,
 				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
+				F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */,
 				F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */,
 				F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
@@ -1344,6 +1363,7 @@
 				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
 				F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */,
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,
+				F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */,
 				F8510D0A2B98B09A00CF1055 /* SignUpModelManager.swift in Sources */,
 				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
 				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
