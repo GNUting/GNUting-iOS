@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SignUpFirstProcessVC: UIViewController{
+class SignUpFirstProcessVC: BaseViewController{
     var timer = Timer()
     var startTime : Date?
     var emailSuccess : Bool = false
@@ -84,7 +84,7 @@ class SignUpFirstProcessVC: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         setNavigationBarSignUpProcess(imageName: "SignupImage1")
         addSubViews()
         setAutoLayout()

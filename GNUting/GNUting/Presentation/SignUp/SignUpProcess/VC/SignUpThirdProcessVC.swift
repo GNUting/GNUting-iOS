@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import PhotosUI
 
-class SignUpThirdProcessVC: UIViewController {
+class SignUpThirdProcessVC: BaseViewController {
     //    var imageFileName : String = ""
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()
@@ -64,7 +64,7 @@ class SignUpThirdProcessVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         setNavigationBarSignUpProcess(imageName: "SignupImage3")
         addSubViews()
         setAutoLayout()

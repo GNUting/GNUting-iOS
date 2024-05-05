@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RequestStateVC: UIViewController {
+class RequestStateVC: BaseViewController {
     var selectedSegmentIndex: Int = 0
     var dateStatusAllInfos : [ApplicationStatusResult] = []
     var dateStatusList : [DateStateModel] = []{
@@ -22,7 +22,12 @@ class RequestStateVC: UIViewController {
             requsetListTableView.reloadData()
         }
     }
-    
+    private lazy var titleLabel : UILabel = {
+        let label = UILabel()
+        label.text = "신청 현황"
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        return label
+    }()
     private lazy var noDataScreenView: NoDataScreenView = {
        let view = NoDataScreenView()
         
@@ -58,7 +63,6 @@ class RequestStateVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
         addSubViews()
         setAutoLayout()
         
@@ -78,11 +82,15 @@ class RequestStateVC: UIViewController {
 }
 extension RequestStateVC{
     private func addSubViews() {
-        self.view.addSubViews([segmentedControl,requsetListTableView,noDataScreenView])
+        self.view.addSubViews([titleLabel,segmentedControl,requsetListTableView,noDataScreenView])
     }
     private func setAutoLayout(){
-        segmentedControl.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.centerX.equalToSuperview()
+        }
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
             make.left.right.equalToSuperview()
             make.height.equalTo(40)
         }

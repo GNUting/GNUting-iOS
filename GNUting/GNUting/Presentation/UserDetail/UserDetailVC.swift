@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserDetailVC: UIViewController {
+class UserDetailVC: BaseViewController {
     var imaegURL : String?
     var userNickName: String?
     var userStudentID: String?
@@ -43,7 +43,6 @@ class UserDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
         getUserData()
         setAddSubViews()
         setAutoLayout()

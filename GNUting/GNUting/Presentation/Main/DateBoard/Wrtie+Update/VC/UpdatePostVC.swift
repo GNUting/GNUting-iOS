@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UpdatePostVC: UIViewController {
+class UpdatePostVC: BaseViewController {
     let textViewPlaceHolder = "내용을 입력해주세요."
     var writeDateBoardState : Bool = true
     var boardID: Int = 0
@@ -43,11 +43,10 @@ class UpdatePostVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
         addSubViews()
         setAutoLayout()
-        
+        self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -122,6 +121,12 @@ extension UpdatePostVC : UITextViewDelegate{
             textView.text = textViewPlaceHolder
             textView.textColor = UIColor(hexCode: "9F9F9F")
         }
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range,in: currentText) else { return false}
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return changedText.count <= 300
     }
 }
 

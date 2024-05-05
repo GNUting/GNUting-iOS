@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailDateBoardVC: UIViewController{
+class DetailDateBoardVC: BaseViewController{
     var boardID: Int = 0
     var userInfos: [UserInfosModel] = []
     var postUserInfos : User?
@@ -68,7 +68,7 @@ class DetailDateBoardVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         addSubViews()
         setAutoLayout()
         bringToDetailDateBoardSetView()
@@ -243,6 +243,15 @@ extension DetailDateBoardVC {
             self.userInfos = result.inUser
             self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId)
             self.setChatPeopleViewButton(memeberCount: result.inUser.count)
+            if result.status == "OPEN" {
+                self.statusLabel.textColor = UIColor(named: "SecondaryColor")
+                self.statusLabel.text = "신청 가능"
+            } else {
+                self.statusLabel.textColor = UIColor(named: "PrimaryColor")
+                self.statusLabel.text = "신청 마감"
+                
+            }
+            
         }
     }
 }

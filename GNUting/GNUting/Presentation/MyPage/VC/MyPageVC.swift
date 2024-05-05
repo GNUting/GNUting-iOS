@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 // MARK: - 마이 페이지
-class MyPageVC: UIViewController {
-    let mypageConfiguration = [MyPageModel(title: "", elements: ["작성한 글 목록"]),MyPageModel(title: "고객지원", elements: ["고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "안내", elements: ["공지사항","도움말","오픈소스 사용","개인정보 처리방침"])]
+class MyPageVC: BaseViewController {
+    let mypageConfiguration = [MyPageModel(title: "", elements: []),MyPageModel(title: "고객지원", elements: ["고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "알림", elements: ["알림 설정"]),MyPageModel(title: "안내", elements: ["오픈소스 사용","개인정보 처리방침"])]
     var userInfo : GetUserDataModel? {
         didSet{
             myPageTabelView.reloadData()
@@ -28,13 +28,14 @@ class MyPageVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         setupMyPageTabelView()
-        self.navigationController?.navigationBar.isHidden = true
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserData()
+        self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
     }
 }
@@ -97,50 +98,22 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            pushViewContoller(viewController: UserWriteTextVC())
+        switch indexPath {
+        case [1,0]:
+            instagramOpen()
+        case [2,0]:
+            logout()
+        case [2,1]:
+            userDelete()
+        case [3,0]:
+            pushViewContoller(viewController: TotalAlertVC())
+        case [4,0]:
+            useLicense()
+        case [4,1]:
+            personalInformation()
+        default:
+            break
         }
-        if indexPath == [2,0] {
-            APIPostManager.shared.postLogout { response in
-                if response?.isSuccess ?? false {
-                    let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                        self.view.window?.rootViewController = LoginVC()
-                    }))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                } else { //🔨 추후 분기처리하기
-                    let alertController = UIAlertController(title: "로그아웃 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                }
-            }
-        } else if indexPath == [2,1] {
-            APIDeleteManager.shared.deleteUser { response in
-                if response.isSuccess {
-                    let alertController = UIAlertController(title: "회원탈퇴", message: "회원 탈퇴되었습니다..", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                        self.navigationController?.setViewControllers([LoginVC()], animated: true)
-                    }))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                } else {
-                    let alertController = UIAlertController(title: "회원탈퇴 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                }
-            }
-        } else if indexPath == [3,3] {
-            guard let url = URL(string: "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"), UIApplication.shared.canOpenURL(url) else { return }
-            UIApplication.shared.open(url)
-        }
-        
     }
 }
 extension MyPageVC : tapProfileUpateButtonDelegate {
@@ -156,4 +129,52 @@ extension MyPageVC : tapProfileUpateButtonDelegate {
         }
     }
 }
-
+extension MyPageVC {
+    private func logout() {
+        APIPostManager.shared.postLogout { response in
+            if response?.isSuccess ?? false {
+                let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+                    self.navigationController?.setViewControllers([LoginVC()], animated: true)
+                }))
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
+            } else { //🔨 추후 분기처리하기
+                let alertController = UIAlertController(title: "로그아웃 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
+            }
+        }
+        
+    }
+    private func userDelete() { //회원 탈퇴
+        APIDeleteManager.shared.deleteUser { response in
+            if response.isSuccess {
+                let alertController = UIAlertController(title: "회원탈퇴", message: "회원 탈퇴되었습니다..", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+                    self.navigationController?.setViewControllers([LoginVC()], animated: true)
+                }))
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
+            } else {
+                let alertController = UIAlertController(title: "회원탈퇴 실패", message: "다시 시도해주세요.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
+            }
+        }
+    }
+    private func personalInformation() { // 개인 정보 처리방침
+        guard let url = URL(string: "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+    }
+    private func useLicense() { // 오픈 소스 사용
+        guard let url = URL(string: "https://github.com/GNUting/GNUting-iOS/blob/main/Using%20Open%20Source"), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+    }
+}

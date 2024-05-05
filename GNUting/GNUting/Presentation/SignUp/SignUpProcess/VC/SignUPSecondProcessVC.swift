@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignUPSecondProcessVC: UIViewController{
+class SignUPSecondProcessVC: BaseViewController{
     
     var selectedDate : String = ""
     private lazy var scrollView : UIScrollView = {
@@ -131,7 +131,6 @@ class SignUPSecondProcessVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
         setNavigationBarSignUpProcess(imageName: "SignupImage2")
         addSubViews()

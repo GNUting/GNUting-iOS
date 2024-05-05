@@ -7,7 +7,7 @@
 
 import UIKit
 // MARK: - 채팅신청하기 화면
-class RequestChatVC: UIViewController{
+class RequestChatVC: BaseViewController{
     var boardID : Int = 0
     
     var addMemberDataList : [UserInfosModel] = []{
@@ -39,7 +39,7 @@ class RequestChatVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+   
         addSubViews()
         setAutoLayout()
         getUserData()
