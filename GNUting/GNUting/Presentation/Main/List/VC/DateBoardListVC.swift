@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DateBoardListVC: UIViewController {
+class DateBoardListVC: BaseViewController {
     
     // MARK: - Properties
     
@@ -50,7 +50,7 @@ class DateBoardListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
         getBoardData(page: page)
         addSubViews()
         setAutoLayout()

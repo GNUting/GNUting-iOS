@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReportVC: UIViewController {
+class ReportVC: BaseViewController {
     var userNickname: String = ""
     let textViewPlaceHolder = "기타 사유를 입력해주세요."
     var boardID: Int = 0
@@ -92,7 +92,7 @@ class ReportVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setVC()
+        
         addSubViews()
         setAutoLayout()
         setNavigationBar()
@@ -100,9 +100,7 @@ class ReportVC: UIViewController {
     }
 }
 extension ReportVC{
-    private func setVC(){
-        view.backgroundColor = .white
-    }
+    
     private func setNavigationBar(){
         setNavigationBarPresentType(title: "신고하기")
     }

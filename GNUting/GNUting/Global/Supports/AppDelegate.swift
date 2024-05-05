@@ -70,7 +70,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         guard let fcmToken = fcmToken else { return }
         KeyChainManager.shared.create(key: "fcmToken", token: fcmToken)
         
-        print("🟢", #function, "Token : \(fcmToken)")
+        print("🟢", #function)
     }
     
 
