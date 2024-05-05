@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = .white
         FirebaseApp.configure()
         setupFCM(application)
+        sleep(UInt32(0.5))
         return true
     }
     private func setupFCM(_ application: UIApplication) {
