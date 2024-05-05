@@ -46,7 +46,7 @@ class UpdatePostVC: BaseViewController {
         
         addSubViews()
         setAutoLayout()
-        
+        self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -121,6 +121,12 @@ extension UpdatePostVC : UITextViewDelegate{
             textView.text = textViewPlaceHolder
             textView.textColor = UIColor(hexCode: "9F9F9F")
         }
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range,in: currentText) else { return false}
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return changedText.count <= 300
     }
 }
 

@@ -9,7 +9,7 @@ import UIKit
 
 
 extension UIViewController{
-
+    
     @objc func popButtonTap(){
         self.navigationController?.popViewController(animated: true)
     }
@@ -39,7 +39,7 @@ extension UIViewController{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
     }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
-    
+        
         if let url = URL(string: stringURL ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let imageData = data else { return }
@@ -72,9 +72,9 @@ extension UIViewController{
             }
         }
     }
-  
+    
     func successHandling(message: String) {
-        let alertController = UIAlertController(title: "성공", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
@@ -112,5 +112,15 @@ extension UIViewController{
         guard let url = URL(string: "https://www.instagram.com/gnu_ting?igsh=MXh1anNvY2N6cnhv"), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url)
     }
-  
+    
+    func swipeRecognizer() {
+        let swifpeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(_ :)))
+        swifpeRight.direction = .right
+        self.view.addGestureRecognizer(swifpeRight)
+    }
+    @objc func respondToSwipeGesture(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right{
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 }

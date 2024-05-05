@@ -17,7 +17,7 @@ class ChatVC: BaseViewController {
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.text = "전체 채팅방"
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 22)
+        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
         return label
     }()
     
