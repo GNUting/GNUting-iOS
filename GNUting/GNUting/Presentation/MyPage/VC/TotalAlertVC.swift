@@ -62,6 +62,7 @@ class TotalAlertVC: BaseViewController {
         setAddSubViews()
         setAutoLayout()
         setNavigationBar()
+        getTotalalertSetting()
     }
     
 }
@@ -128,5 +129,18 @@ extension TotalAlertVC {
             
         }
                 
+    }
+}
+extension TotalAlertVC {
+    private func getTotalalertSetting() {
+        APIGetManager.shared.getTotalSetAlertStatus { response in
+            if response?.result.notificationSetting == "ENABLE"{
+                self.alertAllowButton.setImage(UIImage(named: "OnToggleImage"), for: .normal)
+                self.alertAllowButton.isSelected = true
+            } else {
+                self.alertAllowButton.setImage(UIImage(named: "OffToggleImage"), for: .normal)
+                self.alertAllowButton.isSelected = false
+            }
+        }
     }
 }

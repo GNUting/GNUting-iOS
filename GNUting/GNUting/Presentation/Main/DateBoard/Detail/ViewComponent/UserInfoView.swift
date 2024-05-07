@@ -108,7 +108,7 @@ extension UserInfoView {
    
             DispatchQueue.main.async {
                 self.userImageButton.setImage(image, for: .normal)
-                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.height / 2
                 self.userImageButton.layer.masksToBounds = true
             }
         }

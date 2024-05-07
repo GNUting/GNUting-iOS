@@ -13,6 +13,7 @@ class BaseViewController: UIViewController{
         super.viewDidLoad()
         setBackgroundColor()
         swipeRecognizer()
+        hideKeyboardWhenTappedAround()
     }
     func setBackgroundColor() {
         view.backgroundColor = .white

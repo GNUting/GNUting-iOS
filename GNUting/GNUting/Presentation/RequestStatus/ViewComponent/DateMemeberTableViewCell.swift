@@ -60,7 +60,7 @@ extension DateMemeberTableViewCell {
     }
  
     func setDateMember(model: ApplicationStatusUser ){
-        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.nickname, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
 }
 

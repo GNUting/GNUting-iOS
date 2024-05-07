@@ -14,8 +14,8 @@ protocol MemberAddButtonDelegate: AnyObject{
 }
 
 class SearchAddMemberVC: BaseViewController{
-    
-    
+    var requestChat : Bool = false
+    var chatMemeberCount = 0
     var searchUser : UserInfosModel?
     var addMemberInfos: [UserInfosModel] = [] {
         didSet {
@@ -24,7 +24,7 @@ class SearchAddMemberVC: BaseViewController{
     }
     var searchText: String = ""
     
- 
+    
     
     var memberAddButtonDelegate: MemberAddButtonDelegate?
     
@@ -37,7 +37,7 @@ class SearchAddMemberVC: BaseViewController{
     private lazy var searchController : UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.placeholder = "추가할 멤버를 검색해 주세요"
+        searchController.searchBar.placeholder = "닉네임을 검색해 주세요"
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchTextField.delegate = self
         searchController.searchBar.searchTextField.returnKeyType = .search
@@ -50,7 +50,7 @@ class SearchAddMemberVC: BaseViewController{
         collectionView.register(AddMemeberCollectionViewCell.self, forCellWithReuseIdentifier: AddMemeberCollectionViewCell.identi)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     private lazy var upperUserInfoView : UIView = {
@@ -64,7 +64,7 @@ class SearchAddMemberVC: BaseViewController{
     }()
     private lazy var searchUserInfoView : UserInfoDetailView = {
         let view = UserInfoDetailView()
-
+        
         return view
     }()
     private lazy var completedButton : PrimaryColorButton = {
@@ -96,6 +96,7 @@ class SearchAddMemberVC: BaseViewController{
         setAddSubViews()
         setAutoLayout()
         setNavigationBar()
+        
     }
 }
 extension SearchAddMemberVC{
@@ -126,6 +127,7 @@ extension SearchAddMemberVC{
             make.left.equalTo(searchUserInfoView.snp.right).offset(15)
             make.right.equalToSuperview().offset(-18)
         }
+        memberOptionButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         completedButton.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(Spacing.UpperInset)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
@@ -136,6 +138,19 @@ extension SearchAddMemberVC{
         self.navigationItem.titleView = naviBorderView
         navigationItem.searchController = searchController
     }
+    private func setAddButton() {
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = AttributedString("추가", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor(named: "SecondaryColor")!]))
+        memberOptionButton.configuration = config
+        memberOptionButton.backgroundColor = UIColor(named: "SecondaryColor")
+        memberOptionButton.backgroundColor = .white
+    }
+    private func setDeleteButton() {
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = AttributedString("삭제", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor.white]))
+        memberOptionButton.configuration = config
+        memberOptionButton.backgroundColor = UIColor(named: "SecondaryColor")
+    }
 }
 
 extension SearchAddMemberVC {
@@ -143,19 +158,21 @@ extension SearchAddMemberVC {
         guard let searchUser = searchUser else { return }
         guard let buttonTetxt = sender.titleLabel?.text else { return }
         var config = UIButton.Configuration.plain()
+        
         if buttonTetxt == "추가" {
             addMemberInfos.append(searchUser)
-         
-         
-            config.attributedTitle = AttributedString("삭제", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor.white]))
-            memberOptionButton.configuration = config
-            memberOptionButton.backgroundColor = UIColor(named: "SecondaryColor")
-      
+            if requestChat{
+                if chatMemeberCount < addMemberInfos.count {
+                    showMessage(message: "인원이 초과되었습니다.")
+                    addMemberInfos.removeLast()
+                }else {
+                    setDeleteButton()
+                }
+            } else {
+                setDeleteButton()
+            }
         } else {
-            config.attributedTitle = AttributedString("추가", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor(named: "SecondaryColor")!]))
-            memberOptionButton.configuration = config
-            memberOptionButton.backgroundColor = UIColor(named: "SecondaryColor")
-            memberOptionButton.backgroundColor = .white
+            setAddButton()
             if let index = addMemberInfos.firstIndex(where: {$0.id == searchUser.id}) {
                 addMemberInfos.remove(at: index)
             }
@@ -207,14 +224,24 @@ extension SearchAddMemberVC: UITextFieldDelegate{
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        APIGetManager.shared.getSearchUser(searchNickname: searchText) { [unowned self] searchUserData,response  in
-            errorHandling(response: response)
-            upperUserInfoView.isHidden = false
-            searchUser = searchUserData?.result
-            
-            searchUserInfoView.setUserInfoDetailView(name: searchUser?.nickname, major: searchUser?.department, studentID: searchUser?.studentId, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
-            searchController.searchBar.text = ""
+        setAddButton()
+        if  addMemberInfos.map({$0.nickname}).contains(searchText) {
+            showMessage(message: "이미 추가한 유저입니다.")
+        } else {
+            APIGetManager.shared.getSearchUser(searchNickname: searchText) { [unowned self] searchUserData,response  in
+                guard let success = response?.isSuccess else { return }
+                if success {
+                    upperUserInfoView.isHidden = false
+                    searchUser = searchUserData?.result
+                    
+                    searchUserInfoView.setUserInfoDetailView(name: searchUser?.nickname, major: searchUser?.department, studentID: searchUser?.studentId, introduce: searchUser?.userSelfIntroduction, image: searchUser?.profileImage)
+                    searchController.searchBar.text = ""
+                } else {
+                    showAlert(message: "일치하는 닉네임이 없습니다.")
+                }
+            }
         }
+        
         return true
     }
     

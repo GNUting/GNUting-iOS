@@ -112,7 +112,7 @@ extension MyPageUserInfoTableViewHeader {
         setImageFromStringURL(stringURL: image) { image in
             DispatchQueue.main.async {
                 self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.height / 2
+                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
                 self.userImageView.layer.masksToBounds = true
             }
             

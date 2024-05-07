@@ -45,9 +45,10 @@ class LoginVC: BaseViewController {
     private lazy var loginButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("로그인")
-        button.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
         button.sizeToFit()
-        
+        button.throttle(delay: 3) { _ in
+            self.tapLoginButton()
+        }
         return button
     }()
     private lazy var bottomStackView: UIStackView = {
@@ -86,12 +87,10 @@ class LoginVC: BaseViewController {
 
         addSubViews()
         setAutoLayout()
-        hideKeyboardWhenTappedAround()
     }
-
 }
 extension LoginVC{
-    @objc func tapLoginButton(){
+    func tapLoginButton(){
         let email = emailTextFieldView.getTextFieldString()
         let password = passwordTextField.getTextFieldString()
         APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
@@ -106,6 +105,7 @@ extension LoginVC{
     }
     
     @objc func tapFindPasswordButton(){
+        
         pushViewContoller(viewController: FindPasswordVC())
     }
     @objc func tapSingupButton(){

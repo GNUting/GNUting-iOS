@@ -61,7 +61,7 @@ class RequestStatusDetailVC: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .white
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -91,7 +91,7 @@ extension RequestStatusDetailVC{
             make.left.right.equalToSuperview().inset(Spacing.left)
             
         }
-   
+        
         dateMemeberTableView.snp.makeConstraints { make in
             make.top.equalTo(topStackView.snp.bottom).offset(Spacing.top)
             make.left.right.equalToSuperview().inset(25)
@@ -126,11 +126,11 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateMemeberTableViewCell.identi, for: indexPath) as? DateMemeberTableViewCell else {return UITableViewCell()}
-       
+        
         if indexPath.row == (dedatilData?.applyUserCount ?? 0) - 1 {
             cell.addBorders(to: [.bottom], in: UIColor(named: "BorderColor")!, width: 1)
         }
-      
+        cell.selectionStyle = .none
         cell.addBorders(to: [.left,.right], in: UIColor(named: "BorderColor")!, width: 1)
         if indexPath.section == 0 {
             if let participantUser = dedatilData?.participantUser{
@@ -144,7 +144,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                     self.presentFullScreenVC(viewController: vc)
                 }
             }
-          
+            
         }else {
             if let applyUserData = dedatilData?.applyUser{
                 cell.setDateMember(model: applyUserData[indexPath.row])
@@ -209,18 +209,29 @@ extension RequestStatusDetailVC {
 
 extension RequestStatusDetailVC {
     @objc private func tapCancelButton(){
+        
         if requestStatus{
-            APIDeleteManager.shared.deleteRequestChat(boardID:dedatilData?.id ?? 0) { response in
-                if response.isSuccess {
-                    self.successHandlingPopAction(message: response.message)
-                } else {
-                    self.errorHandling(response: response)
+            let alertContoller = UIAlertController(title: "", message: "신청 취소하시겠습니까?", preferredStyle: .alert)
+            alertContoller.addAction(UIAlertAction(title: "취소", style: .destructive))
+            alertContoller.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                APIDeleteManager.shared.deleteRequestChat(boardID:self.dedatilData?.id ?? 0) { response in
+                    if response.isSuccess {
+                        self.showMessage(message: "취소되었습니다.")
+                        self.popButtonTap()
+                    } else {
+                        self.errorHandling(response: response)
+                    }
                 }
+            }))
+            DispatchQueue.main.async {
+                self.present(alertContoller, animated: true)
             }
+          
+            
         } else {
             APIUpdateManager.shared.rejectedApplication(boardID: dedatilData?.id ?? 0) { response in
                 if response.isSuccess {
-                    self.successHandlingPopAction(message: response.message)
+                    self.showMessagePop(message: "신청을 거절하였습니다.")
                 } else {
                     self.errorHandling(response: response)
                 }
@@ -231,7 +242,7 @@ extension RequestStatusDetailVC {
     @objc private func tapAcceptButton() {
         APIPostManager.shared.chatConfirmed(id: dedatilData?.id ?? 0) { response in
             if response.isSuccess {
-                self.successHandling(message: response.message)
+                self.showMessage(message: "채팅신청을 수락하였습니다.")
             } else {
                 self.errorHandling(response: response)
             }

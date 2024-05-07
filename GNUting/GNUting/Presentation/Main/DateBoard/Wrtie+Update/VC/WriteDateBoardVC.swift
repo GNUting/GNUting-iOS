@@ -34,7 +34,7 @@ class WriteDateBoardVC: BaseViewController {
         tableView.register(MemberTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MemberTableViewHeader.identi)
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -46,7 +46,6 @@ class WriteDateBoardVC: BaseViewController {
         getUserData()
         addSubViews()
         setAutoLayout()
-        self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,11 +58,13 @@ extension WriteDateBoardVC{
     private func setNavigationBar(){
         setNavigationBar(title: "글쓰기")
         
-        let completedButton = UIButton()
+        let completedButton = ThrottleButton()
         completedButton.setTitle("완료", for: .normal)
         completedButton.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
         completedButton.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
-        completedButton.addTarget(self, action: #selector(tapCompletedButton), for: .touchUpInside)
+        completedButton.throttle(delay: 3) { _ in
+            self.tapCompletedButton()
+        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
     }
     private func addSubViews() {
@@ -95,6 +96,7 @@ extension WriteDateBoardVC: UITableViewDataSource {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
             vc.addMemberInfos = addMemberDataList
+            vc.requestChat = false
             let navigationVC = UINavigationController.init(rootViewController: vc)
 
             present(navigationVC, animated: true)
@@ -176,7 +178,7 @@ extension WriteDateBoardVC: UITableViewDelegate {
 // MARK: - ButtonAction
 
 extension WriteDateBoardVC{
-    @objc private func tapCompletedButton(){
+    private func tapCompletedButton(){
         var joinMemberID : [UserIDList] = []
         for userData in addMemberDataList {
             joinMemberID.append(UserIDList(id: userData.id))
@@ -184,8 +186,7 @@ extension WriteDateBoardVC{
 
         APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
             if response.isSuccess {
-                self.successHandling(message: "게시물 작성이 완료되었습니다.")
-                self.popButtonTap()
+                self.showMessagePop(message: "게시물 작성이 완료되었습니다.")
             } else {
                 self.errorHandling(response: response)
             }

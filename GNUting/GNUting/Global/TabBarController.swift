@@ -17,8 +17,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
-        print(email)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

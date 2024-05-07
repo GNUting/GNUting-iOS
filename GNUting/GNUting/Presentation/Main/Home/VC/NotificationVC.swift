@@ -33,7 +33,7 @@ class NotificationVC: BaseViewController {
         
         tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.identi)
         tableView.separatorStyle = .none
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
   
@@ -80,15 +80,11 @@ extension NotificationVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
             APIDeleteManager.shared.deleteNotification(notificationID: notificationList[indexPath.row].id) { response in
                 if response.isSuccess {
-                    
-                    let alertController = UIAlertController(title: "알림 삭제", message: "해당 알림이 리스트에서 삭제되었습니다.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
                     DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
                         self.notificationList.remove(at: indexPath.row)
-                        
                     }
                 } else {
                     let alertController = UIAlertController(title: "오류 발생", message: "다시 시도해주세요", preferredStyle: .alert)

@@ -233,6 +233,7 @@ class APIGetManager: RequestInterceptor {
                 }
             }
     }
+    // 채팅 리스트 조회
     func getChatRoomData(completion: @escaping(ChatRoomModel?,DefaultResponse)->Void) {
         let url = EndPoint.chatRoom.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -253,6 +254,8 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    
+    // 채팅방 채팅 조회
     func getChatMessageData(chatRoomID: Int,completion: @escaping(ChatRoomMessageModel?,DefaultResponse)->Void) {
         let urlString = "http://203.255.3.66:10001/api/v1/chatRoom/\(chatRoomID)/chats"
         guard let url = URL(string: urlString) else { return }
@@ -277,7 +280,7 @@ class APIGetManager: RequestInterceptor {
             }
         
     }
-    
+    // MARK: - 알림 모두 보기
     func getNotificationData(completion: @escaping(NotificationModel?)->Void) {
         let url = EndPoint.notification.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -295,6 +298,7 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    // MARK: - 새알림 확인
     func getNotificationCheck(completion: @escaping(NotificationCheckModel?)->Void){
         let url = EndPoint.notificationCheck.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -313,6 +317,7 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    // MARK: - 사용자 채팅알림 세팅값 API
     func getChatRoomSetAlertStatus(chatRoomID: Int, completion: @escaping(ChatRoomAlertStatusModel?) -> Void) {
         let url = BaseURL.shared.urlString + "\(chatRoomID)" + "/show/notificationSetting"
         AF.request(url,interceptor: APIInterceptorManager())
@@ -329,5 +334,40 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     }
+    // MARK: - 전체 알람보기 세팅값 API
+    func getTotalSetAlertStatus(completion: @escaping(ChatRoomAlertStatusModel?) -> Void) {
+        let url = EndPoint.notificationShowAllsetting.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .responseDecodable(of: ChatRoomAlertStatusModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getTotalSetAlertStatus statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getTotalSetAlertStatus statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+        }
+    } 
+    func getChatRoomUserList(chatRoomID: Int,completion: @escaping(ChatRoomUserModel?) -> Void) {
+        let url = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)" + "/chatRoomUsers"
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ChatRoomUserModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getChatRoomUser statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getChatRoomUser statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+        }
+    }
+
 }
 

@@ -11,12 +11,25 @@ class ChatVC: BaseViewController {
     var userName : String = ""
     var chatRoomData: ChatRoomModel? {
         didSet{
+            if chatRoomData?.result.count == 0 {
+                noDataScreenView.isHidden = false
+            } else {
+                noDataScreenView.isHidden = true
+            }
             chatTableView.reloadData()
         }
     }
+    private lazy var noDataScreenView: NoDataScreenView = {
+       let view = NoDataScreenView()
+        
+        view.setLabel(text: "현재 참여 중인 채팅방이 없습니다. ", range: "")
+        return view
+    }()
+    
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.text = "전체 채팅방"
+        label.textAlignment = .center
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
         return label
     }()
@@ -27,6 +40,7 @@ class ChatVC: BaseViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -45,18 +59,21 @@ class ChatVC: BaseViewController {
 }
 extension ChatVC{
     private func addSubViews() {
-        view.addSubViews([titleLabel,chatTableView])
+        view.addSubViews([titleLabel,chatTableView,noDataScreenView])
     }
     private func setAutoLayout() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
         chatTableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(24)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
+        }
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
     

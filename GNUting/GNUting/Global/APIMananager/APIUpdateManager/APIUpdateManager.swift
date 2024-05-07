@@ -15,11 +15,11 @@ class APIUpdateManager {
     // MARK: - 과팅 신청 거절하기 ✅
     func rejectedApplication(boardID: Int, completion: @escaping(DefaultResponse) -> Void) {
         let uslString = "http://203.255.3.66:10001/api/v1/board/applications/refuse/\(boardID)"
-        
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .patch,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
+                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 switch response.result {
@@ -28,6 +28,7 @@ class APIUpdateManager {
                     completion(json)
                 case .failure:
                     print("🔴 rejectedApplication statusCode: \(statusCode)")
+                    print(response.result)
                     completion(json)
                     break
                 }

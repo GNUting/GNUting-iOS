@@ -38,7 +38,7 @@ class SearchMajorVC: BaseViewController {
         tableView.register(MajorSearchTableViewCell.self, forCellReuseIdentifier: MajorSearchTableViewCell.identi)
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -48,7 +48,6 @@ class SearchMajorVC: BaseViewController {
         setAutoLayout()
         searchConfigure()
         setNavigation()
-        hideKeyboardWhenTappedAround()
     }
     
 }
@@ -98,6 +97,7 @@ extension SearchMajorVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MajorSearchTableViewCell.identi, for: indexPath) as? MajorSearchTableViewCell else { return UITableViewCell() }
         cell.setCell(model: searchResultList[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     

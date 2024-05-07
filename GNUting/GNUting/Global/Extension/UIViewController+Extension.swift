@@ -52,7 +52,7 @@ extension UIViewController{
         }
     }
     func showAlert(message: String){
-        let alertController = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
@@ -72,16 +72,18 @@ extension UIViewController{
             }
         }
     }
-    
-    func successHandling(message: String) {
+   
+
+    func showMessage(message: String) {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
         }
     }
-    func successHandlingPopAction(message: String) {
-        let alertController = UIAlertController(title: "성공", message: message, preferredStyle: .alert)
+    
+    func showMessagePop(message: String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
             self.popButtonTap()
         }))
@@ -123,4 +125,5 @@ extension UIViewController{
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
 }

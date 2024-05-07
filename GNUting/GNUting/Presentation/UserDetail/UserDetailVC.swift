@@ -103,9 +103,6 @@ extension UserDetailVC {
     func getUserData(){
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
-            //            if self.userNickName == userData?.result?.nickname {
-            //                self.reportButton.isHidden = true
-            //            }
         }
     }
 }

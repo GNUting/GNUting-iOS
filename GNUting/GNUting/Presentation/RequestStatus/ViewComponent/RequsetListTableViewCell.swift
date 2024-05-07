@@ -28,6 +28,7 @@ class RequsetListTableViewCell: UITableViewCell {
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
         label.textColor = .white
         label.text = "대기중"
+        label.textAlignment = .center
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
         return label
@@ -68,6 +69,7 @@ extension RequsetListTableViewCell{
             make.left.equalTo(majorAndMemeberCountLabel.snp.right).offset(12)
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalToSuperview().offset(-10)
+            make.width.equalTo(110)
         }
         requestStateLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         requestStateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)

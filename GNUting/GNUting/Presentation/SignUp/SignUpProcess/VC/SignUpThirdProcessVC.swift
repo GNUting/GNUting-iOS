@@ -110,7 +110,7 @@ extension SignUpThirdProcessVC {
         APIPostManager.shared.postSignUP(signUpdata: signUpData, image: image ?? UIImage()) { response  in
             if response.isSuccess {
                 let alertController = UIAlertController(title: "회원가입 성공", message: "로그인을 진행하시겠습니까?", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "아니요", style: .cancel,handler: { _ in
+                alertController.addAction(UIAlertAction(title: "아니요", style: .destructive,handler: { _ in
                     self.navigationController?.setViewControllers([LoginVC()], animated: true)
                 }))
                 alertController.addAction(UIAlertAction(title: "네", style: .default, handler: { _ in

@@ -42,7 +42,7 @@ class SignUpInputViewNicknameType : UIView{
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
         return view
     }()
-    private lazy var nicknameCheckButton : UIButton = {
+    private lazy var nicknameCheckButton : ThrottleButton = {
         
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -50,12 +50,14 @@ class SignUpInputViewNicknameType : UIView{
         config.titleAlignment = .center
         config.baseForegroundColor = .white
         
-        let button = UIButton(configuration: config)
+        let button = ThrottleButton(configuration: config)
         
         button.backgroundColor = UIColor(hexCode: "979C9E")
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(getNickname), for: .touchUpInside)
+        button.throttle(delay: 3) { _ in
+            self.getNickname()
+        }
         return button
     }()
     private lazy var inputCheckLabel : UILabel = {
@@ -142,7 +144,7 @@ extension SignUpInputViewNicknameType {
         }
         
     }
-    @objc private func getNickname(){
+    private func getNickname(){
         nicknameCheckButtonDelegate?.action(textFieldText: inputTextField.text ?? "")
         
     }
