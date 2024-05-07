@@ -9,6 +9,8 @@ import UIKit
 
 class ChatRoomMemberTableViewCell: UITableViewCell {
     static let identi = "ChatRoomMemberTableViewCellid"
+    var closure: ((ChatRommUserModelResult?)-> ())?
+    var chatRommUserModelResult: ChatRommUserModelResult?
     private lazy var upperStackView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -17,11 +19,12 @@ class ChatRoomMemberTableViewCell: UITableViewCell {
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var userImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "SampleImg1")
-        return imageView
+    private lazy var userImageButton : UIButton = {
+       let button = UIButton()
+        button.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
+        return button
     }()
+        
     private lazy var markMeImaegView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "MarkMeImage")
@@ -30,7 +33,7 @@ class ChatRoomMemberTableViewCell: UITableViewCell {
     }()
     private lazy var nameLabel : UILabel = {
        let label = UILabel()
-        label.text = "김지누"
+
         return label
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -55,7 +58,7 @@ class ChatRoomMemberTableViewCell: UITableViewCell {
 extension ChatRoomMemberTableViewCell{
     private func setAddSubViews() {
         contentView.addSubview(upperStackView)
-        upperStackView.addStackSubViews([userImageView,markMeImaegView,nameLabel])
+        upperStackView.addStackSubViews([userImageButton,markMeImaegView,nameLabel])
     }
     private func setAutoLayout(){
         upperStackView.snp.makeConstraints { make in
@@ -63,7 +66,7 @@ extension ChatRoomMemberTableViewCell{
             make.left.right.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-16)
         }
-        userImageView.snp.makeConstraints { make in
+        userImageButton.snp.makeConstraints { make in
             make.height.width.equalTo(45)
         }
         markMeImaegView.snp.makeConstraints { make in
@@ -72,3 +75,24 @@ extension ChatRoomMemberTableViewCell{
     }
     
 }
+extension ChatRoomMemberTableViewCell{
+    func setCell(model: ChatRommUserModelResult) {
+        nameLabel.text = model.nickname
+        self.chatRommUserModelResult = model
+        setImageFromStringURL(stringURL: model.profileImage) { image in
+            DispatchQueue.main.async {
+                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.height / 2
+                self.userImageButton.clipsToBounds = true
+            }
+            
+        }
+    }
+    func showMarkMeImaegView(){
+        markMeImaegView.isHidden = false
+    }
+    @objc private func tapUserImageButton(){
+        closure?(self.chatRommUserModelResult)
+    }
+}
+

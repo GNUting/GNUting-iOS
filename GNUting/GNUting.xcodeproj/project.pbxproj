@@ -24,6 +24,9 @@
 		F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */; };
 		F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */; };
 		F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08D62BE7839100219CEA /* MessageModel.swift */; };
+		F81D08E22BEA344100219CEA /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E12BEA344100219CEA /* PrimaryColorButton.swift */; };
+		F81D08E42BEA375F00219CEA /* ThrottleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E32BEA375F00219CEA /* ThrottleButton.swift */; };
+		F81D08E62BEA5C7C00219CEA /* ChatRoomUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */; };
 		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
@@ -65,7 +68,6 @@
 		F853452D2B5F80C6001EADE6 /* FontRelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F853452C2B5F80C6001EADE6 /* FontRelate.swift */; };
 		F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */; };
 		F85345362B5F8961001EADE6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345352B5F8961001EADE6 /* Spacing.swift */; };
-		F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */; };
 		F85E0AE02BD128BA00ADBE7C /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */; };
 		F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */; };
 		F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862C80F2B622601008120FA /* UILabel+Extension.swift */; };
@@ -179,6 +181,9 @@
 		F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMemberTableViewCell.swift; sourceTree = "<group>"; };
 		F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomSideView.swift; sourceTree = "<group>"; };
 		F81D08D62BE7839100219CEA /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		F81D08E12BEA344100219CEA /* PrimaryColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorButton.swift; sourceTree = "<group>"; };
+		F81D08E32BEA375F00219CEA /* ThrottleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleButton.swift; sourceTree = "<group>"; };
+		F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomUserModel.swift; sourceTree = "<group>"; };
 		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
@@ -223,7 +228,6 @@
 		F853452C2B5F80C6001EADE6 /* FontRelate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontRelate.swift; sourceTree = "<group>"; };
 		F85345332B5F88FB001EADE6 /* UIView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extesnion.swift"; sourceTree = "<group>"; };
 		F85345352B5F8961001EADE6 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
-		F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorButton.swift; sourceTree = "<group>"; };
 		F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
 		F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestChatVC.swift; sourceTree = "<group>"; };
 		F862C80F2B622601008120FA /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -606,7 +610,6 @@
 			isa = PBXGroup;
 			children = (
 				F85345352B5F8961001EADE6 /* Spacing.swift */,
-				F85345372B5F8CB7001EADE6 /* PrimaryColorButton.swift */,
 				F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */,
 				F8D96F6D2B99A8D5009409A3 /* BackButton.swift */,
 				F8C7DE602BC44F6600923EF5 /* DismissButton.swift */,
@@ -802,6 +805,7 @@
 				F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */,
 				F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */,
 				F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */,
+				F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -1006,6 +1010,8 @@
 				F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */,
 				F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */,
 				F81D08B62BE689F000219CEA /* BorderView.swift */,
+				F81D08E12BEA344100219CEA /* PrimaryColorButton.swift */,
+				F81D08E32BEA375F00219CEA /* ThrottleButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1284,6 +1290,8 @@
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F8C7DE532BC4155700923EF5 /* NotificationCheckModel.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,
+				F81D08E42BEA375F00219CEA /* ThrottleButton.swift in Sources */,
+				F81D08E22BEA344100219CEA /* PrimaryColorButton.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
 				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
 				F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */,
@@ -1303,7 +1311,6 @@
 				F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */,
 				F87D05862B8F915400910773 /* MyPageModel.swift in Sources */,
 				F882DBBC2BA43DB4009201D2 /* ReportCategory.swift in Sources */,
-				F85345382B5F8CB7001EADE6 /* PrimaryColorButton.swift in Sources */,
 				F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */,
 				F81D08B92BE6904000219CEA /* AlertState.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatRoomListVC.swift in Sources */,
@@ -1384,6 +1391,7 @@
 				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
 				F8B6ECA12BA4781F0058C6E8 /* MyPostModel.swift in Sources */,
 				F8483F2E2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift in Sources */,
+				F81D08E62BEA5C7C00219CEA /* ChatRoomUserModel.swift in Sources */,
 				F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */,
 				F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */,
 				F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */,
@@ -1551,11 +1559,13 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4G47XHXXQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GNUting/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "지누팅";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"사진 앨범에 접근하시는것을 허용하시겠습니까?\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1591,11 +1601,13 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4G47XHXXQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GNUting/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "지누팅";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"사진 앨범에 접근하시는것을 허용하시겠습니까?\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

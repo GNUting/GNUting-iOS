@@ -92,16 +92,9 @@ extension FindPasswordVC {
 }
 extension FindPasswordVC {
     @objc func tapPasswordUpdateButton() {
-      
         APIUpdateManager.shared.updatePassword(email: emailInputView.getTextFieldText(), password: passWordCheckInputView.getTextFieldText()) { response in
             if response.isSuccess {
-                let alertController = UIAlertController(title: "비밀번호 업데이트", message: "수정된 비밀번호로 업데이트 되었습니다.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                    self.navigationController?.setViewControllers([LoginVC()], animated: true)
-                }))
-                DispatchQueue.main.async {
-                    self.present(alertController, animated: true)
-                }
+                self.showMessagePop(message: "비밀번호가 수정되었습니다.")
             }else {
                 self.errorHandling(response: response)
             }
@@ -153,7 +146,9 @@ extension FindPasswordVC {
 }
 extension FindPasswordVC: CheckEmailButtonDelegate{
     func action(textFieldText: String) {
+        timer.invalidate()
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
+            self.showMessage(message: "인증번호가 전송되었습니다.")
             print(response)
         }
         certifiedInputView.setFoucInputTextFiled()
@@ -182,7 +177,6 @@ extension FindPasswordVC: PasswordCheckDelegate {
         let passwordTestFiledText = passWordInputView.getTextFieldText()
         
         if passwordTestFiledText == text {
-            print("return")
             samePasswordSuccess = true
             nextButtonEnable()
             passWordCheckInputView.setCheckLabel(isHidden: true, text: "비밀번호가 일치합니다.", success: true)

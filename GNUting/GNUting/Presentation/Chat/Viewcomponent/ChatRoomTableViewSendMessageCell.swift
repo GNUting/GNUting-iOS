@@ -8,7 +8,7 @@
 import UIKit
 
 class ChatRoomTableViewSendMessageCell: UITableViewCell {
-    static let identi = "ChatRoomTableViewReceiveMessageCellid"
+    static let identi = "ChatRoomTableViewSendMessageCellid"
     private lazy var upperView : UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal

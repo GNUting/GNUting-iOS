@@ -44,11 +44,11 @@ extension RequestState {
         case .waiting:
             return "대기중"
         case .Success:
-            return "수락 완료"
+            return "수락"
         case .cacnel:
             return "신청 취소"
         case .refuse:
-            return "거절 완료"
+            return "거절됨"
         }
     }
 }

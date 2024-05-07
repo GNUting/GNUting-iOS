@@ -31,8 +31,9 @@ extension MajorSearchTableViewCell {
     private func configure() {
         contentView.addSubview(majorLabel)
         majorLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(10)
-            make.left.right.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(26)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
 }

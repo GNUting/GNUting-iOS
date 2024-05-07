@@ -24,6 +24,9 @@ class MyPageVC: BaseViewController {
         tableView.bounces = false
         tableView.backgroundColor = .white
         tableView.showsVerticalScrollIndicator = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.sectionHeaderTopPadding = 10
         return tableView
     }()
     override func viewDidLoad() {
@@ -49,10 +52,6 @@ extension MyPageVC {
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        myPageTabelView.delegate = self
-        myPageTabelView.dataSource = self
-        
-        
     }
     
 }
@@ -76,7 +75,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             header.profileUpdateButtonDelegate = self
             
             if let userData = userInfo?.result {
-                header.setInfoView(image: userData.profileImage, name: userData.name, studentID: userData.studentId, age: userData.age, major: userData.department, introuduce: userData.userSelfIntroduction)
+                header.setInfoView(image: userData.profileImage, name: userData.nickname, studentID: userData.studentId, age: userData.age, major: userData.department, introuduce: userData.userSelfIntroduction)
             }
             return header
         }else{
@@ -90,7 +89,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
         if section == 0{
             return 150
         } else {
-            return 25
+            return 35
         }
     }
     func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
@@ -131,11 +130,21 @@ extension MyPageVC : tapProfileUpateButtonDelegate {
 }
 extension MyPageVC {
     private func logout() {
+        let alertController = UIAlertController(title: "", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "네", style: .default, handler: { _ in
+            self.userLogOutAPI()
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+    }
+    private func userLogOutAPI() {
         APIPostManager.shared.postLogout { response in
             if response?.isSuccess ?? false {
                 let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                    self.navigationController?.setViewControllers([LoginVC()], animated: true)
+                    self.view.window?.rootViewController = UINavigationController.init(rootViewController: LoginVC())
                 }))
                 DispatchQueue.main.async {
                     self.present(alertController, animated: true)
@@ -148,12 +157,22 @@ extension MyPageVC {
                 }
             }
         }
-        
     }
     private func userDelete() { //회원 탈퇴
+        
+        let alertController = UIAlertController(title: "", message: "회원탈퇴 하시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "네", style: .default, handler: { _ in
+            self.userDeleteAPI()
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+    }
+    private func userDeleteAPI() {
         APIDeleteManager.shared.deleteUser { response in
             if response.isSuccess {
-                let alertController = UIAlertController(title: "회원탈퇴", message: "회원 탈퇴되었습니다..", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "", message: "회원 탈퇴되었습니다.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
                     self.navigationController?.setViewControllers([LoginVC()], animated: true)
                 }))

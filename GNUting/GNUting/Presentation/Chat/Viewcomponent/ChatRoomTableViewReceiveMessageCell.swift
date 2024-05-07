@@ -8,7 +8,7 @@
 import UIKit
 
 class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
-    static let identi = "ChatRoomTableViewSendMessageCellid"
+    static let identi = "ChatRoomTableViewReceiveMessageCellid"
     private lazy var upperView = UIView()
     
     
@@ -92,7 +92,7 @@ extension ChatRoomTableViewReceiveMessageCell{
             make.top.left.bottom.equalToSuperview()
         }
         sendDateLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.bottom.equalToSuperview()
             make.left.equalTo(middleStackView.snp.right).offset(5)
             make.right.lessThanOrEqualToSuperview()
         }

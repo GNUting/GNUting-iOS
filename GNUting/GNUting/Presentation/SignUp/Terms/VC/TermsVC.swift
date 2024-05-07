@@ -28,7 +28,7 @@ class TermsVC: UIViewController{
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(TermsTableViewCell.self, forCellReuseIdentifier: TermsTableViewCell.identi)
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     private lazy var nextButton : PrimaryColorButton = {

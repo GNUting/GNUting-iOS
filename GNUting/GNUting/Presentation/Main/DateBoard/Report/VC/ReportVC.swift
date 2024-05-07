@@ -75,17 +75,20 @@ class ReportVC: BaseViewController {
         
         return button
     }()
-    private lazy var reportButton : UIButton = {
+    private lazy var reportButton : ThrottleButton = {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 30, bottom: 18, trailing: 30)
         config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 14)!]))
         config.titleAlignment = .center
         config.baseForegroundColor = .white
-        let button = UIButton(configuration: config)
+        let button = ThrottleButton(configuration: config)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         button.backgroundColor = UIColor(named: "PrimaryColor")
-        button.addTarget(self, action: #selector(tapReportButton), for: .touchUpInside)
+        button.throttle(delay: 3) { _ in
+            self.tapReportButton()
+        }
+//        button.addTarget(self, action: #selector(tapReportButton), for: .touchUpInside)
         
         
         return button
@@ -155,7 +158,7 @@ extension ReportVC : UITextViewDelegate{
 }
 
 extension ReportVC {
-    @objc private func tapReportButton() {
+    private func tapReportButton() {
         var reportCategory = ""
         switch tag {
         case 1:

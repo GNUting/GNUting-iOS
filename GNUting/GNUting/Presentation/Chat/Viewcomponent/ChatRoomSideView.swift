@@ -12,8 +12,18 @@ protocol LeaveChatRoomButtonDelegate : AnyObject {
 protocol SetAlertButtonDelegate : AnyObject {
     func tapSetAlertButton(alertStatus: String)
 }
+protocol SendTappedUserData: AnyObject {
+    func tapUserImageButton(userData: ChatRommUserModelResult?)
+}
 class ChatRoomSideView: UIView {
-    var leaveChatRoomButtonDelegate : LeaveChatRoomButtonDelegate?
+
+    var chatRommUserModelResult:  [ChatRommUserModelResult] = []{
+        didSet {
+            ChatRoomMemberTableView.reloadData()
+        }
+    }
+    var sendTappedUserData: SendTappedUserData?
+    var leaveChatRoomButtonDelegate: LeaveChatRoomButtonDelegate?
     var setAlertButtonDelegate: SetAlertButtonDelegate?
     var alertStatus: Bool = false
     private lazy var topViewLabel : UILabel = {
@@ -26,9 +36,9 @@ class ChatRoomSideView: UIView {
     private lazy var ChatRoomMemberTableView : UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        
         tableView.register(ChatRoomMemberTableViewCell.self, forCellReuseIdentifier: ChatRoomMemberTableViewCell.identi)
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     private lazy var bottomView : UIView = {
@@ -57,6 +67,7 @@ class ChatRoomSideView: UIView {
         
         setAddSubViews()
         setAutoLayout()
+    
     }
     
     required init?(coder: NSCoder) {
@@ -117,11 +128,20 @@ extension ChatRoomSideView {
 
 extension ChatRoomSideView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        6
+        chatRommUserModelResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatRoomMemberTableViewCell.identi, for: indexPath) as? ChatRoomMemberTableViewCell else { return UITableViewCell() }
+        if indexPath.row == 0{
+            cell.showMarkMeImaegView()
+            
+        }
+        cell.closure = { userData in
+            self.sendTappedUserData?.tapUserImageButton(userData: userData)
+        }
+      
+        cell.setCell(model: chatRommUserModelResult[indexPath.row])
         cell.selectionStyle = .none
         return cell
     }
@@ -137,13 +157,14 @@ extension ChatRoomSideView {
     }
     @objc private func tapSetAlertButton() {
         if alertStatus {
+            alertStatus = false
             setAlertButton.setImage(UIImage(named: "ChatRoomOffBellImage"), for: .normal)
             setAlertButtonDelegate?.tapSetAlertButton(alertStatus: "DISABLE")
         } else {
+            alertStatus = true
             setAlertButton.setImage(UIImage(named: "ChatRoomOnBellImage"), for: .normal)
             setAlertButtonDelegate?.tapSetAlertButton(alertStatus: "ENABLE")
         }
-        
     }
 }
 

@@ -35,7 +35,7 @@ class UpdatePostVC: BaseViewController {
         tableView.register(MemberTableViewHeader.self, forHeaderFooterViewReuseIdentifier: MemberTableViewHeader.identi)
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -46,7 +46,6 @@ class UpdatePostVC: BaseViewController {
         
         addSubViews()
         setAutoLayout()
-        self.hideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,11 +58,13 @@ extension UpdatePostVC{
     private func setNavigationBar(){
         setNavigationBar(title: "수정하기")
         
-        let completedButton = UIButton()
+        let completedButton = ThrottleButton()
         completedButton.setTitle("완료", for: .normal)
         completedButton.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
         completedButton.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
-        completedButton.addTarget(self, action: #selector(tapCompletedButton), for: .touchUpInside)
+        completedButton.throttle(delay: 3) { _ in
+            self.tapCompletedButton()
+        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
     }
     private func addSubViews() {
@@ -94,6 +95,7 @@ extension UpdatePostVC: UITableViewDataSource {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
             vc.addMemberInfos = memberDataList
+            vc.requestChat = false
             let navigationVC = UINavigationController.init(rootViewController: vc)
             present(navigationVC, animated: true)
             
@@ -178,11 +180,10 @@ extension UpdatePostVC: UITableViewDelegate {
 // MARK: - ButtonAction
 
 extension UpdatePostVC{
-    @objc private func tapCompletedButton(){
-        
+    private func tapCompletedButton(){
         APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { response in
             if response.isSuccess {
-                self.successHandlingPopAction(message: response.message)
+                self.showMessagePop(message: "게시글 수정이 완료되었습니다.")
             } else {
                 self.errorHandling(response: response)
             }

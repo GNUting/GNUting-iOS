@@ -232,11 +232,11 @@ extension HomeVC {
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
             self.imageURL = userData?.result?.profileImage
-            self.username = userData?.result?.name ?? "유저이름"
+            self.username = userData?.result?.nickname ?? "유저 닉네임"
             self.userStudentID = userData?.result?.studentId ?? "학번"
             self.userDepartment = userData?.result?.department ?? "학과"
-            setExplainLabel(text: userData?.result?.name ?? "이름")
-            self.setUserNaemLabel(username: username ?? "유저 이름")
+            setExplainLabel(text: userData?.result?.nickname ?? "이름")
+            self.setUserNaemLabel(username: username ?? "유저 닉네임")
             
             setImageFromStringURL(stringURL:self.imageURL ) { image in
                 

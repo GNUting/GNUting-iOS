@@ -135,7 +135,6 @@ class SignUPSecondProcessVC: BaseViewController{
         setNavigationBarSignUpProcess(imageName: "SignupImage2")
         addSubViews()
         setAutoLayout()
-        hideKeyboardWhenTappedAround()
     }
     
 }

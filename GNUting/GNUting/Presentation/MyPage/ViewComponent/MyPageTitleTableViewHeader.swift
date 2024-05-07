@@ -32,7 +32,7 @@ class MyPageTitleTableViewHeader: UITableViewHeaderFooterView {
         borderView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview()
             make.height.equalTo(1)
         }
     }

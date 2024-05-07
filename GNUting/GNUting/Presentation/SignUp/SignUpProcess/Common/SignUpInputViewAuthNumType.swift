@@ -28,18 +28,20 @@ class SignUpInputViewAuthNumType : UIView{
         textField.keyboardType = .numberPad
         return textField
     }()
-    private lazy var confirmButton : UIButton = {
+    private lazy var confirmButton : ThrottleButton = {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         config.attributedTitle = AttributedString("확인", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
         config.titleAlignment = .center
         config.baseForegroundColor = .white
         
-        let button = UIButton(configuration: config)
+        let button = ThrottleButton(configuration: config)
         button.backgroundColor = UIColor(hexCode: "979C9E")
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(confrimButtonAction), for: .touchUpInside)
+        button.throttle(delay: 3) { _ in
+            self.confrimButtonAction()
+        }
         
         return button
     }()
@@ -143,13 +145,15 @@ extension SignUpInputViewAuthNumType {
     @objc private func changeInputTextField(_ sender: UITextField){
         if sender.text?.count == 0 {
             confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+            confirmButton.isEnabled = false
         } else {
             confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+            confirmButton.isEnabled = true
         }
         
     }
     
-    @objc private func confrimButtonAction(){
+    private func confrimButtonAction(){
         confirmButtonDelegate?.action(sendTextFieldText: inputTextField.text ?? "")
     }
 }

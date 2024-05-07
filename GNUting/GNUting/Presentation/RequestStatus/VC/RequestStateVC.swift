@@ -58,6 +58,7 @@ class RequestStateVC: BaseViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(RequsetListTableViewCell.self, forCellReuseIdentifier: RequsetListTableViewCell.identi)
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -65,19 +66,17 @@ class RequestStateVC: BaseViewController {
         
         addSubViews()
         setAutoLayout()
-        
+     
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
-        if selectedSegmentIndex == 0{
-            getRequestStatus()
-        } else {
-            getReceivedState()
-        }
-        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setSegmentedControl(selectedIndex: self.selectedSegmentIndex)
     }
 }
 extension RequestStateVC{
@@ -139,6 +138,7 @@ extension RequestStateVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RequsetListTableViewCell.identi, for: indexPath) as? RequsetListTableViewCell else { return UITableViewCell() }
         cell.setCell(model: dateStatusList[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -195,6 +195,17 @@ extension RequestStateVC {
             }
             
             
+        }
+    }
+}
+extension RequestStateVC {
+    func setSegmentedControl(selectedIndex: Int) {
+        segmentedControl.selectedSegmentIndex = selectedIndex
+        self.selectedSegmentIndex = selectedIndex
+        if selectedSegmentIndex == 0{
+            getRequestStatus()
+        } else {
+            getReceivedState()
         }
     }
 }

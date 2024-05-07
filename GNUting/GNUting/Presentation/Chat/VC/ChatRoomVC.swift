@@ -13,7 +13,8 @@ enum CardState {
     case expanded // 펼쳐짐
     case collapsed // 접혀짐
 }
-class ChatRoomVC: BaseViewController {
+class ChatRoomVC: UIViewController {
+
     var cardVisible = false
     var nextState: CardState{
         return cardVisible ? .collapsed : .expanded
@@ -24,6 +25,7 @@ class ChatRoomVC: BaseViewController {
             self.chatRoomTableViewMoveToBottom()
         }
     }
+
     var originalPostion = CGPoint.zero
     var accessToken = ""
     var chatRoomID: Int = 0
@@ -59,6 +61,7 @@ class ChatRoomVC: BaseViewController {
         tableView.register(ChatRoomTableViewSendMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewSendMessageCell.identi)
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
         tableView.bounces = false
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     private lazy var textField: PaddingTextField = {
@@ -78,10 +81,15 @@ class ChatRoomVC: BaseViewController {
         stackView.spacing = 5
         return stackView
     }()
-    private lazy var sendMessageButton : UIButton = {
-        let button = UIButton()
+    private lazy var sendMessageButton : ThrottleButton = {
+        let button = ThrottleButton()
         button.setImage(UIImage(named: "SendImg"), for: .normal)
-        button.addTarget(self, action: #selector(tapSendMessageButton), for: .touchUpInside)
+        button.throttle(delay: 1) { _ in
+            guard let textFiledText = self.textField.text else { return }
+            if textFiledText != "" {
+                self.tapSendMessageButton()
+            }
+        }
         return button
     }()
     private lazy var sideView : ChatRoomSideView = {
@@ -90,6 +98,7 @@ class ChatRoomVC: BaseViewController {
         view.isHidden = true
         view.leaveChatRoomButtonDelegate = self
         view.setAlertButtonDelegate = self
+        view.sendTappedUserData = self
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(recognizer:)))
         view.addGestureRecognizer(panGestureRecognizer)
         return view
@@ -106,16 +115,21 @@ class ChatRoomVC: BaseViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tabBarController?.tabBar.isHidden = true
-        getAccessToken()
+        swipeRecognizer()
         setAddSubViews()
         setAutoLayout()
         setNavigationBar()
+        
+        getChatRoomMember()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        view.backgroundColor = .white
+      
+        tabBarController?.tabBar.isHidden = true
+        getAccessToken()
         getChatMessageList()
         getAlertSet()
         initStomp()
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -161,7 +175,6 @@ extension ChatRoomVC{
             make.bottom.right.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
         }
-       
     }
 }
 extension ChatRoomVC {
@@ -216,7 +229,7 @@ extension ChatRoomVC: UITableViewDataSource{
 
 // MARK: @objc
 extension ChatRoomVC {
-    @objc private func tapSendMessageButton() {
+    private func tapSendMessageButton() {
         textField.text = ""
         swiftStomp.send(body: SendMessageModel(messageType: "CHAT", message: message), to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
         
@@ -288,6 +301,7 @@ extension ChatRoomVC {
         APIGetManager.shared.getChatRoomSetAlertStatus(chatRoomID: chatRoomID) { response in
             guard let success = response?.isSuccess else { return self.showAlert(message: "재시도하세요. 계속해서 문제 발생시 고객센터로 연락 부탁드립니다.")}
             if success {
+                
                 guard let status = response?.result.notificationSetting else { return }
                 self.sideView.setAlertType(alertStatus: status)
             } else {
@@ -295,22 +309,34 @@ extension ChatRoomVC {
             }
         }
     }
+    private func getChatRoomMember() {
+        APIGetManager.shared.getChatRoomUserList(chatRoomID: chatRoomID) { response in
+            guard let memberList = response?.result else { return }
+            self.sideView.chatRommUserModelResult = memberList
+        }
+    }
 }
 // MARK: - Delegate
 extension ChatRoomVC: LeaveChatRoomButtonDelegate {
     func tapLeaveChatRoomButtonButton() {
-        APIPostManager.shared.postLeavetChatRoom(chatRoomID: chatRoomID) { defaultResponse in
-            let alertController = UIAlertController(title: "채팅방 나가기", message: "채팅방을 나가시면 다시 들어 오실수없습니다. 채팅방을 나가시겠습니까?", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-                self.popButtonTap()
-                
-            }))
-            alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
-            DispatchQueue.main.async {
-                self.present(alertController, animated: true)
+        let alertController = UIAlertController(title: "채팅방 나가기", message: "채팅방을 나가시면 다시 들어 오실수없습니다. 채팅방을 나가시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "네", style: .default,handler: { _ in
+            APIPostManager.shared.postLeavetChatRoom(chatRoomID: self.chatRoomID) { defaultResponse in
+                if defaultResponse.isSuccess {
+                    self.popButtonTap()
+                }else {
+                    self.errorHandling(response: defaultResponse)
+                }
                 
             }
+        }))
+       
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+            
         }
+        
     }
 }
 
@@ -324,7 +350,19 @@ extension ChatRoomVC: SetAlertButtonDelegate {
     }
   
 }
-
+extension ChatRoomVC: SendTappedUserData{
+    func tapUserImageButton(userData: ChatRommUserModelResult?) {
+        let vc = UserDetailVC()
+        vc.imaegURL = userData?.profileImage
+        vc.userNickName = userData?.nickname
+        vc.userStudentID = userData?.studentID
+        vc.userDepartment = userData?.department
+        
+        presentFullScreenVC(viewController: vc)
+    }
+    
+    
+}
 
 // MARK : StompDelegate
 extension ChatRoomVC: SwiftStompDelegate{

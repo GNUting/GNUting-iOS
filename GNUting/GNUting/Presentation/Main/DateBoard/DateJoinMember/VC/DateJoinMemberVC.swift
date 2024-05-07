@@ -30,7 +30,7 @@ class DateJoinMemberVC: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: MemberTableViewCell.identi)
         tableView.dataSource = self
-        
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -61,7 +61,6 @@ extension DateJoinMemberVC {
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(24)
             make.left.right.equalToSuperview().inset(25)
-            make.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
     }
@@ -76,6 +75,8 @@ extension DateJoinMemberVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell() }
+        
+        cell.selectionStyle = .none
         cell.setUserInfoViews(model: userInfos[indexPath.row])
         cell.userImageTappedClosure = {
             let vc = UserDetailVC()

@@ -11,6 +11,7 @@ class DetailDateBoardVC: BaseViewController{
     var boardID: Int = 0
     var userInfos: [UserInfosModel] = []
     var postUserInfos : User?
+    var chatMemeberCount: Int = 0
     private lazy var statusLabel : UILabel = {
        let label = UILabel()
         label.text = "신청 가능"
@@ -168,6 +169,7 @@ extension DetailDateBoardVC{
         if buttonText == "신청하기" {
             let vc = RequestChatVC()
             vc.boardID = boardID
+            vc.chatMemeberCount = self.chatMemeberCount
             pushViewContoller(viewController: vc)
         } else {
             self.tabBarController?.selectedIndex = 1
@@ -199,13 +201,22 @@ extension DetailDateBoardVC: MyPostDelegate {
     }
     
     func didTapDeleteButton() {
-        APIDeleteManager.shared.deletePostText(boardID: boardID) { response in
-            if response.isSuccess {
-                self.successHandlingPopAction(message: response.message)
-            } else {
-                self.errorHandling(response: response)
+    
+        let alertController = UIAlertController(title: "", message: "게시글을 삭제하시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "예", style: .default,handler: { _ in
+            APIDeleteManager.shared.deletePostText(boardID: self.boardID) { response in
+                if response.isSuccess {
+                    self.showMessagePop(message: "게시글이 삭제되었습니다.")
+                } else {
+                    self.errorHandling(response: response)
+                }
             }
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
         }
+        
         
     }
 }
@@ -235,7 +246,6 @@ extension DetailDateBoardVC {
             guard let result = boardDetailData?.result else { return }
             let user = result.user
            
-           
             self.postUserInfos = user
             self.titleLabel.text =  result.title
             self.writeDateLabel.text = result.time
@@ -243,6 +253,7 @@ extension DetailDateBoardVC {
             self.userInfos = result.inUser
             self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId)
             self.setChatPeopleViewButton(memeberCount: result.inUser.count)
+            self.chatMemeberCount = result.inUser.count
             if result.status == "OPEN" {
                 self.statusLabel.textColor = UIColor(named: "SecondaryColor")
                 self.statusLabel.text = "신청 가능"

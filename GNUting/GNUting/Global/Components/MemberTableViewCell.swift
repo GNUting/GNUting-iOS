@@ -55,18 +55,18 @@ extension MemberTableViewCell {
         }
         userInfoView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.left.right.equalToSuperview().inset(Spacing.left)
+            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
             make.bottom.equalToSuperview().offset(-20)
         }
     }
     func setUserInfoViews(model: UserInfosModel ){
-        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.nickname, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
     func setUserInfoViewsPost(model: UserInfosModel ){
-        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.nickname, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
     func setDateMember(model: ApplicationStatusUser ){
-        userInfoView.setUserInfoDetailView(name: model.name, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
+        userInfoView.setUserInfoDetailView(name: model.nickname, major: model.department, studentID: model.studentId, introduce: model.userSelfIntroduction, image: model.profileImage)
     }
 }
 

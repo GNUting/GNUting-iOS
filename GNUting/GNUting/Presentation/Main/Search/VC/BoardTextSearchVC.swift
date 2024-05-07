@@ -45,6 +45,7 @@ class BoardTextSearchVC: BaseViewController{
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -143,6 +144,7 @@ extension BoardTextSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
         boardListCell.searchSetCell(model: searchResultList[indexPath.row])
+        boardListCell.selectionStyle = .none
         return boardListCell
     }
     

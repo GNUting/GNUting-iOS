@@ -51,7 +51,7 @@ class SignUpInputViewEmailCheckType : UIView{
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
         return view
     }()
-    private lazy var confirmButton : UIButton = {
+    private lazy var confirmButton : ThrottleButton = {
         
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -59,12 +59,14 @@ class SignUpInputViewEmailCheckType : UIView{
         config.titleAlignment = .center
         config.baseForegroundColor = .white
         
-        let button = UIButton(configuration: config)
+        let button = ThrottleButton(configuration: config)
         
         button.backgroundColor = UIColor(hexCode: "979C9E")
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(getEmailAuthNumber), for: .touchUpInside)
+        button.throttle(delay: 3) { _ in
+            self.getEmailAuthNumber()
+        }
         return button
     }()
     override init(frame: CGRect) {
@@ -121,12 +123,14 @@ extension SignUpInputViewEmailCheckType {
     @objc private func changeInputTextField(_ sender: UITextField){
         if sender.text?.count == 0 {
             confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+            confirmButton.isEnabled = false
         } else {
             confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+            confirmButton.isEnabled = true
         }
         
     }
-    @objc private func getEmailAuthNumber(){
+    private func getEmailAuthNumber(){
         checkEmailButtonDelegate?.action(textFieldText: inputTextField.text ?? "")
         
     }

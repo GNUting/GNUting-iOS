@@ -6,17 +6,20 @@
 //
 
 import UIKit
+
 // MARK: - 채팅신청하기 화면
+
 class RequestChatVC: BaseViewController{
     var boardID : Int = 0
+    var chatMemeberCount: Int = 0
     
     var addMemberDataList : [UserInfosModel] = []{
         didSet {
             memberTableView.reloadData()
         }
     }
-   
-  
+    
+    
     private lazy var memberTableView : UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -26,24 +29,25 @@ class RequestChatVC: BaseViewController{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.sectionHeaderTopPadding = 0
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
     private lazy var chatRequestCompletedButton : PrimaryColorButton = {
-       let button = PrimaryColorButton()
-        button.setText("채팅 신청완료")
-        button.addTarget(self, action: #selector(tapRequestChatButton), for: .touchUpInside)
-        
+        let button = PrimaryColorButton()
+        button.setText("채팅 신청완료",fointSize: 16)
+        button.throttle(delay: 3) { _ in
+            self.postRequestChat()
+        }
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        
         addSubViews()
         setAutoLayout()
         getUserData()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,12 +55,12 @@ class RequestChatVC: BaseViewController{
     }
 }
 extension RequestChatVC{
-
+    
     private func addSubViews() {
         view.addSubViews([memberTableView,chatRequestCompletedButton])
     }
     private func setAutoLayout(){
-      
+        
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.right.equalToSuperview().inset(Spacing.UpperInset)
@@ -82,6 +86,8 @@ extension RequestChatVC: UITableViewDataSource {
             let vc = SearchAddMemberVC()
             vc.memberAddButtonDelegate = self
             vc.addMemberInfos = addMemberDataList
+            vc.chatMemeberCount = chatMemeberCount
+            vc.requestChat = true
             let navigationVC = UINavigationController.init(rootViewController: vc)
             present(navigationVC, animated: true)
             
@@ -151,15 +157,19 @@ extension RequestChatVC: MemberAddButtonDelegate {
     }
 }
 extension RequestChatVC {
-    @objc private func tapRequestChatButton() {
+    private func postRequestChat() {
         APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { response  in
             if response?.isSuccess == true {
-                self.successHandling(message: response?.message ?? "성공")
-                self.popButtonTap()
+                self.showMessagePop(message: "채팅 신청이 완료되었습니다.")
+             
             } else {
-                self.showAlert(message: response?.result ?? "다시 시도 해보세요!")
+                if response?.code == "APPLY4001"{
+                    self.showMessage(message: "이미 신청한 유저가 존재합니다.")
+                } else {
+                    self.showAlert(message: response?.message ?? "고객센터에 문의하세요.")
+                }
             }
         }
+
     }
 }
-

@@ -119,7 +119,8 @@ extension UpdateProfileVC {
         
         APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImageView.image ?? UIImage()) { response in
             if response.isSuccess {
-                self.successHandling(message: response.message)
+                self.showMessage(message: response.message)
+                self.popButtonTap()
             } else {
                 if response.code == "TOKEN4001-1" {
                     guard let refreshToken = KeyChainManager.shared.read(key: "RefreshToken") else { return }

@@ -55,7 +55,7 @@ class APIPostManager {
                 }
                 
             }
-    
+        
     }
     // MARK: - 회원가입 : 이메일 인증 번호 전송 ✅
     
@@ -199,7 +199,7 @@ class APIPostManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-  
+        
         let requestBody = RefreshTokenModel(refreshToken: refreshToken)
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
@@ -259,13 +259,14 @@ class APIPostManager {
     }
     
     // MARK: - 채팅 신청 ✅
-    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(ResponseWithResult?) -> Void){
+    func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(DefaultResponse?) -> Void){
         
         let uslString = "http://203.255.3.66:10001/api/v1/board/apply/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let requestBody = userInfos
+        
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
         }catch {
@@ -275,18 +276,17 @@ class APIPostManager {
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
-                print(response)
-                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
-                guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
                 
-                switch response.result {
-                case .success:
-                    print("🟢 postRequestChat statusCode: \(statusCode)")
-                    completion(json)
-                case .failure:
-                    print("🔴 postRequestChat statusCode: \(statusCode)")
-                    completion(json)
-                    break
+                guard let statusCode = response.response?.statusCode else { return }
+                if let data = response.data {
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                    if json.isSuccess {
+                        print("🟢 postRequestChat statusCode: \(statusCode)")
+                        completion(json)
+                    } else {
+                        print("🔴 postRequestChat statusCode: \(statusCode)")
+                        completion(json)
+                    }
                 }
             }
     }
@@ -315,7 +315,7 @@ class APIPostManager {
     // MARK: - 글 신고하기 ✅
     func reportBoardPost(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
         let url = EndPoint.reportPost.url
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let requestBody = ReportPostModel(boardId: boardID, reportCategory: reportCategory, reportReason: reportReason)
@@ -328,7 +328,7 @@ class APIPostManager {
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response { response in
-              
+                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 switch response.result {
@@ -345,7 +345,7 @@ class APIPostManager {
     // MARK: - 유저신고하기 ✅
     func reportUser(nickName: String,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
         let url = EndPoint.reportUser.url
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let requestBody = ReportUserModel(nickName: nickName, reportCategory: reportCategory, reportReason: reportReason)
@@ -358,7 +358,7 @@ class APIPostManager {
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response { response in
-              
+                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 switch response.result {

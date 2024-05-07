@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 class APIPutManager {
     static let shared = APIPutManager()
+    //MARK: - 전체 알림 켜기/끄기
     func putTotalNotification(alertStatus: String,completion: @escaping(DefaultResponse) -> Void) {
         let url = EndPoint.notificationSetting.url
         let parameters : [String : String] = ["notificationSetting": alertStatus]
@@ -28,6 +29,7 @@ class APIPutManager {
                 }
             }
     }
+    //MARK: - 채팅 알림 켜기/끄기
     func putAlertNotification(alertStatus: String,chatRoomID: Int,completion: @escaping(DefaultResponse) -> Void) {
         let url = BaseURL.shared.urlString + "\(chatRoomID)" + "/notificationSetting"
         let parameters : [String : String] = ["notificationSetting": alertStatus]
