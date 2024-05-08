@@ -46,7 +46,7 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     }()
     private lazy var updateProfileButton : UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("프로필 수정", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 20)!]))
+        config.attributedTitle = AttributedString("프로필 수정", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 18)!]))
         config.baseForegroundColor = .black
         config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
         let button = UIButton(configuration: config)
@@ -72,29 +72,29 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
 extension MyPageUserInfoTableViewHeader{
     
     private func setAddSubViews() {
-        contentView.addSubview(upperView)
-        upperView.addSubViews([userImageView,labelStackView,updateProfileButton])
+        contentView.addSubViews([upperView,updateProfileButton])
+        upperView.addSubViews([userImageView,labelStackView])
         labelStackView.addStackSubViews([nameLabel,subInfoLabel,introduceLabel])
     }
     private func setAutoLayout() {
         upperView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.left.right.equalToSuperview()
         }
         userImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             
-            make.width.equalTo(70)
+            make.height.width.equalTo(70)
         }
         
         labelStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Spacing.top)
+            make.top.equalToSuperview()
             make.left.equalTo(userImageView.snp.right).offset(10)
             make.right.equalToSuperview()
             
         }
         updateProfileButton.snp.makeConstraints { make in
-            make.top.equalTo(userImageView.snp.bottom).offset(10)
+            make.top.equalTo(upperView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-15)
             make.height.equalTo(50)

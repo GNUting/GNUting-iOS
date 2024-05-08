@@ -142,7 +142,7 @@ extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
     func action(textFieldText: String) {
         APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr") { response in
             if response.isSuccess {
-                print(response)
+                self.showMessage(message: "인증번호가 전송되었습니다.")
                 self.certifiedInputView.setFoucInputTextFiled()
                 self.getSetTime()
             }

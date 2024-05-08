@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = .white
         FirebaseApp.configure()
         setupFCM(application)
-        sleep(UInt32(0.5))
+        sleep(UInt32(2))
         return true
     }
     
@@ -58,7 +58,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         let location = userInfo[AnyHashable("location")] as? String
         guard let locationId = userInfo[AnyHashable("locationId")] else { return }
         
-        print(locationId)
+//        print(locationId)
         let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
         switch location {
         case "apply":
@@ -74,6 +74,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         case "refuse":
             rootVC?.selectedIndex = 0
         case "chat":
+            //            let pushVC = ChatRoomVC()
+            //            vc?.pushViewContoller(viewController: pushVC)
             rootVC?.selectedIndex = 2
         case .none:
             break

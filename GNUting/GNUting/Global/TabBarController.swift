@@ -24,6 +24,10 @@ class TabBarController: UITabBarController {
         self.navigationController?.navigationBar.isHidden = true
     }
     private func setTabBar(){
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithTransparentBackground()
+        tabBar.standardAppearance = tabBarAppearance
+        tabBar.scrollEdgeAppearance = tabBarAppearance
         self.viewControllers = [firstVC,secondVC,thirdVC,forthVC]
         firstVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "Home"), tag: 1)
         secondVC.tabBarItem = UITabBarItem(title: "신청현황", image: UIImage(named: "Request"), tag: 2)

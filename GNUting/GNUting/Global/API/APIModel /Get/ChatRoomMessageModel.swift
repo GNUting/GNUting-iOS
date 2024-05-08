@@ -23,3 +23,9 @@ struct ChatRoomMessageModelResult: Codable {
     let message: String
     let createdDate: String
 }
+
+
+struct LeaveMessageModel: Codable {
+    let messageType: String
+    let message: String
+}

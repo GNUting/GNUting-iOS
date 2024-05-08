@@ -21,7 +21,7 @@ class ChatVC: BaseViewController {
     }
     private lazy var noDataScreenView: NoDataScreenView = {
        let view = NoDataScreenView()
-        
+        view.isHidden = true
         view.setLabel(text: "현재 참여 중인 채팅방이 없습니다. ", range: "")
         return view
     }()
@@ -113,11 +113,10 @@ extension ChatVC : UITableViewDataSource {
 
 extension ChatVC {
     private func getChatRoomData() {
-        APIGetManager.shared.getChatRoomData { getChatRoomData, response in
-            
-            self.chatRoomData = getChatRoomData
-            
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            APIGetManager.shared.getChatRoomData { getChatRoomData, response in
+                self.chatRoomData = getChatRoomData
+            }
         }
     }
-    
 }
