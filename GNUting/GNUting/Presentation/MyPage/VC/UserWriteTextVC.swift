@@ -79,7 +79,7 @@ extension UserWriteTextVC{
         writeTextButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
             make.right.equalToSuperview().offset(-25)
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(60)
         }
     }
 }

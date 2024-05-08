@@ -149,10 +149,10 @@ extension FindPasswordVC: CheckEmailButtonDelegate{
         timer.invalidate()
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
             self.showMessage(message: "인증번호가 전송되었습니다.")
-            print(response)
+            self.certifiedInputView.setFoucInputTextFiled()
+            self.getSetTime()
         }
-        certifiedInputView.setFoucInputTextFiled()
-        getSetTime()
+        
     }
     
 }

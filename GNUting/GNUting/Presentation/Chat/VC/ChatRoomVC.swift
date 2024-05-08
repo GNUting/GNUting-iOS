@@ -62,6 +62,9 @@ class ChatRoomVC: UIViewController {
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tap)
         return tableView
     }()
     private lazy var textField: PaddingTextField = {
@@ -203,24 +206,26 @@ extension ChatRoomVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellData = chatMessageList[indexPath.row]
-        if cellData.email == userEmail{
-            guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
-            sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
-            sendCell.setSizeToFitMessageLabel()
-            sendCell.selectionStyle = .none
-            return sendCell
-        } else if cellData.email == nil{
+        if cellData.messageType == "CHAT" {
+            if cellData.email == userEmail{
+                guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
+                sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                sendCell.setSizeToFitMessageLabel()
+                sendCell.selectionStyle = .none
+                return sendCell
+            } else {
+                guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewReceiveMessageCell.identi, for: indexPath) as? ChatRoomTableViewReceiveMessageCell else { return UITableViewCell() }
+                receiveCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                receiveCell.setSizeToFitMessageLabel()
+                receiveCell.selectionStyle = .none
+                return  receiveCell
+            }
+        } else {
             guard let enterCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomEnterTableViewCell.identi, for: indexPath) as? ChatRoomEnterTableViewCell else { return UITableViewCell() }
             enterCell.setCell(message: cellData.message)
             enterCell.setSizeToFitMessageLabel()
             enterCell.selectionStyle = .none
             return enterCell
-        } else {
-            guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewReceiveMessageCell.identi, for: indexPath) as? ChatRoomTableViewReceiveMessageCell else { return UITableViewCell() }
-            receiveCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
-            receiveCell.setSizeToFitMessageLabel()
-            receiveCell.selectionStyle = .none
-            return  receiveCell
         }
     }
     
@@ -243,7 +248,7 @@ extension ChatRoomVC {
         opaqueView.isHidden = false
         
         sideView.transform = CGAffineTransform(translationX: 0, y: 0)
-        
+        view.endEditing(true)
         self.view.bringSubviewToFront(opaqueView)
         self.view.bringSubviewToFront(sideView)
         
@@ -387,22 +392,34 @@ extension ChatRoomVC: SwiftStompDelegate{
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
         print("Received")
+        let messageString = message as! String
+        let messageData = Data(messageString.utf8)
         
-        if let message = message{
+        if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
             do {
-                let messageString = message as! String
-                let messageData = Data(messageString.utf8)
-                
-                let jsonData = try JSONDecoder().decode(ChatRoomMessageModelResult.self, from: messageData)
-                
-                chatMessageList.append(jsonData)
+                let jsonData = try JSONDecoder().decode(LeaveMessageModel.self, from: messageData)
+                let leaveData = ChatRoomMessageModelResult(id: 0, chatRoomId: 0, messageType: jsonData.messageType, email: nil, nickname: nil, profileImage: nil, message: jsonData.message, createdDate: "")
+                chatMessageList.append(leaveData)
             } catch {
                 print(error)
             }
+            
+        }  else {
+            if let message = message{
+                do {
+                    let jsonData = try JSONDecoder().decode(ChatRoomMessageModelResult.self, from: messageData)
+                    
+                    chatMessageList.append(jsonData)
+                } catch {
+                    print(error)
+                }
 
-        } else if let message = message as? Data{
-            print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
+            } else if let message = message as? Data{
+                print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
+            }
         }
+     
+      
     }
     
     func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {

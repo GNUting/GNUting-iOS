@@ -26,7 +26,7 @@ class MyPageVC: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.sectionHeaderTopPadding = 10
+        tableView.sectionHeaderTopPadding = 5
         return tableView
     }()
     override func viewDidLoad() {

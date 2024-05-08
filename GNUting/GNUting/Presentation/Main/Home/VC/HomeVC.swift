@@ -80,7 +80,7 @@ class HomeVC: BaseViewController{
     }()
     private lazy var postSubView: ImagePlusLabelView = {
         let view = ImagePlusLabelView()
-        view.setImagePlusLabelView(imageName: "PostImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 14) ?? .boldSystemFont(ofSize: 14), labelText: "모든 글은 여기서 볼수 있어요")
+        view.setImagePlusLabelView(imageName: "PostImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 14) ?? .boldSystemFont(ofSize: 14), labelText: "모든 글은 여기서 볼 수 있어요")
         return view
     }()
     private lazy var cardStackView : UIStackView = {
@@ -134,7 +134,7 @@ extension HomeVC{
     }
     private func setAutoLayout(){
         homeTopView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.upperTop)
             make.left.right.equalToSuperview().inset(25)
         }
         explainStackView.snp.makeConstraints { make in

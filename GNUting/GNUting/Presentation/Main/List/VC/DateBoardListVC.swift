@@ -69,7 +69,7 @@ extension DateBoardListVC{
     }
     private func setAutoLayout(){
         dateBoardTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.upperTop)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -77,7 +77,7 @@ extension DateBoardListVC{
         writeTextButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-30)
             make.right.equalToSuperview().offset(-25)
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(60)
         }
         noDataScreenView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

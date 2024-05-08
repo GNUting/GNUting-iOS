@@ -157,8 +157,6 @@ extension SearchAddMemberVC {
     @objc private func didSearchUserInfoView(_ sender: UIButton) {
         guard let searchUser = searchUser else { return }
         guard let buttonTetxt = sender.titleLabel?.text else { return }
-        var config = UIButton.Configuration.plain()
-        
         if buttonTetxt == "추가" {
             addMemberInfos.append(searchUser)
             if requestChat{
