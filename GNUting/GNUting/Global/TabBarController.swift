@@ -10,7 +10,7 @@ import UIKit
 class TabBarController: UITabBarController {
     var firstVC = UINavigationController.init(rootViewController: HomeVC())
     let secondVC = UINavigationController.init(rootViewController: RequestStateVC())
-    let thirdVC = UINavigationController.init(rootViewController: ChatVC())
+    let thirdVC = UINavigationController.init(rootViewController: ChatRoomListVC())
     let forthVC = UINavigationController.init(rootViewController: MyPageVC())
     var email = ""
     

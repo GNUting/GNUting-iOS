@@ -27,6 +27,7 @@
 		F81D08E22BEA344100219CEA /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E12BEA344100219CEA /* PrimaryColorButton.swift */; };
 		F81D08E42BEA375F00219CEA /* ThrottleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E32BEA375F00219CEA /* ThrottleButton.swift */; };
 		F81D08E62BEA5C7C00219CEA /* ChatRoomUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */; };
+		F82006AA2BEBC1DC00E1C05E /* ApplicationReceivedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82006A92BEBC1DC00E1C05E /* ApplicationReceivedModel.swift */; };
 		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
@@ -91,6 +92,7 @@
 		F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */; };
 		F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05892B8F940100910773 /* MyPageTableViewCell.swift */; };
 		F87D058C2B8F95A500910773 /* MyPageTitleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */; };
+		F87DAD272BEC7718005DCB28 /* AlertChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */; };
 		F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813E412BAD824A008AF204 /* UserDefaultsManager.swift */; };
 		F8813E452BAD943D008AF204 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */; };
 		F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBAB2BA40E56009201D2 /* BoardDetailModel.swift */; };
@@ -184,6 +186,7 @@
 		F81D08E12BEA344100219CEA /* PrimaryColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorButton.swift; sourceTree = "<group>"; };
 		F81D08E32BEA375F00219CEA /* ThrottleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleButton.swift; sourceTree = "<group>"; };
 		F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomUserModel.swift; sourceTree = "<group>"; };
+		F82006A92BEBC1DC00E1C05E /* ApplicationReceivedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReceivedModel.swift; sourceTree = "<group>"; };
 		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
@@ -249,6 +252,7 @@
 		F87D05872B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUserInfoTableViewHeader.swift; sourceTree = "<group>"; };
 		F87D05892B8F940100910773 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		F87D058B2B8F95A500910773 /* MyPageTitleTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTitleTableViewHeader.swift; sourceTree = "<group>"; };
+		F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertChatModel.swift; sourceTree = "<group>"; };
 		F8813E412BAD824A008AF204 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		F882DBAB2BA40E56009201D2 /* BoardDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailModel.swift; sourceTree = "<group>"; };
@@ -806,6 +810,8 @@
 				F8C7DE522BC4155700923EF5 /* NotificationCheckModel.swift */,
 				F81D08CB2BE7670800219CEA /* ChatRoomAlertStatusModel.swift */,
 				F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */,
+				F82006A92BEBC1DC00E1C05E /* ApplicationReceivedModel.swift */,
+				F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -1296,6 +1302,7 @@
 				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
 				F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */,
 				F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */,
+				F82006AA2BEBC1DC00E1C05E /* ApplicationReceivedModel.swift in Sources */,
 				F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */,
 				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,
 				F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */,
@@ -1354,6 +1361,7 @@
 				F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */,
 				F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */,
 				F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */,
+				F87DAD272BEC7718005DCB28 /* AlertChatModel.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,
 				F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */,
 				F8B6ECA42BA48A740058C6E8 /* APIUpdateManager.swift in Sources */,
@@ -1571,7 +1579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1613,7 +1621,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

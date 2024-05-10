@@ -1,5 +1,5 @@
 //
-//  RequestChatVC.swift
+//  ChatRoomListVC.swift
 //  GNUting
 //
 //  Created by 원동진 on 2/28/24.

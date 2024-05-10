@@ -56,46 +56,36 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let userInfo = response.notification.request.content.userInfo
         let location = userInfo[AnyHashable("location")] as? String
-        guard let locationId = userInfo[AnyHashable("locationId")] else { return }
+        guard let locationId = userInfo[AnyHashable("locationId")] as? String else { return }
         
-//        print(locationId)
         let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
         switch location {
         case "apply":
             rootVC?.selectedIndex = 1
             let vc = currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 1
-            //            let pushVC = RequestStatusDetailVC()
-            //            vc?.pushViewContoller(viewController: pushVC)
+            vc?.getApplicationReceivedData(ApplicatoinID: locationId, requestStatus: false)
+            
         case "cancel":
             rootVC?.selectedIndex = 1
             let vc = currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 0
         case "refuse":
-            rootVC?.selectedIndex = 0
+            
+            rootVC?.selectedIndex = 1
+            let vc = currentTopViewController() as? RequestStateVC
+            vc?.selectedSegmentIndex = 0
+            vc?.getApplicationReceivedData(ApplicatoinID: locationId, requestStatus: true)
         case "chat":
-            //            let pushVC = ChatRoomVC()
-            //            vc?.pushViewContoller(viewController: pushVC)
             rootVC?.selectedIndex = 2
+//            let vc = currentTopViewController() as? ChatRoomListVC
+//            vc?.AlertpushChatRoom(locationID: locationId)
         case .none:
             break
         case .some(_):
             break
         }
-        if location == "apply" {
-            rootVC?.selectedIndex = 1
-            let vc = currentTopViewController() as? RequestStateVC
-            vc?.selectedSegmentIndex = 1
-
-        } else if location == "cancel"{
-            rootVC?.selectedIndex = 1
-            let vc = currentTopViewController() as? RequestStateVC
-            vc?.selectedSegmentIndex = 0
-        } else if location == "refuse" {
-            rootVC?.selectedIndex = 0
-        } else if location == "chat" {
-            rootVC?.selectedIndex = 2
-        }
+      
     }
     
     /// 앱화면 보고있는중에 푸시올 때
@@ -134,4 +124,3 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         
     }
 }
-

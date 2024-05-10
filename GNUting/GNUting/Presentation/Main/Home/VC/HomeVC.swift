@@ -47,7 +47,8 @@ class HomeVC: BaseViewController{
     private lazy var userNameLabel:  UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 22)
-        
+        label.numberOfLines = 2
+        label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     

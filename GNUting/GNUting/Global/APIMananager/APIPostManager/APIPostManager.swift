@@ -196,11 +196,11 @@ class APIPostManager {
     func postLogout(completion: @escaping(ResponseWithResult?)->Void) {
         let url = EndPoint.logout.url
         guard let refreshToken = KeyChainManager.shared.read(key:"RefreshToken") else { return }
-        
+        guard let fcmToken = KeyChainManager.shared.read(key: "fcmToken") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let requestBody = RefreshTokenModel(refreshToken: refreshToken)
+        let requestBody = RefreshTokenModel(refreshToken: refreshToken,fcmToken: fcmToken)
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
         }catch {
