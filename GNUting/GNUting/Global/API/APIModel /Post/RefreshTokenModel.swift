@@ -8,4 +8,5 @@
 import Foundation
 struct RefreshTokenModel: Codable {
     let refreshToken: String
+    let fcmToken: String
 }

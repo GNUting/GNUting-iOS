@@ -119,7 +119,7 @@ extension UpdateProfileVC {
         
         APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImageView.image ?? UIImage()) { response in
             if response.isSuccess {
-                self.showMessage(message: response.message)
+                self.showMessage(message: "프로필 수정이 완료되었습니다.")
                 self.popButtonTap()
             } else {
                 if response.code == "TOKEN4001-1" {

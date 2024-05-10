@@ -351,6 +351,7 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     } 
+    // MARK: - 채팅 참여인원 Get
     func getChatRoomUserList(chatRoomID: Int,completion: @escaping(ChatRoomUserModel?) -> Void) {
         let url = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)" + "/chatRoomUsers"
         AF.request(url,interceptor: APIInterceptorManager())
@@ -368,6 +369,41 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     }
-
+    // 알림 클릭시 클릭한 신천받은 현황 ID로 조회하는 API
+    func getApplicationReceivedData(applcationID: String,completion: @escaping(ApplicationReceivedModel?) -> Void) {
+        let url = BaseURL.shared.urlString + "notification/application/click/" + applcationID
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ApplicationReceivedModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getApplicationReceivedData statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getApplicationReceivedData statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+        }
+    }
+    // 채팅 알림 클릭시 이동에 필요한 데이터 API 채팅방 제목, 학과
+    func getApplicationChatRoomTitleData(chatRoomID: Int,completion: @escaping(AlertChatModel?) -> Void) {
+        let url = BaseURL.shared.urlString + "notification/chat/click/" + "\(chatRoomID)"
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: AlertChatModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getApplicationChatRoomTitleData statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getApplicationChatRoomTitleData statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+        }
+    }
 }
 

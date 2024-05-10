@@ -150,7 +150,11 @@ extension SignUPInputView: UITextFieldDelegate {
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        
+        if textFieldType == .passwordCheck {
+            passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
+        } else if textFieldType == .password {
+            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
+        }
         return true
     }
     

@@ -210,4 +210,22 @@ extension RequestStateVC {
             getReceivedState()
         }
     }
+    func getApplicationReceivedData(ApplicatoinID: String,requestStatus: Bool) {
+        if requestStatus {
+            APIGetManager.shared.getApplicationReceivedData(applcationID: ApplicatoinID) { applicationReceivedData in
+                let vc = RequestStatusDetailVC()
+                vc.dedatilData = applicationReceivedData?.result
+                vc.requestStatus = true
+                self.pushViewContoller(viewController: vc)
+            }
+        } else {
+            APIGetManager.shared.getApplicationReceivedData(applcationID: ApplicatoinID) { applicationReceivedData in
+                let vc = RequestStatusDetailVC()
+                vc.dedatilData = applicationReceivedData?.result
+                vc.requestStatus = false
+                self.pushViewContoller(viewController: vc)
+            }
+        }
+        
+    }
 }

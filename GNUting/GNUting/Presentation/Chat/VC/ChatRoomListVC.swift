@@ -1,5 +1,5 @@
 //
-//  ChatVC.swift
+//  ChatRoomListVC.swift
 //  GNUting
 //
 //  Created by 원동진 on 2/17/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatVC: BaseViewController {
+class ChatRoomListVC: BaseViewController {
     var userName : String = ""
     var chatRoomData: ChatRoomModel? {
         didSet{
@@ -57,7 +57,7 @@ class ChatVC: BaseViewController {
         getChatRoomData()
     }
 }
-extension ChatVC{
+extension ChatRoomListVC{
     private func addSubViews() {
         view.addSubViews([titleLabel,chatTableView,noDataScreenView])
     }
@@ -79,7 +79,7 @@ extension ChatVC{
     
 }
 
-extension ChatVC: UITableViewDelegate {
+extension ChatRoomListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatRoomVC()
         let result = chatRoomData?.result[indexPath.row]
@@ -90,7 +90,7 @@ extension ChatVC: UITableViewDelegate {
     }
 }
 
-extension ChatVC : UITableViewDataSource {
+extension ChatRoomListVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = chatRoomData?.result.count else { return 0}
@@ -111,12 +111,30 @@ extension ChatVC : UITableViewDataSource {
 }
 
 
-extension ChatVC {
+extension ChatRoomListVC {
     private func getChatRoomData() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getChatRoomData, response in
                 self.chatRoomData = getChatRoomData
             }
         }
+    }
+}
+extension ChatRoomListVC {
+    func AlertpushChatRoom(locationID: String) {
+        let chatRoomID = Int(locationID)
+        let vc = ChatRoomVC()
+        APIGetManager.shared.getApplicationChatRoomTitleData(chatRoomID: chatRoomID ?? 0) { responseResult in
+            print(responseResult)
+            vc.chatRoomID = chatRoomID ?? 0
+            vc.navigationTitle = responseResult?.result.title ?? "채팅방 제목"
+            
+            vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과")*\(responseResult?.result.applyLeaderDepartment ?? "학과")"
+            
+            self.pushViewContoller(viewController: vc)
+        }
+        
+        
+        
     }
 }

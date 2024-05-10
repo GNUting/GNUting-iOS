@@ -14,7 +14,7 @@ enum CardState {
     case collapsed // 접혀짐
 }
 class ChatRoomVC: UIViewController {
-
+    
     var cardVisible = false
     var nextState: CardState{
         return cardVisible ? .collapsed : .expanded
@@ -25,7 +25,7 @@ class ChatRoomVC: UIViewController {
             self.chatRoomTableViewMoveToBottom()
         }
     }
-
+    
     var originalPostion = CGPoint.zero
     var accessToken = ""
     var chatRoomID: Int = 0
@@ -106,7 +106,7 @@ class ChatRoomVC: UIViewController {
         view.addGestureRecognizer(panGestureRecognizer)
         return view
     }()
-  
+    
     
     private lazy var opaqueView: UIView = {
         let view = UIView()
@@ -123,14 +123,15 @@ class ChatRoomVC: UIViewController {
         setAutoLayout()
         setNavigationBar()
         
-        getChatRoomMember()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = .white
-      
+        
         tabBarController?.tabBar.isHidden = true
         getAccessToken()
         getChatMessageList()
+        getChatRoomMember()
         getAlertSet()
         initStomp()
     }
@@ -336,7 +337,7 @@ extension ChatRoomVC: LeaveChatRoomButtonDelegate {
                 
             }
         }))
-       
+        
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
             
@@ -353,7 +354,7 @@ extension ChatRoomVC: SetAlertButtonDelegate {
             }
         }
     }
-  
+    
 }
 extension ChatRoomVC: SendTappedUserData{
     func tapUserImageButton(userData: ChatRommUserModelResult?) {
@@ -392,20 +393,20 @@ extension ChatRoomVC: SwiftStompDelegate{
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
         print("Received")
-        let messageString = message as! String
-        let messageData = Data(messageString.utf8)
         
-        if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
-            do {
-                let jsonData = try JSONDecoder().decode(LeaveMessageModel.self, from: messageData)
-                let leaveData = ChatRoomMessageModelResult(id: 0, chatRoomId: 0, messageType: jsonData.messageType, email: nil, nickname: nil, profileImage: nil, message: jsonData.message, createdDate: "")
-                chatMessageList.append(leaveData)
-            } catch {
-                print(error)
-            }
-            
-        }  else {
-            if let message = message{
+        if let message = message{
+            let messageString = message as! String
+            let messageData = Data(messageString.utf8)
+            if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
+                do {
+                    let jsonData = try JSONDecoder().decode(LeaveMessageModel.self, from: messageData)
+                    let leaveData = ChatRoomMessageModelResult(id: 0, chatRoomId: 0, messageType: jsonData.messageType, email: nil, nickname: nil, profileImage: nil, message: jsonData.message, createdDate: "")
+                    chatMessageList.append(leaveData)
+                } catch {
+                    print(error)
+                }
+                
+            }  else {
                 do {
                     let jsonData = try JSONDecoder().decode(ChatRoomMessageModelResult.self, from: messageData)
                     
@@ -413,13 +414,13 @@ extension ChatRoomVC: SwiftStompDelegate{
                 } catch {
                     print(error)
                 }
-
-            } else if let message = message as? Data{
-                print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
             }
+        } else if let message = message as? Data{
+            print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
         }
-     
-      
+        
+        
+        
     }
     
     func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
