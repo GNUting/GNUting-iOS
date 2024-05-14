@@ -119,20 +119,9 @@ extension RequestStateVC {
     }
 }
 
-extension RequestStateVC: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = RequestStatusDetailVC()
-        vc.dedatilData = dateStatusAllInfos[indexPath.row]
-        if selectedSegmentIndex == 0{
-            vc.requestStatus = true
-        }else {
-            vc.requestStatus = false
-        }
-        pushViewContoller(viewController: vc)
-    }
-}
 
-extension RequestStateVC : UITableViewDelegate {
+
+extension RequestStateVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dateStatusList.count
     }
@@ -144,8 +133,52 @@ extension RequestStateVC : UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if dateStatusAllInfos[indexPath.row].applyStatus != "대기중" {
+            if editingStyle == .delete{
+                if selectedSegmentIndex == 0 {
+                    APIPatchManager.shared.deleteApplystate(chatRoomID: dateStatusAllInfos[indexPath.row].id) { response in
+                        if response.isSuccess {
+                            DispatchQueue.main.async {
+                                self.dateStatusAllInfos.remove(at: indexPath.row)
+                                self.dateStatusList.remove(at: indexPath.row)
+                            }
+                            self.showAlert(message: "신청목록이 삭제 되었습니다.")
+                        }
+                    }
+                } else {
+                    APIPatchManager.shared.deleteReceivedstate(chatRoomID: dateStatusAllInfos[indexPath.row].id) { response in
+                        if response.isSuccess {
+                            DispatchQueue.main.async {
+                                self.dateStatusAllInfos.remove(at: indexPath.row)
+                                self.dateStatusList.remove(at: indexPath.row)
+                            }
+                            self.showAlert(message: "신청받은 목록이 삭제 되었습니다.")
+                        }
+                    }
+                }
+                
+            }
+        }else {
+            self.showAlert(message: "대기중인 상태에서는 삭제가 불가능합니다.")
+        }
+        
+    }
+}
+extension RequestStateVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = RequestStatusDetailVC()
+        vc.dedatilData = dateStatusAllInfos[indexPath.row]
+        if selectedSegmentIndex == 0{
+            vc.requestStatus = true
+        }else {
+            vc.requestStatus = false
+        }
+        pushViewContoller(viewController: vc)
+    }
     
 }
+
 extension RequestStateVC {
     private func getRequestStatus() {
         APIGetManager.shared.getRequestChatState { requestStatusData, response in

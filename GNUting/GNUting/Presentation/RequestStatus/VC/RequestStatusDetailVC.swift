@@ -40,7 +40,10 @@ class RequestStatusDetailVC: BaseViewController {
         button.setText("수락하기",fointSize: 15)
         button.setHeight(height: 50)
         button.backgroundColor = UIColor(named: "SecondaryColor")
-        button.addTarget(self, action: #selector(tapAcceptButton), for: .touchUpInside)
+        button.throttle(delay: 3.0) { _ in
+            self.tapAcceptButton()
+        }
+        
         return button
     }()
     private lazy var groupCountView = ImagePlusLabelView()
@@ -239,7 +242,7 @@ extension RequestStatusDetailVC {
             }
         }
     }
-    @objc private func tapAcceptButton() {
+   private func tapAcceptButton() {
         APIPostManager.shared.chatConfirmed(id: dedatilData?.id ?? 0) { response in
             if response.isSuccess {
                 self.showMessage(message: "채팅신청을 수락하였습니다.")

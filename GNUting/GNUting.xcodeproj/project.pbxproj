@@ -155,6 +155,8 @@
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
 		F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */; };
 		F8DB022D2BB412FE0067CED2 /* ChatMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB022C2BB412FE0067CED2 /* ChatMessageModel.swift */; };
+		F8DE06822BF3696D00D32E7E /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE06812BF3696D00D32E7E /* ImageCacheManager.swift */; };
+		F8DE06852BF3705500D32E7E /* APIPatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE06842BF3705500D32E7E /* APIPatchManager.swift */; };
 		F8DE57A22BB16CC00003D3DB /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE57A12BB16CC00003D3DB /* FindPasswordVC.swift */; };
 		F8E3CD0A2B8B5E6600712CBF /* ReportReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */; };
 		F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */; };
@@ -315,6 +317,8 @@
 		F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
 		F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomVC.swift; sourceTree = "<group>"; };
 		F8DB022C2BB412FE0067CED2 /* ChatMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageModel.swift; sourceTree = "<group>"; };
+		F8DE06812BF3696D00D32E7E /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		F8DE06842BF3705500D32E7E /* APIPatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPatchManager.swift; sourceTree = "<group>"; };
 		F8DE57A12BB16CC00003D3DB /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonView.swift; sourceTree = "<group>"; };
 		F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCheckButton.swift; sourceTree = "<group>"; };
@@ -492,6 +496,7 @@
 		F841A7B72BA72DFE00A9F9D4 /* APIMananager */ = {
 			isa = PBXGroup;
 			children = (
+				F8DE06832BF3702000D32E7E /* APIPatchManager */,
 				F8A179DA2BAC6F15005AAC18 /* APIInterceptorManager */,
 				F841A7BB2BA739C000A9F9D4 /* APIDeleteManager */,
 				F88EE4842B9EE4E20058BC00 /* APIPostManager */,
@@ -954,6 +959,22 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		F8DE06802BF3695B00D32E7E /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				F8DE06812BF3696D00D32E7E /* ImageCacheManager.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		F8DE06832BF3702000D32E7E /* APIPatchManager */ = {
+			isa = PBXGroup;
+			children = (
+				F8DE06842BF3705500D32E7E /* APIPatchManager.swift */,
+			);
+			path = APIPatchManager;
+			sourceTree = "<group>";
+		};
 		F8E3CD082B8B5E2600712CBF /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -966,6 +987,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F8DE06802BF3695B00D32E7E /* Cache */,
 				F81D08C72BE75BEA00219CEA /* Base */,
 				F8813E402BAD8235008AF204 /* UserDefaultsManager */,
 				F841A7B72BA72DFE00A9F9D4 /* APIMananager */,
@@ -1284,6 +1306,7 @@
 				F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */,
 				F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */,
 				F8C7DE5F2BC44B3000923EF5 /* UserDetailVC.swift in Sources */,
+				F8DE06822BF3696D00D32E7E /* ImageCacheManager.swift in Sources */,
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
@@ -1300,6 +1323,7 @@
 				F81D08E22BEA344100219CEA /* PrimaryColorButton.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
 				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
+				F8DE06852BF3705500D32E7E /* APIPatchManager.swift in Sources */,
 				F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */,
 				F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */,
 				F82006AA2BEBC1DC00E1C05E /* ApplicationReceivedModel.swift in Sources */,

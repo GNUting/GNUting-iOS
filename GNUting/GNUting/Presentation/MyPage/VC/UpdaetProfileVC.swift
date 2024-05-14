@@ -198,7 +198,6 @@ extension UpdateProfileVC: NicknameTextfiledDelegate {
     func endEdit() {
         
     }
-    
     func didBegin() {
         updateProfileButton.isEnabled = false
     }

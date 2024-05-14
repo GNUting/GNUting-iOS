@@ -17,17 +17,20 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
         stackView.spacing = 5
         return stackView
     }()
+    private lazy var messageView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hexCode: "FFE2E0")
+        view.layer.cornerRadius = 10
         
-    
-
-    private lazy var messageLabel : BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+        view.layer.masksToBounds = true
+        return view
+    }()
+    private lazy var messageLabel : UILabel = {
+        let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textColor = UIColor(named: "6B6B6B")
         label.numberOfLines = 0
-        label.layer.cornerRadius = 10
-        label.sizeToFit()
-        label.layer.masksToBounds = true
+ 
         label.backgroundColor = UIColor(hexCode: "FFE2E0")
         return label
     }()
@@ -62,8 +65,8 @@ extension ChatRoomTableViewSendMessageCell{
     private func setAddSubViews() {
         contentView.addSubview(upperView)
         
-        upperView.addStackSubViews([sendDateLabel,messageLabel])
-        
+        upperView.addStackSubViews([sendDateLabel,messageView])
+        messageView.addSubview(messageLabel)
     }
     private func setAutoLayout(){
         upperView.snp.makeConstraints { make in
@@ -71,7 +74,10 @@ extension ChatRoomTableViewSendMessageCell{
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-       
+        messageLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(10)
+        }
         sendDateLabel.setContentHuggingPriority(.init(249), for: .horizontal)
         sendDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }

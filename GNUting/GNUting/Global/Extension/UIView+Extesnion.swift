@@ -21,7 +21,6 @@ extension UIView{
                 completion(image)
             }.resume()
         }else {
-            print(stringURL)
             guard let image = UIImage(named: "photoImg") else { return }
             completion(image)
         }

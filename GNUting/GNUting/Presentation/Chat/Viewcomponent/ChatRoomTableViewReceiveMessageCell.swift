@@ -28,16 +28,22 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
         
         return label
     }()
-    private lazy var messageLabel : BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+    private lazy var messageView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hexCode: "FFE2E0")
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
+        view.layer.masksToBounds = true
+        return view
+    }()
+    private lazy var messageLabel : UILabel = {
+        let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textColor = UIColor(named: "6B6B6B")
         
         label.numberOfLines = 0
-        label.layer.cornerRadius = 10
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
-        label.layer.masksToBounds = true
+  
         return label
     }()
     private lazy var sendDateLabel: UILabel = {
@@ -70,7 +76,8 @@ extension ChatRoomTableViewReceiveMessageCell{
         contentView.addSubViews([userImageButton,upperView])
         
         upperView.addSubViews([middleStackView,sendDateLabel])
-        middleStackView.addStackSubViews([nickNameLabel,messageLabel])
+        middleStackView.addStackSubViews([nickNameLabel,messageView])
+        messageView.addSubview(messageLabel)
     }
     private func setAutoLayout(){
         userImageButton.snp.makeConstraints { make in
@@ -91,6 +98,10 @@ extension ChatRoomTableViewReceiveMessageCell{
             make.bottom.equalToSuperview()
             make.left.equalTo(middleStackView.snp.right).offset(5)
             make.right.lessThanOrEqualToSuperview()
+        }
+        messageLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(10)
         }
         middleStackView.setContentHuggingPriority(.init(249), for: .horizontal)
         sendDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
