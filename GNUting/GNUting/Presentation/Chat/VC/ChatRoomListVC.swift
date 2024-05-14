@@ -41,21 +41,23 @@ class ChatRoomListVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
+        
         return tableView
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addSubViews()
         setAutoLayout()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
+        
+     
         getChatRoomData()
     }
+    
 }
 extension ChatRoomListVC{
     private func addSubViews() {
@@ -63,7 +65,7 @@ extension ChatRoomListVC{
     }
     private func setAutoLayout() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
@@ -83,9 +85,10 @@ extension ChatRoomListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatRoomVC()
         let result = chatRoomData?.result[indexPath.row]
+        
         vc.chatRoomID = result?.id ?? 0
         vc.navigationTitle = result?.title ?? "채팅방"
-        vc.subTitleSting = "\(result?.leaderUserDepartment ?? "학과")*\(result?.applyLeaderDepartment ?? "학과")"
+        vc.subTitleSting = "\(result?.leaderUserDepartment ?? "학과") | \(result?.applyLeaderDepartment ?? "학과")"
         pushViewContoller(viewController: vc)
     }
 }
@@ -99,7 +102,7 @@ extension ChatRoomListVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
-        
+      
         if let result = chatRoomData?.result[indexPath.row] {
             cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         }
@@ -116,6 +119,7 @@ extension ChatRoomListVC {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getChatRoomData, response in
                 self.chatRoomData = getChatRoomData
+                
             }
         }
     }
@@ -125,16 +129,12 @@ extension ChatRoomListVC {
         let chatRoomID = Int(locationID)
         let vc = ChatRoomVC()
         APIGetManager.shared.getApplicationChatRoomTitleData(chatRoomID: chatRoomID ?? 0) { responseResult in
-            print(responseResult)
             vc.chatRoomID = chatRoomID ?? 0
             vc.navigationTitle = responseResult?.result.title ?? "채팅방 제목"
             
-            vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과")*\(responseResult?.result.applyLeaderDepartment ?? "학과")"
+            vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과") | \(responseResult?.result.applyLeaderDepartment ?? "학과")"
             
             self.pushViewContoller(viewController: vc)
-        }
-        
-        
-        
+        } 
     }
 }

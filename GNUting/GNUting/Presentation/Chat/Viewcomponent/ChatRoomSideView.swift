@@ -22,10 +22,12 @@ class ChatRoomSideView: UIView {
             ChatRoomMemberTableView.reloadData()
         }
     }
+    var userNickname: String = ""
     var sendTappedUserData: SendTappedUserData?
     var leaveChatRoomButtonDelegate: LeaveChatRoomButtonDelegate?
     var setAlertButtonDelegate: SetAlertButtonDelegate?
     var alertStatus: Bool = false
+
     private lazy var topViewLabel : UILabel = {
        let label = UILabel()
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
@@ -133,14 +135,13 @@ extension ChatRoomSideView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatRoomMemberTableViewCell.identi, for: indexPath) as? ChatRoomMemberTableViewCell else { return UITableViewCell() }
-        if indexPath.row == 0{
-            cell.showMarkMeImaegView()
-            
-        }
         cell.closure = { userData in
             self.sendTappedUserData?.tapUserImageButton(userData: userData)
         }
-      
+        if userNickname == chatRommUserModelResult[indexPath.row].nickname {
+            cell.showMarkMeImaegView()
+        }
+        
         cell.setCell(model: chatRommUserModelResult[indexPath.row])
         cell.selectionStyle = .none
         return cell

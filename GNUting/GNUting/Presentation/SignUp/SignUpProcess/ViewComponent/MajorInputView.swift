@@ -67,4 +67,7 @@ extension MajorInputView {
     func getContentLabelText() -> String?{
         return contentLabel.text
     }
+    func isEmpty() -> Bool {
+        return contentLabel.text?.count == 0 ? true : false
+    }
 }

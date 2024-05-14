@@ -11,10 +11,12 @@ import UIKit
 protocol CheckEmailButtonDelegate {
     func action(textFieldText: String)
 }
-
+protocol CheckEmailTextFieldDelegate {
+    func didBegin()
+}
 class SignUpInputViewEmailCheckType : UIView{
     var checkEmailButtonDelegate: CheckEmailButtonDelegate?
-    
+    var checkEmailTextFieldDelegate: CheckEmailTextFieldDelegate?
     private lazy var inputTypeLabel : UILabel = {
         let label = UILabel()
         label.text = "학교 이메일"
@@ -139,12 +141,13 @@ extension SignUpInputViewEmailCheckType {
 extension SignUpInputViewEmailCheckType: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-        
+        confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+        checkEmailTextFieldDelegate?.didBegin()
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        
+        confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
         return true
     }
     

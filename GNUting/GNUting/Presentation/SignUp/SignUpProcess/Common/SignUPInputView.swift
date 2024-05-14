@@ -15,11 +15,14 @@ protocol PasswordInputDelegate {
 protocol PasswordCheckDelegate {
     func keyboarReturn(text: String)
 }
-
+protocol InputViewTextFiledDelegate {
+    func ShouldEndEdting(textFieldCount: Int?)
+}
 class SignUPInputView : UIView{
 
     var passwordInputDelegate : PasswordInputDelegate?
     var passwordCheckDelegate : PasswordCheckDelegate?
+    var inputViewTextFiledDelegate: InputViewTextFiledDelegate?
     var textFieldType : SignUpInputViewType = .email
     
     private lazy var inputTextTypeLabel : UILabel = {
@@ -114,7 +117,9 @@ extension SignUPInputView{
     func setTextField(text: String) {
         inputTextField.text = text
     }
-    
+    func isEmpty() -> Bool{
+        return inputTextField.text?.count == 0 ? true : false
+    }
 
     func setUnderLineColor(color: UIColor){
         bottomLine.backgroundColor = color
@@ -155,6 +160,7 @@ extension SignUPInputView: UITextFieldDelegate {
         } else if textFieldType == .password {
             passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
         }
+        inputViewTextFiledDelegate?.ShouldEndEdting(textFieldCount: textField.text?.count)
         return true
     }
     
@@ -164,6 +170,7 @@ extension SignUPInputView: UITextFieldDelegate {
         } else if textFieldType == .password {
             passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
         }
+        
         return textField.resignFirstResponder()
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

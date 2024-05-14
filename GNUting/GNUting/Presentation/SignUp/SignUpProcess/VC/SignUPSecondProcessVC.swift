@@ -10,6 +10,7 @@ import UIKit
 class SignUPSecondProcessVC: BaseViewController{
     
     var selectedDate : String = ""
+    var nickNameCheck: Bool = false
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -28,6 +29,7 @@ class SignUPSecondProcessVC: BaseViewController{
         signUPInpuView.setInputTextTypeLabel(text: "이름")
         signUPInpuView.setPlaceholder(placeholder: "이름을 입력해주세요.")
         signUPInpuView.textFieldType = .name
+        signUPInpuView.inputViewTextFiledDelegate = self
         return signUPInpuView
     }()
     private lazy var phoneNumberInputView : SignUPInputView = {
@@ -36,6 +38,7 @@ class SignUPSecondProcessVC: BaseViewController{
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
         signUPInpuView.textFieldType = .phoneNumber
         signUPInpuView.setKeyboardTypeNumberPad()
+        signUPInpuView.inputViewTextFiledDelegate = self
         return signUPInpuView
     }()
     private lazy var genderView : SelectGenderView = {
@@ -93,7 +96,7 @@ class SignUPSecondProcessVC: BaseViewController{
     private lazy var nickNameInputView : SignUpInputViewNicknameType = {
         let nickNameInputView = SignUpInputViewNicknameType()
         nickNameInputView.nicknameCheckButtonDelegate = self
-    
+        nickNameInputView.nicknameTextfiledDelegate = self
         return nickNameInputView
     }()
     private lazy var majorInputView : MajorInputView = {
@@ -110,6 +113,7 @@ class SignUPSecondProcessVC: BaseViewController{
         studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
         studentIDInputView.setKeyboardTypeNumberPad()
         studentIDInputView.textFieldType = .studentID
+        studentIDInputView.inputViewTextFiledDelegate = self
         return studentIDInputView
     }()
     
@@ -175,6 +179,14 @@ extension SignUPSecondProcessVC{
         }
         
     }
+    private func checkEnableNextButton(){
+
+        if nickNameCheck == true && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty(){
+            nextButton.isEnabled = true
+        } else {
+            nextButton.isEnabled = false
+        }
+    }
 }
 
 // MARK: - ScrollView delegate
@@ -202,6 +214,7 @@ extension SignUPSecondProcessVC {
     @objc private func changeDate(_ sender : UIDatePicker){
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        
         selectedDate = formatter.string(from: sender.date)
     }
     @objc private func tapSelectButton(){
@@ -209,7 +222,13 @@ extension SignUPSecondProcessVC {
         buttonStackView.isHidden = true
         bluerEffectView.alpha = 0
         let dateArr = selectedDate.split(separator: "-").map{String($0)}
-        if !dateArr.isEmpty {
+        
+        if dateArr.isEmpty {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let today = formatter.string(from: Date()).split(separator: "-").map{String($0)}
+            selectDateView.setDateLabel(date: DateModel(year: today[0], momth: today[1], day: today[2]))
+        } else {
             selectDateView.setDateLabel(date: DateModel(year: dateArr[0], momth: dateArr[1], day: dateArr[2]))
         }
 
@@ -239,6 +258,7 @@ extension SignUPSecondProcessVC {
         
         let navigationVC = UINavigationController(rootViewController: vc)
         present(navigationVC, animated: true)
+        checkEnableNextButton()
     }
 }
 extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
@@ -246,10 +266,11 @@ extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
         APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
 //            guard let message = response?.message else { return }
             if statuscode == 200 {
-                self.nextButton.isEnabled = true
+                self.nickNameCheck = true
                 self.nickNameInputView.setCheckLabel(isHidden: false, text: "사용할 수 있는 닉네임 입니다.", success: true)
+                self.checkEnableNextButton()
             }else {
-                self.nextButton.isEnabled = false
+                self.nickNameCheck = false
                 self.nickNameInputView.setCheckLabel(isHidden: false, text: "중복된 닉네임입니다.", success: false)
             }
             
@@ -260,5 +281,21 @@ extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
 extension SignUPSecondProcessVC: SearchMajorSelectCellDelegate{
     func sendSeleceted(major: String) {
         majorInputView.setContentLabelText(text: major)
+        checkEnableNextButton()
+    }
+}
+extension SignUPSecondProcessVC: NicknameTextfiledDelegate {
+    func endEdit() {
+        checkEnableNextButton()
+    }
+    
+    func didBegin() {
+        nickNameCheck = false
+    }
+
+}
+extension SignUPSecondProcessVC: InputViewTextFiledDelegate{
+    func ShouldEndEdting(textFieldCount: Int?) {
+        checkEnableNextButton()
     }
 }

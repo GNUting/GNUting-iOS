@@ -12,11 +12,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     private lazy var upperView = UIView()
     
     
-    private lazy var userImageView: UIImageView = {
-        let imageView = UIImageView()
-
-        return imageView
-    }()
+    private lazy var userImageButton =  UIButton()
     private lazy var middleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -71,20 +67,20 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
 }
 extension ChatRoomTableViewReceiveMessageCell{
     private func setAddSubViews() {
-        contentView.addSubViews([userImageView,upperView])
+        contentView.addSubViews([userImageButton,upperView])
         
         upperView.addSubViews([middleStackView,sendDateLabel])
         middleStackView.addStackSubViews([nickNameLabel,messageLabel])
     }
     private func setAutoLayout(){
-        userImageView.snp.makeConstraints { make in
+        userImageButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview()
             make.height.width.equalTo(45)
         }
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
-            make.left.equalTo(userImageView.snp.right).offset(5)
+            make.left.equalTo(userImageButton.snp.right).offset(5)
             make.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-10)
         }
@@ -110,9 +106,9 @@ extension ChatRoomTableViewReceiveMessageCell {
         sendDateLabel.text = "\(time[0]):\(time[1])"
         setImageFromStringURL(stringURL: UserImage) { image in
             DispatchQueue.main.async {
-                self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
-                self.userImageView.layer.masksToBounds = true
+                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
             }
             
         }

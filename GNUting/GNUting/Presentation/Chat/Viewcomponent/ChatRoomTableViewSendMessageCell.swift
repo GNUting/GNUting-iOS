@@ -26,7 +26,7 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
         label.textColor = UIColor(named: "6B6B6B")
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
-        
+        label.sizeToFit()
         label.layer.masksToBounds = true
         label.backgroundColor = UIColor(hexCode: "FFE2E0")
         return label

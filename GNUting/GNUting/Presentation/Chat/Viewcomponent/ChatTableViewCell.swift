@@ -17,12 +17,7 @@ class ChatTableViewCell: UITableViewCell {
         view.layer.masksToBounds = true
         return view
     }()
-    private lazy var userImageView : UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.layer.cornerRadius = imageView.layer.frame.size.width / 2
-        return imageView
-    }()
+    private lazy var userImageButton = UIButton()
     private lazy var firstStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -81,21 +76,22 @@ class ChatTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
+  
     
 }
 extension ChatTableViewCell{
     private func setAddSubViews() {
         contentView.addSubViews([upperView,newChatImage])
-        upperView.addSubViews([firstStackView,userImageView])
+        upperView.addSubViews([firstStackView,userImageButton])
         firstStackView.addStackSubViews([chatTitleLabel,majorLabel])
     }
     private func setAutoLayout(){
         newChatImage.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalToSuperview().offset(25)
+            make.left.equalToSuperview().offset(22)
         }
         upperView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalToSuperview().offset(-12)
@@ -105,7 +101,7 @@ extension ChatTableViewCell{
             make.left.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().offset(-12)
         }
-        userImageView.snp.makeConstraints { make in
+        userImageButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-12)
             make.left.equalTo(firstStackView.snp.right).offset(5)
@@ -114,8 +110,8 @@ extension ChatTableViewCell{
         }
         
         firstStackView.setContentHuggingPriority(.init(250), for: .horizontal)
-        userImageView.setContentHuggingPriority(.init(251), for: .horizontal)
-        userImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
+        userImageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         
     }
     
@@ -129,14 +125,13 @@ extension ChatTableViewCell {
         } else {
             newChatImage.isHidden = true
         }
-        if !chatRoomUserProfileImages.isEmpty{
-            self.setImageFromStringURL(stringURL: chatRoomUserProfileImages[0]) { image in
-                DispatchQueue.main.async {
-                    self.userImageView.image = image
-                    self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
-                    self.userImageView.layer.masksToBounds = true
-                }
+        self.setImageFromStringURL(stringURL: chatRoomUserProfileImages.first as? String) { image in
+            DispatchQueue.main.async {
+                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
             }
         }
+        
     }
 }

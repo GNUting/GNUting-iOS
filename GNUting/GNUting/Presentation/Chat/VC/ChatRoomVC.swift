@@ -131,6 +131,7 @@ class ChatRoomVC: UIViewController {
         tabBarController?.tabBar.isHidden = true
         getAccessToken()
         getChatMessageList()
+        getUserData()
         getChatRoomMember()
         getAlertSet()
         initStomp()
@@ -162,7 +163,7 @@ extension ChatRoomVC{
             
         }
         sendStackView.snp.makeConstraints { make in
-            make.bottom.greaterThanOrEqualTo(view.keyboardLayoutGuide.snp.top)
+            make.bottom.greaterThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-15)
             make.left.right.equalToSuperview().inset(5)
         }
         textField.setContentHuggingPriority(.init(249), for: .horizontal)
@@ -207,6 +208,7 @@ extension ChatRoomVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellData = chatMessageList[indexPath.row]
+        
         if cellData.messageType == "CHAT" {
             if cellData.email == userEmail{
                 guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
@@ -247,8 +249,10 @@ extension ChatRoomVC {
     @objc private func tapSettingButton(_ sender: UIButton){
         sideView.isHidden = false
         opaqueView.isHidden = false
+        UIView.animate(withDuration: 1.0, delay: 0.0) {
+            self.sideView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
         
-        sideView.transform = CGAffineTransform(translationX: 0, y: 0)
         view.endEditing(true)
         self.view.bringSubviewToFront(opaqueView)
         self.view.bringSubviewToFront(sideView)
@@ -319,6 +323,12 @@ extension ChatRoomVC {
         APIGetManager.shared.getChatRoomUserList(chatRoomID: chatRoomID) { response in
             guard let memberList = response?.result else { return }
             self.sideView.chatRommUserModelResult = memberList
+        }
+    }
+    func getUserData(){
+        APIGetManager.shared.getUserData { userData,response  in
+            self.errorHandling(response: response)
+            self.sideView.userNickname = userData?.result?.nickname ?? "유저 닉네임"
         }
     }
 }

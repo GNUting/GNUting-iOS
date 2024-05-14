@@ -38,6 +38,16 @@ class UpdatePostVC: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
+    private lazy var completedButton: ThrottleButton = {
+       let button = ThrottleButton()
+        button.setTitle("완료", for: .normal)
+        button.isEnabled = false
+        button.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        button.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
+      
+        
+        return button
+    }()
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -50,6 +60,7 @@ class UpdatePostVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
+        setCompletedButton()
     }
     
     
@@ -57,15 +68,18 @@ class UpdatePostVC: BaseViewController {
 extension UpdatePostVC{
     private func setNavigationBar(){
         setNavigationBar(title: "수정하기")
-        
-        let completedButton = ThrottleButton()
-        completedButton.setTitle("완료", for: .normal)
-        completedButton.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
-        completedButton.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
-        completedButton.throttle(delay: 3) { _ in
-            self.tapCompletedButton()
-        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
+    }
+    private func setCompletedButton() {
+        completedButton.throttle(delay: 3) { _ in
+            if self.postTextView.getTitleTextFieldText()?.count == 0 {
+                self.showAlert(message: "글 제목 또는 내용을 채워주세요.")
+            } else if self.postTextView.getContentTextViewText().count == 0{
+                self.showAlert(message: "글 제목 또는 내용을 채워주세요.")
+            } else {
+                self.tapCompletedButton()
+            }
+        }
     }
     private func addSubViews() {
         view.addSubViews([postTextView,memberTableView])
