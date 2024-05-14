@@ -11,10 +11,14 @@ import UIKit
 protocol NicknameCheckButtonDelegate {
     func action(textFieldText: String)
 }
+protocol NicknameTextfiledDelegate {
+    func didBegin()
+    func endEdit()
+}
 
 class SignUpInputViewNicknameType : UIView{
     var nicknameCheckButtonDelegate: NicknameCheckButtonDelegate?
-    
+    var nicknameTextfiledDelegate: NicknameTextfiledDelegate?
     private lazy var inputTypeLabel : UILabel = {
         let label = UILabel()
         label.text = "닉네임"
@@ -104,8 +108,9 @@ extension SignUpInputViewNicknameType{
             make.bottom.equalToSuperview()
         }
         nicknameCheckButton.snp.makeConstraints { make in
+            make.top.right.equalToSuperview()
             make.left.equalTo(inputTextField.snp.right).offset(15)
-            make.bottom.right.equalToSuperview()
+            
             make.width.equalTo(80)
         }
         
@@ -153,12 +158,12 @@ extension SignUpInputViewNicknameType {
 extension SignUpInputViewNicknameType: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-        
+        nicknameTextfiledDelegate?.didBegin()
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        
+        nicknameTextfiledDelegate?.endEdit()
         return true
     }
     

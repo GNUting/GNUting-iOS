@@ -142,8 +142,9 @@ extension MyPageVC {
     private func userLogOutAPI() {
         APIPostManager.shared.postLogout { response in
             if response?.isSuccess ?? false {
-                let alertController = UIAlertController(title: "로그아웃", message: "로그 아웃되었습니다.", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 되었습니다.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+                    
                     self.view.window?.rootViewController = UINavigationController.init(rootViewController: LoginVC())
                 }))
                 DispatchQueue.main.async {

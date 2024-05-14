@@ -14,7 +14,19 @@ class HomeVC: BaseViewController{
     var userStudentID: String?
     var userDepartment: String?
     var currentPage = 0
-    
+    private lazy var scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .white
+        scrollView.bounces = false
+        return scrollView
+    }()
+    private lazy var contentView : UIView = {
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = UIColor(hexCode: "FFF0F0")
+        return view
+    }()
     private lazy var bellImage : UIImageView = {
         let imageView = UIImageView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapNotiButton))
@@ -108,6 +120,14 @@ class HomeVC: BaseViewController{
         imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
+    private lazy var mypostCardView1 : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "MypostCardImage")
+        imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMypostCardView))
+        imageView.addGestureRecognizer(tapGesture)
+        return imageView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(hexCode: "FFF0F0")
@@ -122,21 +142,35 @@ class HomeVC: BaseViewController{
         postFCMToken()
         tabBarController?.tabBar.isHidden = false
     }
+   
 }
 extension HomeVC{
     
     
     private func addSubViews() {
-        view.addSubViews([homeTopView,homeBottomView])
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubViews([homeTopView,homeBottomView])
         homeTopView.addSubViews([explainStackView,writePostButton,imageButton])
         explainStackView.addStackSubViews([userNameLabel,explainLabel])
-        homeBottomView.addSubViews([bannerImageView,postSubView,cardStackView])
+        homeBottomView.addSubViews([bannerImageView,postSubView,cardStackView,mypostCardView1])
         cardStackView.addStackSubViews([postBoardCardView,mypostCardView])
     }
     private func setAutoLayout(){
+        scrollView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.left.right.equalToSuperview()
+            
+        }
         homeTopView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.upperTop)
+            make.top.equalToSuperview().offset(Spacing.upperTop)
             make.left.right.equalToSuperview().inset(25)
+            
+        }
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+            
         }
         explainStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(28)
@@ -158,7 +192,7 @@ extension HomeVC{
         homeBottomView.snp.makeConstraints { make in
             make.top.equalTo(homeTopView.snp.bottom)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
         bannerImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(25)
@@ -171,7 +205,10 @@ extension HomeVC{
         cardStackView.snp.makeConstraints { make in
             make.top.equalTo(postSubView.snp.bottom).offset(12)
             make.left.right.equalToSuperview().inset(25)
+            make.bottom.equalToSuperview()
         }
+    
+        
     }
     
     private func setUserNaemLabel(username: String) {

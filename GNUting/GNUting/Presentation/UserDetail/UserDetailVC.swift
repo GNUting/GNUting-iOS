@@ -12,7 +12,7 @@ class UserDetailVC: BaseViewController {
     var userNickName: String?
     var userStudentID: String?
     var userDepartment: String?
-    private lazy var userImageView = UIImageView()
+    private lazy var userImageButton = UIButton()
     private lazy var userNameLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
@@ -54,16 +54,16 @@ class UserDetailVC: BaseViewController {
 }
 extension UserDetailVC{
     private func setAddSubViews() {
-        self.view.addSubViews([userImageView,userNameLabel,subInfoLabel,reportButton])
+        self.view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
     }
     private func setAutoLayout(){
-        userImageView.snp.makeConstraints { make in
+        userImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(150)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(200)
         }
         userNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(userImageView.snp.bottom).offset(20)
+            make.top.equalTo(userImageButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         subInfoLabel.snp.makeConstraints { make in
@@ -73,6 +73,7 @@ extension UserDetailVC{
         reportButton.snp.makeConstraints { make in
             make.top.equalTo(subInfoLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview().offset(-100)
         }
     }
     private func setUserDetailView() {
@@ -80,9 +81,10 @@ extension UserDetailVC{
         subInfoLabel.text = "\(userStudentID ?? "학번")학번 | \(userDepartment ?? "학과")"
         setImageFromStringURL(stringURL: imaegURL) { image in
             DispatchQueue.main.async {
-                self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.height / 2
-                self.userImageView.clipsToBounds = true
+                self.userImageButton.setImage(image, for: .normal)
+
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
             }
         }
     }
@@ -103,6 +105,9 @@ extension UserDetailVC {
     func getUserData(){
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
+            if userData?.result?.nickname == self.userNickName {
+                self.reportButton.isHidden = true
+            }
         }
     }
 }

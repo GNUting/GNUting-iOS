@@ -21,8 +21,9 @@ class MemberTableViewHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(memberLabel)
         memberLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview()
             make.left.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-12)
         }
     }
     

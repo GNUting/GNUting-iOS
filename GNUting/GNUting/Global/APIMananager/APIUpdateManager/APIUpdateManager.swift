@@ -50,8 +50,10 @@ class APIUpdateManager {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
             if let image = imageData {
-                multipartFormData.append(image, withName: "profileImage",fileName: "userUpdateImage.jpeg",mimeType: "image/jpg")
+                print(image)
+                multipartFormData.append(image, withName: "profileImage",fileName: "\(nickname).jpeg",mimeType: "image/jpg")
             }
+            print(multipartFormData)
         }, to: url,method: .patch,headers:header)
         .validate(statusCode: 200..<300)
         .response { response in

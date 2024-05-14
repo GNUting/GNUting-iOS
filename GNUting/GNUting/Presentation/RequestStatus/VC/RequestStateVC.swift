@@ -86,7 +86,7 @@ extension RequestStateVC{
     }
     private func setAutoLayout(){
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(5)
             make.left.right.equalToSuperview()
         }
         segmentedControl.snp.makeConstraints { make in

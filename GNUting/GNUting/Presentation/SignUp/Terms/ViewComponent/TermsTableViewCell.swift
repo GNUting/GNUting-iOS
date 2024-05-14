@@ -7,13 +7,14 @@
 
 import UIKit
 protocol PushButtonDelegate: AnyObject {
-    func buttonAction()
+    func buttonAction(indexPath: IndexPath)
 }
 class TermsTableViewCell: UITableViewCell {
     static let identi = "TermsTableViewCellid"
     var tapCheckButtonClosure : ((Bool)->())?
     var pushButtonDelegate : PushButtonDelegate?
     var selectedState : Bool = false
+    var indexPath : IndexPath?
     private lazy var upperStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -59,7 +60,10 @@ class TermsTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pushButton.isHidden = false
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -96,7 +100,7 @@ extension TermsTableViewCell {
         }
     }
     
-    func setTextLabel(_ text : String){
+    func setTextLabel(_ text : String,indexPath: IndexPath){
         termsTextLabel.text = text
         let attribtuedString = NSMutableAttributedString(string: text)
         let range = (text as NSString).range(of: "(필수)")
@@ -105,18 +109,17 @@ extension TermsTableViewCell {
             attribtuedString.addAttribute(.font, value: UIFont(name: Pretendard.Bold.rawValue, size: 15) ?? .boldSystemFont(ofSize: 15), range: range)
             
         }
+        self.indexPath = indexPath
         attribtuedString.addAttribute(.foregroundColor, value: UIColor(named: "PrimaryColor") ?? .red, range: range)
         termsTextLabel.attributedText = attribtuedString
-        
-        
     }
-    
-    func pushButtonHidden() {
+    func hiddenPushButton() {
         pushButton.isHidden = true
     }
+  
 }
 extension TermsTableViewCell {
     @objc private func tapPushButton(){
-        pushButtonDelegate?.buttonAction()
+        pushButtonDelegate?.buttonAction(indexPath: self.indexPath ?? IndexPath(row: 1, section: 0))
     }
 }

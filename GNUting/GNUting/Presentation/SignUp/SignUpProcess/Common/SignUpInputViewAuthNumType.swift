@@ -61,9 +61,9 @@ class SignUpInputViewAuthNumType : UIView{
     }()
     private lazy var remainNumberLabel : UILabel = {
        let label = UILabel()
-        label.text = "03:00"
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        
         return label
     }()
     override init(frame: CGRect) {
@@ -160,11 +160,13 @@ extension SignUpInputViewAuthNumType {
 extension SignUpInputViewAuthNumType: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-        
+        confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+        inputTextField.text = ""
+        inputCheckLabel.text = ""
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        
+        confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

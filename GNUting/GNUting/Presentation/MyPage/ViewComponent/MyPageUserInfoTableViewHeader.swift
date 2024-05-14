@@ -14,7 +14,7 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     static let identi = "MyPageTableViewUserInfoHeaderid"
     var profileUpdateButtonDelegate : tapProfileUpateButtonDelegate?
     private lazy var upperView = UIView()
-    private lazy var userImageView = UIImageView()
+    private lazy var userImageButton = UIButton()
     
     private lazy var labelStackView : UIStackView = {
         let stackView = UIStackView()
@@ -73,14 +73,15 @@ extension MyPageUserInfoTableViewHeader{
     
     private func setAddSubViews() {
         contentView.addSubViews([upperView,updateProfileButton])
-        upperView.addSubViews([userImageView,labelStackView])
+        upperView.addSubViews([userImageButton,labelStackView])
         labelStackView.addStackSubViews([nameLabel,subInfoLabel,introduceLabel])
     }
     private func setAutoLayout() {
         upperView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalToSuperview().offset(14)
+            make.left.right.equalToSuperview()
         }
-        userImageView.snp.makeConstraints { make in
+        userImageButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             
@@ -89,7 +90,7 @@ extension MyPageUserInfoTableViewHeader{
         
         labelStackView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalTo(userImageView.snp.right).offset(10)
+            make.left.equalTo(userImageButton.snp.right).offset(10)
             make.right.equalToSuperview()
             
         }
@@ -111,9 +112,10 @@ extension MyPageUserInfoTableViewHeader {
         introduceLabel.text = "\(introuduce)"
         setImageFromStringURL(stringURL: image) { image in
             DispatchQueue.main.async {
-                self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
-                self.userImageView.layer.masksToBounds = true
+                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
+                
             }
             
         }

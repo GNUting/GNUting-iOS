@@ -106,8 +106,8 @@ extension SignUpThirdProcessVC {
         if image == UIImage(named: "photoImg") {
             image = nil
         }
-    
-        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: image ?? UIImage()) { response  in
+
+        APIPostManager.shared.postSignUP(signUpdata: signUpData, image: image) { response  in
             if response.isSuccess {
                 let alertController = UIAlertController(title: "회원가입 성공", message: "로그인을 진행하시겠습니까?", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "아니요", style: .destructive,handler: { _ in

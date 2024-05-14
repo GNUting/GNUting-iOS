@@ -111,7 +111,7 @@ extension UIViewController{
         pushViewContoller(viewController: WriteDateBoardVC())
     }
     func instagramOpen() {
-        guard let url = URL(string: "https://www.instagram.com/gnu_ting?igsh=MXh1anNvY2N6cnhv"), UIApplication.shared.canOpenURL(url) else { return }
+        guard let url = URL(string: "https://www.instagram.com/gnu_ting/p/C5bIzh2yIe5/?img_index=1"), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url)
     }
     

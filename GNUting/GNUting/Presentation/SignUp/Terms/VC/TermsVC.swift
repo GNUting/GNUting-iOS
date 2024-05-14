@@ -8,16 +8,15 @@
 import UIKit
 import SnapKit
 class TermsVC: UIViewController{
-    let textArr = ["(필수) 경상국립대학교 재학중입니다.","(필수) 개인 정보 처리 방침"]
+    let textArr = ["(필수) 경상국립대학교 재학중입니다.","(필수) 개인 정보 처리 방침","(필수) 서비스 이용약관 동의"]
     var allCheckSelected : Bool = false
 
-    var selectedState : [Bool] = [false,false]
+    var selectedState : [Bool] = [false,false,false]
     private lazy var allCheckTermsView : AllCheckTermsView = {
         let view = AllCheckTermsView()
         view.tapAllCheckButtonClosure = { [unowned self] selected in
             allCheckSelected = selected
             self.allCheckButton(selected: selected)
-            
             termsTableView.reloadData()
         }
         return view
@@ -60,22 +59,22 @@ extension TermsVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TermsTableViewCell.identi, for: indexPath) as? TermsTableViewCell else {return UITableViewCell()}
         cell.selectionStyle = .none
-        if indexPath.row == 0{
-            cell.pushButtonHidden()
-        }
+        
         cell.pushButtonDelegate = self
         cell.tapCheckButtonClosure = { [unowned self] selected in
             if !selected{
                 allCheckTermsView.checkButtonSelected(isSelected: selected)
             }
             selectedState[indexPath.row] = selected
-            if selectedState.filter({$0 == true}).count == 2 {
+            if selectedState.filter({$0 == true}).count == 3 {
                 allCheckTermsView.checkButtonSelected(isSelected: true)
             }
             setNextButton()
         }
-        
-        cell.setTextLabel(textArr[indexPath.row])
+        if indexPath.row == 0 {
+            cell.hiddenPushButton()
+        }
+        cell.setTextLabel(textArr[indexPath.row],indexPath: indexPath)
         cell.setAllCheckButton(AllCheckButtonSelected: self.allCheckSelected)
         return cell
     }
@@ -109,7 +108,7 @@ extension TermsVC{
 // MARK: - Method
 extension TermsVC{
     private func setNextButton(){
-        if selectedState[0] == true && selectedState[1] == true{
+        if selectedState[0] == true && selectedState[1] == true && selectedState[2] == true{
             nextButton.backgroundColor = UIColor(named: "PrimaryColor")
             nextButton.isEnabled = true
         } else {
@@ -119,11 +118,11 @@ extension TermsVC{
     }
     private func allCheckButton(selected : Bool) {
         if selected {
-            selectedState = [true,true]
+            selectedState = [true,true,true]
             nextButton.backgroundColor = UIColor(named: "PrimaryColor")
             nextButton.isEnabled = true
         } else {
-            selectedState = [false,false]
+            selectedState = [false,false,false]
             nextButton.backgroundColor = UIColor(named: "DisableColor")
             nextButton.isEnabled = false
         }
@@ -137,8 +136,17 @@ extension TermsVC{
     
 }
 extension TermsVC: PushButtonDelegate{
-    func buttonAction() {
-        guard let url = URL(string: "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"), UIApplication.shared.canOpenURL(url) else { return }
+    func buttonAction(indexPath: IndexPath) {
+        var urlString = ""
+        if indexPath.row == 1 {
+            urlString = "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"
+        } else {
+            urlString = "https://equal-kiwi-602.notion.site/9021bea8cf1841fc8a83d26a06c8e72c"
+        }
+        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url)
+        
     }
+    
+    
 }

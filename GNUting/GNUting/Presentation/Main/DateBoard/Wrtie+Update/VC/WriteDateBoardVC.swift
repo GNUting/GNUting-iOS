@@ -9,7 +9,7 @@ import UIKit
 
 class WriteDateBoardVC: BaseViewController {
     let textViewPlaceHolder = "내용을 입력해주세요."
-    var writeDateBoardState : Bool = true
+    var writeEnable : Bool = false
     var addMemberDataList: [UserInfosModel] = [] {
         didSet {
             memberTableView.reloadData()
@@ -37,6 +37,16 @@ class WriteDateBoardVC: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
+    private lazy var completedButton: ThrottleButton = {
+       let button = ThrottleButton()
+        button.setTitle("완료", for: .normal)
+        button.isEnabled = false
+        button.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        button.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
+      
+        
+        return button
+    }()
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -50,6 +60,7 @@ class WriteDateBoardVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
+        setCompletedButton()
     }
     
 
@@ -57,15 +68,18 @@ class WriteDateBoardVC: BaseViewController {
 extension WriteDateBoardVC{
     private func setNavigationBar(){
         setNavigationBar(title: "글쓰기")
-        
-        let completedButton = ThrottleButton()
-        completedButton.setTitle("완료", for: .normal)
-        completedButton.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
-        completedButton.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
-        completedButton.throttle(delay: 3) { _ in
-            self.tapCompletedButton()
-        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
+    }
+    private func setCompletedButton() {
+        completedButton.throttle(delay: 3) { _ in
+            if self.titleContentView.getTitleTextFieldText()?.count == 0 {
+                self.showAlert(message: "글 제목 또는 내용을 채워주세요.")
+            } else if self.titleContentView.getContentTextViewText().count == 0{
+                self.showAlert(message: "글 제목 또는 내용을 채워주세요.")
+            } else {
+                self.tapCompletedButton()
+            }
+        }
     }
     private func addSubViews() {
         view.addSubViews([titleContentView,memberTableView])
@@ -121,6 +135,7 @@ extension WriteDateBoardVC : UITextViewDelegate{
                textView.text = textViewPlaceHolder
                textView.textColor = UIColor(hexCode: "9F9F9F")
            }
+           
        }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""

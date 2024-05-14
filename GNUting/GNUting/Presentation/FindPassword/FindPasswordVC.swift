@@ -12,7 +12,11 @@ class FindPasswordVC: BaseViewController {
     var startTime : Date?
     var emailSuccess : Bool = false
     var samePasswordSuccess : Bool = false
-  
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.isHidden = true
+        return view
+    }()
     private lazy var inputViewUpperStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -70,7 +74,7 @@ class FindPasswordVC: BaseViewController {
 }
 extension FindPasswordVC {
     private func setAddView(){
-        view.addSubViews([inputViewUpperStackView,passwordUpdateButton])
+        view.addSubViews([inputViewUpperStackView,passwordUpdateButton,activityIndicatorView])
         inputViewUpperStackView.addStackSubViews([emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
         
     }
@@ -83,6 +87,9 @@ extension FindPasswordVC {
             make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom)
             make.left.right.equalToSuperview().inset(Spacing.left)
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-15)
+        }
+        activityIndicatorView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
     private func setNavigationBar(){
@@ -117,7 +124,9 @@ extension FindPasswordVC {
         
     }
     private func setEmailCheckTime(limitSecond : Date) {
+        timer.invalidate()
         DispatchQueue.main.async { [weak self] in
+            
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 let elapsedTimeSeconds = Int(Date().timeIntervalSince(limitSecond))
                 let expireLimit = 180
@@ -146,11 +155,15 @@ extension FindPasswordVC {
 }
 extension FindPasswordVC: CheckEmailButtonDelegate{
     func action(textFieldText: String) {
-        timer.invalidate()
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
             self.showMessage(message: "인증번호가 전송되었습니다.")
             self.certifiedInputView.setFoucInputTextFiled()
+            self.activityIndicatorView.stopAnimating()
             self.getSetTime()
+            
         }
         
     }

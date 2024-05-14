@@ -13,6 +13,7 @@ extension UIView{
         _ = views.map{self.addSubview($0)}
     }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
+      
         if let url = URL(string: stringURL ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let imageData = data else { return }
@@ -20,6 +21,7 @@ extension UIView{
                 completion(image)
             }.resume()
         }else {
+            print(stringURL)
             guard let image = UIImage(named: "photoImg") else { return }
             completion(image)
         }

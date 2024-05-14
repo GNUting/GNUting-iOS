@@ -11,7 +11,7 @@ import PhotosUI
 
 class UpdateProfileVC: BaseViewController {
     var userInfo: GetUserDataModel?
-    
+
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images,.livePhotos])
@@ -37,7 +37,7 @@ class UpdateProfileVC: BaseViewController {
     private lazy var nickNameInputView : SignUpInputViewNicknameType = {
         let inputView = SignUpInputViewNicknameType()
         inputView.nicknameCheckButtonDelegate = self
-        
+        inputView.nicknameTextfiledDelegate = self
         return inputView
     }()
     
@@ -171,9 +171,10 @@ extension UpdateProfileVC: PHPickerViewControllerDelegate {
         if let itemProvider = itemProvider,itemProvider.canLoadObject(ofClass: UIImage.self){
             itemProvider.loadObject(ofClass: UIImage.self) { (image,error) in
                 DispatchQueue.main.async {
+                    self.userImageView.image = image as? UIImage
                     self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
                     self.userImageView.layer.masksToBounds = true
-                    self.userImageView.image = image as? UIImage
+                    
                 }
             }
         }
@@ -191,4 +192,15 @@ extension UpdateProfileVC :NicknameCheckButtonDelegate {
             self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)", success: false)
         }
     }
+}
+
+extension UpdateProfileVC: NicknameTextfiledDelegate {
+    func endEdit() {
+        
+    }
+    
+    func didBegin() {
+        updateProfileButton.isEnabled = false
+    }
+
 }

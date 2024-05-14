@@ -59,26 +59,26 @@ class APIPostManager {
     }
     // MARK: - 회원가입 : 이메일 인증 번호 전송 ✅
     
-    func postEmailCheck(email: String,completion: @escaping(EmailCheckResponse)->Void) {
+    func postEmailCheck(email: String,completion: @escaping(EmailCheckResponse?,FailureResponse?)->Void) {
         let url = EndPoint.emailCheck.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters : [String : String] = ["email": email]
         AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
-            .validate(statusCode: 200..<300)
             .responseData { response in
-                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
-                guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
                 
-                switch response.result {
-                case .success:
+                switch statusCode {
+                case 200..<300:
+                    guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
                     print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
-                    completion(json)
-                case .failure:
+                    completion(json,nil)
+                default:
+                    guard let json = try? JSONDecoder().decode(FailureResponse.self, from: data) else { return }
                     print("🔴 postAuthenticationCheck statusCode :\(statusCode)")
-                    completion(json)
+                    completion(nil,json)
                 }
             }
+         
     }
     // MARK: - 비밀번호 변경 : 이메일 인증 번호 전송
     func postEmailCheckChangePassword(email: String,completion: @escaping(EmailCheckResponse)->Void) {
@@ -127,18 +127,21 @@ class APIPostManager {
         
     }
     // MARK: - 회원가입  ✅
-    func postSignUP(signUpdata : SignUpModel,image : UIImage,completion: @escaping (DefaultResponse) -> Void) {
+    func postSignUP(signUpdata : SignUpModel,image : UIImage?,completion: @escaping (DefaultResponse) -> Void) {
         let url = EndPoint.signUp.url
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         let parameters : [String : String] = ["birthDate":signUpdata.birthDate,"department":signUpdata.department,"email": signUpdata.email,"gender": signUpdata.gender," name": signUpdata.name,"nickname": signUpdata.nickname, "password": signUpdata.password, "phoneNumber" : signUpdata.phoneNumber, "studentId": signUpdata.studentId,"userSelfIntroduction": signUpdata.userSelfIntroduction]
         
-        let imageData = image.jpegData(compressionQuality: 0.2)
+        let imageData = image?.jpegData(compressionQuality: 0.2)
+        
         AF.upload(multipartFormData: { multipartFormData in
             for (key,value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
+       
             if let image = imageData {
+                
                 multipartFormData.append(image, withName: "profileImage",fileName: "UserImage.jpeg",mimeType: "image/jpg")
             }
         }, to: url,method: .post,headers: header)
@@ -207,6 +210,7 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
+        
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseData { response in
@@ -215,9 +219,10 @@ class APIPostManager {
                 
                 switch response.result {
                 case .success:
-                    print("🟢 postLogout statusCode :\(statusCode)")
                     UserDefaultsManager.shared.setLogout()
+                    print("🟢 postLogout statusCode :\(statusCode)")
                     completion(json)
+                    
                 case .failure:
                     
                     print("🔴 postLogout statusCode :\(statusCode)")

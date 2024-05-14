@@ -13,6 +13,11 @@ class SignUpFirstProcessVC: BaseViewController{
     var startTime : Date?
     var emailSuccess : Bool = false
     var samePasswordSuccess : Bool = false
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.isHidden = true
+        return view
+    }()
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -43,7 +48,7 @@ class SignUpFirstProcessVC: BaseViewController{
     private lazy var emailInputView : SignUpInputViewEmailCheckType = {
         let signUPInpuView = SignUpInputViewEmailCheckType()
         signUPInpuView.checkEmailButtonDelegate = self
-        
+        signUPInpuView.checkEmailTextFieldDelegate = self
         return signUPInpuView
     }()
     private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
@@ -100,7 +105,7 @@ class SignUpFirstProcessVC: BaseViewController{
 
 extension SignUpFirstProcessVC{
     private func addSubViews(){
-        view.addSubview(scrollView)
+        view.addSubViews([scrollView,activityIndicatorView])
         scrollView.addSubViews([inputViewUpperStackView,nextButton])
         inputViewUpperStackView.addStackSubViews([explainLabel,emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
     }
@@ -121,7 +126,11 @@ extension SignUpFirstProcessVC{
             make.top.greaterThanOrEqualTo(inputViewUpperStackView.snp.bottom).offset(20)
             make.left.right.bottom.equalToSuperview()
         }
+        activityIndicatorView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
     }
+    
 }
 //MARK: - Action
 extension SignUpFirstProcessVC{
@@ -140,16 +149,31 @@ extension SignUpFirstProcessVC{
 }
 extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
     func action(textFieldText: String) {
-        APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr") { response in
-            if response.isSuccess {
+        
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr") { response,failureResponse  in
+            if !(failureResponse?.isSuccess ?? true) {
+                self.activityIndicatorView.stopAnimating()
+                self.timer.invalidate()
+                self.certifiedInputView.setRemainLabel(text: "")
+                if failureResponse?.code == "USER4000-4" {
+                    self.showMessage(message: failureResponse?.message ?? "이미 존재하는 사용자입니다.")
+                } else {
+                    self.showMessage(message: failureResponse?.message ?? "네트워크 에러 다시 시도하세요")
+                }
+            }
+            
+            guard let success = response?.isSuccess else { return }
+            if success {
                 self.showMessage(message: "인증번호가 전송되었습니다.")
                 self.certifiedInputView.setFoucInputTextFiled()
+                self.activityIndicatorView.stopAnimating()
                 self.getSetTime()
             }
+            
         }
-        
     }
-    
 }
 extension SignUpFirstProcessVC: ConfirmButtonDelegate{
     func action(sendTextFieldText: String) {
@@ -195,9 +219,16 @@ extension SignUpFirstProcessVC: PasswordInputDelegate {
     }
   
 }
-
+extension SignUpFirstProcessVC: CheckEmailTextFieldDelegate {
+    func didBegin() {
+        nextButton.isEnabled = false
+    }
+    
+    
+}
 extension SignUpFirstProcessVC {
     private func setEmailCheckTime(limitSecond : Date) {
+        timer.invalidate()
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 let elapsedTimeSeconds = Int(Date().timeIntervalSince(limitSecond))

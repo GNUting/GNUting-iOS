@@ -94,7 +94,7 @@ extension SelectDateView {
             make.top.left.right.equalToSuperview()
         }
         upperStackView.snp.makeConstraints { make in
-            make.top.equalTo(typeLabel.snp.bottom)
+            make.top.equalTo(typeLabel.snp.bottom).offset(14)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-14)
         }
@@ -104,4 +104,5 @@ extension SelectDateView {
         monthLabel.text = date.momth
         dayLabel.text = date.day
     }
+ 
 }

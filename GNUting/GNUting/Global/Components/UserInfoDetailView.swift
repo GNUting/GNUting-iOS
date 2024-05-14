@@ -24,7 +24,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .leading
-        stackView.spacing = 1
+        stackView.spacing = 8
         return stackView
     }()
     lazy var userImageButton = UserImageButton()
