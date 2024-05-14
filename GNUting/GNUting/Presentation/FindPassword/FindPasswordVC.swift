@@ -28,7 +28,7 @@ class FindPasswordVC: BaseViewController {
     private lazy var emailInputView : SignUpInputViewEmailCheckType = {
         let signUPInpuView = SignUpInputViewEmailCheckType()
         signUPInpuView.checkEmailButtonDelegate = self
-        
+        signUPInpuView.checkEmailTextFieldDelegate = self
         return signUPInpuView
     }()
     private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
@@ -177,7 +177,9 @@ extension FindPasswordVC: ConfirmButtonDelegate{
                 
                 emailSuccess = true
                 certifiedInputView.setCheckLabel(isHidden: false, text: "인증이 완료되었습니다.", success: true)
+                timer.invalidate()
                 nextButtonEnable()
+                
             } else {
                 certifiedInputView.setCheckLabel(isHidden: false, text: "인증번호가 일치하지 않습니다.", success: false)
             }
@@ -212,4 +214,12 @@ extension FindPasswordVC: PasswordInputDelegate {
         }
     }
   
+}
+extension FindPasswordVC: CheckEmailTextFieldDelegate {
+    func didBegin() {
+        emailSuccess = false
+        nextButtonEnable()
+    }
+    
+    
 }

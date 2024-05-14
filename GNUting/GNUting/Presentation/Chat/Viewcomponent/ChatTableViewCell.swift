@@ -94,10 +94,10 @@ extension ChatTableViewCell{
             make.top.equalToSuperview().offset(5)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-5)
         }
         firstStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(6)
             make.left.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().offset(-12)
         }
@@ -125,8 +125,16 @@ extension ChatTableViewCell {
         } else {
             newChatImage.isHidden = true
         }
+        let cacheKey = NSString(string: chatRoomUserProfileImages.first as? String ?? "")
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
+            self.userImageButton.setImage(cachedImage, for: .normal)
+            self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+            self.userImageButton.layer.masksToBounds = true
+        }
+                
         self.setImageFromStringURL(stringURL: chatRoomUserProfileImages.first as? String) { image in
             DispatchQueue.main.async {
+                ImageCacheManager.shared.setObject(image, forKey: cacheKey)
                 self.userImageButton.setImage(image, for: .normal)
                 self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
                 self.userImageButton.layer.masksToBounds = true
