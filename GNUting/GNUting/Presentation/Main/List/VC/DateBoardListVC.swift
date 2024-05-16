@@ -15,14 +15,14 @@ class DateBoardListVC: BaseViewController {
     var isFetching : Bool = true
     var dateBoardListData: [BoardResult] = [] {
         didSet{
+            
             if dateBoardListData.count == 0 {
                 noDataScreenView.isHidden = false
             } else {
                 noDataScreenView.isHidden = true
             }
-            DispatchQueue.main.async {
-                self.dateBoardTableView.reloadData()
-            }
+            self.dateBoardTableView.reloadData()
+         
         }
     }
     private lazy var noDataScreenView: NoDataScreenView = {
@@ -38,7 +38,7 @@ class DateBoardListVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-                                                
+
         return tableView
     }()
     
@@ -137,3 +137,5 @@ extension DateBoardListVC  {
         }
     }
 }
+
+

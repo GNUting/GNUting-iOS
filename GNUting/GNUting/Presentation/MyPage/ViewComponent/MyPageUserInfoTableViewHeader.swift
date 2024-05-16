@@ -97,7 +97,7 @@ extension MyPageUserInfoTableViewHeader{
         updateProfileButton.snp.makeConstraints { make in
             make.top.equalTo(upperView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-15)
+            make.bottom.equalToSuperview()
             make.height.equalTo(50)
         }
     }

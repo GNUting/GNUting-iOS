@@ -62,6 +62,7 @@ class ChatRoomVC: UIViewController {
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tap)
@@ -212,15 +213,18 @@ extension ChatRoomVC: UITableViewDataSource{
         if cellData.messageType == "CHAT" {
             if cellData.email == userEmail{
                 guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
-                sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                sendCell.setCell(nickName: cellData.nickname ?? "(알 수 없음)", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
                 sendCell.setSizeToFitMessageLabel()
                 sendCell.selectionStyle = .none
                 return sendCell
             } else {
                 guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewReceiveMessageCell.identi, for: indexPath) as? ChatRoomTableViewReceiveMessageCell else { return UITableViewCell() }
-                receiveCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                receiveCell.setCell(model: cellData)
                 receiveCell.setSizeToFitMessageLabel()
                 receiveCell.selectionStyle = .none
+                receiveCell.closure = { tapReceiveData in
+                    self.tapReceivedUserImageButton(userData: tapReceiveData)
+                }
                 return  receiveCell
             }
         } else {
@@ -367,7 +371,7 @@ extension ChatRoomVC: SetAlertButtonDelegate {
     
 }
 extension ChatRoomVC: SendTappedUserData{
-    func tapUserImageButton(userData: ChatRommUserModelResult?) {
+    func tapUserImageButton(userData: ChatRommUserModelResult?) { // 사이드뷰에서
         let vc = UserDetailVC()
         vc.imaegURL = userData?.profileImage
         vc.userNickName = userData?.nickname
@@ -377,7 +381,15 @@ extension ChatRoomVC: SendTappedUserData{
         presentFullScreenVC(viewController: vc)
     }
     
-    
+    func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
+        let vc = UserDetailVC()
+        vc.imaegURL = userData?.profileImage
+        vc.userNickName = userData?.nickname
+        vc.userStudentID = userData?.studentId
+        vc.userDepartment = userData?.department
+        
+        presentFullScreenVC(viewController: vc)
+    }
 }
 
 // MARK : StompDelegate
@@ -403,14 +415,16 @@ extension ChatRoomVC: SwiftStompDelegate{
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
         print("Received")
-        
+     
         if let message = message{
             let messageString = message as! String
+        
             let messageData = Data(messageString.utf8)
             if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
                 do {
+                    
                     let jsonData = try JSONDecoder().decode(LeaveMessageModel.self, from: messageData)
-                    let leaveData = ChatRoomMessageModelResult(id: 0, chatRoomId: 0, messageType: jsonData.messageType, email: nil, nickname: nil, profileImage: nil, message: jsonData.message, createdDate: "")
+                    let leaveData = ChatRoomMessageModelResult(id: 0, chatRoomId: 0, messageType: jsonData.messageType, email: nil, nickname: nil, profileImage: nil, message: jsonData.message, createdDate: "",studentId: "",department: "")
                     chatMessageList.append(leaveData)
                 } catch {
                     print(error)

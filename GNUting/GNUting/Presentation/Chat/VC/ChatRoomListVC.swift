@@ -17,8 +17,11 @@ class ChatRoomListVC: BaseViewController {
                 noDataScreenView.isHidden = true
             }
             chatTableView.reloadData()
+         
+            chatTableView.refreshControl?.endRefreshing()
         }
     }
+ 
     private lazy var noDataScreenView: NoDataScreenView = {
        let view = NoDataScreenView()
         view.isHidden = true
@@ -41,13 +44,15 @@ class ChatRoomListVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(reloadBoardListData), for: .valueChanged)
         return tableView
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         setAutoLayout()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,6 +82,7 @@ extension ChatRoomListVC{
         noDataScreenView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+     
     }
     
 }
@@ -106,7 +112,7 @@ extension ChatRoomListVC : UITableViewDataSource {
         if let result = chatRoomData?.result[indexPath.row] {
             cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         }
-        cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -116,6 +122,7 @@ extension ChatRoomListVC : UITableViewDataSource {
 
 extension ChatRoomListVC {
     private func getChatRoomData() {
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getChatRoomData, response in
                 self.chatRoomData = getChatRoomData
@@ -123,18 +130,35 @@ extension ChatRoomListVC {
             }
         }
     }
+    @objc private func reloadBoardListData() {
+        getChatRoomData()
+    }
 }
 extension ChatRoomListVC {
     func AlertpushChatRoom(locationID: String) {
         let chatRoomID = Int(locationID)
         let vc = ChatRoomVC()
         APIGetManager.shared.getApplicationChatRoomTitleData(chatRoomID: chatRoomID ?? 0) { responseResult in
-            vc.chatRoomID = chatRoomID ?? 0
-            vc.navigationTitle = responseResult?.result.title ?? "채팅방 제목"
+            guard let success = responseResult?.isSuccess else { return }
+            let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
+          
+            if success {
+                vc.chatRoomID = chatRoomID ?? 0
+                vc.navigationTitle = responseResult?.result.title ?? "채팅방 제목"
+                
+                vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과") | \(responseResult?.result.applyLeaderDepartment ?? "학과")"
+                
+                self.pushViewContoller(viewController: vc)
+            } else {
+                if responseResult?.code == "CHATROOM4001"{
+                    self.showAlert(message: "채팅방을 찾을수 없습니다.")
+                } else if responseResult?.code == "CHATROOMUSER4001"{
+                    self.showAlert(message: "채팅방을 찾을수 없습니다.")
+                }
+                rootVC?.selectedIndex = 0
+            }
             
-            vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과") | \(responseResult?.result.applyLeaderDepartment ?? "학과")"
-            
-            self.pushViewContoller(viewController: vc)
         } 
     }
 }
+

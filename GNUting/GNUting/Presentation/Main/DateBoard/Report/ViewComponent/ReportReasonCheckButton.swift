@@ -26,6 +26,7 @@ extension ReportReasonCheckButton {
         configuration.imagePlacement = .leading
         configuration.imagePadding = 10
         configuration.titleAlignment = .leading
+        configuration.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 0, bottom: 10, trailing: 10)
         self.changesSelectionAsPrimaryAction = true
         self.configurationUpdateHandler = {  button in
             var configuration = button.configuration
@@ -34,5 +35,6 @@ extension ReportReasonCheckButton {
             button.configuration = configuration
         }
         self.configuration = configuration
+        self.sizeToFit()
     }
 }

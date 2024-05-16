@@ -14,8 +14,14 @@ class BaseViewController: UIViewController{
         setBackgroundColor()
         swipeRecognizer()
         hideKeyboardWhenTappedAround()
+        setNetworkMonitor()
     }
     func setBackgroundColor() {
         view.backgroundColor = .white
+    }
+    func setNetworkMonitor() {
+        if !NetworkMonitor.shared.isConnected {
+            self.showAlert(message: "네트워크 신호가 약합니다. 네트워크를 연결해주세요.")
+        }
     }
 }

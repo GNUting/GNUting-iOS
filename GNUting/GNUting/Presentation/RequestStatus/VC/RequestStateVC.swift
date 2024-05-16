@@ -19,6 +19,7 @@ class RequestStateVC: BaseViewController {
                 noDataScreenView.isHidden = true
                 
             }
+            requsetListTableView.refreshControl?.endRefreshing()
             requsetListTableView.reloadData()
         }
     }
@@ -60,8 +61,11 @@ class RequestStateVC: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(RequsetListTableViewCell.self, forCellReuseIdentifier: RequsetListTableViewCell.identi)
         tableView.showsVerticalScrollIndicator = false
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(reloadBoardListData), for: .valueChanged)
         return tableView
     }()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,9 +78,11 @@ class RequestStateVC: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
+       
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+  
         setSegmentedControl(selectedIndex: self.selectedSegmentIndex)
     }
 }
@@ -116,6 +122,9 @@ extension RequestStateVC {
             getReceivedState()
         }
         
+    }
+    @objc private func reloadBoardListData() {
+        setSegmentedControl(selectedIndex: self.selectedSegmentIndex)
     }
 }
 
@@ -234,9 +243,11 @@ extension RequestStateVC {
     }
 }
 extension RequestStateVC {
+    
     func setSegmentedControl(selectedIndex: Int) {
         segmentedControl.selectedSegmentIndex = selectedIndex
         self.selectedSegmentIndex = selectedIndex
+
         if selectedSegmentIndex == 0{
             getRequestStatus()
         } else {
@@ -244,21 +255,49 @@ extension RequestStateVC {
         }
     }
     func getApplicationReceivedData(ApplicatoinID: String,requestStatus: Bool) {
+        let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
+        let vc = RequestStatusDetailVC()
+   
         if requestStatus {
             APIGetManager.shared.getApplicationReceivedData(applcationID: ApplicatoinID) { applicationReceivedData in
-                let vc = RequestStatusDetailVC()
-                vc.dedatilData = applicationReceivedData?.result
-                vc.requestStatus = true
-                self.pushViewContoller(viewController: vc)
+                guard let sucess = applicationReceivedData?.isSuccess else { return }
+                if sucess {
+                    vc.dedatilData = applicationReceivedData?.result
+                    vc.requestStatus = true
+                    self.pushViewContoller(viewController: vc)
+                } else {
+                    self.setErrorHandling(errorCode: applicationReceivedData?.code, errorMessage: applicationReceivedData?.message)
+                    rootVC?.selectedIndex = 0
+                }
             }
         } else {
             APIGetManager.shared.getApplicationReceivedData(applcationID: ApplicatoinID) { applicationReceivedData in
-                let vc = RequestStatusDetailVC()
-                vc.dedatilData = applicationReceivedData?.result
-                vc.requestStatus = false
-                self.pushViewContoller(viewController: vc)
+                guard let sucess = applicationReceivedData?.isSuccess else { return }
+              
+                if sucess {
+                    vc.dedatilData = applicationReceivedData?.result
+                    vc.requestStatus = false
+                    self.pushViewContoller(viewController: vc)
+                } else {
+                    self.setErrorHandling(errorCode: applicationReceivedData?.code, errorMessage: applicationReceivedData?.message)
+                    rootVC?.selectedIndex = 0
+                }
+                
             }
         }
         
     }
+    private func setErrorHandling(errorCode: String?,errorMessage: String?){
+        switch errorCode{
+        case "APPLY4000":
+            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+        case "APPLY4004":
+            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+        case "BOARD5003":
+            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+        default:
+            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+        }
+    }
+    
 }

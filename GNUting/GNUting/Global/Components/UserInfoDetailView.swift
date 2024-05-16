@@ -11,14 +11,7 @@ import UIKit
 class UserInfoDetailView: UIView { // 한줄소개 있음
     
     
-    private lazy var middleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.spacing = 5
-        return stackView
-    }()
+    private lazy var infoUpperView = UIView()
     private lazy var middleTopStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -50,7 +43,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
         label.textColor = UIColor(named: "DisableColor")
         label.textAlignment = .left
-        
+        label.numberOfLines = 0
         return label
     }()
     
@@ -67,8 +60,8 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
 }
 extension UserInfoDetailView{
     private func setAddsubViews() {
-        self.addSubViews([userImageButton,middleStackView])
-        middleStackView.addStackSubViews([middleTopStackView,selfIntroduceLabel])
+        self.addSubViews([userImageButton,infoUpperView])
+        infoUpperView.addSubViews([middleTopStackView,selfIntroduceLabel])
         middleTopStackView.addStackSubViews([userNameLabel,subInfoLabel])
         
     }
@@ -78,13 +71,23 @@ extension UserInfoDetailView{
             make.height.width.equalTo(50)
             make.top.left.bottom.equalToSuperview()
         }
-        middleStackView.snp.makeConstraints { make in
-            make.top.right.bottom.equalToSuperview()
+        infoUpperView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(5)
+            make.right.equalToSuperview()
             make.left.equalTo(userImageButton.snp.right).offset(10)
+        }
+        middleTopStackView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+        selfIntroduceLabel.snp.makeConstraints { make in
+            make.top.equalTo(middleTopStackView.snp.bottom).offset(5)
+            make.left.right.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
         }
         subInfoLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
         }
+        
         userNameLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         subInfoLabel.setContentHuggingPriority(.init(250), for: .horizontal)
         userNameLabel.setContentCompressionResistancePriority(.init(751), for: .horizontal)
@@ -95,7 +98,6 @@ extension UserInfoDetailView{
     
     func setUserInfoDetailView(name :String?,major: String?,studentID: String?, introduce: String?, image : String? ) {
         self.userNameLabel.text = name
-//        self.subInfoLabel.text = "\(studentID ?? "학번") | \(major ?? "과")"
         self.subInfoLabel.text = "\(studentID ?? "학번") | \(major ?? "과")"
         self.selfIntroduceLabel.text = introduce
         self.setImageFromStringURL(stringURL: image) { image in

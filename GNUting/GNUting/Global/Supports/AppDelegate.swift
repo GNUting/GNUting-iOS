@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         setupFCM(application)
         sleep(UInt32(2))
+        NetworkMonitor.shared.startMonitoring()
         return true
     }
     
@@ -71,7 +72,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         case "cancel":
             rootVC?.selectedIndex = 1
             let vc = currentTopViewController() as? RequestStateVC
-            vc?.selectedSegmentIndex = 0
+            vc?.selectedSegmentIndex = 1
         case "refuse":
             
             rootVC?.selectedIndex = 1

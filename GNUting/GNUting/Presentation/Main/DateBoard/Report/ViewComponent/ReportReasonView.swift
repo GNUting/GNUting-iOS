@@ -21,7 +21,7 @@ class ReportReasonView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
-        stackView.spacing = 50
+        stackView.spacing = 30
         return stackView
     }()
     private lazy var firstBusttonStackView : UIStackView = {

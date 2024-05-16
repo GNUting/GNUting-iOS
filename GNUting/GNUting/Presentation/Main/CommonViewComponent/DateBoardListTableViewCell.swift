@@ -74,6 +74,7 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         
         boardTitleLabel.text = model.title
         subInfoLabel.text = "\(model.time) | \(model.user.department) | \((model.user.studentId)) "
+       
         userCountLabel.text = "인원 : \(model.inUserCount)명"
         
     }

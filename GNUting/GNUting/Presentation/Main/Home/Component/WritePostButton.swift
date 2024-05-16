@@ -23,7 +23,7 @@ class WritePostButton: UIButton {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         self.addTarget(self, action: #selector(tapWritePostButton), for: .touchUpInside)
-     
+        
     }
     
     required init?(coder: NSCoder) {
