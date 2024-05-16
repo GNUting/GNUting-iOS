@@ -52,14 +52,14 @@ class ChatRoomListVC: BaseViewController {
         super.viewDidLoad()
         addSubViews()
         setAutoLayout()
-        
+     
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
         
-     
+        setTotalAlert(status: "ENABLE")
         getChatRoomData()
     }
     
