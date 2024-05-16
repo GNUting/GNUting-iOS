@@ -88,7 +88,10 @@ extension UserWriteTextVC: UITableViewDelegate{
         let vc = DetailDateBoardVC()
         vc.boardID = myPostList[indexPath.row].id
         vc.setPushMypostVersion()
-        pushViewContoller(viewController: vc)
+        if myPostList[indexPath.row].status == "OPEN" {
+            pushViewContoller(viewController: vc)
+        }
+        
     }
 }
 extension UserWriteTextVC : UITableViewDataSource{

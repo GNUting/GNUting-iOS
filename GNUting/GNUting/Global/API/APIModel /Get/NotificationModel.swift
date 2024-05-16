@@ -18,4 +18,6 @@ struct NotificationModelResult: Codable {
     let id: Int
     let title, body, time: String
     let status: String?
+    let location: String
+    let locationId: Int?
 }

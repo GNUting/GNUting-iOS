@@ -15,6 +15,7 @@ class ReportVC: BaseViewController {
     private let explainLabel : UILabel = {
         let fullText = """
 신고하기 전에 잠깐!
+
 이 글이 운영진에 의해 삭제되어야 마땅하다고 생각된다면 신고해주세요!
 이용규칙에 위배되는 글을 여러 차례 계시하여 신고를 많이 받은 회원은 제한 조취가 취해집니다.
 

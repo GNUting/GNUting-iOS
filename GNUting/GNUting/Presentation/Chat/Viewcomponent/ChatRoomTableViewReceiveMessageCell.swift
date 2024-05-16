@@ -9,10 +9,14 @@ import UIKit
 
 class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     static let identi = "ChatRoomTableViewReceiveMessageCellid"
+    var closure: ((ChatRoomMessageModelResult)-> ())?
+    var chatRommUserModelResult: ChatRoomMessageModelResult?
     private lazy var upperView = UIView()
-    
-    
-    private lazy var userImageButton =  UIButton()
+    private lazy var userImageButton : UIButton = {
+        let button = UIButton()
+         button.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
+         return button
+    }()
     private lazy var middleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -30,7 +34,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     }()
     private lazy var messageView : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "FFE2E0")
+        view.backgroundColor = .white
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
@@ -108,24 +112,39 @@ extension ChatRoomTableViewReceiveMessageCell{
     }
 }
 extension ChatRoomTableViewReceiveMessageCell {
-    func setCell(nickName: String, UserImage: String, message:String,sendDate: String){
-        nickNameLabel.text = nickName
-        messageLabel.text = message
+    func setCell(model: ChatRoomMessageModelResult?){
+        nickNameLabel.text = model?.nickname
+        messageLabel.text = model?.message
         
+        guard let chatRoomData = model else { return }
         
-        let time = sendDate.split(separator: "T")[1].split(separator: ":")
+        self.chatRommUserModelResult = ChatRoomMessageModelResult(id: chatRoomData.id, chatRoomId: chatRoomData.chatRoomId , messageType: chatRoomData.messageType , email: chatRoomData.email, nickname: chatRoomData.nickname, profileImage: chatRoomData.profileImage, message: chatRoomData.message , createdDate: chatRoomData.createdDate , studentId: chatRoomData.studentId , department: chatRoomData.department)
+        let sendDate = model?.createdDate
+        let time = sendDate!.split(separator: "T")[1].split(separator: ":")
         sendDateLabel.text = "\(time[0]):\(time[1])"
-        setImageFromStringURL(stringURL: UserImage) { image in
+        let cacheKey = NSString(string: model?.profileImage ?? "")
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
             DispatchQueue.main.async {
-                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.setImage(cachedImage, for: .normal)
                 self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
                 self.userImageButton.layer.masksToBounds = true
             }
-            
+        } else {
+            setImageFromStringURL(stringURL: model?.profileImage) { image in
+                DispatchQueue.main.async {
+                    ImageCacheManager.shared.setObject(image, forKey: cacheKey)
+                    self.userImageButton.setImage(image, for: .normal)
+                    self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                    self.userImageButton.layer.masksToBounds = true
+                }
+            }
         }
-        
+  
     }
     func setSizeToFitMessageLabel() {
         messageLabel.adjustsFontSizeToFitWidth = true
+    }
+    @objc private func tapUserImageButton(){
+        closure?(self.chatRommUserModelResult!)
     }
 }

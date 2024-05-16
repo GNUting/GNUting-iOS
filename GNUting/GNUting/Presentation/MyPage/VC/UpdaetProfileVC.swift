@@ -11,7 +11,7 @@ import PhotosUI
 
 class UpdateProfileVC: BaseViewController {
     var userInfo: GetUserDataModel?
-
+    
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images,.livePhotos])
@@ -24,14 +24,11 @@ class UpdateProfileVC: BaseViewController {
         
         return imaegPicker
     }()
-    private lazy var userImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.crop.circle")
-        imageView.layer.cornerRadius = imageView.layer.frame.size.width / 2
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPhothImageView))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGesture)
-        return imageView
+    private lazy var userImageButton : UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(tapPhothImageView), for: .touchUpInside)
+
+        return button
     }()
     
     private lazy var nickNameInputView : SignUpInputViewNicknameType = {
@@ -80,16 +77,16 @@ class UpdateProfileVC: BaseViewController {
 
 extension UpdateProfileVC{
     private func setAddSubViews() {
-        view.addSubViews([userImageView,nickNameInputView,majorInputView,introduceInputView,updateProfileButton])
+        view.addSubViews([userImageButton,nickNameInputView,majorInputView,introduceInputView,updateProfileButton])
     }
     private func setAutoLayout(){
-        userImageView.snp.makeConstraints { make in
+        userImageButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(200)
         }
         nickNameInputView.snp.makeConstraints { make in
-            make.top.equalTo(userImageView.snp.bottom).offset(50)
+            make.top.equalTo(userImageButton.snp.bottom).offset(50)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
@@ -116,8 +113,11 @@ extension UpdateProfileVC{
 
 extension UpdateProfileVC {
     @objc private func tapUpdateProfileButton() {
-        
-        APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImageView.image ?? UIImage()) { response in
+        var userImage = userImageButton.imageView?.image
+        if userImageButton.imageView?.image == UIImage(named: "photoImg") {
+            userImage = nil
+        }
+        APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImage) { response in
             if response.isSuccess {
                 self.showMessage(message: "프로필 수정이 완료되었습니다.")
                 self.popButtonTap()
@@ -144,7 +144,22 @@ extension UpdateProfileVC {
     }
     
     @objc private func tapPhothImageView() {
-        present(imagePicker,animated: true)
+        let alertController = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "앨범에서 사진/동영상 선택", style: .default, handler: { _ in
+            self.present(self.imagePicker,animated: true)
+        }))
+        alertController.addAction(UIAlertAction(title: "기본 이미지 적용", style: .default, handler: { _ in
+            DispatchQueue.main.async {
+                self.userImageButton.setImage(UIImage(named: "photoImg"), for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "취소", style: .destructive))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+        
     }
 }
 extension UpdateProfileVC {
@@ -152,11 +167,11 @@ extension UpdateProfileVC {
         nickNameInputView.setTextField(text: userInfo?.result?.nickname ?? "")
         majorInputView.setTextField(text: userInfo?.result?.department ?? "")
         introduceInputView.setTextField(text: userInfo?.result?.userSelfIntroduction ?? "")
-        userImageView.setImageFromStringURL(stringURL: userInfo?.result?.profileImage) { image in
+        userImageButton.setImageFromStringURL(stringURL: userInfo?.result?.profileImage) { image in
             DispatchQueue.main.async {
-                self.userImageView.image = image
-                self.userImageView.layer.cornerRadius = self.userImageView.layer.frame.size.width / 2
-                self.userImageView.layer.masksToBounds = true
+                self.userImageButton.setImage(image, for: .normal)
+                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
+                self.userImageButton.layer.masksToBounds = true
             }
             
         }
@@ -171,9 +186,10 @@ extension UpdateProfileVC: PHPickerViewControllerDelegate {
         if let itemProvider = itemProvider,itemProvider.canLoadObject(ofClass: UIImage.self){
             itemProvider.loadObject(ofClass: UIImage.self) { (image,error) in
                 DispatchQueue.main.async {
-                    self.userImageView.image = image as? UIImage
-                    self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
-                    self.userImageView.layer.masksToBounds = true
+                    self.userImageButton.setImage(image as? UIImage, for: .normal)
+                    
+                    self.userImageButton.layer.cornerRadius = self.userImageButton.frame.width / 2
+                    self.userImageButton.layer.masksToBounds = true
                     
                 }
             }
@@ -201,5 +217,5 @@ extension UpdateProfileVC: NicknameTextfiledDelegate {
     func didBegin() {
         updateProfileButton.isEnabled = false
     }
-
+    
 }

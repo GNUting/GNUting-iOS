@@ -264,7 +264,7 @@ class APIGetManager: RequestInterceptor {
             .validate(statusCode: 200..<300)
             .responseDecodable(of:ChatRoomMessageModel.self) { response in
                 
-                
+
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 switch response.result {
@@ -287,6 +287,7 @@ class APIGetManager: RequestInterceptor {
             .validate(statusCode: 200..<300)
             .responseDecodable(of: NotificationModel.self) { response in
                     guard let statusCode = response.response?.statusCode else { return }
+             
                     switch response.result {
                     case .success:
                         print("🟢 getNotificationData statusCode: \(statusCode)")
@@ -372,6 +373,7 @@ class APIGetManager: RequestInterceptor {
     // 알림 클릭시 클릭한 신천받은 현황 ID로 조회하는 API
     func getApplicationReceivedData(applcationID: String,completion: @escaping(ApplicationReceivedModel?) -> Void) {
         let url = BaseURL.shared.urlString + "notification/application/click/" + applcationID
+        
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ApplicationReceivedModel.self) { response in

@@ -14,6 +14,14 @@ class HomeVC: BaseViewController{
     var userStudentID: String?
     var userDepartment: String?
     var currentPage = 0
+    private lazy var appLogoButtonItem: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "AppLogoImage")
+        config.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 12, bottom: 0, trailing: 0)
+        let button = UIButton(configuration: config)
+        
+        return button
+    }()
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -120,14 +128,7 @@ class HomeVC: BaseViewController{
         imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
-    private lazy var mypostCardView1 : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "MypostCardImage")
-        imageView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMypostCardView))
-        imageView.addGestureRecognizer(tapGesture)
-        return imageView
-    }()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(hexCode: "FFF0F0")
@@ -153,7 +154,7 @@ extension HomeVC{
         contentView.addSubViews([homeTopView,homeBottomView])
         homeTopView.addSubViews([explainStackView,writePostButton,imageButton])
         explainStackView.addStackSubViews([userNameLabel,explainLabel])
-        homeBottomView.addSubViews([bannerImageView,postSubView,cardStackView,mypostCardView1])
+        homeBottomView.addSubViews([bannerImageView,postSubView,cardStackView])
         cardStackView.addStackSubViews([postBoardCardView,mypostCardView])
     }
     private func setAutoLayout(){
@@ -220,9 +221,10 @@ extension HomeVC{
         
     }
     private func setNavigationBar() {
-        let appLogoButtonItem = UIBarButtonItem(image: UIImage(named: "AppLogoImage"), style: .plain, target: self, action: nil)
-        appLogoButtonItem.tintColor = UIColor(named: "PrimaryColor")
-        self.navigationItem.leftBarButtonItem = appLogoButtonItem
+        let leftNavigationItem = UIBarButtonItem(customView: self.appLogoButtonItem)
+        leftNavigationItem.tintColor = UIColor(named: "PrimaryColor")
+        
+        self.navigationItem.leftBarButtonItem = leftNavigationItem
         let searchButtonItem = UIBarButtonItem(image: UIImage(named: "SearchImg"), style: .plain, target: self, action: #selector(self.tapSearchButton))
         searchButtonItem.tintColor = UIColor(named: "IconColor")
         let bellImageButton = UIBarButtonItem(customView: self.bellImage)
@@ -257,10 +259,31 @@ extension HomeVC{
         instagramOpen()
     }
     @objc private func tapPostBoardCardView() {
-        pushViewContoller(viewController: DateBoardListVC())
+        UIView.animate(withDuration: 0.2) {
+            let scale = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.postBoardCardView.transform = scale
+            
+        } completion: { finished in
+            UIView.animate(withDuration: 0.2) {
+                self.postBoardCardView.transform = .identity
+            }
+            self.pushViewContoller(viewController: DateBoardListVC())
+        }
+       
     }
     @objc private func tapMypostCardView() {
-        pushViewContoller(viewController: UserWriteTextVC())
+        UIView.animate(withDuration: 0.2) {
+            let scale = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.mypostCardView.transform = scale
+            
+        } completion: { finished in
+            UIView.animate(withDuration: 0.2) {
+                self.mypostCardView.transform = .identity
+            }
+            self.pushViewContoller(viewController: UserWriteTextVC())
+        }
+        
+        
     }
 }
 // MARK: - Get Data
@@ -270,11 +293,11 @@ extension HomeVC {
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
             self.imageURL = userData?.result?.profileImage
-            self.username = userData?.result?.nickname ?? "유저 닉네임"
+            self.username = userData?.result?.nickname ?? "(알 수 없음)"
             self.userStudentID = userData?.result?.studentId ?? "학번"
             self.userDepartment = userData?.result?.department ?? "학과"
             setExplainLabel(text: userData?.result?.nickname ?? "이름")
-            self.setUserNaemLabel(username: username ?? "유저 닉네임")
+            self.setUserNaemLabel(username: username ?? "(알 수 없음)")
             
             setImageFromStringURL(stringURL:self.imageURL ) { image in
                 
@@ -315,6 +338,16 @@ extension HomeVC {
 //MARK: - Delegate
 extension HomeVC: WritePostButtonDelegate {
     func tapButton() {
-        pushViewContoller(viewController: WriteDateBoardVC())
+        UIView.animate(withDuration: 0.2) {
+            let scale = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.writePostButton.transform = scale
+            
+        } completion: { finished in
+            UIView.animate(withDuration: 0.2) {
+                self.writePostButton.transform = .identity
+            }
+            self.pushViewContoller(viewController: WriteDateBoardVC())
+        }
+        
     }
 }

@@ -45,10 +45,10 @@ extension DateMemberHeader {
         
         
         if requestStatus {
-            majorLabel.text = "▶\(major ?? "학과")"
+            majorLabel.text = "▶ \(major ?? "학과")"
             majorLabel.textColor = UIColor(named: "SecondaryColor")
         } else {
-            majorLabel.text = "◀\(major ?? "학과")"
+            majorLabel.text = "◀ \(major ?? "학과")"
             majorLabel.textColor = UIColor(named: "PrimaryColor")
         }
         

@@ -87,7 +87,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
         if section == 0{
-            return 150
+            return 170
         } else {
             return 35
         }

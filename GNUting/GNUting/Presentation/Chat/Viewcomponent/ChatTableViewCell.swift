@@ -9,6 +9,7 @@ import UIKit
 
 class ChatTableViewCell: UITableViewCell {
     static let identi = "ChatTableViewCellid"
+    var imageArr : [String?] = []
     private lazy var upperView : UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -17,13 +18,13 @@ class ChatTableViewCell: UITableViewCell {
         view.layer.masksToBounds = true
         return view
     }()
-    private lazy var userImageButton = UIButton()
+    private lazy var userImageView = ChatRoomFirstImageView()
     private lazy var firstStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 12
+        stackView.spacing = 6
         
         return stackView
     }()
@@ -42,7 +43,6 @@ class ChatTableViewCell: UITableViewCell {
         
         return label
     }()
-    
     private lazy var majorLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
@@ -64,7 +64,7 @@ class ChatTableViewCell: UITableViewCell {
         
         setAddSubViews()
         setAutoLayout()
-        
+       
     }
     
     required init?(coder: NSCoder) {
@@ -76,13 +76,16 @@ class ChatTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-  
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
     
 }
 extension ChatTableViewCell{
     private func setAddSubViews() {
         contentView.addSubViews([upperView,newChatImage])
-        upperView.addSubViews([firstStackView,userImageButton])
+        upperView.addSubViews([firstStackView,userImageView])
         firstStackView.addStackSubViews([chatTitleLabel,majorLabel])
     }
     private func setAutoLayout(){
@@ -97,21 +100,25 @@ extension ChatTableViewCell{
             make.bottom.equalToSuperview().offset(-5)
         }
         firstStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(6)
+            make.top.equalToSuperview().offset(12)
             make.left.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().offset(-12)
         }
-        userImageButton.snp.makeConstraints { make in
+        chatTitleLabel.snp.makeConstraints { make in
+            make.height.equalTo(18)
+        }
+        userImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-12)
             make.left.equalTo(firstStackView.snp.right).offset(5)
             make.bottom.equalToSuperview().offset(-12)
-            make.height.width.equalTo(45)
+            make.height.width.equalTo(50)
         }
+        userImageView.setContentHuggingPriority(.init(251), for: .horizontal)
+        userImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         firstStackView.setContentHuggingPriority(.init(250), for: .horizontal)
-        userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
-        userImageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         
     }
     
@@ -125,21 +132,11 @@ extension ChatTableViewCell {
         } else {
             newChatImage.isHidden = true
         }
-        let cacheKey = NSString(string: chatRoomUserProfileImages.first as? String ?? "")
-        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
-            self.userImageButton.setImage(cachedImage, for: .normal)
-            self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
-            self.userImageButton.layer.masksToBounds = true
-        }
-                
-        self.setImageFromStringURL(stringURL: chatRoomUserProfileImages.first as? String) { image in
-            DispatchQueue.main.async {
-                ImageCacheManager.shared.setObject(image, forKey: cacheKey)
-                self.userImageButton.setImage(image, for: .normal)
-                self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
-                self.userImageButton.layer.masksToBounds = true
-            }
-        }
+
         
+        self.imageArr = chatRoomUserProfileImages
+        userImageView.setImage(imageArr: chatRoomUserProfileImages,title: title)
     }
+  
 }
+

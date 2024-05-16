@@ -278,6 +278,7 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
+  
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
@@ -289,6 +290,7 @@ class APIPostManager {
                         print("🟢 postRequestChat statusCode: \(statusCode)")
                         completion(json)
                     } else {
+                        print(json)
                         print("🔴 postRequestChat statusCode: \(statusCode)")
                         completion(json)
                     }

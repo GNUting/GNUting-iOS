@@ -38,6 +38,7 @@ class TotalAlertVC: BaseViewController {
         label.text = "해당 설정이 꺼져있으면 알림을 받을 수 없습니다.\n기기 설정에서 지누팅 알림 허용 여부를 확인해 주세요."
         label.numberOfLines = 2
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 11)
+        label.textColor = UIColor(hexCode: "979C9E")
         return label
     }()
     private lazy var borderView = BorderView()
@@ -77,9 +78,9 @@ extension TotalAlertVC{
     }
     private func setAutoLayout(){
         bellImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(35)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(25)
             make.left.equalToSuperview().offset(43)
-            
+            make.height.width.equalTo(45)
         }
         labelStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)

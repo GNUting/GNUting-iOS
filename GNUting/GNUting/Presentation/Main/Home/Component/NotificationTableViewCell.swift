@@ -54,8 +54,6 @@ class NotificationTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
 }
@@ -70,6 +68,7 @@ extension NotificationTableViewCell{
             make.left.equalToSuperview().offset(25)
             
             make.width.height.equalTo(40)
+            make.bottom.equalToSuperview().offset(-25)
         }
         labelStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)

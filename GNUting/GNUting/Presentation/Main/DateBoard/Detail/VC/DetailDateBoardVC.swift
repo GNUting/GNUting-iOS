@@ -252,6 +252,7 @@ extension DetailDateBoardVC {
             self.contentTextView.text = result.detail
             self.userInfos = result.inUser
             self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId)
+    
             self.setChatPeopleViewButton(memeberCount: result.inUser.count)
             self.chatMemeberCount = result.inUser.count
             if result.status == "OPEN" {

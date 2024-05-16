@@ -36,24 +36,27 @@ class APIUpdateManager {
     }
     
     // MARK: - 유저 정보 수정 ✅
-    func updateUserProfile(nickname: String, department: String, userSelfIntroduction: String,image: UIImage,completion :@escaping(DefaultResponse)->Void) {
+    func updateUserProfile(nickname: String, department: String, userSelfIntroduction: String,image: UIImage?,completion :@escaping(DefaultResponse)->Void) {
         let url = EndPoint.updateProfile.url
         guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨
         guard let token = KeyChainManager.shared.read(key: email) else { return }
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data","Authorization": "Bearer " + token]
         let parameters : [String : String] = ["department":department,"nickname": nickname,"userSelfIntroduction": userSelfIntroduction]
-        let imageData = image.jpegData(compressionQuality: 0.2)
+        let imageData = image?.jpegData(compressionQuality: 0.2)
         
         AF.upload(multipartFormData: { multipartFormData in
             for (key,value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
-            if let image = imageData {
-                print(image)
-                multipartFormData.append(image, withName: "profileImage",fileName: "\(nickname).jpeg",mimeType: "image/jpg")
+            var imageStr = ""
+            if let image = image {
+                let address = Unmanaged.passUnretained(image).toOpaque()
+                imageStr = "\(address)"
             }
-            print(multipartFormData)
+            if let image = imageData {
+                multipartFormData.append(image, withName: "profileImage",fileName: "\(imageStr)\(Int.random(in: 1...999)).jpeg",mimeType: "image/jpg")
+            }
         }, to: url,method: .patch,headers:header)
         .validate(statusCode: 200..<300)
         .response { response in
