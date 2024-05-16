@@ -125,6 +125,12 @@ extension UIViewController{
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
+    func setTotalAlert(status: String) {
+        APIPutManager.shared.putTotalNotification(alertStatus: status) { response in
+            if !response.isSuccess {
+                self.showAlert(message: "에러 발생")
+            }
+        }
+    }
     
 }
