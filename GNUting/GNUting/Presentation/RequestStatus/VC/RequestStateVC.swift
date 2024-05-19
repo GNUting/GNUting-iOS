@@ -138,7 +138,7 @@ extension RequestStateVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RequsetListTableViewCell.identi, for: indexPath) as? RequsetListTableViewCell else { return UITableViewCell() }
         cell.setCell(model: dateStatusList[indexPath.row])
-        cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -183,6 +183,7 @@ extension RequestStateVC: UITableViewDelegate {
         }else {
             vc.requestStatus = false
         }
+        tableView.deselectRow(at: indexPath, animated: true)
         pushViewContoller(viewController: vc)
     }
     

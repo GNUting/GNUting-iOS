@@ -123,7 +123,6 @@ class ChatRoomVC: UIViewController {
         setAddSubViews()
         setAutoLayout()
         setNavigationBar()
-        setTotalAlert(status: "DISABLE")
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -136,10 +135,13 @@ class ChatRoomVC: UIViewController {
         getChatRoomMember()
         getAlertSet()
         initStomp()
+        isChatRoomVisible()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.chatRoomOut()
         self.swiftStomp.disconnect()
+        
     }
 }
 extension ChatRoomVC{
@@ -171,7 +173,7 @@ extension ChatRoomVC{
         sendMessageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         borderView2.snp.makeConstraints { make in
             make.top.equalTo(chatRoomTableView.snp.bottom)
-            make.bottom.equalTo(sendStackView.snp.top).offset(-5)
+            make.bottom.equalTo(sendStackView.snp.top).offset(-10)
             make.left.right.equalToSuperview()
             make.height.equalTo(1)
         }
@@ -200,7 +202,13 @@ extension ChatRoomVC {
             }
         }
     }
-    
+    private func isChatRoomVisible() {
+        ChatVisibleManager.shared.chatRoomID = self.chatRoomID
+        ChatVisibleManager.shared.isChatRoom = true
+    }
+    private func chatRoomOut() {
+        ChatVisibleManager.shared.isChatRoom = false
+    }
 }
 extension ChatRoomVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -214,14 +222,13 @@ extension ChatRoomVC: UITableViewDataSource{
         if cellData.messageType == "CHAT" {
             if cellData.email == userEmail{
                 guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
-                sendCell.setCell(nickName: cellData.nickname ?? "(알 수 없음)", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
                 sendCell.setSizeToFitMessageLabel()
                 sendCell.selectionStyle = .none
                 return sendCell
             } else {
                 guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewReceiveMessageCell.identi, for: indexPath) as? ChatRoomTableViewReceiveMessageCell else { return UITableViewCell() }
                 receiveCell.setCell(model: cellData)
-                receiveCell.setSizeToFitMessageLabel()
                 receiveCell.selectionStyle = .none
                 receiveCell.closure = { tapReceiveData in
                     self.tapReceivedUserImageButton(userData: tapReceiveData)

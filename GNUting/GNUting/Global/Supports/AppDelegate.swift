@@ -93,8 +93,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     
     /// 앱화면 보고있는중에 푸시올 때
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        //        let userInfo = notification.request.content.userInfo
-        return [.sound, .banner, .list,.badge]
+        let userInfo = notification.request.content.userInfo
+        let location = userInfo[AnyHashable("location")] as? String
+        let locationID = userInfo[AnyHashable("locationId")] as? String ?? "0"
+        let chatRoomID = ChatVisibleManager.shared.chatRoomID
+        let chatRoomVisible = ChatVisibleManager.shared.isChatRoom
+        
+        if location == "chat" && chatRoomVisible == true && chatRoomID == Int(locationID) ?? 0{
+            
+        } else {
+            return [.sound, .banner, .list,.badge]
+        }
+        return []
     }
     
     /// FCMToken 업데이트시

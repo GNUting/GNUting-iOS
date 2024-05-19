@@ -232,13 +232,20 @@ extension RequestStatusDetailVC {
           
             
         } else {
-            APIUpdateManager.shared.rejectedApplication(boardID: dedatilData?.id ?? 0) { response in
-                if response.isSuccess {
-                    self.showMessagePop(message: "신청을 거절하였습니다.")
-                } else {
-                    self.errorHandling(response: response)
+            let alertContoller = UIAlertController(title: "", message: "신청 거절하시겠습니까?", preferredStyle: .alert)
+            alertContoller.addAction(UIAlertAction(title: "취소", style: .destructive))
+            alertContoller.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                APIUpdateManager.shared.rejectedApplication(boardID: self.dedatilData?.id ?? 0) { response in
+                    if response.isSuccess {
+                        self.showMessagePop(message: "신청을 거절하였습니다.")
+                    } else {
+                        self.errorHandling(response: response)
+                    }
+                    
                 }
-                
+            }))
+            DispatchQueue.main.async {
+                self.present(alertContoller, animated: true)
             }
         }
     }

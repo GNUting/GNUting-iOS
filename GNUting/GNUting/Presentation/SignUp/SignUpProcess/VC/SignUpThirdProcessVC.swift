@@ -25,12 +25,11 @@ class SignUpThirdProcessVC: BaseViewController {
         return imaegPicker
     }()
     
-    private lazy var phothImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "photoImg")
-        imageView.contentMode = .scaleToFill
-  
-        return imageView
+    private lazy var phothImageView : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "photoImg"), for: .normal)
+    
+        return button
     }()
     private let explainLabel : UILabel = {
         let label = UILabel()
@@ -102,7 +101,8 @@ extension SignUpThirdProcessVC {
         let savedSignUpdate = SignUpModelManager.shared.signUpDictionary
         
         let signUpData : SignUpModel = SignUpModel(birthDate: savedSignUpdate["birthDate"] ?? "", department: savedSignUpdate["department"] ?? "", email: (savedSignUpdate["email"] ?? "") + "@gnu.ac.kr", gender: savedSignUpdate["gender"] ?? "", name: savedSignUpdate["name"] ?? "", nickname: savedSignUpdate["nickname"] ?? "", password: savedSignUpdate["password"] ?? "", phoneNumber: savedSignUpdate["phoneNumber"] ?? "", studentId: savedSignUpdate["studentId"] ?? "", userSelfIntroduction: savedSignUpdate["userSelfIntroduction"] ?? "")
-        var image = phothImageView.image
+
+        var image = phothImageView.imageView?.image
         if image == UIImage(named: "photoImg") {
             image = nil
         }
@@ -129,6 +129,7 @@ extension SignUpThirdProcessVC {
 
 extension SignUpThirdProcessVC {
     @objc private func tapSignUpCompltedButton(){
+
         setAndPostSignUp()
     }
     
@@ -168,7 +169,8 @@ extension SignUpThirdProcessVC: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     self.phothImageView.layer.cornerRadius = 75
                     self.phothImageView.layer.masksToBounds = true
-                    self.phothImageView.image = image as? UIImage
+                    self.phothImageView.setImage(image as? UIImage, for: .normal)
+                    
                     self.imageSkipButton.isHidden = true
                     self.bottomButton.setText("지누팅 시작하기")
                     

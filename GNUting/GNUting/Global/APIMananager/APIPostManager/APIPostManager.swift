@@ -70,6 +70,7 @@ class APIPostManager {
                 switch statusCode {
                 case 200..<300:
                     guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
+                    print(json)
                     print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
                     completion(json,nil)
                 default:

@@ -58,8 +58,6 @@ class ChatRoomListVC: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
-        
-        setTotalAlert(status: "ENABLE")
         getChatRoomData()
     }
     
@@ -112,7 +110,7 @@ extension ChatRoomListVC : UITableViewDataSource {
         if let result = chatRoomData?.result[indexPath.row] {
             cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         }
-        
+        cell.selectionStyle = .none
         return cell
     }
     

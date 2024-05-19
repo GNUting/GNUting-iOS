@@ -38,13 +38,15 @@ class UpdateProfileVC: BaseViewController {
         return inputView
     }()
     
-    private lazy var majorInputView : SignUPInputView = {
-        let majorInputView = SignUPInputView()
-        majorInputView.setInputTextTypeLabel(text: "학과")
-        majorInputView.setPlaceholder(placeholder: "힉과를 입력해주세요.")
+  
+    private lazy var majorInputView : MajorInputView = {
+        let majorInputView = MajorInputView()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMajorInputView))
+        majorInputView.isUserInteractionEnabled = true
+        majorInputView.addGestureRecognizer(tapGesture)
+        
         return majorInputView
     }()
-    
     private lazy var introduceInputView : SignUPInputView = {
         let majorInputView = SignUPInputView()
         majorInputView.setInputTextTypeLabel(text: "한줄 소개")
@@ -56,8 +58,9 @@ class UpdateProfileVC: BaseViewController {
         let button = PrimaryColorButton()
         button.backgroundColor = UIColor(named: "PrimaryColor")
         button.setText("프로필 수정")
-        
-        button.addTarget(self, action: #selector(tapUpdateProfileButton), for: .touchUpInside)
+        button.throttle(delay: 3.0) { _ in
+            self.tapUpdateProfileButton()
+        }
         
         return button
     }()
@@ -91,17 +94,16 @@ extension UpdateProfileVC{
             make.right.equalToSuperview().offset(Spacing.right)
         }
         majorInputView.snp.makeConstraints { make in
-            make.top.equalTo(nickNameInputView.snp.bottom)
+            make.top.equalTo(nickNameInputView.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
         introduceInputView.snp.makeConstraints { make in
-            make.top.equalTo(majorInputView.snp.bottom).offset(12)
+            make.top.equalTo(majorInputView.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
         }
         updateProfileButton.snp.makeConstraints { make in
-            
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
             make.height.equalTo(50)
@@ -112,12 +114,13 @@ extension UpdateProfileVC{
 }
 
 extension UpdateProfileVC {
-    @objc private func tapUpdateProfileButton() {
+    private func tapUpdateProfileButton() {
         var userImage = userImageButton.imageView?.image
         if userImageButton.imageView?.image == UIImage(named: "photoImg") {
             userImage = nil
         }
-        APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getTextFieldText(), userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImage) { response in
+      
+        APIUpdateManager.shared.updateUserProfile(nickname: nickNameInputView.getTextFieldText(), department: majorInputView.getContentLabelText() ?? "영어영문학부", userSelfIntroduction: introduceInputView.getTextFieldText(), image: userImage) { response in
             if response.isSuccess {
                 self.showMessage(message: "프로필 수정이 완료되었습니다.")
                 self.popButtonTap()
@@ -165,7 +168,7 @@ extension UpdateProfileVC {
 extension UpdateProfileVC {
     private func setUserInfo() {
         nickNameInputView.setTextField(text: userInfo?.result?.nickname ?? "")
-        majorInputView.setTextField(text: userInfo?.result?.department ?? "")
+        majorInputView.setContentLabelText(text: userInfo?.result?.department ?? "학과")
         introduceInputView.setTextField(text: userInfo?.result?.userSelfIntroduction ?? "")
         userImageButton.setImageFromStringURL(stringURL: userInfo?.result?.profileImage) { image in
             DispatchQueue.main.async {
@@ -218,4 +221,19 @@ extension UpdateProfileVC: NicknameTextfiledDelegate {
         updateProfileButton.isEnabled = false
     }
     
+}
+extension UpdateProfileVC {
+    @objc private func tapMajorInputView() {
+        
+        let vc = SearchMajorVC()
+        vc.searchMajorSelectCellDelegate = self
+        
+        let navigationVC = UINavigationController(rootViewController: vc)
+        present(navigationVC, animated: true)
+    }
+}
+extension UpdateProfileVC: SearchMajorSelectCellDelegate{
+    func sendSeleceted(major: String) {
+        majorInputView.setContentLabelText(text: major)
+    }
 }

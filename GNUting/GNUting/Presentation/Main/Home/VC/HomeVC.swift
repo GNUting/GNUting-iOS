@@ -112,21 +112,19 @@ class HomeVC: BaseViewController{
         stackView.spacing = 15
         return stackView
     }()
-    private lazy var postBoardCardView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "PostBoardCardImage")
-        imageView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPostBoardCardView))
-        imageView.addGestureRecognizer(tapGesture)
-        return imageView
+    private lazy var postBoardCardView : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "PostBoardCardImage"), for: .normal)
+        button.addTarget(self, action: #selector(tapPostBoardCardView), for: .touchUpInside)
+        
+        return button
     }()
-    private lazy var mypostCardView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "MypostCardImage")
-        imageView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMypostCardView))
-        imageView.addGestureRecognizer(tapGesture)
-        return imageView
+    private lazy var mypostCardView : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "MypostCardImage"), for: .normal)
+        button.addTarget(self, action: #selector(tapMypostCardView), for: .touchUpInside)
+
+        return button
     }()
    
     override func viewDidLoad() {
@@ -259,31 +257,11 @@ extension HomeVC{
         instagramOpen()
     }
     @objc private func tapPostBoardCardView() {
-        UIView.animate(withDuration: 0.2) {
-            let scale = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            self.postBoardCardView.transform = scale
-            
-        } completion: { finished in
-            UIView.animate(withDuration: 0.2) {
-                self.postBoardCardView.transform = .identity
-            }
-            self.pushViewContoller(viewController: DateBoardListVC())
-        }
+        self.pushViewContoller(viewController: DateBoardListVC())
        
     }
     @objc private func tapMypostCardView() {
-        UIView.animate(withDuration: 0.2) {
-            let scale = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            self.mypostCardView.transform = scale
-            
-        } completion: { finished in
-            UIView.animate(withDuration: 0.2) {
-                self.mypostCardView.transform = .identity
-            }
-            self.pushViewContoller(viewController: UserWriteTextVC())
-        }
-        
-        
+        self.pushViewContoller(viewController: UserWriteTextVC())
     }
 }
 // MARK: - Get Data
@@ -293,11 +271,11 @@ extension HomeVC {
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
             self.imageURL = userData?.result?.profileImage
-            self.username = userData?.result?.nickname ?? "(알 수 없음)"
+            self.username = userData?.result?.nickname ?? "닉네임"
             self.userStudentID = userData?.result?.studentId ?? "학번"
             self.userDepartment = userData?.result?.department ?? "학과"
             setExplainLabel(text: userData?.result?.nickname ?? "이름")
-            self.setUserNaemLabel(username: username ?? "(알 수 없음)")
+            self.setUserNaemLabel(username: username ?? "닉네임")
             
             setImageFromStringURL(stringURL:self.imageURL ) { image in
                 
