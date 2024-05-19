@@ -21,21 +21,15 @@ class UserInfoView: UIView {
         view.backgroundColor = UIColor(hexCode: "E9E9E9")
         return view
     }()
-    private lazy var upperStackView : UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        return stackView
-    }()
+    private lazy var upperStackView = UIView()
+        
     
     lazy var userImageButton = UserImageButton()
     
     private lazy var middleStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 5
+   
         stackView.alignment = .fill
         stackView.distribution = .fill
         return stackView
@@ -70,7 +64,7 @@ class UserInfoView: UIView {
 extension UserInfoView {
     private func addSubViews(){
         self.addSubViews([border1,upperStackView,border2])
-        upperStackView.addStackSubViews([userImageButton,middleStackView])
+        upperStackView.addSubViews([userImageButton,middleStackView])
         middleStackView.addStackSubViews([nickNameLabel,majorStudentIDLabel])
         middleStackView.setContentHuggingPriority(.init(250), for: .horizontal)
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
@@ -78,7 +72,13 @@ extension UserInfoView {
     }
     private func setAutoLayout(){
         userImageButton.snp.makeConstraints { make in
-            make.height.width.equalTo(40)
+            make.top.left.bottom.equalToSuperview()
+            make.height.width.equalTo(50)
+        }
+        middleStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(5)
+            make.right.equalToSuperview()
+            make.left.equalTo(userImageButton.snp.right).offset(10)
         }
         border1.snp.makeConstraints { make in
             make.top.equalToSuperview()

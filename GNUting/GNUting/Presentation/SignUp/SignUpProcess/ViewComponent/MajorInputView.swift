@@ -19,7 +19,7 @@ class MajorInputView : UIView{
 
     private lazy var contentLabel : UILabel = {
         let textField = UILabel()
-        textField.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        textField.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         textField.text = "클릭하여 학과를 선택해주세요"
         textField.textColor = UIColor(hexCode: "CBCBCD")
 

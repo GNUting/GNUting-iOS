@@ -25,6 +25,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
         stackView.distribution = .fill
         return stackView
     }()
+    private lazy var messageUpperView = UIView()
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
@@ -45,7 +46,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textColor = UIColor(named: "6B6B6B")
-        
+        label.sizeToFit()
         label.numberOfLines = 0
   
         return label
@@ -79,8 +80,9 @@ extension ChatRoomTableViewReceiveMessageCell{
     private func setAddSubViews() {
         contentView.addSubViews([userImageButton,upperView])
         
-        upperView.addSubViews([middleStackView,sendDateLabel])
-        middleStackView.addStackSubViews([nickNameLabel,messageView])
+        upperView.addSubViews([middleStackView])
+        middleStackView.addStackSubViews([nickNameLabel,messageUpperView])
+        messageUpperView.addSubViews([messageView,sendDateLabel])
         messageView.addSubview(messageLabel)
     }
     private func setAutoLayout(){
@@ -96,26 +98,28 @@ extension ChatRoomTableViewReceiveMessageCell{
             make.bottom.equalToSuperview().offset(-10)
         }
         middleStackView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+        messageView.snp.makeConstraints { make in
             make.top.left.bottom.equalToSuperview()
         }
         sendDateLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
-            make.left.equalTo(middleStackView.snp.right).offset(5)
+            make.left.equalTo(messageView.snp.right).offset(5)
             make.right.lessThanOrEqualToSuperview()
         }
         messageLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(10)
             make.left.right.equalToSuperview().inset(10)
         }
-        middleStackView.setContentHuggingPriority(.init(249), for: .horizontal)
+        messageUpperView.setContentHuggingPriority(.init(249), for: .horizontal)
         sendDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }
 extension ChatRoomTableViewReceiveMessageCell {
     func setCell(model: ChatRoomMessageModelResult?){
-        nickNameLabel.text = model?.nickname
+        nickNameLabel.text = model?.nickname == nil ? "(알 수 없음)" : model?.nickname
         messageLabel.text = model?.message
-        
         guard let chatRoomData = model else { return }
         
         self.chatRommUserModelResult = ChatRoomMessageModelResult(id: chatRoomData.id, chatRoomId: chatRoomData.chatRoomId , messageType: chatRoomData.messageType , email: chatRoomData.email, nickname: chatRoomData.nickname, profileImage: chatRoomData.profileImage, message: chatRoomData.message , createdDate: chatRoomData.createdDate , studentId: chatRoomData.studentId , department: chatRoomData.department)

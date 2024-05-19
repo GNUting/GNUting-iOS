@@ -112,7 +112,9 @@ extension BoardTextSearchVC: UITableViewDelegate {
         let vc = DetailDateBoardVC()
         vc.boardID = searchResultList[indexPath.row].boardID
         vc.setPushBoardList()
+        tableView.deselectRow(at: indexPath, animated: true)
         pushViewContoller(viewController: vc)
+        
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
@@ -144,7 +146,7 @@ extension BoardTextSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
         boardListCell.searchSetCell(model: searchResultList[indexPath.row])
-        boardListCell.selectionStyle = .none
+        
         return boardListCell
     }
     

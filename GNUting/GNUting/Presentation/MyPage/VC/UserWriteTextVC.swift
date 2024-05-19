@@ -88,6 +88,7 @@ extension UserWriteTextVC: UITableViewDelegate{
         let vc = DetailDateBoardVC()
         vc.boardID = myPostList[indexPath.row].id
         vc.setPushMypostVersion()
+        tableView.deselectRow(at: indexPath, animated: true)
         if myPostList[indexPath.row].status == "OPEN" {
             pushViewContoller(viewController: vc)
         }
@@ -102,7 +103,7 @@ extension UserWriteTextVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
         cell.myPostSetCell(model: myPostList[indexPath.row])
-        cell.selectionStyle = .none
+        
         return cell
     }
    

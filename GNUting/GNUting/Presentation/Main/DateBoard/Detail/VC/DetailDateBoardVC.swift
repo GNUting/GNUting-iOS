@@ -117,7 +117,7 @@ extension DetailDateBoardVC{
         requetChatButton.snp.makeConstraints { make in
             make.top.equalTo(chatPeopleViewButton.snp.bottom).offset(5)
             make.left.right.equalToSuperview().inset(Spacing.UpperInset)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
             
         }
         detailDateBoardSetView.snp.makeConstraints { make in

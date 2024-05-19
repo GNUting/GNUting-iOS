@@ -94,6 +94,7 @@ extension DateBoardListVC: UITableViewDataSource{
         let vc = DetailDateBoardVC()
         vc.boardID = dateBoardListData[indexPath.row].id
         vc.setPushBoardList()
+        tableView.deselectRow(at: indexPath, animated: true)
         if dateBoardListData[indexPath.row].status == "OPEN" {
             pushViewContoller(viewController: vc)
         }
@@ -116,7 +117,8 @@ extension DateBoardListVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
         boardListCell.boardListSetCell(model: dateBoardListData[indexPath.row])
-        boardListCell.selectionStyle = .none
+        
+        
         return boardListCell
     }
 }
