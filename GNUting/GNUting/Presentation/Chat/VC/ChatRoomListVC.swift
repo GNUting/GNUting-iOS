@@ -68,7 +68,7 @@ extension ChatRoomListVC{
     }
     private func setAutoLayout() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }

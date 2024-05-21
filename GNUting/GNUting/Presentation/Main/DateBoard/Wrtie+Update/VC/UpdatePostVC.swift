@@ -147,31 +147,18 @@ extension UpdatePostVC : UITextViewDelegate{
 }
 
 extension UpdatePostVC: UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        2
-    }
     
     // MARK: - Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return memberDataList.count
-        } else {
-            return 1
-        }
+        return memberDataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
-            cell.setUserInfoViews(model: memberDataList[indexPath.row])
-            cell.selectionStyle = .none
-            
-            return cell
-        } else {
-            guard let addCell = tableView.dequeueReusableCell(withIdentifier: MemBerAddTableViewCell.identi, for: indexPath) as? MemBerAddTableViewCell else { return UITableViewCell()}
-            addCell.selectionStyle = .none
-            return addCell
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
+        cell.setUserInfoViews(model: memberDataList[indexPath.row])
+        cell.selectionStyle = .none
+        
+        return cell
     }
     
     // MARK: - Header

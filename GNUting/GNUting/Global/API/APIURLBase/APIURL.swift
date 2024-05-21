@@ -99,6 +99,7 @@ enum EndPoint{
 
 private extension URL{
     static let baseURL = "http://203.255.3.66:10001/api/v1/"
+//    static let baseURL = "jdbc:mysql://203.255.3.66:13306/gnuting_dev"
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
@@ -109,4 +110,5 @@ private extension URL{
 class BaseURL {
     static let shared = BaseURL()
     let urlString = "http://203.255.3.66:10001/api/v1/"
+//    let urlString = "jdbc:mysql://203.255.3.66:13306/gnuting_dev"
 }
