@@ -179,7 +179,6 @@ extension ChatRoomFirstImageView {
         }
     }
     func removeSubViewAll() {
-        print("remove")
         for view in self.subviews {
             view.removeFromSuperview()
         }

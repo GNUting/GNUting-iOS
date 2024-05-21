@@ -1,14 +1,14 @@
 //
-//  ChatRoomEnterTableViewCell.swift
+//  ChatRoomDefaultTableViewCell.swift
 //  GNUting
 //
-//  Created by 원동진 on 4/10/24.
+//  Created by 원동진 on 5/22/24.
 //
 
 import UIKit
 
-class ChatRoomEnterTableViewCell: UITableViewCell {
-    static let identi = "ChatRoomEnterTableViewCellid"
+class ChatRoomDefaultTableViewCell: UITableViewCell {
+    static let identi = "ChatRoomDefaultTableViewCellid"
     private lazy var enterExplainLabel : BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.textColor = UIColor(named: "636060")
@@ -27,25 +27,23 @@ class ChatRoomEnterTableViewCell: UITableViewCell {
         contentView.addSubview(enterExplainLabel)
         enterExplainLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(12)
-            make.left.right.equalToSuperview()
+            make.centerX.equalToSuperview()
         }
+    }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
 }
-extension ChatRoomEnterTableViewCell {
+extension ChatRoomDefaultTableViewCell {
     func setCell(message: String,enterType: String){
-        
-        
         enterExplainLabel.text = message
     }
     func setSizeToFitMessageLabel() {

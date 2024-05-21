@@ -189,6 +189,6 @@ extension DateBoardListVC  {
 
 extension DateBoardListVC {
     @objc private func tapNoticeStackView() {
-        print("tap")
+    
     }
 }
