@@ -58,7 +58,6 @@ class APIUpdateManager {
                 multipartFormData.append(image, withName: "profileImage",fileName: "\(imageStr)\(Int.random(in: 1...999)).jpeg",mimeType: "image/jpg")
             }
         }, to: url,method: .patch,headers:header)
-        .validate(statusCode: 200..<300)
         .response { response in
             guard let statusCode = response.response?.statusCode, let data = response.data else { return }
             guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
