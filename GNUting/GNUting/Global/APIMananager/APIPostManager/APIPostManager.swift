@@ -66,11 +66,9 @@ class APIPostManager {
         AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
             .responseData { response in
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
-                
                 switch statusCode {
                 case 200..<300:
                     guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
-                    print(json)
                     print("🟢 postEmailCheck statusCode :\(statusCode)")
                     completion(json,nil)
                 default:
@@ -89,7 +87,6 @@ class APIPostManager {
         AF.request(url,method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers)
             .validate(statusCode: 200..<300)
             .responseData { response in
-                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
                 

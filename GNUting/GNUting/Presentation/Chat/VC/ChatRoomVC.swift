@@ -59,6 +59,7 @@ class ChatRoomVC: UIViewController {
         tableView.register(ChatRoomEnterTableViewCell.self, forCellReuseIdentifier: ChatRoomEnterTableViewCell.identi)
         tableView.register(ChatRoomTableViewSendMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewSendMessageCell.identi)
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
+        tableView.register(ChatRoomDefaultTableViewCell.self, forCellReuseIdentifier: ChatRoomDefaultTableViewCell.identi)
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
         
@@ -229,9 +230,15 @@ extension ChatRoomVC: UITableViewDataSource{
                 }
                 return  receiveCell
             }
-        } else {
+        } else if cellData.messageType == "ENTER" {
             guard let enterCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomEnterTableViewCell.identi, for: indexPath) as? ChatRoomEnterTableViewCell else { return UITableViewCell() }
-            enterCell.setCell(message: cellData.message)
+            enterCell.setCell(message: cellData.message, enterType: cellData.messageType)
+            enterCell.setSizeToFitMessageLabel()
+            enterCell.selectionStyle = .none
+            return enterCell
+        } else {
+            guard let enterCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomDefaultTableViewCell.identi, for: indexPath) as? ChatRoomDefaultTableViewCell else { return UITableViewCell() }
+            enterCell.setCell(message: cellData.message, enterType: cellData.messageType)
             enterCell.setSizeToFitMessageLabel()
             enterCell.selectionStyle = .none
             return enterCell

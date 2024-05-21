@@ -40,14 +40,15 @@ class APIDeleteManager {
     // MARK: - 내글 삭제 ✅
     
     func deletePostText(boardID: Int,completion: @escaping(DefaultResponse)->Void) {
-        let uslString = BaseURL.shared.urlString + BaseURL.shared.urlString + "board/\(boardID)"
+        let uslString = BaseURL.shared.urlString + "board/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .delete,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response { response in
+                print("\(response)")
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-                
+            
                 switch response.result {
                 case .success:
                     print("🟢 deletePostText statusCode :\(statusCode)")

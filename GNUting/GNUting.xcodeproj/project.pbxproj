@@ -75,6 +75,8 @@
 		F869094A2BFA22BD001634D4 /* ChatVisibleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86909492BFA22BD001634D4 /* ChatVisibleManager.swift */; };
 		F869094C2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F869094B2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift */; };
 		F869094E2BFCCC12001634D4 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */; };
+		F86909502BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */; };
+		F86909532BFCF537001634D4 /* AppStoreVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */; };
 		F86A17EC2BCE61CA00AC0D92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86A17EB2BCE61CA00AC0D92 /* GoogleService-Info.plist */; };
 		F86A17FA2BCE660C00AC0D92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */; };
 		F86A17FC2BCE660C00AC0D92 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17FB2BCE660C00AC0D92 /* FirebaseMessaging */; };
@@ -244,6 +246,8 @@
 		F86909492BFA22BD001634D4 /* ChatVisibleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVisibleManager.swift; sourceTree = "<group>"; };
 		F869094B2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomNavigationBar.swift; sourceTree = "<group>"; };
 		F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
+		F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDefaultTableViewCell.swift; sourceTree = "<group>"; };
+		F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreVersionCheck.swift; sourceTree = "<group>"; };
 		F86A17EB2BCE61CA00AC0D92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
 		F87351662B906295004E89C5 /* UpdaetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaetProfileVC.swift; sourceTree = "<group>"; };
@@ -661,6 +665,14 @@
 			path = RequestChat;
 			sourceTree = "<group>";
 		};
+		F86909512BFCF522001634D4 /* AppStoreCheck */ = {
+			isa = PBXGroup;
+			children = (
+				F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */,
+			);
+			path = AppStoreCheck;
+			sourceTree = "<group>";
+		};
 		F86DC9372B862B0E007EC3CA /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,6 +1027,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F86909512BFCF522001634D4 /* AppStoreCheck */,
 				F889EA042BF66F550042D8FB /* Network */,
 				F8DE06802BF3695B00D32E7E /* Cache */,
 				F81D08C72BE75BEA00219CEA /* Base */,
@@ -1175,6 +1188,7 @@
 				F81D08CD2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift */,
 				F81D08D32BE773FD00219CEA /* ChatRoomSideView.swift */,
 				F869094B2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift */,
+				F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */,
 			);
 			path = Viewcomponent;
 			sourceTree = "<group>";
@@ -1406,6 +1420,7 @@
 				F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */,
 				F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */,
 				F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */,
+				F86909502BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift in Sources */,
 				F88EE4882B9F06550058BC00 /* UIImage+Extension.swift in Sources */,
 				F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
@@ -1470,6 +1485,7 @@
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,
 				F8AAD3CF2BA36EC90047B8C0 /* WriteTextUserData.swift in Sources */,
+				F86909532BFCF537001634D4 /* AppStoreVersionCheck.swift in Sources */,
 				F87351862B90B043004E89C5 /* BasePaddingLabel.swift in Sources */,
 				F850061B2B738D78007AB351 /* TermsVC.swift in Sources */,
 				F841A7BD2BA739D300A9F9D4 /* APIDeleteManager.swift in Sources */,
@@ -1639,7 +1655,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1681,7 +1697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

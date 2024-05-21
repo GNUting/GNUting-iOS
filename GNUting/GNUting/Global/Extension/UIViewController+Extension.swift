@@ -61,7 +61,7 @@ extension UIViewController{
     func errorHandling(response: DefaultResponse?) {
         if response?.isSuccess == false{
             if response?.code != "BOARD4003"{
-                self.showAlert(message: "\(response?.message ?? "다시 시도 해보세요.") \n 지속된 오류 발생시 고객센터로 문의 해주세요. ")
+                self.showAlert(message: "\(response?.message ?? "지속된 오류 발생시 고객센터로 문의 해주세요.")")
             }
         }
     }
