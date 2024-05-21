@@ -257,7 +257,7 @@ class APIGetManager: RequestInterceptor {
     
     // 채팅방 채팅 조회
     func getChatMessageData(chatRoomID: Int,completion: @escaping(ChatRoomMessageModel?,DefaultResponse)->Void) {
-        let urlString = "http://203.255.3.66:10001/api/v1/chatRoom/\(chatRoomID)/chats"
+        let urlString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/chats"
         guard let url = URL(string: urlString) else { return }
         
         AF.request(url,method: .get,interceptor: APIInterceptorManager())

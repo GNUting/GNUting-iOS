@@ -25,12 +25,41 @@ class DateBoardListVC: BaseViewController {
          
         }
     }
+    private lazy var noticeStackView : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 6
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapNoticeStackView))
+        stackView.addGestureRecognizer(tapGesture)
+        return stackView
+    }()
+    private lazy var borderView = BorderView()
+    private lazy var noticeImageView : UIImageView = {
+       let imageView = UIImageView()
+        imageView.image = UIImage(named: "LoudspeakerImg")
+        return imageView
+    }()
+    
+    private lazy var noticeLabel: BasePaddingLabel = {
+       let label = BasePaddingLabel(padding: UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15))
+        label.text = "부적절한 게시글을 작성할 경우, 앱 이용이 제한될 수 있습니다."
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 11)
+        label.textColor = UIColor(hexCode: "4F4F4F")
+        label.backgroundColor = UIColor(named: "BackGroundColor")
+        label.layer.cornerRadius = 8
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
     private lazy var noDataScreenView: NoDataScreenView = {
        let view = NoDataScreenView()
         view.isHidden = true
         view.setLabel(text: "게시글이 비어있습니다.", range: "")
         return view
     }()
+    
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
         tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
@@ -65,11 +94,29 @@ class DateBoardListVC: BaseViewController {
 }
 extension DateBoardListVC{
     private func addSubViews() {
-        view.addSubViews([dateBoardTableView,noDataScreenView,writeTextButton])
+        view.addSubViews([noticeStackView,borderView,dateBoardTableView,noDataScreenView,writeTextButton])
+        noticeStackView.addStackSubViews([noticeImageView,noticeLabel])
     }
     private func setAutoLayout(){
+        
+        noticeStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(28)
+            make.left.equalToSuperview().offset(25)
+            make.right.equalToSuperview().offset(-28)
+           
+        }
+        
+        noticeImageView.snp.makeConstraints { make in
+            make.width.equalTo(24)
+        }
+        
+        borderView.snp.makeConstraints { make in
+            make.top.equalTo(noticeStackView.snp.bottom).offset(20)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(1)
+        }
         dateBoardTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.upperTop)
+            make.top.equalTo(borderView.snp.bottom)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -140,4 +187,8 @@ extension DateBoardListVC  {
     }
 }
 
-
+extension DateBoardListVC {
+    @objc private func tapNoticeStackView() {
+        print("tap")
+    }
+}

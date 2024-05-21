@@ -71,11 +71,12 @@ class APIPostManager {
                 case 200..<300:
                     guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
                     print(json)
-                    print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
+                    print("🟢 postEmailCheck statusCode :\(statusCode)")
                     completion(json,nil)
                 default:
                     guard let json = try? JSONDecoder().decode(FailureResponse.self, from: data) else { return }
-                    print("🔴 postAuthenticationCheck statusCode :\(statusCode)")
+                    print("🔴 postEmailCheck statusCode :\(statusCode)")
+                    print("\(json)")
                     completion(nil,json)
                 }
             }
@@ -95,10 +96,10 @@ class APIPostManager {
                 
                 switch response.result {
                 case .success:
-                    print("🟢 postAuthenticationCheck statusCode :\(statusCode)")
+                    print("🟢 postEmailCheckChangePassword statusCode :\(statusCode)")
                     completion(json)
                 case .failure:
-                    print("🔴 postAuthenticationCheck statusCode :\(statusCode)")
+                    print("🔴 postEmailCheckChangePassword statusCode :\(statusCode)")
                     completion(json)
                 }
             }
@@ -267,7 +268,7 @@ class APIPostManager {
     // MARK: - 채팅 신청 ✅
     func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(DefaultResponse?) -> Void){
         
-        let uslString = "http://203.255.3.66:10001/api/v1/board/apply/\(boardID)"
+        let uslString = BaseURL.shared.urlString + "board/apply/\(boardID)"
         guard let url = URL(string: uslString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -301,7 +302,7 @@ class APIPostManager {
     
     // MARK: - 채팅 신청 : 승인하기
     func chatConfirmed(id: Int, completion: @escaping(DefaultResponse) -> Void) {
-        let uslString = "http://203.255.3.66:10001/api/v1/board/applications/accept/\(id)"
+        let uslString = BaseURL.shared.urlString + "board/applications/accept/\(id)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .post,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
@@ -381,7 +382,7 @@ class APIPostManager {
             }
     }
     func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
-        let uslString = "http://203.255.3.66:10001/api/v1/chatRoom/\(chatRoomID)/leave"
+        let uslString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/leave"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .post,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)

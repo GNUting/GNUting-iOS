@@ -101,7 +101,7 @@ class HomeVC: BaseViewController{
     }()
     private lazy var postSubView: ImagePlusLabelView = {
         let view = ImagePlusLabelView()
-        view.setImagePlusLabelView(imageName: "PostImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 14) ?? .boldSystemFont(ofSize: 14), labelText: "모든 글은 여기서 볼 수 있어요")
+        view.setImagePlusLabelView(imageName: "PostImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 16) ?? .boldSystemFont(ofSize: 16), labelText: "모든 게시글은 여기서 볼 수 있어요")
         return view
     }()
     private lazy var cardStackView : UIStackView = {

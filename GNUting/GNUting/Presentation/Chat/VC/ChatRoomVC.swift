@@ -35,12 +35,12 @@ class ChatRoomVC: UIViewController {
     var userEmail : String = ""
     private var swiftStomp : SwiftStomp!
     private lazy var navigationBarView : ChatRoomNavigationBar = {
-       let view = ChatRoomNavigationBar()
+        let view = ChatRoomNavigationBar()
         view.setLabel(title: navigationTitle, subTitle: subTitleSting)
         view.naviagtionBarButtonDelegate = self
         return view
     }()
- 
+    
     
     private lazy var borderView1 : UIView = {
         let view = UIView()
@@ -113,6 +113,8 @@ class ChatRoomVC: UIViewController {
         view.backgroundColor = UIColor.gray.withAlphaComponent(0.8)
         view.frame = self.view.bounds
         view.isHidden = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOutSideView))
+        view.addGestureRecognizer(tapGesture)
         
         return view
     }()
@@ -239,12 +241,21 @@ extension ChatRoomVC: UITableViewDataSource{
     
 }
 
-// MARK: @objc
+// MARK: Button Action
 extension ChatRoomVC {
     private func tapSendMessageButton() {
         textField.text = ""
         swiftStomp.send(body: SendMessageModel(messageType: "CHAT", message: message), to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
         
+    }
+    @objc private func tapOutSideView() {
+        let translation = CGAffineTransform(translationX: 0, y: 0)
+        sideView.transform = translation
+        
+        UIView.animate(withDuration: 1.0, delay: 0) {
+            self.sideView.transform = CGAffineTransform(translationX: self.view.frame.width, y: 0)
+            self.opaqueView.isHidden = true
+        }
     }
     @objc private func changeValueTextField(_ sender: UITextField) {
         guard let textFieldText = sender.text else { return }
@@ -254,8 +265,8 @@ extension ChatRoomVC {
         let translation = CGAffineTransform(translationX: view.frame.width, y: 0)
         view.endEditing(true)
         sideView.transform = translation
-        self.sideView.isHidden = false
-        self.opaqueView.isHidden = false
+        sideView.isHidden = false
+        opaqueView.isHidden = false
         
         UIView.animate(withDuration: 1.0, delay: 0) {
             self.sideView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -297,6 +308,7 @@ extension ChatRoomVC {
     }
     private func initStomp(){
         let url = URL(string: "ws://203.255.3.66:10001/chat")!
+//        let url = URL(string: "ws://localhost:10001/chat")!
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
         self.swiftStomp.enableLogging = true
         self.swiftStomp.delegate = self
@@ -423,10 +435,10 @@ extension ChatRoomVC: SwiftStompDelegate{
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
         print("Received")
-     
+        
         if let message = message{
             let messageString = message as! String
-        
+            
             let messageData = Data(messageString.utf8)
             if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
                 do {
