@@ -14,7 +14,15 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 12)
         return label
     }()
-    private lazy var boardTitleLabel : UILabel = {
+    private lazy var titleLabelStackView: UIStackView = {
+        let stackView = UIStackView()
+         stackView.axis = .horizontal
+         stackView.spacing = 6
+         stackView.distribution = .fill
+         stackView.alignment = .fill
+         return stackView
+    }()
+    private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
         label.textAlignment = .left
@@ -36,10 +44,13 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         return label
     }()
     
-    private lazy var userCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
-        label.textColor = UIColor(named: "DisableColor")
+    private lazy var userCountLabel: BasePaddingLabel = {
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 3, left: 8, bottom: 3, right: 8))
+        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 11)
+        label.backgroundColor = UIColor(named: "BackGroundColor")
+        label.layer.cornerRadius = 4
+        label.layer.masksToBounds = true
+        label.textColor = UIColor(hexCode: "696969")
         return label
     }()
     
@@ -65,67 +76,69 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         if model.status == "OPEN"{
             statsuLabel.text = "신청 가능"
             statsuLabel.textColor = UIColor(named: "SecondaryColor")
-            boardTitleLabel.textColor = .black
+            titleLabel.textColor = .black
         } else {
             statsuLabel.text = "신청 마감"
             statsuLabel.textColor = UIColor(named: "PrimaryColor")
-            boardTitleLabel.textColor = UIColor(named: "DisableColor")
+            titleLabel.textColor = UIColor(named: "DisableColor")
         }
         
-        boardTitleLabel.text = model.title
+        titleLabel.text = model.title
         subInfoLabel.text = "\(model.time) | \(model.user.department) | \((model.user.studentId)) "
        
-        userCountLabel.text = "인원 : \(model.inUserCount)명"
+        userCountLabel.text = "\(model.inUserCount):\(model.inUserCount)"
         
     }
     func searchSetCell(model: SearchResultContent) {
         if model.status == "OPEN"{
             statsuLabel.text = "신청 가능"
             statsuLabel.textColor = UIColor(named: "SecondaryColor")
-            boardTitleLabel.textColor = .black
+            titleLabel.textColor = .black
         } else {
             statsuLabel.text = "신청 마감"
             statsuLabel.textColor = UIColor(named: "PrimaryColor")
-            boardTitleLabel.textColor = UIColor(named: "DisableColor")
+            titleLabel.textColor = UIColor(named: "DisableColor")
         }
-        boardTitleLabel.text = model.title
+        titleLabel.text = model.title
         subInfoLabel.text = "\(model.time)|\(model.department) | \((model.studentID)) "
-        userCountLabel.text = "인원 : \(model.inUserCount)명"
+        userCountLabel.text = "\(model.inUserCount):\(model.inUserCount)"
     }
     func myPostSetCell(model:MyPostResult){
         if model.status == "OPEN"{
             statsuLabel.text = "신청 가능"
             statsuLabel.textColor = UIColor(named: "SecondaryColor")
-            boardTitleLabel.textColor = .black
+            titleLabel.textColor = .black
         } else {
             statsuLabel.text = "신청 마감"
             statsuLabel.textColor = UIColor(named: "PrimaryColor")
-            boardTitleLabel.textColor = UIColor(named: "DisableColor")
-        } 
-        boardTitleLabel.text = model.title
+            titleLabel.textColor = UIColor(named: "DisableColor")
+        }
+        titleLabel.text = model.title
         subInfoLabel.text = "\(model.time) | \(model.user.department) | \((model.user.studentId)) "
-        userCountLabel.text = "인원 : \(model.inUserCount)명"
+        userCountLabel.text = "\(model.inUserCount):\(model.inUserCount)"
     }
     private func configure(){
-        contentView.addSubViews([statsuLabel,boardTitleLabel,subTitleLableStackView,borderView])
-        subTitleLableStackView.addStackSubViews([subInfoLabel,userCountLabel])
+        contentView.addSubViews([statsuLabel,titleLabelStackView,subInfoLabel,borderView])
+        titleLabelStackView.addStackSubViews([userCountLabel,titleLabel])
         statsuLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(22)
+            make.top.equalToSuperview().offset(20)
             make.left.right.equalToSuperview().inset(Spacing.left)
         }
-        boardTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(statsuLabel.snp.bottom).offset(3)
+        titleLabelStackView.snp.makeConstraints { make in
+            make.top.equalTo(statsuLabel.snp.bottom).offset(6)
             make.left.right.equalToSuperview().inset(Spacing.left)
         }
-        subTitleLableStackView.snp.makeConstraints { make in
-            make.top.equalTo(boardTitleLabel.snp.bottom).offset(5)
+        subInfoLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabelStackView.snp.bottom).offset(6)
             make.left.right.equalToSuperview().inset(Spacing.left)
             
         }
-        subInfoLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        userCountLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        titleLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        
        
         borderView.snp.makeConstraints { make in
-            make.top.equalTo(subInfoLabel.snp.bottom).offset(22)
+            make.top.equalTo(subInfoLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(Spacing.left)
             make.bottom.equalToSuperview()
             make.height.equalTo(1)

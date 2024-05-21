@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "btn_write 2.png",
+      "filename" : "fluent-emoji_loudspeaker.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "btn_write@2x 2.png",
+      "filename" : "fluent-emoji_loudspeaker@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "btn_write@3x 2.png",
+      "filename" : "fluent-emoji_loudspeaker@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
