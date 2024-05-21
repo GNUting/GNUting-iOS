@@ -74,6 +74,7 @@
 		F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862C80F2B622601008120FA /* UILabel+Extension.swift */; };
 		F869094A2BFA22BD001634D4 /* ChatVisibleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86909492BFA22BD001634D4 /* ChatVisibleManager.swift */; };
 		F869094C2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F869094B2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift */; };
+		F869094E2BFCCC12001634D4 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */; };
 		F86A17EC2BCE61CA00AC0D92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86A17EB2BCE61CA00AC0D92 /* GoogleService-Info.plist */; };
 		F86A17FA2BCE660C00AC0D92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */; };
 		F86A17FC2BCE660C00AC0D92 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17FB2BCE660C00AC0D92 /* FirebaseMessaging */; };
@@ -242,6 +243,7 @@
 		F862C80F2B622601008120FA /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		F86909492BFA22BD001634D4 /* ChatVisibleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVisibleManager.swift; sourceTree = "<group>"; };
 		F869094B2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomNavigationBar.swift; sourceTree = "<group>"; };
+		F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		F86A17EB2BCE61CA00AC0D92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
 		F87351662B906295004E89C5 /* UpdaetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaetProfileVC.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */,
 				F88EE4872B9F06550058BC00 /* UIImage+Extension.swift */,
 				F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */,
+				F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1431,6 +1434,7 @@
 				F8A15E932B60CE88001DE5E4 /* LoginVC.swift in Sources */,
 				F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */,
+				F869094E2BFCCC12001634D4 /* UIResponder+Extension.swift in Sources */,
 				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
 				F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */,
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,

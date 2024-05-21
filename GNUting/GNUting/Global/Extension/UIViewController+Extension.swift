@@ -110,10 +110,6 @@ extension UIViewController{
     @objc func tapWriteTextButton(){
         pushViewContoller(viewController: WriteDateBoardVC())
     }
-    func instagramOpen() {
-        guard let url = URL(string: "https://www.instagram.com/gnu_ting/p/C5bIzh2yIe5/?img_index=1"), UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url)
-    }
     
     func swipeRecognizer() {
         let swifpeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(_ :)))
@@ -132,5 +128,41 @@ extension UIViewController{
             }
         }
     }
-    
+    func setKeyboardObserver() { // 옵저버 등록
+           NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+       }
+
+       func removeKeyboardObserver() { // 옵저버 해제
+           NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+       }
+    func instagramOpen() {
+        guard let url = URL(string: "https://www.instagram.com/gnu_ting/p/C5bIzh2yIe5/?img_index=1"), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+    }
+    @objc func keyboardWillShow(_ sender: Notification) {
+        // keyboardFrame : 현재 동작하고 있는 이벤트에서 키보드의 frame을 전달
+        // currentTextField : UIResponder.currentResponder로부터 현재 응답을 받고 있는 UITextField를 확인
+        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let currentTextField = UIResponder.currentResponder as? UITextField else { return }
+
+        // keyboardYTop : 키보드 상단의 y값
+        let keyboardYTop = keyboardFrame.cgRectValue.origin.y
+        // convertedTextFieldFrame : 현재 선택한 textField의 frame을 해당 텍스트 필드의 superview에서 view cooridnate system으로 변환
+        let convertedTextFieldFrame = view.convert(currentTextField.frame, from : currentTextField.superview)
+        // textFieldYBottom : 텍스트필드 하단의 y값 = 텍스트필드의 y값(=y축 위치) + 텍스트필드의 높이
+        let textFieldYBottom = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+        
+        // textField 하단이 키보드 상단보다 높을 때 view의 높이를 조정
+        if textFieldYBottom > keyboardYTop {
+            let textFieldYTop = convertedTextFieldFrame.origin.y
+            let properTextFieldHeight = textFieldYTop - keyboardYTop / 1.3
+            view.frame.origin.y = CGFloat(-properTextFieldHeight)
+        }
+    }
+    @objc func keyboardWillHide(_ sender: Notification) {
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
+    }
 }

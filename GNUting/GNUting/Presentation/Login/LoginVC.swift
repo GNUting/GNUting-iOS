@@ -40,6 +40,7 @@ class LoginVC: BaseViewController {
         let loginTextFieldView = LoginTextFieldView()
         loginTextFieldView.setTextFieldPlaceHolder(text: "비밀번호")
         loginTextFieldView.setPasswordTypeTextField()
+       
         return loginTextFieldView
     }()
     private lazy var loginButton : PrimaryColorButton = {
@@ -143,4 +144,5 @@ extension LoginVC {
         }
     }
 }
+
 

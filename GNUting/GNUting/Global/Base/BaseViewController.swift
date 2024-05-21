@@ -15,6 +15,11 @@ class BaseViewController: UIViewController{
         swipeRecognizer()
         hideKeyboardWhenTappedAround()
         setNetworkMonitor()
+        setKeyboardObserver()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeKeyboardObserver()
     }
     func setBackgroundColor() {
         view.backgroundColor = .white

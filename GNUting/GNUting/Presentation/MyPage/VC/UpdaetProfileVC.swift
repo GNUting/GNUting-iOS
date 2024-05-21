@@ -11,7 +11,19 @@ import PhotosUI
 
 class UpdateProfileVC: BaseViewController {
     var userInfo: GetUserDataModel?
-    
+    private lazy var scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .white
+        scrollView.bounces = false
+        return scrollView
+    }()
+    private lazy var contentView : UIView = {
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images,.livePhotos])
@@ -74,17 +86,31 @@ class UpdateProfileVC: BaseViewController {
         
         setUserInfo()
         setNavigationBar(title: "프로필수정")
+     
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
 }
 
 extension UpdateProfileVC{
     private func setAddSubViews() {
-        view.addSubViews([userImageButton,nickNameInputView,majorInputView,introduceInputView,updateProfileButton])
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubViews([userImageButton,nickNameInputView,majorInputView,introduceInputView,updateProfileButton])
     }
     private func setAutoLayout(){
+        scrollView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.left.right.equalToSuperview()
+        }
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+        }
         userImageButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
+            make.top.equalToSuperview().offset(50)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(200)
         }
@@ -104,10 +130,11 @@ extension UpdateProfileVC{
             make.right.equalToSuperview().offset(Spacing.right)
         }
         updateProfileButton.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(introduceInputView.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(Spacing.left)
             make.right.equalToSuperview().offset(Spacing.right)
             make.height.equalTo(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
     
@@ -231,6 +258,7 @@ extension UpdateProfileVC {
         let navigationVC = UINavigationController(rootViewController: vc)
         present(navigationVC, animated: true)
     }
+    
 }
 extension UpdateProfileVC: SearchMajorSelectCellDelegate{
     func sendSeleceted(major: String) {
