@@ -69,6 +69,7 @@ class ChatRoomSideView: UIView {
         
         setAddSubViews()
         setAutoLayout()
+        self.backgroundColor = .white
     
     }
     

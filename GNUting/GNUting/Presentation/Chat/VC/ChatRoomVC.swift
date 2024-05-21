@@ -34,14 +34,13 @@ class ChatRoomVC: UIViewController {
     var message: String = ""
     var userEmail : String = ""
     private var swiftStomp : SwiftStomp!
-    private lazy var subTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = subTitleSting
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
-        label.textColor = UIColor(hexCode: "767676")
-        
-        return label
+    private lazy var navigationBarView : ChatRoomNavigationBar = {
+       let view = ChatRoomNavigationBar()
+        view.setLabel(title: navigationTitle, subTitle: subTitleSting)
+        view.naviagtionBarButtonDelegate = self
+        return view
     }()
+ 
     
     private lazy var borderView1 : UIView = {
         let view = UIView()
@@ -122,12 +121,11 @@ class ChatRoomVC: UIViewController {
         swipeRecognizer()
         setAddSubViews()
         setAutoLayout()
-        setNavigationBar()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = .white
-        
+        navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
         getAccessToken()
         getChatMessageList()
@@ -146,17 +144,18 @@ class ChatRoomVC: UIViewController {
 }
 extension ChatRoomVC{
     private func setAddSubViews() {
-        view.addSubViews([subTitleLabel,borderView1,chatRoomTableView,borderView2,sendStackView,sideView,opaqueView])
+        view.addSubViews([navigationBarView,borderView1,chatRoomTableView,borderView2,sendStackView,sideView,opaqueView])
         sendStackView.addStackSubViews([textField,sendMessageButton])
-        
+        self.view.bringSubviewToFront(opaqueView)
+        self.view.bringSubviewToFront(sideView)
     }
     private func setAutoLayout(){
-        subTitleLabel.snp.makeConstraints { make in
+        navigationBarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.centerX.equalToSuperview()
+            make.left.right.equalToSuperview()
         }
         borderView1.snp.makeConstraints { make in
-            make.top.equalTo(subTitleLabel.snp.bottom).offset(10)
+            make.top.equalTo(navigationBarView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(1)
         }
@@ -186,13 +185,6 @@ extension ChatRoomVC{
     }
 }
 extension ChatRoomVC {
-    private func setNavigationBar(){
-        self.navigationController?.navigationBar.isHidden = false
-        setNavigationBar(title: self.navigationTitle)
-        let settingButton = UIBarButtonItem(image: UIImage(named: "ChatRommSetImage"), style: .plain, target: self, action: #selector(tapSettingButton(_ :)))
-        settingButton.tintColor = UIColor(named: "IconColor")
-        self.navigationItem.rightBarButtonItem = settingButton
-    }
     private func chatRoomTableViewMoveToBottom() {
         let chatMessageCount = self.chatMessageList.count
         DispatchQueue.main.async {
@@ -258,17 +250,16 @@ extension ChatRoomVC {
         guard let textFieldText = sender.text else { return }
         self.message = textFieldText
     }
-    @objc private func tapSettingButton(_ sender: UIButton){
-        sideView.isHidden = false
-        opaqueView.isHidden = false
-        UIView.animate(withDuration: 1.0, delay: 0.0) {
+    private func tapSettingButton() {
+        let translation = CGAffineTransform(translationX: view.frame.width, y: 0)
+        view.endEditing(true)
+        sideView.transform = translation
+        self.sideView.isHidden = false
+        self.opaqueView.isHidden = false
+        
+        UIView.animate(withDuration: 1.0, delay: 0) {
             self.sideView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
-        
-        view.endEditing(true)
-        self.view.bringSubviewToFront(opaqueView)
-        self.view.bringSubviewToFront(sideView)
-        
     }
     @objc func handleCardPan(recognizer:UIPanGestureRecognizer) {
         let newLocation = recognizer.location(in: sideView)
@@ -345,6 +336,15 @@ extension ChatRoomVC {
     }
 }
 // MARK: - Delegate
+extension ChatRoomVC: NaviagtionBarButtonDelegate {
+    func tappedBackButton() {
+        popButtonTap()
+    }
+    
+    func tappedSettingButton() {
+        tapSettingButton()
+    }
+}
 extension ChatRoomVC: LeaveChatRoomButtonDelegate {
     func tapLeaveChatRoomButtonButton() {
         let alertController = UIAlertController(title: "채팅방 나가기", message: "채팅방을 나가시면 다시 들어 오실수없습니다. 채팅방을 나가시겠습니까?", preferredStyle: .alert)

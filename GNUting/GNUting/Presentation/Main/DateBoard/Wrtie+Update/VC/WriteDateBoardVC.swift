@@ -195,17 +195,22 @@ extension WriteDateBoardVC: UITableViewDelegate {
 extension WriteDateBoardVC{
     private func tapCompletedButton(){
         var joinMemberID : [UserIDList] = []
+        
         for userData in addMemberDataList {
             joinMemberID.append(UserIDList(id: userData.id))
         }
-
-        APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
-            if response.isSuccess {
-                self.showMessagePop(message: "게시물 작성이 완료되었습니다.")
-            } else {
-                self.errorHandling(response: response)
+        if joinMemberID.count == 1 {
+            self.showMessage(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.")
+        } else {
+            APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
+                if response.isSuccess {
+                    self.showMessagePop(message: "게시물 작성이 완료되었습니다.")
+                } else {
+                    self.errorHandling(response: response)
+                }
             }
         }
+     
         
     }
 }
