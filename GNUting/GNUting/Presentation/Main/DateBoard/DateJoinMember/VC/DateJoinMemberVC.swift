@@ -81,7 +81,7 @@ extension DateJoinMemberVC : UITableViewDataSource {
         cell.userImageTappedClosure = {
             let vc = UserDetailVC()
             vc.imaegURL = self.userInfos[indexPath.row].profileImage
-            vc.userNickName = self.userInfos[indexPath.row].nickname
+            vc.userNickname = self.userInfos[indexPath.row].nickname
             vc.userDepartment = self.userInfos[indexPath.row].department
             vc.userStudentID = self.userInfos[indexPath.row].studentId
             self.presentFullScreenVC(viewController: vc)

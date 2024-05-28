@@ -270,7 +270,7 @@ extension DetailDateBoardVC {
 extension DetailDateBoardVC: UserImageButtonDelegate {
     func tappedAction() {
         let vc = UserDetailVC()
-        vc.userNickName = postUserInfos?.nickname
+        vc.userNickname = postUserInfos?.nickname
         vc.imaegURL = postUserInfos?.image
         vc.userDepartment = postUserInfos?.department
         vc.userStudentID = postUserInfos?.studentId
