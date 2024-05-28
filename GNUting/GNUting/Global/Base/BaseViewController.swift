@@ -16,11 +16,15 @@ class BaseViewController: UIViewController{
         hideKeyboardWhenTappedAround()
         setNetworkMonitor()
         setKeyboardObserver()
+        addExpirationRefreshToken()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        removeKeyboardObserver()
     }
+    func addExpirationRefreshToken(){
+        NotificationCenter.default.addObserver(self, selector: #selector(expirationRefreshToken), name: .expirationRefreshToken, object: nil)
+    }
+  
     func setBackgroundColor() {
         view.backgroundColor = .white
     }
@@ -28,5 +32,7 @@ class BaseViewController: UIViewController{
         if !NetworkMonitor.shared.isConnected {
             self.showAlert(message: "네트워크 신호가 약합니다. 네트워크를 연결해주세요.")
         }
+     
     }
+   
 }

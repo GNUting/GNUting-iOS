@@ -35,7 +35,7 @@ struct Number : Codable {
 struct RefreshAccessTokenResponse: Codable {
     let isSuccess: Bool
     let code, message: String
-    let result: RefreshAccessTokenResponseResult
+    let result: RefreshAccessTokenResponseResult?
 }
 struct RefreshAccessTokenResponseResult: Codable {
     let accessToken: String

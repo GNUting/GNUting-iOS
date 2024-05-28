@@ -124,8 +124,9 @@ class ChatRoomVC: UIViewController {
         swipeRecognizer()
         setAddSubViews()
         setAutoLayout()
-        
+        addExpirationRefreshToken()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
@@ -138,6 +139,7 @@ class ChatRoomVC: UIViewController {
         initStomp()
         isChatRoomVisible()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.chatRoomOut()
@@ -204,6 +206,10 @@ extension ChatRoomVC {
     private func chatRoomOut() {
         ChatVisibleManager.shared.isChatRoom = false
     }
+    private func addExpirationRefreshToken(){
+        NotificationCenter.default.addObserver(self, selector: #selector(expirationRefreshToken), name: .expirationRefreshToken, object: nil)
+    }
+
 }
 extension ChatRoomVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

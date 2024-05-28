@@ -121,13 +121,8 @@ extension UIViewController{
             self.navigationController?.popViewController(animated: true)
         }
     }
-    func setTotalAlert(status: String) {
-        APIPutManager.shared.putTotalNotification(alertStatus: status) { response in
-            if !response.isSuccess {
-                self.showAlert(message: "에러 발생")
-            }
-        }
-    }
+
+
     func setKeyboardObserver() { // 옵저버 등록
            NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -163,6 +158,31 @@ extension UIViewController{
     @objc func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
+        }
+    }
+  
+    func expirationRefreshtoken() { // 리프레쉬 토큰 만료시 불러올 함수
+        UserDefaultsManager.shared.setLogout()
+        setRootViewControllerLoginVC()
+    }
+    @objc func expirationRefreshToken() {
+        NotificationCenter.default.removeObserver(self, name: .expirationRefreshToken, object: nil)
+        self.expirationRefreshtoken()
+    }
+    func setRootViewControllerLoginVC() {
+        let alertController = UIAlertController(title: "", message: "로그인을 다시 시도해주세요.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+            self.changeRootViewController(viewController: LoginVC())
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+            
+        }
+    }
+    func changeRootViewController(viewController: UIViewController){
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            window.rootViewController = UINavigationController.init(rootViewController: viewController)
         }
     }
 }
