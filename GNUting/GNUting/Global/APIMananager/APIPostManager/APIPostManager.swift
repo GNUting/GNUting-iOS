@@ -22,7 +22,17 @@ class APIPostManager {
             .responseDecodable(of:RefreshAccessTokenResponse.self) { response in
                 guard let statusCode = response.response?.statusCode else { return }
                 guard let responseData = response.value else { return }
-                completion(responseData, statusCode)
+                switch statusCode {
+                case 200..<300:
+                    completion(responseData, statusCode)
+                case 400..<500:
+                    completion(responseData, statusCode)
+                default:
+                    completion(responseData, statusCode)
+                }
+                
+                
+                
             }
     }
     

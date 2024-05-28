@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 final class APIInterceptorManager: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
@@ -36,14 +37,19 @@ final class APIInterceptorManager: RequestInterceptor {
             case 200..<300:
                 print("🟢 updateAccessToken Success:\(statusCode)")
                 guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨//🔨
-                KeyChainManager.shared.create(key: email, token: response.result.accessToken)
+                KeyChainManager.shared.create(key: email, token: response.result?.accessToken ?? "")
                 completion(.retry)
+            case 400..<500:
+                print("🔴 updateAccessToken failure:\(statusCode)")
+                NotificationCenter.default.post(name: .expirationRefreshToken, object: nil)
+                completion(.doNotRetry)
             default:
-                print("🔴 updateAccessToken Success:\(statusCode)")
+                print("🔴 updateAccessToken failure:\(statusCode)")
                 completion(.doNotRetryWithError(error))
             }
         }
         
     }
 }
+
 
