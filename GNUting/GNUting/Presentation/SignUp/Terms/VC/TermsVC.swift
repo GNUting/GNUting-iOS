@@ -139,7 +139,7 @@ extension TermsVC: PushButtonDelegate{
     func buttonAction(indexPath: IndexPath) {
         var urlString = ""
         if indexPath.row == 1 {
-            urlString = "https://gnuting.github.io/GNUting-PrivacyPolicy/privacy_policy"
+            urlString = "https://early-badge-c69.notion.site/d687ee3399a44fbcbc577ee3a73a54e4"
         } else {
             urlString = "https://equal-kiwi-602.notion.site/9021bea8cf1841fc8a83d26a06c8e72c"
         }

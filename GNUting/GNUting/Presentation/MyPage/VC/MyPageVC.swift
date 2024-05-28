@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 // MARK: - 마이 페이지
 class MyPageVC: BaseViewController {
-    let mypageConfiguration = [MyPageModel(title: "", elements: []),MyPageModel(title: "고객지원", elements: ["고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "알림", elements: ["알림 설정"]),MyPageModel(title: "안내", elements: ["오픈소스 사용","개인정보 처리방침"])]
+    let mypageConfiguration = [MyPageModel(title: "", elements: []),MyPageModel(title: "고객지원", elements: ["고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "알림", elements: ["알림 설정"]),MyPageModel(title: "안내", elements: ["오픈소스 사용","개인정보 처리방침","서비스 이용약관"])]
     var userInfo : GetUserDataModel? {
         didSet{
             myPageTabelView.reloadData()
@@ -110,6 +110,8 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
             useLicense()
         case [4,1]:
             personalInformation()
+        case [4,2]:
+            termsConditions()
         default:
             break
         }
@@ -195,6 +197,10 @@ extension MyPageVC {
     }
     private func useLicense() { // 오픈 소스 사용
         guard let url = URL(string: "https://github.com/GNUting/GNUting-iOS/blob/main/Using%20Open%20Source"), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+    }
+    private func termsConditions() { // 이용약관
+        guard let url = URL(string: "https://equal-kiwi-602.notion.site/9021bea8cf1841fc8a83d26a06c8e72c"), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url)
     }
 }
