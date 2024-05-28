@@ -67,10 +67,8 @@ class APIDeleteManager {
             .validate(statusCode: 200..<300)
             .response {
                 response in
-                UserDefaultsManager.shared.setLogout()
                    guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                    guard let json = try? JSONDecoder().decode(ResponseWithResult.self, from: data) else { return }
-                   
                    switch response.result {
                    case .success:
                        UserDefaultsManager.shared.setLogout()

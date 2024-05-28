@@ -159,10 +159,15 @@ extension UpdateProfileVC {
                         case 200..<300:
                             print("🟢 updateAccessToken Success:\(statusCode)")
                             guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return } //🔨
-                            KeyChainManager.shared.create(key: email, token: response.result.accessToken)
+                            KeyChainManager.shared.create(key: email, token: response.result?.accessToken ?? "")
                             self.tapUpdateProfileButton()
+                        case 400..<500:
+                            if response.code == "TOKEN4001-3" {
+                                self.expirationRefreshtoken()
+                            }
+                            print("🔴 updateAccessToken failure:\(statusCode)")
                         default:
-                            print("🔴 updateAccessToken Success:\(statusCode)")
+                            print("🔴 updateAccessToken failure:\(statusCode)")
                         }
                     }
                     
@@ -172,7 +177,6 @@ extension UpdateProfileVC {
             }
         }
     }
-    
     @objc private func tapPhothImageView() {
         let alertController = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "앨범에서 사진/동영상 선택", style: .default, handler: { _ in
