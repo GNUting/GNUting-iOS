@@ -53,17 +53,19 @@ class UserDetailVC: BaseViewController {
         getUserData()
         setAddSubViews()
         setAutoLayout()
-        setUserDetailView()
+        setUserDetailViewLabel()
+        setUserDetailViewImageView()
         setNavigationBar()
     }
 }
 
-// MARK: - View
+// MARK: - View Add & Layout
 
 extension UserDetailVC{
     private func setAddSubViews() {
         self.view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
     }
+    
     private func setAutoLayout(){
         userImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(150)
@@ -87,19 +89,21 @@ extension UserDetailVC{
             make.bottom.lessThanOrEqualToSuperview().offset(-100)
         }
     }
-   
+}
+
+// MARK: - View Set
+
+extension UserDetailVC {
     private func setNavigationBar() {
         setNavigationBarPresentType(title: "")
-        
     }
-
-}
-// MARK: - Data 관련
-extension UserDetailVC {
-    private func setUserDetailView() {
+    
+    private func setUserDetailViewLabel() {
         userNameLabel.text = userNickname
         subInfoLabel.text = "\(userStudentID ?? "학번")학번 | \(userDepartment ?? "학과")"
-        
+    }
+    
+    private func setUserDetailViewImageView() {
         setImageFromStringURL(stringURL: imaegURL) { image in
             DispatchQueue.main.async {
                 self.userImageButton.setImage(image, for: .normal)
@@ -108,11 +112,15 @@ extension UserDetailVC {
             }
         }
     }
-    
+}
+
+
+// MARK: - Data 관련
+
+extension UserDetailVC {
     func getUserData(){ // 사용자 정보 Get
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
-             
             if userData?.result?.nickname == self.userNickname { // 사용자 정보와 비교하여 일치할 경우 신고하기 버튼 Hidden
                 self.reportButton.isHidden = true
             }
@@ -120,13 +128,11 @@ extension UserDetailVC {
     }
 }
 
-
 // MARK: - Action
 
 extension UserDetailVC {
     @objc private func tapReportButton() {
         let vc = ReportVC()
-        
         vc.userNickname = self.userNickname ?? "유저이름"
         self.presentFullScreenVC(viewController: vc)
     }
