@@ -7,10 +7,13 @@
 
 import UIKit
 
+// MARK: - 로그인 화면
+
 class LoginVC: BaseViewController {
     private lazy var appLogiImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "AppNameImage")
+        
         return imageView
     }()
     private lazy var explainLabel : UILabel = {
@@ -19,6 +22,7 @@ class LoginVC: BaseViewController {
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
         label.textAlignment = .left
         label.numberOfLines = 2
+        
         return label
     }()
 
@@ -28,14 +32,17 @@ class LoginVC: BaseViewController {
         stackView.spacing = 19
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
+        
         return stackView
     }()
+    
     private lazy var emailTextFieldView : LoginTextFieldView = {
         let loginTextFieldView = LoginTextFieldView()
         loginTextFieldView.setTextFieldPlaceHolder(text: "학교 이메일")
         
         return loginTextFieldView
     }()
+    
     private lazy var passwordTextField : LoginTextFieldView = {
         let loginTextFieldView = LoginTextFieldView()
         loginTextFieldView.setTextFieldPlaceHolder(text: "비밀번호")
@@ -43,6 +50,7 @@ class LoginVC: BaseViewController {
        
         return loginTextFieldView
     }()
+    
     private lazy var loginButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("로그인")
@@ -50,74 +58,67 @@ class LoginVC: BaseViewController {
         button.throttle(delay: 3) { _ in
             self.tapLoginButton()
         }
+        
         return button
     }()
-    private lazy var bottomStackView: UIStackView = {
+    
+    private lazy var bottomStackView: UIStackView = { // 비밀번호 찾기, 회원가입 StackView
         let bottomStackView = UIStackView()
         bottomStackView.axis = .horizontal
         bottomStackView.spacing = 20
         bottomStackView.distribution = .equalSpacing
         bottomStackView.alignment = .fill
+        
         return bottomStackView
     }()
+    
     private lazy var findPasswordButton : UIButton = {
         var config = UIButton.Configuration.plain()
         config.attributedTitle = AttributedString("비밀번호 찾기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
         config.baseForegroundColor = UIColor(named: "Gray")
+        
         let button = UIButton(configuration: config)
         button.addTarget(self, action: #selector(tapFindPasswordButton), for: .touchUpInside)
+        
         return button
     }()
+    
     private lazy var borderLabel : UILabel = {
         let label = UILabel()
         label.text = "|"
         label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
         label.textColor = UIColor(named: "Gray")
+        
         return label
     }()
+    
     private lazy var signUpButton : UIButton = {
         var config = UIButton.Configuration.plain()
         config.attributedTitle = AttributedString("회원가입", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
         config.baseForegroundColor = UIColor(named: "Gray")
+        
         let button = UIButton(configuration: config)
         button.addTarget(self, action: #selector(tapSingupButton), for: .touchUpInside)
+        
         return button
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addSubViews()
         setAutoLayout()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
     }
 }
-extension LoginVC{
-    func tapLoginButton(){
-        let email = emailTextFieldView.getTextFieldString()
-        let password = passwordTextField.getTextFieldString()
-        APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
-            if response?.isSuccess == false {
-                self.errorHandling(response: response)
-            
-            }
-            if successResponse?.isSuccess == true {
-                self.view.window?.rootViewController = TabBarController()
-            }
-        }
-    }
-    
-    @objc func tapFindPasswordButton(){
-        
-        pushViewContoller(viewController: FindPasswordVC())
-    }
-    @objc func tapSingupButton(){
-        pushViewContoller(viewController: TermsVC())
-    }
-}
+
+// MARK: - View Add & Layout
+
 extension LoginVC {
     private func addSubViews(){
         view.addSubViews([appLogiImageView,explainLabel,textFieldStackView,bottomStackView])
@@ -145,4 +146,37 @@ extension LoginVC {
     }
 }
 
+// MARK: - Action
 
+extension LoginVC{
+    func tapLoginButton() {
+        let email = emailTextFieldView.getTextFieldString()
+        let password = passwordTextField.getTextFieldString()
+        
+        loginAPI(email: email, password: password)
+    }
+    
+    @objc func tapFindPasswordButton(){
+        pushViewContoller(viewController: FindPasswordVC())
+    }
+    
+    @objc func tapSingupButton(){
+        pushViewContoller(viewController: TermsVC())
+    }
+}
+
+// MARK: - Post API
+
+extension LoginVC {
+    func loginAPI(email: String, password: String) {
+        APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
+            if response?.isSuccess == false {
+                self.errorHandling(response: response)
+            }
+            
+            if successResponse?.isSuccess == true {
+                self.view.window?.rootViewController = TabBarController()
+            }
+        }
+    }
+}
