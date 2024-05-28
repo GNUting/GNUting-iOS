@@ -241,7 +241,7 @@ extension HomeVC{
     @objc private func tapUserImageButton(){
         let vc = UserDetailVC()
         vc.imaegURL = self.imageURL
-        vc.userNickName = self.username
+        vc.userNickname = self.username
         vc.userStudentID = self.userStudentID
         vc.userDepartment = self.userDepartment
         

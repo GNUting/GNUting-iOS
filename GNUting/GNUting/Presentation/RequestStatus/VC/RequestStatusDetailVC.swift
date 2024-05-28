@@ -140,7 +140,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.setDateMember(model: participantUser[indexPath.row])
                 cell.userImageTappedClosure = {
                     let vc = UserDetailVC()
-                    vc.userNickName = participantUser[indexPath.row].nickname
+                    vc.userNickname = participantUser[indexPath.row].nickname
                     vc.imaegURL = participantUser[indexPath.row].profileImage
                     vc.userDepartment = participantUser[indexPath.row].department
                     vc.userStudentID = participantUser[indexPath.row].studentId
@@ -153,7 +153,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.setDateMember(model: applyUserData[indexPath.row])
                 cell.userImageTappedClosure = {
                     let vc = UserDetailVC()
-                    vc.userNickName = applyUserData[indexPath.row].nickname
+                    vc.userNickname = applyUserData[indexPath.row].nickname
                     vc.imaegURL = applyUserData[indexPath.row].profileImage
                     vc.userDepartment = applyUserData[indexPath.row].department
                     vc.userStudentID = applyUserData[indexPath.row].studentId

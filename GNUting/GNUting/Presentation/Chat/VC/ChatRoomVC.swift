@@ -401,7 +401,7 @@ extension ChatRoomVC: SendTappedUserData{
     func tapUserImageButton(userData: ChatRommUserModelResult?) { // 사이드뷰에서
         let vc = UserDetailVC()
         vc.imaegURL = userData?.profileImage
-        vc.userNickName = userData?.nickname
+        vc.userNickname = userData?.nickname
         vc.userStudentID = userData?.studentID
         vc.userDepartment = userData?.department
         
@@ -411,7 +411,7 @@ extension ChatRoomVC: SendTappedUserData{
     func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
         let vc = UserDetailVC()
         vc.imaegURL = userData?.profileImage
-        vc.userNickName = userData?.nickname
+        vc.userNickname = userData?.nickname
         vc.userStudentID = userData?.studentId
         vc.userDepartment = userData?.department
         
