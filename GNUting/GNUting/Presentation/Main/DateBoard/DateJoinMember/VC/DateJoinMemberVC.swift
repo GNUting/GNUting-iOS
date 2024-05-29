@@ -12,7 +12,7 @@ class DateJoinMemberVC: BaseViewController {
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.text = "과팅 멤버 정보"
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        label.font = Pretendard.medium(size: 18)
         
         return label
     }()

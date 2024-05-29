@@ -13,7 +13,7 @@ class SelectDateView : UIView{
     private let typeLabel : UILabel = {
         let uiLabel = UILabel()
         uiLabel.text = "생년월일"
-        uiLabel.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
+        uiLabel.font = Pretendard.semiBold(size: 14)
         return uiLabel
     }()
     private lazy var upperStackView : UIStackView = {
@@ -36,7 +36,7 @@ class SelectDateView : UIView{
     }()
     private lazy var yearLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Light.rawValue, size:  18)
+        label.font = Pretendard.light(size: 18)
         label.text = "YYYY"
         label.textColor = textColor
         label.textAlignment = .center
@@ -44,7 +44,7 @@ class SelectDateView : UIView{
     }()
     private lazy var monthLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Light.rawValue, size:  18)
+        label.font = Pretendard.light(size: 18)
         label.text = "MM"
         label.textColor = textColor
         label.textAlignment = .center
@@ -52,7 +52,7 @@ class SelectDateView : UIView{
     }()
     private lazy var dayLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Light.rawValue, size:  18)
+        label.font = Pretendard.light(size: 18)
         label.text = "DD"
         label.textColor = textColor
         label.textAlignment = .center
@@ -60,14 +60,14 @@ class SelectDateView : UIView{
     }()
     private lazy var divide1Label : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Light.rawValue, size:  18)
+        label.font = Pretendard.light(size: 18)
         label.text = "/"
         label.textColor = textColor
         return label
     }()
     private lazy var divide2Label : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Light.rawValue, size:  18)
+        label.font = Pretendard.light(size: 18)
         label.text = "/"
         label.textColor = textColor
         return label

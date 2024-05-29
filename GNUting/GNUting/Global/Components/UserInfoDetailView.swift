@@ -24,7 +24,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
     
     private lazy var userNameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
+        label.font = Pretendard.medium(size: 16)
         label.textColor = .black
         label.textAlignment = .left
         return label
@@ -32,7 +32,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
     
     private lazy var subInfoLabel : UILabel = { // 학번 나이
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         label.textAlignment = .left
         
@@ -40,7 +40,7 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
     }()
     private lazy var selfIntroduceLabel : UILabel = { // 한줄 소개
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         label.textAlignment = .left
         label.numberOfLines = 0

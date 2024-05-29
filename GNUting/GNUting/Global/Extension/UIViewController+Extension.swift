@@ -22,7 +22,7 @@ extension UIViewController{
         backButton.addTarget(self, action: #selector(popButtonTap), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.title = title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 18)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Pretendard.medium(size: 18) ?? .boldSystemFont(ofSize: 18)]
     }
     func setNavigationBarSignUpProcess(imageName: String){
         let backButton = BackButton()
@@ -36,7 +36,7 @@ extension UIViewController{
         dismissButton.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dismissButton)
         self.navigationItem.title = title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:  Pretendard.semiBold(size: 18) ?? .systemFont(ofSize: 18)]
     }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
         

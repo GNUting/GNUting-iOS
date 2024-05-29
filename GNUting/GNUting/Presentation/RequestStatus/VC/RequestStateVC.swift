@@ -27,7 +27,7 @@ class RequestStateVC: BaseViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "신청 현황"
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        label.font = Pretendard.medium(size: 18)
         return label
     }()
     private lazy var noDataScreenView: NoDataScreenView = {
@@ -42,13 +42,13 @@ class RequestStateVC: BaseViewController {
         control.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor")!,
-                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!],
+                .font: Pretendard.medium(size: 13) ?? .systemFont(ofSize: 13)],
             for: .selected
         )
         control.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor(hexCode: "6C7072"),
-                .font: UIFont(name: Pretendard.Medium.rawValue, size: 13)!],
+                .font: Pretendard.medium(size: 13) ?? .systemFont(ofSize: 13)],
             for: .normal
         )
         control.selectedSegmentIndex = 0

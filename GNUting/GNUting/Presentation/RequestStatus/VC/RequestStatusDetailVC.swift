@@ -50,7 +50,7 @@ class RequestStatusDetailVC: BaseViewController {
     
     private lazy var stateLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         label.textColor = UIColor(named: "DisableColor")
         label.textAlignment = .right
         return label
@@ -189,7 +189,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
 }
 extension RequestStatusDetailVC {
     private func setStateLabel(state: String,groupCount: Int) {
-        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 16)!, labelText: "\(groupCount) : \(groupCount) 매칭")
+        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: Pretendard.bold(size: 16) ?? .boldSystemFont(ofSize: 16), labelText: "\(groupCount) : \(groupCount) 매칭")
         var applyStatus: RequestState = .waiting
         switch state{
         case "승인":

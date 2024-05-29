@@ -87,7 +87,7 @@ extension BoardTextSearchVC {
         dismissButton.tintColor = UIColor(named: "IconColor")
         self.navigationItem.leftBarButtonItem = dismissButton
         self.navigationItem.title = "게시글 검색"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 18)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : Pretendard.semiBold(size: 18) ?? .boldSystemFont(ofSize: 18)]
         navigationItem.searchController = searchController
 
     }

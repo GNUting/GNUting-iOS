@@ -18,7 +18,7 @@ class ChatRoomDefaultTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.sizeToFit()
         return label
     }()
