@@ -30,7 +30,7 @@ class ChatRoomSideView: UIView {
 
     private lazy var topViewLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         label.text = "대화상대"
         return label
     }()

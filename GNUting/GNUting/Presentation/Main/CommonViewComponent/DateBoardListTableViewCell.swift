@@ -11,7 +11,7 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
     static let identi = "DetailDateBoardTableViewCellid"
     private lazy var statsuLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 12)
+        label.font = Pretendard.semiBold(size: 12)
         return label
     }()
     private lazy var titleLabelStackView: UIStackView = {
@@ -24,7 +24,7 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
     }()
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         label.textAlignment = .left
         return label
     }()
@@ -39,14 +39,14 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
     private lazy var subInfoLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "DisableColor")
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textAlignment = .left
         return label
     }()
     
     private lazy var userCountLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 3, left: 8, bottom: 3, right: 8))
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 11)
+        label.font = Pretendard.regular(size: 11)
         label.backgroundColor = UIColor(named: "BackGroundColor")
         label.layer.cornerRadius = 4
         label.layer.masksToBounds = true

@@ -28,7 +28,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     private lazy var messageUpperView = UIView()
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         label.textColor = .black
         
         return label
@@ -44,7 +44,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     }()
     private lazy var messageLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textColor = UIColor(named: "6B6B6B")
         label.sizeToFit()
         label.numberOfLines = 0
@@ -53,7 +53,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
     }()
     private lazy var sendDateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         label.numberOfLines = 0
         return label

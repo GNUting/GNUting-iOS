@@ -36,7 +36,7 @@ class SignUpThirdProcessVC: BaseViewController {
         let text = "거의 다왔어요!\n프로필 사진을 등록해주세요:)"
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 22)
+        label.font = Pretendard.bold(size: 22)
         label.text = text
         let range = (text as NSString).range(of: "프로필 사진")
         let attribtuedString = NSMutableAttributedString(string: text)
@@ -49,7 +49,7 @@ class SignUpThirdProcessVC: BaseViewController {
         let text = "나중에 할게요"
         let attributeString = NSMutableAttributedString(string: text)
         attributeString.addAttribute(.underlineStyle , value: 1, range: NSRange.init(location: 0, length: text.count))
-        attributeString.addAttribute(.font , value: UIFont(name: Pretendard.Regular.rawValue, size: 14) ?? .systemFont(ofSize: 14), range: NSRange.init(location: 0, length: text.count))
+        attributeString.addAttribute(.font , value: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14), range: NSRange.init(location: 0, length: text.count))
         attributeString.addAttribute(.foregroundColor, value: UIColor(hexCode: "979C9E"), range: NSRange.init(location: 0, length: text.count))
         button.setAttributedTitle(attributeString, for: .normal)
         button.addTarget(self, action: #selector(tapSignUpCompltedButton), for: .touchUpInside)

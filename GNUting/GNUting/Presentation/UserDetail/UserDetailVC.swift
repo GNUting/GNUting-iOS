@@ -5,37 +5,42 @@
 //  Created by 원동진 on 4/9/24.
 //
 
-import UIKit
-
 // MARK: - 프로필 클릭시 사용자 디테일 화면
 
-class UserDetailVC: BaseViewController {
-    var imaegURL : String? // 사용자 이미지 URL 주소
-    var userNickname: String? // 사용자 닉네임
-    var userStudentID: String? // 사용자 학번
-    var userDepartment: String? // 사용자 학과
+import UIKit
+
+final class UserDetailVC: BaseViewController {
+    
+    //MARK: - Properties
+    
+    public var imaegURL: String? // 사용자 이미지 URL 주소
+    public var userNickname: String? // 사용자 닉네임
+    public var userStudentID: String? // 사용자 학번
+    public var userDepartment: String? // 사용자 학과
+    
+    // MARK: - SubViews
     
     private lazy var userImageButton = UIButton()
     
-    private lazy var userNameLabel : UILabel = {
+    private lazy var userNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
+        label.font = Pretendard.medium(size: 16)
         
         return label
     }()
     
-    private lazy var subInfoLabel : UILabel = { // 학번 & 학과 Label
+    private lazy var subInfoLabel: UILabel = { // 학번 & 학과 Label
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         
         return label
     }()
     
-    private lazy var reportButton : UIButton = {
+    private lazy var reportButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 27, bottom: 10, trailing: 27)
-        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!,NSAttributedString.Key.foregroundColor : UIColor(named: "PrimaryColor") ?? .red]))
+        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .boldSystemFont(ofSize: 16),NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor") ?? .red]))
         config.titleAlignment = .center
         
         let button = UIButton(configuration: config)
@@ -47,6 +52,9 @@ class UserDetailVC: BaseViewController {
         
         return button
     }()
+    
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,14 +67,14 @@ class UserDetailVC: BaseViewController {
     }
 }
 
-// MARK: - View Add & Layout
+// MARK: - Layout Helpers
 
 extension UserDetailVC{
     private func setAddSubViews() {
-        self.view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
+        view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
     }
     
-    private func setAutoLayout(){
+    private func setAutoLayout() {
         userImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(150)
             make.centerX.equalToSuperview()
@@ -91,7 +99,7 @@ extension UserDetailVC{
     }
 }
 
-// MARK: - View Set
+// MARK: - SetView
 
 extension UserDetailVC {
     private func setNavigationBar() {
@@ -115,10 +123,10 @@ extension UserDetailVC {
 }
 
 
-// MARK: - Data 관련
+// MARK: - GET API
 
 extension UserDetailVC {
-    func getUserData(){ // 사용자 정보 Get
+    private func getUserData() { // 사용자 정보 Get
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
             if userData?.result?.nickname == self.userNickname { // 사용자 정보와 비교하여 일치할 경우 신고하기 버튼 Hidden
@@ -131,7 +139,7 @@ extension UserDetailVC {
 // MARK: - Action
 
 extension UserDetailVC {
-    @objc private func tapReportButton() {
+    @objc private func tapReportButton() { // 신고하기 버튼 클릭
         let vc = ReportVC()
         vc.userNickname = self.userNickname ?? "유저이름"
         self.presentFullScreenVC(viewController: vc)

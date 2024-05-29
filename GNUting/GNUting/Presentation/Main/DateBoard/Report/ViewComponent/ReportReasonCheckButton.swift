@@ -20,7 +20,7 @@ class ReportReasonCheckButton: UIButton {
 extension ReportReasonCheckButton {
     public func setConfiguration(buttonText:  String) {
         var configuration = UIButton.Configuration.plain()
-        configuration.attributedTitle = AttributedString("\(buttonText)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 12)!]))
+        configuration.attributedTitle = AttributedString("\(buttonText)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 12) ?? .systemFont(ofSize: 12)]))
         configuration.image = UIImage(named: "DisSelectedIImg")
         configuration.baseForegroundColor = .black
         configuration.imagePlacement = .leading

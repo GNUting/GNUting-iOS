@@ -12,7 +12,7 @@ class SelectGenderView : UIView {
     private let typeLabel : UILabel = {
         let uiLabel = UILabel()
         uiLabel.text = "성별"
-        uiLabel.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
+        uiLabel.font = Pretendard.semiBold(size: 14)
         return uiLabel
     }()
     private lazy var buttonStackView : UIStackView = {
@@ -26,7 +26,7 @@ class SelectGenderView : UIView {
     }()
     private lazy var manTypeButton : UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("남", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+        config.attributedTitle = AttributedString("남", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
         config.baseForegroundColor = UIColor(hexCode: "767676")
         config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
         config.titleAlignment = .center
@@ -42,7 +42,7 @@ class SelectGenderView : UIView {
     }()
     private lazy var girlTypeButton : UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("여", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+        config.attributedTitle = AttributedString("여", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
         config.baseForegroundColor = UIColor(hexCode: "767676")
         config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
         config.titleAlignment = .center
@@ -98,7 +98,7 @@ extension SelectGenderView {
     func isSelctedButton(text: String,isSelcted : Bool,button : UIButton){
         if isSelcted{
             var config = UIButton.Configuration.plain()
-            config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+            config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
             config.baseForegroundColor = UIColor(named: "PrimaryColor")
             config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
             config.titleAlignment = .center
@@ -110,7 +110,7 @@ extension SelectGenderView {
             button.layer.borderWidth = 1
         }else{
             var config = UIButton.Configuration.plain()
-            config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!]))
+            config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
             config.baseForegroundColor = UIColor(hexCode: "767676")
             config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
             config.titleAlignment = .center

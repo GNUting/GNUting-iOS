@@ -42,7 +42,7 @@ class UpdatePostVC: BaseViewController {
        let button = ThrottleButton()
         button.setTitle("완료", for: .normal)
         button.isEnabled = false
-        button.titleLabel?.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        button.titleLabel?.font = Pretendard.medium(size: 18)
         button.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
       
         

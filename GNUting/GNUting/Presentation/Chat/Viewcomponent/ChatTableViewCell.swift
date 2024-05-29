@@ -39,13 +39,13 @@ class ChatTableViewCell: UITableViewCell {
     }()
     private lazy var chatTitleLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 16)
+        label.font = Pretendard.bold(size: 16)
         
         return label
     }()
     private lazy var majorLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.font = Pretendard.regular(size: 14)
         
         label.textColor = UIColor(hexCode: "767676")
         return label

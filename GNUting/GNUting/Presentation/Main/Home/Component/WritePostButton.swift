@@ -16,7 +16,7 @@ class WritePostButton: UIButton {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 17, bottom: 10, trailing: 17)
         
-        config.attributedTitle = AttributedString("게시글 작성하기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 12)!,NSAttributedString.Key.foregroundColor : UIColor.white]))
+        config.attributedTitle = AttributedString("게시글 작성하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 12) ?? .boldSystemFont(ofSize: 12),NSAttributedString.Key.foregroundColor : UIColor.white]))
         self.configuration = config
         self.configuration = config
         self.backgroundColor = UIColor(named: "SecondaryColor")

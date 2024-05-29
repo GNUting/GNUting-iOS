@@ -19,14 +19,14 @@ class HomeDateBoardListTableViewCell: UITableViewCell {
     }()
     private lazy var majorLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
+        label.font = Pretendard.medium(size: 16)
         label.textColor = .black
         label.textAlignment = .left
         return label
     }()
     private lazy var boardTitleLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 15)
+        label.font = Pretendard.regular(size: 15)
         label.textColor = .black
         label.textAlignment = .right
         return label

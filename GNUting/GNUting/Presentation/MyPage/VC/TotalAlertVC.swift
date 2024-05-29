@@ -26,7 +26,7 @@ class TotalAlertVC: BaseViewController {
         let label = UILabel()
         let text = "기기 설정 내 지누팅 알림을 꼭! 허용해 주세요"
         label.text = text
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 13)
+        label.font = Pretendard.semiBold(size: 13)
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttribute(.foregroundColor, value: UIColor(named: "PrimaryCOlor") ?? .red, range: (text as NSString).range(of: "지누팅 알림"))
         attributedString.addAttribute(.foregroundColor, value: UIColor(named: "PrimaryCOlor") ?? .red, range: (text as NSString).range(of: "꼭! 허용"))
@@ -37,7 +37,7 @@ class TotalAlertVC: BaseViewController {
         let label = UILabel()
         label.text = "해당 설정이 꺼져있으면 알림을 받을 수 없습니다.\n기기 설정에서 지누팅 알림 허용 여부를 확인해 주세요."
         label.numberOfLines = 2
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 11)
+        label.font = Pretendard.regular(size: 11)
         label.textColor = UIColor(hexCode: "979C9E")
         return label
     }()
@@ -45,7 +45,7 @@ class TotalAlertVC: BaseViewController {
     private lazy var agreePushNotiLabel : UILabel = {
        let label = UILabel()
         label.text = "앱 푸시 알림 동의"
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 13)
+        label.font = Pretendard.regular(size: 13)
         
         return label
     }()

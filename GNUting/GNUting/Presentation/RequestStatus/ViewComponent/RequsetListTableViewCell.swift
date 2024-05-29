@@ -19,13 +19,13 @@ class RequsetListTableViewCell: UITableViewCell {
     }()
     private lazy var majorAndMemeberCountLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
+        label.font = Pretendard.semiBold(size: 16)
         
         return label
     }()
     private lazy var requestStateLabel : BasePaddingLabel = {
        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 16)
+        label.font = Pretendard.semiBold(size: 16)
         label.textColor = .white
         label.text = "대기중"
         label.textAlignment = .center
