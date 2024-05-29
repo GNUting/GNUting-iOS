@@ -125,7 +125,7 @@
 		F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */; };
 		F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */; };
 		F8A5B6272BE11B500054E324 /* SignUpInputViewAuthNumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */; };
-		F8A5B6292BE11DD60054E324 /* SignUpInputViewEmailCheckType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6282BE11DD60054E324 /* SignUpInputViewEmailCheckType.swift */; };
+		F8A5B6292BE11DD60054E324 /* EmailCheckTypeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */; };
 		F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */; };
 		F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695572BA0800900BEB0C6 /* LoginResponse.swift */; };
 		F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */; };
@@ -295,7 +295,7 @@
 		F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptorManager.swift; sourceTree = "<group>"; };
 		F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewAuthNumType.swift; sourceTree = "<group>"; };
-		F8A5B6282BE11DD60054E324 /* SignUpInputViewEmailCheckType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewEmailCheckType.swift; sourceTree = "<group>"; };
+		F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCheckTypeInputView.swift; sourceTree = "<group>"; };
 		F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewNicknameType.swift; sourceTree = "<group>"; };
 		F8A695572BA0800900BEB0C6 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
@@ -448,7 +448,6 @@
 		F8235CE42B749E5300E49073 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F8A5B6282BE11DD60054E324 /* SignUpInputViewEmailCheckType.swift */,
 				F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */,
 				F8235CE72B74A14000E49073 /* SignUPInputView.swift */,
 				F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */,
@@ -459,10 +458,12 @@
 		F8235CE92B74A3E500E49073 /* SignUpProcess */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD250D2C072716004D1CBB /* ThirdProcess */,
+				F8AD250C2C072710004D1CBB /* SecondProcess */,
+				F8AD250B2C072708004D1CBB /* FirstProcess */,
 				F8235CE42B749E5300E49073 /* Common */,
 				F8235CF72B765E1200E49073 /* model */,
 				F8235CF22B74B75D00E49073 /* ViewComponent */,
-				F8235CEF2B74B52800E49073 /* VC */,
 			);
 			path = SignUpProcess;
 			sourceTree = "<group>";
@@ -474,17 +475,6 @@
 				F85006232B739C9D007AB351 /* AllCheckTermsView.swift */,
 			);
 			path = ViewComponent;
-			sourceTree = "<group>";
-		};
-		F8235CEF2B74B52800E49073 /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
-				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
-				F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */,
-				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
-			);
-			path = VC;
 			sourceTree = "<group>";
 		};
 		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
@@ -868,6 +858,54 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
+		F8AD250B2C072708004D1CBB /* FirstProcess */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
+			);
+			path = FirstProcess;
+			sourceTree = "<group>";
+		};
+		F8AD250C2C072710004D1CBB /* SecondProcess */ = {
+			isa = PBXGroup;
+			children = (
+				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
+				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
+			);
+			path = SecondProcess;
+			sourceTree = "<group>";
+		};
+		F8AD250D2C072716004D1CBB /* ThirdProcess */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */,
+			);
+			path = ThirdProcess;
+			sourceTree = "<group>";
+		};
+		F8AD250E2C07275E004D1CBB /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				F8AD25102C073314004D1CBB /* InputView */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
+		F8AD250F2C072766004D1CBB /* CommonModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CommonModel;
+			sourceTree = "<group>";
+		};
+		F8AD25102C073314004D1CBB /* InputView */ = {
+			isa = PBXGroup;
+			children = (
+				F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */,
+			);
+			path = InputView;
+			sourceTree = "<group>";
+		};
 		F8B6ECA22BA48A5D0058C6E8 /* APIUpdateManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1051,6 +1089,8 @@
 		F8E3CD4B2B8CE82800712CBF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD250F2C072766004D1CBB /* CommonModel */,
+				F8AD250E2C07275E004D1CBB /* CommonView */,
 				F8C7DE5B2BC44AFB00923EF5 /* UserDetail */,
 				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F8A15E982B60F0C4001DE5E4 /* FindPassword */,
@@ -1399,7 +1439,7 @@
 				F8BE89E32B8077A9008E6767 /* ChatRoomListVC.swift in Sources */,
 				F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */,
 				F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */,
-				F8A5B6292BE11DD60054E324 /* SignUpInputViewEmailCheckType.swift in Sources */,
+				F8A5B6292BE11DD60054E324 /* EmailCheckTypeInputView.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */,
 				F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */,

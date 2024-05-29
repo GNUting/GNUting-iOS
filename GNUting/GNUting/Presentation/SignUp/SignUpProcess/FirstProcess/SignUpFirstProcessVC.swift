@@ -45,10 +45,10 @@ class SignUpFirstProcessVC: BaseViewController{
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var emailInputView : SignUpInputViewEmailCheckType = {
-        let signUPInpuView = SignUpInputViewEmailCheckType()
-        signUPInpuView.checkEmailButtonDelegate = self
-        signUPInpuView.checkEmailTextFieldDelegate = self
+    private lazy var emailInputView : EmailCheckTypeInputView = {
+        let signUPInpuView = EmailCheckTypeInputView()
+        signUPInpuView.emailCheckTypeInputViewDelegate = self
+    
         return signUPInpuView
     }()
     private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
@@ -147,9 +147,8 @@ extension SignUpFirstProcessVC{
         setEmailCheckTime(limitSecond: startTime)
     }
 }
-extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
-    func action(textFieldText: String) {
-        
+extension SignUpFirstProcessVC: EmailCheckTypeInputViewDelegate{
+    func tapButtonAction(textFieldText: String) {
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
         APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr") { response,failureResponse  in
@@ -173,6 +172,10 @@ extension SignUpFirstProcessVC: CheckEmailButtonDelegate{
             }
             
         }
+    }
+    
+    func didBeginTextfield() {
+        nextButton.isEnabled = false
     }
 }
 extension SignUpFirstProcessVC: ConfirmButtonDelegate{
@@ -219,13 +222,7 @@ extension SignUpFirstProcessVC: PasswordInputDelegate {
     }
   
 }
-extension SignUpFirstProcessVC: CheckEmailTextFieldDelegate {
-    func didBegin() {
-        nextButton.isEnabled = false
-    }
-    
-    
-}
+
 extension SignUpFirstProcessVC {
     private func setEmailCheckTime(limitSecond : Date) {
         timer.invalidate()

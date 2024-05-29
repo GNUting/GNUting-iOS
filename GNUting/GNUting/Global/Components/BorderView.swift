@@ -28,3 +28,12 @@ extension BorderView {
         }
     }
 }
+extension BorderView {
+    public func disableColor() {
+        self.backgroundColor = UIColor(named: "BorderColor")
+    }
+
+    func enableColor() {
+        self.backgroundColor = UIColor(named: "PrimaryColor")
+    }
+}
