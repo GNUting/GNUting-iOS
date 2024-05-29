@@ -25,7 +25,7 @@ class AllCheckTermsView: UIView {
     }()
     let termsTextLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 20)
+        label.font = Pretendard.semiBold(size: 20)
         label.text = "약관 전체 동의"
         return label
     }()

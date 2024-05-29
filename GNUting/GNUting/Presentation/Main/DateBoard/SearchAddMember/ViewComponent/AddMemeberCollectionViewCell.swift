@@ -13,7 +13,7 @@ class AddMemeberCollectionViewCell: UICollectionViewCell {
     private lazy var containerView = UIView()
     private lazy var userIDNameLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 15)
+        label.font = Pretendard.semiBold(size: 15)
         
         label.textColor = UIColor(named: "DisableColor")
         return label

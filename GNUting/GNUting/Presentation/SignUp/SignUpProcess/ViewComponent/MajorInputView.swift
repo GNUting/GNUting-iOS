@@ -13,13 +13,13 @@ class MajorInputView : UIView{
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.text = "학과"
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
+        label.font = Pretendard.semiBold(size: 14)
         return label
     }()
 
     private lazy var contentLabel : UILabel = {
         let textField = UILabel()
-        textField.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        textField.font = Pretendard.regular(size: 12)
         textField.text = "클릭하여 학과를 선택해주세요"
         textField.textColor = UIColor(hexCode: "CBCBCD")
 

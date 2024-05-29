@@ -15,30 +15,23 @@ class SignUpInputViewAuthNumType : UIView{
     
     private lazy var inputTextTypeLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         label.text = "인증번호"
         return label
     }()
     
     private lazy var inputTextField : UITextField = {
         let textField = UITextField()
-        textField.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
         textField.addTarget(self, action: #selector(changeInputTextField(_:)), for: .editingChanged)
         textField.keyboardType = .numberPad
         return textField
     }()
+    
     private lazy var confirmButton : ThrottleButton = {
-        var config = UIButton.Configuration.plain()
-        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        config.attributedTitle = AttributedString("확인", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
-        config.titleAlignment = .center
-        config.baseForegroundColor = .white
-        
-        let button = ThrottleButton(configuration: config)
-        button.backgroundColor = UIColor(hexCode: "979C9E")
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
+        let button = ConfirmButton()
+        button.setConfiguration(title: "확인")
         button.throttle(delay: 3) { _ in
             self.confrimButtonAction()
         }
@@ -54,7 +47,7 @@ class SignUpInputViewAuthNumType : UIView{
     private lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         label.isHidden = true
         
         return label
@@ -62,7 +55,7 @@ class SignUpInputViewAuthNumType : UIView{
     private lazy var remainNumberLabel : UILabel = {
        let label = UILabel()
         label.textColor = UIColor(named: "PrimaryColor")
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         
         return label
     }()
@@ -144,7 +137,7 @@ extension SignUpInputViewAuthNumType{
 extension SignUpInputViewAuthNumType {
     @objc private func changeInputTextField(_ sender: UITextField){
         if sender.text?.count == 0 {
-            confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+            confirmButton.backgroundColor = UIColor(named: "DisableColor")
             confirmButton.isEnabled = false
         } else {
             confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
@@ -166,7 +159,7 @@ extension SignUpInputViewAuthNumType: UITextFieldDelegate {
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        confirmButton.backgroundColor = UIColor(hexCode: "979C9E")
+        confirmButton.backgroundColor = UIColor(named: "DisableColor")
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

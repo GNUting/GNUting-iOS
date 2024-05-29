@@ -12,7 +12,7 @@ class MajorSearchTableViewCell: UITableViewCell {
     static let identi = "MajorSearchTableViewCellid"
     private lazy var majorLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 16)
+        label.font = Pretendard.bold(size: 16)
         label.textAlignment = .left
         return label
     }()
