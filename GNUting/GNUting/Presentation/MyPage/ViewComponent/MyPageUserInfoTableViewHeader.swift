@@ -28,25 +28,25 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 18)
+        label.font = Pretendard.semiBold(size: 18)
 
         return label
     }()
     private lazy var subInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 16)
+        label.font = Pretendard.regular(size: 16)
 
         return label
     }()
     private lazy var introduceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 16)
+        label.font = Pretendard.regular(size: 16)
  
         return label
     }()
     private lazy var updateProfileButton : UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("프로필 수정", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 18)!]))
+        config.attributedTitle = AttributedString("프로필 수정", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 18) ?? .systemFont(ofSize: 18)]))
         config.baseForegroundColor = .black
         config.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
         let button = UIButton(configuration: config)

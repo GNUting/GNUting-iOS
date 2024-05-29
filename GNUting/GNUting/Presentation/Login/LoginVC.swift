@@ -22,7 +22,7 @@ final class LoginVC: BaseViewController {
     private lazy var explainLabel: UILabel = {
         let label = UILabel()
         label.text = "경상국립대학교 재학생 전용 과팅앱\n학교 속 새로운 인연을 만나보세요 :)"
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textAlignment = .left
         label.numberOfLines = 2
         
@@ -77,7 +77,7 @@ final class LoginVC: BaseViewController {
     
     private lazy var findPasswordButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("비밀번호 찾기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("비밀번호 찾기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14)]))
         config.baseForegroundColor = UIColor(named: "Gray")
         
         let button = UIButton(configuration: config)
@@ -89,7 +89,7 @@ final class LoginVC: BaseViewController {
     private lazy var borderLabel: UILabel = {
         let label = UILabel()
         label.text = "|"
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.font = Pretendard.regular(size: 14)
         label.textColor = UIColor(named: "Gray")
         
         return label
@@ -97,7 +97,7 @@ final class LoginVC: BaseViewController {
     
     private lazy var signUpButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("회원가입", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("회원가입", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14)]))
         config.baseForegroundColor = UIColor(named: "Gray")
         
         let button = UIButton(configuration: config)

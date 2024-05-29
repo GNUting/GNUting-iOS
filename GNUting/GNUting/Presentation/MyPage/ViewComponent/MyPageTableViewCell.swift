@@ -18,7 +18,7 @@ class MyPageTableViewCell: UITableViewCell {
     }()
     private lazy var elementLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 15)
+        label.font = Pretendard.semiBold(size: 15)
         label.textColor = .black
         label.textAlignment = .left
         return label

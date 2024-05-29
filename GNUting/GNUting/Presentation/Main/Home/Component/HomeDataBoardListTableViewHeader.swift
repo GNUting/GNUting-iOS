@@ -20,7 +20,7 @@ class HomeDateBoardListTableViewHeader: UITableViewHeaderFooterView {
     }()
     private let boardNameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 18)
+        label.font = Pretendard.bold(size: 18)
         label.text = "과팅 게시판"
         label.textAlignment = .left
         label.textColor = .black
@@ -30,7 +30,7 @@ class HomeDateBoardListTableViewHeader: UITableViewHeaderFooterView {
         let button = UIButton()
         button.setTitle("더보기 >", for: .normal)
         button.setTitleColor(UIColor(hexCode: "767676"), for: .normal)
-        button.titleLabel?.font = UIFont.init(name: Pretendard.SemiBold.rawValue, size: 15)
+        button.titleLabel?.font = Pretendard.semiBold(size: 15)
         button.addTarget(self, action: #selector(tapMoreViewButton), for: .touchUpInside)
         return button
     }()

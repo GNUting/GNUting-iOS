@@ -37,7 +37,7 @@ class UserInfoView: UIView {
  
     private lazy var nickNameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         label.textAlignment = .left
         
         return label
@@ -45,7 +45,7 @@ class UserInfoView: UIView {
     private lazy var majorStudentIDLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         return label
     }()

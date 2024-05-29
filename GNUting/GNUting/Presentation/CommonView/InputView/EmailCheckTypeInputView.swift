@@ -5,7 +5,7 @@
 //  Created by 원동진 on 4/30/24.
 //
 
-//MARK: - 이메일 인증 InputView
+// MARK: - 이메일 인증 InputView
 
 import UIKit
 
@@ -27,26 +27,16 @@ final class EmailCheckTypeInputView: UIView {
     private lazy var inputTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "학교 이메일"
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         
         return label
     }()
     
     private let borderView = BorderView()
     
-    private lazy var confirmButton: ThrottleButton = {
-        
-        var config = UIButton.Configuration.plain()
-        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        config.attributedTitle = AttributedString("인증받기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
-        config.titleAlignment = .center
-        config.baseForegroundColor = .white
-        
-        let button = ThrottleButton(configuration: config)
-        
-        button.backgroundColor = UIColor(named: "DisableColor")
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
+    private lazy var confirmButton: ConfirmButton = {
+        let button = ConfirmButton()
+        button.setConfiguration(title: "인증받기")
         button.throttle(delay: 3) { _ in
             self.tapConfirmButton()
         }
@@ -66,7 +56,7 @@ final class EmailCheckTypeInputView: UIView {
     
     private lazy var inputTextField: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
         textField.addTarget(self, action: #selector(changeInputTextField(_:)), for: .editingChanged)
         
@@ -76,7 +66,7 @@ final class EmailCheckTypeInputView: UIView {
     private lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.text = "@gnu.ac.kr"
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.font = Pretendard.regular(size: 14)
         
         return label
     }()
@@ -143,13 +133,14 @@ extension EmailCheckTypeInputView {
 // MARK: - Action
 
 extension EmailCheckTypeInputView {
-    @objc private func changeInputTextField(_ sender: UITextField){
+    @objc private func changeInputTextField(_ sender: UITextField) {
         if sender.text?.count == 0 {
             confirmButton.backgroundColor = UIColor(named: "DisableColor")
             confirmButton.isEnabled = false
         } else {
             confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
             confirmButton.isEnabled = true
+            
         }
     }
     

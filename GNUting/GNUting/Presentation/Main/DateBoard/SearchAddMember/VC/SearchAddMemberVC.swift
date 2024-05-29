@@ -77,7 +77,7 @@ class SearchAddMemberVC: BaseViewController{
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20)
         
-        config.attributedTitle = AttributedString("추가", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor(named: "SecondaryColor")!]))
+        config.attributedTitle = AttributedString("추가", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 13) ?? .systemFont(ofSize: 13),NSAttributedString.Key.foregroundColor: UIColor(named: "SecondaryColor")!]))
         config.titleAlignment = .center
         let button = UIButton(configuration: config)
         button.layer.borderWidth = 1
@@ -140,14 +140,14 @@ extension SearchAddMemberVC{
     }
     private func setAddButton() {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("추가", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor(named: "SecondaryColor")!]))
+        config.attributedTitle = AttributedString("추가", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.regular(size: 13) ?? .systemFont(ofSize: 13),NSAttributedString.Key.foregroundColor : UIColor(named: "SecondaryColor")!]))
         memberOptionButton.configuration = config
         memberOptionButton.backgroundColor = UIColor(named: "SecondaryColor")
         memberOptionButton.backgroundColor = .white
     }
     private func setDeleteButton() {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("삭제", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: CGFloat(13))!,NSAttributedString.Key.foregroundColor : UIColor.white]))
+        config.attributedTitle = AttributedString("삭제", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.regular(size: 13) ?? .systemFont(ofSize: 13),NSAttributedString.Key.foregroundColor : UIColor.white]))
         memberOptionButton.configuration = config
         memberOptionButton.backgroundColor = UIColor(named: "SecondaryColor")
     }
@@ -203,7 +203,7 @@ extension SearchAddMemberVC: UICollectionViewDataSource,UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: addMemberInfos[indexPath.item].nickname.size(withAttributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: 15)!]).width + 50, height: 35)
+        return CGSize(width: addMemberInfos[indexPath.item].nickname.size(withAttributes: [NSAttributedString.Key.font : Pretendard.semiBold(size: 15) ?? .boldSystemFont(ofSize: 15)]).width + 50, height: 35)
     }
     
 }

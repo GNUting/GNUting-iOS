@@ -134,6 +134,7 @@
 		F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */; };
 		F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AAD3CA2BA3430F0047B8C0 /* SearchUserModel.swift */; };
 		F8AAD3CF2BA36EC90047B8C0 /* WriteTextUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AAD3CE2BA36EC90047B8C0 /* WriteTextUserData.swift */; };
+		F8AD25152C0764D2004D1CBB /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD25142C0764D2004D1CBB /* ConfirmButton.swift */; };
 		F8B6ECA12BA4781F0058C6E8 /* MyPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6ECA02BA4781F0058C6E8 /* MyPostModel.swift */; };
 		F8B6ECA42BA48A740058C6E8 /* APIUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6ECA32BA48A740058C6E8 /* APIUpdateManager.swift */; };
 		F8BE89D92B807646008E6767 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89D82B807646008E6767 /* TabBarController.swift */; };
@@ -304,6 +305,7 @@
 		F8A6956D2BA1D18000BEB0C6 /* SearchBoardTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBoardTextModel.swift; sourceTree = "<group>"; };
 		F8AAD3CA2BA3430F0047B8C0 /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 		F8AAD3CE2BA36EC90047B8C0 /* WriteTextUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextUserData.swift; sourceTree = "<group>"; };
+		F8AD25142C0764D2004D1CBB /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		F8B6ECA02BA4781F0058C6E8 /* MyPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostModel.swift; sourceTree = "<group>"; };
 		F8B6ECA32BA48A740058C6E8 /* APIUpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUpdateManager.swift; sourceTree = "<group>"; };
 		F8BE89D82B807646008E6767 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -448,7 +450,6 @@
 		F8235CE42B749E5300E49073 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */,
 				F8235CE72B74A14000E49073 /* SignUPInputView.swift */,
 				F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */,
 			);
@@ -480,6 +481,7 @@
 		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */,
 				F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */,
 				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
 				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
@@ -886,6 +888,7 @@
 		F8AD250E2C07275E004D1CBB /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD25112C074649004D1CBB /* Button */,
 				F8AD25102C073314004D1CBB /* InputView */,
 			);
 			path = CommonView;
@@ -904,6 +907,15 @@
 				F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */,
 			);
 			path = InputView;
+			sourceTree = "<group>";
+		};
+		F8AD25112C074649004D1CBB /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				F81D08E32BEA375F00219CEA /* ThrottleButton.swift */,
+				F8AD25142C0764D2004D1CBB /* ConfirmButton.swift */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 		F8B6ECA22BA48A5D0058C6E8 /* APIUpdateManager */ = {
@@ -1124,7 +1136,6 @@
 				F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */,
 				F81D08B62BE689F000219CEA /* BorderView.swift */,
 				F81D08E12BEA344100219CEA /* PrimaryColorButton.swift */,
-				F81D08E32BEA375F00219CEA /* ThrottleButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1427,6 +1438,7 @@
 				F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */,
 				F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */,
 				F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */,
+				F8AD25152C0764D2004D1CBB /* ConfirmButton.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
 				F88D97A42BA9C55A009BAEEF /* MajorSearchTableViewCell.swift in Sources */,
 				F869094C2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift in Sources */,

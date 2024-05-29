@@ -11,7 +11,7 @@ class MyPageTitleTableViewHeader: UITableViewHeaderFooterView {
     static let identi = "MyPageTitleHeaderid"
     private lazy var titleLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
+        label.font = Pretendard.semiBold(size: 14)
         label.textColor = UIColor(hexCode: "767676")
         label.textAlignment = .left
         return label

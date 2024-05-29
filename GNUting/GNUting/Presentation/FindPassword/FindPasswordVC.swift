@@ -31,6 +31,7 @@ class FindPasswordVC: BaseViewController {
         
         return inputView
     }()
+    
     private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
         let signUPInpuView = SignUpInputViewAuthNumType()
         signUPInpuView.confirmButtonDelegate = self
@@ -76,6 +77,7 @@ extension FindPasswordVC {
     private func setAddView(){
         view.addSubViews([inputViewUpperStackView,passwordUpdateButton,activityIndicatorView])
         inputViewUpperStackView.addStackSubViews([emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
+        view.bringSubviewToFront(emailInputView)
         
     }
     private func setAutoLayout(){

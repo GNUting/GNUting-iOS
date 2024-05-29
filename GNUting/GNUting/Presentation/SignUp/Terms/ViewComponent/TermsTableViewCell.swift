@@ -32,7 +32,7 @@ class TermsTableViewCell: UITableViewCell {
     }()
     private lazy var termsTextLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 15)
+        label.font = Pretendard.regular(size: 15)
         return label
     }()
     private lazy var pushButton : UIButton = {
@@ -106,7 +106,7 @@ extension TermsTableViewCell {
         let range = (text as NSString).range(of: "(필수)")
         if text == "(필수) 경상국립대학교 재학중입니다." {
             let range = (text as NSString).range(of: "경상국립대학교")
-            attribtuedString.addAttribute(.font, value: UIFont(name: Pretendard.Bold.rawValue, size: 15) ?? .boldSystemFont(ofSize: 15), range: range)
+            attribtuedString.addAttribute(.font, value: Pretendard.bold(size: 15) ?? .boldSystemFont(ofSize: 15), range: range)
             
         }
         self.indexPath = indexPath

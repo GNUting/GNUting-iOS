@@ -37,7 +37,7 @@ extension LoginTextFieldView {
         textField.delegate = self
     }
     func setTextFieldPlaceHolder(text: String){
-        textField.attributedPlaceholder = NSAttributedString(string: text,attributes: [NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 20)!,NSAttributedString.Key.foregroundColor : UIColor(hexCode: "7D7D7D")])
+        textField.attributedPlaceholder = NSAttributedString(string: text,attributes: [NSAttributedString.Key.font : Pretendard.regular(size: 20) ?? .systemFont(ofSize: 20),NSAttributedString.Key.foregroundColor : UIColor(hexCode: "7D7D7D")])
     }
     func setPasswordTypeTextField() {
         textField.isSecureTextEntry = true

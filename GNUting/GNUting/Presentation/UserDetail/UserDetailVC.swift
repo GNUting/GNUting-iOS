@@ -5,9 +5,9 @@
 //  Created by 원동진 on 4/9/24.
 //
 
-import UIKit
-
 // MARK: - 프로필 클릭시 사용자 디테일 화면
+
+import UIKit
 
 final class UserDetailVC: BaseViewController {
     
@@ -24,14 +24,14 @@ final class UserDetailVC: BaseViewController {
     
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
+        label.font = Pretendard.medium(size: 16)
         
         return label
     }()
     
     private lazy var subInfoLabel: UILabel = { // 학번 & 학과 Label
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         
         return label
@@ -40,7 +40,7 @@ final class UserDetailVC: BaseViewController {
     private lazy var reportButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 27, bottom: 10, trailing: 27)
-        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 16)!,NSAttributedString.Key.foregroundColor : UIColor(named: "PrimaryColor") ?? .red]))
+        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .boldSystemFont(ofSize: 16),NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor") ?? .red]))
         config.titleAlignment = .center
         
         let button = UIButton(configuration: config)
@@ -74,7 +74,7 @@ extension UserDetailVC{
         view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
     }
     
-    private func setAutoLayout(){
+    private func setAutoLayout() {
         userImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(150)
             make.centerX.equalToSuperview()
