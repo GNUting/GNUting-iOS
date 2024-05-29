@@ -140,7 +140,6 @@ extension EmailCheckTypeInputView {
         } else {
             confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
             confirmButton.isEnabled = true
-            
         }
     }
     
