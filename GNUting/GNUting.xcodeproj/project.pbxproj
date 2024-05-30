@@ -124,7 +124,7 @@
 		F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */; };
 		F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */; };
 		F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */; };
-		F8A5B6272BE11B500054E324 /* SignUpInputViewAuthNumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */; };
+		F8A5B6272BE11B500054E324 /* AuthNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */; };
 		F8A5B6292BE11DD60054E324 /* EmailCheckTypeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */; };
 		F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */; };
 		F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695572BA0800900BEB0C6 /* LoginResponse.swift */; };
@@ -295,7 +295,7 @@
 		F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		F8A15E9B2B60F427001DE5E4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptorManager.swift; sourceTree = "<group>"; };
-		F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewAuthNumType.swift; sourceTree = "<group>"; };
+		F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNumberInputView.swift; sourceTree = "<group>"; };
 		F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCheckTypeInputView.swift; sourceTree = "<group>"; };
 		F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewNicknameType.swift; sourceTree = "<group>"; };
 		F8A695572BA0800900BEB0C6 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
@@ -481,7 +481,6 @@
 		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				F8A5B6262BE11B500054E324 /* SignUpInputViewAuthNumType.swift */,
 				F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */,
 				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
 				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
@@ -904,6 +903,7 @@
 		F8AD25102C073314004D1CBB /* InputView */ = {
 			isa = PBXGroup;
 			children = (
+				F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */,
 				F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */,
 			);
 			path = InputView;
@@ -1484,7 +1484,7 @@
 				F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */,
 				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
-				F8A5B6272BE11B500054E324 /* SignUpInputViewAuthNumType.swift in Sources */,
+				F8A5B6272BE11B500054E324 /* AuthNumberInputView.swift in Sources */,
 				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,

@@ -52,8 +52,8 @@ final class SignUpFirstProcessVC: BaseViewController{
         return signUPInpuView
     }()
     
-    private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
-        let signUPInpuView = SignUpInputViewAuthNumType()
+    private lazy var certifiedInputView : AuthNumberInputView = {
+        let signUPInpuView = AuthNumberInputView()
         signUPInpuView.confirmButtonDelegate = self
         
         return signUPInpuView

@@ -5,12 +5,17 @@
 //  Created by 원동진 on 4/30/24.
 //
 
+// MARK: - 인증번호 InputView
+
 import UIKit
+
+// MARK: - Protocol
 
 protocol ConfirmButtonDelegate {
     func action(sendTextFieldText: String)
 }
-class SignUpInputViewAuthNumType : UIView{
+
+class AuthNumberInputView : UIView{
     var confirmButtonDelegate: ConfirmButtonDelegate?
     
     private lazy var inputTextTypeLabel : UILabel = {
@@ -69,7 +74,7 @@ class SignUpInputViewAuthNumType : UIView{
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension SignUpInputViewAuthNumType{
+extension AuthNumberInputView{
     private func setAddSubViews() {
         addSubViews([inputTextTypeLabel,inputTextField,bottomLine,inputCheckLabel,remainNumberLabel,confirmButton])
     }
@@ -123,7 +128,7 @@ extension SignUpInputViewAuthNumType{
         remainNumberLabel.text = text
     }
 }
-extension SignUpInputViewAuthNumType{
+extension AuthNumberInputView{
     
     func setFoucInputTextFiled() {
         inputTextField.becomeFirstResponder()
@@ -134,7 +139,7 @@ extension SignUpInputViewAuthNumType{
     }
 }
 
-extension SignUpInputViewAuthNumType {
+extension AuthNumberInputView {
     @objc private func changeInputTextField(_ sender: UITextField){
         if sender.text?.count == 0 {
             confirmButton.backgroundColor = UIColor(named: "DisableColor")
@@ -150,7 +155,7 @@ extension SignUpInputViewAuthNumType {
         confirmButtonDelegate?.action(sendTextFieldText: inputTextField.text ?? "")
     }
 }
-extension SignUpInputViewAuthNumType: UITextFieldDelegate {
+extension AuthNumberInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
         confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
