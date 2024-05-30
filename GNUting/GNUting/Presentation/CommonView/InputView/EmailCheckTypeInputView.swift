@@ -71,7 +71,7 @@ final class EmailCheckTypeInputView: UIView {
         return label
     }()
     
-    // MARK: - LifeCycle
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -127,7 +127,6 @@ extension EmailCheckTypeInputView {
     public func getTextFieldText() -> String { // 텍스트 필드 받아오기
         inputTextField.text ?? ""
     }
-   
 }
 
 // MARK: - Action
@@ -160,6 +159,7 @@ extension EmailCheckTypeInputView: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         borderView.disableColor()
         confirmButton.backgroundColor = UIColor(named: "DisableColor")
+        
         return true
     }
     

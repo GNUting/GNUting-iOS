@@ -10,6 +10,9 @@
 import UIKit
 
 final class ConfirmButton: ThrottleButton {
+    
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
