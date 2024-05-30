@@ -11,12 +11,12 @@ import UIKit
 
 // MARK: - Protocol
 
-protocol ConfirmButtonDelegate {
-    func action(sendTextFieldText: String)
+protocol AuthNumberInputViewDelegate {
+    func tapComfirmButton(authNumber: String)
 }
 
 class AuthNumberInputView : UIView{
-    var confirmButtonDelegate: ConfirmButtonDelegate?
+    var authNumberInputViewDelegate: AuthNumberInputViewDelegate?
     
     private lazy var inputTextTypeLabel : UILabel = {
         let label = UILabel()
@@ -152,7 +152,7 @@ extension AuthNumberInputView {
     }
     
     private func confrimButtonAction(){
-        confirmButtonDelegate?.action(sendTextFieldText: inputTextField.text ?? "")
+        authNumberInputViewDelegate?.tapComfirmButton(authNumber: inputTextField.text ?? "")
     }
 }
 extension AuthNumberInputView: UITextFieldDelegate {

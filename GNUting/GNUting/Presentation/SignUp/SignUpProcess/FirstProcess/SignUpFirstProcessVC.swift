@@ -54,7 +54,7 @@ final class SignUpFirstProcessVC: BaseViewController{
     
     private lazy var certifiedInputView : AuthNumberInputView = {
         let signUPInpuView = AuthNumberInputView()
-        signUPInpuView.confirmButtonDelegate = self
+        signUPInpuView.authNumberInputViewDelegate = self
         
         return signUPInpuView
     }()
@@ -180,10 +180,9 @@ extension SignUpFirstProcessVC: EmailCheckTypeInputViewDelegate{
         nextButton.isEnabled = false
     }
 }
-extension SignUpFirstProcessVC: ConfirmButtonDelegate{
-    func action(sendTextFieldText: String) {
-        
-        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response  in
+extension SignUpFirstProcessVC: AuthNumberInputViewDelegate{
+    func tapComfirmButton(authNumber: String) {
+        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: authNumber) { [self] response  in
             if response.isSuccess {
                 emailSuccess = true
                 certifiedInputView.setCheckLabel(isHidden: false, text: "인증이 완료되었습니다.", success: true)
@@ -195,7 +194,6 @@ extension SignUpFirstProcessVC: ConfirmButtonDelegate{
             
         }
     }
-    
 }
 extension SignUpFirstProcessVC: PasswordCheckDelegate {
     func keyboarReturn(text: String) {

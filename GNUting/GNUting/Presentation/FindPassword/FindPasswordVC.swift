@@ -34,7 +34,7 @@ class FindPasswordVC: BaseViewController {
     
     private lazy var certifiedInputView : AuthNumberInputView = {
         let signUPInpuView = AuthNumberInputView()
-        signUPInpuView.confirmButtonDelegate = self
+        signUPInpuView.authNumberInputViewDelegate = self
         return signUPInpuView
     }()
     private lazy var passWordInputView : SignUPInputView = {
@@ -174,10 +174,9 @@ extension FindPasswordVC: EmailCheckTypeInputViewDelegate{
     }
     
 }
-extension FindPasswordVC: ConfirmButtonDelegate{
-    func action(sendTextFieldText: String) {
-        
-        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: sendTextFieldText) { [self] response  in
+extension FindPasswordVC: AuthNumberInputViewDelegate{
+    func tapComfirmButton(authNumber: String) {
+        APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: authNumber) { [self] response  in
             if response.isSuccess {
                 
                 emailSuccess = true
