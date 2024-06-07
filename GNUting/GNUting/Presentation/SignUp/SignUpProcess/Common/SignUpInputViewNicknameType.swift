@@ -13,7 +13,7 @@ protocol NicknameCheckButtonDelegate {
 }
 protocol NicknameTextfiledDelegate {
     func didBegin()
-    func endEdit()
+    func endEdit(textFieldText: String)
 }
 
 class SignUpInputViewNicknameType : UIView{
@@ -163,7 +163,7 @@ extension SignUpInputViewNicknameType: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        nicknameTextfiledDelegate?.endEdit()
+        nicknameTextfiledDelegate?.endEdit(textFieldText: textField.text ?? "")
         return true
     }
     
