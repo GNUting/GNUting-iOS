@@ -23,8 +23,6 @@ class PrimaryColorButton: UIButton {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         self.isUserInteractionEnabled = true
-        self.setTitleColor(.white, for: .disabled)
-     
     }
     override var isEnabled: Bool {
         didSet {
@@ -42,7 +40,7 @@ class PrimaryColorButton: UIButton {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
         
-        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.SemiBold.rawValue, size: CGFloat(fointSize))!,NSAttributedString.Key.foregroundColor : UIColor.white]))
+        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.semiBold(size: CGFloat(fointSize)) ?? .systemFont(ofSize: CGFloat(fointSize)),NSAttributedString.Key.foregroundColor : UIColor.white]))
         config.titleAlignment = .center
         self.configuration = config
     }

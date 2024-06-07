@@ -25,12 +25,13 @@ class FindPasswordVC: BaseViewController {
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var emailInputView : SignUpInputViewEmailCheckType = {
-        let signUPInpuView = SignUpInputViewEmailCheckType()
-        signUPInpuView.checkEmailButtonDelegate = self
-        signUPInpuView.checkEmailTextFieldDelegate = self
-        return signUPInpuView
+    private lazy var emailInputView : EmailCheckTypeInputView = {
+        let inputView = EmailCheckTypeInputView()
+        inputView.emailCheckTypeInputViewDelegate = self
+        
+        return inputView
     }()
+    
     private lazy var certifiedInputView : SignUpInputViewAuthNumType = {
         let signUPInpuView = SignUpInputViewAuthNumType()
         signUPInpuView.confirmButtonDelegate = self
@@ -76,6 +77,7 @@ extension FindPasswordVC {
     private func setAddView(){
         view.addSubViews([inputViewUpperStackView,passwordUpdateButton,activityIndicatorView])
         inputViewUpperStackView.addStackSubViews([emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
+        view.bringSubviewToFront(emailInputView)
         
     }
     private func setAutoLayout(){
@@ -153,19 +155,22 @@ extension FindPasswordVC {
         }
     }
 }
-extension FindPasswordVC: CheckEmailButtonDelegate{
-    func action(textFieldText: String) {
+extension FindPasswordVC: EmailCheckTypeInputViewDelegate{
+    func tapButtonAction(textFieldText: String) {
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
-        
+
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
             self.showMessage(message: "인증번호가 전송되었습니다.")
             self.certifiedInputView.setFoucInputTextFiled()
             self.activityIndicatorView.stopAnimating()
             self.getSetTime()
-            
         }
-        
+    }
+    
+    func didBeginTextfield() {
+        emailSuccess = false
+        nextButtonEnable()
     }
     
 }
@@ -214,12 +219,4 @@ extension FindPasswordVC: PasswordInputDelegate {
         }
     }
   
-}
-extension FindPasswordVC: CheckEmailTextFieldDelegate {
-    func didBegin() {
-        emailSuccess = false
-        nextButtonEnable()
-    }
-    
-    
 }

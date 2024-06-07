@@ -12,7 +12,7 @@ class DateMemberHeader: UITableViewHeaderFooterView {
     var requestStatus : Bool = true // false : Received
     private lazy var majorLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 18)
+        label.font = Pretendard.semiBold(size: 18)
  
         label.textAlignment = .left
       

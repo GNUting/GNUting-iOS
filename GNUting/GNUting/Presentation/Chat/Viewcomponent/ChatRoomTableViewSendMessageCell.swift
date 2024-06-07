@@ -27,7 +27,7 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
     }()
     private lazy var messageLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textColor = UIColor(named: "6B6B6B")
         label.numberOfLines = 0
  
@@ -36,7 +36,7 @@ class ChatRoomTableViewSendMessageCell: UITableViewCell {
     }()
     private lazy var sendDateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textColor = UIColor(named: "DisableColor")
         
         label.textAlignment = .right

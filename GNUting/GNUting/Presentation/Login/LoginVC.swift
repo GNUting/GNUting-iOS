@@ -9,24 +9,27 @@ import UIKit
 
 // MARK: - 로그인 화면
 
-class LoginVC: BaseViewController {
+final class LoginVC: BaseViewController {
+    
+    // MARK: - SubViews
+    
     private lazy var appLogiImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "AppNameImage")
         
         return imageView
     }()
-    private lazy var explainLabel : UILabel = {
+    private lazy var explainLabel: UILabel = {
         let label = UILabel()
         label.text = "경상국립대학교 재학생 전용 과팅앱\n학교 속 새로운 인연을 만나보세요 :)"
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.textAlignment = .left
         label.numberOfLines = 2
         
         return label
     }()
 
-    private lazy var textFieldStackView : UIStackView = {
+    private lazy var textFieldStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 19
@@ -36,14 +39,14 @@ class LoginVC: BaseViewController {
         return stackView
     }()
     
-    private lazy var emailTextFieldView : LoginTextFieldView = {
+    private lazy var emailTextFieldView: LoginTextFieldView = {
         let loginTextFieldView = LoginTextFieldView()
         loginTextFieldView.setTextFieldPlaceHolder(text: "학교 이메일")
         
         return loginTextFieldView
     }()
     
-    private lazy var passwordTextField : LoginTextFieldView = {
+    private lazy var passwordTextField: LoginTextFieldView = {
         let loginTextFieldView = LoginTextFieldView()
         loginTextFieldView.setTextFieldPlaceHolder(text: "비밀번호")
         loginTextFieldView.setPasswordTypeTextField()
@@ -51,7 +54,7 @@ class LoginVC: BaseViewController {
         return loginTextFieldView
     }()
     
-    private lazy var loginButton : PrimaryColorButton = {
+    private lazy var loginButton: PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("로그인")
         button.sizeToFit()
@@ -72,9 +75,9 @@ class LoginVC: BaseViewController {
         return bottomStackView
     }()
     
-    private lazy var findPasswordButton : UIButton = {
+    private lazy var findPasswordButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("비밀번호 찾기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("비밀번호 찾기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14)]))
         config.baseForegroundColor = UIColor(named: "Gray")
         
         let button = UIButton(configuration: config)
@@ -83,18 +86,18 @@ class LoginVC: BaseViewController {
         return button
     }()
     
-    private lazy var borderLabel : UILabel = {
+    private lazy var borderLabel: UILabel = {
         let label = UILabel()
         label.text = "|"
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.font = Pretendard.regular(size: 14)
         label.textColor = UIColor(named: "Gray")
         
         return label
     }()
     
-    private lazy var signUpButton : UIButton = {
+    private lazy var signUpButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("회원가입", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("회원가입", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14)]))
         config.baseForegroundColor = UIColor(named: "Gray")
         
         let button = UIButton(configuration: config)
@@ -102,6 +105,8 @@ class LoginVC: BaseViewController {
         
         return button
     }()
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,15 +122,16 @@ class LoginVC: BaseViewController {
     }
 }
 
-// MARK: - View Add & Layout
+// MARK: - Layout Helpers
 
 extension LoginVC {
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubViews([appLogiImageView,explainLabel,textFieldStackView,bottomStackView])
         textFieldStackView.addStackSubViews([emailTextFieldView,passwordTextField,loginButton])
         bottomStackView.addStackSubViews([findPasswordButton,borderLabel,signUpButton])
     }
-    private func setAutoLayout(){
+    
+    private func setAutoLayout() {
         appLogiImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(95)
             make.centerX.equalToSuperview()
@@ -146,29 +152,10 @@ extension LoginVC {
     }
 }
 
-// MARK: - Action
-
-extension LoginVC{
-    func tapLoginButton() {
-        let email = emailTextFieldView.getTextFieldString()
-        let password = passwordTextField.getTextFieldString()
-        
-        loginAPI(email: email, password: password)
-    }
-    
-    @objc func tapFindPasswordButton(){
-        pushViewContoller(viewController: FindPasswordVC())
-    }
-    
-    @objc func tapSingupButton(){
-        pushViewContoller(viewController: TermsVC())
-    }
-}
-
-// MARK: - Post API
+// MARK: - POST API
 
 extension LoginVC {
-    func loginAPI(email: String, password: String) {
+    private func loginAPI(email: String, password: String) {
         APIPostManager.shared.postLoginAPI(email: email, password: password) { response,successResponse  in
             if response?.isSuccess == false {
                 self.errorHandling(response: response)
@@ -178,5 +165,24 @@ extension LoginVC {
                 self.view.window?.rootViewController = TabBarController()
             }
         }
+    }
+}
+
+// MARK: - Action
+
+extension LoginVC {
+    private func tapLoginButton() {
+        let email = emailTextFieldView.getTextFieldString()
+        let password = passwordTextField.getTextFieldString()
+        
+        loginAPI(email: email, password: password)
+    }
+    
+    @objc private func tapFindPasswordButton() {
+        pushViewContoller(viewController: FindPasswordVC())
+    }
+    
+    @objc private func tapSingupButton() {
+        pushViewContoller(viewController: TermsVC())
     }
 }

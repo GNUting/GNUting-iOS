@@ -25,10 +25,10 @@ class ReportVC: BaseViewController {
 """
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 9)
+        label.font = Pretendard.medium(size: 9)
         label.numberOfLines = 0
         label.text = fullText
-        label.setRangeTextFont(fullText: fullText, range: "신고하기 전에 잠깐!", uiFont: UIFont(name: Pretendard.Bold.rawValue, size: 12)!)
+        label.setRangeTextFont(fullText: fullText, range: "신고하기 전에 잠깐!", font: Pretendard.bold(size: 12) ?? .systemFont(ofSize: 12))
         return label
     }()
     private lazy var reportReasonView : ReportReasonView = {
@@ -43,7 +43,7 @@ class ReportVC: BaseViewController {
         let textView = UITextView()
         textView.text = textViewPlaceHolder
         textView.textColor = UIColor(hexCode: "9F9F9F")
-        textView.font = UIFont(name: Pretendard.Regular.rawValue, size: 18)
+        textView.font = Pretendard.regular(size: 18)
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         textView.layer.cornerRadius = 10
         textView.layer.borderWidth = 1
@@ -64,7 +64,7 @@ class ReportVC: BaseViewController {
     private lazy var cancelButton : UIButton = {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 30, bottom: 18, trailing: 30)
-        config.attributedTitle = AttributedString("취소하기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("취소하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.bold(size: 14) ?? .boldSystemFont(ofSize: 14)]))
         config.titleAlignment = .center
         config.baseForegroundColor = .black
         let button = UIButton(configuration: config)
@@ -79,7 +79,7 @@ class ReportVC: BaseViewController {
     private lazy var reportButton : ThrottleButton = {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 30, bottom: 18, trailing: 30)
-        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Bold.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.bold(size: 14) ?? .boldSystemFont(ofSize: 14)]))
         config.titleAlignment = .center
         config.baseForegroundColor = .white
         let button = ThrottleButton(configuration: config)

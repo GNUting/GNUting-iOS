@@ -15,13 +15,13 @@ class DetailDateBoardVC: BaseViewController{
     private lazy var statusLabel : UILabel = {
        let label = UILabel()
         label.text = "신청 가능"
-        label.font = UIFont(name: Pretendard.SemiBold.rawValue, size: 14)
+        label.font = Pretendard.semiBold(size: 14)
         label.textColor = UIColor(named: "SecondaryColor")
         return label
     }()
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 16)
+        label.font = Pretendard.medium(size: 16)
         label.textAlignment = .left
         
         return label
@@ -29,7 +29,7 @@ class DetailDateBoardVC: BaseViewController{
     private lazy var writeDateLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.font = Pretendard.regular(size: 14)
         label.textColor = UIColor(named: "DisableColor")
         return label
     }()
@@ -40,7 +40,7 @@ class DetailDateBoardVC: BaseViewController{
     }()
     private lazy var contentTextView : UITextView  = {
         let textView = UITextView()
-        textView.font = UIFont(name: Pretendard.Regular.rawValue, size: 18)
+        textView.font = Pretendard.regular(size: 18)
         textView.textColor = .black
         textView.isEditable = false
 
@@ -134,7 +134,7 @@ extension DetailDateBoardVC{
     }
     private func setChatPeopleViewButton(memeberCount: Int) {
         var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("과팅 멤버 정보 \(memeberCount)명", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Medium.rawValue, size: 15)!]))
+        config.attributedTitle = AttributedString("과팅 멤버 정보 \(memeberCount)명", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 15) ?? .systemFont(ofSize: 15)]))
         config.image = UIImage(named: "ChatImg")
         config.baseForegroundColor = UIColor(named: "PrimaryColor")
         config.imagePlacement = .leading

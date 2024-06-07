@@ -11,7 +11,7 @@ class ReportReasonView: UIView {
     var buttonTagClosure: ((Int)->())?
     private let reportResonLabel : UILabel =  {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 12)
+        label.font = Pretendard.bold(size: 12)
         label.textAlignment = .left
         label.text = "신고 사유"
         return label

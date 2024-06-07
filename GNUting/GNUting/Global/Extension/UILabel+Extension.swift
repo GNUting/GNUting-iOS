@@ -9,10 +9,10 @@ import UIKit
 
 
 extension UILabel {
-    func setRangeTextFont(fullText: String,range: String,uiFont : UIFont){
+    func setRangeTextFont(fullText: String,range: String,font : UIFont){
         let attributedString = NSMutableAttributedString(string: fullText)
         let range = ( fullText as NSString).range(of: range)
-        attributedString.addAttribute(.font, value: uiFont, range: range)
+        attributedString.addAttribute(.font, value: font, range: range)
         self.attributedText = attributedString
     }
     
