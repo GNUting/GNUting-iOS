@@ -15,7 +15,7 @@ class NoDataScreenView: UIView {
     }()
     private lazy var label: UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        label.font = Pretendard.medium(size: 18)
         label.textColor = UIColor(named: "DisableColor")
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -53,6 +53,6 @@ extension NoDataScreenView{
 extension NoDataScreenView {
     func setLabel(text: String,range:String) {
         label.text = text
-        label.setRangeTextFont(fullText: text, range: range, uiFont: UIFont(name: Pretendard.Regular.rawValue, size: 14) ?? .systemFont(ofSize: 14))
+        label.setRangeTextFont(fullText: text, range: range, font: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14))
     }
 }

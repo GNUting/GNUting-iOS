@@ -22,13 +22,13 @@ class SignUpInputViewNicknameType : UIView{
     private lazy var inputTypeLabel : UILabel = {
         let label = UILabel()
         label.text = "닉네임"
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         return label
     }()
     
     private lazy var inputTextField : UITextField = {
         let textField = UITextField()
-        textField.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
         textField.addTarget(self, action: #selector(changeInputTextField(_:)), for: .editingChanged)
         
@@ -37,7 +37,7 @@ class SignUpInputViewNicknameType : UIView{
     private lazy var emailLabel : UILabel = {
         let uiLabel = UILabel()
         uiLabel.text = "@gnu.ac.kr"
-        uiLabel.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        uiLabel.font = Pretendard.regular(size: 14)
         
         return uiLabel
     }()
@@ -50,7 +50,7 @@ class SignUpInputViewNicknameType : UIView{
         
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        config.attributedTitle = AttributedString("중복확인", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: Pretendard.Regular.rawValue, size: 14)!]))
+        config.attributedTitle = AttributedString("중복확인", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14)]))
         config.titleAlignment = .center
         config.baseForegroundColor = .white
         
@@ -67,7 +67,7 @@ class SignUpInputViewNicknameType : UIView{
     private lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 12)
+        label.font = Pretendard.medium(size: 12)
         label.isHidden = true
         
         return label

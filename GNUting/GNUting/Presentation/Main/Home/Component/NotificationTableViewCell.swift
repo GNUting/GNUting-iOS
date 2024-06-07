@@ -25,19 +25,19 @@ class NotificationTableViewCell: UITableViewCell {
     private lazy var notificationTitleLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        label.font = Pretendard.medium(size: 14)
         return label
     }()
     private lazy var notificationBodyLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 13)
+        label.font = Pretendard.regular(size: 13)
         return label
     }()
     private lazy var dateLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "DisableColor")
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         return label
     }()
     

@@ -66,7 +66,7 @@ class HomeVC: BaseViewController{
     }()
     private lazy var userNameLabel:  UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 22)
+        label.font = Pretendard.regular(size: 22)
         label.numberOfLines = 2
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -74,7 +74,7 @@ class HomeVC: BaseViewController{
     
     private lazy var explainLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        label.font = Pretendard.regular(size: 12)
         label.text = "지누팅에서 아름다운 만남을 가져보세요!"
         label.textColor = UIColor(named: "DisableColor")
         
@@ -101,7 +101,7 @@ class HomeVC: BaseViewController{
     }()
     private lazy var postSubView: ImagePlusLabelView = {
         let view = ImagePlusLabelView()
-        view.setImagePlusLabelView(imageName: "PostImage", textFont: UIFont(name: Pretendard.Bold.rawValue, size: 16) ?? .boldSystemFont(ofSize: 16), labelText: "모든 게시글은 여기서 볼 수 있어요")
+        view.setImagePlusLabelView(imageName: "PostImage", textFont: Pretendard.bold(size: 16) ?? .boldSystemFont(ofSize: 16), labelText: "모든 게시글은 여기서 볼 수 있어요")
         return view
     }()
     private lazy var cardStackView : UIStackView = {
@@ -213,7 +213,7 @@ extension HomeVC{
     private func setUserNaemLabel(username: String) {
         let text = "\(username) 님 안녕하세요 :)"
         userNameLabel.text = text
-        userNameLabel.setRangeTextFont(fullText: text, range: username, uiFont: UIFont(name: Pretendard.Bold.rawValue, size: 22) ?? .boldSystemFont(ofSize: 22))
+        userNameLabel.setRangeTextFont(fullText: text, range: username, font: Pretendard.bold(size: 22) ?? .boldSystemFont(ofSize: 22))
     }
     private func setExplainLabel(text: String) {
         

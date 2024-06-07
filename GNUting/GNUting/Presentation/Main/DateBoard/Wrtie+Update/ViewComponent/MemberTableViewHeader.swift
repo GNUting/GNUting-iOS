@@ -12,7 +12,7 @@ class MemberTableViewHeader: UITableViewHeaderFooterView {
     private let memberLabel : UILabel = {
         let label = UILabel()
 
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        label.font = Pretendard.medium(size: 18)
         label.textColor = .black
         label.textAlignment = .left
         return label

@@ -19,7 +19,7 @@ class ChatRoomNavigationBar: UIView {
     }()
     private lazy var titleLabel : UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: Pretendard.Medium.rawValue, size: 18)
+        label.font = Pretendard.medium(size: 18)
         return label
     }()
     private lazy var settingButton : UIButton =  {
@@ -31,7 +31,7 @@ class ChatRoomNavigationBar: UIView {
     }()
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 14)
+        label.font = Pretendard.regular(size: 14)
         label.textColor = UIColor(hexCode: "767676")
         
         return label

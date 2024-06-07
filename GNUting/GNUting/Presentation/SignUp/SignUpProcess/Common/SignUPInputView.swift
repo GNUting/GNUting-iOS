@@ -27,13 +27,13 @@ class SignUPInputView : UIView{
     
     private lazy var inputTextTypeLabel : UILabel = {
         let uiLabel = UILabel()
-        uiLabel.font = UIFont(name: Pretendard.Medium.rawValue, size: 14)
+        uiLabel.font = Pretendard.medium(size: 14)
         return uiLabel
     }()
 
     private lazy var inputTextField : UITextField = {
         let textField = UITextField()
-        textField.font = UIFont(name: Pretendard.Regular.rawValue, size: 12)
+        textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
 
         return textField
@@ -49,7 +49,7 @@ class SignUPInputView : UIView{
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
-        label.font = UIFont(name: Pretendard.Bold.rawValue, size: 12)
+        label.font = Pretendard.bold(size: 12)
         label.isHidden = true
         label.numberOfLines = 2
         return label

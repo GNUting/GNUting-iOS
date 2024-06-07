@@ -45,7 +45,7 @@ class DateBoardListVC: BaseViewController {
     private lazy var noticeLabel: BasePaddingLabel = {
        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15))
         label.text = "부적절한 게시글을 작성할 경우, 앱 이용이 제한될 수 있습니다."
-        label.font = UIFont(name: Pretendard.Regular.rawValue, size: 11)
+        label.font = Pretendard.regular(size: 11)
         label.textColor = UIColor(hexCode: "4F4F4F")
         label.backgroundColor = UIColor(named: "BackGroundColor")
         label.layer.cornerRadius = 8
