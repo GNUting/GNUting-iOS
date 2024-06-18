@@ -26,16 +26,16 @@ class SignUPSecondProcessVC: BaseViewController{
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var nameInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var nameInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "이름")
         signUPInpuView.setPlaceholder(placeholder: "이름을 입력해주세요.")
         signUPInpuView.textFieldType = .name
         signUPInpuView.inputViewTextFiledDelegate = self
         return signUPInpuView
     }()
-    private lazy var phoneNumberInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var phoneNumberInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "전화번호")
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
         signUPInpuView.textFieldType = .phoneNumber
@@ -111,8 +111,8 @@ class SignUPSecondProcessVC: BaseViewController{
         
         return majorInputView
     }()
-    private lazy var studentIDInputView : SignUPInputView = {
-        let studentIDInputView = SignUPInputView()
+    private lazy var studentIDInputView : CommonInputView = {
+        let studentIDInputView = CommonInputView()
         studentIDInputView.setInputTextTypeLabel(text: "학번")
         studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
         studentIDInputView.setKeyboardTypeNumberPad()
@@ -121,8 +121,8 @@ class SignUPSecondProcessVC: BaseViewController{
         return studentIDInputView
     }()
     
-    private lazy var introduceOneLine : SignUPInputView = {
-        let inputView = SignUPInputView()
+    private lazy var introduceOneLine : CommonInputView = {
+        let inputView = CommonInputView()
         inputView.setInputTextTypeLabel(text: "한줄소개")
         inputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
         inputView.textFieldType = .introduce

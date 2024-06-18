@@ -37,8 +37,8 @@ class FindPasswordVC: BaseViewController {
         signUPInpuView.authNumberInputViewDelegate = self
         return signUPInpuView
     }()
-    private lazy var passWordInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var passWordInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "신규 비밀번호")
         
         signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
@@ -47,8 +47,8 @@ class FindPasswordVC: BaseViewController {
         signUPInpuView.setSecureTextEntry()
         return signUPInpuView
     }()
-    private lazy var passWordCheckInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var passWordCheckInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "신규 비밀번호 확인")
         signUPInpuView.setPlaceholder(placeholder: "비밀번호 확인")
         signUPInpuView.textFieldType = .passwordCheck

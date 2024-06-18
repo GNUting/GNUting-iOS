@@ -59,8 +59,8 @@ class UpdateProfileVC: BaseViewController {
         
         return majorInputView
     }()
-    private lazy var introduceInputView : SignUPInputView = {
-        let majorInputView = SignUPInputView()
+    private lazy var introduceInputView : CommonInputView = {
+        let majorInputView = CommonInputView()
         majorInputView.setInputTextTypeLabel(text: "한줄 소개")
         majorInputView.setPlaceholder(placeholder: "한줄 소개를 입력해주세요.")
         return majorInputView

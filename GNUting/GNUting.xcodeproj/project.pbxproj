@@ -28,7 +28,7 @@
 		F81D08E42BEA375F00219CEA /* ThrottleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E32BEA375F00219CEA /* ThrottleButton.swift */; };
 		F81D08E62BEA5C7C00219CEA /* ChatRoomUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */; };
 		F82006AA2BEBC1DC00E1C05E /* ApplicationReceivedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82006A92BEBC1DC00E1C05E /* ApplicationReceivedModel.swift */; };
-		F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* SignUPInputView.swift */; };
+		F8235CE82B74A14000E49073 /* CommonInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CE72B74A14000E49073 /* CommonInputView.swift */; };
 		F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */; };
 		F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */; };
 		F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF32B74B77900E49073 /* SelectGenderView.swift */; };
@@ -198,7 +198,7 @@
 		F81D08E32BEA375F00219CEA /* ThrottleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleButton.swift; sourceTree = "<group>"; };
 		F81D08E52BEA5C7C00219CEA /* ChatRoomUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomUserModel.swift; sourceTree = "<group>"; };
 		F82006A92BEBC1DC00E1C05E /* ApplicationReceivedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReceivedModel.swift; sourceTree = "<group>"; };
-		F8235CE72B74A14000E49073 /* SignUPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPInputView.swift; sourceTree = "<group>"; };
+		F8235CE72B74A14000E49073 /* CommonInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonInputView.swift; sourceTree = "<group>"; };
 		F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirstProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPSecondProcessVC.swift; sourceTree = "<group>"; };
 		F8235CF32B74B77900E49073 /* SelectGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderView.swift; sourceTree = "<group>"; };
@@ -450,7 +450,6 @@
 		F8235CE42B749E5300E49073 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F8235CE72B74A14000E49073 /* SignUPInputView.swift */,
 				F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */,
 			);
 			path = Common;
@@ -903,6 +902,7 @@
 		F8AD25102C073314004D1CBB /* InputView */ = {
 			isa = PBXGroup;
 			children = (
+				F8235CE72B74A14000E49073 /* CommonInputView.swift */,
 				F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */,
 				F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */,
 			);
@@ -1436,7 +1436,7 @@
 				F8DE068E2BF5E53000D32E7E /* ChatRoomFirstImageView.swift in Sources */,
 				F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */,
 				F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */,
-				F8235CE82B74A14000E49073 /* SignUPInputView.swift in Sources */,
+				F8235CE82B74A14000E49073 /* CommonInputView.swift in Sources */,
 				F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */,
 				F8AD25152C0764D2004D1CBB /* ConfirmButton.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
