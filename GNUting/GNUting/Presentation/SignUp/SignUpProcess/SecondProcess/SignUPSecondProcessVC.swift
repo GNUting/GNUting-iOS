@@ -10,7 +10,9 @@ import UIKit
 class SignUPSecondProcessVC: BaseViewController{
     
     var selectedDate : String = ""
-    var nickNameCheck: Bool = false
+    private var nickNameCheck: Bool = false
+    private var phoneNumberCheck: Bool = false
+    
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -39,6 +41,8 @@ class SignUPSecondProcessVC: BaseViewController{
         signUPInpuView.textFieldType = .phoneNumber
         signUPInpuView.setKeyboardTypeNumberPad()
         signUPInpuView.inputViewTextFiledDelegate = self
+        signUPInpuView.phoneNumberDelegate = self
+        
         return signUPInpuView
     }()
     private lazy var genderView : SelectGenderView = {
@@ -179,10 +183,11 @@ extension SignUPSecondProcessVC{
             
         }
         
+        
     }
     private func checkEnableNextButton(){
 
-        if nickNameCheck == true && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() {
+        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
@@ -298,5 +303,16 @@ extension SignUPSecondProcessVC: NicknameTextfiledDelegate {
 extension SignUPSecondProcessVC: InputViewTextFiledDelegate{
     func shouldEndEdting() {
         checkEnableNextButton()
+    }
+}
+extension SignUPSecondProcessVC: PhoneNumberDelegate {
+    func phoneNumberKeyBoardReturn(textFieldCount: Int) {
+        if textFieldCount == 13 {
+            phoneNumberCheck = true
+            phoneNumberInputView.setCheckLabel(isHidden: false, text: "올바른 전화번호입니다.", success: true)
+        } else {
+            phoneNumberCheck = false
+            phoneNumberInputView.setCheckLabel(isHidden: false, text: "전화번호 입력이 올바르지 않습니다.", success: false)
+        }
     }
 }

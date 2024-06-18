@@ -21,6 +21,11 @@ protocol PasswordCheckDelegate {
 protocol InputViewTextFiledDelegate {
     func shouldEndEdting()
 }
+
+protocol PhoneNumberDelegate {
+    func phoneNumberKeyBoardReturn(textFieldCount: Int)
+}
+
 class SignUPInputView : UIView{
     
     // MARK: - Properties
@@ -28,6 +33,7 @@ class SignUPInputView : UIView{
     var passwordDelegate : PasswordDelegate? // 비밀번호 return action
     var passwordCheckDelegate : PasswordCheckDelegate? // 비밀번호 확인
     var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
+    var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
     var textFieldType : SignUpInputViewType? // inputView 타입
     
     // MARK: - SubViews
@@ -102,6 +108,7 @@ extension SignUPInputView{
         
     }
 }
+
 // MARK: - Method private
 
 extension SignUPInputView {
@@ -180,9 +187,11 @@ extension SignUPInputView: UITextFieldDelegate {
             passwordDelegate?.passwordkeyBoardReturn(text: textField.text ?? "")
         } else if textFieldType == .passwordCheck {
             passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textField.text ?? "")
-        } else {
-            inputViewTextFiledDelegate?.shouldEndEdting()
+        } else if textFieldType == .phoneNumber {
+            phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textField.text?.count ?? 0)
         }
+        
+        inputViewTextFiledDelegate?.shouldEndEdting()
         
         return true
     }
@@ -192,12 +201,15 @@ extension SignUPInputView: UITextFieldDelegate {
             passwordDelegate?.passwordkeyBoardReturn(text: textField.text ?? "")
         } else if textFieldType == .passwordCheck {
             passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textField.text ?? "")
-        } else {
-            inputViewTextFiledDelegate?.shouldEndEdting()
+        } else if textFieldType == .phoneNumber {
+            phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textField.text?.count ?? 0)
         }
+        
+        inputViewTextFiledDelegate?.shouldEndEdting()
         
         return textField.resignFirstResponder()
     }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
