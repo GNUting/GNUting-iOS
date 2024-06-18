@@ -69,7 +69,7 @@ final class UserDetailVC: BaseViewController {
 
 // MARK: - Layout Helpers
 
-extension UserDetailVC{
+extension UserDetailVC {
     private func setAddSubViews() {
         view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
     }

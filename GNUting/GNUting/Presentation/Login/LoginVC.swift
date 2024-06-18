@@ -111,7 +111,7 @@ final class LoginVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addSubViews()
+        setAddSubViews()
         setAutoLayout()
     }
     
@@ -125,7 +125,7 @@ final class LoginVC: BaseViewController {
 // MARK: - Layout Helpers
 
 extension LoginVC {
-    private func addSubViews() {
+    private func setAddSubViews() {
         view.addSubViews([appLogiImageView,explainLabel,textFieldStackView,bottomStackView])
         textFieldStackView.addStackSubViews([emailTextFieldView,passwordTextField,loginButton])
         bottomStackView.addStackSubViews([findPasswordButton,borderLabel,signUpButton])

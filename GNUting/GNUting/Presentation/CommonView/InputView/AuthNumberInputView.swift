@@ -86,7 +86,7 @@ final class AuthNumberInputView: UIView {
 
 // MARK: - Layout Helpers
 
-extension AuthNumberInputView{
+extension AuthNumberInputView {
     private func setAddSubViews() {
         addSubViews([inputTextTypeLabel,inputTextField,borderView,inputCheckLabel,remainNumberLabel,confirmButton])
     }
@@ -159,7 +159,7 @@ extension AuthNumberInputView {
 // MARK: - Action
 
 extension AuthNumberInputView {
-    @objc private func changeInputTextField(_ sender: UITextField){
+    @objc private func changeInputTextField(_ sender: UITextField) {
         if sender.text?.count == 0 {
             confirmButton.backgroundColor = UIColor(named: "DisableColor")
             confirmButton.isEnabled = false

@@ -28,22 +28,23 @@ protocol PhoneNumberDelegate {
     func phoneNumberKeyBoardReturn(textFieldCount: Int)
 }
 
-class SignUPInputView : UIView{
+class SignUPInputView: UIView {
     
     // MARK: - Properties
     
-    var passwordDelegate : PasswordDelegate? // 비밀번호 return action
-    var passwordCheckDelegate : PasswordCheckDelegate? // 비밀번호 확인
+    var passwordDelegate: PasswordDelegate? // 비밀번호 return action
+    var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
     var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
     var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
-    var textFieldType : SignUpInputViewType? // inputView 타입
+    var textFieldType: SignUpInputViewType? // inputView 타입
     
     // MARK: - SubViews
     
-    private lazy var inputTextTypeLabel : UILabel = {
-        let uiLabel = UILabel()
-        uiLabel.font = Pretendard.medium(size: 14)
-        return uiLabel
+    private lazy var inputTextTypeLabel: UILabel = {
+        let label = UILabel()
+        label.font = Pretendard.medium(size: 14)
+        
+        return label
     }()
     
     private lazy var inputTextField : UITextField = {
@@ -55,18 +56,20 @@ class SignUPInputView : UIView{
     }()
     
     
-    private let bottomLine : UIView = {
+    private let bottomLine: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
+        
         return view
     }()
-    private lazy var inputCheckLabel : UILabel = {
+    private lazy var inputCheckLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = Pretendard.bold(size: 12)
         label.isHidden = true
         label.numberOfLines = 2
+        
         return label
     }()
     
@@ -74,7 +77,9 @@ class SignUPInputView : UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        
+        setAddSubViews()
+        setAutoLayout()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -83,13 +88,16 @@ class SignUPInputView : UIView{
 
 // MARK: - Layout Helpers
 
-extension SignUPInputView{
-    private func configure(){
+extension SignUPInputView {
+    private func setAddSubViews() {
         self.addSubViews([inputTextTypeLabel,inputTextField,bottomLine,inputCheckLabel])
-        
+    }
+
+    private func setAutoLayout() {
         inputTextTypeLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }
+        
         inputTextField.snp.makeConstraints { make in
             make.top.equalTo(inputTextTypeLabel.snp.bottom).offset(14)
             make.left.right.equalToSuperview()
@@ -97,17 +105,14 @@ extension SignUPInputView{
         
         bottomLine.snp.makeConstraints { make in
             make.top.equalTo(inputTextField.snp.bottom).offset(6)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(1)
         }
+        
         inputCheckLabel.snp.makeConstraints { make in
             make.top.equalTo(bottomLine.snp.bottom).offset(4)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
         }
-        
     }
 }
 
@@ -118,6 +123,7 @@ extension SignUPInputView {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
+        
         for ch in mask where index < numbers.endIndex {
             if ch == "X" {
                 result.append(numbers[index])
@@ -136,15 +142,19 @@ extension SignUPInputView{
     func setInputTextTypeLabel(text: String){
         inputTextTypeLabel.text = text
     }
+    
     func setFoucInputTextFiled() {
         inputTextField.becomeFirstResponder()
     }
+    
     func setPlaceholder(placeholder: String){
         inputTextField.placeholder = placeholder
     }
+    
     func setTextField(text: String) {
         inputTextField.text = text
     }
+    
     func isEmpty() -> Bool{
         return inputTextField.text?.count == 0 ? true : false
     }
@@ -164,6 +174,7 @@ extension SignUPInputView{
             inputCheckLabel.textColor = UIColor(named: "PrimaryColor")
         }
     }
+    
     func getTextFieldText() -> String {
         inputTextField.text ?? ""
     }
@@ -171,6 +182,7 @@ extension SignUPInputView{
     func setKeyboardTypeNumberPad() {
         inputTextField.keyboardType = .numberPad
     }
+    
     func setSecureTextEntry() {
         inputTextField.isSecureTextEntry = true
     }
@@ -181,8 +193,8 @@ extension SignUPInputView{
 extension SignUPInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-        
     }
+    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
         if textFieldType == .password {

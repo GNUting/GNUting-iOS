@@ -29,6 +29,7 @@ final class ConfirmButton: ThrottleButton {
 extension ConfirmButton {
     public func setConfiguration(title: String) {
         var configuration = UIButton.Configuration.plain()
+        
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         configuration.attributedTitle = AttributedString("\(title)", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.white]))
         configuration.titleAlignment = .center

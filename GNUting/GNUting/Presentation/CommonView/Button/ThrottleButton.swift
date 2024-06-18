@@ -45,6 +45,7 @@ extension ThrottleButton {
                 self?.workItem = nil
             })
             self.workItem = workItem
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + self.delay, execute: workItem)
         }
     }
