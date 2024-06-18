@@ -5,9 +5,12 @@
 //  Created by 원동진 on 2/8/24.
 // Code 정리 Start
 
+// MARK: - Common InputView
+
 import Foundation
 import UIKit
 
+// MARK: - Protocol
 
 protocol PasswordInputDelegate {
     func passwordKeyboarReturn(text: String)
@@ -19,11 +22,15 @@ protocol InputViewTextFiledDelegate {
     func ShouldEndEdting(textFieldCount: Int?)
 }
 class SignUPInputView : UIView{
-
+    
+    // MARK: - Properties
+    
     var passwordInputDelegate : PasswordInputDelegate?
     var passwordCheckDelegate : PasswordCheckDelegate?
     var inputViewTextFiledDelegate: InputViewTextFiledDelegate?
-    var textFieldType : SignUpInputViewType = .email
+    var textFieldType : SignUpInputViewType?
+    
+    // MARK: - SubViews
     
     private lazy var inputTextTypeLabel : UILabel = {
         let uiLabel = UILabel()
@@ -54,6 +61,9 @@ class SignUPInputView : UIView{
         label.numberOfLines = 2
         return label
     }()
+    
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -62,6 +72,9 @@ class SignUPInputView : UIView{
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// MARK: - Layout Helpers
+
 extension SignUPInputView{
     private func configure(){
         self.addSubViews([inputTextTypeLabel,inputTextField,bottomLine,inputCheckLabel])
@@ -88,8 +101,11 @@ extension SignUPInputView{
         }
 
     }
-    
-    private  func format(mask : String,phone : String) -> String{ // format함수
+}
+// MARK: - Method private
+
+extension SignUPInputView {
+    private func format(mask : String,phone : String) -> String{ // format함수
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
@@ -104,6 +120,9 @@ extension SignUPInputView{
         return result
     }
 }
+
+// MARK: - Method public
+
 extension SignUPInputView{
     func setInputTextTypeLabel(text: String){
         inputTextTypeLabel.text = text
@@ -147,6 +166,8 @@ extension SignUPInputView{
         inputTextField.isSecureTextEntry = true
     }
 }
+
+// MARK: - Delegate
 
 extension SignUPInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
