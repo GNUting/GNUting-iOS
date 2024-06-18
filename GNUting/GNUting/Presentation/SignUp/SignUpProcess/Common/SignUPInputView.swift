@@ -62,7 +62,7 @@ final class SignUPInputView: UIView {
         
         return view
     }()
-    private lazy var inputCheckLabel: UILabel = {
+    private lazy var inputCheckLabel: UILabel = { // 입력값에 따른 분기처리를 위한 Label
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
@@ -135,28 +135,38 @@ extension SignUPInputView {
         
         return result
     }
+    
+    private func textFieldHandler(textFieldText: String) { // 텍스트필드 타입에 따른 action 처리
+        if textFieldType == .password {
+            passwordDelegate?.passwordkeyBoardReturn(text: textFieldText)
+        } else if textFieldType == .passwordCheck {
+            passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textFieldText)
+        } else if textFieldType == .phoneNumber {
+            phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textFieldText.count)
+        }
+    }
 }
 
 // MARK: - Method public
 
 extension SignUPInputView{
-    public func setInputTextTypeLabel(text: String) {
+    public func setInputTextTypeLabel(text: String) { // 입력 카테고리 Label
         inputTextTypeLabel.text = text
     }
     
-    public func setPlaceholder(placeholder: String) {
+    public func setPlaceholder(placeholder: String) { // textField placeholder 설정
         inputTextField.placeholder = placeholder
     }
     
-    public func setTextField(text: String) {
+    public func setTextField(text: String) { // textField text 설정
         inputTextField.text = text
     }
     
-    public func isEmpty() -> Bool {
+    public func isEmpty() -> Bool { // textField isEmpty 확인
         return inputTextField.text?.count == 0 ? true : false
     }
     
-    public func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) {
+    public func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
         inputCheckLabel.isHidden = isHidden
         inputCheckLabel.text = text
         
@@ -171,11 +181,11 @@ extension SignUPInputView{
         inputTextField.text ?? ""
     }
     
-    public func setKeyboardTypeNumberPad() {
+    public func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
         inputTextField.keyboardType = .numberPad
     }
     
-    public func setSecureTextEntry() {
+    public func setSecureTextEntry() { // 비밀번호
         inputTextField.isSecureTextEntry = true
     }
 }
@@ -183,37 +193,21 @@ extension SignUPInputView{
 // MARK: - Delegate
 
 extension SignUPInputView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) { // TextField 입력 시작
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        if textFieldType == .password {
-            passwordDelegate?.passwordkeyBoardReturn(text: textField.text ?? "")
-        } else if textFieldType == .passwordCheck {
-            passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textField.text ?? "")
-        } else if textFieldType == .phoneNumber {
-            phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textField.text?.count ?? 0)
-        }
-        
-        inputViewTextFiledDelegate?.shouldEndEdting()
-        
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textFieldType == .password {
-            passwordDelegate?.passwordkeyBoardReturn(text: textField.text ?? "")
-        } else if textFieldType == .passwordCheck {
-            passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textField.text ?? "")
-        } else if textFieldType == .phoneNumber {
-            phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textField.text?.count ?? 0)
-        }
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return 누
+        textFieldHandler(textFieldText: textField.text ?? "")
         inputViewTextFiledDelegate?.shouldEndEdting()
         
         return textField.resignFirstResponder()
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldHandler(textFieldText: textField.text ?? "")
+        inputViewTextFiledDelegate?.shouldEndEdting()
+        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -223,11 +217,13 @@ extension SignUPInputView: UITextFieldDelegate {
                 return true
             }
         }
+        
         switch textFieldType {
         case .phoneNumber:
             guard let text = textField.text else { return false }
             let newString = (text as NSString).replacingCharacters(in: range, with: string)
             textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
+            
             return false
         case .name:
             guard textField.text?.count ?? 0 < 8 else { return false }
@@ -240,7 +236,7 @@ extension SignUPInputView: UITextFieldDelegate {
         default:
             break
         }
+        
         return true
     }
-    
 }
