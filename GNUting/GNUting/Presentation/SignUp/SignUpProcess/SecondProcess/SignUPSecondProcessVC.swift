@@ -309,10 +309,10 @@ extension SignUPSecondProcessVC: PhoneNumberDelegate {
     func phoneNumberKeyBoardReturn(textFieldCount: Int) {
         if textFieldCount == 13 {
             phoneNumberCheck = true
-            phoneNumberInputView.setCheckLabel(isHidden: false, text: "올바른 전화번호입니다.", success: true)
+            phoneNumberInputView.setInputCheckLabel(isHidden: false, text: "올바른 전화번호입니다.", success: true)
         } else {
             phoneNumberCheck = false
-            phoneNumberInputView.setCheckLabel(isHidden: false, text: "전화번호 입력이 올바르지 않습니다.", success: false)
+            phoneNumberInputView.setInputCheckLabel(isHidden: false, text: "전화번호 입력이 올바르지 않습니다.", success: false)
         }
     }
 }

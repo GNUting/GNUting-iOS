@@ -12,27 +12,27 @@ import UIKit
 
 // MARK: - Protocol
 
-protocol PasswordDelegate {
+protocol PasswordDelegate: AnyObject {
     func passwordkeyBoardReturn(text: String)
 }
 
-protocol PasswordCheckDelegate {
+protocol PasswordCheckDelegate: AnyObject {
     func passwordCheckKeyboardReturn(text: String)
 }
 
-protocol InputViewTextFiledDelegate {
+protocol InputViewTextFiledDelegate: AnyObject {
     func shouldEndEdting()
 }
 
-protocol PhoneNumberDelegate {
+protocol PhoneNumberDelegate: AnyObject {
     func phoneNumberKeyBoardReturn(textFieldCount: Int)
 }
 
-class SignUPInputView: UIView {
+final class SignUPInputView: UIView {
     
     // MARK: - Properties
     
-    var passwordDelegate: PasswordDelegate? // 비밀번호 return action
+    public weak var passwordDelegate: PasswordDelegate? // 비밀번호 return action
     var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
     var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
     var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
@@ -119,7 +119,7 @@ extension SignUPInputView {
 // MARK: - Method private
 
 extension SignUPInputView {
-    private func format(mask : String,phone : String) -> String{ // format함수
+    private func format(mask: String, phone: String) -> String { // 전화번호 format 함수
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
@@ -132,6 +132,7 @@ extension SignUPInputView {
                 result.append(ch)
             }
         }
+        
         return result
     }
 }
@@ -139,35 +140,26 @@ extension SignUPInputView {
 // MARK: - Method public
 
 extension SignUPInputView{
-    func setInputTextTypeLabel(text: String){
+    public func setInputTextTypeLabel(text: String) {
         inputTextTypeLabel.text = text
     }
     
-    func setFoucInputTextFiled() {
-        inputTextField.becomeFirstResponder()
-    }
-    
-    func setPlaceholder(placeholder: String){
+    public func setPlaceholder(placeholder: String) {
         inputTextField.placeholder = placeholder
     }
     
-    func setTextField(text: String) {
+    public func setTextField(text: String) {
         inputTextField.text = text
     }
     
-    func isEmpty() -> Bool{
+    public func isEmpty() -> Bool {
         return inputTextField.text?.count == 0 ? true : false
     }
     
-    func setUnderLineColor(color: UIColor){
-        bottomLine.backgroundColor = color
-    }
-    
-    func setCheckLabel(isHidden: Bool,text: String?,success:Bool){
+    public func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) {
         inputCheckLabel.isHidden = isHidden
-        if !isHidden {
-            inputCheckLabel.text = text
-        }
+        inputCheckLabel.text = text
+        
         if success {
             inputCheckLabel.textColor = UIColor(named: "SecondaryColor")
         } else {
@@ -175,15 +167,15 @@ extension SignUPInputView{
         }
     }
     
-    func getTextFieldText() -> String {
+    public func getTextFieldText() -> String {
         inputTextField.text ?? ""
     }
     
-    func setKeyboardTypeNumberPad() {
+    public func setKeyboardTypeNumberPad() {
         inputTextField.keyboardType = .numberPad
     }
     
-    func setSecureTextEntry() {
+    public func setSecureTextEntry() {
         inputTextField.isSecureTextEntry = true
     }
 }

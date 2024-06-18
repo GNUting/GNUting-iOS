@@ -198,11 +198,11 @@ extension FindPasswordVC: PasswordCheckDelegate {
         if passwordTestFiledText == text {
             samePasswordSuccess = true
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
+            passWordCheckInputView.setInputCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
         }else {
             samePasswordSuccess = false
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.", success: false)
+            passWordCheckInputView.setInputCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.", success: false)
             
         }
     }
@@ -212,9 +212,9 @@ extension FindPasswordVC: PasswordDelegate {
         let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
         let checkPassword = text.range(of: regex,options: .regularExpression) != nil
         if !checkPassword {
-            passWordInputView.setCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
+            passWordInputView.setInputCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
         } else {
-            passWordInputView.setCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
+            passWordInputView.setInputCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
         }
     }
 }
