@@ -12,23 +12,23 @@ import UIKit
 
 // MARK: - Protocol
 
-protocol PasswordInputDelegate {
-    func passwordKeyboarReturn(text: String)
+protocol PasswordDelegate {
+    func passwordkeyBoardReturn(text: String)
 }
 protocol PasswordCheckDelegate {
-    func keyboarReturn(text: String)
+    func passwordCheckKeyboardReturn(text: String)
 }
 protocol InputViewTextFiledDelegate {
-    func ShouldEndEdting(textFieldCount: Int?)
+    func shouldEndEdting()
 }
 class SignUPInputView : UIView{
     
     // MARK: - Properties
     
-    var passwordInputDelegate : PasswordInputDelegate?
-    var passwordCheckDelegate : PasswordCheckDelegate?
-    var inputViewTextFiledDelegate: InputViewTextFiledDelegate?
-    var textFieldType : SignUpInputViewType?
+    var passwordDelegate : PasswordDelegate? // 비밀번호 return action
+    var passwordCheckDelegate : PasswordCheckDelegate? // 비밀번호 확인
+    var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
+    var textFieldType : SignUpInputViewType? // inputView 타입
     
     // MARK: - SubViews
     
@@ -37,16 +37,16 @@ class SignUPInputView : UIView{
         uiLabel.font = Pretendard.medium(size: 14)
         return uiLabel
     }()
-
+    
     private lazy var inputTextField : UITextField = {
         let textField = UITextField()
         textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
-
+        
         return textField
     }()
-   
-
+    
+    
     private let bottomLine : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
@@ -99,7 +99,7 @@ extension SignUPInputView{
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-
+        
     }
 }
 // MARK: - Method private
@@ -139,11 +139,11 @@ extension SignUPInputView{
     func isEmpty() -> Bool{
         return inputTextField.text?.count == 0 ? true : false
     }
-
+    
     func setUnderLineColor(color: UIColor){
         bottomLine.backgroundColor = color
     }
-
+    
     func setCheckLabel(isHidden: Bool,text: String?,success:Bool){
         inputCheckLabel.isHidden = isHidden
         if !isHidden {
@@ -176,20 +176,24 @@ extension SignUPInputView: UITextFieldDelegate {
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        if textFieldType == .passwordCheck {
-            passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
-        } else if textFieldType == .password {
-            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
+        if textFieldType == .password {
+            passwordDelegate?.passwordkeyBoardReturn(text: textField.text ?? "")
+        } else if textFieldType == .passwordCheck {
+            passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textField.text ?? "")
+        } else {
+            inputViewTextFiledDelegate?.shouldEndEdting()
         }
-        inputViewTextFiledDelegate?.ShouldEndEdting(textFieldCount: textField.text?.count)
+        
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textFieldType == .passwordCheck {
-            passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
-        } else if textFieldType == .password {
-            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
+        if textFieldType == .password {
+            passwordDelegate?.passwordkeyBoardReturn(text: textField.text ?? "")
+        } else if textFieldType == .passwordCheck {
+            passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textField.text ?? "")
+        } else {
+            inputViewTextFiledDelegate?.shouldEndEdting()
         }
         
         return textField.resignFirstResponder()

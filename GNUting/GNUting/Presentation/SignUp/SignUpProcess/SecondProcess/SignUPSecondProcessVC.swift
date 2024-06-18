@@ -118,11 +118,12 @@ class SignUPSecondProcessVC: BaseViewController{
     }()
     
     private lazy var introduceOneLine : SignUPInputView = {
-        let studentIDInputView = SignUPInputView()
-        studentIDInputView.setInputTextTypeLabel(text: "한줄소개")
-        studentIDInputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
-        studentIDInputView.textFieldType = .introduce
-        return studentIDInputView
+        let inputView = SignUPInputView()
+        inputView.setInputTextTypeLabel(text: "한줄소개")
+        inputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
+        inputView.textFieldType = .introduce
+        inputView.inputViewTextFiledDelegate = self
+        return inputView
     }()
     
     private lazy var nextButton : PrimaryColorButton = {
@@ -181,7 +182,7 @@ extension SignUPSecondProcessVC{
     }
     private func checkEnableNextButton(){
 
-        if nickNameCheck == true && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty(){
+        if nickNameCheck == true && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
@@ -295,7 +296,7 @@ extension SignUPSecondProcessVC: NicknameTextfiledDelegate {
 
 }
 extension SignUPSecondProcessVC: InputViewTextFiledDelegate{
-    func ShouldEndEdting(textFieldCount: Int?) {
+    func shouldEndEdting() {
         checkEnableNextButton()
     }
 }

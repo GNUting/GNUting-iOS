@@ -43,7 +43,7 @@ class FindPasswordVC: BaseViewController {
         
         signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
-        signUPInpuView.passwordInputDelegate = self
+        signUPInpuView.passwordDelegate = self
         signUPInpuView.setSecureTextEntry()
         return signUPInpuView
     }()
@@ -192,13 +192,13 @@ extension FindPasswordVC: AuthNumberInputViewDelegate{
     }
 }
 extension FindPasswordVC: PasswordCheckDelegate {
-    func keyboarReturn(text: String) {
+    func passwordCheckKeyboardReturn(text: String) {
         let passwordTestFiledText = passWordInputView.getTextFieldText()
         
         if passwordTestFiledText == text {
             samePasswordSuccess = true
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: true, text: "비밀번호가 일치합니다.", success: true)
+            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
         }else {
             samePasswordSuccess = false
             nextButtonEnable()
@@ -207,15 +207,14 @@ extension FindPasswordVC: PasswordCheckDelegate {
         }
     }
 }
-extension FindPasswordVC: PasswordInputDelegate {
-    func passwordKeyboarReturn(text: String) {
+extension FindPasswordVC: PasswordDelegate {
+    func passwordkeyBoardReturn(text: String) {
         let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
         let checkPassword = text.range(of: regex,options: .regularExpression) != nil
         if !checkPassword {
             passWordInputView.setCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
         } else {
-            passWordInputView.setCheckLabel(isHidden: true, text: "",success: true)
+            passWordInputView.setCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
         }
     }
-  
 }
