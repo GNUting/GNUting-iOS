@@ -3,7 +3,7 @@
 //  GNUting
 //
 //  Created by 원동진 on 2/8/24.
-//
+// Code 정리 Start
 
 import Foundation
 import UIKit

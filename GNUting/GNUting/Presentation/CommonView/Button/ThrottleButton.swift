@@ -10,6 +10,9 @@
 import UIKit
 
 class ThrottleButton: UIButton {
+    
+    // MARK: - deinit
+    
     deinit {
         self.removeTarget(self, action: #selector(self.editingChanged(_:)), for: .touchUpInside)
     }
@@ -24,7 +27,7 @@ class ThrottleButton: UIButton {
 // MARK: - Method
 
 extension ThrottleButton {
-    func throttle(delay: Double, callback: @escaping ((Date) -> Void)) {
+    public func throttle(delay: Double, callback: @escaping ((Date) -> Void)) {
         self.delay = delay
         self.callback = callback
         self.addTarget(self, action: #selector(self.editingChanged(_:)), for: .touchUpInside)
