@@ -28,7 +28,7 @@ protocol PhoneNumberDelegate: AnyObject {
     func phoneNumberKeyBoardReturn(textFieldCount: Int)
 }
 
-final class SignUPInputView: UIView {
+final class CommonInputView: UIView {
     
     // MARK: - Properties
     
@@ -88,7 +88,7 @@ final class SignUPInputView: UIView {
 
 // MARK: - Layout Helpers
 
-extension SignUPInputView {
+extension CommonInputView {
     private func setAddSubViews() {
         self.addSubViews([inputTextTypeLabel,inputTextField,bottomLine,inputCheckLabel])
     }
@@ -118,7 +118,7 @@ extension SignUPInputView {
 
 // MARK: - Method private
 
-extension SignUPInputView {
+extension CommonInputView {
     private func format(mask: String, phone: String) -> String { // 전화번호 format 함수
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
@@ -149,7 +149,7 @@ extension SignUPInputView {
 
 // MARK: - Method public
 
-extension SignUPInputView{
+extension CommonInputView {
     public func setInputTextTypeLabel(text: String) { // 입력 카테고리 Label
         inputTextTypeLabel.text = text
     }
@@ -192,7 +192,7 @@ extension SignUPInputView{
 
 // MARK: - Delegate
 
-extension SignUPInputView: UITextFieldDelegate {
+extension CommonInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) { // TextField 입력 시작
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
     }
