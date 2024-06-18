@@ -15,7 +15,7 @@ protocol AuthNumberInputViewDelegate: AnyObject {
     func tapComfirmButton(authNumber: String)
 }
 
-final class AuthNumberInputView : UIView {
+final class AuthNumberInputView: UIView {
     
     // MARK: - Properties
     

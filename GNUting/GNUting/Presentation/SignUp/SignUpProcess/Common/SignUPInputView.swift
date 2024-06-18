@@ -5,7 +5,7 @@
 //  Created by 원동진 on 2/8/24.
 // Code 정리 Start
 
-// MARK: - Common InputView
+// MARK: - 회원가입, 비밀번호찾기, 프로필 업데이트, InputView
 
 import Foundation
 import UIKit
@@ -15,9 +15,11 @@ import UIKit
 protocol PasswordDelegate {
     func passwordkeyBoardReturn(text: String)
 }
+
 protocol PasswordCheckDelegate {
     func passwordCheckKeyboardReturn(text: String)
 }
+
 protocol InputViewTextFiledDelegate {
     func shouldEndEdting()
 }
