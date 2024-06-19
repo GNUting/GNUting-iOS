@@ -99,7 +99,7 @@ enum EndPoint{
 
 private extension URL{
 //    static let baseURL = "http://203.255.3.66:10001/api/v1/"
-    static let baseURL = "http://localhost:10001/api/v1/"
+    static let baseURL = "http://localhost:10001/api/v1/" // Test
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
@@ -110,5 +110,5 @@ private extension URL{
 class BaseURL {
     static let shared = BaseURL()
 //    let urlString = "http://203.255.3.66:10001/api/v1/"
-    let urlString = "http://localhost:10001/api/v1/"
+    let urlString = "http://localhost:10001/api/v1/" // Test
 }

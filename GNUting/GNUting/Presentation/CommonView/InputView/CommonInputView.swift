@@ -150,6 +150,9 @@ extension CommonInputView {
 // MARK: - Method public
 
 extension CommonInputView {
+    
+    // MARK: - Set
+    
     public func setInputTextTypeLabel(text: String) { // 입력 카테고리 Label
         inputTextTypeLabel.text = text
     }
@@ -177,16 +180,18 @@ extension CommonInputView {
         }
     }
     
-    public func getTextFieldText() -> String {
-        inputTextField.text ?? ""
-    }
-    
     public func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
         inputTextField.keyboardType = .numberPad
     }
     
     public func setSecureTextEntry() { // 비밀번호
         inputTextField.isSecureTextEntry = true
+    }
+    
+    // MARK: - Get
+    
+    public func getTextFieldText() -> String {
+        inputTextField.text ?? ""
     }
 }
 

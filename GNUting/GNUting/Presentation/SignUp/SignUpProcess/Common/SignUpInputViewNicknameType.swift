@@ -5,8 +5,11 @@
 //  Created by 원동진 on 5/1/24.
 //
 
+// MARK: - 회원가입, 프롶필 업데이트 닉네임 InputView
+
 import UIKit
 
+// MARK: - Protocol
 
 protocol NicknameCheckButtonDelegate {
     func action(textFieldText: String)
@@ -16,17 +19,24 @@ protocol NicknameTextfiledDelegate {
     func endEdit()
 }
 
-class SignUpInputViewNicknameType : UIView{
+class SignUpInputViewNicknameType: UIView {
+    
+    // MARK: - Properties
+    
     var nicknameCheckButtonDelegate: NicknameCheckButtonDelegate?
     var nicknameTextfiledDelegate: NicknameTextfiledDelegate?
-    private lazy var inputTypeLabel : UILabel = {
+    
+    // MARK: - SubViews
+    
+    private lazy var inputTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
         label.font = Pretendard.medium(size: 14)
+        
         return label
     }()
     
-    private lazy var inputTextField : UITextField = {
+    private lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
@@ -34,19 +44,22 @@ class SignUpInputViewNicknameType : UIView{
         
         return textField
     }()
-    private lazy var emailLabel : UILabel = {
-        let uiLabel = UILabel()
-        uiLabel.text = "@gnu.ac.kr"
-        uiLabel.font = Pretendard.regular(size: 14)
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = "@gnu.ac.kr"
+        label.font = Pretendard.regular(size: 14)
         
-        return uiLabel
+        return label
     }()
-    private let bottomLine : UIView = {
+    
+    private let bottomLine: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
+        
         return view
     }()
-    private lazy var nicknameCheckButton : ThrottleButton = {
+    
+    private lazy var nicknameCheckButton: ThrottleButton = {
         
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -62,8 +75,10 @@ class SignUpInputViewNicknameType : UIView{
         button.throttle(delay: 3) { _ in
             self.getNickname()
         }
+        
         return button
     }()
+    
     private lazy var inputCheckLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -72,59 +87,66 @@ class SignUpInputViewNicknameType : UIView{
         
         return label
     }()
+    
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setAddSubViews()
         setAutoLayout()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension SignUpInputViewNicknameType{
+
+// MARK: - Layout Helpers
+
+extension SignUpInputViewNicknameType {
     private func setAddSubViews() {
         addSubViews([inputTypeLabel,inputTextField,bottomLine,nicknameCheckButton,inputCheckLabel])
-                     
     }
-    private func setAutoLayout(){
+    
+    private func setAutoLayout() {
         inputTypeLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-
         }
+        
         inputTextField.snp.makeConstraints { make in
             make.top.equalTo(inputTypeLabel.snp.bottom).offset(6)
             make.left.equalToSuperview()
         }
+        
         bottomLine.snp.makeConstraints { make in
             make.top.equalTo(inputTextField.snp.bottom).offset(6)
             make.height.equalTo(1)
             make.width.equalTo(inputTextField)
             
         }
+        
         inputCheckLabel.snp.makeConstraints { make in
             make.top.equalTo(bottomLine.snp.bottom).offset(6)
             make.left.right.bottom.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
         nicknameCheckButton.snp.makeConstraints { make in
             make.top.right.equalToSuperview()
             make.left.equalTo(inputTextField.snp.right).offset(15)
             
             make.width.equalTo(80)
         }
-        
-        
     }
 }
+
+// MARK: - Method public
+
 extension SignUpInputViewNicknameType {
-    func setFoucInputTextFiled() { // 포커스 주기
-        inputTextField.becomeFirstResponder()
-    }
-   
-    func getTextFieldText() -> String { // 텍스트 필드 받아오기
-        inputTextField.text ?? ""
-    }
+    
+    // MARK: - Set
+    
     func setCheckLabel(isHidden: Bool,text: String?,success:Bool){
         inputCheckLabel.isHidden = isHidden
         if !isHidden {
@@ -136,12 +158,22 @@ extension SignUpInputViewNicknameType {
             inputCheckLabel.textColor = UIColor(named: "PrimaryColor")
         }
     }
+    
     func setTextField(text: String) {
         inputTextField.text = text
     }
+    
+    // MARK: - Get
+    
+    func getTextFieldText() -> String { // 텍스트 필드 받아오기
+        inputTextField.text ?? ""
+    }
 }
+
+// MARK: - Button Action
+
 extension SignUpInputViewNicknameType {
-    @objc private func changeInputTextField(_ sender: UITextField){
+    @objc private func changeInputTextField(_ sender: UITextField) {
         if sender.text?.count == 0 {
             nicknameCheckButton.backgroundColor = UIColor(hexCode: "979C9E")
         } else {
@@ -151,10 +183,11 @@ extension SignUpInputViewNicknameType {
     }
     private func getNickname(){
         nicknameCheckButtonDelegate?.action(textFieldText: inputTextField.text ?? "")
-        
     }
-    
 }
+
+// MARK: - Delegate
+
 extension SignUpInputViewNicknameType: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
