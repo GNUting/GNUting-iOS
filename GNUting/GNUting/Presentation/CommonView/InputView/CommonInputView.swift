@@ -5,70 +5,99 @@
 //  Created by 원동진 on 2/8/24.
 // Code 정리 Start
 
+// MARK: - 회원가입, 비밀번호찾기, 프로필 업데이트, InputView
+
 import Foundation
 import UIKit
 
+// MARK: - Protocol
 
-protocol PasswordInputDelegate {
-    func passwordKeyboarReturn(text: String)
+protocol PasswordDelegate: AnyObject {
+    func passwordkeyBoardReturn(text: String)
 }
-protocol PasswordCheckDelegate {
-    func keyboarReturn(text: String)
-}
-protocol InputViewTextFiledDelegate {
-    func ShouldEndEdting(textFieldCount: Int?)
-}
-class SignUPInputView : UIView{
 
-    var passwordInputDelegate : PasswordInputDelegate?
-    var passwordCheckDelegate : PasswordCheckDelegate?
-    var inputViewTextFiledDelegate: InputViewTextFiledDelegate?
-    var textFieldType : SignUpInputViewType = .email
+protocol PasswordCheckDelegate: AnyObject {
+    func passwordCheckKeyboardReturn(text: String)
+}
+
+protocol InputViewTextFiledDelegate: AnyObject {
+    func shouldEndEdting()
+}
+
+protocol PhoneNumberDelegate: AnyObject {
+    func phoneNumberKeyBoardReturn(textFieldCount: Int)
+}
+
+final class CommonInputView: UIView {
     
-    private lazy var inputTextTypeLabel : UILabel = {
-        let uiLabel = UILabel()
-        uiLabel.font = Pretendard.medium(size: 14)
-        return uiLabel
+    // MARK: - Properties
+    
+    public weak var passwordDelegate: PasswordDelegate? // 비밀번호 return action
+    var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
+    var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
+    var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
+    var textFieldType: SignUpInputViewType? // inputView 타입
+    
+    // MARK: - SubViews
+    
+    private lazy var inputTextTypeLabel: UILabel = {
+        let label = UILabel()
+        label.font = Pretendard.medium(size: 14)
+        
+        return label
     }()
-
+    
     private lazy var inputTextField : UITextField = {
         let textField = UITextField()
         textField.font = Pretendard.regular(size: 12)
         textField.delegate = self
-
+        
         return textField
     }()
-   
-
-    private let bottomLine : UIView = {
+    
+    
+    private let bottomLine: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "EAEAEA")
+        
         return view
     }()
-    private lazy var inputCheckLabel : UILabel = {
+    private lazy var inputCheckLabel: UILabel = { // 입력값에 따른 분기처리를 위한 Label
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = Pretendard.bold(size: 12)
         label.isHidden = true
         label.numberOfLines = 2
+        
         return label
     }()
+    
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        
+        setAddSubViews()
+        setAutoLayout()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension SignUPInputView{
-    private func configure(){
+
+// MARK: - Layout Helpers
+
+extension CommonInputView {
+    private func setAddSubViews() {
         self.addSubViews([inputTextTypeLabel,inputTextField,bottomLine,inputCheckLabel])
-        
+    }
+
+    private func setAutoLayout() {
         inputTextTypeLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }
+        
         inputTextField.snp.makeConstraints { make in
             make.top.equalTo(inputTextTypeLabel.snp.bottom).offset(14)
             make.left.right.equalToSuperview()
@@ -76,23 +105,25 @@ extension SignUPInputView{
         
         bottomLine.snp.makeConstraints { make in
             make.top.equalTo(inputTextField.snp.bottom).offset(6)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(1)
         }
+        
         inputCheckLabel.snp.makeConstraints { make in
             make.top.equalTo(bottomLine.snp.bottom).offset(4)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
         }
-
     }
-    
-    private  func format(mask : String,phone : String) -> String{ // format함수
+}
+
+// MARK: - Method private
+
+extension CommonInputView {
+    private func format(mask: String, phone: String) -> String { // 전화번호 format 함수
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
+        
         for ch in mask where index < numbers.endIndex {
             if ch == "X" {
                 result.append(numbers[index])
@@ -101,78 +132,84 @@ extension SignUPInputView{
                 result.append(ch)
             }
         }
+        
         return result
     }
+    
+    private func textFieldHandler(textFieldText: String) { // 텍스트필드 타입에 따른 action 처리
+        if textFieldType == .password {
+            passwordDelegate?.passwordkeyBoardReturn(text: textFieldText)
+        } else if textFieldType == .passwordCheck {
+            passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textFieldText)
+        } else if textFieldType == .phoneNumber {
+            phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textFieldText.count)
+        }
+    }
 }
-extension SignUPInputView{
-    func setInputTextTypeLabel(text: String){
+
+// MARK: - Method public
+
+extension CommonInputView {
+    public func setInputTextTypeLabel(text: String) { // 입력 카테고리 Label
         inputTextTypeLabel.text = text
     }
-    func setFoucInputTextFiled() {
-        inputTextField.becomeFirstResponder()
-    }
-    func setPlaceholder(placeholder: String){
+    
+    public func setPlaceholder(placeholder: String) { // textField placeholder 설정
         inputTextField.placeholder = placeholder
     }
-    func setTextField(text: String) {
+    
+    public func setTextField(text: String) { // textField text 설정
         inputTextField.text = text
     }
-    func isEmpty() -> Bool{
+    
+    public func isEmpty() -> Bool { // textField isEmpty 확인
         return inputTextField.text?.count == 0 ? true : false
     }
-
-    func setUnderLineColor(color: UIColor){
-        bottomLine.backgroundColor = color
-    }
-
-    func setCheckLabel(isHidden: Bool,text: String?,success:Bool){
+    
+    public func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
         inputCheckLabel.isHidden = isHidden
-        if !isHidden {
-            inputCheckLabel.text = text
-        }
+        inputCheckLabel.text = text
+        
         if success {
             inputCheckLabel.textColor = UIColor(named: "SecondaryColor")
         } else {
             inputCheckLabel.textColor = UIColor(named: "PrimaryColor")
         }
     }
-    func getTextFieldText() -> String {
+    
+    public func getTextFieldText() -> String {
         inputTextField.text ?? ""
     }
     
-    func setKeyboardTypeNumberPad() {
+    public func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
         inputTextField.keyboardType = .numberPad
     }
-    func setSecureTextEntry() {
+    
+    public func setSecureTextEntry() { // 비밀번호
         inputTextField.isSecureTextEntry = true
     }
 }
 
-extension SignUPInputView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+// MARK: - Delegate
+
+extension CommonInputView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) { // TextField 입력 시작
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
-        
-    }
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
-        if textFieldType == .passwordCheck {
-            passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
-        } else if textFieldType == .password {
-            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
-        }
-        inputViewTextFiledDelegate?.ShouldEndEdting(textFieldCount: textField.text?.count)
-        return true
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textFieldType == .passwordCheck {
-            passwordCheckDelegate?.keyboarReturn(text: textField.text ?? "")
-        } else if textFieldType == .password {
-            passwordInputDelegate?.passwordKeyboarReturn(text: textField.text ?? "")
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return 누
+        textFieldHandler(textFieldText: textField.text ?? "")
+        inputViewTextFiledDelegate?.shouldEndEdting()
         
         return textField.resignFirstResponder()
     }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldHandler(textFieldText: textField.text ?? "")
+        inputViewTextFiledDelegate?.shouldEndEdting()
+        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -180,11 +217,13 @@ extension SignUPInputView: UITextFieldDelegate {
                 return true
             }
         }
+        
         switch textFieldType {
         case .phoneNumber:
             guard let text = textField.text else { return false }
             let newString = (text as NSString).replacingCharacters(in: range, with: string)
             textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
+            
             return false
         case .name:
             guard textField.text?.count ?? 0 < 8 else { return false }
@@ -197,7 +236,7 @@ extension SignUPInputView: UITextFieldDelegate {
         default:
             break
         }
+        
         return true
     }
-    
 }

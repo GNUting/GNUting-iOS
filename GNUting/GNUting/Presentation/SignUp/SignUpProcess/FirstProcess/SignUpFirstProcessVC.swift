@@ -58,17 +58,17 @@ final class SignUpFirstProcessVC: BaseViewController{
         
         return signUPInpuView
     }()
-    private lazy var passWordInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var passWordInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "비밀번호")
         signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
         signUPInpuView.textFieldType = .password
         signUPInpuView.setSecureTextEntry()
-        signUPInpuView.passwordInputDelegate = self
+        signUPInpuView.passwordDelegate = self
         return signUPInpuView
     }()
-    private lazy var passWordCheckInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var passWordCheckInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "비밀번호 확인")
         signUPInpuView.setPlaceholder(placeholder: "비밀번호와 동일하게 입력해주세요.")
         signUPInpuView.textFieldType = .passwordCheck
@@ -196,31 +196,30 @@ extension SignUpFirstProcessVC: AuthNumberInputViewDelegate{
     }
 }
 extension SignUpFirstProcessVC: PasswordCheckDelegate {
-    func keyboarReturn(text: String) {
+    func passwordCheckKeyboardReturn(text: String) {
         let passwordTestFiledText = passWordInputView.getTextFieldText()
         if passwordTestFiledText == text {
             samePasswordSuccess = true
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
+            passWordCheckInputView.setInputCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
         }else {
             samePasswordSuccess = false
             nextButtonEnable()
-            passWordCheckInputView.setCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.", success: false)
+            passWordCheckInputView.setInputCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.", success: false)
             
         }
     }
 }
-extension SignUpFirstProcessVC: PasswordInputDelegate {
-    func passwordKeyboarReturn(text: String) {
+extension SignUpFirstProcessVC: PasswordDelegate {
+    func passwordkeyBoardReturn(text: String) {
         let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
         let checkPassword = text.range(of: regex,options: .regularExpression) != nil
         if !checkPassword {
-            passWordInputView.setCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
+            passWordInputView.setInputCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
         } else {
-            passWordInputView.setCheckLabel(isHidden: true, text: nil, success: false)
+            passWordInputView.setInputCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
         }
     }
-  
 }
 
 extension SignUpFirstProcessVC {

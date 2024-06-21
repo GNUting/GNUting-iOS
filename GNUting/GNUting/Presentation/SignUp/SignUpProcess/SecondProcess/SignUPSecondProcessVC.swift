@@ -10,7 +10,9 @@ import UIKit
 class SignUPSecondProcessVC: BaseViewController{
     
     var selectedDate : String = ""
-    var nickNameCheck: Bool = false
+    private var nickNameCheck: Bool = false
+    private var phoneNumberCheck: Bool = false
+    
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -24,21 +26,23 @@ class SignUPSecondProcessVC: BaseViewController{
         stackView.distribution = .fill
         return stackView
     }()
-    private lazy var nameInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var nameInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "이름")
         signUPInpuView.setPlaceholder(placeholder: "이름을 입력해주세요.")
         signUPInpuView.textFieldType = .name
         signUPInpuView.inputViewTextFiledDelegate = self
         return signUPInpuView
     }()
-    private lazy var phoneNumberInputView : SignUPInputView = {
-        let signUPInpuView = SignUPInputView()
+    private lazy var phoneNumberInputView : CommonInputView = {
+        let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "전화번호")
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
         signUPInpuView.textFieldType = .phoneNumber
         signUPInpuView.setKeyboardTypeNumberPad()
         signUPInpuView.inputViewTextFiledDelegate = self
+        signUPInpuView.phoneNumberDelegate = self
+        
         return signUPInpuView
     }()
     private lazy var genderView : SelectGenderView = {
@@ -107,8 +111,8 @@ class SignUPSecondProcessVC: BaseViewController{
         
         return majorInputView
     }()
-    private lazy var studentIDInputView : SignUPInputView = {
-        let studentIDInputView = SignUPInputView()
+    private lazy var studentIDInputView : CommonInputView = {
+        let studentIDInputView = CommonInputView()
         studentIDInputView.setInputTextTypeLabel(text: "학번")
         studentIDInputView.setPlaceholder(placeholder: "입학년도만 입력해주세요 EX 24 ")
         studentIDInputView.setKeyboardTypeNumberPad()
@@ -117,12 +121,13 @@ class SignUPSecondProcessVC: BaseViewController{
         return studentIDInputView
     }()
     
-    private lazy var introduceOneLine : SignUPInputView = {
-        let studentIDInputView = SignUPInputView()
-        studentIDInputView.setInputTextTypeLabel(text: "한줄소개")
-        studentIDInputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
-        studentIDInputView.textFieldType = .introduce
-        return studentIDInputView
+    private lazy var introduceOneLine : CommonInputView = {
+        let inputView = CommonInputView()
+        inputView.setInputTextTypeLabel(text: "한줄소개")
+        inputView.setPlaceholder(placeholder: "자신을 한줄로 표현해주세요.(30자 제한)")
+        inputView.textFieldType = .introduce
+        inputView.inputViewTextFiledDelegate = self
+        return inputView
     }()
     
     private lazy var nextButton : PrimaryColorButton = {
@@ -178,10 +183,11 @@ extension SignUPSecondProcessVC{
             
         }
         
+        
     }
     private func checkEnableNextButton(){
 
-        if nickNameCheck == true && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty(){
+        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
@@ -295,7 +301,18 @@ extension SignUPSecondProcessVC: NicknameTextfiledDelegate {
 
 }
 extension SignUPSecondProcessVC: InputViewTextFiledDelegate{
-    func ShouldEndEdting(textFieldCount: Int?) {
+    func shouldEndEdting() {
         checkEnableNextButton()
+    }
+}
+extension SignUPSecondProcessVC: PhoneNumberDelegate {
+    func phoneNumberKeyBoardReturn(textFieldCount: Int) {
+        if textFieldCount == 13 {
+            phoneNumberCheck = true
+            phoneNumberInputView.setInputCheckLabel(isHidden: false, text: "올바른 전화번호입니다.", success: true)
+        } else {
+            phoneNumberCheck = false
+            phoneNumberInputView.setInputCheckLabel(isHidden: false, text: "전화번호 입력이 올바르지 않습니다.", success: false)
+        }
     }
 }
