@@ -43,8 +43,8 @@ class UpdateProfileVC: BaseViewController {
         return button
     }()
     
-    private lazy var nickNameInputView : SignUpInputViewNicknameType = {
-        let inputView = SignUpInputViewNicknameType()
+    private lazy var nickNameInputView : NicknameTypeInputView = {
+        let inputView = NicknameTypeInputView()
         inputView.nicknameCheckButtonDelegate = self
         inputView.nicknameTextfiledDelegate = self
         return inputView

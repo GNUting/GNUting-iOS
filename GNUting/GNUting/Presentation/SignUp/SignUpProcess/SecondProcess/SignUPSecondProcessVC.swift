@@ -97,8 +97,8 @@ class SignUPSecondProcessVC: BaseViewController{
         button.addTarget(self, action: #selector(tapSelectButton), for: .touchUpInside)
         return button
     }()
-    private lazy var nickNameInputView : SignUpInputViewNicknameType = {
-        let nickNameInputView = SignUpInputViewNicknameType()
+    private lazy var nickNameInputView : NicknameTypeInputView = {
+        let nickNameInputView = NicknameTypeInputView()
         nickNameInputView.nicknameCheckButtonDelegate = self
         nickNameInputView.nicknameTextfiledDelegate = self
         return nickNameInputView

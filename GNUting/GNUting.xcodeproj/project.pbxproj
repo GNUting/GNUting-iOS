@@ -126,7 +126,7 @@
 		F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */; };
 		F8A5B6272BE11B500054E324 /* AuthNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */; };
 		F8A5B6292BE11DD60054E324 /* EmailCheckTypeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */; };
-		F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */; };
+		F8A5B62B2BE14A110054E324 /* NicknameTypeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5B62A2BE14A110054E324 /* NicknameTypeInputView.swift */; };
 		F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695572BA0800900BEB0C6 /* LoginResponse.swift */; };
 		F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */; };
 		F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */; };
@@ -297,7 +297,7 @@
 		F8A179DB2BAC6F42005AAC18 /* APIInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptorManager.swift; sourceTree = "<group>"; };
 		F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNumberInputView.swift; sourceTree = "<group>"; };
 		F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCheckTypeInputView.swift; sourceTree = "<group>"; };
-		F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewNicknameType.swift; sourceTree = "<group>"; };
+		F8A5B62A2BE14A110054E324 /* NicknameTypeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameTypeInputView.swift; sourceTree = "<group>"; };
 		F8A695572BA0800900BEB0C6 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		F8A6955C2BA08DE400BEB0C6 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		F8A695612BA09BAC00BEB0C6 /* GetUserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDataModel.swift; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 		F8235CE42B749E5300E49073 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F8A5B62A2BE14A110054E324 /* SignUpInputViewNicknameType.swift */,
+				F8A5B62A2BE14A110054E324 /* NicknameTypeInputView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1489,7 +1489,7 @@
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
 				F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */,
-				F8A5B62B2BE14A110054E324 /* SignUpInputViewNicknameType.swift in Sources */,
+				F8A5B62B2BE14A110054E324 /* NicknameTypeInputView.swift in Sources */,
 				F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */,
 				F87DAD272BEC7718005DCB28 /* AlertChatModel.swift in Sources */,
 				F85344FA2B5F710A001EADE6 /* AppDelegate.swift in Sources */,

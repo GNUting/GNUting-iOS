@@ -5,7 +5,7 @@
 //  Created by 원동진 on 5/1/24.
 //
 
-// MARK: - 회원가입, 프롶필 업데이트 닉네임 InputView
+// MARK: - 회원가입, 프로필 업데이트 닉네임 InputView
 
 import UIKit
 
@@ -19,7 +19,7 @@ protocol NicknameTextfiledDelegate {
     func endEdit()
 }
 
-class SignUpInputViewNicknameType: UIView {
+class NicknameTypeInputView: UIView {
     
     // MARK: - Properties
     
@@ -104,7 +104,7 @@ class SignUpInputViewNicknameType: UIView {
 
 // MARK: - Layout Helpers
 
-extension SignUpInputViewNicknameType {
+extension NicknameTypeInputView {
     private func setAddSubViews() {
         addSubViews([inputTypeLabel,inputTextField,bottomLine,nicknameCheckButton,inputCheckLabel])
     }
@@ -143,7 +143,7 @@ extension SignUpInputViewNicknameType {
 
 // MARK: - Method public
 
-extension SignUpInputViewNicknameType {
+extension NicknameTypeInputView {
     
     // MARK: - Set
     
@@ -172,7 +172,7 @@ extension SignUpInputViewNicknameType {
 
 // MARK: - Button Action
 
-extension SignUpInputViewNicknameType {
+extension NicknameTypeInputView {
     @objc private func changeInputTextField(_ sender: UITextField) {
         if sender.text?.count == 0 {
             nicknameCheckButton.backgroundColor = UIColor(hexCode: "979C9E")
@@ -188,7 +188,7 @@ extension SignUpInputViewNicknameType {
 
 // MARK: - Delegate
 
-extension SignUpInputViewNicknameType: UITextFieldDelegate {
+extension NicknameTypeInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
         nicknameTextfiledDelegate?.didBegin()
