@@ -11,20 +11,20 @@ import UIKit
 
 // MARK: - Protocol
 
-protocol NicknameCheckButtonDelegate {
+protocol NicknameCheckButtonDelegate: AnyObject {
     func action(textFieldText: String)
 }
-protocol NicknameTextfiledDelegate {
+protocol NicknameTextfiledDelegate: AnyObject {
     func didBegin()
     func endEdit()
 }
 
-class NicknameTypeInputView: UIView {
+final class NicknameTypeInputView: UIView {
     
     // MARK: - Properties
     
-    var nicknameCheckButtonDelegate: NicknameCheckButtonDelegate?
-    var nicknameTextfiledDelegate: NicknameTextfiledDelegate?
+    public weak var nicknameCheckButtonDelegate: NicknameCheckButtonDelegate?
+    public weak var nicknameTextfiledDelegate: NicknameTextfiledDelegate?
     
     // MARK: - SubViews
     
@@ -74,7 +74,7 @@ class NicknameTypeInputView: UIView {
         return button
     }()
     
-    private lazy var inputCheckLabel : UILabel = {
+    private lazy var inputCheckLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = Pretendard.medium(size: 12)
@@ -142,7 +142,7 @@ extension NicknameTypeInputView {
     
     // MARK: - Set
     
-    func setCheckLabel(isHidden: Bool,text: String?,success:Bool){
+   public func setCheckLabel(isHidden: Bool, text: String?, success: Bool) {
         inputCheckLabel.isHidden = isHidden
         if !isHidden {
             inputCheckLabel.text = text
@@ -154,13 +154,13 @@ extension NicknameTypeInputView {
         }
     }
     
-    func setTextField(text: String) {
+    public func setTextField(text: String) {
         inputTextField.text = text
     }
     
     // MARK: - Get
     
-    func getTextFieldText() -> String { // 텍스트 필드 받아오기
+    public func getTextFieldText() -> String { // 텍스트 필드 받아오기
         inputTextField.text ?? ""
     }
 }
@@ -174,9 +174,9 @@ extension NicknameTypeInputView {
         } else {
             nicknameCheckButton.backgroundColor = UIColor(named: "PrimaryColor")
         }
-        
     }
-    private func getNickname(){
+    
+    private func getNickname() {
         nicknameCheckButtonDelegate?.action(textFieldText: inputTextField.text ?? "")
     }
 }
@@ -198,6 +198,7 @@ extension NicknameTypeInputView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -206,6 +207,7 @@ extension NicknameTypeInputView: UITextFieldDelegate {
             }
         }
         guard textField.text?.count ?? 0 < 10 else { return false }
+        
         return true
     }
 }
