@@ -52,12 +52,7 @@ class NicknameTypeInputView: UIView {
         return label
     }()
     
-    private let bottomLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "EAEAEA")
-        
-        return view
-    }()
+    private let borderView = BorderView()
     
     private lazy var nicknameCheckButton: ThrottleButton = {
         
@@ -106,7 +101,7 @@ class NicknameTypeInputView: UIView {
 
 extension NicknameTypeInputView {
     private func setAddSubViews() {
-        addSubViews([inputTypeLabel,inputTextField,bottomLine,nicknameCheckButton,inputCheckLabel])
+        addSubViews([inputTypeLabel,inputTextField,borderView,nicknameCheckButton,inputCheckLabel])
     }
     
     private func setAutoLayout() {
@@ -119,7 +114,7 @@ extension NicknameTypeInputView {
             make.left.equalToSuperview()
         }
         
-        bottomLine.snp.makeConstraints { make in
+        borderView.snp.makeConstraints { make in
             make.top.equalTo(inputTextField.snp.bottom).offset(6)
             make.height.equalTo(1)
             make.width.equalTo(inputTextField)
@@ -127,7 +122,7 @@ extension NicknameTypeInputView {
         }
         
         inputCheckLabel.snp.makeConstraints { make in
-            make.top.equalTo(bottomLine.snp.bottom).offset(6)
+            make.top.equalTo(borderView.snp.bottom).offset(6)
             make.left.right.bottom.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -190,12 +185,12 @@ extension NicknameTypeInputView {
 
 extension NicknameTypeInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
+        borderView.enableColor()
         nicknameTextfiledDelegate?.didBegin()
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
+        borderView.disableColor()
         nicknameTextfiledDelegate?.endEdit()
         return true
     }

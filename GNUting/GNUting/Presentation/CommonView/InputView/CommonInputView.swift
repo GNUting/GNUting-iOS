@@ -55,13 +55,8 @@ final class CommonInputView: UIView {
         return textField
     }()
     
+    private lazy var borderView = BorderView()
     
-    private let bottomLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "EAEAEA")
-        
-        return view
-    }()
     private lazy var inputCheckLabel: UILabel = { // 입력값에 따른 분기처리를 위한 Label
         let label = UILabel()
         label.textAlignment = .left
@@ -90,7 +85,7 @@ final class CommonInputView: UIView {
 
 extension CommonInputView {
     private func setAddSubViews() {
-        self.addSubViews([inputTextTypeLabel,inputTextField,bottomLine,inputCheckLabel])
+        self.addSubViews([inputTextTypeLabel,inputTextField,borderView,inputCheckLabel])
     }
 
     private func setAutoLayout() {
@@ -103,14 +98,13 @@ extension CommonInputView {
             make.left.right.equalToSuperview()
         }
         
-        bottomLine.snp.makeConstraints { make in
+        borderView.snp.makeConstraints { make in
             make.top.equalTo(inputTextField.snp.bottom).offset(6)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         
         inputCheckLabel.snp.makeConstraints { make in
-            make.top.equalTo(bottomLine.snp.bottom).offset(4)
+            make.top.equalTo(borderView.snp.bottom).offset(4)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -199,7 +193,8 @@ extension CommonInputView {
 
 extension CommonInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) { // TextField 입력 시작
-        bottomLine.backgroundColor = UIColor(named: "PrimaryColor")
+        borderView.enableColor()
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return 누
@@ -212,7 +207,7 @@ extension CommonInputView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         textFieldHandler(textFieldText: textField.text ?? "")
         inputViewTextFiledDelegate?.shouldEndEdting()
-        bottomLine.backgroundColor = UIColor(hexCode: "EAEAEA")
+        borderView.disableColor()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
