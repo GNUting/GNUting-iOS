@@ -447,21 +447,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F8235CE42B749E5300E49073 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				F8A5B62A2BE14A110054E324 /* NicknameTypeInputView.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		F8235CE92B74A3E500E49073 /* SignUpProcess */ = {
 			isa = PBXGroup;
 			children = (
 				F8AD250D2C072716004D1CBB /* ThirdProcess */,
 				F8AD250C2C072710004D1CBB /* SecondProcess */,
 				F8AD250B2C072708004D1CBB /* FirstProcess */,
-				F8235CE42B749E5300E49073 /* Common */,
 				F8235CF72B765E1200E49073 /* model */,
 				F8235CF22B74B75D00E49073 /* ViewComponent */,
 			);
@@ -902,6 +893,7 @@
 		F8AD25102C073314004D1CBB /* InputView */ = {
 			isa = PBXGroup;
 			children = (
+				F8A5B62A2BE14A110054E324 /* NicknameTypeInputView.swift */,
 				F8235CE72B74A14000E49073 /* CommonInputView.swift */,
 				F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */,
 				F8A5B6282BE11DD60054E324 /* EmailCheckTypeInputView.swift */,
