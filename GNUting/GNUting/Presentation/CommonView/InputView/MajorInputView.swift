@@ -9,7 +9,17 @@
 
 import UIKit
 
+// MARK: - Protocol
+
+protocol MajorInputViewDelegate: AnyObject {
+    func tapMajorInputView()
+}
+
 final class MajorInputView: UIView {
+    
+    // MARK: - Properties
+    
+    public weak var majorInputViewDelegate: MajorInputViewDelegate?
     
     // MARK: - SubViews
     
@@ -36,8 +46,10 @@ final class MajorInputView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setAddSubViews()
         setAutoLayout()
+        addTapGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -84,5 +96,19 @@ extension MajorInputView {
     
     public func isEmpty() -> Bool {
         return contentLabel.text?.count == 0 ? true : false
+    }
+}
+
+// MARK: - Action
+
+extension MajorInputView {
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapSuperView))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func tapSuperView() {
+        majorInputViewDelegate?.tapMajorInputView()
     }
 }

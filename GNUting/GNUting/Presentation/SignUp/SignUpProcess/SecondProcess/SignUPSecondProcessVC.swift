@@ -103,12 +103,9 @@ class SignUPSecondProcessVC: BaseViewController{
         nickNameInputView.nicknameTextfiledDelegate = self
         return nickNameInputView
     }()
-    private lazy var majorInputView : MajorInputView = {
+    private lazy var majorInputView: MajorInputView = {
         let majorInputView = MajorInputView()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMajorInputView))
-        majorInputView.isUserInteractionEnabled = true
-        majorInputView.addGestureRecognizer(tapGesture)
-        
+        majorInputView.majorInputViewDelegate = self
         return majorInputView
     }()
     private lazy var studentIDInputView : CommonInputView = {
@@ -257,15 +254,6 @@ extension SignUPSecondProcessVC {
         
         pushViewContoller(viewController: SignUpThirdProcessVC())
     }
-    @objc private func tapMajorInputView() {
-        
-        let vc = SearchMajorVC()
-        vc.searchMajorSelectCellDelegate = self
-        
-        let navigationVC = UINavigationController(rootViewController: vc)
-        present(navigationVC, animated: true)
-        checkEnableNextButton()
-    }
 }
 extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
     func action(textFieldText: String) {
@@ -284,6 +272,18 @@ extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
         }
     }
 }
+
+extension SignUPSecondProcessVC: MajorInputViewDelegate {
+    func tapMajorInputView() {
+        let vc = SearchMajorVC()
+        vc.searchMajorSelectCellDelegate = self
+        let navigationVC = UINavigationController(rootViewController: vc)
+        present(navigationVC, animated: true)
+        
+        checkEnableNextButton()
+    }
+}
+
 extension SignUPSecondProcessVC: SearchMajorSelectCellDelegate{
     func sendSeleceted(major: String) {
         majorInputView.setContentLabelText(text: major)

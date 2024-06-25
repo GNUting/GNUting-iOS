@@ -53,9 +53,7 @@ class UpdateProfileVC: BaseViewController {
   
     private lazy var majorInputView : MajorInputView = {
         let majorInputView = MajorInputView()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMajorInputView))
-        majorInputView.isUserInteractionEnabled = true
-        majorInputView.addGestureRecognizer(tapGesture)
+        majorInputView.majorInputViewDelegate = self
         
         return majorInputView
     }()
@@ -253,16 +251,14 @@ extension UpdateProfileVC: NicknameTextfiledDelegate {
     }
     
 }
-extension UpdateProfileVC {
-    @objc private func tapMajorInputView() {
-        
+extension UpdateProfileVC: MajorInputViewDelegate {
+    func tapMajorInputView() {
         let vc = SearchMajorVC()
         vc.searchMajorSelectCellDelegate = self
-        
         let navigationVC = UINavigationController(rootViewController: vc)
+        
         present(navigationVC, animated: true)
     }
-    
 }
 extension UpdateProfileVC: SearchMajorSelectCellDelegate{
     func sendSeleceted(major: String) {
