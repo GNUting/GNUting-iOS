@@ -471,7 +471,6 @@
 		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */,
 				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
 				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
 				F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */,
@@ -893,6 +892,7 @@
 		F8AD25102C073314004D1CBB /* InputView */ = {
 			isa = PBXGroup;
 			children = (
+				F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */,
 				F8A5B62A2BE14A110054E324 /* NicknameTypeInputView.swift */,
 				F8235CE72B74A14000E49073 /* CommonInputView.swift */,
 				F8A5B6262BE11B500054E324 /* AuthNumberInputView.swift */,
