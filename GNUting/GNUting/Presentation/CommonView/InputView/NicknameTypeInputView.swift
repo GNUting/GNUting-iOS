@@ -116,21 +116,17 @@ extension NicknameTypeInputView {
         
         borderView.snp.makeConstraints { make in
             make.top.equalTo(inputTextField.snp.bottom).offset(6)
-            make.height.equalTo(1)
             make.width.equalTo(inputTextField)
-            
         }
         
         inputCheckLabel.snp.makeConstraints { make in
             make.top.equalTo(borderView.snp.bottom).offset(6)
             make.left.right.bottom.equalToSuperview()
-            make.bottom.equalToSuperview()
         }
         
         nicknameCheckButton.snp.makeConstraints { make in
             make.top.right.equalToSuperview()
             make.left.equalTo(inputTextField.snp.right).offset(15)
-            
             make.width.equalTo(80)
         }
     }
