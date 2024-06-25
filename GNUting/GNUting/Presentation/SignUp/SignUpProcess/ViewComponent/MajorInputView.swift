@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MajorInputView: UIView {
+final class MajorInputView: UIView {
     
     // MARK: - SubViews
     
@@ -44,7 +44,10 @@ class MajorInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension MajorInputView{
+
+// MARK: - Layout Helpers
+
+extension MajorInputView {
     private func setAddSubViews() {
         self.addSubViews([titleLabel, contentLabel, borderView])
     }
@@ -66,17 +69,20 @@ extension MajorInputView{
         }
     }
 }
+
+// MARK: - Method public
+
 extension MajorInputView {
-    func setContentLabelText(text: String) {
+    public func setContentLabelText(text: String) {
         contentLabel.text = text
         contentLabel.textColor = .black
     }
     
-    func getContentLabelText() -> String? {
+    public func getContentLabelText() -> String? {
         return contentLabel.text
     }
     
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         return contentLabel.text?.count == 0 ? true : false
     }
 }
