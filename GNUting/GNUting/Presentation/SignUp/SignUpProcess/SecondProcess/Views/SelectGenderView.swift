@@ -9,11 +9,11 @@
 
 import UIKit
 
-class SelectGenderView: UIView {
+final class SelectGenderView: UIView {
     
     // MARK: - Properties
     
-    var selectedGender: Int = 0 // 0 : 남자 , 1:여자
+    public var selectedGender: Int = 0 // 0 : 남자 , 1:여자
 
     // MARK: - SubViews
     
@@ -89,7 +89,7 @@ extension SelectGenderView {
 // MARK: - Method public
 
 extension SelectGenderView {
-    func getSelectedGender() -> String {
+    public func getSelectedGender() -> String {
         return selectedGender == 0 ? "MALE" : "FEMALE"
     }
 }
