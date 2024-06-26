@@ -471,7 +471,6 @@
 		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
 				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
 				F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */,
 				F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */,
@@ -861,6 +860,7 @@
 			children = (
 				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
 				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
+				F8E944532C2BE3FA0085D762 /* Views */,
 			);
 			path = SecondProcess;
 			sourceTree = "<group>";
@@ -1212,6 +1212,14 @@
 				F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */,
 			);
 			path = VC;
+			sourceTree = "<group>";
+		};
+		F8E944532C2BE3FA0085D762 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F8E993E92BB5A4B6002A8A5F /* VC */ = {
