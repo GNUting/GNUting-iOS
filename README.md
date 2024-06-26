@@ -27,6 +27,8 @@
 
 
 ### Architecture
-GNUting is based on MVC design pattern and repository pattern
+ - MVC
+ - Singleton
+ - Delegate
 
 
