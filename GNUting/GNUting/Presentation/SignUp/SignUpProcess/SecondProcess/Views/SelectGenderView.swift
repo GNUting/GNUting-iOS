@@ -35,39 +35,18 @@ class SelectGenderView: UIView {
         return stackView
     }()
     
-    private lazy var manTypeButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("남", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
-        config.baseForegroundColor = UIColor(hexCode: "767676")
-        config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
-        config.titleAlignment = .center
-        let button = UIButton(configuration: config)
-        button.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
-        button.backgroundColor = UIColor(hexCode: "F5F5F5")
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
-        button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
-        button.tag = 0
+    private lazy var manTypeButton: GenderButton = {
+        let button = GenderButton()
+        button.setGenderButton(title: "남", tag: 0)
+        button.genderButtonDelegate = self
         
         return button
     }()
     
-    private lazy var girlTypeButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.attributedTitle = AttributedString("여", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
-        config.baseForegroundColor = UIColor(hexCode: "767676")
-        config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
-        config.titleAlignment = .center
-        let button = UIButton(configuration: config)
-        button.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
-        button.backgroundColor = UIColor(hexCode: "F5F5F5")
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
-        button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
-        button.tag = 1
+    private lazy var girlTypeButton: GenderButton = {
+        let button = GenderButton()
+        button.setGenderButton(title: "여", tag: 1)
+        button.genderButtonDelegate = self
         
         return button
     }()
@@ -91,7 +70,6 @@ class SelectGenderView: UIView {
 extension SelectGenderView {
     private func setAddSubViews() {
         self.addSubViews([typeLabel,buttonStackView])
-        
         buttonStackView.addStackSubViews([manTypeButton,girlTypeButton])
     }
     
@@ -108,57 +86,26 @@ extension SelectGenderView {
     }
 }
 
-// MARK: - Action
-
-extension SelectGenderView {
-    @objc func tapButton(_ sender : UIButton) {
-        selectedGender = sender.tag
-        if sender.tag == 0{
-            isSelctedButton(text: "남", isSelcted: true, button: manTypeButton)
-            isSelctedButton(text: "여", isSelcted: false, button: girlTypeButton)
-        } else {
-            isSelctedButton(text: "여", isSelcted: true, button: girlTypeButton)
-            isSelctedButton(text: "남", isSelcted: false, button: manTypeButton)
-        }
-    }
-    
-    func isSelctedButton(text: String,isSelcted : Bool,button : UIButton){
-        if isSelcted{
-            var config = UIButton.Configuration.plain()
-            config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
-            config.baseForegroundColor = UIColor(named: "PrimaryColor")
-            config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
-            config.titleAlignment = .center
-            button.configuration = config
-            button.layer.borderColor = UIColor(named: "PrimaryColor")?.cgColor
-            button.backgroundColor = UIColor(named: "PrimaryColor")?.withAlphaComponent(0.3)
-            button.layer.cornerRadius = 10
-            button.layer.masksToBounds = true
-            button.layer.borderWidth = 1
-        } else {
-            var config = UIButton.Configuration.plain()
-            config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))
-            config.baseForegroundColor = UIColor(hexCode: "767676")
-            config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
-            config.titleAlignment = .center
-            button.configuration = config
-            button.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
-            button.backgroundColor = UIColor(hexCode: "F5F5F5")
-            button.layer.cornerRadius = 10
-            button.layer.masksToBounds = true
-            button.layer.borderWidth = 1
-        }
-    }
-}
-
 // MARK: - Method public
 
 extension SelectGenderView {
-    func getSelectedGender() -> String{
-        if selectedGender == 0 {
-            return "MALE"
+    func getSelectedGender() -> String {
+        return selectedGender == 0 ? "MALE" : "FEMALE"
+    }
+}
+
+// MARK: - Delegate
+
+extension SelectGenderView: GenderButtonDelegate {
+    func tapButton(tag: Int) {
+        self.selectedGender = tag
+        
+        if tag == 0 {
+            manTypeButton.isSelected = true
+            girlTypeButton.isSelected = false
         } else {
-            return "FEMALE"
+            manTypeButton.isSelected = false
+            girlTypeButton.isSelected = true
         }
     }
 }

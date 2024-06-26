@@ -171,6 +171,7 @@
 		F8E3CD0C2B8B602C00712CBF /* ReportReasonCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */; };
 		F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */; };
 		F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */; };
+		F8E944572C2BE6870085D762 /* GenderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E944562C2BE6870085D762 /* GenderButton.swift */; };
 		F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */; };
 		F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */; };
 		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
@@ -342,6 +343,7 @@
 		F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCheckButton.swift; sourceTree = "<group>"; };
 		F8E3CD442B8CE5BC00712CBF /* DateJoinMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateJoinMemberVC.swift; sourceTree = "<group>"; };
 		F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDetailView.swift; sourceTree = "<group>"; };
+		F8E944562C2BE6870085D762 /* GenderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderButton.swift; sourceTree = "<group>"; };
 		F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewReceiveMessageCell.swift; sourceTree = "<group>"; };
 		F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewSendMessageCell.swift; sourceTree = "<group>"; };
 		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
@@ -1218,6 +1220,7 @@
 			isa = PBXGroup;
 			children = (
 				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
+				F8E944562C2BE6870085D762 /* GenderButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
 				F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */,
+				F8E944572C2BE6870085D762 /* GenderButton.swift in Sources */,
 				F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */,
 				F85345362B5F8961001EADE6 /* Spacing.swift in Sources */,
 				F85006242B739C9D007AB351 /* AllCheckTermsView.swift in Sources */,
