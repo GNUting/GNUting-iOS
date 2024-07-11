@@ -374,6 +374,26 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F801471F2C3FD10B00ED03BB /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
+				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
+				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
+				F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		F80147202C3FD11F00ED03BB /* SignUPSecondProcessVC_Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
+				F8E944562C2BE6870085D762 /* GenderButton.swift */,
+			);
+			path = SignUPSecondProcessVC_Views;
+			sourceTree = "<group>";
+		};
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,32 +472,23 @@
 		F8235CE92B74A3E500E49073 /* SignUpProcess */ = {
 			isa = PBXGroup;
 			children = (
-				F8AD250D2C072716004D1CBB /* ThirdProcess */,
-				F8AD250C2C072710004D1CBB /* SecondProcess */,
-				F8AD250B2C072708004D1CBB /* FirstProcess */,
+				F801471F2C3FD10B00ED03BB /* VC */,
 				F8235CF72B765E1200E49073 /* model */,
-				F8235CF22B74B75D00E49073 /* ViewComponent */,
+				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
+				F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */,
+				F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */,
+				F80147202C3FD11F00ED03BB /* SignUPSecondProcessVC_Views */,
 			);
 			path = SignUpProcess;
 			sourceTree = "<group>";
 		};
-		F8235CEE2B74B51100E49073 /* ViewComponent */ = {
+		F8235CEE2B74B51100E49073 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */,
 				F85006232B739C9D007AB351 /* AllCheckTermsView.swift */,
 			);
-			path = ViewComponent;
-			sourceTree = "<group>";
-		};
-		F8235CF22B74B75D00E49073 /* ViewComponent */ = {
-			isa = PBXGroup;
-			children = (
-				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
-				F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */,
-				F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */,
-			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F8235CF72B765E1200E49073 /* model */ = {
@@ -541,8 +552,8 @@
 		F85006172B738D48007AB351 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				F8235CE92B74A3E500E49073 /* SignUpProcess */,
 				F850061C2B738FB9007AB351 /* Terms */,
+				F8235CE92B74A3E500E49073 /* SignUpProcess */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -551,7 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E3CD4F2B8CE8E200712CBF /* VC */,
-				F8235CEE2B74B51100E49073 /* ViewComponent */,
+				F8235CEE2B74B51100E49073 /* Views */,
 			);
 			path = Terms;
 			sourceTree = "<group>";
@@ -847,32 +858,6 @@
 				F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */,
 			);
 			path = Post;
-			sourceTree = "<group>";
-		};
-		F8AD250B2C072708004D1CBB /* FirstProcess */ = {
-			isa = PBXGroup;
-			children = (
-				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
-			);
-			path = FirstProcess;
-			sourceTree = "<group>";
-		};
-		F8AD250C2C072710004D1CBB /* SecondProcess */ = {
-			isa = PBXGroup;
-			children = (
-				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
-				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
-				F8E944532C2BE3FA0085D762 /* Views */,
-			);
-			path = SecondProcess;
-			sourceTree = "<group>";
-		};
-		F8AD250D2C072716004D1CBB /* ThirdProcess */ = {
-			isa = PBXGroup;
-			children = (
-				F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */,
-			);
-			path = ThirdProcess;
 			sourceTree = "<group>";
 		};
 		F8AD250E2C07275E004D1CBB /* CommonView */ = {
@@ -1214,15 +1199,6 @@
 				F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		F8E944532C2BE3FA0085D762 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
-				F8E944562C2BE6870085D762 /* GenderButton.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		F8E993E92BB5A4B6002A8A5F /* VC */ = {
