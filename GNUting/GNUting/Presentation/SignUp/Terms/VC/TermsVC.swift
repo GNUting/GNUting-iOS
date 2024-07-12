@@ -131,7 +131,7 @@ extension TermsVC{
 //MARK : - Action
 extension TermsVC{
     @objc private func tapNextButton(){
-        pushViewContoller(viewController: SignUPSecondProcessVC())
+        pushViewContoller(viewController: SignUpFirstProcessVC())
     }
     
 }

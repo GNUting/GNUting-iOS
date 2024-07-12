@@ -388,6 +388,7 @@
 		F80147202C3FD11F00ED03BB /* SignUPSecondProcessVC_Views */ = {
 			isa = PBXGroup;
 			children = (
+				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
 				F8235CF32B74B77900E49073 /* SelectGenderView.swift */,
 				F8E944562C2BE6870085D762 /* GenderButton.swift */,
 			);
@@ -474,7 +475,6 @@
 			children = (
 				F801471F2C3FD10B00ED03BB /* VC */,
 				F8235CF72B765E1200E49073 /* model */,
-				F8235CF52B764AD700E49073 /* SelectDateView.swift */,
 				F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */,
 				F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */,
 				F80147202C3FD11F00ED03BB /* SignUPSecondProcessVC_Views */,
