@@ -80,7 +80,6 @@
 		F86909532BFCF537001634D4 /* AppStoreVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */; };
 		F86A17FA2BCE660C00AC0D92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */; };
 		F86A17FC2BCE660C00AC0D92 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17FB2BCE660C00AC0D92 /* FirebaseMessaging */; };
-		F86B9B6F2C22E084000897A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86B9B6E2C22E084000897A0 /* GoogleService-Info.plist */; };
 		F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */; };
 		F87351672B906295004E89C5 /* UpdaetProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351662B906295004E89C5 /* UpdaetProfileVC.swift */; };
 		F87351692B906EE0004E89C5 /* UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */; };
@@ -148,6 +147,7 @@
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
 		F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */; };
 		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
+		F8C2F37D2C75D4AA00BA6173 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C2F37C2C75D4AA00BA6173 /* GoogleService-Info.plist */; };
 		F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */; };
 		F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */; };
 		F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */; };
@@ -252,7 +252,6 @@
 		F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDefaultTableViewCell.swift; sourceTree = "<group>"; };
 		F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreVersionCheck.swift; sourceTree = "<group>"; };
-		F86B9B6E2C22E084000897A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
 		F87351662B906295004E89C5 /* UpdaetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaetProfileVC.swift; sourceTree = "<group>"; };
 		F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
@@ -320,6 +319,7 @@
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
+		F8C2F37C2C75D4AA00BA6173 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -601,7 +601,7 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F86B9B6E2C22E084000897A0 /* GoogleService-Info.plist */,
+				F8C2F37C2C75D4AA00BA6173 /* GoogleService-Info.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -1318,12 +1318,12 @@
 				F853452B2B5F7A49001EADE6 /* Pretendard-SemiBold.otf in Resources */,
 				F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */,
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
-				F86B9B6F2C22E084000897A0 /* GoogleService-Info.plist in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
+				F8C2F37D2C75D4AA00BA6173 /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
 				F85345292B5F7A49001EADE6 /* Pretendard-Light.otf in Resources */,

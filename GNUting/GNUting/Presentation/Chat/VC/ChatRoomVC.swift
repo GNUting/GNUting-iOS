@@ -320,7 +320,7 @@ extension ChatRoomVC {
         self.accessToken = token
     }
     private func initStomp(){
-        let url = URL(string: "ws://203.255.3.66:10001/chat")!
+        let url = URL(string: "ws://203.255.15.32:14357/chat")!
 //        let url = URL(string: "ws://localhost:10001/chat")!
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
         self.swiftStomp.enableLogging = true
