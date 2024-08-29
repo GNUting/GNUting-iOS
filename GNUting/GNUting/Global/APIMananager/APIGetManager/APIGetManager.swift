@@ -95,7 +95,7 @@ class APIGetManager: RequestInterceptor {
             }
     }
     
-
+    
     // MARK: - 게시글 : 검색 ✅ 에러메시지 출력
     func getSearchBoardText(searchText: String,page: Int, completion: @escaping(SearchBoardTextModel?,DefaultResponse?)->Void) {
         let url = EndPoint.searchGetBoardData.url
@@ -152,7 +152,7 @@ class APIGetManager: RequestInterceptor {
             .responseDecodable(of:BoardDetailModel.self){ response in
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-     
+                
                 switch response.result {
                 case .success:
                     print("🟢 getBoardDetail statusCode: \(statusCode)")
@@ -175,7 +175,7 @@ class APIGetManager: RequestInterceptor {
             .responseDecodable(of:ApplicationStatusModel.self) { response in
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-     
+                
                 switch response.result {
                 case .success:
                     print("🟢 getReceivedChatState statusCode: \(statusCode)")
@@ -197,7 +197,7 @@ class APIGetManager: RequestInterceptor {
             .responseDecodable(of:ApplicationStatusModel.self) { response in
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-     
+                
                 switch response.result {
                 case .success:
                     print("🟢 getRequestChatState statusCode: \(statusCode)")
@@ -239,19 +239,19 @@ class APIGetManager: RequestInterceptor {
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ChatRoomModel.self) { response in
-                    guard let statusCode = response.response?.statusCode, let data = response.data else { return }
-                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 
-                    switch response.result {
-                    case .success:
-                        print("🟢 getChatRoomData statusCode: \(statusCode)")
-                        completion(response.value,json)
-                    case .failure:
-                        print("🔴 getChatRoomData statusCode: \(statusCode)")
-                        
-                        completion(response.value,json)
-                        break
-                    }
+                switch response.result {
+                case .success:
+                    print("🟢 getChatRoomData statusCode: \(statusCode)")
+                    completion(response.value,json)
+                case .failure:
+                    print("🔴 getChatRoomData statusCode: \(statusCode)")
+                    
+                    completion(response.value,json)
+                    break
+                }
             }
     }
     
@@ -264,7 +264,7 @@ class APIGetManager: RequestInterceptor {
             .validate(statusCode: 200..<300)
             .responseDecodable(of:ChatRoomMessageModel.self) { response in
                 
-
+                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
                 switch response.result {
@@ -286,17 +286,17 @@ class APIGetManager: RequestInterceptor {
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of: NotificationModel.self) { response in
-                    guard let statusCode = response.response?.statusCode else { return }
-             
-                    switch response.result {
-                    case .success:
-                        print("🟢 getNotificationData statusCode: \(statusCode)")
-                        completion(response.value)
-                    case .failure:
-                        print("🔴 getNotificationData statusCode: \(statusCode)")
-                        completion(response.value)
-                        break
-                    }
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch response.result {
+                case .success:
+                    print("🟢 getNotificationData statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getNotificationData statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
             }
     }
     // MARK: - 새알림 확인
@@ -304,18 +304,18 @@ class APIGetManager: RequestInterceptor {
         let url = EndPoint.notificationCheck.url
         AF.request(url,interceptor: APIInterceptorManager())
             .responseDecodable(of: NotificationCheckModel.self) { response in
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    
-                    switch response.result {
-                    case .success:
-                        print("🟢 getNotificationCheck statusCode: \(statusCode)")
-                        completion(response.value)
-                    case .failure:
-                        print("🔴 getNotificationCheck statusCode: \(statusCode)")
-                        completion(response.value)
-                        break
-                    }
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                
+                switch response.result {
+                case .success:
+                    print("🟢 getNotificationCheck statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getNotificationCheck statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
             }
     }
     // MARK: - 사용자 채팅알림 세팅값 API
@@ -333,7 +333,7 @@ class APIGetManager: RequestInterceptor {
                     completion(response.value)
                     break
                 }
-        }
+            }
     }
     // MARK: - 전체 알람보기 세팅값 API
     func getTotalSetAlertStatus(completion: @escaping(ChatRoomAlertStatusModel?) -> Void) {
@@ -350,8 +350,8 @@ class APIGetManager: RequestInterceptor {
                     completion(response.value)
                     break
                 }
-        }
-    } 
+            }
+    }
     // MARK: - 채팅 참여인원 Get
     func getChatRoomUserList(chatRoomID: Int,completion: @escaping(ChatRoomUserModel?) -> Void) {
         let url = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)" + "/chatRoomUsers"
@@ -368,7 +368,7 @@ class APIGetManager: RequestInterceptor {
                     completion(response.value)
                     break
                 }
-        }
+            }
     }
     // 알림 클릭시 클릭한 신천받은 현황 ID로 조회하는 API
     func getApplicationReceivedData(applcationID: String,completion: @escaping(ApplicationReceivedModel?) -> Void) {
@@ -387,7 +387,7 @@ class APIGetManager: RequestInterceptor {
                     completion(response.value)
                     break
                 }
-        }
+            }
     }
     // 채팅 알림 클릭시 이동에 필요한 데이터 API 채팅방 제목, 학과
     func getApplicationChatRoomTitleData(chatRoomID: Int,completion: @escaping(AlertChatModel?) -> Void) {
