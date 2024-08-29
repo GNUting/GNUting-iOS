@@ -36,7 +36,7 @@ class PrimaryColorButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    public func setText(_ text : String,fointSize: Int = 20){
+    func setText(_ text : String,fointSize: Int = 20){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
         

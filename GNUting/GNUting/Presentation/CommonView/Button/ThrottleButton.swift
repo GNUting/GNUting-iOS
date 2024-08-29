@@ -27,7 +27,7 @@ class ThrottleButton: UIButton {
 // MARK: - Method
 
 extension ThrottleButton {
-    public func throttle(delay: Double, callback: @escaping ((Date) -> Void)) {
+    func throttle(delay: Double, callback: @escaping ((Date) -> Void)) {
         self.delay = delay
         self.callback = callback
         self.addTarget(self, action: #selector(self.editingChanged(_:)), for: .touchUpInside)

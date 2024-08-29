@@ -24,10 +24,10 @@ final class ConfirmButton: ThrottleButton {
     }
 }
 
-// MARK: - Public Method
+// MARK: - internal Method
 
 extension ConfirmButton {
-    public func setConfiguration(title: String) {
+    func setConfiguration(title: String) {
         var configuration = UIButton.Configuration.plain()
         
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)

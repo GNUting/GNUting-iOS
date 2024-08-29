@@ -28,7 +28,7 @@ class AdvertCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
     }
-    public func setCell(_ model : UIImage){
+    func setCell(_ model : UIImage){
         adverImageView.image = model
     }
 }

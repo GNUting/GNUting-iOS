@@ -19,7 +19,7 @@ final class AuthNumberInputView: UIView {
     
     // MARK: - Properties
     
-    public weak var authNumberInputViewDelegate: AuthNumberInputViewDelegate?
+     weak var authNumberInputViewDelegate: AuthNumberInputViewDelegate?
     
     // MARK: - SubViews
     
@@ -129,10 +129,10 @@ extension AuthNumberInputView {
     }
 }
 
-// MARK: - Method public SetView
+// MARK: - Internal Method SetView
 
 extension AuthNumberInputView {
-    public func setCheckLabel(isHidden: Bool, text: String?, success: Bool) { // 인증번호 성공 or 실패에 대한 출력 Label
+     func setCheckLabel(isHidden: Bool, text: String?, success: Bool) { // 인증번호 성공 or 실패에 대한 출력 Label
         inputCheckLabel.isHidden = isHidden
         
         if !isHidden {
@@ -147,11 +147,11 @@ extension AuthNumberInputView {
         
     }
     
-    public func setRemainLabel(text: String?) { // 인증 완료 남은시간 Set
+     func setRemainLabel(text: String?) { // 인증 완료 남은시간 Set
         remainNumberLabel.text = text
     }
     
-    public func setFoucInputTextFiled() { // 포커스 주기
+     func setFoucInputTextFiled() { // 포커스 주기
         inputTextField.becomeFirstResponder()
     }
 }

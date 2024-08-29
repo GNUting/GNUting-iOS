@@ -13,10 +13,10 @@ final class UserDetailVC: BaseViewController {
     
     //MARK: - Properties
     
-    public var imaegURL: String? // 사용자 이미지 URL 주소
-    public var userNickname: String? // 사용자 닉네임
-    public var userStudentID: String? // 사용자 학번
-    public var userDepartment: String? // 사용자 학과
+     var imaegURL: String? // 사용자 이미지 URL 주소
+     var userNickname: String? // 사용자 닉네임
+     var userStudentID: String? // 사용자 학번
+     var userDepartment: String? // 사용자 학과
     
     // MARK: - SubViews
     
