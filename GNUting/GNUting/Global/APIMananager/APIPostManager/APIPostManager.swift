@@ -103,6 +103,7 @@ class APIPostManager {
                 switch response.result {
                 case .success:
                     print("🟢 postEmailCheckChangePassword statusCode :\(statusCode)")
+                    print(json)
                     completion(json)
                 case .failure:
                     print("🔴 postEmailCheckChangePassword statusCode :\(statusCode)")

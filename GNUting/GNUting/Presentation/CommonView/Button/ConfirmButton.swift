@@ -24,7 +24,7 @@ final class ConfirmButton: ThrottleButton {
     }
 }
 
-// MARK: - internal Method
+// MARK: - Internal Method
 
 extension ConfirmButton {
     func setConfiguration(title: String) {

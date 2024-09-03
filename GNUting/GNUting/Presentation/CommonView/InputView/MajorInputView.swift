@@ -82,7 +82,7 @@ extension MajorInputView {
     }
 }
 
-// MARK: - internal Method
+// MARK: - Internal Method
 
 extension MajorInputView {
     func setContentLabelText(text: String) {

@@ -197,7 +197,7 @@ extension CommonInputView: UITextFieldDelegate {
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return 누
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return
         textFieldHandler(textFieldText: textField.text ?? "")
         inputViewTextFiledDelegate?.shouldEndEdting()
         
