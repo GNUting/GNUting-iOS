@@ -5,9 +5,11 @@
 //  Created by 원동진 on 3/25/24.
 //
 
+// MARK: - 비밀번호 찾기 화면 VC
+
 import UIKit
 
-class FindPasswordVC: BaseViewController {
+final class FindPasswordVC: BaseViewController {
     
     // MARK: - Properties
     

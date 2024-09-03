@@ -174,6 +174,8 @@
 		F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */; };
 		F8E993EE2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */; };
 		F8F258FC2C80581A0041FF54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8F258FB2C80581A0041FF54 /* GoogleService-Info.plist */; };
+		F8F258FF2C86F7F90041FF54 /* Terms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F258FE2C86F7F90041FF54 /* Terms.swift */; };
+		F8F259012C86FEFC0041FF54 /* TermsURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F259002C86FEFC0041FF54 /* TermsURL.swift */; };
 		F8F3E5212B8837B200827BB0 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F3E5202B8837B200827BB0 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -346,6 +348,8 @@
 		F8E993EB2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewReceiveMessageCell.swift; sourceTree = "<group>"; };
 		F8E993ED2BB5A5A2002A8A5F /* ChatRoomTableViewSendMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewSendMessageCell.swift; sourceTree = "<group>"; };
 		F8F258FB2C80581A0041FF54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F8F258FE2C86F7F90041FF54 /* Terms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terms.swift; sourceTree = "<group>"; };
+		F8F259002C86FEFC0041FF54 /* TermsURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermsURL.swift; path = GNUting/Presentation/CommonModel/TermsURL.swift; sourceTree = SOURCE_ROOT; };
 		F8F3E5202B8837B200827BB0 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -561,6 +565,7 @@
 		F850061C2B738FB9007AB351 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
+				F8F258FD2C86F7EE0041FF54 /* Model */,
 				F8E3CD4F2B8CE8E200712CBF /* VC */,
 				F8235CEE2B74B51100E49073 /* Views */,
 			);
@@ -869,13 +874,6 @@
 			path = CommonView;
 			sourceTree = "<group>";
 		};
-		F8AD250F2C072766004D1CBB /* CommonModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CommonModel;
-			sourceTree = "<group>";
-		};
 		F8AD25102C073314004D1CBB /* InputView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,7 +1078,7 @@
 		F8E3CD4B2B8CE82800712CBF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				F8AD250F2C072766004D1CBB /* CommonModel */,
+				F8F259022C86FF040041FF54 /* CommonModel */,
 				F8AD250E2C07275E004D1CBB /* CommonView */,
 				F8C7DE5B2BC44AFB00923EF5 /* UserDetail */,
 				F8A15E912B60CE6B001DE5E4 /* Login */,
@@ -1224,6 +1222,22 @@
 				F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */,
 			);
 			path = Viewcomponent;
+			sourceTree = "<group>";
+		};
+		F8F258FD2C86F7EE0041FF54 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8F258FE2C86F7F90041FF54 /* Terms.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F8F259022C86FF040041FF54 /* CommonModel */ = {
+			isa = PBXGroup;
+			children = (
+				F8F259002C86FEFC0041FF54 /* TermsURL.swift */,
+			);
+			path = CommonModel;
 			sourceTree = "<group>";
 		};
 		F8F3E51D2B8835E300827BB0 /* Report */ = {
@@ -1388,6 +1402,7 @@
 				F8A695582BA0800900BEB0C6 /* LoginResponse.swift in Sources */,
 				F87D058A2B8F940100910773 /* MyPageTableViewCell.swift in Sources */,
 				F8235CEB2B74A40900E49073 /* SignUpFirstProcessVC.swift in Sources */,
+				F8F258FF2C86F7F90041FF54 /* Terms.swift in Sources */,
 				F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */,
 				F8E944572C2BE6870085D762 /* GenderButton.swift in Sources */,
 				F81D08D42BE773FD00219CEA /* ChatRoomSideView.swift in Sources */,
@@ -1421,6 +1436,7 @@
 				F8AD25152C0764D2004D1CBB /* ConfirmButton.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
 				F88D97A42BA9C55A009BAEEF /* MajorSearchTableViewCell.swift in Sources */,
+				F8F259012C86FEFC0041FF54 /* TermsURL.swift in Sources */,
 				F869094C2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift in Sources */,
 				F87D058C2B8F95A500910773 /* MyPageTitleTableViewHeader.swift in Sources */,
 				F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */,
