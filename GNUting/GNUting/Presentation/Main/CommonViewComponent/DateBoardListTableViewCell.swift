@@ -118,8 +118,8 @@ class DateBoardListTableViewCell: UITableViewCell { // 게시글 목록 타이�
         userCountLabel.text = "\(model.inUserCount):\(model.inUserCount)"
     }
     private func configure(){
-        contentView.addSubViews([statsuLabel,titleLabelStackView,subInfoLabel,borderView])
-        titleLabelStackView.addStackSubViews([userCountLabel,titleLabel])
+        contentView.addSubViews([statsuLabel, titleLabelStackView, subInfoLabel, borderView])
+        titleLabelStackView.addStackSubViews([userCountLabel, titleLabel])
         statsuLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.right.equalToSuperview().inset(Spacing.left)

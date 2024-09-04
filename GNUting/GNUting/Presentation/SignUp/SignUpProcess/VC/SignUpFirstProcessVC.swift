@@ -106,9 +106,9 @@ final class SignUpFirstProcessVC: BaseViewController{
 
 extension SignUpFirstProcessVC{
     private func addSubViews(){
-        view.addSubViews([scrollView,activityIndicatorView])
-        scrollView.addSubViews([inputViewUpperStackView,nextButton])
-        inputViewUpperStackView.addStackSubViews([explainLabel,emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
+        view.addSubViews([scrollView, activityIndicatorView])
+        scrollView.addSubViews([inputViewUpperStackView, nextButton])
+        inputViewUpperStackView.addStackSubViews([explainLabel, emailInputView, certifiedInputView, passWordInputView, passWordCheckInputView])
     }
     
     private func setAutoLayout(){

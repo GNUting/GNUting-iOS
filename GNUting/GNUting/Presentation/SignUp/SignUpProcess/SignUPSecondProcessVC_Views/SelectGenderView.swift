@@ -69,8 +69,8 @@ final class SelectGenderView: UIView {
 
 extension SelectGenderView {
     private func setAddSubViews() {
-        self.addSubViews([typeLabel,buttonStackView])
-        buttonStackView.addStackSubViews([manTypeButton,girlTypeButton])
+        self.addSubViews([typeLabel, buttonStackView])
+        buttonStackView.addStackSubViews([manTypeButton, girlTypeButton])
     }
     
     private func setAutoLayout() {

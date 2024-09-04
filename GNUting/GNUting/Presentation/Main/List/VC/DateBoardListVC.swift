@@ -94,8 +94,8 @@ class DateBoardListVC: BaseViewController {
 }
 extension DateBoardListVC{
     private func addSubViews() {
-        view.addSubViews([noticeStackView,borderView,dateBoardTableView,noDataScreenView,writeTextButton])
-        noticeStackView.addStackSubViews([noticeImageView,noticeLabel])
+        view.addSubViews([noticeStackView, borderView, dateBoardTableView, noDataScreenView, writeTextButton])
+        noticeStackView.addStackSubViews([noticeImageView, noticeLabel])
     }
     private func setAutoLayout(){
         

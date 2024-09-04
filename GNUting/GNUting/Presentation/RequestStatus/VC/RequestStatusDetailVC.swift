@@ -84,8 +84,8 @@ class RequestStatusDetailVC: BaseViewController {
 }
 extension RequestStatusDetailVC{
     private func setAddSubViews() {
-        view.addSubViews([topStackView,dateMemeberTableView,buttonStackView])
-        topStackView.addStackSubViews([groupCountView,stateLabel])
+        view.addSubViews([topStackView, dateMemeberTableView, buttonStackView])
+        topStackView.addStackSubViews([groupCountView, stateLabel])
         
     }
     private func setAutoLayout(){

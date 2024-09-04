@@ -72,7 +72,7 @@ class SignUpThirdProcessVC: BaseViewController {
 }
 extension SignUpThirdProcessVC{
     private func addSubViews(){
-        self.view.addSubViews([phothImageView,explainLabel,imageSkipButton,bottomButton])
+        self.view.addSubViews([phothImageView, explainLabel, imageSkipButton, bottomButton])
     }
     private func setAutoLayout(){
         phothImageView.snp.makeConstraints { make in

@@ -90,7 +90,7 @@ final class TermsTableViewCell: UITableViewCell {
 extension TermsTableViewCell {
     private func setAddSubViews() {
         contentView.addSubview(upperStackView)
-        upperStackView.addStackSubViews([checkButton,termsTextLabel,pushButton])
+        upperStackView.addStackSubViews([checkButton, termsTextLabel, pushButton])
     }
     
     private func setAutoLayout() {

@@ -89,8 +89,8 @@ final class EmailCheckTypeInputView: UIView {
 
 extension EmailCheckTypeInputView {
     private func setAddSubViews() {
-        addSubViews([inputTypeLabel,middleStackView,borderView,confirmButton])
-        middleStackView.addStackSubViews([inputTextField,emailLabel])
+        addSubViews([inputTypeLabel, middleStackView, borderView, confirmButton])
+        middleStackView.addStackSubViews([inputTextField, emailLabel])
     }
     
     private func setAutoLayout() {

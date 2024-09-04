@@ -44,7 +44,7 @@ class DateJoinMemberVC: BaseViewController {
 
 extension DateJoinMemberVC {
     private func setAddSubViews() {
-        view.addSubViews([titleLabel,dismissButton,memberTableView])
+        view.addSubViews([titleLabel, dismissButton, memberTableView])
     }
     
     private func setAutoLayout(){

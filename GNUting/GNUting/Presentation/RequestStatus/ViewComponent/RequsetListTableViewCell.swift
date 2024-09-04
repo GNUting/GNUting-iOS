@@ -53,7 +53,7 @@ extension RequsetListTableViewCell{
       
     }
     private func setAutoLayout() {
-        upperView.addSubViews([majorAndMemeberCountLabel,requestStateLabel])
+        upperView.addSubViews([majorAndMemeberCountLabel, requestStateLabel])
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(7)
             make.left.right.equalToSuperview()

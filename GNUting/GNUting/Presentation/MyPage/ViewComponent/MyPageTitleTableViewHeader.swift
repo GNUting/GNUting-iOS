@@ -23,7 +23,7 @@ class MyPageTitleTableViewHeader: UITableViewHeaderFooterView {
     }()
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.addSubViews([titleLabel,borderView])
+        contentView.addSubViews([titleLabel, borderView])
         setHeader()
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)

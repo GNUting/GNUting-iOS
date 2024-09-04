@@ -50,7 +50,7 @@ class ChatRoomNavigationBar: UIView {
 }
 extension ChatRoomNavigationBar{
     private func setAddSubViews() {
-        self.addSubViews([backButton,titleLabel,settingButton,subTitleLabel])
+        self.addSubViews([backButton, titleLabel, settingButton, subTitleLabel])
     }
     private func setAutoLayout(){
         backButton.snp.makeConstraints { make in

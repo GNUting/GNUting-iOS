@@ -36,7 +36,7 @@ class NoDataScreenView: UIView {
 }
 extension NoDataScreenView{
     private func setAddSubViews() {
-        addSubViews([imageView,label])
+        addSubViews([imageView, label])
     }
     private func setAutoLayout(){
         imageView.snp.makeConstraints { make in

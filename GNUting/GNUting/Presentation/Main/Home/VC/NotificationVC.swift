@@ -52,7 +52,7 @@ class NotificationVC: BaseViewController {
 }
 extension NotificationVC{
     private func setAddSubViews() {
-        view.addSubViews([notificationTableView,noDataScreenView])
+        view.addSubViews([notificationTableView, noDataScreenView])
     }
     private func setAutoLayout(){
         notificationTableView.snp.makeConstraints { make in

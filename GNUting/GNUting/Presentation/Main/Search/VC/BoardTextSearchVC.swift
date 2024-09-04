@@ -69,7 +69,7 @@ extension BoardTextSearchVC {
         searchResultTableView.dataSource = self
     }
     private func addSubViews() {
-        self.view.addSubViews([searchResultTableView,noDataScreenView])
+        self.view.addSubViews([searchResultTableView, noDataScreenView])
     }
     private func setAutoLayout(){
         searchResultTableView.snp.makeConstraints { make in

@@ -149,11 +149,11 @@ extension HomeVC{
     private func addSubViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubViews([homeTopView,homeBottomView])
-        homeTopView.addSubViews([explainStackView,writePostButton,imageButton])
-        explainStackView.addStackSubViews([userNameLabel,explainLabel])
-        homeBottomView.addSubViews([bannerImageView,postSubView,cardStackView])
-        cardStackView.addStackSubViews([postBoardCardView,mypostCardView])
+        contentView.addSubViews([homeTopView, homeBottomView])
+        homeTopView.addSubViews([explainStackView, writePostButton, imageButton])
+        explainStackView.addStackSubViews([userNameLabel, explainLabel])
+        homeBottomView.addSubViews([bannerImageView, postSubView, cardStackView])
+        cardStackView.addStackSubViews([postBoardCardView, mypostCardView])
     }
     private func setAutoLayout(){
         scrollView.snp.makeConstraints { make in

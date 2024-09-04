@@ -5,12 +5,18 @@
 //  Created by 원동진 on 3/19/24.
 //
 
+// MARK: - 학과 검색 VC
+
 import UIKit
+
+// MARK: - protocol
+
 protocol SearchMajorSelectCellDelegate : AnyObject{
     func sendSeleceted(major: String)
 }
 class SearchMajorVC: BaseViewController {
-    var searchMajorSelectCellDelegate: SearchMajorSelectCellDelegate?
+    
+    weak var searchMajorSelectCellDelegate: SearchMajorSelectCellDelegate?
     
     var searchResultList: [SearchMajorModelResult] = [] {
         didSet {

@@ -64,7 +64,7 @@ class ChatRoomListVC: BaseViewController {
 }
 extension ChatRoomListVC{
     private func addSubViews() {
-        view.addSubViews([titleLabel,chatTableView,noDataScreenView])
+        view.addSubViews([titleLabel, chatTableView, noDataScreenView])
     }
     private func setAutoLayout() {
         titleLabel.snp.makeConstraints { make in

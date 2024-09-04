@@ -33,9 +33,9 @@ final class CommonInputView: UIView {
     // MARK: - Properties
     
     weak var passwordDelegate: PasswordDelegate? // 비밀번호 return action
-    var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
-    var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
-    var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
+    weak var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
+    weak var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
+    weak var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
     var textFieldType: SignUpInputViewType? // inputView 타입
     
     // MARK: - SubViews
@@ -85,7 +85,7 @@ final class CommonInputView: UIView {
 
 extension CommonInputView {
     private func setAddSubViews() {
-        self.addSubViews([inputTextTypeLabel,inputTextField,borderView,inputCheckLabel])
+        self.addSubViews([inputTextTypeLabel, inputTextField, borderView, inputCheckLabel])
     }
 
     private func setAutoLayout() {

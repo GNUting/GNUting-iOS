@@ -88,7 +88,7 @@ final class AuthNumberInputView: UIView {
 
 extension AuthNumberInputView {
     private func setAddSubViews() {
-        addSubViews([inputTextTypeLabel,inputTextField,borderView,inputCheckLabel,remainNumberLabel,confirmButton])
+        addSubViews([inputTextTypeLabel, inputTextField, borderView, inputCheckLabel, remainNumberLabel, confirmButton])
     }
     
     private func setAutoLayout(){

@@ -71,7 +71,7 @@ final class UserDetailVC: BaseViewController {
 
 extension UserDetailVC {
     private func setAddSubViews() {
-        view.addSubViews([userImageButton,userNameLabel,subInfoLabel,reportButton])
+        view.addSubViews([userImageButton, userNameLabel, subInfoLabel, reportButton])
     }
     
     private func setAutoLayout() {

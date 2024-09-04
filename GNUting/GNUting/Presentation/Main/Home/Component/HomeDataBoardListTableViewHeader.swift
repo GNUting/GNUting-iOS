@@ -48,8 +48,8 @@ class HomeDateBoardListTableViewHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     private func configure(){
-        contentView.addSubViews([upperStackView,borderView])
-        upperStackView.addStackSubViews([boardNameLabel,moreViewButton])
+        contentView.addSubViews([upperStackView, borderView])
+        upperStackView.addStackSubViews([boardNameLabel, moreViewButton])
         upperStackView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }

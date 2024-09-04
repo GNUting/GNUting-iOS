@@ -78,11 +78,11 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
 }
 extension ChatRoomTableViewReceiveMessageCell{
     private func setAddSubViews() {
-        contentView.addSubViews([userImageButton,upperView])
+        contentView.addSubViews([userImageButton, upperView])
         
         upperView.addSubViews([middleStackView])
-        middleStackView.addStackSubViews([nickNameLabel,messageUpperView])
-        messageUpperView.addSubViews([messageView,sendDateLabel])
+        middleStackView.addStackSubViews([nickNameLabel, messageUpperView])
+        messageUpperView.addSubViews([messageView, sendDateLabel])
         messageView.addSubview(messageLabel)
     }
     private func setAutoLayout(){

@@ -101,7 +101,7 @@ final class NicknameTypeInputView: UIView {
 
 extension NicknameTypeInputView {
     private func setAddSubViews() {
-        addSubViews([inputTypeLabel,inputTextField,borderView,nicknameCheckButton,inputCheckLabel])
+        addSubViews([inputTypeLabel, inputTextField, borderView, nicknameCheckButton, inputCheckLabel])
     }
     
     private func setAutoLayout() {

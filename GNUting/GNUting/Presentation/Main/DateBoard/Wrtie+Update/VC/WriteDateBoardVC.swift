@@ -82,7 +82,7 @@ extension WriteDateBoardVC{
         }
     }
     private func addSubViews() {
-        view.addSubViews([titleContentView,memberTableView])
+        view.addSubViews([titleContentView, memberTableView])
     }
     private func setAutoLayout(){
         titleContentView.snp.makeConstraints { make in

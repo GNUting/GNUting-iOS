@@ -85,7 +85,7 @@ extension DetailDateBoardVC{
         self.view.bringSubviewToFront(detailDateBoardSetView)
     }
     private func addSubViews() {
-        view.addSubViews([statusLabel,titleLabel,writeDateLabel,userInfoView,contentTextView,chatPeopleViewButton,requetChatButton,detailDateBoardSetView])
+        view.addSubViews([statusLabel, titleLabel, writeDateLabel, userInfoView, contentTextView, chatPeopleViewButton, requetChatButton, detailDateBoardSetView])
     }
     private func setAutoLayout(){
         statusLabel.snp.makeConstraints { make in

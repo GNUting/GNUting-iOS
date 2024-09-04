@@ -5,6 +5,8 @@
 //  Created by 원동진 on 2/7/24.
 //
 
+// MARK: - 전체 동의 View
+
 import UIKit
 
 // MARK: - Protocol
@@ -72,8 +74,8 @@ extension AllCheckTermsView {
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        self.addSubViews([upperStackView,borderView])
-        upperStackView.addStackSubViews([checkButton,termsTextLabel])
+        self.addSubViews([upperStackView, borderView])
+        upperStackView.addStackSubViews([checkButton, termsTextLabel])
     }
     
     private func setAutoLayout() {

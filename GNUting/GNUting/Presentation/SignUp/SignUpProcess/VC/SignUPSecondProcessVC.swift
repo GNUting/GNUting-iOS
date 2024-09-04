@@ -149,10 +149,10 @@ class SignUPSecondProcessVC: BaseViewController{
 
 extension SignUPSecondProcessVC{
     private func addSubViews(){
-        self.view.addSubViews([scrollView,datePicker,bluerEffectView,buttonStackView])
-        scrollView.addSubViews([inputViewUpperStackView,nextButton])
-        inputViewUpperStackView.addStackSubViews([nameInputView,phoneNumberInputView,genderView,selectDateView,nickNameInputView,majorInputView,studentIDInputView,introduceOneLine])
-        buttonStackView.addStackSubViews([dateViewCacnelButton,dateViewSelectButton])
+        self.view.addSubViews([scrollView, datePicker, bluerEffectView, buttonStackView])
+        scrollView.addSubViews([inputViewUpperStackView, nextButton])
+        inputViewUpperStackView.addStackSubViews([nameInputView, phoneNumberInputView, genderView, selectDateView, nickNameInputView, majorInputView, studentIDInputView, introduceOneLine])
+        buttonStackView.addStackSubViews([dateViewCacnelButton, dateViewSelectButton])
     }
     
     private func setAutoLayout(){

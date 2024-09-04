@@ -98,8 +98,8 @@ final class FindPasswordVC: BaseViewController {
 
 extension FindPasswordVC {
     private func setAddView() {
-        view.addSubViews([inputViewUpperStackView,passwordUpdateButton,activityIndicatorView])
-        inputViewUpperStackView.addStackSubViews([emailInputView,certifiedInputView,passWordInputView,passWordCheckInputView])
+        view.addSubViews([inputViewUpperStackView, passwordUpdateButton, activityIndicatorView])
+        inputViewUpperStackView.addStackSubViews([emailInputView, certifiedInputView, passWordInputView, passWordCheckInputView])
         view.bringSubviewToFront(emailInputView)
     }
     

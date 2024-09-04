@@ -35,7 +35,7 @@ class ChatRoomFirstImageView: UIView {
 extension ChatRoomFirstImageView{
     
     private func setAddSubViews() {
-        self.addSubViews([firstImageButton,secondImageButton,thirdImageButton,forthImageButton])
+        self.addSubViews([firstImageButton, secondImageButton, thirdImageButton, forthImageButton])
       
     }
     private func setAutoLayout() {
@@ -86,7 +86,7 @@ extension ChatRoomFirstImageView {
             }
             
         case 2:
-            self.addSubViews([firstImageButton,secondImageButton])
+            self.addSubViews([firstImageButton, secondImageButton])
             firstImageButton.snp.updateConstraints { make in
                 make.centerX.equalToSuperview().offset(11)
                 make.centerY.equalToSuperview()
@@ -105,7 +105,7 @@ extension ChatRoomFirstImageView {
             }
         case 3:
             
-            self.addSubViews([firstImageButton,secondImageButton,thirdImageButton])
+            self.addSubViews([firstImageButton, secondImageButton, thirdImageButton])
             firstImageButton.snp.updateConstraints { make in
                 make.centerX.equalToSuperview()
                 make.centerY.equalToSuperview().offset(-11)
@@ -125,7 +125,7 @@ extension ChatRoomFirstImageView {
                 make.height.width.equalTo(0)
             }
         case 4:
-            self.addSubViews([firstImageButton,secondImageButton,thirdImageButton,forthImageButton])
+            self.addSubViews([firstImageButton, secondImageButton, thirdImageButton, forthImageButton])
             firstImageButton.snp.updateConstraints { make in
                 make.centerX.equalToSuperview().offset(11)
                 make.centerY.equalToSuperview().offset(11)

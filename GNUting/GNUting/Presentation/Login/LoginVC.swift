@@ -126,9 +126,9 @@ final class LoginVC: BaseViewController {
 
 extension LoginVC {
     private func setAddSubViews() {
-        view.addSubViews([appLogiImageView,explainLabel,textFieldStackView,bottomStackView])
-        textFieldStackView.addStackSubViews([emailTextFieldView,passwordTextField,loginButton])
-        bottomStackView.addStackSubViews([findPasswordButton,borderLabel,signUpButton])
+        view.addSubViews([appLogiImageView, explainLabel, textFieldStackView, bottomStackView])
+        textFieldStackView.addStackSubViews([emailTextFieldView, passwordTextField, loginButton])
+        bottomStackView.addStackSubViews([findPasswordButton, borderLabel, signUpButton])
     }
     
     private func setAutoLayout() {

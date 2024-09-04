@@ -5,7 +5,7 @@
 //  Created by 원동진 on 9/3/24.
 //
 
-// MARK: - 이용약관
+// MARK: - 이용약관 Model
 
 import Foundation
 

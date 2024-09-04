@@ -60,9 +60,9 @@ class UserInfoDetailView: UIView { // 한줄소개 있음
 }
 extension UserInfoDetailView{
     private func setAddsubViews() {
-        self.addSubViews([userImageButton,infoUpperView])
-        infoUpperView.addSubViews([middleTopStackView,selfIntroduceLabel])
-        middleTopStackView.addStackSubViews([userNameLabel,subInfoLabel])
+        self.addSubViews([userImageButton, infoUpperView])
+        infoUpperView.addSubViews([middleTopStackView, selfIntroduceLabel])
+        middleTopStackView.addStackSubViews([userNameLabel, subInfoLabel])
         
     }
     

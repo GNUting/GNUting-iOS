@@ -149,7 +149,7 @@ class ChatRoomVC: UIViewController {
 }
 extension ChatRoomVC{
     private func setAddSubViews() {
-        view.addSubViews([navigationBarView,borderView1,chatRoomTableView,borderView2,sendStackView,sideView,opaqueView])
+        view.addSubViews([navigationBarView, borderView1, chatRoomTableView, borderView2, sendStackView, sideView, opaqueView])
         sendStackView.addStackSubViews([textField,sendMessageButton])
         self.view.bringSubviewToFront(opaqueView)
         self.view.bringSubviewToFront(sideView)

@@ -88,7 +88,7 @@ class RequestStateVC: BaseViewController {
 }
 extension RequestStateVC{
     private func addSubViews() {
-        self.view.addSubViews([titleLabel,segmentedControl,requsetListTableView,noDataScreenView])
+        self.view.addSubViews([titleLabel, segmentedControl, requsetListTableView, noDataScreenView])
     }
     private func setAutoLayout(){
         titleLabel.snp.makeConstraints { make in

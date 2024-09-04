@@ -63,9 +63,9 @@ class UserInfoView: UIView {
 }
 extension UserInfoView {
     private func addSubViews(){
-        self.addSubViews([border1,upperStackView,border2])
-        upperStackView.addSubViews([userImageButton,middleStackView])
-        middleStackView.addStackSubViews([nickNameLabel,majorStudentIDLabel])
+        self.addSubViews([border1, upperStackView, border2])
+        upperStackView.addSubViews([userImageButton, middleStackView])
+        middleStackView.addStackSubViews([nickNameLabel, majorStudentIDLabel])
         middleStackView.setContentHuggingPriority(.init(250), for: .horizontal)
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
         

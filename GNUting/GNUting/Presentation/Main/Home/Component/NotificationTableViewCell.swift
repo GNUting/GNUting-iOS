@@ -59,8 +59,8 @@ class NotificationTableViewCell: UITableViewCell {
 }
 extension NotificationTableViewCell{
     private func setAddSubViews() {
-        contentView.addSubViews([notificationImageView,labelStackView])
-        labelStackView.addStackSubViews([notificationTitleLabel,notificationBodyLabel,dateLabel])
+        contentView.addSubViews([notificationImageView, labelStackView])
+        labelStackView.addStackSubViews([notificationTitleLabel, notificationBodyLabel, dateLabel])
     }
     private func setAutoLayout(){
         notificationImageView.snp.makeConstraints { make in

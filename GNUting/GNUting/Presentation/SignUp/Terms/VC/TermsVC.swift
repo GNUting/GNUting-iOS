@@ -68,7 +68,7 @@ class TermsVC: UIViewController{
 
 extension TermsVC {
     private func addSubViews(){
-        self.view.addSubViews([allCheckTermsView,termsTableView,nextButton])
+        self.view.addSubViews([allCheckTermsView, termsTableView, nextButton])
     }
     
     private func setAutoLayout(){
