@@ -178,7 +178,7 @@ extension SignUPSecondProcessVC {
     // MARK: - Privatge
     
     private func checkEnableNextButton() { // 다음 버튼 활성화 Check
-        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() {
+        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() && !selectedDate.isEmpty {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
@@ -291,7 +291,9 @@ extension SignUPSecondProcessVC {
         formatter.dateFormat = "yyyy-MM-dd"
         
         selectedDate = formatter.string(from: sender.date)
+        checkEnableNextButton()
     }
+    
     @objc private func tapSelectButton(){
         datePicker.isHidden = true
         buttonStackView.isHidden = true
@@ -307,7 +309,10 @@ extension SignUPSecondProcessVC {
         } else {
             selectDateView.setDateLabel(date: DateModel(year: dateArr[0], momth: dateArr[1], day: dateArr[2]))
         }
-
+        
+        if selectedDate.isEmpty {
+            showMessage(message: "생년월일을 올바르게 입력하세요.")
+        }
     }
     @objc private func tapCanelButton(){
         datePicker.isHidden = true
