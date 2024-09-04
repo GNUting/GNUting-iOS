@@ -18,7 +18,7 @@ class ReportReasonCheckButton: UIButton {
     }
 }
 extension ReportReasonCheckButton {
-    public func setConfiguration(buttonText:  String) {
+    func setConfiguration(buttonText:  String) {
         var configuration = UIButton.Configuration.plain()
         configuration.attributedTitle = AttributedString("\(buttonText)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.regular(size: 12) ?? .systemFont(ofSize: 12)]))
         configuration.image = UIImage(named: "DisSelectedIImg")

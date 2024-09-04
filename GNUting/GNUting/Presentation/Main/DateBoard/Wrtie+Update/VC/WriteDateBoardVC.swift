@@ -227,7 +227,7 @@ extension WriteDateBoardVC{
 
 
 extension WriteDateBoardVC {
-    public func sendDetailTextData(textTuple : (String,String)) {
+    func sendDetailTextData(textTuple : (String,String)) {
         titleContentView.setTitleTextFieldText(text: textTuple.0)
         titleContentView.setContentTextView(text: textTuple.1)
         titleContentView.setContentTextViewTextColor(color: .black)

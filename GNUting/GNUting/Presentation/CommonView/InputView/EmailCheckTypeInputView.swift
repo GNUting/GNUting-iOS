@@ -20,7 +20,7 @@ final class EmailCheckTypeInputView: UIView {
     
     // MARK: - Properties
     
-    public weak var emailCheckTypeInputViewDelegate: EmailCheckTypeInputViewDelegate?
+     weak var emailCheckTypeInputViewDelegate: EmailCheckTypeInputViewDelegate?
     
     // MARK: - SubViews
     
@@ -117,14 +117,14 @@ extension EmailCheckTypeInputView {
     }
 }
 
-// MARK: - Method public
+// MARK: - Method 
 
 extension EmailCheckTypeInputView {
-    public func setFoucInputTextFiled() { // 포커스 주기
+     func setFoucInputTextFiled() { // 포커스 주기
         inputTextField.becomeFirstResponder()
     }
    
-    public func getTextFieldText() -> String { // 텍스트 필드 받아오기
+     func getTextFieldText() -> String { // 텍스트 필드 받아오기
         inputTextField.text ?? ""
     }
 }

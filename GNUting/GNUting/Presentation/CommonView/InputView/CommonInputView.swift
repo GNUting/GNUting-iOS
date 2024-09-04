@@ -32,7 +32,7 @@ final class CommonInputView: UIView {
     
     // MARK: - Properties
     
-    public weak var passwordDelegate: PasswordDelegate? // 비밀번호 return action
+    weak var passwordDelegate: PasswordDelegate? // 비밀번호 return action
     var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
     var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
     var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
@@ -141,29 +141,29 @@ extension CommonInputView {
     }
 }
 
-// MARK: - Method public
+// MARK: - internal Method
 
 extension CommonInputView {
     
     // MARK: - Set
     
-    public func setInputTextTypeLabel(text: String) { // 입력 카테고리 Label
+    func setInputTextTypeLabel(text: String) { // 입력 카테고리 Label
         inputTextTypeLabel.text = text
     }
     
-    public func setPlaceholder(placeholder: String) { // textField placeholder 설정
+    func setPlaceholder(placeholder: String) { // textField placeholder 설정
         inputTextField.placeholder = placeholder
     }
     
-    public func setTextField(text: String) { // textField text 설정
+     func setTextField(text: String) { // textField text 설정
         inputTextField.text = text
     }
     
-    public func isEmpty() -> Bool { // textField isEmpty 확인
+     func isEmpty() -> Bool { // textField isEmpty 확인
         return inputTextField.text?.count == 0 ? true : false
     }
     
-    public func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
+     func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
         inputCheckLabel.isHidden = isHidden
         inputCheckLabel.text = text
         
@@ -174,17 +174,17 @@ extension CommonInputView {
         }
     }
     
-    public func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
+     func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
         inputTextField.keyboardType = .numberPad
     }
     
-    public func setSecureTextEntry() { // 비밀번호
+     func setSecureTextEntry() { // 비밀번호
         inputTextField.isSecureTextEntry = true
     }
     
     // MARK: - Get
     
-    public func getTextFieldText() -> String {
+     func getTextFieldText() -> String {
         inputTextField.text ?? ""
     }
 }
@@ -197,7 +197,7 @@ extension CommonInputView: UITextFieldDelegate {
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return 누
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return
         textFieldHandler(textFieldText: textField.text ?? "")
         inputViewTextFiledDelegate?.shouldEndEdting()
         

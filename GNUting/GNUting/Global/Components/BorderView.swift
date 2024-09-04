@@ -29,7 +29,7 @@ extension BorderView {
     }
 }
 extension BorderView {
-    public func disableColor() {
+    func disableColor() {
         self.backgroundColor = UIColor(named: "BorderColor")
     }
 

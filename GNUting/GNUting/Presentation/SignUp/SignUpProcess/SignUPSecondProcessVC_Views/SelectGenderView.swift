@@ -13,7 +13,7 @@ final class SelectGenderView: UIView {
     
     // MARK: - Properties
     
-    public var selectedGender: Int = 0 // 0 : 남자 , 1:여자
+    var selectedGender: Int = 0 // 0 : 남자 , 1:여자
 
     // MARK: - SubViews
     
@@ -86,10 +86,10 @@ extension SelectGenderView {
     }
 }
 
-// MARK: - Method public
+// MARK: - Internal Method
 
 extension SelectGenderView {
-    public func getSelectedGender() -> String {
+    func getSelectedGender() -> String {
         return selectedGender == 0 ? "MALE" : "FEMALE"
     }
 }

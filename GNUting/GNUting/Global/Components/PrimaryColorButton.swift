@@ -24,6 +24,7 @@ class PrimaryColorButton: UIButton {
         self.layer.masksToBounds = true
         self.isUserInteractionEnabled = true
     }
+    
     override var isEnabled: Bool {
         didSet {
             if isEnabled {
@@ -33,10 +34,12 @@ class PrimaryColorButton: UIButton {
             }
         }
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    public func setText(_ text : String,fointSize: Int = 20){
+    
+    func setText(_ text : String,fointSize: Int = 20){
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10)
         
@@ -44,11 +47,13 @@ class PrimaryColorButton: UIButton {
         config.titleAlignment = .center
         self.configuration = config
     }
+    
     func setHeight(height: Int = 60) {
         self.snp.makeConstraints { make in
             make.height.equalTo(height)
         }
     }
+    
     func throttle(delay: Double, callback: @escaping ((Date) -> Void)) {
         self.delay = delay
         self.callback = callback

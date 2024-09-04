@@ -17,7 +17,7 @@ final class GenderButton: UIButton {
     
     // MARK: - Properties
     
-    weak public var genderButtonDelegate: GenderButtonDelegate?
+    weak var genderButtonDelegate: GenderButtonDelegate?
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -61,10 +61,10 @@ extension GenderButton {
     }
 }
 
-// MARK: - Method public
+// MARK: - Internal Method
 
 extension GenderButton {
-    public func setGenderButton(title: String, tag: Int) {
+    func setGenderButton(title: String, tag: Int) {
         var configuration = UIButton.Configuration.plain()
         
         configuration.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 16) ?? .systemFont(ofSize: 16)]))

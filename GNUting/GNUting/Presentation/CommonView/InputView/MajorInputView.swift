@@ -19,7 +19,7 @@ final class MajorInputView: UIView {
     
     // MARK: - Properties
     
-    public weak var majorInputViewDelegate: MajorInputViewDelegate?
+    weak var majorInputViewDelegate: MajorInputViewDelegate?
     
     // MARK: - SubViews
     
@@ -82,19 +82,19 @@ extension MajorInputView {
     }
 }
 
-// MARK: - Method public
+// MARK: - Internal Method
 
 extension MajorInputView {
-    public func setContentLabelText(text: String) {
+    func setContentLabelText(text: String) {
         contentLabel.text = text
         contentLabel.textColor = .black
     }
     
-    public func getContentLabelText() -> String? {
+    func getContentLabelText() -> String? {
         return contentLabel.text
     }
     
-    public func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return contentLabel.text?.count == 0 ? true : false
     }
 }

@@ -23,8 +23,8 @@ final class NicknameTypeInputView: UIView {
     
     // MARK: - Properties
     
-    public weak var nicknameCheckButtonDelegate: NicknameCheckButtonDelegate?
-    public weak var nicknameTextfiledDelegate: NicknameTextfiledDelegate?
+    weak var nicknameCheckButtonDelegate: NicknameCheckButtonDelegate?
+    weak var nicknameTextfiledDelegate: NicknameTextfiledDelegate?
     
     // MARK: - SubViews
     
@@ -132,13 +132,13 @@ extension NicknameTypeInputView {
     }
 }
 
-// MARK: - Method public
+// MARK: - internal Method
 
 extension NicknameTypeInputView {
     
     // MARK: - Set
     
-   public func setCheckLabel(isHidden: Bool, text: String?, success: Bool) {
+   func setCheckLabel(isHidden: Bool, text: String?, success: Bool) {
         inputCheckLabel.isHidden = isHidden
         if !isHidden {
             inputCheckLabel.text = text
@@ -150,13 +150,13 @@ extension NicknameTypeInputView {
         }
     }
     
-    public func setTextField(text: String) {
+    func setTextField(text: String) {
         inputTextField.text = text
     }
     
     // MARK: - Get
     
-    public func getTextFieldText() -> String { // 텍스트 필드 받아오기
+    func getTextFieldText() -> String { // 텍스트 필드 받아오기
         inputTextField.text ?? ""
     }
 }

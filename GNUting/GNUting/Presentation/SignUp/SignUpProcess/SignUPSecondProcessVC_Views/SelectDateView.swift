@@ -108,11 +108,11 @@ extension SelectDateView {
     }
 }
 
-// MARK: - Method public
+// MARK: - Internal Method
 
 
 extension SelectDateView {
-    public func setDateLabel(date : DateModel) {
+    func setDateLabel(date : DateModel) {
         yearLabel.text = date.year
         monthLabel.text = date.momth
         dayLabel.text = date.day
