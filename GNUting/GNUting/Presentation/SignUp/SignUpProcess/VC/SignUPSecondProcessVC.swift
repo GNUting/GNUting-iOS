@@ -5,6 +5,8 @@
 //  Created by 원동진 on 2/8/24.
 //
 
+// MARK: - 회원가입 2 단계 VC
+
 import UIKit
 
 final class SignUPSecondProcessVC: BaseViewController {

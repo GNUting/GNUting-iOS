@@ -9,6 +9,8 @@
 
 import UIKit
 
+// MARK: - protocol
+
 protocol GenderButtonDelegate: AnyObject {
     func tapButton(tag: Int)
 }
