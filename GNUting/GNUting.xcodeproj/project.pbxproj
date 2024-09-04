@@ -110,7 +110,7 @@
 		F88D979C2BA9BD5F009BAEEF /* SearchMajorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */; };
 		F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */; };
 		F88D97A22BA9C3D7009BAEEF /* SearchMajorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */; };
-		F88D97A42BA9C55A009BAEEF /* MajorSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */; };
+		F88D97A42BA9C55A009BAEEF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D97A32BA9C55A009BAEEF /* SearchTableViewCell.swift */; };
 		F88EE47F2B9ED94E0058BC00 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EE47E2B9ED94E0058BC00 /* SignUpModel.swift */; };
 		F88EE4822B9EE3420058BC00 /* APIURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EE4812B9EE3420058BC00 /* APIURL.swift */; };
 		F88EE4862B9EE4F80058BC00 /* APIPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EE4852B9EE4F80058BC00 /* APIPostManager.swift */; };
@@ -284,7 +284,7 @@
 		F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMajorVC.swift; sourceTree = "<group>"; };
 		F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorInputView.swift; sourceTree = "<group>"; };
 		F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMajorModel.swift; sourceTree = "<group>"; };
-		F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorSearchTableViewCell.swift; sourceTree = "<group>"; };
+		F88D97A32BA9C55A009BAEEF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		F88EE47E2B9ED94E0058BC00 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		F88EE4812B9EE3420058BC00 /* APIURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIURL.swift; path = GNUting/Global/API/APIURLBase/APIURL.swift; sourceTree = SOURCE_ROOT; };
 		F88EE4852B9EE4F80058BC00 /* APIPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostManager.swift; sourceTree = "<group>"; };
@@ -381,7 +381,6 @@
 		F801471F2C3FD10B00ED03BB /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
 				F8235CEA2B74A40900E49073 /* SignUpFirstProcessVC.swift */,
 				F8235CF02B74B54100E49073 /* SignUPSecondProcessVC.swift */,
 				F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */,
@@ -479,8 +478,6 @@
 			children = (
 				F801471F2C3FD10B00ED03BB /* VC */,
 				F8235CF72B765E1200E49073 /* model */,
-				F88D97A32BA9C55A009BAEEF /* MajorSearchTableViewCell.swift */,
-				F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */,
 				F80147202C3FD11F00ED03BB /* SignUPSecondProcessVC_Views */,
 			);
 			path = SignUpProcess;
@@ -782,6 +779,7 @@
 			isa = PBXGroup;
 			children = (
 				F8A15E922B60CE88001DE5E4 /* LoginVC.swift */,
+				F85E0ADF2BD128BA00ADBE7C /* LoginTextFieldView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1083,6 +1081,7 @@
 				F8C7DE5B2BC44AFB00923EF5 /* UserDetail */,
 				F8A15E912B60CE6B001DE5E4 /* Login */,
 				F8A15E982B60F0C4001DE5E4 /* FindPassword */,
+				F8F259042C8866950041FF54 /* SearchMajor */,
 				F85006172B738D48007AB351 /* SignUp */,
 				F8BE89DA2B807668008E6767 /* Main */,
 				F8BE89DB2B807678008E6767 /* RequestStatus */,
@@ -1238,6 +1237,15 @@
 				F8F259002C86FEFC0041FF54 /* TermsURL.swift */,
 			);
 			path = CommonModel;
+			sourceTree = "<group>";
+		};
+		F8F259042C8866950041FF54 /* SearchMajor */ = {
+			isa = PBXGroup;
+			children = (
+				F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */,
+				F88D97A32BA9C55A009BAEEF /* SearchTableViewCell.swift */,
+			);
+			path = SearchMajor;
 			sourceTree = "<group>";
 		};
 		F8F3E51D2B8835E300827BB0 /* Report */ = {
@@ -1435,7 +1443,7 @@
 				F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */,
 				F8AD25152C0764D2004D1CBB /* ConfirmButton.swift in Sources */,
 				F8E3CD452B8CE5BC00712CBF /* DateJoinMemberVC.swift in Sources */,
-				F88D97A42BA9C55A009BAEEF /* MajorSearchTableViewCell.swift in Sources */,
+				F88D97A42BA9C55A009BAEEF /* SearchTableViewCell.swift in Sources */,
 				F8F259012C86FEFC0041FF54 /* TermsURL.swift in Sources */,
 				F869094C2BFC6A2E001634D4 /* ChatRoomNavigationBar.swift in Sources */,
 				F87D058C2B8F95A500910773 /* MyPageTitleTableViewHeader.swift in Sources */,

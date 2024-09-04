@@ -46,7 +46,7 @@ final class SearchMajorVC: BaseViewController {
     
     private lazy var searchResultTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(MajorSearchTableViewCell.self, forCellReuseIdentifier: MajorSearchTableViewCell.identi)
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identi)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.showsVerticalScrollIndicator = false
@@ -112,7 +112,7 @@ extension SearchMajorVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MajorSearchTableViewCell.identi, for: indexPath) as? MajorSearchTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identi, for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
         cell.setCell(model: searchResultList[indexPath.row])
         cell.selectionStyle = .none
         

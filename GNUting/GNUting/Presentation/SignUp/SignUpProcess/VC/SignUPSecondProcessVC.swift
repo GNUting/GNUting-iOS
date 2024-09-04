@@ -16,6 +16,7 @@ class SignUPSecondProcessVC: BaseViewController{
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        
         return scrollView
     }()
     private lazy var inputViewUpperStackView : UIStackView = {
@@ -24,17 +25,19 @@ class SignUPSecondProcessVC: BaseViewController{
         stackView.alignment = .fill
         stackView.spacing = 10
         stackView.distribution = .fill
+        
         return stackView
     }()
-    private lazy var nameInputView : CommonInputView = {
+    private lazy var nameInputView: CommonInputView = {
         let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "이름")
         signUPInpuView.setPlaceholder(placeholder: "이름을 입력해주세요.")
         signUPInpuView.textFieldType = .name
         signUPInpuView.inputViewTextFiledDelegate = self
+        
         return signUPInpuView
     }()
-    private lazy var phoneNumberInputView : CommonInputView = {
+    private lazy var phoneNumberInputView: CommonInputView = {
         let signUPInpuView = CommonInputView()
         signUPInpuView.setInputTextTypeLabel(text: "전화번호")
         signUPInpuView.setPlaceholder(placeholder: "전화번호를 입력해주세요.")
