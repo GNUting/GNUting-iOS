@@ -10,7 +10,7 @@
 import UIKit
 import SnapKit
 
-final class SignUpFirstProcessVC: BaseViewController{
+final class SignUpFirstProcessVC: BaseViewController {
     
     // MARK: - Properties
     
@@ -83,6 +83,7 @@ final class SignUpFirstProcessVC: BaseViewController{
         addSubViews()
         setAutoLayout()
         setDelegateSubViews()
+        setSecureTextEntry()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,12 +131,17 @@ extension SignUpFirstProcessVC {
         }
     }
     
-    // MARK: - SetDelegate
+    // MARK: - SetSubViews
     
     private func setDelegateSubViews() {
         emailInputView.emailCheckTypeInputViewDelegate = self
         certifiedInputView.authNumberInputViewDelegate = self
         passWordCheckInputView.passwordCheckDelegate = self
+    }
+    
+    private func setSecureTextEntry() {
+        passWordInputView.setSecureTextEntry()
+        passWordCheckInputView.setSecureTextEntry()
     }
 }
 

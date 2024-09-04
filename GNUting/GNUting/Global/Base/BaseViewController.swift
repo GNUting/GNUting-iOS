@@ -43,7 +43,6 @@ extension BaseViewController {
         commonInputView.setInputTextTypeLabel(text: text)
         commonInputView.setPlaceholder(placeholder: placHolder)
         commonInputView.textFieldType = textFieldType
-        commonInputView.setSecureTextEntry()
         
         return commonInputView
     }

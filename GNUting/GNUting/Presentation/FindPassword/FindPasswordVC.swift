@@ -62,6 +62,7 @@ final class FindPasswordVC: BaseViewController {
         setAutoLayout()
         setNavigationBar(title: "비밀번호 찾기")
         setDelegateSubViews()
+        setSecureTextEntry()
     }
 }
 
@@ -92,12 +93,17 @@ extension FindPasswordVC {
         }
     }
     
-    // MARK: - SetDelegate
+    // MARK: - SetSubViews
     
     private func setDelegateSubViews() {
         emailInputView.emailCheckTypeInputViewDelegate = self
         certifiedInputView.authNumberInputViewDelegate = self
         passWordCheckInputView.passwordCheckDelegate = self
+    }
+    
+    private func setSecureTextEntry() {
+        passWordInputView.setSecureTextEntry()
+        passWordCheckInputView.setSecureTextEntry()
     }
 }
 
