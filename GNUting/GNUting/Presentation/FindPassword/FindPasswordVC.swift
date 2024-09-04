@@ -36,41 +36,11 @@ final class FindPasswordVC: BaseViewController {
         
         return stackView
     }()
-    private lazy var emailInputView: EmailCheckTypeInputView = {
-        let inputView = EmailCheckTypeInputView()
-        inputView.emailCheckTypeInputViewDelegate = self
-        
-        return inputView
-    }()
     
-    private lazy var certifiedInputView: AuthNumberInputView = {
-        let signUPInpuView = AuthNumberInputView()
-        signUPInpuView.authNumberInputViewDelegate = self
-        
-        return signUPInpuView
-    }()
-    
-    private lazy var passWordInputView: CommonInputView = {
-        let signUPInpuView = CommonInputView()
-        signUPInpuView.setInputTextTypeLabel(text: "신규 비밀번호")
-        signUPInpuView.setPlaceholder(placeholder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자")
-        signUPInpuView.textFieldType = .password
-        signUPInpuView.passwordDelegate = self
-        signUPInpuView.setSecureTextEntry()
-        
-        return signUPInpuView
-    }()
-    
-    private lazy var passWordCheckInputView: CommonInputView = {
-        let signUPInpuView = CommonInputView()
-        signUPInpuView.setInputTextTypeLabel(text: "신규 비밀번호 확인")
-        signUPInpuView.setPlaceholder(placeholder: "비밀번호 확인")
-        signUPInpuView.textFieldType = .passwordCheck
-        signUPInpuView.passwordCheckDelegate = self
-        signUPInpuView.setSecureTextEntry()
-        
-        return signUPInpuView
-    }()
+    private lazy var emailInputView = EmailCheckTypeInputView()
+    private lazy var certifiedInputView = AuthNumberInputView()
+    private lazy var passWordInputView = makeCommonInputView(text: "비밀번호", placHolder: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자", textFieldType: .password)
+    private lazy var passWordCheckInputView = makeCommonInputView(text: "비밀번호 확인", placHolder: "비밀번호와 동일하게 입력해주세요.", textFieldType: .passwordCheck)
     
     private lazy var passwordUpdateButton: PrimaryColorButton = {
         let button = PrimaryColorButton()
@@ -91,12 +61,14 @@ final class FindPasswordVC: BaseViewController {
         setAddView()
         setAutoLayout()
         setNavigationBar(title: "비밀번호 찾기")
+        setDelegateSubViews()
     }
 }
 
-// MARK: - Layout Helpers
-
 extension FindPasswordVC {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddView() {
         view.addSubViews([inputViewUpperStackView, passwordUpdateButton, activityIndicatorView])
         inputViewUpperStackView.addStackSubViews([emailInputView, certifiedInputView, passWordInputView, passWordCheckInputView])
@@ -118,6 +90,14 @@ extension FindPasswordVC {
         activityIndicatorView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    // MARK: - SetDelegate
+    
+    private func setDelegateSubViews() {
+        emailInputView.emailCheckTypeInputViewDelegate = self
+        certifiedInputView.authNumberInputViewDelegate = self
+        passWordCheckInputView.passwordCheckDelegate = self
     }
 }
 
@@ -175,7 +155,7 @@ extension FindPasswordVC {
         }
     }
     
-    private func postEmailCheckChangePassword(textFieldText: String) {
+    private func postEmailCheckChangePasswordAPI(textFieldText: String) {
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
             self.showMessage(message: "인증번호가 전송되었습니다.")
             self.certifiedInputView.setFoucInputTextFiled()
@@ -184,7 +164,7 @@ extension FindPasswordVC {
         }
     }
     
-    private func postAuthenticationCheck(authNumber: String) {
+    private func postAuthenticationCheckAPI(authNumber: String) {
         APIPostManager.shared.postAuthenticationCheck(email: emailInputView.getTextFieldText() + "@gnu.ac.kr", number: authNumber) { [self] response  in
             if response.isSuccess {
                 emailSuccess = true
@@ -198,25 +178,13 @@ extension FindPasswordVC {
     }
 }
 
-// MARK: - Action
-
-extension FindPasswordVC {
-    @objc func getSetTime() {
-        guard let startTime = startTime else {
-            setEmailCheckTime(limitSecond: Date())
-            return
-        }
-        setEmailCheckTime(limitSecond: startTime)
-    }
-}
-
 // MARK: - Delegate
 
 extension FindPasswordVC: EmailCheckTypeInputViewDelegate { // 이메일 인증
     func tapButtonAction(textFieldText: String) { // 이메일 인증 Button action
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
-        postEmailCheckChangePassword(textFieldText: textFieldText)
+        postEmailCheckChangePasswordAPI(textFieldText: textFieldText)
     }
     
     func didBeginTextfield() { // 이메일 입력 시작 action
@@ -227,35 +195,29 @@ extension FindPasswordVC: EmailCheckTypeInputViewDelegate { // 이메일 인증
 
 extension FindPasswordVC: AuthNumberInputViewDelegate {
     func tapComfirmButton(authNumber: String) { // 이메일 인증 번호 확인 버튼 action
-        postAuthenticationCheck(authNumber: authNumber)
-    }
-}
-
-extension FindPasswordVC: PasswordDelegate {
-    func passwordkeyBoardReturn(text: String) { // 비밀번호 입력 후 return or 화면 터치 Action
-        let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
-        let checkPassword = text.range(of: regex,options: .regularExpression) != nil
-        
-        if !checkPassword {
-            passWordInputView.setInputCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
-        } else {
-            passWordInputView.setInputCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
-        }
+        postAuthenticationCheckAPI(authNumber: authNumber)
     }
 }
 
 extension FindPasswordVC: PasswordCheckDelegate {
     func passwordCheckKeyboardReturn(text: String) { // 비밀번호 확인 입력 후 return or 확면 터치 Action
         let passwordTestFiledText = passWordInputView.getTextFieldText()
+        let isPasswordMatch = passwordTestFiledText == text
         
-        if passwordTestFiledText == text {
-            samePasswordSuccess = true
-            nextButtonEnable()
-            passWordCheckInputView.setInputCheckLabel(isHidden: false, text: "비밀번호가 일치합니다.", success: true)
-        } else {
-            samePasswordSuccess = false
-            nextButtonEnable()
-            passWordCheckInputView.setInputCheckLabel(isHidden: false, text: "비밀번호가 일치하지 않습니다.", success: false)
+        samePasswordSuccess = isPasswordMatch
+        passWordCheckInputView.setInputCheckLabel(isHidden: false, text: isPasswordMatch ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다.", success: isPasswordMatch)
+        nextButtonEnable()
+    }
+}
+
+// MARK: - Action
+
+extension FindPasswordVC {
+    @objc func getSetTime() {
+        guard let startTime = startTime else {
+            setEmailCheckTime(limitSecond: Date())
+            return
         }
+        setEmailCheckTime(limitSecond: startTime)
     }
 }

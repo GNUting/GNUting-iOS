@@ -156,25 +156,6 @@ extension AuthNumberInputView {
     }
 }
 
-// MARK: - Action
-
-extension AuthNumberInputView {
-    @objc private func changeInputTextField(_ sender: UITextField) {
-        if sender.text?.count == 0 {
-            confirmButton.backgroundColor = UIColor(named: "DisableColor")
-            confirmButton.isEnabled = false
-        } else {
-            confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
-            confirmButton.isEnabled = true
-        }
-        
-    }
-    
-    private func tapConfirmButton() {
-        authNumberInputViewDelegate?.tapComfirmButton(authNumber: inputTextField.text ?? "")
-    }
-}
-
 // MARK: - Delegate
 
 extension AuthNumberInputView: UITextFieldDelegate {
@@ -194,5 +175,24 @@ extension AuthNumberInputView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
+    }
+}
+
+// MARK: - Action
+
+extension AuthNumberInputView {
+    @objc private func changeInputTextField(_ sender: UITextField) {
+        if sender.text?.count == 0 {
+            confirmButton.backgroundColor = UIColor(named: "DisableColor")
+            confirmButton.isEnabled = false
+        } else {
+            confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
+            confirmButton.isEnabled = true
+        }
+        
+    }
+    
+    private func tapConfirmButton() {
+        authNumberInputViewDelegate?.tapComfirmButton(authNumber: inputTextField.text ?? "")
     }
 }

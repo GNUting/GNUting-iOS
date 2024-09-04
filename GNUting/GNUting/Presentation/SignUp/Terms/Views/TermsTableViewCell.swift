@@ -112,7 +112,7 @@ extension TermsTableViewCell {
 // MARK: - ButtonAction
 
 extension TermsTableViewCell {
-    @objc func tapCheckButton(_ sender: UIButton){
+    @objc func tapCheckButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         selectedState = sender.isSelected
         termsTableViewCellDelegate?.checkButtonAction(isSelected: sender.isSelected, indexPath: self.indexPath ?? IndexPath(row: 0, section: 0))
@@ -131,12 +131,12 @@ extension TermsTableViewCell {
     
     // MARK: - Internal
     
-    func setAllCheckButton(AllCheckButtonSelected : Bool){
+    func setAllCheckButton(AllCheckButtonSelected : Bool) {
         checkButton.isSelected = AllCheckButtonSelected
         AllCheckButtonSelected ? checkButton.setImage(UIImage(named: "SelectedCheckImage"), for: .selected) : checkButton.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
     }
     
-    func setTextLabel(type: String,description : String){
+    func setTextLabel(type: String,description : String) {
         let labelString = "\(type) \(description)"
         let attribtuedString = NSMutableAttributedString(string: labelString)
         let range = (labelString as NSString).range(of: type)
