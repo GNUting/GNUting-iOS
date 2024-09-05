@@ -62,7 +62,7 @@ class DateBoardListVC: BaseViewController {
     
     private lazy var dateBoardTableView : UITableView = {
        let tableView = UITableView()
-        tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
+        tableView.register(BoardListTableViewCell.self, forCellReuseIdentifier: BoardListTableViewCell.identi)
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
@@ -162,8 +162,8 @@ extension DateBoardListVC: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
-        boardListCell.boardListSetCell(model: dateBoardListData[indexPath.row])
+        guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: BoardListTableViewCell.identi, for: indexPath) as? BoardListTableViewCell else {return BoardListTableViewCell()}
+        boardListCell.setCell(model: dateBoardListData[indexPath.row])
         
         
         return boardListCell

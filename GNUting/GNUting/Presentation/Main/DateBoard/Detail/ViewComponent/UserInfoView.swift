@@ -13,12 +13,12 @@ import SnapKit
 class UserInfoView: UIView {
     private lazy var border1 : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
+        view.backgroundColor = UIColor(named: "ColorE9E9E9")
         return view
     }()
     private lazy var border2 : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
+        view.backgroundColor = UIColor(named: "ColorE9E9E9")
         return view
     }()
     private lazy var upperStackView = UIView()

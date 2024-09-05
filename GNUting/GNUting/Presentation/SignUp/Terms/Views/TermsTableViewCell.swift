@@ -15,6 +15,7 @@ protocol TermsTableViewCellDelegate: AnyObject {
     func pushButtonAction(indexPath: IndexPath)
     func checkButtonAction(isSelected: Bool, indexPath: IndexPath)
 }
+
 final class TermsTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -78,10 +79,6 @@ final class TermsTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         pushButton.isHidden = false // 151 번 코드로 인해 셀 재사용시 pushButton 사라지는 형상을 막고자함
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 }
 

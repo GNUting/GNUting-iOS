@@ -145,7 +145,7 @@
 		F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */; };
 		F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */; };
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
-		F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */; };
+		F8BE8A1B2B82127A008E6767 /* BoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */; };
 		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
 		F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */; };
 		F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */; };
@@ -319,7 +319,7 @@
 		F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDateBoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataBoardListTableViewHeader.swift; sourceTree = "<group>"; };
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
-		F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListTableViewCell.swift; sourceTree = "<group>"; };
+		F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
 		F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
@@ -934,7 +934,7 @@
 		F8BE89DA2B807668008E6767 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F8E3CD582B8CEA8900712CBF /* CommonViewComponent */,
+				F8E3CD582B8CEA8900712CBF /* CommonViews */,
 				F8E3CD502B8CE95D00712CBF /* Home */,
 				F80C4DE42B838CEA00BA6FFB /* Search */,
 				F8CDE3502B849ED000E5598D /* List */,
@@ -1174,12 +1174,12 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		F8E3CD582B8CEA8900712CBF /* CommonViewComponent */ = {
+		F8E3CD582B8CEA8900712CBF /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
-				F8BE8A1A2B82127A008E6767 /* DateBoardListTableViewCell.swift */,
+				F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */,
 			);
-			path = CommonViewComponent;
+			path = CommonViews;
 			sourceTree = "<group>";
 		};
 		F8E3CD592B8CEAA100712CBF /* VC */ = {
@@ -1531,7 +1531,7 @@
 				F85E0AE02BD128BA00ADBE7C /* LoginTextFieldView.swift in Sources */,
 				F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */,
 				F8DB022D2BB412FE0067CED2 /* ChatMessageModel.swift in Sources */,
-				F8BE8A1B2B82127A008E6767 /* DateBoardListTableViewCell.swift in Sources */,
+				F8BE8A1B2B82127A008E6767 /* BoardListTableViewCell.swift in Sources */,
 				F8B6ECA12BA4781F0058C6E8 /* MyPostModel.swift in Sources */,
 				F8483F2E2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift in Sources */,
 				F81D08E62BEA5C7C00219CEA /* ChatRoomUserModel.swift in Sources */,

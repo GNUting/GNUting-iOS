@@ -41,7 +41,7 @@ class BoardTextSearchVC: BaseViewController{
     
     private lazy var searchResultTableView : UITableView = {
         let tableView = UITableView()
-        tableView.register(DateBoardListTableViewCell.self, forCellReuseIdentifier: DateBoardListTableViewCell.identi)
+        tableView.register(BoardListTableViewCell.self, forCellReuseIdentifier: BoardListTableViewCell.identi)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -144,8 +144,8 @@ extension BoardTextSearchVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: DateBoardListTableViewCell.identi, for: indexPath) as? DateBoardListTableViewCell else {return DateBoardListTableViewCell()}
-        boardListCell.searchSetCell(model: searchResultList[indexPath.row])
+        guard let boardListCell = tableView.dequeueReusableCell(withIdentifier: BoardListTableViewCell.identi, for: indexPath) as? BoardListTableViewCell else {return BoardListTableViewCell()}
+        boardListCell.setCell(model: searchResultList[indexPath.row])
         
         return boardListCell
     }

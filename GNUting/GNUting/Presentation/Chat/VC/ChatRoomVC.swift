@@ -41,17 +41,9 @@ class ChatRoomVC: UIViewController {
         return view
     }()
     
+    private let borderView1 = BorderView()
+    private let borderView2 = BorderView()
     
-    private lazy var borderView1 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
-    private lazy var borderView2 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
     private lazy var chatRoomTableView : UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -162,7 +154,6 @@ extension ChatRoomVC{
         borderView1.snp.makeConstraints { make in
             make.top.equalTo(navigationBarView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         chatRoomTableView.snp.makeConstraints { make in
             make.top.equalTo(borderView1.snp.bottom).offset(10)
@@ -179,7 +170,6 @@ extension ChatRoomVC{
             make.top.equalTo(chatRoomTableView.snp.bottom)
             make.bottom.equalTo(sendStackView.snp.top).offset(-10)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         
         sideView.snp.makeConstraints { make in

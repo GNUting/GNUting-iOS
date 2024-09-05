@@ -34,11 +34,11 @@ class HomeDateBoardListTableViewHeader: UITableViewHeaderFooterView {
         button.addTarget(self, action: #selector(tapMoreViewButton), for: .touchUpInside)
         return button
     }()
-    private let borderView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
+    
+    private let borderView = BorderView()
+    
+    // MARK: - init
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         configure()
@@ -56,7 +56,6 @@ class HomeDateBoardListTableViewHeader: UITableViewHeaderFooterView {
         borderView.snp.makeConstraints { make in
             make.top.equalTo(upperStackView.snp.bottom).offset(15)
             make.left.bottom.right.equalToSuperview()
-            make.height.equalTo(1)
         }
     }
     @objc private func tapMoreViewButton(){
