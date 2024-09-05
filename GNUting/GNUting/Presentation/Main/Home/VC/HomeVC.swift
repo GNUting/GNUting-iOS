@@ -20,7 +20,7 @@ class HomeVC: BaseViewController {
     
     // MARK: - SubViews
     
-    private lazy var scrollView : UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .white
@@ -29,7 +29,7 @@ class HomeVC: BaseViewController {
         return scrollView
     }()
     
-    private lazy var contentView : UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
         view.isUserInteractionEnabled = true
         view.backgroundColor = UIColor(hexCode: "FFF0F0")
@@ -67,14 +67,14 @@ class HomeVC: BaseViewController {
 
 // MARK: - Layout Helpers
 
-extension HomeVC{
+extension HomeVC {
     private func addSubViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubViews([homeTopView, homeBottomView])
     }
     
-    private func setAutoLayout(){
+    private func setAutoLayout() {
         scrollView.snp.makeConstraints { make in
             make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.left.right.equalToSuperview()
@@ -136,7 +136,7 @@ extension HomeVC {
     
     // MARK: - Post FCMToken
     
-    private func postFCMTokenAPI(){
+    private func postFCMTokenAPI() {
         guard let fcmToken = KeyChainManager.shared.read(key: "fcmToken") else { return }
         APIPostManager.shared.postFCMToken(fcmToken: fcmToken) { response in
             if response?.code != "FIREBASE4000" {
@@ -145,7 +145,7 @@ extension HomeVC {
         }
     }
     
-    private func getUserDataAPI(){
+    private func getUserDataAPI() {
         APIGetManager.shared.getUserData { [unowned self] userData,response  in
             errorHandling(response: response)
             self.userDetailData = UserDetailModel(imageURL: userData?.result?.profileImage,
@@ -159,7 +159,7 @@ extension HomeVC {
         }
     }
     
-    private func getNotificationCheckAPI(){
+    private func getNotificationCheckAPI() {
         APIGetManager.shared.getNotificationCheck { notificationCheckModel in
             guard let notificationCheckData = notificationCheckModel?.result else { return }
             

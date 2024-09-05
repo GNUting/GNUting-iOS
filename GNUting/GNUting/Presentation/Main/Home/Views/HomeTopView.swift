@@ -13,7 +13,7 @@ class HomeTopView: UIView {
     
     // MARK: - SubViews
     
-    private lazy var explainStackView : UIStackView = {
+    private lazy var explainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
@@ -30,6 +30,7 @@ class HomeTopView: UIView {
         label.font = Pretendard.regular(size: 22)
         label.numberOfLines = 2
         label.lineBreakStrategy = .hangulWordPriority
+        
         return label
     }()
     
@@ -67,7 +68,7 @@ extension HomeTopView {
         explainStackView.addStackSubViews([userNameLabel, explainLabel])
     }
     
-    private func setAutoLayout(){
+    private func setAutoLayout() {
         explainStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(28)
             make.left.equalToSuperview().offset(25)
