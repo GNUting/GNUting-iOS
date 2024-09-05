@@ -12,7 +12,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol AllCheckTermsViewDelegate: AnyObject {
-    func tapButton(isSelected: Bool)
+    func tapButtonAction(isSelected: Bool)
 }
 
 final class AllCheckTermsView: UIView {
@@ -101,7 +101,7 @@ extension AllCheckTermsView {
     
     @objc func tapCheckButton(_ sender: UIButton){
         sender.isSelected.toggle()
-        allCheckTermsViewDelegate?.tapButton(isSelected: sender.isSelected)
+        allCheckTermsViewDelegate?.tapButtonAction(isSelected: sender.isSelected)
     }
     
     // MARK: - Internal Method

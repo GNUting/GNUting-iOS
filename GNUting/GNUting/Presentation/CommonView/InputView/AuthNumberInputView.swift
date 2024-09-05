@@ -12,7 +12,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol AuthNumberInputViewDelegate: AnyObject {
-    func tapComfirmButton(authNumber: String)
+    func tapComfirmButtonAction(authNumber: String)
 }
 
 final class AuthNumberInputView: UIView {
@@ -193,6 +193,6 @@ extension AuthNumberInputView {
     }
     
     private func tapConfirmButton() {
-        authNumberInputViewDelegate?.tapComfirmButton(authNumber: inputTextField.text ?? "")
+        authNumberInputViewDelegate?.tapComfirmButtonAction(authNumber: inputTextField.text ?? "")
     }
 }

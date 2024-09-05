@@ -13,7 +13,7 @@ struct BoardModel: Codable {
     let result: [BoardResult]?
 }
 
-struct BoardResult: Codable,BoardListCellconfiguration {
+struct BoardResult: Codable, BoardListCellconfiguration {
     let id: Int
     let title: String
     let detail: String

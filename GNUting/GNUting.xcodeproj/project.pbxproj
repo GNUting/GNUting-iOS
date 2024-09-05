@@ -141,9 +141,6 @@
 		F8BE89E12B80778E008E6767 /* RequestStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E02B80778E008E6767 /* RequestStateVC.swift */; };
 		F8BE89E32B8077A9008E6767 /* ChatRoomListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E22B8077A9008E6767 /* ChatRoomListVC.swift */; };
 		F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE89E42B8078BA008E6767 /* MyPageVC.swift */; };
-		F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */; };
-		F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */; };
-		F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */; };
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
 		F8BE8A1B2B82127A008E6767 /* BoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */; };
 		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
@@ -315,9 +312,6 @@
 		F8BE89E02B80778E008E6767 /* RequestStateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStateVC.swift; sourceTree = "<group>"; };
 		F8BE89E22B8077A9008E6767 /* ChatRoomListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomListVC.swift; sourceTree = "<group>"; };
 		F8BE89E42B8078BA008E6767 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
-		F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertCollectionViewCell.swift; sourceTree = "<group>"; };
-		F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDateBoardListTableViewCell.swift; sourceTree = "<group>"; };
-		F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataBoardListTableViewHeader.swift; sourceTree = "<group>"; };
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
@@ -720,7 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				F8BE89DE2B80770F008E6767 /* HomeVC.swift */,
-				F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -863,6 +856,31 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
+		F8AC69CD2C899A0900873455 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				F8AC69CF2C899A2100873455 /* Views */,
+				F8AC69CE2C899A1300873455 /* VC */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		F8AC69CE2C899A1300873455 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		F8AC69CF2C899A2100873455 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F8AD250E2C07275E004D1CBB /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,6 +955,7 @@
 				F8E3CD582B8CEA8900712CBF /* CommonViews */,
 				F8E3CD502B8CE95D00712CBF /* Home */,
 				F80C4DE42B838CEA00BA6FFB /* Search */,
+				F8AC69CD2C899A0900873455 /* Notification */,
 				F8CDE3502B849ED000E5598D /* List */,
 				F80C4DE02B838BCB00BA6FFB /* DateBoard */,
 			);
@@ -973,16 +992,12 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		F8BE8A122B82049E008E6767 /* Component */ = {
+		F8BE8A122B82049E008E6767 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F8BE8A0D2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift */,
-				F8BE8A132B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift */,
-				F8BE8A0B2B81FAE7008E6767 /* AdvertCollectionViewCell.swift */,
-				F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */,
 				F8483F292BE23DE400FC3AB6 /* WritePostButton.swift */,
 			);
-			path = Component;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F8C7DE5B2BC44AFB00923EF5 /* UserDetail */ = {
@@ -1127,7 +1142,7 @@
 		F8E3CD502B8CE95D00712CBF /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F8BE8A122B82049E008E6767 /* Component */,
+				F8BE8A122B82049E008E6767 /* Views */,
 				F882DBB12BA42D03009201D2 /* VC */,
 			);
 			path = Home;
@@ -1459,9 +1474,7 @@
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
 				F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */,
 				F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */,
-				F8BE8A0C2B81FAE7008E6767 /* AdvertCollectionViewCell.swift in Sources */,
 				F8C7DE612BC44F6600923EF5 /* DismissButton.swift in Sources */,
-				F8BE8A142B8207EA008E6767 /* HomeDataBoardListTableViewHeader.swift in Sources */,
 				F882DBB92BA43D57009201D2 /* PostReportModel.swift in Sources */,
 				F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */,
 				F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */,
@@ -1515,7 +1528,6 @@
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,
 				F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */,
 				F8510D0A2B98B09A00CF1055 /* SignUpModelManager.swift in Sources */,
-				F8BE8A0E2B82031A008E6767 /* HomeDateBoardListTableViewCell.swift in Sources */,
 				F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */,
 				F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */,
 				F8483F2A2BE23DE400FC3AB6 /* WritePostButton.swift in Sources */,

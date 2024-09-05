@@ -120,9 +120,3 @@ extension UserWriteTextVC {
         }
     }
 }
-//MARK: - Delegate
-extension UserWriteTextVC: WritePostButtonDelegate {
-    func tapButton() {
-        pushViewContoller(viewController: WriteDateBoardVC())
-    }
-}

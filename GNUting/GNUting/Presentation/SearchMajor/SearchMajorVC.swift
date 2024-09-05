@@ -14,6 +14,7 @@ import UIKit
 protocol SearchMajorSelectCellDelegate: AnyObject {
     func sendSeleceted(major: String)
 }
+
 final class SearchMajorVC: BaseViewController {
     
     // MARK: - Properties

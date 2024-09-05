@@ -12,7 +12,7 @@ import UIKit
 // MARK: - protocol
 
 protocol GenderButtonDelegate: AnyObject {
-    func tapButton(tag: Int)
+    func tapButtonAction(tag: Int)
 }
 
 final class GenderButton: UIButton {
@@ -87,6 +87,6 @@ extension GenderButton {
     }
     
     @objc private func tapButton() {
-        genderButtonDelegate?.tapButton(tag: self.tag)
+        genderButtonDelegate?.tapButtonAction(tag: self.tag)
     }
 }
