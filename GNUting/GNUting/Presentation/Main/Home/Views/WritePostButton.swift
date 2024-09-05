@@ -48,6 +48,15 @@ class WritePostButton: UIButton {
     // MARK: - Action
     
     @objc private func tapWritePostButton() {
-        writePostButtonDelegate?.tapButtonAction()
+        UIView.animate(withDuration: 0.2) {
+            let scale = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.transform = scale
+
+        } completion: { finished in
+            UIView.animate(withDuration: 0.2) {
+                self.transform = .identity
+            }
+            self.writePostButtonDelegate?.tapButtonAction()
+        }
     }
 }

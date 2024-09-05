@@ -80,10 +80,10 @@ extension DateJoinMemberVC : UITableViewDataSource {
         cell.setUserInfoViews(model: userInfos[indexPath.row])
         cell.userImageTappedClosure = {
             let vc = UserDetailVC()
-            vc.imaegURL = self.userInfos[indexPath.row].profileImage
-            vc.userNickname = self.userInfos[indexPath.row].nickname
-            vc.userDepartment = self.userInfos[indexPath.row].department
-            vc.userStudentID = self.userInfos[indexPath.row].studentId
+            vc.userDetailData = UserDetailModel(imageURL: self.userInfos[indexPath.row].profileImage,
+                                                nickname: self.userInfos[indexPath.row].nickname,
+                                                userStudentID: self.userInfos[indexPath.row].studentId, 
+                                                userDepartment: self.userInfos[indexPath.row].department)
             self.presentFullScreenVC(viewController: vc)
         }
         return cell

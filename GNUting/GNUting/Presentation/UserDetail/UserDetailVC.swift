@@ -13,16 +13,13 @@ final class UserDetailVC: BaseViewController {
     
     //MARK: - Properties
     
-     var imaegURL: String? // 사용자 이미지 URL 주소
-     var userNickname: String? // 사용자 닉네임
-     var userStudentID: String? // 사용자 학번
-     var userDepartment: String? // 사용자 학과
-    
+    var userDetailData: UserDetailModel?
+     
     // MARK: - SubViews
     
     private lazy var userImageButton = UIButton()
     
-    private lazy var userNameLabel: UILabel = {
+    private lazy var userNickameLabel: UILabel = {
         let label = UILabel()
         label.font = Pretendard.medium(size: 16)
         
@@ -71,7 +68,7 @@ final class UserDetailVC: BaseViewController {
 
 extension UserDetailVC {
     private func setAddSubViews() {
-        view.addSubViews([userImageButton, userNameLabel, subInfoLabel, reportButton])
+        view.addSubViews([userImageButton, userNickameLabel, subInfoLabel, reportButton])
     }
     
     private func setAutoLayout() {
@@ -81,13 +78,13 @@ extension UserDetailVC {
             make.height.width.equalTo(200)
         }
         
-        userNameLabel.snp.makeConstraints { make in
+        userNickameLabel.snp.makeConstraints { make in
             make.top.equalTo(userImageButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         
         subInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(userNameLabel.snp.bottom).offset(5)
+            make.top.equalTo(userNickameLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
         }
         
@@ -107,12 +104,12 @@ extension UserDetailVC {
     }
     
     private func setUserDetailViewLabel() {
-        userNameLabel.text = userNickname
-        subInfoLabel.text = "\(userStudentID ?? "학번")학번 | \(userDepartment ?? "학과")"
+        userNickameLabel.text = userDetailData?.nickname
+        subInfoLabel.text = "\(userDetailData?.userStudentID ?? "학번")학번 | \(userDetailData?.userDepartment ?? "학과")"
     }
     
     private func setUserDetailViewImageView() {
-        setImageFromStringURL(stringURL: imaegURL) { image in
+        setImageFromStringURL(stringURL: userDetailData?.imageURL) { image in
             DispatchQueue.main.async {
                 self.userImageButton.setImage(image, for: .normal)
                 self.userImageButton.layer.cornerRadius = self.userImageButton.layer.frame.size.width / 2
@@ -129,7 +126,7 @@ extension UserDetailVC {
     private func getUserData() { // 사용자 정보 Get
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
-            if userData?.result?.nickname == self.userNickname { // 사용자 정보와 비교하여 일치할 경우 신고하기 버튼 Hidden
+            if userData?.result?.nickname == self.userDetailData?.nickname { // 사용자 정보와 비교하여 일치할 경우 신고하기 버튼 Hidden
                 self.reportButton.isHidden = true
             }
         }
@@ -141,7 +138,8 @@ extension UserDetailVC {
 extension UserDetailVC {
     @objc private func tapReportButton() { // 신고하기 버튼 클릭
         let vc = ReportVC()
-        vc.userNickname = self.userNickname ?? "유저이름"
+        
+        vc.userNickname = self.userDetailData?.nickname ?? "유저이름"
         self.presentFullScreenVC(viewController: vc)
     }
 }

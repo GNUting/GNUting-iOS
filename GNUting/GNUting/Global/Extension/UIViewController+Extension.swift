@@ -46,7 +46,7 @@ extension UIViewController{
                 guard let image = UIImage(data: imageData) else { return }
                 completion(image)
             }.resume()
-        }else {
+        } else {
             guard let image = UIImage(named: "photoImg") else { return }
             completion(image)
         }
@@ -94,6 +94,7 @@ extension UIViewController{
     func presentFullScreenVC(viewController: UIViewController) {
         let navigationVC = UINavigationController.init(rootViewController: viewController)
         navigationVC.modalPresentationStyle = .fullScreen
+        
         self.present(navigationVC, animated: true)
     }
     func hideKeyboardWhenTappedAround(){

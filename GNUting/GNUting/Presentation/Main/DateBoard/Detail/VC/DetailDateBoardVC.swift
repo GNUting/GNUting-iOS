@@ -270,10 +270,11 @@ extension DetailDateBoardVC {
 extension DetailDateBoardVC: UserImageButtonDelegate {
     func tappedAction() {
         let vc = UserDetailVC()
-        vc.userNickname = postUserInfos?.nickname
-        vc.imaegURL = postUserInfos?.image
-        vc.userDepartment = postUserInfos?.department
-        vc.userStudentID = postUserInfos?.studentId
+        
+        vc.userDetailData = UserDetailModel(imageURL: postUserInfos?.image,
+                                            nickname: postUserInfos?.nickname,
+                                            userStudentID: postUserInfos?.studentId,
+                                            userDepartment: postUserInfos?.department)
         presentFullScreenVC(viewController: vc)
     }
     

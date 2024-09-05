@@ -234,7 +234,7 @@ extension SignUpFirstProcessVC: EmailCheckTypeInputViewDelegate {
     }
 }
 extension SignUpFirstProcessVC: AuthNumberInputViewDelegate {
-    func tapComfirmButton(authNumber: String) {
+    func tapComfirmButtonAction(authNumber: String) {
         postAuthenticationCheckAPI(authNumber: authNumber)
     }
 }

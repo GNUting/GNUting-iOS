@@ -158,7 +158,7 @@ extension TermsVC: TermsTableViewCellDelegate { // 체크 버튼 클릭
 }
 
 extension TermsVC: AllCheckTermsViewDelegate { // 전체 동의 버튼 클릭
-    func tapButton(isSelected: Bool) {
+    func tapButtonAction(isSelected: Bool) {
         self.allCheckSelected = isSelected
         allCheckButton(selected: isSelected)
         termsTableView.reloadData()

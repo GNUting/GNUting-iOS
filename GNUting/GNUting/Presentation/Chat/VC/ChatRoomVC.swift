@@ -396,21 +396,21 @@ extension ChatRoomVC: SetAlertButtonDelegate {
 extension ChatRoomVC: SendTappedUserData{
     func tapUserImageButton(userData: ChatRommUserModelResult?) { // 사이드뷰에서
         let vc = UserDetailVC()
-        vc.imaegURL = userData?.profileImage
-        vc.userNickname = userData?.nickname
-        vc.userStudentID = userData?.studentID
-        vc.userDepartment = userData?.department
         
+        vc.userDetailData = UserDetailModel(imageURL: userData?.profileImage,
+                                            nickname: userData?.nickname,
+                                            userStudentID: userData?.studentID,
+                                            userDepartment: userData?.department)
         presentFullScreenVC(viewController: vc)
     }
     
     func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
         let vc = UserDetailVC()
-        vc.imaegURL = userData?.profileImage
-        vc.userNickname = userData?.nickname
-        vc.userStudentID = userData?.studentId
-        vc.userDepartment = userData?.department
         
+        vc.userDetailData = UserDetailModel(imageURL: userData?.profileImage,
+                                            nickname: userData?.nickname,
+                                            userStudentID: userData?.studentId,
+                                            userDepartment: userData?.department)
         presentFullScreenVC(viewController: vc)
     }
 }

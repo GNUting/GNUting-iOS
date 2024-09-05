@@ -200,7 +200,7 @@ extension FindPasswordVC: EmailCheckTypeInputViewDelegate { // 이메일 인증
 }
 
 extension FindPasswordVC: AuthNumberInputViewDelegate {
-    func tapComfirmButton(authNumber: String) { // 이메일 인증 번호 확인 버튼 action
+    func tapComfirmButtonAction(authNumber: String) { // 이메일 인증 번호 확인 버튼 action
         postAuthenticationCheckAPI(authNumber: authNumber)
     }
 }

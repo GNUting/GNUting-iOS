@@ -95,7 +95,7 @@ extension SelectGenderView {
 // MARK: - Delegate
 
 extension SelectGenderView: GenderButtonDelegate {
-    func tapButton(tag: Int) {
+    func tapButtonAction(tag: Int) {
         self.selectedGender = tag
         
         if tag == 0 {
