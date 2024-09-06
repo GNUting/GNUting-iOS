@@ -13,10 +13,10 @@ final class FindPasswordVC: BaseViewController {
     
     // MARK: - Properties
     
-    var timer = Timer()
-    var startTime : Date?
-    var emailSuccess : Bool = false
-    var samePasswordSuccess : Bool = false
+    private var timer = Timer()
+    private var startTime: Date?
+    private var emailSuccess = false
+    private var samePasswordSuccess = false
     
     // MARK: - SubViews
     

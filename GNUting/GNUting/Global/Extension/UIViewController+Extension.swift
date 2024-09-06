@@ -195,4 +195,10 @@ extension UIViewController{
         attributedString.addAttribute(.foregroundColor, value: highlightColor, range: range)
         label.attributedText = attributedString
     }
+    
+    func setTapGestureView(view: UIView, action: Selector) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: action)
+        
+        view.addGestureRecognizer(tapGesture)
+    }
 }

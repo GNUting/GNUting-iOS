@@ -16,7 +16,7 @@ class HomeVC: BaseViewController {
     
     // MARK: - Properties
     
-    var userDetailData: UserDetailModel?
+    private var userDetailData: UserDetailModel?
     
     // MARK: - SubViews
     
@@ -120,8 +120,8 @@ extension HomeVC {
     }
     
     private func setImageViewTapGesture() {
-        setTapGestureImageView(imaegView: bellImageView, action: #selector(tapNotiButtonAction))
-        setTapGestureImageView(imaegView: homeBottomView.bannerImageView, action: #selector(tapBannerImageViewAction))
+        setTapGestureView(view: bellImageView, action: #selector(tapNotiButtonAction))
+        setTapGestureView(view: homeBottomView.bannerImageView, action: #selector(tapBannerImageViewAction))
     }
     
     private func setDelegate() {
@@ -211,11 +211,5 @@ extension HomeVC {
     
     @objc private func tapBannerImageViewAction() {
         instagramOpen()
-    }
-    
-    private func setTapGestureImageView(imaegView: UIImageView, action: Selector) {
-        let tapGesture = UITapGestureRecognizer(target: self, action: action)
-        
-        imaegView.addGestureRecognizer(tapGesture)
     }
 }

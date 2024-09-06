@@ -13,7 +13,7 @@ class NotificationVC: BaseViewController {
     
     // MARK: - Properties
     
-    var notificationList: [NotificationModelResult] = [] {
+    private var notificationList: [NotificationModelResult] = [] {
         didSet{
             noDataScreenView.isHidden = notificationList.count == 0 ? false : true
             notificationTableView.reloadData()

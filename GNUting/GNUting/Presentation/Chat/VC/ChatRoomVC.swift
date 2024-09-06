@@ -20,7 +20,7 @@ class ChatRoomVC: UIViewController {
         return cardVisible ? .collapsed : .expanded
     }
     var chatMessageList: [ChatRoomMessageModelResult] = []{
-        didSet{
+        didSet {
             self.chatRoomTableView.reloadData()
             self.chatRoomTableViewMoveToBottom()
         }

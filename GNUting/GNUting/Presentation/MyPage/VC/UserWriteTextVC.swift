@@ -11,7 +11,7 @@ import UIKit
 
 class UserWriteTextVC: BaseViewController {
     var myPostList : [MyPostResult] = [] {
-        didSet{
+        didSet {
             if myPostList.count == 0 {
                 noDataScreenView.isHidden = false
                 writeTextButton.isHidden = false

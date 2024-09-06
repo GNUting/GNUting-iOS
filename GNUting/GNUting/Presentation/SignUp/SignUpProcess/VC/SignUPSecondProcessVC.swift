@@ -13,7 +13,7 @@ final class SignUPSecondProcessVC: BaseViewController {
     
     // MARK: - Properties
     
-    var selectedDate : String = ""
+    private var selectedDate : String = ""
     private var nickNameCheck: Bool = false
     private var phoneNumberCheck: Bool = false
     

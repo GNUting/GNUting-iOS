@@ -11,10 +11,10 @@ class BoardTextSearchVC: BaseViewController {
     
     // MARK: - Properties
     
-    var isFetching : Bool = true
-    var page = 0
-    var searchText = ""
-    var searchResultList: [SearchResultContent] = [] {
+    private var isFetching : Bool = true
+    private var page = 0
+    private var searchText = ""
+    private var searchResultList: [SearchResultContent] = [] {
         didSet {
             noDataScreenView.isHidden = searchResultList.count == 0 ? false : true
             DispatchQueue.main.async {

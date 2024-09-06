@@ -19,7 +19,7 @@ final class SearchMajorVC: BaseViewController {
     
     // MARK: - Properties
     weak var searchMajorSelectCellDelegate: SearchMajorSelectCellDelegate?
-    var searchResultList: [SearchMajorModelResult] = [] {
+    private var searchResultList: [SearchMajorModelResult] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.searchResultTableView.reloadData()

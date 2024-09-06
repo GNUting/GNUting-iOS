@@ -13,7 +13,7 @@ final class SelectGenderView: UIView {
     
     // MARK: - Properties
     
-    var selectedGender: Int = 0 // 0 : 남자 , 1:여자
+    private var selectedGender: Int = 0 // 0 : 남자 , 1:여자
 
     // MARK: - SubViews
     
