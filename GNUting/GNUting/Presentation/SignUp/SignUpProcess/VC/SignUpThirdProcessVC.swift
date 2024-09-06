@@ -187,22 +187,6 @@ extension SignUpThirdProcessVC {
     }
 }
 
-// MARK: - Action
-
-extension SignUpThirdProcessVC {
-    @objc private func tapSignUpCompltedButton(){
-        setAndPostSignUp()
-    }
-    
-    @objc private func tapBottomButton() {
-        if bottomButton.titleLabel?.text == "프로필 사진 등록하기" {
-            present(imagePicker, animated: true)
-        } else {
-            setAndPostSignUp()
-        }
-    }
-}
-
 // MARK: - Delegate
 
 extension SignUpThirdProcessVC: PHPickerViewControllerDelegate {
@@ -221,6 +205,22 @@ extension SignUpThirdProcessVC: PHPickerViewControllerDelegate {
                     self.bottomButton.setText("지누팅 시작하기")
                 }
             }
+        }
+    }
+}
+
+// MARK: - Action
+
+extension SignUpThirdProcessVC {
+    @objc private func tapSignUpCompltedButton(){
+        setAndPostSignUp()
+    }
+    
+    @objc private func tapBottomButton() {
+        if bottomButton.titleLabel?.text == "프로필 사진 등록하기" {
+            present(imagePicker, animated: true)
+        } else {
+            setAndPostSignUp()
         }
     }
 }

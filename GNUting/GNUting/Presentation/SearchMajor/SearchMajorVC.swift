@@ -101,12 +101,6 @@ extension SearchMajorVC {
 
 // MARK: - UITableVIew
 
-extension SearchMajorVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchMajorSelectCellDelegate?.sendSeleceted(major: searchResultList[indexPath.row].name)
-        dismiss(animated: true)
-    }
-}
 extension SearchMajorVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         searchResultList.count
@@ -120,6 +114,14 @@ extension SearchMajorVC: UITableViewDataSource {
         return cell
     }
 }
+
+extension SearchMajorVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchMajorSelectCellDelegate?.sendSeleceted(major: searchResultList[indexPath.row].name)
+        dismiss(animated: true)
+    }
+}
+
 
 // MARK: - Delegate
 

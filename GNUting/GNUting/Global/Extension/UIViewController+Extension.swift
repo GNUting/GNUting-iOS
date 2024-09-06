@@ -51,6 +51,7 @@ extension UIViewController{
             completion(image)
         }
     }
+    
     func showAlert(message: String){
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))

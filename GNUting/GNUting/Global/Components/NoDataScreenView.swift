@@ -8,11 +8,13 @@
 import UIKit
 
 class NoDataScreenView: UIView {
+    
     private lazy var imageView: UIImageView = {
        let imageView = UIImageView()
         imageView.image = UIImage(named: "NoDataImage")
         return imageView
     }()
+    
     private lazy var label: UILabel = {
        let label = UILabel()
         label.font = Pretendard.medium(size: 18)

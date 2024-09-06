@@ -133,15 +133,6 @@ extension BoardTextSearchVC: UITableViewDataSource {
 
 // MARK: - Delegate
 
-extension BoardTextSearchVC: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return}
-        self.searchText = text
-        
-        getSearchBoardTextAPI(searchText: text,page: 0, initialState: true)
-    }
-}
-
 extension BoardTextSearchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailDateBoardVC()
@@ -162,3 +153,14 @@ extension BoardTextSearchVC: UITableViewDelegate {
         }
     }
 }
+
+extension BoardTextSearchVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return}
+        self.searchText = text
+        
+        getSearchBoardTextAPI(searchText: text,page: 0, initialState: true)
+    }
+}
+
+
