@@ -67,11 +67,11 @@ class TermsVC: UIViewController{
 // MARK: - Layout Helpers
 
 extension TermsVC {
-    private func addSubViews(){
-        self.view.addSubViews([allCheckTermsView,termsTableView,nextButton])
+    private func addSubViews() {
+        self.view.addSubViews([allCheckTermsView, termsTableView, nextButton])
     }
     
-    private func setAutoLayout(){
+    private func setAutoLayout() {
         allCheckTermsView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Spacing.upperTop)
             make.left.equalToSuperview().offset(Spacing.left)
@@ -114,9 +114,9 @@ extension TermsVC {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableView
 
-extension TermsVC: UITableViewDataSource{
+extension TermsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -158,7 +158,7 @@ extension TermsVC: TermsTableViewCellDelegate { // 체크 버튼 클릭
 }
 
 extension TermsVC: AllCheckTermsViewDelegate { // 전체 동의 버튼 클릭
-    func tapButton(isSelected: Bool) {
+    func tapButtonAction(isSelected: Bool) {
         self.allCheckSelected = isSelected
         allCheckButton(selected: isSelected)
         termsTableView.reloadData()

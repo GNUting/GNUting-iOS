@@ -36,3 +36,14 @@ class BaseViewController: UIViewController{
     }
    
 }
+
+extension BaseViewController {
+    func makeCommonInputView(text: String, placHolder: String, textFieldType: SignUpInputViewType) -> CommonInputView {
+        let commonInputView = CommonInputView()
+        commonInputView.setInputTextTypeLabel(text: text)
+        commonInputView.setPlaceholder(placeholder: placHolder)
+        commonInputView.textFieldType = textFieldType
+        
+        return commonInputView
+    }
+}

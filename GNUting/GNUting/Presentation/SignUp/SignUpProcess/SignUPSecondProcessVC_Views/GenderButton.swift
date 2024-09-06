@@ -9,8 +9,10 @@
 
 import UIKit
 
+// MARK: - protocol
+
 protocol GenderButtonDelegate: AnyObject {
-    func tapButton(tag: Int)
+    func tapButtonAction(tag: Int)
 }
 
 final class GenderButton: UIButton {
@@ -47,9 +49,11 @@ final class GenderButton: UIButton {
     }
 }
 
-// MARK: - Configure
+// MARK: - Method
 
 extension GenderButton {
+    
+    // MARK: - Configure
     private func setButton() {
         self.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
         self.backgroundColor = UIColor(hexCode: "F5F5F5")
@@ -59,11 +63,9 @@ extension GenderButton {
         self.setBackgroundImage(nil, for: .selected)
         self.tintColor = .clear
     }
-}
-
-// MARK: - Internal Method
-
-extension GenderButton {
+    
+    // MARK: - Internal
+    
     func setGenderButton(title: String, tag: Int) {
         var configuration = UIButton.Configuration.plain()
         
@@ -85,6 +87,6 @@ extension GenderButton {
     }
     
     @objc private func tapButton() {
-        genderButtonDelegate?.tapButton(tag: self.tag)
+        genderButtonDelegate?.tapButtonAction(tag: self.tag)
     }
 }

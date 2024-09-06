@@ -85,7 +85,7 @@ extension DetailDateBoardVC{
         self.view.bringSubviewToFront(detailDateBoardSetView)
     }
     private func addSubViews() {
-        view.addSubViews([statusLabel,titleLabel,writeDateLabel,userInfoView,contentTextView,chatPeopleViewButton,requetChatButton,detailDateBoardSetView])
+        view.addSubViews([statusLabel, titleLabel, writeDateLabel, userInfoView, contentTextView, chatPeopleViewButton, requetChatButton, detailDateBoardSetView])
     }
     private func setAutoLayout(){
         statusLabel.snp.makeConstraints { make in
@@ -270,10 +270,11 @@ extension DetailDateBoardVC {
 extension DetailDateBoardVC: UserImageButtonDelegate {
     func tappedAction() {
         let vc = UserDetailVC()
-        vc.userNickname = postUserInfos?.nickname
-        vc.imaegURL = postUserInfos?.image
-        vc.userDepartment = postUserInfos?.department
-        vc.userStudentID = postUserInfos?.studentId
+        
+        vc.userDetailData = UserDetailModel(imageURL: postUserInfos?.image,
+                                            nickname: postUserInfos?.nickname,
+                                            userStudentID: postUserInfos?.studentId,
+                                            userDepartment: postUserInfos?.department)
         presentFullScreenVC(viewController: vc)
     }
     

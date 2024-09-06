@@ -15,6 +15,7 @@ protocol TermsTableViewCellDelegate: AnyObject {
     func pushButtonAction(indexPath: IndexPath)
     func checkButtonAction(isSelected: Bool, indexPath: IndexPath)
 }
+
 final class TermsTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -79,10 +80,6 @@ final class TermsTableViewCell: UITableViewCell {
         
         pushButton.isHidden = false // 151 번 코드로 인해 셀 재사용시 pushButton 사라지는 형상을 막고자함
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }
 
 // MARK: - Layout Helpers
@@ -90,7 +87,7 @@ final class TermsTableViewCell: UITableViewCell {
 extension TermsTableViewCell {
     private func setAddSubViews() {
         contentView.addSubview(upperStackView)
-        upperStackView.addStackSubViews([checkButton,termsTextLabel,pushButton])
+        upperStackView.addStackSubViews([checkButton, termsTextLabel, pushButton])
     }
     
     private func setAutoLayout() {
@@ -112,7 +109,7 @@ extension TermsTableViewCell {
 // MARK: - ButtonAction
 
 extension TermsTableViewCell {
-    @objc func tapCheckButton(_ sender: UIButton){
+    @objc func tapCheckButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         selectedState = sender.isSelected
         termsTableViewCellDelegate?.checkButtonAction(isSelected: sender.isSelected, indexPath: self.indexPath ?? IndexPath(row: 0, section: 0))
@@ -131,12 +128,12 @@ extension TermsTableViewCell {
     
     // MARK: - Internal
     
-    func setAllCheckButton(AllCheckButtonSelected : Bool){
+    func setAllCheckButton(AllCheckButtonSelected : Bool) {
         checkButton.isSelected = AllCheckButtonSelected
         AllCheckButtonSelected ? checkButton.setImage(UIImage(named: "SelectedCheckImage"), for: .selected) : checkButton.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
     }
     
-    func setTextLabel(type: String,description : String){
+    func setTextLabel(type: String,description : String) {
         let labelString = "\(type) \(description)"
         let attribtuedString = NSMutableAttributedString(string: labelString)
         let range = (labelString as NSString).range(of: type)

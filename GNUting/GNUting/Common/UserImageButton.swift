@@ -10,7 +10,7 @@ protocol UserImageButtonDelegate : AnyObject {
     func tappedAction()
 }
 class UserImageButton: UIButton {
-    var userImageButtonDelegate : UserImageButtonDelegate?
+    weak var userImageButtonDelegate : UserImageButtonDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)

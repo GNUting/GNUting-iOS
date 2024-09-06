@@ -5,12 +5,14 @@
 //  Created by 원동진 on 2/7/24.
 //
 
+// MARK: - 전체 동의 View
+
 import UIKit
 
 // MARK: - Protocol
 
 protocol AllCheckTermsViewDelegate: AnyObject {
-    func tapButton(isSelected: Bool)
+    func tapButtonAction(isSelected: Bool)
 }
 
 final class AllCheckTermsView: UIView {
@@ -72,8 +74,8 @@ extension AllCheckTermsView {
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        self.addSubViews([upperStackView,borderView])
-        upperStackView.addStackSubViews([checkButton,termsTextLabel])
+        self.addSubViews([upperStackView, borderView])
+        upperStackView.addStackSubViews([checkButton, termsTextLabel])
     }
     
     private func setAutoLayout() {
@@ -99,7 +101,7 @@ extension AllCheckTermsView {
     
     @objc func tapCheckButton(_ sender: UIButton){
         sender.isSelected.toggle()
-        allCheckTermsViewDelegate?.tapButton(isSelected: sender.isSelected)
+        allCheckTermsViewDelegate?.tapButtonAction(isSelected: sender.isSelected)
     }
     
     // MARK: - Internal Method

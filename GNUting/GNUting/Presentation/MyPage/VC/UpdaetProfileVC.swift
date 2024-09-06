@@ -96,7 +96,7 @@ extension UpdateProfileVC{
     private func setAddSubViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubViews([userImageButton,nickNameInputView,majorInputView,introduceInputView,updateProfileButton])
+        contentView.addSubViews([userImageButton, nickNameInputView, majorInputView, introduceInputView, updateProfileButton])
     }
     private func setAutoLayout(){
         scrollView.snp.makeConstraints { make in

@@ -46,11 +46,12 @@ extension UIViewController{
                 guard let image = UIImage(data: imageData) else { return }
                 completion(image)
             }.resume()
-        }else {
+        } else {
             guard let image = UIImage(named: "photoImg") else { return }
             completion(image)
         }
     }
+    
     func showAlert(message: String){
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
@@ -94,6 +95,7 @@ extension UIViewController{
     func presentFullScreenVC(viewController: UIViewController) {
         let navigationVC = UINavigationController.init(rootViewController: viewController)
         navigationVC.modalPresentationStyle = .fullScreen
+        
         self.present(navigationVC, animated: true)
     }
     func hideKeyboardWhenTappedAround(){
@@ -179,10 +181,24 @@ extension UIViewController{
             
         }
     }
-    func changeRootViewController(viewController: UIViewController){
+    func changeRootViewController(viewController: UIViewController) {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
             window.rootViewController = UINavigationController.init(rootViewController: viewController)
         }
+    }
+    
+    func setAttributedText(for label: UILabel, text: String, highlightText: String, highlightColor: UIColor) {
+        let range = (text as NSString).range(of: highlightText)
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        attributedString.addAttribute(.foregroundColor, value: highlightColor, range: range)
+        label.attributedText = attributedString
+    }
+    
+    func setTapGestureView(view: UIView, action: Selector) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: action)
+        
+        view.addGestureRecognizer(tapGesture)
     }
 }

@@ -12,12 +12,14 @@ struct MyPostModel : Codable{
        let result: [MyPostResult]
 }
 // MARK: - Result
-struct MyPostResult: Codable {
+struct MyPostResult: Codable, BoardListCellconfiguration {
     let id: Int
     let title, detail, status, gender, time: String
     let user: MyInfo
     let inUserCount: Int
     
+    var department: String { return user.department}
+    var studentID: String { return user.studentId}
 }
 
 // MARK: - User

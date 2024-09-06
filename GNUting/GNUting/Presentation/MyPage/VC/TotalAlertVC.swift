@@ -73,8 +73,8 @@ extension TotalAlertVC{
         self.navigationController?.navigationBar.isHidden = false
     }
     private func setAddSubViews() {
-        view.addSubViews([bellImageView,labelStackView,borderView,agreePushNotiLabel,alertAllowButton])
-        labelStackView.addStackSubViews([firstExplainLabel,secondExplainLabel])
+        view.addSubViews([bellImageView, labelStackView, borderView, agreePushNotiLabel, alertAllowButton])
+        labelStackView.addStackSubViews([firstExplainLabel, secondExplainLabel])
     }
     private func setAutoLayout(){
         bellImageView.snp.makeConstraints { make in

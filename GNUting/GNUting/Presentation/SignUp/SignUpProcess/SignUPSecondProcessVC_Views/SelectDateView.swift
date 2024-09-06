@@ -70,9 +70,12 @@ final class SelectDateView: UIView{
     }
 }
 
-// MARK: - Layout Helpers
+// MARK: - Method
 
 extension SelectDateView {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddSubViews() {
         addSubViews([upperStackView, typeLabel])
         upperStackView.addStackSubViews([yearLabel, innerStackView, dayLabel])
@@ -91,12 +94,8 @@ extension SelectDateView {
         }
     }
     
-
-}
-
-// MARK: - Method private
-
-extension SelectDateView {
+    // MARK: - private
+    
     private func makeDateViewLabel(text: String) -> UILabel {
         let label = UILabel()
         label.font = Pretendard.light(size: 18)
@@ -106,12 +105,9 @@ extension SelectDateView {
         
         return label
     }
-}
+    
+    // MARK: - Internal
 
-// MARK: - Internal Method
-
-
-extension SelectDateView {
     func setDateLabel(date : DateModel) {
         yearLabel.text = date.year
         monthLabel.text = date.momth

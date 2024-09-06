@@ -13,7 +13,7 @@ final class SelectGenderView: UIView {
     
     // MARK: - Properties
     
-    var selectedGender: Int = 0 // 0 : 남자 , 1:여자
+    private var selectedGender: Int = 0 // 0 : 남자 , 1:여자
 
     // MARK: - SubViews
     
@@ -35,22 +35,9 @@ final class SelectGenderView: UIView {
         return stackView
     }()
     
-    private lazy var manTypeButton: GenderButton = {
-        let button = GenderButton()
-        button.setGenderButton(title: "남", tag: 0)
-        button.genderButtonDelegate = self
-        
-        return button
-    }()
-    
-    private lazy var girlTypeButton: GenderButton = {
-        let button = GenderButton()
-        button.setGenderButton(title: "여", tag: 1)
-        button.genderButtonDelegate = self
-        
-        return button
-    }()
-    
+    private lazy var manTypeButton = makeGenderButton(title: "남", tag: 0)
+    private lazy var girlTypeButton = makeGenderButton(title: "여", tag: 1)
+  
     // MARK: - init
     
     override init(frame: CGRect) {
@@ -65,12 +52,15 @@ final class SelectGenderView: UIView {
     }
 }
 
-// MARK: - Layout Helpers
+// MARK: - Internal Method
 
 extension SelectGenderView {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddSubViews() {
-        self.addSubViews([typeLabel,buttonStackView])
-        buttonStackView.addStackSubViews([manTypeButton,girlTypeButton])
+        self.addSubViews([typeLabel, buttonStackView])
+        buttonStackView.addStackSubViews([manTypeButton, girlTypeButton])
     }
     
     private func setAutoLayout() {
@@ -84,11 +74,19 @@ extension SelectGenderView {
             make.bottom.equalToSuperview().offset(-14)
         }
     }
-}
+    
+    // MARK: - Make GenderButton
+    
+    private func makeGenderButton(title: String, tag: Int) -> GenderButton {
+        let genderButton = GenderButton()
+        genderButton.setGenderButton(title: title, tag: tag)
+        genderButton.genderButtonDelegate = self
+        
+        return genderButton
+    }
+    
+    // MARK: - Internal
 
-// MARK: - Internal Method
-
-extension SelectGenderView {
     func getSelectedGender() -> String {
         return selectedGender == 0 ? "MALE" : "FEMALE"
     }
@@ -97,7 +95,7 @@ extension SelectGenderView {
 // MARK: - Delegate
 
 extension SelectGenderView: GenderButtonDelegate {
-    func tapButton(tag: Int) {
+    func tapButtonAction(tag: Int) {
         self.selectedGender = tag
         
         if tag == 0 {

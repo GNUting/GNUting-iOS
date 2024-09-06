@@ -23,9 +23,9 @@ class ChatRoomSideView: UIView {
         }
     }
     var userNickname: String = ""
-    var sendTappedUserData: SendTappedUserData?
-    var leaveChatRoomButtonDelegate: LeaveChatRoomButtonDelegate?
-    var setAlertButtonDelegate: SetAlertButtonDelegate?
+    weak var sendTappedUserData: SendTappedUserData?
+    weak var leaveChatRoomButtonDelegate: LeaveChatRoomButtonDelegate?
+    weak var setAlertButtonDelegate: SetAlertButtonDelegate?
     var alertStatus: Bool = false
 
     private lazy var topViewLabel : UILabel = {
@@ -81,8 +81,8 @@ class ChatRoomSideView: UIView {
 
 extension ChatRoomSideView {
     private func setAddSubViews() {
-        addSubViews([topViewLabel,borderView,ChatRoomMemberTableView,bottomView])
-        bottomView.addSubViews([leaveChatRoomButton,setAlertButton])
+        addSubViews([topViewLabel, borderView, ChatRoomMemberTableView, bottomView])
+        bottomView.addSubViews([leaveChatRoomButton, setAlertButton])
     }
     private func setAutoLayout(){
         topViewLabel.snp.makeConstraints { make in

@@ -2,10 +2,8 @@
 //  Terms.swift
 //  GNUting
 //
-//  Created by 원동진 on 9/3/24.
+//  Created by 원동진 on 9/5/24.
 //
-
-// MARK: - 이용약관
 
 import Foundation
 
@@ -19,5 +17,3 @@ struct Terms {
         Terms(type: "(필수)", description: "서비스 이용약관 동의")
     ]
 }
-
-

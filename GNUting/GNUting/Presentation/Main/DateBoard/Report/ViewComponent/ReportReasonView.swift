@@ -101,10 +101,10 @@ class ReportReasonView: UIView {
 }
 extension ReportReasonView {
     private func configure() {
-        self.addSubViews([reportResonLabel,upperStackView])
-        upperStackView.addStackSubViews([firstBusttonStackView,secondBusttonStackView])
-        firstBusttonStackView.addStackSubViews([reportReasonFirstButton,reportReasonThirdButton,reportReasonFifthButton])
-        secondBusttonStackView.addStackSubViews([reportReasonSecondButton,reportReasonFourthButton,reportReasonSixthButton])
+        self.addSubViews([reportResonLabel, upperStackView])
+        upperStackView.addStackSubViews([firstBusttonStackView, secondBusttonStackView])
+        firstBusttonStackView.addStackSubViews([reportReasonFirstButton, reportReasonThirdButton, reportReasonFifthButton])
+        secondBusttonStackView.addStackSubViews([reportReasonSecondButton, reportReasonFourthButton, reportReasonSixthButton])
     }
     private func setAutoLayout() {
         reportResonLabel.snp.makeConstraints { make in
@@ -119,7 +119,7 @@ extension ReportReasonView {
 
 extension ReportReasonView {
     @objc private func tapButtonAction(_ sender: UIButton) {
-        [reportReasonFirstButton,reportReasonSecondButton,reportReasonThirdButton,reportReasonFourthButton,reportReasonFifthButton,reportReasonSixthButton].forEach { button in
+        [reportReasonFirstButton, reportReasonSecondButton, reportReasonThirdButton, reportReasonFourthButton, reportReasonFifthButton, reportReasonSixthButton].forEach { button in
             button.isSelected = false
         }
         sender.isSelected = true

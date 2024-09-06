@@ -6,8 +6,9 @@
 //
 
 import Foundation
-struct DateModel{
-    let year : String
-    let momth : String
-    let day : String
+
+struct DateModel {
+    let year: String
+    let momth: String
+    let day: String
 }

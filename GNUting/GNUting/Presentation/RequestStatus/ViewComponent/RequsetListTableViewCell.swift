@@ -13,7 +13,7 @@ class RequsetListTableViewCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
+        view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
         view.layer.masksToBounds = true
         return view
     }()
@@ -53,7 +53,7 @@ extension RequsetListTableViewCell{
       
     }
     private func setAutoLayout() {
-        upperView.addSubViews([majorAndMemeberCountLabel,requestStateLabel])
+        upperView.addSubViews([majorAndMemeberCountLabel, requestStateLabel])
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(7)
             make.left.right.equalToSuperview()

@@ -82,7 +82,7 @@ extension UpdatePostVC{
         }
     }
     private func addSubViews() {
-        view.addSubViews([postTextView,memberTableView])
+        view.addSubViews([postTextView, memberTableView])
     }
     private func setAutoLayout(){
         postTextView.snp.makeConstraints { make in

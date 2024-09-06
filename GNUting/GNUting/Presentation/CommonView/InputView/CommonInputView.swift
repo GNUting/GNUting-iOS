@@ -12,10 +12,6 @@ import UIKit
 
 // MARK: - Protocol
 
-protocol PasswordDelegate: AnyObject {
-    func passwordkeyBoardReturn(text: String)
-}
-
 protocol PasswordCheckDelegate: AnyObject {
     func passwordCheckKeyboardReturn(text: String)
 }
@@ -32,10 +28,9 @@ final class CommonInputView: UIView {
     
     // MARK: - Properties
     
-    weak var passwordDelegate: PasswordDelegate? // 비밀번호 return action
-    var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
-    var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
-    var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
+    weak var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
+    weak var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
+    weak var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
     var textFieldType: SignUpInputViewType? // inputView 타입
     
     // MARK: - SubViews
@@ -85,7 +80,7 @@ final class CommonInputView: UIView {
 
 extension CommonInputView {
     private func setAddSubViews() {
-        self.addSubViews([inputTextTypeLabel,inputTextField,borderView,inputCheckLabel])
+        self.addSubViews([inputTextTypeLabel, inputTextField, borderView, inputCheckLabel])
     }
 
     private func setAutoLayout() {
@@ -131,12 +126,24 @@ extension CommonInputView {
     }
     
     private func textFieldHandler(textFieldText: String) { // 텍스트필드 타입에 따른 action 처리
+        
         if textFieldType == .password {
-            passwordDelegate?.passwordkeyBoardReturn(text: textFieldText)
+            setPasswordCheckLabel(text: textFieldText)
         } else if textFieldType == .passwordCheck {
             passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textFieldText)
         } else if textFieldType == .phoneNumber {
             phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textFieldText.count)
+        }
+    }
+    
+    private func setPasswordCheckLabel(text: String) {
+        let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
+        let checkPassword = text.range(of: regex,options: .regularExpression) != nil
+        
+        if checkPassword {
+            self.setInputCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
+        } else {
+            self.setInputCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
         }
     }
 }

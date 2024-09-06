@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum SignUpInputViewType {
     case name
     case nickname

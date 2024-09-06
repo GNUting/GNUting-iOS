@@ -84,9 +84,9 @@ class ChatTableViewCell: UITableViewCell {
 }
 extension ChatTableViewCell{
     private func setAddSubViews() {
-        contentView.addSubViews([upperView,newChatImage])
-        upperView.addSubViews([firstStackView,userImageView])
-        firstStackView.addStackSubViews([chatTitleLabel,majorLabel])
+        contentView.addSubViews([upperView, newChatImage])
+        upperView.addSubViews([firstStackView, userImageView])
+        firstStackView.addStackSubViews([chatTitleLabel, majorLabel])
     }
     private func setAutoLayout(){
         newChatImage.snp.makeConstraints { make in

@@ -20,7 +20,7 @@ class ChatRoomVC: UIViewController {
         return cardVisible ? .collapsed : .expanded
     }
     var chatMessageList: [ChatRoomMessageModelResult] = []{
-        didSet{
+        didSet {
             self.chatRoomTableView.reloadData()
             self.chatRoomTableViewMoveToBottom()
         }
@@ -41,17 +41,9 @@ class ChatRoomVC: UIViewController {
         return view
     }()
     
+    private let borderView1 = BorderView()
+    private let borderView2 = BorderView()
     
-    private lazy var borderView1 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
-    private lazy var borderView2 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
     private lazy var chatRoomTableView : UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -149,7 +141,7 @@ class ChatRoomVC: UIViewController {
 }
 extension ChatRoomVC{
     private func setAddSubViews() {
-        view.addSubViews([navigationBarView,borderView1,chatRoomTableView,borderView2,sendStackView,sideView,opaqueView])
+        view.addSubViews([navigationBarView, borderView1, chatRoomTableView, borderView2, sendStackView, sideView, opaqueView])
         sendStackView.addStackSubViews([textField,sendMessageButton])
         self.view.bringSubviewToFront(opaqueView)
         self.view.bringSubviewToFront(sideView)
@@ -162,7 +154,6 @@ extension ChatRoomVC{
         borderView1.snp.makeConstraints { make in
             make.top.equalTo(navigationBarView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         chatRoomTableView.snp.makeConstraints { make in
             make.top.equalTo(borderView1.snp.bottom).offset(10)
@@ -179,7 +170,6 @@ extension ChatRoomVC{
             make.top.equalTo(chatRoomTableView.snp.bottom)
             make.bottom.equalTo(sendStackView.snp.top).offset(-10)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         
         sideView.snp.makeConstraints { make in
@@ -406,21 +396,21 @@ extension ChatRoomVC: SetAlertButtonDelegate {
 extension ChatRoomVC: SendTappedUserData{
     func tapUserImageButton(userData: ChatRommUserModelResult?) { // 사이드뷰에서
         let vc = UserDetailVC()
-        vc.imaegURL = userData?.profileImage
-        vc.userNickname = userData?.nickname
-        vc.userStudentID = userData?.studentID
-        vc.userDepartment = userData?.department
         
+        vc.userDetailData = UserDetailModel(imageURL: userData?.profileImage,
+                                            nickname: userData?.nickname,
+                                            userStudentID: userData?.studentID,
+                                            userDepartment: userData?.department)
         presentFullScreenVC(viewController: vc)
     }
     
     func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
         let vc = UserDetailVC()
-        vc.imaegURL = userData?.profileImage
-        vc.userNickname = userData?.nickname
-        vc.userStudentID = userData?.studentId
-        vc.userDepartment = userData?.department
         
+        vc.userDetailData = UserDetailModel(imageURL: userData?.profileImage,
+                                            nickname: userData?.nickname,
+                                            userStudentID: userData?.studentId,
+                                            userDepartment: userData?.department)
         presentFullScreenVC(viewController: vc)
     }
 }
