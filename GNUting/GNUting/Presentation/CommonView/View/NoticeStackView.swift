@@ -9,9 +9,10 @@
 
 import UIKit
 
-class NoticeStackView: UIStackView {
+final class NoticeStackView: UIStackView {
 
-    // MARK: - Properties/
+    // MARK: - Properties
+    
     private var labelText: String
     
     // MARK: - SubViews
@@ -24,7 +25,7 @@ class NoticeStackView: UIStackView {
     }()
     
     private lazy var noticeLabel: BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15))
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 12, left: 15, bottom: 12, right: 15))
         label.font = Pretendard.regular(size: 11)
         label.textColor = UIColor(hexCode: "4F4F4F")
         label.backgroundColor = UIColor(named: "BackGroundColor")

@@ -11,23 +11,113 @@ import UIKit
 
 final class NoteViewController: BaseViewController {
     
+    // MARK: - SubViews
+    
     let noticeStackView = NoticeStackView(text: "업로드 된 메모는 매일 자정에 초기화됩니다.")
+    
+    let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        return layout
+    }()
+    
+    private lazy var applyNumberLabel: ImagePlusLabelView = {
+        let labelView = ImagePlusLabelView()
+        labelView.setImagePlusLabelView(imageName: "PointImage", textFont: Pretendard.medium(size: 12) ?? .systemFont(ofSize: 12), labelText: "일일 신청 남은 횟수: 3회",lableTextColor: UIColor(named: "PrimaryColor") ?? .red)
+        
+        return labelView
+    }()
+    
+    private lazy var noteCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.register(NoteCollectionViewCell.self, forCellWithReuseIdentifier: NoteCollectionViewCell.identi)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        
+        return collectionView
+    }()
+    
+    private lazy var writeNoteButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(named: "WriteNoteImage"), for: .normal)
+        
+        return button
+    }()
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setAddSubViews()
         setAutoLayout()
-    }
-
-}
-
-extension NoteViewController{
-    private func setAddSubViews() {
-        
-    }
-    private func setAutoLayout(){
-        
+        setNavigationBar(title: "메모팅")
     }
     
+}
+
+extension NoteViewController {
+    
+    // MARK: - Layout Helpers
+    
+    private func setAddSubViews() {
+        view.addSubViews([noticeStackView,applyNumberLabel,noteCollectionView,writeNoteButton])
+    }
+    private func setAutoLayout(){
+        noticeStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(27)
+            make.left.right.equalToSuperview().inset(25)
+        }
+        
+        applyNumberLabel.snp.makeConstraints { make in
+            make.top.equalTo(noticeStackView.snp.bottom).offset(11)
+            make.right.equalToSuperview().offset(-25)
+        }
+        
+        noteCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(applyNumberLabel.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(27)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        writeNoteButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
+            make.width.height.equalTo(56)
+        }
+    }
+    
+}
+
+// MARK: - UICollectionView
+
+extension NoteViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCollectionViewCell.identi, for: indexPath) as? NoteCollectionViewCell else { return UICollectionViewCell() }
+        
+        return cell
+    }
+}
+
+extension NoteViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width / 2) - 10
+        return CGSize(width: width, height: width)
+    }
+    
+    // 가로 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
+    
+    // 세로 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        25
+    }
 }

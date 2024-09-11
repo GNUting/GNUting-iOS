@@ -76,7 +76,7 @@ extension DateBoardListVC {
     
     private func setAutoLayout() {
         noticeStackView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(28)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(27)
             make.left.right.equalToSuperview().inset(25)
         }
 

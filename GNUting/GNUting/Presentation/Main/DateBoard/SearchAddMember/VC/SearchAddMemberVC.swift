@@ -63,11 +63,9 @@ class SearchAddMemberVC: BaseViewController{
         view.layer.masksToBounds = true
         return view
     }()
-    private lazy var searchUserInfoView : UserInfoDetailView = {
-        let view = UserInfoDetailView()
-        
-        return view
-    }()
+    
+    private lazy var searchUserInfoView = UserInfoDetailView()
+    
     private lazy var completedButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("완료", fointSize: 14)

@@ -40,7 +40,7 @@ final class WriteButton: UIButton {
         config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 12) ?? .boldSystemFont(ofSize: 12),NSAttributedString.Key.foregroundColor: textColor]))
         self.configuration = config
         self.backgroundColor = backgroundColor
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 15
         self.layer.masksToBounds = true
         self.addTarget(self, action: #selector(tapWritePostButton), for: .touchUpInside)
         self.tag = tag

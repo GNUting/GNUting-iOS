@@ -141,6 +141,7 @@
 		F8AC69E22C9199FD00873455 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AC69E12C9199FD00873455 /* NoteViewController.swift */; };
 		F8AC69E42C919A1600873455 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AC69E32C919A1600873455 /* WriteNoteView.swift */; };
 		F8AC69E72C919DC800873455 /* NoticeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AC69E62C919DC800873455 /* NoticeStackView.swift */; };
+		F8AC69E92C91ACF000873455 /* NoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AC69E82C91ACF000873455 /* NoteCollectionViewCell.swift */; };
 		F8AD25152C0764D2004D1CBB /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD25142C0764D2004D1CBB /* ConfirmButton.swift */; };
 		F8B6ECA12BA4781F0058C6E8 /* MyPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6ECA02BA4781F0058C6E8 /* MyPostModel.swift */; };
 		F8B6ECA42BA48A740058C6E8 /* APIUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6ECA32BA48A740058C6E8 /* APIUpdateManager.swift */; };
@@ -318,6 +319,7 @@
 		F8AC69E12C9199FD00873455 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		F8AC69E32C919A1600873455 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 		F8AC69E62C919DC800873455 /* NoticeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeStackView.swift; sourceTree = "<group>"; };
+		F8AC69E82C91ACF000873455 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8AD25142C0764D2004D1CBB /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		F8B6ECA02BA4781F0058C6E8 /* MyPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostModel.swift; sourceTree = "<group>"; };
 		F8B6ECA32BA48A740058C6E8 /* APIUpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUpdateManager.swift; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 			isa = PBXGroup;
 			children = (
 				F8AC69E32C919A1600873455 /* WriteNoteView.swift */,
+				F8AC69E82C91ACF000873455 /* NoteCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1477,6 +1480,7 @@
 				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
+				F8AC69E92C91ACF000873455 /* NoteCollectionViewCell.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,
 				F8C7DE532BC4155700923EF5 /* NotificationCheckModel.swift in Sources */,
 				F85345342B5F88FB001EADE6 /* UIView+Extesnion.swift in Sources */,

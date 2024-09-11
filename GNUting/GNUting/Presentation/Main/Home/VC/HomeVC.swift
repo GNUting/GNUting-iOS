@@ -191,7 +191,7 @@ extension HomeVC: HomeBottomViewDelegate {
     }
     
     func tapNoteCardView() {
-        
+        self.pushViewContoller(viewController: NoteViewController())
     }
     
     func tapMypostCardView() {

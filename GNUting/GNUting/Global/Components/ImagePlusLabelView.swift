@@ -44,9 +44,10 @@ extension ImagePlusLabelView{
     
 }
 extension ImagePlusLabelView {
-    func setImagePlusLabelView(imageName: String, textFont : UIFont, labelText: String) {
+    func setImagePlusLabelView(imageName: String, textFont : UIFont, labelText: String, lableTextColor: UIColor = .black) {
         imageView.image = UIImage(named: imageName)
         label.font = textFont
         label.text = labelText
+        label.textColor = lableTextColor
     }
 }
