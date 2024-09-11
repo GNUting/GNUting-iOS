@@ -13,7 +13,9 @@ import UIKit
 
 protocol HomeBottomViewDelegate: AnyObject {
     func tapPostBoardCardView()
+    func oneMatchCardView()
     func tapMypostCardView()
+    func tapNoteCardView()
 }
 
 class HomeBottomView: UIView {
@@ -24,15 +26,15 @@ class HomeBottomView: UIView {
     
     // MARK: - SubViews
     
-    let bannerImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "bannerImage")
-        imageView.layer.cornerRadius = 10
-        imageView.layer.masksToBounds = true
-        imageView.isUserInteractionEnabled = true
-        
-        return imageView
-    }()
+//    let bannerImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "bannerImage")
+//        imageView.layer.cornerRadius = 10
+//        imageView.layer.masksToBounds = true
+//        imageView.isUserInteractionEnabled = true
+//        
+//        return imageView
+//    }()
     
     private let postSubView: ImagePlusLabelView = {
         let view = ImagePlusLabelView()
@@ -41,7 +43,7 @@ class HomeBottomView: UIView {
         return view
     }()
     
-    let cardStackView: UIStackView = {
+    let firstCardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -51,25 +53,20 @@ class HomeBottomView: UIView {
         return stackView
     }()
     
-    private lazy var postBoardCardView: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "PostBoardCardImage"), for: .normal)
-        button.addAction(UIAction { [self] _ in
-            homeBottomViewDelegate?.tapPostBoardCardView()
-        }, for: .touchUpInside)
+    let seoncdCardStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 15
         
-        return button
+        return stackView
     }()
-    
-    private lazy var mypostCardView: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "MypostCardImage"), for: .normal)
-        button.addAction(UIAction { [self] _ in
-            homeBottomViewDelegate?.tapMypostCardView()
-        }, for: .touchUpInside)
-        
-        return button
-    }()
+ 
+    private lazy var postBoardCardView = makeCardImaegButton(image: UIImage(named: "PostBoardCardImage") ?? UIImage(), action: #selector(tapPostBoardCardView))
+    private lazy var OneMatchCardView = makeCardImaegButton(image: UIImage(named: "OneMatchCardImage") ?? UIImage(), action: #selector(tapOneMatchCardView))
+    private lazy var noteCardView = makeCardImaegButton(image: UIImage(named: "NoteCardImage") ?? UIImage(), action: #selector(tapNoteCardView))
+    private lazy var mypostCardView = makeCardImaegButton(image: UIImage(named: "MypostCardImage") ?? UIImage(), action: #selector(tapPostBoardCardView))
     
     // MARK: - Init
     
@@ -87,29 +84,67 @@ class HomeBottomView: UIView {
     
 }
 
-// MARK: - Layout Helpers
-
 extension HomeBottomView {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddSubViews() {
-        self.addSubViews([bannerImageView, postSubView, cardStackView])
-        cardStackView.addStackSubViews([postBoardCardView, mypostCardView])
+        self.addSubViews([postSubView, firstCardStackView, seoncdCardStackView])
+        firstCardStackView.addStackSubViews([postBoardCardView, OneMatchCardView])
+        seoncdCardStackView.addStackSubViews([noteCardView, mypostCardView])
     }
     
     private func setAutoLayout(){
-        bannerImageView.snp.makeConstraints { make in
+//        bannerImageView.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(25)
+//            make.left.right.equalToSuperview().inset(25)
+//        }
+        
+        postSubView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(25)
             make.left.right.equalToSuperview().inset(25)
         }
         
-        postSubView.snp.makeConstraints { make in
-            make.top.equalTo(bannerImageView.snp.bottom).offset(27)
+        firstCardStackView.snp.makeConstraints { make in
+            make.top.equalTo(postSubView.snp.bottom).offset(12)
             make.left.right.equalToSuperview().inset(25)
+            
         }
         
-        cardStackView.snp.makeConstraints { make in
-            make.top.equalTo(postSubView.snp.bottom).offset(12)
+        seoncdCardStackView.snp.makeConstraints { make in
+            make.top.equalTo(firstCardStackView.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(25)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    // MARK: - Private Method
+    
+    private func makeCardImaegButton(image: UIImage, action: Selector) -> UIButton {
+        let button = UIButton()
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: action, for: .touchUpInside)
+        
+        return button
+    }
+}
+
+// MARK: - action
+
+extension HomeBottomView {
+    @objc private func tapPostBoardCardView() {
+        homeBottomViewDelegate?.tapPostBoardCardView()
+    }
+    
+    @objc private func tapOneMatchCardView() {
+        homeBottomViewDelegate?.oneMatchCardView()
+    }
+    
+    @objc private func tapMypostCardView() {
+        homeBottomViewDelegate?.tapMypostCardView()
+    }
+    
+    @objc private func tapNoteCardView() {
+        homeBottomViewDelegate?.tapNoteCardView()
     }
 }

@@ -121,11 +121,11 @@ extension HomeVC {
     
     private func setImageViewTapGesture() {
         setTapGestureView(view: bellImageView, action: #selector(tapNotiButtonAction))
-        setTapGestureView(view: homeBottomView.bannerImageView, action: #selector(tapBannerImageViewAction))
+//        setTapGestureView(view: homeBottomView.bannerImageView, action: #selector(tapBannerImageViewAction))
     }
     
     private func setDelegate() {
-        homeTopView.writePostButton.writePostButtonDelegate = self
+        homeTopView.writePostButton.writeButtonDelegate = self
         homeBottomView.homeBottomViewDelegate = self
     }
 }
@@ -171,15 +171,27 @@ extension HomeVC {
 
 // MARK: - Delegate
 
-extension HomeVC: WritePostButtonDelegate {
-    func tapButtonAction() {
-        self.pushViewContoller(viewController: WriteDateBoardVC())
+extension HomeVC: WriteButtonDelegate {
+    func tapButtonAction(tag: Int) {
+        if tag == 0 {
+            self.pushViewContoller(viewController: WriteDateBoardVC())
+        } else if tag == 1 { // 메모팅 남기기 버튼
+            
+        }
     }
 }
 
 extension HomeVC: HomeBottomViewDelegate {
     func tapPostBoardCardView() {
         self.pushViewContoller(viewController: DateBoardListVC())
+    }
+    
+    func oneMatchCardView() {
+        
+    }
+    
+    func tapNoteCardView() {
+        
     }
     
     func tapMypostCardView() {

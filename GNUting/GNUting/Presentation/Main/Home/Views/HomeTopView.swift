@@ -43,8 +43,31 @@ class HomeTopView: UIView {
         return label
     }()
     
-    let writePostButton = WritePostButton()
+    let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 6
+        
+        return stackView
+    }()
     
+    let writePostButton: WriteButton = {
+        let button = WriteButton()
+        button.setConfiguration(text: "게시글 작성하기", textColor: .white, backgroundColor: UIColor(named: "SecondaryColor") ?? .blue, tag: 0)
+        button.tag = 0
+        
+        return button
+    }()
+    
+    let writNoteButton: WriteButton = {
+        let button = WriteButton()
+        button.setConfiguration(text: "메모팅 남기기", textColor: UIColor(hexCode: "191919"), backgroundColor: UIColor(named: "BorderColor") ?? .blue, tag: 1)
+        button.tag = 1
+        
+        return button
+    }()
     // MARK: - init
     
     override init(frame: CGRect) {
@@ -64,7 +87,8 @@ class HomeTopView: UIView {
 
 extension HomeTopView {
     private func setAddSubViews() {
-        self.addSubViews([explainStackView, writePostButton, imageButton])
+        self.addSubViews([explainStackView, buttonStackView, imageButton])
+        buttonStackView.addStackSubViews([writePostButton,writNoteButton])
         explainStackView.addStackSubViews([userNameLabel, explainLabel])
     }
     
@@ -74,7 +98,7 @@ extension HomeTopView {
             make.left.equalToSuperview().offset(25)
         }
         
-        writePostButton.snp.makeConstraints { make in
+        buttonStackView.snp.makeConstraints { make in
             make.top.equalTo(explainStackView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(25)
             make.bottom.equalToSuperview().offset(-16)

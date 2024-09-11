@@ -1,29 +1,29 @@
 //
-//  WritePostButton.swift
+//  WriteButton.swift
 //  GNUting
 //
 //  Created by 원동진 on 5/1/24.
 //
 
-// MARK: - 홈 화면 게시글 작성하기 버튼 (초기 두개의 VC에서 이용됬으나 현재 Home에서만 사용)
+// MARK: - 홈 화면 게시글,메모 작성하기 Button
 
 import UIKit
 
 // MARK: - protocol
 
-protocol  WritePostButtonDelegate: AnyObject {
-    func tapButtonAction()
+protocol  WriteButtonDelegate: AnyObject {
+    func tapButtonAction(tag: Int)
 }
 
-class WritePostButton: UIButton {
+class WriteButton: UIButton {
     
     // MARK: - Properties
-    weak var writePostButtonDelegate: WritePostButtonDelegate?
+    
+    weak var writeButtonDelegate: WriteButtonDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setConfiguration()
     }
     
     // MARK: - Init
@@ -32,17 +32,18 @@ class WritePostButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private Method Set
+    // MARK: - Internanl Method Set
     
-    private func setConfiguration() {
+    func setConfiguration(text: String, textColor: UIColor, backgroundColor: UIColor,tag: Int) {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 17, bottom: 10, trailing: 17)
-        config.attributedTitle = AttributedString("게시글 작성하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 12) ?? .boldSystemFont(ofSize: 12),NSAttributedString.Key.foregroundColor : UIColor.white]))
+        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.medium(size: 12) ?? .boldSystemFont(ofSize: 12),NSAttributedString.Key.foregroundColor: textColor]))
         self.configuration = config
-        self.backgroundColor = UIColor(named: "SecondaryColor")
+        self.backgroundColor = backgroundColor
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         self.addTarget(self, action: #selector(tapWritePostButton), for: .touchUpInside)
+        self.tag = tag
     }
     
     // MARK: - Action
@@ -56,7 +57,7 @@ class WritePostButton: UIButton {
             UIView.animate(withDuration: 0.2) {
                 self.transform = .identity
             }
-            self.writePostButtonDelegate?.tapButtonAction()
+            self.writeButtonDelegate?.tapButtonAction(tag: self.tag)
         }
     }
 }
