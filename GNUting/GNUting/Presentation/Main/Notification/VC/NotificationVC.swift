@@ -9,7 +9,7 @@
 
 import UIKit
 
-class NotificationVC: BaseViewController {
+final class NotificationVC: BaseViewController {
     
     // MARK: - Properties
     

@@ -12,7 +12,7 @@ import UIKit
 import SnapKit
 
 
-class HomeVC: BaseViewController {
+final class HomeVC: BaseViewController {
     
     // MARK: - Properties
     

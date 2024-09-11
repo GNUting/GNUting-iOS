@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoardTextSearchVC: BaseViewController {
+final class BoardTextSearchVC: BaseViewController {
     
     // MARK: - Properties
     

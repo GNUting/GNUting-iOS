@@ -15,7 +15,7 @@ protocol  WriteButtonDelegate: AnyObject {
     func tapButtonAction(tag: Int)
 }
 
-class WriteButton: UIButton {
+final class WriteButton: UIButton {
     
     // MARK: - Properties
     

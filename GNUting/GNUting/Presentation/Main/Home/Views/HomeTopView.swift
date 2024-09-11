@@ -9,7 +9,7 @@
 
 import UIKit
 
-class HomeTopView: UIView {
+final class HomeTopView: UIView {
     
     // MARK: - SubViews
     

@@ -9,7 +9,7 @@
 
 import UIKit
 
-class DateBoardListVC: BaseViewController {
+final class DateBoardListVC: BaseViewController {
     
     // MARK: - Properties
     
@@ -24,34 +24,7 @@ class DateBoardListVC: BaseViewController {
     
     // MARK: - SubViews
     
-    private lazy var noticeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 6
-        
-        return stackView
-    }()
-    
-    private lazy var noticeImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "LoudspeakerImg")
-        
-        return imageView
-    }()
-    
-    private lazy var noticeLabel: BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15))
-        label.text = "부적절한 게시글을 작성할 경우, 앱 이용이 제한될 수 있습니다."
-        label.font = Pretendard.regular(size: 11)
-        label.textColor = UIColor(hexCode: "4F4F4F")
-        label.backgroundColor = UIColor(named: "BackGroundColor")
-        label.layer.cornerRadius = 8
-        label.layer.masksToBounds = true
-        
-        return label
-    }()
+    let noticeStackView = NoticeStackView(text: "부적절한 게시글을 작성할 경우, 앱 이용이 제한될 수 있습니다.")
     
     private lazy var borderView = BorderView()
     
@@ -99,7 +72,6 @@ class DateBoardListVC: BaseViewController {
 extension DateBoardListVC {
     private func addSubViews() {
         view.addSubViews([noticeStackView, borderView, dateBoardTableView, noDataScreenView, writeTextButton])
-        noticeStackView.addStackSubViews([noticeImageView, noticeLabel])
     }
     
     private func setAutoLayout() {
@@ -107,11 +79,7 @@ extension DateBoardListVC {
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(28)
             make.left.right.equalToSuperview().inset(25)
         }
-    
-        noticeImageView.snp.makeConstraints { make in
-            make.width.equalTo(24)
-        }
-        
+
         borderView.snp.makeConstraints { make in
             make.top.equalTo(noticeStackView.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
