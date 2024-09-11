@@ -27,7 +27,6 @@ class NoteCollectionViewCell: UICollectionViewCell {
     let noteLabel: UILabel = {
         let label = UILabel()
         label.font = Pretendard.medium(size: 12)
-        label.text = "Test"
         label.numberOfLines = 0
         
         return label
@@ -66,5 +65,11 @@ extension NoteCollectionViewCell {
             make.left.right.equalToSuperview().inset(20)
             make.bottom.lessThanOrEqualToSuperview().offset(-20)
         }
+    }
+    
+    // MARK: - Set Cell
+    
+    func setCell(content: String?) {
+        noteLabel.text = content
     }
 }

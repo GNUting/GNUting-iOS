@@ -11,6 +11,14 @@ import UIKit
 
 final class NoteViewController: BaseViewController {
     
+    // MARK: - Properties
+    
+    private var noteInformation: NoteModel? {
+        didSet {
+            noteCollectionView.reloadData()
+        }
+    }
+    
     // MARK: - SubViews
     
     let noticeStackView = NoticeStackView(text: "업로드 된 메모는 매일 자정에 초기화됩니다.")
@@ -54,8 +62,14 @@ final class NoteViewController: BaseViewController {
         setAddSubViews()
         setAutoLayout()
         setNavigationBar(title: "메모팅")
+        getNoteInformationAPI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
 }
 
 extension NoteViewController {
@@ -91,15 +105,26 @@ extension NoteViewController {
     
 }
 
+// MARK: - API
+
+extension NoteViewController {
+    private func getNoteInformationAPI() {
+        APIGetManager.shared.getNoteInformation { noteData in
+            self.noteInformation = noteData
+        }
+    }
+}
+
 // MARK: - UICollectionView
 
 extension NoteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return noteInformation?.result.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCollectionViewCell.identi, for: indexPath) as? NoteCollectionViewCell else { return UICollectionViewCell() }
+        cell.setCell(content: noteInformation?.result[indexPath.item].content)
         
         return cell
     }

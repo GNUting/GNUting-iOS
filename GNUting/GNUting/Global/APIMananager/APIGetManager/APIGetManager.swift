@@ -407,5 +407,23 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     }
+    
+    func getNoteInformation(completion: @escaping(NoteModel?)->Void) {
+        let url = EndPoint.noteRead.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of:NoteModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getNoteInformation statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getNoteInformation statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+            }
+    }
 }
 
