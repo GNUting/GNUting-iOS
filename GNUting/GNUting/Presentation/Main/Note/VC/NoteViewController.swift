@@ -12,7 +12,7 @@ import UIKit
 final class NoteViewController: BaseViewController {
     
     // MARK: - Properties
-    
+    let textViewPlaceHolder = "내용을 입력해주세요."
     private var noteInformation: NoteModel? {
         didSet {
             noteCollectionView.reloadData()
@@ -48,10 +48,20 @@ final class NoteViewController: BaseViewController {
     }()
     
     private lazy var writeNoteButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setImage(UIImage(named: "WriteNoteImage"), for: .normal)
+        button.addAction(UIAction { _ in
+            self.writeNoteView.isHidden = false
+        }, for: .touchUpInside)
         
         return button
+    }()
+    
+    private lazy var writeNoteView: WriteNoteView = {
+        let view = WriteNoteView()
+        view.writeNoteViewDelegate = self
+        
+        return view
     }()
     
     // MARK: - LifeCycle
@@ -77,7 +87,8 @@ extension NoteViewController {
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        view.addSubViews([noticeStackView,applyNumberLabel,noteCollectionView,writeNoteButton])
+        
+        view.addSubViews([noticeStackView, applyNumberLabel, noteCollectionView, writeNoteButton, writeNoteView])
     }
     private func setAutoLayout(){
         noticeStackView.snp.makeConstraints { make in
@@ -100,6 +111,10 @@ extension NoteViewController {
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
             make.width.height.equalTo(56)
+        }
+        
+        writeNoteView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -144,5 +159,13 @@ extension NoteViewController: UICollectionViewDelegateFlowLayout {
     // 세로 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         25
+    }
+}
+
+// MARK: - Delegate
+
+extension NoteViewController: WriteNoteViewDelegate {
+    func tapCancelbutton() {
+        writeNoteView.isHidden = true
     }
 }
