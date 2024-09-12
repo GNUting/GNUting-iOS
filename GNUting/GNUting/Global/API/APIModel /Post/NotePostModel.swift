@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct NotePostModel: Encodable {
+    let content: String
+}

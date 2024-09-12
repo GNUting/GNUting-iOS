@@ -12,7 +12,8 @@ import UIKit
 // MARK: - protocol
 
 protocol WriteNoteViewDelegate: AnyObject {
-    func tapCancelbutton()
+    func writeNoteViewtapCancelbutton()
+    func tapRegisterButton(contentTextViewText: String)
 }
 
 final class WriteNoteView: UIView {
@@ -125,22 +126,13 @@ extension WriteNoteView {
         self.isHidden = true
     }
     
-    private func makeButton(text: String, textColor: UIColor?, borderColor: UIColor?, backgroundColor: UIColor?) -> ThrottleButton {
-        let button = ThrottleButton()
-        button.setTitle("\(text)", for: .normal)
-        button.setTitleColor(textColor, for: .normal)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = borderColor?.cgColor
-        button.layer.masksToBounds = true
-        button.backgroundColor = backgroundColor
-        
-        return button
-    }
-    
     private func setButtonAction() {
         cancelButton.throttle(delay: 1) { _ in
-            self.writeNoteViewDelegate?.tapCancelbutton()
+            self.writeNoteViewDelegate?.writeNoteViewtapCancelbutton()
+        }
+        
+        registerButton.throttle(delay: 3) { _ in
+            self.writeNoteViewDelegate?.tapRegisterButton(contentTextViewText: self.noteContentTextView.text)
         }
     }
 }
@@ -150,7 +142,6 @@ extension WriteNoteView {
 extension WriteNoteView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
-            print("begin")
             textView.text = nil
             textView.textColor = .black
         }

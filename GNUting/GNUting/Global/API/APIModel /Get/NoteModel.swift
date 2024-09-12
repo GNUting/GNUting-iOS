@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NoteModel: Decodable {
+struct NoteGetModel: Decodable {
     let isSuccess: Bool
        let code, message: String
        let result: [NoteModelData]

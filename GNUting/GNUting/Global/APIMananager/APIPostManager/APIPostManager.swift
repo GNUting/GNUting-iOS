@@ -388,6 +388,9 @@ class APIPostManager {
                 }
             }
     }
+    
+    // MARK: - 채팅방 나가기
+    
     func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
         let uslString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/leave"
         guard let url = URL(string: uslString) else { return }
@@ -402,6 +405,38 @@ class APIPostManager {
                     completion(json)
                 case .failure:
                     print("🔴 postLeavetChatRoom statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
+    
+    // MARK: - 메모저장
+    
+    func postNoteRegister(content: String, completion: @escaping(DefaultResponse?) -> Void) {
+        let url = EndPoint.noteRegisterPost.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let requestBody = NotePostModel(content: content)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        } catch {
+            print("Error encoding request data: \(error.localizedDescription)")
+            return
+        }
+        
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 postFCMToken statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postFCMToken statusCode: \(statusCode)")
                     completion(json)
                     break
                 }

@@ -408,11 +408,11 @@ class APIGetManager: RequestInterceptor {
         }
     }
     
-    func getNoteInformation(completion: @escaping(NoteModel?)->Void) {
+    func getNoteInformation(completion: @escaping(NoteGetModel?)->Void) {
         let url = EndPoint.noteRead.url
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
-            .responseDecodable(of:NoteModel.self) { response in
+            .responseDecodable(of:NoteGetModel.self) { response in
                 guard let statusCode = response.response?.statusCode else { return }
                 switch response.result {
                 case .success:

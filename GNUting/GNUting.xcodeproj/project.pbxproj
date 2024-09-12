@@ -12,6 +12,7 @@
 		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
 		F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */; };
+		F815FF5D2C92F7A8009EB279 /* NotePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */; };
 		F81895CF2BA82CDD00DF7ABE /* FcmTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81895CE2BA82CDD00DF7ABE /* FcmTokenModel.swift */; };
 		F81D08B52BE65CD400219CEA /* TotalAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08B42BE65CD400219CEA /* TotalAlertVC.swift */; };
 		F81D08B72BE689F000219CEA /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81D08B62BE689F000219CEA /* BorderView.swift */; };
@@ -193,6 +194,7 @@
 		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
 		F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePostModel.swift; sourceTree = "<group>"; };
 		F81895CE2BA82CDD00DF7ABE /* FcmTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmTokenModel.swift; sourceTree = "<group>"; };
 		F81D08B42BE65CD400219CEA /* TotalAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalAlertVC.swift; sourceTree = "<group>"; };
 		F81D08B62BE689F000219CEA /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
@@ -870,6 +872,7 @@
 				F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */,
 				F81895CE2BA82CDD00DF7ABE /* FcmTokenModel.swift */,
 				F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */,
+				F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1494,6 +1497,7 @@
 				F81D08E42BEA375F00219CEA /* ThrottleButton.swift in Sources */,
 				F81D08E22BEA344100219CEA /* PrimaryColorButton.swift in Sources */,
 				F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */,
+				F815FF5D2C92F7A8009EB279 /* NotePostModel.swift in Sources */,
 				F8CD76A52BB6E8F0001B141F /* ChatRoomMessageModel.swift in Sources */,
 				F889EA062BF66F6F0042D8FB /* NetworkMonitor.swift in Sources */,
 				F8DE06852BF3705500D32E7E /* APIPatchManager.swift in Sources */,

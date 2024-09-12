@@ -13,7 +13,7 @@ final class NoteViewController: BaseViewController {
     
     // MARK: - Properties
     let textViewPlaceHolder = "내용을 입력해주세요."
-    private var noteInformation: NoteModel? {
+    private var noteInformation: NoteGetModel? {
         didSet {
             noteCollectionView.reloadData()
         }
@@ -64,6 +64,13 @@ final class NoteViewController: BaseViewController {
         return view
     }()
     
+    private lazy var noteDateProgressView: NoteDateProgressView = {
+        let view = NoteDateProgressView()
+        view.writeNoteViewDelegate = self
+        
+        return view
+    }()
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -88,7 +95,7 @@ extension NoteViewController {
     
     private func setAddSubViews() {
         
-        view.addSubViews([noticeStackView, applyNumberLabel, noteCollectionView, writeNoteButton, writeNoteView])
+        view.addSubViews([noticeStackView, applyNumberLabel, noteCollectionView, writeNoteButton, writeNoteView,noteDateProgressView])
     }
     private func setAutoLayout(){
         noticeStackView.snp.makeConstraints { make in
@@ -116,6 +123,9 @@ extension NoteViewController {
         writeNoteView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        noteDateProgressView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
 }
@@ -126,6 +136,19 @@ extension NoteViewController {
     private func getNoteInformationAPI() {
         APIGetManager.shared.getNoteInformation { noteData in
             self.noteInformation = noteData
+        }
+    }
+    
+    private func postNoteRegisterAPI(content: String) {
+        APIPostManager.shared.postNoteRegister(content: content) { response in
+            guard let response = response else { return print("nil 출력")}
+            
+            if response.isSuccess {
+                self.showAlert(message: "메모가 등록되었습니다.")
+            } else {
+                self.showAlert(message: response.message)
+            }
+            self.writeNoteView.isHidden = true
         }
     }
 }
@@ -164,8 +187,25 @@ extension NoteViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Delegate
 
+extension NoteViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        noteDateProgressView.isHidden = false
+    }
+}
+
 extension NoteViewController: WriteNoteViewDelegate {
-    func tapCancelbutton() {
+    func tapRegisterButton(contentTextViewText: String) {
+        postNoteRegisterAPI(content: contentTextViewText)
+        
+    }
+    
+    func writeNoteViewtapCancelbutton() {
         writeNoteView.isHidden = true
+    }
+}
+
+extension NoteViewController: NoteDateProgressViewDelegate {
+    func noteDateProgressViewTapCancelbutton() {
+        noteDateProgressView.isHidden = true
     }
 }
