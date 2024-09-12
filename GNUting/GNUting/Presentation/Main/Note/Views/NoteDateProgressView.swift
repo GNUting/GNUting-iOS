@@ -15,6 +15,7 @@ import UIKit
 
 protocol NoteDateProgressViewDelegate: AnyObject {
     func noteDateProgressViewTapCancelbutton()
+    func tapProgressButton()
 }
 
 final class NoteDateProgressView: UIView {
@@ -126,6 +127,9 @@ extension NoteDateProgressView {
     private func setButtonAction() {
         cancelButton.throttle(delay: 1) { _ in
             self.writeNoteViewDelegate?.noteDateProgressViewTapCancelbutton()
+        }
+        progressButton.throttle(delay: 3) { _ in
+            self.writeNoteViewDelegate?.tapProgressButton()
         }
     }
 }

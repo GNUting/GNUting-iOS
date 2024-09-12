@@ -377,8 +377,8 @@ extension ChatRoomVC {
             guard let title = response?.result.title else { return }
             guard let leaderUserDepartment = response?.result.leaderUserDepartment else { return }
             guard let applyLeaderDepartment = response?.result.applyLeaderDepartment else { return }
-            self.navigationBarView.setLabel(title: title, subTitle: "\(leaderUserDepartment) | \(applyLeaderDepartment)")
             
+            self.navigationBarView.setLabel(title: title, subTitle: "\(leaderUserDepartment) | \(applyLeaderDepartment)")
         }
     }
 }

@@ -12,7 +12,9 @@ import UIKit
 final class NoteViewController: BaseViewController {
     
     // MARK: - Properties
+    
     let textViewPlaceHolder = "내용을 입력해주세요."
+    var selectedNoteID : Int?
     private var noteInformation: NoteGetModel? {
         didSet {
             noteCollectionView.reloadData()
@@ -81,12 +83,6 @@ final class NoteViewController: BaseViewController {
         setNavigationBar(title: "메모팅")
         getNoteInformationAPI()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
 }
 
 extension NoteViewController {
@@ -94,10 +90,10 @@ extension NoteViewController {
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        
         view.addSubViews([noticeStackView, applyNumberLabel, noteCollectionView, writeNoteButton, writeNoteView,noteDateProgressView])
     }
-    private func setAutoLayout(){
+    
+    private func setAutoLayout() {
         noticeStackView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(27)
             make.left.right.equalToSuperview().inset(25)
@@ -123,11 +119,11 @@ extension NoteViewController {
         writeNoteView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         noteDateProgressView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
-    
 }
 
 // MARK: - API
@@ -139,16 +135,32 @@ extension NoteViewController {
         }
     }
     
+    private func getNoteTingRemainApply() {
+        
+    }
     private func postNoteRegisterAPI(content: String) {
         APIPostManager.shared.postNoteRegister(content: content) { response in
             guard let response = response else { return print("nil 출력")}
-            
             if response.isSuccess {
                 self.showAlert(message: "메모가 등록되었습니다.")
             } else {
                 self.showAlert(message: response.message)
             }
             self.writeNoteView.isHidden = true
+        }
+    }
+    
+    private func postApplyNote(noteID: Int) {
+        APIPostManager.shared.postApplyNote(noteID: noteID) { response in
+            guard let response = response else { return print(#function,"Rsponse nil")}
+            if response.isSuccess {
+                let chatRoomVC = ChatRoomVC()
+                chatRoomVC.isPushNotification = true
+                chatRoomVC.chatRoomID = noteID
+                self.pushViewContoller(viewController: chatRoomVC)
+            } else {
+                self.showMessage(message: response.message)
+            }
         }
     }
 }
@@ -190,13 +202,13 @@ extension NoteViewController: UICollectionViewDelegateFlowLayout {
 extension NoteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         noteDateProgressView.isHidden = false
+        self.selectedNoteID = noteInformation?.result[indexPath.item].id
     }
 }
 
 extension NoteViewController: WriteNoteViewDelegate {
     func tapRegisterButton(contentTextViewText: String) {
         postNoteRegisterAPI(content: contentTextViewText)
-        
     }
     
     func writeNoteViewtapCancelbutton() {
@@ -205,6 +217,11 @@ extension NoteViewController: WriteNoteViewDelegate {
 }
 
 extension NoteViewController: NoteDateProgressViewDelegate {
+    func tapProgressButton() {
+        noteDateProgressView.isHidden = true
+        postApplyNote(noteID: self.selectedNoteID ?? 0)
+    }
+    
     func noteDateProgressViewTapCancelbutton() {
         noteDateProgressView.isHidden = true
     }
