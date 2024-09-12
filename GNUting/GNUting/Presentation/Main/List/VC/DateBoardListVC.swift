@@ -26,8 +26,6 @@ final class DateBoardListVC: BaseViewController {
     
     let noticeStackView = NoticeStackView(text: "부적절한 게시글을 작성할 경우, 앱 이용이 제한될 수 있습니다.")
     
-    private lazy var borderView = BorderView()
-    
     private lazy var noDataScreenView: NoDataScreenView = {
         let view = NoDataScreenView()
         view.isHidden = true
@@ -71,7 +69,7 @@ final class DateBoardListVC: BaseViewController {
 
 extension DateBoardListVC {
     private func addSubViews() {
-        view.addSubViews([noticeStackView, borderView, dateBoardTableView, noDataScreenView, writeTextButton])
+        view.addSubViews([noticeStackView, dateBoardTableView, noDataScreenView, writeTextButton])
     }
     
     private func setAutoLayout() {
@@ -79,14 +77,9 @@ extension DateBoardListVC {
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(27)
             make.left.right.equalToSuperview().inset(25)
         }
-
-        borderView.snp.makeConstraints { make in
-            make.top.equalTo(noticeStackView.snp.bottom).offset(20)
-            make.left.right.equalToSuperview()
-        }
         
         dateBoardTableView.snp.makeConstraints { make in
-            make.top.equalTo(borderView.snp.bottom)
+            make.top.equalTo(noticeStackView.snp.bottom).offset(28)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
