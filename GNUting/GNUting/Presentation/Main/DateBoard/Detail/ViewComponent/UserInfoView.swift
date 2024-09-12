@@ -11,16 +11,8 @@ import SnapKit
 
 
 class UserInfoView: UIView {
-    private lazy var border1 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "ColorE9E9E9")
-        return view
-    }()
-    private lazy var border2 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "ColorE9E9E9")
-        return view
-    }()
+    private lazy var border1 = BorderView()
+    private lazy var border2 = BorderView()
     private lazy var upperStackView = UIView()
         
     
@@ -84,7 +76,6 @@ extension UserInfoView {
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         upperStackView.snp.makeConstraints { make in
             make.top.equalTo(border1.snp.bottom).offset(10)
@@ -96,7 +87,6 @@ extension UserInfoView {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(1)
         }
     }
     func setUserInfoView(userImage: String?,userNickname: String, major: String, StudentID: String) {
