@@ -35,6 +35,8 @@ enum EndPoint{
     case notificationCheck
     case notificationSetting
     case notificationShowAllsetting
+    case noteRead
+    case noteRegisterPost
     var url : URL {
         switch self{
         case .login:
@@ -93,6 +95,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "notificationSetting")
         case .notificationShowAllsetting:
             return .makeForEndpoint(endPoint: "notification/show/allsetting")
+        case .noteRead:
+            return .makeForEndpoint(endPoint: "memo")
+        case .noteRegisterPost:
+            return .makeForEndpoint(endPoint: "memo/save")
         }
     }
 }

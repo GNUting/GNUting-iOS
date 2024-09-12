@@ -9,6 +9,8 @@ import UIKit
 
 class ChatRoomListVC: BaseViewController {
     var userName : String = ""
+    var selecetedIndex: IndexPath?
+    var pushChatRoomID: Int?
     var chatRoomData: ChatRoomModel? {
         didSet{
             if chatRoomData?.result.count == 0 {
@@ -54,14 +56,20 @@ class ChatRoomListVC: BaseViewController {
         setAutoLayout()
      
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
         getChatRoomData()
+        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
 }
+
 extension ChatRoomListVC{
     private func addSubViews() {
         view.addSubViews([titleLabel, chatTableView, noDataScreenView])
@@ -89,10 +97,8 @@ extension ChatRoomListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatRoomVC()
         let result = chatRoomData?.result[indexPath.row]
-        
+        self.selecetedIndex = indexPath
         vc.chatRoomID = result?.id ?? 0
-        vc.navigationTitle = result?.title ?? "채팅방"
-        vc.subTitleSting = "\(result?.leaderUserDepartment ?? "학과") | \(result?.applyLeaderDepartment ?? "학과")"
         pushViewContoller(viewController: vc)
     }
 }
@@ -117,7 +123,6 @@ extension ChatRoomListVC : UITableViewDataSource {
     
 }
 
-
 extension ChatRoomListVC {
     private func getChatRoomData() {
 
@@ -132,31 +137,3 @@ extension ChatRoomListVC {
         getChatRoomData()
     }
 }
-extension ChatRoomListVC {
-    func AlertpushChatRoom(locationID: String) {
-        let chatRoomID = Int(locationID)
-        let vc = ChatRoomVC()
-        APIGetManager.shared.getApplicationChatRoomTitleData(chatRoomID: chatRoomID ?? 0) { responseResult in
-            guard let success = responseResult?.isSuccess else { return }
-            let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
-          
-            if success {
-                vc.chatRoomID = chatRoomID ?? 0
-                vc.navigationTitle = responseResult?.result.title ?? "채팅방 제목"
-                
-                vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과") | \(responseResult?.result.applyLeaderDepartment ?? "학과")"
-                
-                self.pushViewContoller(viewController: vc)
-            } else {
-                if responseResult?.code == "CHATROOM4001"{
-                    self.showAlert(message: "채팅방을 찾을수 없습니다.")
-                } else if responseResult?.code == "CHATROOMUSER4001"{
-                    self.showAlert(message: "채팅방을 찾을수 없습니다.")
-                }
-                rootVC?.selectedIndex = 0
-            }
-            
-        } 
-    }
-}
-

@@ -19,6 +19,8 @@ class ChatRoomVC: UIViewController {
     var nextState: CardState{
         return cardVisible ? .collapsed : .expanded
     }
+    var isPushNotification = false
+    
     var chatMessageList: [ChatRoomMessageModelResult] = []{
         didSet {
             self.chatRoomTableView.reloadData()
@@ -29,14 +31,14 @@ class ChatRoomVC: UIViewController {
     var originalPostion = CGPoint.zero
     var accessToken = ""
     var chatRoomID: Int = 0
-    var navigationTitle: String = "게시글 제목"
-    var subTitleSting: String = "학과*학과"
+    var navigationTitle: String?
+    var subTitleSting: String?
     var message: String = ""
     var userEmail : String = ""
     private var swiftStomp : SwiftStomp!
-    private lazy var navigationBarView : ChatRoomNavigationBar = {
+    private lazy var navigationBarView: ChatRoomNavigationBar = {
         let view = ChatRoomNavigationBar()
-        view.setLabel(title: navigationTitle, subTitle: subTitleSting)
+        
         view.naviagtionBarButtonDelegate = self
         return view
     }()
@@ -123,7 +125,9 @@ class ChatRoomVC: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
+        
         getAccessToken()
+        getChatRoomNavigationInfoAPI()
         getChatMessageList()
         getUserData()
         getChatRoomMember()
@@ -136,6 +140,12 @@ class ChatRoomVC: UIViewController {
         super.viewWillDisappear(animated)
         self.chatRoomOut()
         self.swiftStomp.disconnect()
+        isNotificationPushed(isPush: isPushNotification)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         
     }
 }
@@ -180,6 +190,17 @@ extension ChatRoomVC{
     }
 }
 extension ChatRoomVC {
+    private func isNotificationPushed(isPush: Bool) {
+        if isPush {
+            let vc = TabBarController()
+            
+            vc.selectedIndex = 2
+            self.navigationController?.popToRootViewController(animated: true)
+            view.window?.rootViewController = vc
+        }
+    }
+    
+    
     private func chatRoomTableViewMoveToBottom() {
         let chatMessageCount = self.chatMessageList.count
         DispatchQueue.main.async {
@@ -245,6 +266,7 @@ extension ChatRoomVC: UITableViewDataSource{
 }
 
 // MARK: Button Action
+
 extension ChatRoomVC {
     private func tapSendMessageButton() {
         textField.text = ""
@@ -310,15 +332,15 @@ extension ChatRoomVC {
         self.accessToken = token
     }
     private func initStomp(){
-        let url = URL(string: "ws://203.255.15.32:14357/chat")!
-//        let url = URL(string: "ws://localhost:10001/chat")!
+//        let url = URL(string: "ws://203.255.15.32:14357/chat")!
+        let url = URL(string: "ws://203.255.15.32:1541/chat")!
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
         self.swiftStomp.enableLogging = true
         self.swiftStomp.delegate = self
         self.swiftStomp.connect()
     }
     private func getChatMessageList() {
-        APIGetManager.shared.getChatMessageData(chatRoomID: chatRoomID) { chatMessageListData, response in
+        APIGetManager.shared.getChatMessageData(chatRoomID: self.chatRoomID) { chatMessageListData, response in
             if response.isSuccess {
                 guard let result = chatMessageListData?.result else { return }
                 self.chatMessageList = result
@@ -347,6 +369,16 @@ extension ChatRoomVC {
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
             self.sideView.userNickname = userData?.result?.nickname ?? "유저 닉네임"
+        }
+    }
+    
+    private func getChatRoomNavigationInfoAPI() {
+        APIGetManager.shared.getChatRoomNavigationInfo(chatRoomID: self.chatRoomID) { response in
+            guard let title = response?.result.title else { return }
+            guard let leaderUserDepartment = response?.result.leaderUserDepartment else { return }
+            guard let applyLeaderDepartment = response?.result.applyLeaderDepartment else { return }
+            
+            self.navigationBarView.setLabel(title: title, subTitle: "\(leaderUserDepartment) | \(applyLeaderDepartment)")
         }
     }
 }

@@ -59,7 +59,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let userInfo = response.notification.request.content.userInfo
         let location = userInfo[AnyHashable("location")] as? String
-        guard let locationId = userInfo[AnyHashable("locationId")] as? String else { return }
+        guard let locationID = userInfo[AnyHashable("locationId")] as? String else { return }
         
         let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
         switch location {
@@ -67,7 +67,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             rootVC?.selectedIndex = 1
             let vc = currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 1
-            vc?.getApplicationReceivedData(ApplicatoinID: locationId, requestStatus: false)
+            vc?.getApplicationReceivedData(ApplicatoinID: locationID, requestStatus: false)
             
         case "cancel":
             rootVC?.selectedIndex = 1
@@ -78,11 +78,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             rootVC?.selectedIndex = 1
             let vc = currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 0
-            vc?.getApplicationReceivedData(ApplicatoinID: locationId, requestStatus: true)
+            vc?.getApplicationReceivedData(ApplicatoinID: locationID, requestStatus: true)
         case "chat":
             rootVC?.selectedIndex = 2
-            let vc = currentTopViewController() as? ChatRoomListVC
-            vc?.AlertpushChatRoom(locationID: locationId)
+            let chatRoomVC = ChatRoomVC()
+            
+            chatRoomVC.isPushNotification = true
+            chatRoomVC.chatRoomID = Int(locationID) ?? 0
+            rootVC?.pushViewContoller(viewController: chatRoomVC)
         case .none:
             break
         case .some(_):

@@ -88,7 +88,7 @@ class APIPostManager {
                     completion(nil,json)
                 }
             }
-         
+        
     }
     // MARK: - 비밀번호 변경 : 이메일 인증 번호 전송
     func postEmailCheckChangePassword(email: String,completion: @escaping(EmailCheckResponse)->Void) {
@@ -148,7 +148,7 @@ class APIPostManager {
             for (key,value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
-       
+            
             if let image = imageData {
                 
                 multipartFormData.append(image, withName: "profileImage",fileName: "UserImage.jpeg",mimeType: "image/jpg")
@@ -287,7 +287,7 @@ class APIPostManager {
             print("Error encoding request data: \(error)")
             return
         }
-  
+        
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
@@ -388,6 +388,9 @@ class APIPostManager {
                 }
             }
     }
+    
+    // MARK: - 채팅방 나가기
+    
     func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
         let uslString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/leave"
         guard let url = URL(string: uslString) else { return }
@@ -402,6 +405,62 @@ class APIPostManager {
                     completion(json)
                 case .failure:
                     print("🔴 postLeavetChatRoom statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
+    
+    // MARK: - 메모팅 등록
+    
+    func postNoteRegister(content: String, completion: @escaping(DefaultResponse?) -> Void) {
+        let url = EndPoint.noteRegisterPost.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let requestBody = NotePostModel(content: content)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        } catch {
+            print("Error encoding request data: \(error.localizedDescription)")
+            return
+        }
+        
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 postNoteRegister statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postNoteRegister statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
+    // MARK: - 메모팅 신청
+    
+    func postApplyNote(noteID: Int, completion: @escaping(DefaultResponse?) -> Void) {
+        let uslString = BaseURL.shared.urlString + "memo/\(noteID)"
+        guard let url = URL(string: uslString) else { return }
+        AF.request(url,method: .post,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                print(response)
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                print(json)
+                switch response.result {
+                case .success:
+                    print("🟢 postApplyNote statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postApplyNote statusCode: \(statusCode)")
                     completion(json)
                     break
                 }

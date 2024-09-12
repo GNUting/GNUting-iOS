@@ -390,11 +390,12 @@ class APIGetManager: RequestInterceptor {
         }
     }
     // 채팅 알림 클릭시 이동에 필요한 데이터 API 채팅방 제목, 학과
-    func getApplicationChatRoomTitleData(chatRoomID: Int,completion: @escaping(AlertChatModel?) -> Void) {
+    func getChatRoomNavigationInfo(chatRoomID: Int,completion: @escaping(AlertChatModel?) -> Void) {
         let url = BaseURL.shared.urlString + "notification/chat/click/" + "\(chatRoomID)"
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of: AlertChatModel.self) { response in
+                
                 guard let statusCode = response.response?.statusCode else { return }
                 switch response.result {
                 case .success:
@@ -406,6 +407,24 @@ class APIGetManager: RequestInterceptor {
                     break
                 }
         }
+    }
+    
+    func getNoteInformation(completion: @escaping(NoteGetModel?)->Void) {
+        let url = EndPoint.noteRead.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of:NoteGetModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getNoteInformation statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getNoteInformation statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+            }
     }
 }
 

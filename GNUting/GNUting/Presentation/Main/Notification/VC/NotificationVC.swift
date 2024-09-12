@@ -9,7 +9,7 @@
 
 import UIKit
 
-class NotificationVC: BaseViewController {
+final class NotificationVC: BaseViewController {
     
     // MARK: - Properties
     
@@ -80,7 +80,7 @@ extension NotificationVC {
     private func getNotificationData() {
         APIGetManager.shared.getNotificationData { notificationData in
             guard let notificationDataList = notificationData else { return }
-            
+        
             if notificationDataList.isSuccess {
                 self.notificationList = notificationDataList.result
             } else {
@@ -102,6 +102,17 @@ extension NotificationVC {
                 DispatchQueue.main.async {
                     self.present(alertController, animated: true)
                 }
+            }
+        }
+    }
+    
+    private func getChatRoomNavigationInfoAPI(chatRoomID: Int,completion: @escaping(AlertChatModelResult?) -> Void) {
+        APIGetManager.shared.getChatRoomNavigationInfo(chatRoomID: chatRoomID) { response in
+            guard let sucess = response?.isSuccess else { return}
+            if sucess {
+                completion(response?.result)
+            } else {
+                self.showAlert(message: response?.message ?? "")
             }
         }
     }
@@ -146,14 +157,17 @@ extension NotificationVC: UITableViewDelegate {
             } else if location == "refuse" {
                 requestVC?.getApplicationReceivedData(ApplicatoinID: String(locationID ?? 0), requestStatus: true)
             }
-            
+            view.window?.rootViewController = vc
         case "chat":
-            let requsetVC = vc.thirdVC.topViewController as? ChatRoomListVC
+            let chatRoomVC = ChatRoomVC()
+            chatRoomVC.isPushNotification = true
+            chatRoomVC.chatRoomID = locationID ?? 0
+            self.pushViewContoller(viewController: chatRoomVC)
             
-            requsetVC?.AlertpushChatRoom(locationID: String(locationID ?? 0))
+
         default:
             break
         }
-        view.window?.rootViewController = vc
+        
     }
 }
