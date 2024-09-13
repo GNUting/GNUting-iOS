@@ -10,3 +10,14 @@ import Foundation
 struct NotePostModel: Encodable {
     let content: String
 }
+
+struct NoteApplyModel: Decodable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    let result: NoteApplyModelData
+}
+
+struct NoteApplyModelData: Decodable {
+    let chatId: Int
+}

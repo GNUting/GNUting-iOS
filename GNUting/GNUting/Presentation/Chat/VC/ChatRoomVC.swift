@@ -125,7 +125,6 @@ class ChatRoomVC: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
-        
         getAccessToken()
         getChatRoomNavigationInfoAPI()
         getChatMessageList()
@@ -349,7 +348,11 @@ extension ChatRoomVC {
     }
     private func getAlertSet() {
         APIGetManager.shared.getChatRoomSetAlertStatus(chatRoomID: chatRoomID) { response in
-            guard let success = response?.isSuccess else { return self.showAlert(message: "재시도하세요. 계속해서 문제 발생시 고객센터로 연락 부탁드립니다.")}
+            guard let success = response?.isSuccess else {
+                self.showAlert(message: "재시도하세요. 계속해서 문제 발생시 고객센터로 연락 부탁드립니다.")
+                self.dismiss(animated: true)
+                return
+                }
             if success {
                 
                 guard let status = response?.result.notificationSetting else { return }
@@ -373,7 +376,7 @@ extension ChatRoomVC {
     }
     
     private func getChatRoomNavigationInfoAPI() {
-        APIGetManager.shared.getChatRoomNavigationInfo(chatRoomID: self.chatRoomID) { response in
+        APIGetManager.shared.getChatRoomNavigationInfo(chatRoomID: self.chatRoomID) { response  in
             guard let title = response?.result.title else { return }
             guard let leaderUserDepartment = response?.result.leaderUserDepartment else { return }
             guard let applyLeaderDepartment = response?.result.applyLeaderDepartment else { return }

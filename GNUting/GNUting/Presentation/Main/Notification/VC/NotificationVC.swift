@@ -105,17 +105,6 @@ extension NotificationVC {
             }
         }
     }
-    
-    private func getChatRoomNavigationInfoAPI(chatRoomID: Int,completion: @escaping(AlertChatModelResult?) -> Void) {
-        APIGetManager.shared.getChatRoomNavigationInfo(chatRoomID: chatRoomID) { response in
-            guard let sucess = response?.isSuccess else { return}
-            if sucess {
-                completion(response?.result)
-            } else {
-                self.showAlert(message: response?.message ?? "")
-            }
-        }
-    }
 }
 
 // MARK: - UITableView
