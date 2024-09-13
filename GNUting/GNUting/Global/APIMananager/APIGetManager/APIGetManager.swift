@@ -259,21 +259,20 @@ class APIGetManager: RequestInterceptor {
     func getChatMessageData(chatRoomID: Int,completion: @escaping(ChatRoomMessageModel?,DefaultResponse)->Void) {
         let urlString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/chats"
         guard let url = URL(string: urlString) else { return }
-        
+
         AF.request(url,method: .get,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of:ChatRoomMessageModel.self) { response in
-                
-
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
                 guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                
                 switch response.result {
                 case .success:
                     print("🟢 getChatMessageData statusCode: \(statusCode)")
                     completion(response.value,json)
                 case .failure:
                     print("🔴 getChatMessageData statusCode: \(statusCode)")
-                    
+    
                     completion(response.value,json)
                     break
                 }
@@ -304,9 +303,8 @@ class APIGetManager: RequestInterceptor {
         let url = EndPoint.notificationCheck.url
         AF.request(url,interceptor: APIInterceptorManager())
             .responseDecodable(of: NotificationCheckModel.self) { response in
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    
+                guard let statusCode = response.response?.statusCode else { return }
+                
                     switch response.result {
                     case .success:
                         print("🟢 getNotificationCheck statusCode: \(statusCode)")
@@ -355,10 +353,12 @@ class APIGetManager: RequestInterceptor {
     // MARK: - 채팅 참여인원 Get
     func getChatRoomUserList(chatRoomID: Int,completion: @escaping(ChatRoomUserModel?) -> Void) {
         let url = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)" + "/chatRoomUsers"
+        
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ChatRoomUserModel.self) { response in
                 guard let statusCode = response.response?.statusCode else { return }
+                
                 switch response.result {
                 case .success:
                     print("🟢 getChatRoomUser statusCode: \(statusCode)")
@@ -366,6 +366,7 @@ class APIGetManager: RequestInterceptor {
                 case .failure:
                     print("🔴 getChatRoomUser statusCode: \(statusCode)")
                     completion(response.value)
+                    
                     break
                 }
         }
@@ -392,22 +393,24 @@ class APIGetManager: RequestInterceptor {
     // 채팅 알림 클릭시 이동에 필요한 데이터 API 채팅방 제목, 학과
     func getChatRoomNavigationInfo(chatRoomID: Int,completion: @escaping(AlertChatModel?) -> Void) {
         let url = BaseURL.shared.urlString + "notification/chat/click/" + "\(chatRoomID)"
+        
         AF.request(url,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .responseDecodable(of: AlertChatModel.self) { response in
-                
                 guard let statusCode = response.response?.statusCode else { return }
+                
                 switch response.result {
                 case .success:
-                    print("🟢 getApplicationChatRoomTitleData statusCode: \(statusCode)")
                     completion(response.value)
                 case .failure:
-                    print("🔴 getApplicationChatRoomTitleData statusCode: \(statusCode)")
                     completion(response.value)
+                    
                     break
                 }
         }
     }
+    
+    // 메모리스트 읽기
     
     func getNoteInformation(completion: @escaping(NoteGetModel?)->Void) {
         let url = EndPoint.noteRead.url
@@ -421,6 +424,25 @@ class APIGetManager: RequestInterceptor {
                     completion(response.value)
                 case .failure:
                     print("🔴 getNoteInformation statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+            }
+    }
+    
+    // 신청 남은 횟수 Read
+    
+    func getNoteTingRemainApply(completion: @escaping(NoteApplRemainModel?) -> Void) {
+        let url = EndPoint.noteApplyRemainCount.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .responseDecodable(of:NoteApplRemainModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getNoteTingRemainApply statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getNoteTingRemainApply statusCode: \(statusCode)")
                     completion(response.value)
                     break
                 }

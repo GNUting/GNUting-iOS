@@ -9,11 +9,19 @@ import Foundation
 
 struct NoteGetModel: Decodable {
     let isSuccess: Bool
-       let code, message: String
-       let result: [NoteModelData]
+    let code, message: String
+    let result: [NoteModelData]
 }
 
 struct NoteModelData: Decodable {
     let id: Int
     let content, gender: String
 }
+
+struct NoteApplRemainModel: Decodable {
+    let isSuccess: Bool
+    let code, message: String
+    let result: Int
+}
+
+

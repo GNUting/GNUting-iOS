@@ -126,6 +126,7 @@ extension HomeVC {
     
     private func setDelegate() {
         homeTopView.writePostButton.writeButtonDelegate = self
+        homeTopView.writNoteButton.writeButtonDelegate = self
         homeBottomView.homeBottomViewDelegate = self
     }
 }
@@ -173,10 +174,13 @@ extension HomeVC {
 
 extension HomeVC: WriteButtonDelegate {
     func tapButtonAction(tag: Int) {
+        print(tag)
         if tag == 0 {
             self.pushViewContoller(viewController: WriteDateBoardVC())
         } else if tag == 1 { // 메모팅 남기기 버튼
-            
+            let vc = NoteViewController()
+            vc.isHiddenwriteNoteView(hidden: false)
+            self.pushViewContoller(viewController: vc)
         }
     }
 }

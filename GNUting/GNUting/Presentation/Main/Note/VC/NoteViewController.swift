@@ -17,11 +17,19 @@ final class NoteViewController: BaseViewController {
     var selectedNoteID : Int?
     private var noteInformation: NoteGetModel? {
         didSet {
+            noDataScreenView.isHidden = noteInformation == nil ? false : true
             noteCollectionView.reloadData()
         }
     }
     
     // MARK: - SubViews
+    
+    private lazy var noDataScreenView: NoDataScreenView = {
+        let view = NoDataScreenView()
+        view.setLabel(text: "메모가 없습니다.\n조금만 기다려 볼까요?", range: "조금만 기다려 볼까요?")
+        
+        return view
+    }()
     
     let noticeStackView = NoticeStackView(text: "업로드 된 메모는 매일 자정에 초기화됩니다.")
     
@@ -32,12 +40,7 @@ final class NoteViewController: BaseViewController {
         return layout
     }()
     
-    private lazy var applyNumberLabel: ImagePlusLabelView = {
-        let labelView = ImagePlusLabelView()
-        labelView.setImagePlusLabelView(imageName: "PointImage", textFont: Pretendard.medium(size: 12) ?? .systemFont(ofSize: 12), labelText: "일일 신청 남은 횟수: 3회",lableTextColor: UIColor(named: "PrimaryColor") ?? .red)
-        
-        return labelView
-    }()
+    private lazy var applyNumberLabel = ImagePlusLabelView()
     
     private lazy var noteCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
@@ -81,6 +84,7 @@ final class NoteViewController: BaseViewController {
         setAddSubViews()
         setAutoLayout()
         setNavigationBar(title: "메모팅")
+        getNoteTingRemainApplyAPI()
         getNoteInformationAPI()
     }
 }
@@ -90,7 +94,7 @@ extension NoteViewController {
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        view.addSubViews([noticeStackView, applyNumberLabel, noteCollectionView, writeNoteButton, writeNoteView,noteDateProgressView])
+        view.addSubViews([noticeStackView, applyNumberLabel, noteCollectionView, writeNoteButton, noDataScreenView, writeNoteView,noteDateProgressView])
     }
     
     private func setAutoLayout() {
@@ -116,6 +120,10 @@ extension NoteViewController {
             make.width.height.equalTo(56)
         }
         
+        noDataScreenView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
         writeNoteView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -124,20 +132,29 @@ extension NoteViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    // MARK: - Internanl Method
+    
+    func isHiddenwriteNoteView(hidden: Bool) {
+        writeNoteView.isHidden = hidden
+    }
 }
 
 // MARK: - API
 
 extension NoteViewController {
     private func getNoteInformationAPI() {
-        APIGetManager.shared.getNoteInformation { noteData in
-            self.noteInformation = noteData
+        APIGetManager.shared.getNoteInformation { response in
+            self.noteInformation = response
         }
     }
     
-    private func getNoteTingRemainApply() {
-        
+    private func getNoteTingRemainApplyAPI() {
+        APIGetManager.shared.getNoteTingRemainApply { response in
+            self.applyNumberLabel.setImagePlusLabelView(imageName: "PointImage", textFont: Pretendard.medium(size: 12) ?? .systemFont(ofSize: 12), labelText: "일일 신청 남은 횟수: \(response?.result ?? 0)회",lableTextColor: UIColor(named: "PrimaryColor") ?? .red)
+        }
     }
+    
     private func postNoteRegisterAPI(content: String) {
         APIPostManager.shared.postNoteRegister(content: content) { response in
             guard let response = response else { return print("nil 출력")}
@@ -156,7 +173,7 @@ extension NoteViewController {
             if response.isSuccess {
                 let chatRoomVC = ChatRoomVC()
                 chatRoomVC.isPushNotification = true
-                chatRoomVC.chatRoomID = noteID
+                chatRoomVC.chatRoomID = response.result.chatId
                 self.pushViewContoller(viewController: chatRoomVC)
             } else {
                 self.showMessage(message: response.message)
@@ -219,6 +236,7 @@ extension NoteViewController: WriteNoteViewDelegate {
 extension NoteViewController: NoteDateProgressViewDelegate {
     func tapProgressButton() {
         noteDateProgressView.isHidden = true
+        
         postApplyNote(noteID: self.selectedNoteID ?? 0)
     }
     

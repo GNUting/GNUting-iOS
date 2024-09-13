@@ -80,7 +80,7 @@ class APIPostManager {
                 case 200..<300:
                     guard let json = try? JSONDecoder().decode(EmailCheckResponse.self, from: data) else { return }
                     print("🟢 postEmailCheck statusCode :\(statusCode)")
-                    print("\(json)")
+//                    print("\(json)")
                     completion(json,nil)
                 default:
                     guard let json = try? JSONDecoder().decode(FailureResponse.self, from: data) else { return }
@@ -191,8 +191,6 @@ class APIPostManager {
                     KeyChainManager.shared.create(key: email, token: accessToken)
                     KeyChainManager.shared.create(key: "UserEmail", token: email)
                     KeyChainManager.shared.create(key: "RefreshToken", token: refrechToken)
-                    
-                    
                     UserDefaultsManager.shared.setLogin()
                     
                     completion(nil,json)
@@ -283,7 +281,7 @@ class APIPostManager {
         
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
-        }catch {
+        } catch {
             print("Error encoding request data: \(error)")
             return
         }
@@ -445,16 +443,14 @@ class APIPostManager {
     
     // MARK: - 메모팅 신청
     
-    func postApplyNote(noteID: Int, completion: @escaping(DefaultResponse?) -> Void) {
+    func postApplyNote(noteID: Int, completion: @escaping(NoteApplyModel?) -> Void) {
         let uslString = BaseURL.shared.urlString + "memo/\(noteID)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .post,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response { response in
-                print(response)
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
-                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
-                print(json)
+                guard let json = try? JSONDecoder().decode(NoteApplyModel.self, from: data) else { return }
                 switch response.result {
                 case .success:
                     print("🟢 postApplyNote statusCode: \(statusCode)")

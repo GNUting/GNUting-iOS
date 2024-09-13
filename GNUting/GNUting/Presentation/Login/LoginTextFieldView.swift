@@ -13,7 +13,7 @@ class LoginTextFieldView: UIView {
     
     // MARK: - Properties
     
-    private lazy var textField : PaddingTextField = {
+    private lazy var textField: PaddingTextField = {
         let paddingTextField = PaddingTextField()
         paddingTextField.backgroundColor = .white
         paddingTextField.layer.cornerRadius = 10
