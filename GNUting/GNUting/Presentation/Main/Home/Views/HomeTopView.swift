@@ -53,29 +53,18 @@ final class HomeTopView: UIView {
         return stackView
     }()
     
-    let writePostButton: WriteButton = {
-        let button = WriteButton()
-        button.setConfiguration(text: "게시글 작성하기", textColor: .white, backgroundColor: UIColor(named: "SecondaryColor") ?? .blue, tag: 0)
-        button.tag = 0
-        
-        return button
-    }()
-    
-    let writNoteButton: WriteButton = {
-        let button = WriteButton()
-        button.setConfiguration(text: "메모팅 남기기", textColor: UIColor(hexCode: "191919"), backgroundColor: UIColor(named: "BorderColor") ?? .blue, tag: 1)
-        button.tag = 1
-        
-        return button
-    }()
+    let writePostButton = WriteButton()
+    let writNoteButton = WriteButton()
+
     // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setView()
         setAddSubViews()
         setAutoLayout()
+        setView()
+        setButton()
     }
     
     required init?(coder: NSCoder) {
@@ -83,9 +72,10 @@ final class HomeTopView: UIView {
     }
 }
 
-// MARK: - Layout Helpers
-
 extension HomeTopView {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddSubViews() {
         self.addSubViews([explainStackView, buttonStackView, imageButton])
         buttonStackView.addStackSubViews([writePostButton,writNoteButton])
@@ -115,6 +105,11 @@ extension HomeTopView {
     private func setView() {
         self.backgroundColor = .white
         self.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner,.layerMaxXMinYCorner])
+    }
+    
+    private func setButton() {
+        writePostButton.setConfiguration(text: "게시글 작성하기", textColor: .white, backgroundColor: UIColor(named: "SecondaryColor") ?? .blue, tag: 0)
+        writNoteButton.setConfiguration(text: "메모팅 남기기", textColor: UIColor(hexCode: "191919"), backgroundColor: UIColor(named: "BorderColor") ?? .blue, tag: 1)
     }
 }
 

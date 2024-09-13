@@ -132,6 +132,12 @@ extension NoteViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    // MARK: - Internanl Method
+    
+    func isHiddenwriteNoteView(hidden: Bool) {
+        writeNoteView.isHidden = hidden
+    }
 }
 
 // MARK: - API
