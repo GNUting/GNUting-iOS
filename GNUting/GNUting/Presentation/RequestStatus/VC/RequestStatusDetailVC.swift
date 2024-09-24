@@ -191,9 +191,11 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
 }
 extension RequestStatusDetailVC {
     private func setStateLabel(state: String,groupCount: Int) {
-        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: Pretendard.bold(size: 16) ?? .boldSystemFont(ofSize: 16), labelText: "\(groupCount) : \(groupCount) 매칭")
+        let countStr = "\(groupCount) : \(groupCount) 매칭"
+        let groupCountViewString = groupCount == 1 ? countStr : "과팅 (\(countStr))"
+        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: Pretendard.bold(size: 16) ?? .boldSystemFont(ofSize: 16), labelText: groupCountViewString)
         var applyStatus: RequestState = .waiting
-        switch state{
+        switch state {
         case "승인":
             applyStatus = .Success
             buttonStackView.isHidden = true
