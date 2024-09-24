@@ -401,8 +401,10 @@ class APIGetManager: RequestInterceptor {
                 
                 switch response.result {
                 case .success:
+                    print("🟢 getChatRoomNavigationInfo statusCode: \(statusCode)")
                     completion(response.value)
                 case .failure:
+                    print("🔴 getChatRoomNavigationInfo statusCode: \(statusCode)")
                     completion(response.value)
                     
                     break
