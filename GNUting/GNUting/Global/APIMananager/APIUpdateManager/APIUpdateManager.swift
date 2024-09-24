@@ -42,12 +42,12 @@ class APIUpdateManager {
         guard let token = KeyChainManager.shared.read(key: email) else { return }
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data","Authorization": "Bearer " + token]
-        let parameters : [String : String] = ["department":department,"nickname": nickname,"userSelfIntroduction": userSelfIntroduction]
+        let parameters : [String : String?] = ["department":department,"nickname": nickname,"userSelfIntroduction": userSelfIntroduction,"drink": nil, "hobby": nil, "mbti": nil, "smoke": nil]
         let imageData = image?.jpegData(compressionQuality: 0.2)
         
         AF.upload(multipartFormData: { multipartFormData in
             for (key,value) in parameters {
-                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
+                multipartFormData.append("\(value ?? "")".data(using: .utf8)!, withName: key)
             }
             var imageStr = ""
             if let image = image {

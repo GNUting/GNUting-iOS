@@ -260,7 +260,7 @@ extension UpdateProfileVC: MajorInputViewDelegate {
         present(navigationVC, animated: true)
     }
 }
-extension UpdateProfileVC: SearchMajorSelectCellDelegate{
+extension UpdateProfileVC: SearchMajorSelectCellDelegate {
     func sendSeleceted(major: String) {
         majorInputView.setContentLabelText(text: major)
     }
