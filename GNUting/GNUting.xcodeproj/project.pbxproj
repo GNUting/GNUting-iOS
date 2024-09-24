@@ -1014,7 +1014,7 @@
 				F8E3CD502B8CE95D00712CBF /* Home */,
 				F80C4DE42B838CEA00BA6FFB /* Search */,
 				F8AC69CD2C899A0900873455 /* Notification */,
-				F8CDE3502B849ED000E5598D /* List */,
+				F8CDE3502B849ED000E5598D /* BoardList */,
 				F80C4DE02B838BCB00BA6FFB /* DateBoard */,
 			);
 			path = Main;
@@ -1077,12 +1077,12 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		F8CDE3502B849ED000E5598D /* List */ = {
+		F8CDE3502B849ED000E5598D /* BoardList */ = {
 			isa = PBXGroup;
 			children = (
 				F8E3CD512B8CE96F00712CBF /* VC */,
 			);
-			path = List;
+			path = BoardList;
 			sourceTree = "<group>";
 		};
 		F8DB022B2BB412EE0067CED2 /* Chat */ = {

@@ -5,7 +5,7 @@
 //  Created by 원동진 on 2/18/24.
 //
 
-// MARK: - 과텡 게시판 리스트 VC
+// MARK: - 과팅 게시판 리스트 VC
 
 import UIKit
 
