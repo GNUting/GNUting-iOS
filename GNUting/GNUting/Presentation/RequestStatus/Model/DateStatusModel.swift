@@ -7,7 +7,6 @@
 
 import Foundation
 struct DateStateModel {
-    let major: String
     let memeberCount: Int
     let applyStatus: RequestState
 }
