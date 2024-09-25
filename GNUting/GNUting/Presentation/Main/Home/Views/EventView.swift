@@ -85,6 +85,7 @@ extension EventView {
         contentView.addSubViews([explainLabel,nicknameTextField, buttonStackView])
         buttonStackView.addStackSubViews([cancelButton,registerButton])
     }
+    
     private func setAutoLayout() {
         contentView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

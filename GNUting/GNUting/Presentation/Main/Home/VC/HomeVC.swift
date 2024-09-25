@@ -217,8 +217,6 @@ extension HomeVC: HomeBottomViewDelegate {
     func tapMypostCardView() {
         self.pushViewContoller(viewController: UserWriteTextVC())
     }
-    
-    
 }
 
 extension HomeVC: EventViewDelegate {
