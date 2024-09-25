@@ -16,6 +16,7 @@ protocol HomeBottomViewDelegate: AnyObject {
     func oneMatchCardView()
     func tapMypostCardView()
     func tapNoteCardView()
+    func tapEventButton()
 }
 
 final class HomeBottomView: UIView {
@@ -26,15 +27,20 @@ final class HomeBottomView: UIView {
     
     // MARK: - SubViews
     
-//    let bannerImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "bannerImage")
-//        imageView.layer.cornerRadius = 10
-//        imageView.layer.masksToBounds = true
-//        imageView.isUserInteractionEnabled = true
-//        
-//        return imageView
-//    }()
+    private let eventButton: UIButton = {
+        let button = UIButton()
+        var configuration = UIButton.Configuration.plain()
+        
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        configuration.attributedTitle = AttributedString("오감 총학생회 X 지누팅", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.bold(size: 15) ?? .systemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.white]))
+        configuration.titleAlignment = .center
+        button.configuration = configuration
+        button.backgroundColor = UIColor(hexCode: "1D013E")
+        button.layer.cornerRadius = 8
+        button.layer.masksToBounds = true
+        
+        return button
+    }()
     
     private let postSubView: ImagePlusLabelView = {
         let view = ImagePlusLabelView()
@@ -62,7 +68,7 @@ final class HomeBottomView: UIView {
         
         return stackView
     }()
- 
+    
     private lazy var postBoardCardView = makeCardImaegButton(image: UIImage(named: "PostBoardCardImage") ?? UIImage(), action: #selector(tapPostBoardCardView))
     private lazy var OneMatchCardView = makeCardImaegButton(image: UIImage(named: "OneMatchCardImage") ?? UIImage(), action: #selector(tapOneMatchCardView))
     private lazy var noteCardView = makeCardImaegButton(image: UIImage(named: "NoteCardImage") ?? UIImage(), action: #selector(tapNoteCardView))
@@ -76,6 +82,7 @@ final class HomeBottomView: UIView {
         self.backgroundColor = .white
         setAddSubViews()
         setAutoLayout()
+        eventButton.addTarget(self, action: #selector(tapEventButton), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -89,19 +96,19 @@ extension HomeBottomView {
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        self.addSubViews([postSubView, firstCardStackView, seoncdCardStackView])
+        self.addSubViews([eventButton,postSubView, firstCardStackView, seoncdCardStackView])
         firstCardStackView.addStackSubViews([postBoardCardView, OneMatchCardView])
         seoncdCardStackView.addStackSubViews([noteCardView, mypostCardView])
     }
     
     private func setAutoLayout(){
-//        bannerImageView.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(25)
-//            make.left.right.equalToSuperview().inset(25)
-//        }
+        eventButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.right.equalToSuperview().inset(25)
+        }
         
         postSubView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(25)
+            make.top.equalTo(eventButton.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(25)
         }
         
@@ -146,5 +153,9 @@ extension HomeBottomView {
     
     @objc private func tapNoteCardView() {
         homeBottomViewDelegate?.tapNoteCardView()
+    }
+    
+    @objc private func tapEventButton() {
+        homeBottomViewDelegate?.tapEventButton()
     }
 }

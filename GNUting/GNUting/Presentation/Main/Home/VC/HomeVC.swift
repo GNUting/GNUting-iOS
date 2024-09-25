@@ -40,7 +40,14 @@ final class HomeVC: BaseViewController {
     private lazy var appLogoButton = UIButton()
     private lazy var bellImageView = UIImageView()
     private lazy var homeTopView = HomeTopView()
-    private lazy var homeBottomView = HomeBottomView()
+    private lazy var homeBottomView = HomeBottomView()    
+    
+    private lazy var eventView: EventView = {
+        let eventView = EventView()
+        eventView.eventViewDelegate = self
+        
+        return eventView
+    }()
     
     // MARK: - LifeCycle
     
@@ -69,7 +76,7 @@ final class HomeVC: BaseViewController {
 
 extension HomeVC {
     private func addSubViews() {
-        view.addSubview(scrollView)
+        view.addSubViews([scrollView,eventView])
         scrollView.addSubview(contentView)
         contentView.addSubViews([homeTopView, homeBottomView])
     }
@@ -80,14 +87,20 @@ extension HomeVC {
             make.left.right.equalToSuperview()
         }
         
-        homeTopView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Spacing.upperTop)
-            make.left.right.equalToSuperview().inset(25)
-        }
-        
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.width.equalTo(scrollView.snp.width)
+        }
+        
+        eventView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+            
+        }
+        
+        homeTopView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(Spacing.upperTop)
+            make.left.right.equalToSuperview().inset(25)
         }
         
         homeBottomView.snp.makeConstraints { make in
@@ -174,7 +187,6 @@ extension HomeVC {
 
 extension HomeVC: WriteButtonDelegate {
     func tapButtonAction(tag: Int) {
-        print(tag)
         if tag == 0 {
             self.pushViewContoller(viewController: WriteDateBoardVC())
         } else if tag == 1 { // 메모팅 남기기 버튼
@@ -186,12 +198,16 @@ extension HomeVC: WriteButtonDelegate {
 }
 
 extension HomeVC: HomeBottomViewDelegate {
+    func tapEventButton() {
+        eventView.isHidden = false
+    }
+    
     func tapPostBoardCardView() {
         self.pushViewContoller(viewController: DateBoardListVC())
     }
     
     func oneMatchCardView() {
-        
+        self.showAlert(message: "곧 출시 예정이에요.")
     }
     
     func tapNoteCardView() {
@@ -200,6 +216,19 @@ extension HomeVC: HomeBottomViewDelegate {
     
     func tapMypostCardView() {
         self.pushViewContoller(viewController: UserWriteTextVC())
+    }
+    
+    
+}
+
+extension HomeVC: EventViewDelegate {
+    func tapCancelButton() {
+        eventView.isHidden = true
+    }
+    
+    func tapRegisterButton(contentTextViewText: String) {
+        print(contentTextViewText)
+        eventView.isHidden = true
     }
     
     
