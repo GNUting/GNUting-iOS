@@ -466,11 +466,21 @@ class APIGetManager: RequestInterceptor {
     
     // MARK: - Evnet 총학생회 이벤트 open Close
     
-    func getEventSeverOpen() {
+    func getEventSeverOpen(completion: @escaping(EventServerOpenModel?) -> Void) {
         let url = EndPoint.eventIsOpenSever.url
         AF.request(url,interceptor: APIInterceptorManager())
-            .response { response in
-                print(response)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: EventServerOpenModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getEventSeverOpen statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getEventSeverOpen statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
             }
     }
 }

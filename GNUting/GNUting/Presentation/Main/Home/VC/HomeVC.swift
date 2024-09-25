@@ -234,8 +234,15 @@ extension HomeVC: WriteButtonDelegate {
 
 extension HomeVC: HomeBottomViewDelegate {
     func tapEventButton() {
-        //        APIGetManager.shared.getEventSeverOpen()
-        eventView.isHidden = false
+        APIGetManager.shared.getEventSeverOpen { response in
+            let isOpen = response?.result
+            if isOpen == "OPEN" {
+                self.eventView.isHidden = false
+            } else {
+                self.showAlert(message: "이벤트 기간이 아닙니다.")
+            }
+        }
+        
     }
     
     func tapPostBoardCardView() {
