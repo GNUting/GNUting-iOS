@@ -233,7 +233,9 @@ class APIGetManager: RequestInterceptor {
                 }
             }
     }
+    
     // 채팅 리스트 조회
+    
     func getChatRoomData(completion: @escaping(ChatRoomModel?,DefaultResponse)->Void) {
         let url = EndPoint.chatRoom.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -256,6 +258,7 @@ class APIGetManager: RequestInterceptor {
     }
     
     // 채팅방 채팅 조회
+    
     func getChatMessageData(chatRoomID: Int,completion: @escaping(ChatRoomMessageModel?,DefaultResponse)->Void) {
         let urlString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/chats"
         guard let url = URL(string: urlString) else { return }
@@ -279,7 +282,9 @@ class APIGetManager: RequestInterceptor {
             }
         
     }
+    
     // MARK: - 알림 모두 보기
+    
     func getNotificationData(completion: @escaping(NotificationModel?)->Void) {
         let url = EndPoint.notification.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -298,7 +303,9 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    
     // MARK: - 새알림 확인
+    
     func getNotificationCheck(completion: @escaping(NotificationCheckModel?)->Void){
         let url = EndPoint.notificationCheck.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -316,7 +323,9 @@ class APIGetManager: RequestInterceptor {
                     }
             }
     }
+    
     // MARK: - 사용자 채팅알림 세팅값 API
+    
     func getChatRoomSetAlertStatus(chatRoomID: Int, completion: @escaping(ChatRoomAlertStatusModel?) -> Void) {
         let url = BaseURL.shared.urlString + "\(chatRoomID)" + "/show/notificationSetting"
         AF.request(url,interceptor: APIInterceptorManager())
@@ -333,7 +342,9 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     }
+    
     // MARK: - 전체 알람보기 세팅값 API
+    
     func getTotalSetAlertStatus(completion: @escaping(ChatRoomAlertStatusModel?) -> Void) {
         let url = EndPoint.notificationShowAllsetting.url
         AF.request(url,interceptor: APIInterceptorManager())
@@ -350,7 +361,9 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     } 
+    
     // MARK: - 채팅 참여인원 Get
+    
     func getChatRoomUserList(chatRoomID: Int,completion: @escaping(ChatRoomUserModel?) -> Void) {
         let url = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)" + "/chatRoomUsers"
         
@@ -371,7 +384,7 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     }
-    // 알림 클릭시 클릭한 신천받은 현황 ID로 조회하는 API
+    // MARK: - 알림 클릭시 클릭한 신천받은 현황 ID로 조회하는 API
     func getApplicationReceivedData(applcationID: String,completion: @escaping(ApplicationReceivedModel?) -> Void) {
         let url = BaseURL.shared.urlString + "notification/application/click/" + applcationID
         
@@ -390,7 +403,7 @@ class APIGetManager: RequestInterceptor {
                 }
         }
     }
-    // 채팅 알림 클릭시 이동에 필요한 데이터 API 채팅방 제목, 학과
+    // MARK: - 채팅 알림 클릭시 이동에 필요한 데이터 API 채팅방 제목, 학과
     func getChatRoomNavigationInfo(chatRoomID: Int,completion: @escaping(AlertChatModel?) -> Void) {
         let url = BaseURL.shared.urlString + "notification/chat/click/" + "\(chatRoomID)"
         
@@ -412,7 +425,7 @@ class APIGetManager: RequestInterceptor {
         }
     }
     
-    // 메모리스트 읽기
+    // MARK: - 메모리스트 읽기
     
     func getNoteInformation(completion: @escaping(NoteGetModel?)->Void) {
         let url = EndPoint.noteRead.url
@@ -432,7 +445,7 @@ class APIGetManager: RequestInterceptor {
             }
     }
     
-    // 신청 남은 횟수 Read
+    // MARK: - 신청 남은 횟수 Read
     
     func getNoteTingRemainApply(completion: @escaping(NoteApplRemainModel?) -> Void) {
         let url = EndPoint.noteApplyRemainCount.url
@@ -445,6 +458,26 @@ class APIGetManager: RequestInterceptor {
                     completion(response.value)
                 case .failure:
                     print("🔴 getNoteTingRemainApply statusCode: \(statusCode)")
+                    completion(response.value)
+                    break
+                }
+            }
+    }
+    
+    // MARK: - Evnet 총학생회 이벤트 open Close
+    
+    func getEventSeverOpen(completion: @escaping(EventServerOpenModel?) -> Void) {
+        let url = EndPoint.eventIsOpenSever.url
+        AF.request(url,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: EventServerOpenModel.self) { response in
+                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 getEventSeverOpen statusCode: \(statusCode)")
+                    completion(response.value)
+                case .failure:
+                    print("🔴 getEventSeverOpen statusCode: \(statusCode)")
                     completion(response.value)
                     break
                 }
