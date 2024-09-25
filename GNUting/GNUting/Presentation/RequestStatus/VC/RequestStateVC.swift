@@ -197,7 +197,7 @@ extension RequestStateVC {
             self.dateStatusAllInfos = results
             self.dateStatusList = []
             for result in results {
-                let participantUserDepartment = result.participantUserDepartment
+//                let participantUserDepartment = result.participantUserDepartment
                 let participantUserCount = result.participantUserCount
                 var applyStatus : RequestState = .waiting
             
@@ -209,7 +209,7 @@ extension RequestStateVC {
                 default:
                     applyStatus = .waiting
                 }
-                self.dateStatusList.append(DateStateModel(major: participantUserDepartment, memeberCount: participantUserCount, applyStatus: applyStatus))
+                self.dateStatusList.append(DateStateModel(memeberCount: participantUserCount, applyStatus: applyStatus))
             }
             
             
@@ -224,7 +224,7 @@ extension RequestStateVC {
             self.dateStatusList = []
             guard let results = requestStatusData?.result else { return }
             for result in results {
-                let applyUserDepartment = result.applyUserDepartment
+//                let applyUserDepartment = result.applyUserDepartment
                 let applyUserCount = result.applyUserCount
                 var applyStatus : RequestState = .waiting
                 switch result.applyStatus{
@@ -236,7 +236,7 @@ extension RequestStateVC {
                     applyStatus = .waiting
                 }
 
-                self.dateStatusList.append(DateStateModel(major: applyUserDepartment, memeberCount: applyUserCount, applyStatus: applyStatus))
+                self.dateStatusList.append(DateStateModel(memeberCount: applyUserCount, applyStatus: applyStatus))
             }
             
             

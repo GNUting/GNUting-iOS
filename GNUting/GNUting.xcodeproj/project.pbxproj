@@ -92,6 +92,7 @@
 		F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351872B90B21E004E89C5 /* RequestModel.swift */; };
 		F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */; };
 		F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */; };
+		F8752F6E2CA3F83E00F2E6EE /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8752F6D2CA3F83E00F2E6EE /* EventView.swift */; };
 		F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */; };
 		F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */; };
 		F87D05862B8F915400910773 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05852B8F915400910773 /* MyPageModel.swift */; };
@@ -273,6 +274,7 @@
 		F87351872B90B21E004E89C5 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusDetailVC.swift; sourceTree = "<group>"; };
 		F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemberHeader.swift; sourceTree = "<group>"; };
+		F8752F6D2CA3F83E00F2E6EE /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddMemberVC.swift; sourceTree = "<group>"; };
 		F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemeberCollectionViewCell.swift; sourceTree = "<group>"; };
 		F87D05852B8F915400910773 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
@@ -1056,6 +1058,7 @@
 				F8483F292BE23DE400FC3AB6 /* WriteButton.swift */,
 				F8AC69D22C89A26E00873455 /* HomeTopView.swift */,
 				F8AC69D42C89AC3E00873455 /* HomeBottomView.swift */,
+				F8752F6D2CA3F83E00F2E6EE /* EventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1604,6 +1607,7 @@
 				F8483F302BE4892600FC3AB6 /* NoDataScreenView.swift in Sources */,
 				F85E0AE02BD128BA00ADBE7C /* LoginTextFieldView.swift in Sources */,
 				F8AC69E42C919A1600873455 /* WriteNoteView.swift in Sources */,
+				F8752F6E2CA3F83E00F2E6EE /* EventView.swift in Sources */,
 				F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */,
 				F8AC69D72C89AF3600873455 /* UserDetailModel.swift in Sources */,
 				F8DB022D2BB412FE0067CED2 /* ChatMessageModel.swift in Sources */,
