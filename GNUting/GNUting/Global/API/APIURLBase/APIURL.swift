@@ -38,6 +38,8 @@ enum EndPoint{
     case noteRead
     case noteApplyRemainCount
     case noteRegisterPost
+    case eventIsOpenSever
+    case eventParticipate
     var url : URL {
         switch self{
         case .login:
@@ -102,6 +104,10 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "memo/save")
         case .noteApplyRemainCount:
             return .makeForEndpoint(endPoint: "memo/remaining")
+        case .eventIsOpenSever:
+            return .makeForEndpoint(endPoint: "event/server/check")
+        case .eventParticipate:
+            return.makeForEndpoint(endPoint: "event/participate")
         }
     }
 }

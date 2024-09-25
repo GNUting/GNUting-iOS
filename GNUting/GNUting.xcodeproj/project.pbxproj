@@ -93,6 +93,7 @@
 		F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */; };
 		F87351902B90B82B004E89C5 /* DateMemberHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */; };
 		F8752F6E2CA3F83E00F2E6EE /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8752F6D2CA3F83E00F2E6EE /* EventView.swift */; };
+		F8752F702CA4059A00F2E6EE /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8752F6F2CA4059A00F2E6EE /* EventModel.swift */; };
 		F87D057D2B8F795300910773 /* SearchAddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */; };
 		F87D05802B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */; };
 		F87D05862B8F915400910773 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D05852B8F915400910773 /* MyPageModel.swift */; };
@@ -275,6 +276,7 @@
 		F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusDetailVC.swift; sourceTree = "<group>"; };
 		F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemberHeader.swift; sourceTree = "<group>"; };
 		F8752F6D2CA3F83E00F2E6EE /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		F8752F6F2CA4059A00F2E6EE /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		F87D057C2B8F795300910773 /* SearchAddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddMemberVC.swift; sourceTree = "<group>"; };
 		F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemeberCollectionViewCell.swift; sourceTree = "<group>"; };
 		F87D05852B8F915400910773 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				F82006A92BEBC1DC00E1C05E /* ApplicationReceivedModel.swift */,
 				F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */,
 				F8AC69EA2C91BF7600873455 /* NoteModel.swift */,
+				F8752F6F2CA4059A00F2E6EE /* EventModel.swift */,
 			);
 			path = Get;
 			sourceTree = "<group>";
@@ -1492,6 +1495,7 @@
 				F8AC69E22C9199FD00873455 /* NoteViewController.swift in Sources */,
 				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
+				F8752F702CA4059A00F2E6EE /* EventModel.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8AC69E92C91ACF000873455 /* NoteCollectionViewCell.swift in Sources */,
 				F8A15E972B60E7B2001DE5E4 /* PaddingTextField.swift in Sources */,

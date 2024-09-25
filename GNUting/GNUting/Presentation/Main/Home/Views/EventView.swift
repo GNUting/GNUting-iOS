@@ -9,7 +9,7 @@ import UIKit
 
 protocol EventViewDelegate: AnyObject {
     func tapCancelButton()
-    func tapRegisterButton(contentTextViewText: String)
+    func tapRegisterButton(textFiledText: String)
 }
 
 final class EventView: UIView {
@@ -124,7 +124,7 @@ extension EventView {
         }
         
         registerButton.throttle(delay: 3) { _ in
-            self.eventViewDelegate?.tapRegisterButton(contentTextViewText: self.nicknameTextField.text ?? "")
+            self.eventViewDelegate?.tapRegisterButton(textFiledText: self.nicknameTextField.text ?? "")
         }
     }
 }

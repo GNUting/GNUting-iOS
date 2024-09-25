@@ -40,7 +40,7 @@ final class HomeVC: BaseViewController {
     private lazy var appLogoButton = UIButton()
     private lazy var bellImageView = UIImageView()
     private lazy var homeTopView = HomeTopView()
-    private lazy var homeBottomView = HomeBottomView()    
+    private lazy var homeBottomView = HomeBottomView()
     
     private lazy var eventView: EventView = {
         let eventView = EventView()
@@ -134,13 +134,36 @@ extension HomeVC {
     
     private func setImageViewTapGesture() {
         setTapGestureView(view: bellImageView, action: #selector(tapNotiButtonAction))
-//        setTapGestureView(view: homeBottomView.bannerImageView, action: #selector(tapBannerImageViewAction))
+        //        setTapGestureView(view: homeBottomView.bannerImageView, action: #selector(tapBannerImageViewAction))
     }
     
     private func setDelegate() {
         homeTopView.writePostButton.writeButtonDelegate = self
         homeTopView.writNoteButton.writeButtonDelegate = self
         homeBottomView.homeBottomViewDelegate = self
+    }
+    
+    // MARK:  - SetAlertController
+    
+    private func setAlertController(chatID: Int) {
+        let alertController = UIAlertController(title: "채팅이 성사되었습니다.", message: "채팅방으로 이동 하시겠습니까?", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "네", style: .destructive,handler: { _ in
+            self.pushChatRoom(chatID: chatID)
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+    }
+    
+    // MARK: - pushChatRoom
+    
+    private func pushChatRoom(chatID: Int) {
+        let chatRoomVC = ChatRoomVC()
+        chatRoomVC.isPushNotification = true
+        chatRoomVC.chatRoomID = chatID
+        self.pushViewContoller(viewController: chatRoomVC)
     }
 }
 
@@ -181,6 +204,18 @@ extension HomeVC {
             self.setNavigationBar()
         }
     }
+    
+    private func postEventParticipateAPI(nickname: String) {
+        APIPostManager.shared.postEventParticipate(nickname: nickname) { successResponse, failureResponse in
+            if ((successResponse?.isSuccess) != nil) {
+                self.setAlertController(chatID: successResponse?.result.chatId ?? 0)
+            } else {
+                if !(failureResponse?.isSuccess ?? false)  {
+                    self.showMessage(message: failureResponse?.message ?? "재시도 해주세요.")
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Delegate
@@ -199,6 +234,7 @@ extension HomeVC: WriteButtonDelegate {
 
 extension HomeVC: HomeBottomViewDelegate {
     func tapEventButton() {
+        //        APIGetManager.shared.getEventSeverOpen()
         eventView.isHidden = false
     }
     
@@ -224,8 +260,8 @@ extension HomeVC: EventViewDelegate {
         eventView.isHidden = true
     }
     
-    func tapRegisterButton(contentTextViewText: String) {
-        print(contentTextViewText)
+    func tapRegisterButton(textFiledText: String) {
+        postEventParticipateAPI(nickname: textFiledText)
         eventView.isHidden = true
     }
     
