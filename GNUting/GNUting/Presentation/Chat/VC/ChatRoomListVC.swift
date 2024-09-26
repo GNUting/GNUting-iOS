@@ -119,9 +119,14 @@ extension ChatRoomListVC{
         
         if usernameList.count == 1 {
             usernameString = usernameList.first ?? "닉네임"
+        } else if usernameList.count == 0 {
+            usernameString = "(알수없음)"
         } else {
-            for username in usernameList {
-                usernameString += username + ","
+            for (idx,username) in usernameList.enumerated() {
+                usernameString += username
+                if idx != usernameList.count - 1 {
+                    usernameString += ", "
+                }
             }
         }
         return usernameString
@@ -148,7 +153,6 @@ extension ChatRoomListVC{
 extension ChatRoomListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatRoomVC()
-        let result = chatRoomData
         self.selecetedIndex = indexPath
         vc.chatRoomID = chatRoomData[indexPath.row].id
         pushViewContoller(viewController: vc)
@@ -166,7 +170,7 @@ extension ChatRoomListVC : UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
         let cellData = chatRoomData[indexPath.row]
         let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
-        let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름
+        let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
         let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
         let subInfoString = checkOneMatching(userListCount: otherMemberCount, studentID: cellData.chatRoomUsers.first?.studentID, department: cellData.chatRoomUsers.first?.department)// 1대1일 경우 학번 학과
         let title = otherMemberCount == 1 ? "메모팅" : "\(otherMemberCount-1):\(otherMemberCount-1)" // 몇 대 몇인지 메모팅인지 ? // 추후 1대1 인지 메모팅인지 구분필요
