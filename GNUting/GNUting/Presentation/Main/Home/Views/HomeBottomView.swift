@@ -29,15 +29,7 @@ final class HomeBottomView: UIView {
     
     private let eventButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.plain()
-        
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-        configuration.attributedTitle = AttributedString("오감 총학생회 X 지누팅", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.bold(size: 15) ?? .systemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.white]))
-        configuration.titleAlignment = .center
-        button.configuration = configuration
-        button.backgroundColor = UIColor(hexCode: "1D013E")
-        button.layer.cornerRadius = 8
-        button.layer.masksToBounds = true
+        button.setBackgroundImage(UIImage(named: "EventBannerImage"), for: .normal)
         
         return button
     }()
