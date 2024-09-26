@@ -5,25 +5,30 @@
 //  Created by 원동진 on 2/17/24.
 //
 
+// MARK: - 채팅 목록 List
+
 import UIKit
+import SwiftStomp
+import Starscream
 
 class ChatRoomListVC: BaseViewController {
-    var userName : String = ""
+    
+    // MARK: - Properties
+    
     var selecetedIndex: IndexPath?
-    var pushChatRoomID: Int?
+    var accessToken = ""
+    private var swiftStomp : SwiftStomp!
+    
     var chatRoomData: ChatRoomModel? {
         didSet{
-            if chatRoomData?.result.count == 0 {
-                noDataScreenView.isHidden = false
-            } else {
-                noDataScreenView.isHidden = true
-            }
+            noDataScreenView.isHidden = chatRoomData?.result.isEmpty == true ? false : true
             chatTableView.reloadData()
-         
             chatTableView.refreshControl?.endRefreshing()
         }
     }
- 
+    
+    // MARK: - SubViews
+    
     private lazy var noDataScreenView: NoDataScreenView = {
        let view = NoDataScreenView()
         view.isHidden = true
@@ -61,12 +66,15 @@ class ChatRoomListVC: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
+        getAccessToken()
         getChatRoomData()
+        initStomp()
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.swiftStomp.disconnect()
     }
 }
 
@@ -114,7 +122,8 @@ extension ChatRoomListVC : UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
       
         if let result = chatRoomData?.result[indexPath.row] {
-            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
+            print(result)
+//            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         }
         cell.selectionStyle = .none
         return cell
@@ -135,5 +144,70 @@ extension ChatRoomListVC {
     }
     @objc private func reloadBoardListData() {
         getChatRoomData()
+    }
+}
+
+
+// MARK: - Chat
+
+extension ChatRoomListVC {
+    private func initStomp(){
+//        let url = URL(string: "ws://203.255.15.32:14357/chat")!
+        let url = URL(string: "ws://203.255.15.32:1541/chat")!
+        self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
+        self.swiftStomp.enableLogging = true
+        self.swiftStomp.delegate = self
+        self.swiftStomp.connect()
+    }
+    private func getAccessToken(){
+        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        self.accessToken = token
+    }
+}
+
+extension ChatRoomListVC: SwiftStompDelegate {
+    func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
+        if connectType == .toSocketEndpoint{
+            print("Connected to socket")
+        } else if connectType == .toStomp{
+            print("Connected to stomp")
+            swiftStomp.subscribe(to: "/sub/chatRoom/update")
+            
+        }
+    }
+    
+    func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
+        if disconnectType == .fromSocket{
+            print("Socket disconnected. Disconnect completed")
+        } else if disconnectType == .fromStomp{
+            print("Client disconnected from stomp but socket is still connected!")
+        }
+    }
+    
+    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
+        print("Received")
+        if let message = message {
+            let messageStirng = message as! String
+            print("messageStirng: \(messageStirng)")
+        }
+    }
+    
+    func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
+        print("Receipt with id `\(receiptId)` received")
+    }
+    
+    func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
+        if type == .fromSocket{
+            print("Socket error occurred! [\(briefDescription)]")
+        } else if type == .fromStomp{
+            print("Stomp error occurred! [\(briefDescription)] : \(String(describing: fullDescription))")
+        } else {
+            print("Unknown error occured!")
+        }
+    }
+    
+    func onSocketEvent(eventName: String, description: String) {
+        print("Socket event occured: \(eventName) => \(description)")
     }
 }
