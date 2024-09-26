@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - 채팅목록 리스트
+
 class ChatTableViewCell: UITableViewCell {
     
     // MARK: - Properties
