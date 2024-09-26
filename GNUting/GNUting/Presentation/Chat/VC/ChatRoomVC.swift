@@ -476,7 +476,6 @@ extension ChatRoomVC: SwiftStompDelegate{
         
         if let message = message{
             let messageString = message as! String
-            
             let messageData = Data(messageString.utf8)
             if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
                 do {

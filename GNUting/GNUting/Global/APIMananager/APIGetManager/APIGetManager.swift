@@ -250,7 +250,6 @@ class APIGetManager: RequestInterceptor {
                         completion(response.value,json)
                     case .failure:
                         print("🔴 getChatRoomData statusCode: \(statusCode)")
-                        print(json)
                         completion(response.value,json)
                         break
                     }

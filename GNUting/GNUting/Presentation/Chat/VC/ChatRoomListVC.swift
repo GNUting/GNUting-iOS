@@ -19,9 +19,9 @@ class ChatRoomListVC: BaseViewController {
     var accessToken = ""
     private var swiftStomp : SwiftStomp!
     
-    var chatRoomData: ChatRoomModel? {
+    var chatRoomData: [ChatRoomModelResult] = [] {
         didSet{
-            noDataScreenView.isHidden = chatRoomData?.result.isEmpty == true ? false : true
+            noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
             chatTableView.reloadData()
             chatTableView.refreshControl?.endRefreshing()
         }
@@ -30,7 +30,7 @@ class ChatRoomListVC: BaseViewController {
     // MARK: - SubViews
     
     private lazy var noDataScreenView: NoDataScreenView = {
-       let view = NoDataScreenView()
+        let view = NoDataScreenView()
         view.isHidden = true
         view.setLabel(text: "현재 참여 중인 채팅방이 없습니다. ", range: "")
         return view
@@ -45,7 +45,7 @@ class ChatRoomListVC: BaseViewController {
     }()
     
     private lazy var chatTableView : UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identi)
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -59,7 +59,7 @@ class ChatRoomListVC: BaseViewController {
         super.viewDidLoad()
         addSubViews()
         setAutoLayout()
-     
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +79,8 @@ class ChatRoomListVC: BaseViewController {
 }
 
 extension ChatRoomListVC{
+    
+    // MARK: - Layout Helpers
     private func addSubViews() {
         view.addSubViews([titleLabel, chatTableView, noDataScreenView])
     }
@@ -96,17 +98,59 @@ extension ChatRoomListVC{
         noDataScreenView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
-     
+        
+    }
+    // MARK: - Private Logic
+    
+    private func checkImageString(imageArray: [String?])-> String? {
+        var chatRoomTitleImageStirng: String? // 채팅리스트 대표사진, 모두 nil일경우 nil || 한명이라도 있을 경우 해당 부분
+        
+        for image in imageArray {
+            if image != nil {
+                chatRoomTitleImageStirng = image ?? ""
+                return chatRoomTitleImageStirng
+            }
+        }
+        return nil
     }
     
+    private func makeUsrnameString(by usernameList: [String]) -> String{
+        var usernameString = ""
+        
+        if usernameList.count == 1 {
+            usernameString = usernameList.first ?? "닉네임"
+        } else {
+            for username in usernameList {
+                usernameString += username + ","
+            }
+        }
+        return usernameString
+    }
+    
+    private func checkOneMatching(userListCount: Int, studentID: String?, department: String?) -> String? {
+        if userListCount == 1 {
+            return "\(studentID ?? "학번")학번|\(department ?? "학과")"
+        } else {
+            return nil
+        }
+    }
+    
+    private func changeTime(to date: String) -> String {
+        let dateFormatter = DateFormatter()
+        let date = dateFormatter.date(from: date) ?? Date()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        
+        return dateFormatter.string(from: date)
+    }
 }
 
 extension ChatRoomListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatRoomVC()
-        let result = chatRoomData?.result[indexPath.row]
+        let result = chatRoomData
         self.selecetedIndex = indexPath
-        vc.chatRoomID = result?.id ?? 0
+        vc.chatRoomID = chatRoomData[indexPath.row].id
         pushViewContoller(viewController: vc)
     }
 }
@@ -114,17 +158,26 @@ extension ChatRoomListVC: UITableViewDelegate {
 extension ChatRoomListVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = chatRoomData?.result.count else { return 0}
-        return count
+
+        return chatRoomData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
-      
-        if let result = chatRoomData?.result[indexPath.row] {
-            print(result)
-//            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
-        }
+        let cellData = chatRoomData[indexPath.row]
+        let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
+        let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름
+        let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
+        let subInfoString = checkOneMatching(userListCount: otherMemberCount, studentID: cellData.chatRoomUsers.first?.studentID, department: cellData.chatRoomUsers.first?.department)// 1대1일 경우 학번 학과
+        let title = otherMemberCount == 1 ? "메모팅" : "\(otherMemberCount-1):\(otherMemberCount-1)" // 몇 대 몇인지 메모팅인지 ? // 추후 1대1 인지 메모팅인지 구분필요
+        let lastMessage = cellData.lastMessage // 제일 최근 메세지
+        let lastMessageTime = changeTime(to: cellData.lastMessageTime) // 제일 최근 메세지 시간
+        
+        
+        cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: title, lastMessage: lastMessage, lastMessageTime: lastMessageTime)
+        
+        //            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -134,9 +187,10 @@ extension ChatRoomListVC : UITableViewDataSource {
 
 extension ChatRoomListVC {
     private func getChatRoomData() {
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            APIGetManager.shared.getChatRoomData { getChatRoomData, response in
+            APIGetManager.shared.getChatRoomData { getData, response in
+                guard let getChatRoomData = getData?.result else { return }
                 self.chatRoomData = getChatRoomData
                 
             }
@@ -152,7 +206,7 @@ extension ChatRoomListVC {
 
 extension ChatRoomListVC {
     private func initStomp(){
-//        let url = URL(string: "ws://203.255.15.32:14357/chat")!
+        //        let url = URL(string: "ws://203.255.15.32:14357/chat")!
         let url = URL(string: "ws://203.255.15.32:1541/chat")!
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
         self.swiftStomp.enableLogging = true
@@ -185,11 +239,23 @@ extension ChatRoomListVC: SwiftStompDelegate {
         }
     }
     
-    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
-        print("Received")
+    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) { 
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0, execute: {
+//            self.getChatRoomData()
+//        })
+        print("Recevied")
         if let message = message {
             let messageStirng = message as! String
-            print("messageStirng: \(messageStirng)")
+            let messageData = Data(messageStirng.utf8)
+            
+            do {
+                let jsonData = try JSONDecoder().decode([ChatRoomModelResult].self, from: messageData)
+                print(jsonData)
+                self.chatRoomData = jsonData
+            } catch {
+                print(error)
+            }
+            
         }
     }
     
