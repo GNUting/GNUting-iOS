@@ -17,6 +17,7 @@ class ChatRoomListVC: BaseViewController {
     
     var selecetedIndex: IndexPath?
     var accessToken = ""
+    var userEmail = ""
     private var swiftStomp : SwiftStomp!
     
     var chatRoomData: [ChatRoomModelResult] = [] {
@@ -173,12 +174,12 @@ extension ChatRoomListVC : UITableViewDataSource {
         let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
         let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
         let subInfoString = checkOneMatching(userListCount: otherMemberCount, studentID: cellData.chatRoomUsers.first?.studentID, department: cellData.chatRoomUsers.first?.department)// 1대1일 경우 학번 학과
-        let title = otherMemberCount == 1 ? "메모팅" : "\(otherMemberCount-1):\(otherMemberCount-1)" // 몇 대 몇인지 메모팅인지 ? // 추후 1대1 인지 메모팅인지 구분필요
+//        let title = otherMemberCount == 1 ? "메모팅" : "\(otherMemberCount-1):\(otherMemberCount-1)" // 몇 대 몇인지 메모팅인지 ? // 추후 1대1 인지 메모팅인지 구분필요
         let lastMessage = cellData.lastMessage // 제일 최근 메세지
         let lastMessageTime = changeTime(to: cellData.lastMessageTime) // 제일 최근 메세지 시간
+
         
-        
-        cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: title, lastMessage: lastMessage, lastMessageTime: lastMessageTime)
+        cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: cellData.title , lastMessage: lastMessage, lastMessageTime: lastMessageTime)
         
         //            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
         
@@ -219,6 +220,7 @@ extension ChatRoomListVC {
     }
     private func getAccessToken(){
         guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
+        userEmail = email
         guard let token = KeyChainManager.shared.read(key: email) else { return }
         self.accessToken = token
     }
@@ -230,7 +232,9 @@ extension ChatRoomListVC: SwiftStompDelegate {
             print("Connected to socket")
         } else if connectType == .toStomp{
             print("Connected to stomp")
-            swiftStomp.subscribe(to: "/sub/chatRoom/update")
+            print(userEmail)
+            swiftStomp.subscribe(to: "/user/\(userEmail)/sub/chatRoom/update")
+//            swiftStomp.subscribe(to: "/sub/chatRoom/update")
             
         }
     }
@@ -250,6 +254,7 @@ extension ChatRoomListVC: SwiftStompDelegate {
         print("Recevied")
         if let message = message {
             let messageStirng = message as! String
+            print(messageStirng)
             let messageData = Data(messageStirng.utf8)
             
             do {
