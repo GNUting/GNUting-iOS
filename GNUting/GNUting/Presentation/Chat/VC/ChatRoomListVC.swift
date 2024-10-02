@@ -123,7 +123,7 @@ extension ChatRoomListVC{
     
     private func checkOneMatching(userListCount: Int, studentID: String?, department: String?) -> String? {
         if userListCount == 1 {
-            return "\(studentID ?? "학번")학번|\(department ?? "학과")"
+            return "\(studentID ?? "")|\(department ?? "학과")"
         } else {
             return nil
         }
