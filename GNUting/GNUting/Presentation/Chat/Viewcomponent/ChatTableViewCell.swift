@@ -146,9 +146,11 @@ extension ChatTableViewCell{
             make.right.equalToSuperview()
 
         }
-        
+        chatRoomNameListLabel.setContentCompressionResistancePriority(.init(rawValue: 751), for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         middleStackView.setContentHuggingPriority(.init(250), for: .horizontal)
-        middleStackView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        messageTimeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         messageTimeLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         
     }

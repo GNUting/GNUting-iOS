@@ -8,17 +8,12 @@
 // MARK: - 채팅 목록 List
 
 import UIKit
-import SwiftStomp
-import Starscream
 
 class ChatRoomListVC: BaseViewController {
     
     // MARK: - Properties
     
     var selecetedIndex: IndexPath?
-    var accessToken = ""
-    var userEmail = ""
-    private var swiftStomp : SwiftStomp!
     
     var chatRoomData: [ChatRoomModelResult] = [] {
         didSet{
@@ -67,15 +62,8 @@ class ChatRoomListVC: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
-        getAccessToken()
         getChatRoomData()
-        initStomp()
         
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.swiftStomp.disconnect()
     }
 }
 
@@ -203,86 +191,5 @@ extension ChatRoomListVC {
     }
     @objc private func reloadBoardListData() {
         getChatRoomData()
-    }
-}
-
-
-// MARK: - Chat
-
-extension ChatRoomListVC {
-    private func initStomp(){
-        //        let url = URL(string: "ws://203.255.15.32:14357/chat")!
-        let url = URL(string: "ws://203.255.15.32:1541/chat")!
-        self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
-        self.swiftStomp.enableLogging = true
-        self.swiftStomp.delegate = self
-        self.swiftStomp.connect()
-    }
-    private func getAccessToken(){
-        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
-        userEmail = email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
-        self.accessToken = token
-    }
-}
-
-extension ChatRoomListVC: SwiftStompDelegate {
-    func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
-        if connectType == .toSocketEndpoint{
-            print("Connected to socket")
-        } else if connectType == .toStomp{
-            print("Connected to stomp")
-            print(userEmail)
-            swiftStomp.subscribe(to: "/user/\(userEmail)/sub/chatRoom/update")
-//            swiftStomp.subscribe(to: "/sub/chatRoom/update")
-            
-        }
-    }
-    
-    func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
-        if disconnectType == .fromSocket{
-            print("Socket disconnected. Disconnect completed")
-        } else if disconnectType == .fromStomp{
-            print("Client disconnected from stomp but socket is still connected!")
-        }
-    }
-    
-    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) { 
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0, execute: {
-//            self.getChatRoomData()
-//        })
-        print("Recevied")
-        if let message = message {
-            let messageStirng = message as! String
-            print(messageStirng)
-            let messageData = Data(messageStirng.utf8)
-            
-            do {
-                let jsonData = try JSONDecoder().decode([ChatRoomModelResult].self, from: messageData)
-                print(jsonData)
-                self.chatRoomData = jsonData
-            } catch {
-                print(error)
-            }
-            
-        }
-    }
-    
-    func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
-        print("Receipt with id `\(receiptId)` received")
-    }
-    
-    func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
-        if type == .fromSocket{
-            print("Socket error occurred! [\(briefDescription)]")
-        } else if type == .fromStomp{
-            print("Stomp error occurred! [\(briefDescription)] : \(String(describing: fullDescription))")
-        } else {
-            print("Unknown error occured!")
-        }
-    }
-    
-    func onSocketEvent(eventName: String, description: String) {
-        print("Socket event occured: \(eventName) => \(description)")
     }
 }
