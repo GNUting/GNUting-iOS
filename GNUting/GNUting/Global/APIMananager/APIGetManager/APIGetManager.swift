@@ -13,7 +13,7 @@ class APIGetManager: RequestInterceptor {
     static let shared = APIGetManager()
     
     // MARK: - 회원 가입 : 닉네임 중복확인 ✅
-    func checkNickname(nickname: String, completion: @escaping(NicknameCheckModel?,Int) -> Void) {
+    func checkNickname(nickname: String, completion: @escaping(NicknameCheckModel?) -> Void) {
         let url = EndPoint.checkNickname.url
         let parameters : [String : String] = ["nickname": nickname]
         AF.request(url,method: .get,parameters: parameters,encoding: URLEncoding.default)
@@ -22,12 +22,11 @@ class APIGetManager: RequestInterceptor {
                 
                 switch statusCode {
                 case 200..<300:
-                    print("🟢 checkNickname Success:\(statusCode)")
-                    completion(response.value,statusCode)
+                    print("🟢 checkNickname StatusCode :\(statusCode)")
+                    completion(response.value)
                 default:
-                    guard let data = response.value else { return }
-                    print("🔴 checkNickname Data: \(data)")
-                    completion(data,statusCode)
+                    print("🔴 checkNickname StatusCode : \(statusCode)")
+                    completion(response.value)
                 }
             }
     }

@@ -193,13 +193,7 @@ extension NicknameTypeInputView: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         borderView.disableColor()
         
-        if isOnlyWhitespace(text: textField.text ?? "") {
-            setCheckLabel(isHidden: false, text: "공백만 입력 되었습니다.", success: false)
-            nicknameCheckButton.isEnabled = false
-        } else {
-            nicknameCheckButton.isEnabled = true
-            nicknameTextfiledDelegate?.endEdit()
-        }
+        nicknameTextfiledDelegate?.endEdit()
         
         return true
     }

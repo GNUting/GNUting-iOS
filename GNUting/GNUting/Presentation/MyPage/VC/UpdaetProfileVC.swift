@@ -230,14 +230,10 @@ extension UpdateProfileVC: PHPickerViewControllerDelegate {
 }
 extension UpdateProfileVC :NicknameCheckButtonDelegate {
     func action(textFieldText: String) {
-        APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
-            guard let message = response?.message else { return }
-            if statuscode == 200 {
-                self.updateProfileButton.isEnabled = true
-            }else {
-                self.updateProfileButton.isEnabled = false
-            }
-            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)", success: false)
+        APIGetManager.shared.checkNickname(nickname: textFieldText) { response  in
+            guard let success = response?.isSuccess else { return }
+            self.updateProfileButton.isEnabled = success ? true : false
+            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(response?.message ?? "재시도 해주세요.")", success: false)
         }
     }
 }
