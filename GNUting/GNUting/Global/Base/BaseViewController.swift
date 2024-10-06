@@ -20,6 +20,7 @@ class BaseViewController: UIViewController{
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        removeKeyboardObserver()
     }
     func addExpirationRefreshToken(){
         NotificationCenter.default.addObserver(self, selector: #selector(expirationRefreshToken), name: .expirationRefreshToken, object: nil)
