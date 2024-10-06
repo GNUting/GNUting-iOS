@@ -31,4 +31,5 @@
  - Singleton
  - Delegate
 
-
+## 시연 영상
+https://drive.google.com/file/d/17bT4aljaAFVUXrHe9WqGl24M1KfozqvI/view?usp=sharing
