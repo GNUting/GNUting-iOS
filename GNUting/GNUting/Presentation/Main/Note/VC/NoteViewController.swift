@@ -168,16 +168,16 @@ extension NoteViewController {
     }
     
     private func postApplyNote(noteID: Int) {
-        APIPostManager.shared.postApplyNote(noteID: noteID) { response in
-            guard let response = response else { return print(#function,"Rsponse nil")}
-            if response.isSuccess {
+        APIPostManager.shared.postApplyNote(noteID: noteID) { successResponse,failureResponse  in
+            if ((successResponse?.isSuccess) != nil) {
                 let chatRoomVC = ChatRoomVC()
                 chatRoomVC.isPushNotification = true
-                chatRoomVC.chatRoomID = response.result.chatId
+                chatRoomVC.chatRoomID = successResponse?.result.chatId ?? 0
                 self.pushViewContoller(viewController: chatRoomVC)
             } else {
-                self.showMessage(message: response.message)
+                self.showMessage(message: failureResponse?.message ?? "재시도해주세요.")
             }
+         
         }
     }
 }
@@ -225,6 +225,7 @@ extension NoteViewController: UICollectionViewDelegate {
 
 extension NoteViewController: WriteNoteViewDelegate {
     func tapRegisterButton(contentTextViewText: String) {
+        
         postNoteRegisterAPI(content: contentTextViewText)
     }
     
@@ -235,6 +236,7 @@ extension NoteViewController: WriteNoteViewDelegate {
 
 extension NoteViewController: NoteDateProgressViewDelegate {
     func tapProgressButton() {
+        print("tap")
         noteDateProgressView.isHidden = true
         
         postApplyNote(noteID: self.selectedNoteID ?? 0)

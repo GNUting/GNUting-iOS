@@ -132,7 +132,7 @@ extension NicknameTypeInputView {
     }
 }
 
-// MARK: - internal Method
+// MARK: - Method
 
 extension NicknameTypeInputView {
     
@@ -159,6 +159,10 @@ extension NicknameTypeInputView {
     func getTextFieldText() -> String { // 텍스트 필드 받아오기
         inputTextField.text ?? ""
     }
+    private func isOnlyWhitespace(text: String) -> Bool {
+        return text.range(of: "^[\\s]*$", options: .regularExpression) != nil
+    }
+    
 }
 
 // MARK: - Button Action
@@ -183,11 +187,14 @@ extension NicknameTypeInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         borderView.enableColor()
         nicknameTextfiledDelegate?.didBegin()
+        
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         borderView.disableColor()
+        
         nicknameTextfiledDelegate?.endEdit()
+        
         return true
     }
     
@@ -196,6 +203,9 @@ extension NicknameTypeInputView: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+       
+        
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
             if isBackSpace == -92 {

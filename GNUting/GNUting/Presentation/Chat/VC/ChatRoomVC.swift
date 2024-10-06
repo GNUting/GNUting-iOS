@@ -233,7 +233,7 @@ extension ChatRoomVC: UITableViewDataSource{
         if cellData.messageType == "CHAT" {
             if cellData.email == userEmail{
                 guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
-                sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                sendCell.setCell(nickName: cellData.nickname ?? "(알 수 없음)", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
                 sendCell.setSizeToFitMessageLabel()
                 sendCell.selectionStyle = .none
                 return sendCell
@@ -331,8 +331,8 @@ extension ChatRoomVC {
         self.accessToken = token
     }
     private func initStomp(){
-//        let url = URL(string: "ws://203.255.15.32:14357/chat")!
-        let url = URL(string: "ws://203.255.15.32:1541/chat")!
+        let url = URL(string: "ws://203.255.15.32:14357/chat")!
+//        let url = URL(string: "ws://203.255.15.32:1541/chat")!
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
         self.swiftStomp.enableLogging = true
         self.swiftStomp.delegate = self
@@ -371,7 +371,7 @@ extension ChatRoomVC {
     func getUserData(){
         APIGetManager.shared.getUserData { userData,response  in
             self.errorHandling(response: response)
-            self.sideView.userNickname = userData?.result?.nickname ?? "유저 닉네임"
+            self.sideView.userNickname = userData?.result?.nickname ?? "(알 수 없음)"
         }
     }
     
@@ -476,7 +476,6 @@ extension ChatRoomVC: SwiftStompDelegate{
         
         if let message = message{
             let messageString = message as! String
-            
             let messageData = Data(messageString.utf8)
             if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
                 do {

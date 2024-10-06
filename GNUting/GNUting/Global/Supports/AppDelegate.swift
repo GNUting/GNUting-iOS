@@ -62,6 +62,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         guard let locationID = userInfo[AnyHashable("locationId")] as? String else { return }
         
         let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
+        
         switch location {
         case "apply":
             rootVC?.selectedIndex = 1
@@ -82,10 +83,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         case "chat":
             rootVC?.selectedIndex = 2
             let chatRoomVC = ChatRoomVC()
-            
+            let vc = currentTopViewController() as? ChatRoomListVC
             chatRoomVC.isPushNotification = true
             chatRoomVC.chatRoomID = Int(locationID) ?? 0
-            rootVC?.pushViewContoller(viewController: chatRoomVC)
+            vc?.pushViewContoller(viewController: chatRoomVC)
         case .none:
             break
         case .some(_):

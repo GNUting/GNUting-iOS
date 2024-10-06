@@ -456,21 +456,26 @@ class APIPostManager {
     
     // MARK: - 메모팅 신청
     
-    func postApplyNote(noteID: Int, completion: @escaping(NoteApplyModel?) -> Void) {
+    func postApplyNote(noteID: Int, completion: @escaping(NoteApplyModel?,DefaultResponse?) -> Void) {
         let uslString = BaseURL.shared.urlString + "memo/\(noteID)"
         guard let url = URL(string: uslString) else { return }
         AF.request(url,method: .post,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response { response in
+                
                 guard let statusCode = response.response?.statusCode, let data = response.data else { return }
-                guard let json = try? JSONDecoder().decode(NoteApplyModel.self, from: data) else { return }
+                
                 switch response.result {
                 case .success:
+                    guard let json = try? JSONDecoder().decode(NoteApplyModel.self, from: data) else { return }
+                    
                     print("🟢 postApplyNote statusCode: \(statusCode)")
-                    completion(json)
+                    completion(json,nil)
+                    
                 case .failure:
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else {return }
                     print("🔴 postApplyNote statusCode: \(statusCode)")
-                    completion(json)
+                    completion(nil,json)
                     break
                 }
             }

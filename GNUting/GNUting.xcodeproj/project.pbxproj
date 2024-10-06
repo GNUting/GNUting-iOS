@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A4860BEE577AFE9533473F /* Pods_GNUting.framework */; };
+		F80287562CA5477200089E8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F80287552CA5477200089E8A /* GoogleService-Info.plist */; };
 		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
 		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
@@ -157,7 +158,6 @@
 		F8BE8A172B820BBA008E6767 /* DateBoardListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */; };
 		F8BE8A1B2B82127A008E6767 /* BoardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */; };
 		F8BE8A212B821ADB008E6767 /* BoardTextSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */; };
-		F8C132852CA2A733007A587D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C132842CA2A733007A587D /* GoogleService-Info.plist */; };
 		F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */; };
 		F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */; };
 		F8C7DE512BC40A3100923EF5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */; };
@@ -192,6 +192,7 @@
 		03A4860BEE577AFE9533473F /* Pods_GNUting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GNUting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E8E0639216DE4D6A431C6A /* Pods-GNUting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.release.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.release.xcconfig"; sourceTree = "<group>"; };
 		F272B29E19B4176D6274BFBD /* Pods-GNUting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.debug.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.debug.xcconfig"; sourceTree = "<group>"; };
+		F80287552CA5477200089E8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDateBoardVC.swift; sourceTree = "<group>"; };
 		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
@@ -340,7 +341,6 @@
 		F8BE8A162B820BBA008E6767 /* DateBoardListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBoardListVC.swift; sourceTree = "<group>"; };
 		F8BE8A1A2B82127A008E6767 /* BoardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListTableViewCell.swift; sourceTree = "<group>"; };
 		F8BE8A202B821ADB008E6767 /* BoardTextSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTextSearchVC.swift; sourceTree = "<group>"; };
-		F8C132842CA2A733007A587D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8C7DE4C2BC406B400923EF5 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		F8C7DE4E2BC4099D00923EF5 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		F8C7DE502BC40A3100923EF5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -620,7 +620,7 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F8C132842CA2A733007A587D /* GoogleService-Info.plist */,
+				F80287552CA5477200089E8A /* GoogleService-Info.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -1415,7 +1415,7 @@
 				F853452B2B5F7A49001EADE6 /* Pretendard-SemiBold.otf in Resources */,
 				F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */,
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
-				F8C132852CA2A733007A587D /* GoogleService-Info.plist in Resources */,
+				F80287562CA5477200089E8A /* GoogleService-Info.plist in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
@@ -1799,7 +1799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1841,7 +1841,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

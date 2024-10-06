@@ -105,7 +105,7 @@ extension UserDetailVC {
     
     private func setUserDetailViewLabel() {
         userNickameLabel.text = userDetailData?.nickname
-        subInfoLabel.text = "\(userDetailData?.userStudentID ?? "학번")학번 | \(userDetailData?.userDepartment ?? "학과")"
+        subInfoLabel.text = "\(userDetailData?.userStudentID ?? "학번") | \(userDetailData?.userDepartment ?? "학과")"
     }
     
     private func setUserDetailViewImageView() {

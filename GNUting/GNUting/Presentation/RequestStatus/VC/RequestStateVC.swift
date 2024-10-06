@@ -178,6 +178,7 @@ extension RequestStateVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RequestStatusDetailVC()
         vc.dedatilData = dateStatusAllInfos[indexPath.row]
+        print(dateStatusAllInfos[indexPath.row])
         if selectedSegmentIndex == 0{
             vc.requestStatus = true
         }else {

@@ -199,15 +199,15 @@ extension SignUPSecondProcessVC {
 
 extension SignUPSecondProcessVC {
     private func checkNicknameAPI(nickname: String) {
-        APIGetManager.shared.checkNickname(nickname: nickname) { response,statuscode  in
-//            guard let message = response?.message else { return }
-            if statuscode == 200 {
+        APIGetManager.shared.checkNickname(nickname: nickname) { response  in
+            guard let success = response?.isSuccess else { return }
+            if success {
                 self.nickNameCheck = true
                 self.nickNameInputView.setCheckLabel(isHidden: false, text: "사용할 수 있는 닉네임 입니다.", success: true)
                 self.checkEnableNextButton()
-            }else {
+            } else {
                 self.nickNameCheck = false
-                self.nickNameInputView.setCheckLabel(isHidden: false, text: "중복된 닉네임입니다.", success: false)
+                self.nickNameInputView.setCheckLabel(isHidden: false, text: response?.message, success: false)
             }
         }
     }
