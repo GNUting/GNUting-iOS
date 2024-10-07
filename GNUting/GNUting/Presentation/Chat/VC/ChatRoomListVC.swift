@@ -14,7 +14,8 @@ class ChatRoomListVC: BaseViewController {
     // MARK: - Properties
     
     var selecetedIndex: IndexPath?
-    
+    var timeTrigger = true
+    var realTime = Timer()
     var chatRoomData: [ChatRoomModelResult] = [] {
         didSet{
             noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
@@ -53,9 +54,9 @@ class ChatRoomListVC: BaseViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addSubViews()
         setAutoLayout()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +65,14 @@ class ChatRoomListVC: BaseViewController {
         tabBarController?.tabBar.isHidden = false
         getChatRoomData()
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startRepeatFunction()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopRepeatFunction()
     }
 }
 
@@ -135,6 +144,24 @@ extension ChatRoomListVC{
         
         return String(secondString.prefix(5))
     }
+    
+    private func startRepeatFunction() {
+        print(#function,"Start repeat ChatRoomList API")
+        if (timeTrigger) {
+            realTime = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateChatRoomAPI), userInfo: nil, repeats: true)
+            timeTrigger = false
+        }
+    }
+    
+    private func stopRepeatFunction() {
+        realTime.invalidate()
+        timeTrigger = true
+        print(#function,"Stop refresh ChatRoomList API")
+    }
+    
+    @objc private func updateChatRoomAPI() {
+        getChatRoomData()
+    }
 }
 
 extension ChatRoomListVC: UITableViewDelegate {
@@ -146,10 +173,8 @@ extension ChatRoomListVC: UITableViewDelegate {
     }
 }
 
-extension ChatRoomListVC : UITableViewDataSource {
-    
+extension ChatRoomListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return chatRoomData.count
     }
     
@@ -168,13 +193,10 @@ extension ChatRoomListVC : UITableViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 extension ChatRoomListVC {
     private func getChatRoomData() {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getData, response in
                 guard let getChatRoomData = getData?.result else { return }
@@ -182,6 +204,7 @@ extension ChatRoomListVC {
             }
         }
     }
+    
     @objc private func reloadBoardListData() {
         getChatRoomData()
     }

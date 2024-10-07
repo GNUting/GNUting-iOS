@@ -198,18 +198,15 @@ extension SignUpFirstProcessVC {
     
     private func postEmailCheckAPI(textFieldText: String) {
         APIPostManager.shared.postEmailCheck(email: textFieldText + "@gnu.ac.kr") { response, failureResponse  in
-            guard let success = response?.isSuccess else { return }
-            
             if !(failureResponse?.isSuccess ?? true) {
                 self.activityIndicatorView.stopAnimating()
                 self.timer.invalidate()
                 self.certifiedInputView.setRemainLabel(text: "")
-                
                 let USER4004CODE = failureResponse?.code == "USER4000-4"
                 self.showMessage(message: USER4004CODE ? failureResponse?.message ?? "이미 존재하는 사용자입니다." : failureResponse?.message ?? "네트워크 에러 다시 시도하세요")
             }
             
-            if success {
+            if ((response?.isSuccess) != nil) {
                 self.showMessage(message: "인증번호가 전송되었습니다.")
                 self.certifiedInputView.setFoucInputTextFiled()
                 self.activityIndicatorView.stopAnimating()

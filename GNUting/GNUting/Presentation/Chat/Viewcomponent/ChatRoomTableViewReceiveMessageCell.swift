@@ -78,9 +78,7 @@ class ChatRoomTableViewReceiveMessageCell: UITableViewCell {
 }
 extension ChatRoomTableViewReceiveMessageCell{
     private func setAddSubViews() {
-        contentView.addSubViews([userImageButton, upperView])
-        
-        upperView.addSubViews([middleStackView])
+        contentView.addSubViews([userImageButton, middleStackView])
         middleStackView.addStackSubViews([nickNameLabel, messageUpperView])
         messageUpperView.addSubViews([messageView, sendDateLabel])
         messageView.addSubview(messageLabel)
@@ -91,14 +89,11 @@ extension ChatRoomTableViewReceiveMessageCell{
             make.left.equalToSuperview()
             make.height.width.equalTo(45)
         }
-        upperView.snp.makeConstraints { make in
+        middleStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.left.equalTo(userImageButton.snp.right).offset(5)
             make.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-10)
-        }
-        middleStackView.snp.makeConstraints { make in
-            make.top.left.right.bottom.equalToSuperview()
         }
         messageView.snp.makeConstraints { make in
             make.top.left.bottom.equalToSuperview()

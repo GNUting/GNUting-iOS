@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A4860BEE577AFE9533473F /* Pods_GNUting.framework */; };
 		F80287562CA5477200089E8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F80287552CA5477200089E8A /* GoogleService-Info.plist */; };
+		F80498A22CB3038C0059DA6A /* SwiftStompDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */; };
 		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
 		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
@@ -193,6 +194,7 @@
 		B0E8E0639216DE4D6A431C6A /* Pods-GNUting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.release.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.release.xcconfig"; sourceTree = "<group>"; };
 		F272B29E19B4176D6274BFBD /* Pods-GNUting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.debug.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.debug.xcconfig"; sourceTree = "<group>"; };
 		F80287552CA5477200089E8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftStompDelegate.swift; sourceTree = "<group>"; };
 		F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDateBoardVC.swift; sourceTree = "<group>"; };
 		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
@@ -414,6 +416,14 @@
 				F8E944562C2BE6870085D762 /* GenderButton.swift */,
 			);
 			path = SignUPSecondProcessVC_Views;
+			sourceTree = "<group>";
+		};
+		F80498A02CB303480059DA6A /* Extension+ChatRoomVC */ = {
+			isa = PBXGroup;
+			children = (
+				F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */,
+			);
+			path = "Extension+ChatRoomVC";
 			sourceTree = "<group>";
 		};
 		F80C4DE02B838BCB00BA6FFB /* DateBoard */ = {
@@ -1283,6 +1293,7 @@
 		F8E993E92BB5A4B6002A8A5F /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				F80498A02CB303480059DA6A /* Extension+ChatRoomVC */,
 				F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */,
 				F8BE89E22B8077A9008E6767 /* ChatRoomListVC.swift */,
 			);
@@ -1495,6 +1506,7 @@
 				F8AC69E22C9199FD00873455 /* NoteViewController.swift in Sources */,
 				F8A179DC2BAC6F42005AAC18 /* APIInterceptorManager.swift in Sources */,
 				F8E3CD492B8CE6DE00712CBF /* UserInfoDetailView.swift in Sources */,
+				F80498A22CB3038C0059DA6A /* SwiftStompDelegate.swift in Sources */,
 				F8752F702CA4059A00F2E6EE /* EventModel.swift in Sources */,
 				F8A15E9C2B60F427001DE5E4 /* UIViewController+Extension.swift in Sources */,
 				F8AC69E92C91ACF000873455 /* NoteCollectionViewCell.swift in Sources */,
