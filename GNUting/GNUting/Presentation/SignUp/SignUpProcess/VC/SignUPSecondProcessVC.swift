@@ -157,30 +157,11 @@ extension SignUPSecondProcessVC {
             
         }
     }
-    
-    // MARK: - SetSubView
-    
-    private func setDelegateSubViews() {
-        nameInputView.inputViewTextFiledDelegate = self
-        phoneNumberInputView.inputViewTextFiledDelegate = self
-        phoneNumberInputView.phoneNumberDelegate = self
-        nickNameInputView.nicknameCheckButtonDelegate = self
-        nickNameInputView.nicknameTextfiledDelegate = self
-        majorInputView.majorInputViewDelegate = self
-        studentIDInputView.inputViewTextFiledDelegate = self
-        introduceOneLine.inputViewTextFiledDelegate = self
-    }
-    
-    private func setPhoneNumberInputView() {
-        phoneNumberInputView.setKeyboardTypeNumberPad()
-    }
-    
-    // MARK: - Privatge
-    
-    private func checkEnableNextButton() { // 다음 버튼 활성화 Check
-        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !selectedDate.isEmpty {
+    private func checkEnableNextButton(){
+        if nickNameCheck == true && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && phoneNumberInputView.getTextFieldText().count == 13{
             nextButton.isEnabled = true
-        } else {
+        } 
+        else {
             nextButton.isEnabled = false
         }
     }
@@ -332,5 +313,57 @@ extension SignUPSecondProcessVC {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "userSelfIntroduction", setData: introduceOneLine.getTextFieldText())
         
         pushViewContoller(viewController: SignUpThirdProcessVC())
+    }
+}
+extension SignUPSecondProcessVC :NicknameCheckButtonDelegate {
+    func action(textFieldText: String) {
+        if textFieldText.isEmpty {
+            nickNameInputView.setCheckLabel(isHidden: false, text: "닉네임을 입력해주세요.", success: false)
+        } else {
+            APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
+    //            guard let message = response?.message else { return }
+                if statuscode == 200 {
+                    self.nickNameCheck = true
+                    self.nickNameInputView.setCheckLabel(isHidden: false, text: "사용할 수 있는 닉네임 입니다.", success: true)
+                    self.checkEnableNextButton()
+                }else {
+                    self.nickNameCheck = false
+                    self.nickNameInputView.setCheckLabel(isHidden: false, text: "중복된 닉네임입니다.", success: false)
+                }
+            }
+        }
+    }
+}
+extension SignUPSecondProcessVC: SearchMajorSelectCellDelegate{
+    func sendSeleceted(major: String) {
+        majorInputView.setContentLabelText(text: major)
+        checkEnableNextButton()
+    }
+}
+extension SignUPSecondProcessVC: NicknameTextfiledDelegate {
+    func endEdit(textFieldText: String) {
+        checkEnableNextButton()
+        if textFieldText.isEmpty {
+            nickNameCheck = false
+            self.nickNameInputView.setCheckLabel(isHidden: false, text: "닉네임을 입력해주세요.", success: false)
+        }
+        
+    }
+    
+    func didBegin() {
+        nickNameCheck = false
+    }
+
+}
+extension SignUPSecondProcessVC: InputViewTextFiledDelegate{
+    func ShouldEndEdting(textFieldCount: Int?) {
+        if phoneNumberInputView.getTextFieldText().count != 13 {
+            self.phoneNumberInputView.setCheckLabel(isHidden: false, text: "올바른 전화번호를 입력해 주세요.", success: false)
+            nextButton.isEnabled = false
+        } else {
+            self.phoneNumberInputView.setCheckLabel(isHidden: true, text: "", success: true)
+        }
+        checkEnableNextButton()
+        
     }
 }
