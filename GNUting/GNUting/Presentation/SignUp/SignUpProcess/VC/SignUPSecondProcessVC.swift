@@ -178,7 +178,7 @@ extension SignUPSecondProcessVC {
     // MARK: - Privatge
     
     private func checkEnableNextButton() { // 다음 버튼 활성화 Check
-        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !introduceOneLine.isEmpty() && !selectedDate.isEmpty {
+        if nickNameCheck && phoneNumberCheck && !nameInputView.isEmpty() && !phoneNumberInputView.isEmpty() && !majorInputView.isEmpty() && !studentIDInputView.isEmpty() && !selectedDate.isEmpty {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
