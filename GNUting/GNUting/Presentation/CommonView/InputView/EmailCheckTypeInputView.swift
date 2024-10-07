@@ -137,7 +137,13 @@ extension EmailCheckTypeInputView: UITextFieldDelegate {
         borderView.enableColor()
         confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
     }
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            return false
+        }
+        
+        return true
+    }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         borderView.disableColor()
         confirmButton.backgroundColor = UIColor(named: "DisableColor")
