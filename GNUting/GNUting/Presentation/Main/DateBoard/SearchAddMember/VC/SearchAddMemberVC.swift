@@ -5,29 +5,30 @@
 //  Created by 원동진 on 2/28/24.
 //
 
+// MARK: - 멤버검색해서 추가하는 VC
+
 import UIKit
 
-// MARK: - 멤버검색해서 추가하는 VC
+// MARK: protocol
 
 protocol MemberAddButtonDelegate: AnyObject{
     func sendAddMemberData(send: [UserInfosModel])
 }
 
 class SearchAddMemberVC: BaseViewController{
-    var requestChat : Bool = false
+    var searchText: String = ""
     var chatMemeberCount = 0
+    var requestChat : Bool = false
     var searchUser : UserInfosModel?
     var addMemberInfos: [UserInfosModel] = [] {
         didSet {
             addMemberCollectionView.reloadData()
         }
     }
-    var searchText: String = ""
+    weak var memberAddButtonDelegate: MemberAddButtonDelegate?
     
     
-    
-    var memberAddButtonDelegate: MemberAddButtonDelegate?
-    
+    // MARK: - SubViews
     private lazy var naviBorderView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "BorderImage")
@@ -62,11 +63,9 @@ class SearchAddMemberVC: BaseViewController{
         view.layer.masksToBounds = true
         return view
     }()
-    private lazy var searchUserInfoView : UserInfoDetailView = {
-        let view = UserInfoDetailView()
-        
-        return view
-    }()
+    
+    private lazy var searchUserInfoView = UserInfoDetailView()
+    
     private lazy var completedButton : PrimaryColorButton = {
         let button = PrimaryColorButton()
         button.setText("완료", fointSize: 14)
@@ -101,8 +100,8 @@ class SearchAddMemberVC: BaseViewController{
 }
 extension SearchAddMemberVC{
     private func setAddSubViews() {
-        self.view.addSubViews([addMemberCollectionView,upperUserInfoView,completedButton])
-        upperUserInfoView.addSubViews([searchUserInfoView,memberOptionButton])
+        self.view.addSubViews([addMemberCollectionView, upperUserInfoView, completedButton])
+        upperUserInfoView.addSubViews([searchUserInfoView, memberOptionButton])
     }
     private func setAutoLayout(){
         addMemberCollectionView.snp.makeConstraints { make in

@@ -11,7 +11,7 @@ import SnapKit
 class MyPageVC: BaseViewController {
     let mypageConfiguration = [MyPageModel(title: "", elements: []),MyPageModel(title: "고객지원", elements: ["고객센터"]),MyPageModel(title: "계정 관리", elements: ["로그아웃","회원탈퇴"]),MyPageModel(title: "알림", elements: ["알림 설정"]),MyPageModel(title: "안내", elements: ["오픈소스 사용","개인정보 처리방침","서비스 이용약관"])]
     var userInfo : GetUserDataModel? {
-        didSet{
+        didSet {
             myPageTabelView.reloadData()
         }
     }

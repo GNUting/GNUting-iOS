@@ -58,7 +58,7 @@ class ChatRoomMemberTableViewCell: UITableViewCell {
 extension ChatRoomMemberTableViewCell{
     private func setAddSubViews() {
         contentView.addSubview(upperStackView)
-        upperStackView.addStackSubViews([userImageButton,markMeImaegView,nameLabel])
+        upperStackView.addStackSubViews([userImageButton, markMeImaegView, nameLabel])
     }
     private func setAutoLayout(){
         upperStackView.snp.makeConstraints { make in

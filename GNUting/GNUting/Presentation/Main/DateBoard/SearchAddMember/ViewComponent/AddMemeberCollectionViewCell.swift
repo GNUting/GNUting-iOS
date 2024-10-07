@@ -39,7 +39,7 @@ class AddMemeberCollectionViewCell: UICollectionViewCell {
 extension AddMemeberCollectionViewCell{
     private func setAddSubViews() {
         contentView.addSubview(containerView)
-        containerView.addSubViews([userIDNameLabel,cancelImageView])
+        containerView.addSubViews([userIDNameLabel, cancelImageView])
     }
     private func setAutoLayout(){
         containerView.snp.makeConstraints { make in

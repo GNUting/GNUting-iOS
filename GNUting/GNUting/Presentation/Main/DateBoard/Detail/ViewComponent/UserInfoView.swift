@@ -11,16 +11,8 @@ import SnapKit
 
 
 class UserInfoView: UIView {
-    private lazy var border1 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
-    private lazy var border2 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
+    private lazy var border1 = BorderView()
+    private lazy var border2 = BorderView()
     private lazy var upperStackView = UIView()
         
     
@@ -63,9 +55,9 @@ class UserInfoView: UIView {
 }
 extension UserInfoView {
     private func addSubViews(){
-        self.addSubViews([border1,upperStackView,border2])
-        upperStackView.addSubViews([userImageButton,middleStackView])
-        middleStackView.addStackSubViews([nickNameLabel,majorStudentIDLabel])
+        self.addSubViews([border1, upperStackView, border2])
+        upperStackView.addSubViews([userImageButton, middleStackView])
+        middleStackView.addStackSubViews([nickNameLabel, majorStudentIDLabel])
         middleStackView.setContentHuggingPriority(.init(250), for: .horizontal)
         userImageButton.setContentHuggingPriority(.init(251), for: .horizontal)
         
@@ -84,7 +76,6 @@ extension UserInfoView {
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(1)
         }
         upperStackView.snp.makeConstraints { make in
             make.top.equalTo(border1.snp.bottom).offset(10)
@@ -96,7 +87,6 @@ extension UserInfoView {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(1)
         }
     }
     func setUserInfoView(userImage: String?,userNickname: String, major: String, StudentID: String) {

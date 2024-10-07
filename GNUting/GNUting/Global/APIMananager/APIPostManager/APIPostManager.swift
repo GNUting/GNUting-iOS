@@ -13,6 +13,7 @@ class APIPostManager {
     static let shared = APIPostManager()
     
     // MARK: - 토큰 : AT 갱신
+    
     func updateAccessToken(refreshToken: String, completion: @escaping(RefreshAccessTokenResponse,Int)->Void){
         let url = EndPoint.updateAccessToken.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
@@ -87,9 +88,11 @@ class APIPostManager {
                     completion(nil,json)
                 }
             }
-         
+        
     }
+    
     // MARK: - 비밀번호 변경 : 이메일 인증 번호 전송
+    
     func postEmailCheckChangePassword(email: String,completion: @escaping(EmailCheckResponse)->Void) {
         let url = EndPoint.emailCheckChangePassword.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
@@ -110,7 +113,9 @@ class APIPostManager {
                 }
             }
     }
+    
     // MARK: - 회원가입 : 인증 번호 확인 ✅
+    
     func postAuthenticationCheck(email: String, number: String, completion: @escaping(DefaultResponse)->Void) {
         let url = EndPoint.checkMailVerify.url
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
@@ -134,7 +139,9 @@ class APIPostManager {
             }
         
     }
+    
     // MARK: - 회원가입  ✅
+    
     func postSignUP(signUpdata : SignUpModel,image : UIImage?,completion: @escaping (DefaultResponse) -> Void) {
         let url = EndPoint.signUp.url
         
@@ -147,7 +154,7 @@ class APIPostManager {
             for (key,value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
-       
+            
             if let image = imageData {
                 
                 multipartFormData.append(image, withName: "profileImage",fileName: "UserImage.jpeg",mimeType: "image/jpg")
@@ -190,8 +197,6 @@ class APIPostManager {
                     KeyChainManager.shared.create(key: email, token: accessToken)
                     KeyChainManager.shared.create(key: "UserEmail", token: email)
                     KeyChainManager.shared.create(key: "RefreshToken", token: refrechToken)
-                    
-                    
                     UserDefaultsManager.shared.setLogin()
                     
                     completion(nil,json)
@@ -203,7 +208,9 @@ class APIPostManager {
                 }
             }
     }
+    
     // MARK: - 로그 아웃
+    
     func postLogout(completion: @escaping(ResponseWithResult?)->Void) {
         let url = EndPoint.logout.url
         guard let refreshToken = KeyChainManager.shared.read(key:"RefreshToken") else { return }
@@ -240,8 +247,8 @@ class APIPostManager {
             }
     }
     
-    
     // MARK: - 글쓰기 ✅
+    
     func postWriteText(title: String,detail:String,joinMemberID: [UserIDList],completion: @escaping(DefaultResponse)->Void) {
         let url = EndPoint.writeText.url
         
@@ -272,6 +279,7 @@ class APIPostManager {
     }
     
     // MARK: - 채팅 신청 ✅
+    
     func postRequestChat(userInfos: [UserInfosModel],boardID: Int, completion: @escaping(DefaultResponse?) -> Void){
         
         let uslString = BaseURL.shared.urlString + "board/apply/\(boardID)"
@@ -282,11 +290,11 @@ class APIPostManager {
         
         do {
             try request.httpBody = JSONEncoder().encode(requestBody)
-        }catch {
+        } catch {
             print("Error encoding request data: \(error)")
             return
         }
-  
+        
         AF.request(request,interceptor: APIInterceptorManager())
             .validate(statusCode: 200..<300)
             .response{ response in
@@ -307,6 +315,7 @@ class APIPostManager {
     }
     
     // MARK: - 채팅 신청 : 승인하기
+    
     func chatConfirmed(id: Int, completion: @escaping(DefaultResponse) -> Void) {
         let uslString = BaseURL.shared.urlString + "board/applications/accept/\(id)"
         guard let url = URL(string: uslString) else { return }
@@ -328,6 +337,7 @@ class APIPostManager {
     }
     
     // MARK: - 글 신고하기 ✅
+    
     func reportBoardPost(boardID: Int,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
         let url = EndPoint.reportPost.url
         
@@ -357,7 +367,9 @@ class APIPostManager {
                 }
             }
     }
+    
     // MARK: - 유저신고하기 ✅
+    
     func reportUser(nickName: String,reportCategory: String, reportReason: String, completion: @escaping(DefaultResponse)-> Void) {
         let url = EndPoint.reportUser.url
         
@@ -387,6 +399,9 @@ class APIPostManager {
                 }
             }
     }
+    
+    // MARK: - 채팅방 나가기
+    
     func postLeavetChatRoom(chatRoomID: Int,completion: @escaping(DefaultResponse)->Void) {
         let uslString = BaseURL.shared.urlString + "chatRoom/\(chatRoomID)/leave"
         guard let url = URL(string: uslString) else { return }
@@ -404,6 +419,99 @@ class APIPostManager {
                     completion(json)
                     break
                 }
+            }
+    }
+    
+    
+    // MARK: - 메모팅 등록
+    
+    func postNoteRegister(content: String, completion: @escaping(DefaultResponse?) -> Void) {
+        let url = EndPoint.noteRegisterPost.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let requestBody = NotePostModel(content: content)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        } catch {
+            print("Error encoding request data: \(error.localizedDescription)")
+            return
+        }
+        
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                switch response.result {
+                case .success:
+                    print("🟢 postNoteRegister statusCode: \(statusCode)")
+                    completion(json)
+                case .failure:
+                    print("🔴 postNoteRegister statusCode: \(statusCode)")
+                    completion(json)
+                    break
+                }
+            }
+    }
+    
+    // MARK: - 메모팅 신청
+    
+    func postApplyNote(noteID: Int, completion: @escaping(NoteApplyModel?,DefaultResponse?) -> Void) {
+        let uslString = BaseURL.shared.urlString + "memo/\(noteID)"
+        guard let url = URL(string: uslString) else { return }
+        AF.request(url,method: .post,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                
+                switch response.result {
+                case .success:
+                    guard let json = try? JSONDecoder().decode(NoteApplyModel.self, from: data) else { return }
+                    
+                    print("🟢 postApplyNote statusCode: \(statusCode)")
+                    completion(json,nil)
+                    
+                case .failure:
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else {return }
+                    print("🔴 postApplyNote statusCode: \(statusCode)")
+                    completion(nil,json)
+                    break
+                }
+            }
+    }
+    
+    // MARK: - Event 닉네임으로 신청후 채팅방 생성
+    
+    func postEventParticipate(nickname: String, completion: @escaping(EventApplyResponseModel?,DefaultResponse?) -> Void) {
+        let url = EndPoint.eventParticipate.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let requestBody = EventParticipateModel(nickname: nickname)
+        do {
+            try request.httpBody = JSONEncoder().encode(requestBody)
+        } catch {
+            print("Error encoding request data: \(error.localizedDescription)")
+            return
+        }
+        
+        AF.request(request,interceptor: APIInterceptorManager())
+            .validate(statusCode: 200..<300)
+            .response { response in
+                guard let statusCode = response.response?.statusCode, let data = response.data else { return }
+                
+                switch response.result {
+                case .success:
+                    guard let json = try? JSONDecoder().decode(EventApplyResponseModel.self, from: data) else { return }
+                    print("🟢 postEventParticipate statusCode: \(statusCode)")
+                    completion(json,nil)
+                case .failure:
+                    guard let json = try? JSONDecoder().decode(DefaultResponse.self, from: data) else { return }
+                    print("🔴 postEventParticipate statusCode: \(statusCode)")
+                    completion(nil,json)
+                    break
+                }
+                
             }
     }
 }

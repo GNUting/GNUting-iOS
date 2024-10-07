@@ -112,8 +112,8 @@ extension ReportVC{
 }
 extension ReportVC{
     private func addSubViews() {
-        view.addSubViews([explainLabel,reportReasonView,OtherReasonTextView,bottomButtonStackView])
-        bottomButtonStackView.addStackSubViews([cancelButton,reportButton])
+        view.addSubViews([explainLabel, reportReasonView, OtherReasonTextView, bottomButtonStackView])
+        bottomButtonStackView.addStackSubViews([cancelButton, reportButton])
     }
     private func setAutoLayout() {
         explainLabel.snp.makeConstraints { make in

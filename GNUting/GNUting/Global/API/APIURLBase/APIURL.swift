@@ -35,6 +35,11 @@ enum EndPoint{
     case notificationCheck
     case notificationSetting
     case notificationShowAllsetting
+    case noteRead
+    case noteApplyRemainCount
+    case noteRegisterPost
+    case eventIsOpenSever
+    case eventParticipate
     var url : URL {
         switch self{
         case .login:
@@ -93,13 +98,24 @@ enum EndPoint{
             return .makeForEndpoint(endPoint: "notificationSetting")
         case .notificationShowAllsetting:
             return .makeForEndpoint(endPoint: "notification/show/allsetting")
+        case .noteRead:
+            return .makeForEndpoint(endPoint: "memo")
+        case .noteRegisterPost:
+            return .makeForEndpoint(endPoint: "memo/save")
+        case .noteApplyRemainCount:
+            return .makeForEndpoint(endPoint: "memo/remaining")
+        case .eventIsOpenSever:
+            return .makeForEndpoint(endPoint: "event/server/check")
+        case .eventParticipate:
+            return.makeForEndpoint(endPoint: "event/participate")
         }
     }
 }
 
 private extension URL{
     static let baseURL = "http://203.255.15.32:14357/api/v1/"
-//    static let baseURL = "http://localhost:10001/api/v1/"
+    //    static let baseURL = "http://203.255.15.32:1541/api/v1/" // Test
+
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
@@ -110,5 +126,5 @@ private extension URL{
 class BaseURL {
     static let shared = BaseURL()
     let urlString = "http://203.255.15.32:14357/api/v1/"
-//    let urlString = "http://localhost:10001/api/v1/"
+//    let urlString = "http://203.255.15.32:1541/api/v1/" // Test
 }

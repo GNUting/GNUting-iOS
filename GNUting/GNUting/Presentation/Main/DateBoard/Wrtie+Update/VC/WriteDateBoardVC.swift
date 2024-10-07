@@ -82,7 +82,7 @@ extension WriteDateBoardVC{
         }
     }
     private func addSubViews() {
-        view.addSubViews([titleContentView,memberTableView])
+        view.addSubViews([titleContentView, memberTableView])
     }
     private func setAutoLayout(){
         titleContentView.snp.makeConstraints { make in
@@ -227,7 +227,7 @@ extension WriteDateBoardVC{
 
 
 extension WriteDateBoardVC {
-    public func sendDetailTextData(textTuple : (String,String)) {
+    func sendDetailTextData(textTuple : (String,String)) {
         titleContentView.setTitleTextFieldText(text: textTuple.0)
         titleContentView.setContentTextView(text: textTuple.1)
         titleContentView.setContentTextViewTextColor(color: .black)

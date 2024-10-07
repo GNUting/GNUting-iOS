@@ -13,19 +13,19 @@ class RequsetListTableViewCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(hexCode: "EAEAEA").cgColor
+        view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
         view.layer.masksToBounds = true
         return view
     }()
-    private lazy var majorAndMemeberCountLabel : UILabel = {
-       let label = UILabel()
-        label.font = Pretendard.semiBold(size: 16)
+    private lazy var requestTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = Pretendard.medium(size: 13)
         
         return label
     }()
     private lazy var requestStateLabel : BasePaddingLabel = {
-       let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
-        label.font = Pretendard.semiBold(size: 16)
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
+        label.font = Pretendard.semiBold(size: 14)
         label.textColor = .white
         label.text = "대기중"
         label.textAlignment = .center
@@ -50,23 +50,23 @@ class RequsetListTableViewCell: UITableViewCell {
 extension RequsetListTableViewCell{
     private func setAddSubViews() {
         contentView.addSubview(upperView)
-      
+        
     }
     private func setAutoLayout() {
-        upperView.addSubViews([majorAndMemeberCountLabel,requestStateLabel])
+        upperView.addSubViews([requestTitleLabel, requestStateLabel])
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(7)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-7)
         }
-        majorAndMemeberCountLabel.snp.makeConstraints { make in
+        requestTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview().offset(Spacing.left)
             make.bottom.equalToSuperview().offset(-10)
         }
         requestStateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
-            make.left.equalTo(majorAndMemeberCountLabel.snp.right).offset(12)
+            make.left.equalTo(requestTitleLabel.snp.right).offset(12)
             make.right.equalToSuperview().offset(Spacing.right)
             make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(110)
@@ -75,7 +75,11 @@ extension RequsetListTableViewCell{
         requestStateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
     func setCell(model : DateStateModel ){
-        majorAndMemeberCountLabel.text = "\(model.major) \(model.memeberCount)명"
+        let memeberCount = model.memeberCount
+        let countStr = "\(memeberCount) : \(memeberCount) 매칭"
+        let requestTitle = memeberCount == 1 ? countStr : "과팅 (\(countStr))"
+        
+        requestTitleLabel.text = requestTitle
         requestStateLabel.text = "\(model.applyStatus.statusString)"
         requestStateLabel.backgroundColor = model.applyStatus.backgroundColor
     }

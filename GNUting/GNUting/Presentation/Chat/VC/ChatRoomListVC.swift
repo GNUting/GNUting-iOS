@@ -5,25 +5,29 @@
 //  Created by 원동진 on 2/17/24.
 //
 
+// MARK: - 채팅 목록 List
+
 import UIKit
 
 class ChatRoomListVC: BaseViewController {
-    var userName : String = ""
-    var chatRoomData: ChatRoomModel? {
+    
+    // MARK: - Properties
+    
+    var selecetedIndex: IndexPath?
+    var timeTrigger = true
+    var realTime = Timer()
+    var chatRoomData: [ChatRoomModelResult] = [] {
         didSet{
-            if chatRoomData?.result.count == 0 {
-                noDataScreenView.isHidden = false
-            } else {
-                noDataScreenView.isHidden = true
-            }
+            noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
             chatTableView.reloadData()
-         
             chatTableView.refreshControl?.endRefreshing()
         }
     }
- 
+    
+    // MARK: - SubViews
+    
     private lazy var noDataScreenView: NoDataScreenView = {
-       let view = NoDataScreenView()
+        let view = NoDataScreenView()
         view.isHidden = true
         view.setLabel(text: "현재 참여 중인 채팅방이 없습니다. ", range: "")
         return view
@@ -38,7 +42,7 @@ class ChatRoomListVC: BaseViewController {
     }()
     
     private lazy var chatTableView : UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identi)
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -50,21 +54,33 @@ class ChatRoomListVC: BaseViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addSubViews()
         setAutoLayout()
-     
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
         getChatRoomData()
+        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startRepeatFunction()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopRepeatFunction()
+    }
 }
+
 extension ChatRoomListVC{
+    
+    // MARK: - Layout Helpers
     private func addSubViews() {
-        view.addSubViews([titleLabel,chatTableView,noDataScreenView])
+        view.addSubViews([titleLabel, chatTableView, noDataScreenView])
     }
     private func setAutoLayout() {
         titleLabel.snp.makeConstraints { make in
@@ -80,83 +96,116 @@ extension ChatRoomListVC{
         noDataScreenView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
-     
+        
+    }
+    // MARK: - Private Logic
+    
+    private func checkImageString(imageArray: [String?])-> String? {
+        var chatRoomTitleImageStirng: String? // 채팅리스트 대표사진, 모두 nil일경우 nil || 한명이라도 있을 경우 해당 부분
+        
+        for image in imageArray {
+            if image != nil {
+                chatRoomTitleImageStirng = image ?? ""
+                return chatRoomTitleImageStirng
+            }
+        }
+        return nil
     }
     
+    private func makeUsrnameString(by usernameList: [String]) -> String{
+        var usernameString = ""
+        
+        if usernameList.count == 1 {
+            usernameString = usernameList.first ?? "닉네임"
+        } else if usernameList.count == 0 {
+            usernameString = "(알수없음)"
+        } else {
+            for (idx,username) in usernameList.enumerated() {
+                usernameString += username
+                if idx != usernameList.count - 1 {
+                    usernameString += ", "
+                }
+            }
+        }
+        return usernameString
+    }
+    
+    private func checkOneMatching(userListCount: Int, studentID: String?, department: String?) -> String? {
+        if userListCount == 1 {
+            return "\(studentID ?? "")|\(department ?? "학과")"
+        } else {
+            return nil
+        }
+    }
+    
+    private func changeDateString(dateString: String) -> String{
+        let splitString = dateString.split(separator: "T")
+        let secondString = splitString[1]
+        
+        return String(secondString.prefix(5))
+    }
+    
+    private func startRepeatFunction() {
+        print(#function,"Start repeat ChatRoomList API")
+        if (timeTrigger) {
+            realTime = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateChatRoomAPI), userInfo: nil, repeats: true)
+            timeTrigger = false
+        }
+    }
+    
+    private func stopRepeatFunction() {
+        realTime.invalidate()
+        timeTrigger = true
+        print(#function,"Stop refresh ChatRoomList API")
+    }
+    
+    @objc private func updateChatRoomAPI() {
+        getChatRoomData()
+    }
 }
 
 extension ChatRoomListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatRoomVC()
-        let result = chatRoomData?.result[indexPath.row]
-        
-        vc.chatRoomID = result?.id ?? 0
-        vc.navigationTitle = result?.title ?? "채팅방"
-        vc.subTitleSting = "\(result?.leaderUserDepartment ?? "학과") | \(result?.applyLeaderDepartment ?? "학과")"
+        self.selecetedIndex = indexPath
+        vc.chatRoomID = chatRoomData[indexPath.row].id
         pushViewContoller(viewController: vc)
     }
 }
 
-extension ChatRoomListVC : UITableViewDataSource {
-    
+extension ChatRoomListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = chatRoomData?.result.count else { return 0}
-        return count
+        return chatRoomData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
-      
-        if let result = chatRoomData?.result[indexPath.row] {
-            cell.setChatTableViewCell(title: result.title, leaderUserDepartment: result.leaderUserDepartment, applyLeaderDepartment: result.applyLeaderDepartment, chatRoomUserProfileImages: result.chatRoomUserProfileImages, hasNewMessage: result.hasNewMessage)
-        }
+        let cellData = chatRoomData[indexPath.row]
+        let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
+        let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
+        let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
+        let subInfoString = checkOneMatching(userListCount: otherMemberCount, studentID: cellData.chatRoomUsers.first?.studentID, department: cellData.chatRoomUsers.first?.department)// 1대1일 경우 학번 학과
+        let lastMessage = cellData.lastMessage // 제일 최근 메세지
+        let lastMessageTime = changeDateString(dateString: cellData.lastMessageTime) // 제일 최근 메세지 시간
+        
+        cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: cellData.title , lastMessage: lastMessage, lastMessageTime: lastMessageTime)
         cell.selectionStyle = .none
+        
         return cell
     }
-    
-    
 }
-
 
 extension ChatRoomListVC {
     private func getChatRoomData() {
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            APIGetManager.shared.getChatRoomData { getChatRoomData, response in
+            APIGetManager.shared.getChatRoomData { getData, response in
+                guard let getChatRoomData = getData?.result else { return }
                 self.chatRoomData = getChatRoomData
-                
             }
         }
     }
+    
     @objc private func reloadBoardListData() {
         getChatRoomData()
     }
 }
-extension ChatRoomListVC {
-    func AlertpushChatRoom(locationID: String) {
-        let chatRoomID = Int(locationID)
-        let vc = ChatRoomVC()
-        APIGetManager.shared.getApplicationChatRoomTitleData(chatRoomID: chatRoomID ?? 0) { responseResult in
-            guard let success = responseResult?.isSuccess else { return }
-            let rootVC = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController as? UITabBarController
-          
-            if success {
-                vc.chatRoomID = chatRoomID ?? 0
-                vc.navigationTitle = responseResult?.result.title ?? "채팅방 제목"
-                
-                vc.subTitleSting = "\(responseResult?.result.leaderUserDepartment ?? "학과") | \(responseResult?.result.applyLeaderDepartment ?? "학과")"
-                
-                self.pushViewContoller(viewController: vc)
-            } else {
-                if responseResult?.code == "CHATROOM4001"{
-                    self.showAlert(message: "채팅방을 찾을수 없습니다.")
-                } else if responseResult?.code == "CHATROOMUSER4001"{
-                    self.showAlert(message: "채팅방을 찾을수 없습니다.")
-                }
-                rootVC?.selectedIndex = 0
-            }
-            
-        } 
-    }
-}
-

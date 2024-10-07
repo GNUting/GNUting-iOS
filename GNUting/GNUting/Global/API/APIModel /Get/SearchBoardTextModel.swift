@@ -24,7 +24,7 @@ struct SearchResult: Codable {
     let empty: Bool
 }
 // MARK: - Content
-struct SearchResultContent: Codable {
+struct SearchResultContent: Codable, BoardListCellconfiguration {
     let boardID, inUserCount: Int
     let title, department, studentID,time,status: String
 

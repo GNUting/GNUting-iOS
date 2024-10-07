@@ -10,6 +10,9 @@
 import UIKit
 
 final class ConfirmButton: ThrottleButton {
+    
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -21,11 +24,12 @@ final class ConfirmButton: ThrottleButton {
     }
 }
 
-// MARK: - Public Method
+// MARK: - Internal Method
 
 extension ConfirmButton {
-    public func setConfiguration(title: String) {
+    func setConfiguration(title: String) {
         var configuration = UIButton.Configuration.plain()
+        
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         configuration.attributedTitle = AttributedString("\(title)", attributes: AttributeContainer([NSAttributedString.Key.font : Pretendard.regular(size: 14) ?? .systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.white]))
         configuration.titleAlignment = .center

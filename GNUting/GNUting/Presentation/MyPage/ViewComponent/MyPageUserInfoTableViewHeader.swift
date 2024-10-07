@@ -12,7 +12,7 @@ protocol tapProfileUpateButtonDelegate : AnyObject{
 }
 class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
     static let identi = "MyPageTableViewUserInfoHeaderid"
-    var profileUpdateButtonDelegate : tapProfileUpateButtonDelegate?
+    weak var profileUpdateButtonDelegate : tapProfileUpateButtonDelegate?
     private lazy var upperView = UIView()
     private lazy var userImageButton = UIButton()
     
@@ -72,9 +72,9 @@ class MyPageUserInfoTableViewHeader: UITableViewHeaderFooterView {
 extension MyPageUserInfoTableViewHeader{
     
     private func setAddSubViews() {
-        contentView.addSubViews([upperView,updateProfileButton])
-        upperView.addSubViews([userImageButton,labelStackView])
-        labelStackView.addStackSubViews([nameLabel,subInfoLabel,introduceLabel])
+        contentView.addSubViews([upperView, updateProfileButton])
+        upperView.addSubViews([userImageButton, labelStackView])
+        labelStackView.addStackSubViews([nameLabel, subInfoLabel, introduceLabel])
     }
     private func setAutoLayout() {
         upperView.snp.makeConstraints { make in

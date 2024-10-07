@@ -30,7 +30,7 @@ class MemberTableViewHeader: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    public func setMemberLabelCount(memberCount : Int){
+    func setMemberLabelCount(memberCount : Int){
         memberLabel.text = "멤버(\(memberCount))"
     }
 }

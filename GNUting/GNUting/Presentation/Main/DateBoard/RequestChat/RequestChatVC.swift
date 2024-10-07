@@ -57,7 +57,7 @@ class RequestChatVC: BaseViewController{
 extension RequestChatVC{
     
     private func addSubViews() {
-        view.addSubViews([memberTableView,chatRequestCompletedButton])
+        view.addSubViews([memberTableView, chatRequestCompletedButton])
     }
     private func setAutoLayout(){
         

@@ -84,8 +84,8 @@ class RequestStatusDetailVC: BaseViewController {
 }
 extension RequestStatusDetailVC{
     private func setAddSubViews() {
-        view.addSubViews([topStackView,dateMemeberTableView,buttonStackView])
-        topStackView.addStackSubViews([groupCountView,stateLabel])
+        view.addSubViews([topStackView, dateMemeberTableView, buttonStackView])
+        topStackView.addStackSubViews([groupCountView, stateLabel])
         
     }
     private func setAutoLayout(){
@@ -140,10 +140,11 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.setDateMember(model: participantUser[indexPath.row])
                 cell.userImageTappedClosure = {
                     let vc = UserDetailVC()
-                    vc.userNickname = participantUser[indexPath.row].nickname
-                    vc.imaegURL = participantUser[indexPath.row].profileImage
-                    vc.userDepartment = participantUser[indexPath.row].department
-                    vc.userStudentID = participantUser[indexPath.row].studentId
+                    
+                    vc.userDetailData = UserDetailModel(imageURL: participantUser[indexPath.row].profileImage,
+                                                        nickname: participantUser[indexPath.row].nickname,
+                                                        userStudentID: participantUser[indexPath.row].studentId,
+                                                        userDepartment: participantUser[indexPath.row].department)
                     self.presentFullScreenVC(viewController: vc)
                 }
             }
@@ -153,10 +154,11 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.setDateMember(model: applyUserData[indexPath.row])
                 cell.userImageTappedClosure = {
                     let vc = UserDetailVC()
-                    vc.userNickname = applyUserData[indexPath.row].nickname
-                    vc.imaegURL = applyUserData[indexPath.row].profileImage
-                    vc.userDepartment = applyUserData[indexPath.row].department
-                    vc.userStudentID = applyUserData[indexPath.row].studentId
+                    
+                    vc.userDetailData = UserDetailModel(imageURL: applyUserData[indexPath.row].profileImage,
+                                                        nickname: applyUserData[indexPath.row].nickname,
+                                                        userStudentID: applyUserData[indexPath.row].studentId,
+                                                        userDepartment: applyUserData[indexPath.row].department)
                     self.presentFullScreenVC(viewController: vc)
                 }
             }
@@ -189,9 +191,11 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
 }
 extension RequestStatusDetailVC {
     private func setStateLabel(state: String,groupCount: Int) {
-        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: Pretendard.bold(size: 16) ?? .boldSystemFont(ofSize: 16), labelText: "\(groupCount) : \(groupCount) 매칭")
+        let countStr = "\(groupCount) : \(groupCount) 매칭"
+        let groupCountViewString = groupCount == 1 ? countStr : "과팅 (\(countStr))"
+        groupCountView.setImagePlusLabelView(imageName: "HeartImage", textFont: Pretendard.bold(size: 16) ?? .boldSystemFont(ofSize: 16), labelText: groupCountViewString)
         var applyStatus: RequestState = .waiting
-        switch state{
+        switch state {
         case "승인":
             applyStatus = .Success
             buttonStackView.isHidden = true

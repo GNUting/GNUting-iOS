@@ -20,7 +20,7 @@ final class EmailCheckTypeInputView: UIView {
     
     // MARK: - Properties
     
-    public weak var emailCheckTypeInputViewDelegate: EmailCheckTypeInputViewDelegate?
+     weak var emailCheckTypeInputViewDelegate: EmailCheckTypeInputViewDelegate?
     
     // MARK: - SubViews
     
@@ -71,7 +71,7 @@ final class EmailCheckTypeInputView: UIView {
         return label
     }()
     
-    // MARK: - LifeCycle
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,8 +89,8 @@ final class EmailCheckTypeInputView: UIView {
 
 extension EmailCheckTypeInputView {
     private func setAddSubViews() {
-        addSubViews([inputTypeLabel,middleStackView,borderView,confirmButton])
-        middleStackView.addStackSubViews([inputTextField,emailLabel])
+        addSubViews([inputTypeLabel, middleStackView, borderView, confirmButton])
+        middleStackView.addStackSubViews([inputTextField, emailLabel])
     }
     
     private func setAutoLayout() {
@@ -117,17 +117,45 @@ extension EmailCheckTypeInputView {
     }
 }
 
-// MARK: - Method public
+// MARK: - Method 
 
 extension EmailCheckTypeInputView {
-    public func setFoucInputTextFiled() { // 포커스 주기
+     func setFoucInputTextFiled() { // 포커스 주기
         inputTextField.becomeFirstResponder()
     }
    
-    public func getTextFieldText() -> String { // 텍스트 필드 받아오기
+     func getTextFieldText() -> String { // 텍스트 필드 받아오기
         inputTextField.text ?? ""
     }
-   
+}
+
+// MARK: - Delegate
+
+extension EmailCheckTypeInputView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        emailCheckTypeInputViewDelegate?.didBeginTextfield()
+        borderView.enableColor()
+        confirmButton.backgroundColor = textField.text?.count == 0 ? UIColor(named: "DisableColor") : UIColor(named: "PrimaryColor")
+        confirmButton.isEnabled = textField.text?.count == 0 ? false : true
+        
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            return false
+        }
+        
+        return true
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        borderView.disableColor()
+        confirmButton.backgroundColor = UIColor(named: "DisableColor")
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
 }
 
 // MARK: - Action
@@ -147,24 +175,3 @@ extension EmailCheckTypeInputView {
         emailCheckTypeInputViewDelegate?.tapButtonAction(textFieldText: inputTextField.text ?? "")
     }
 }
-
-// MARK: - Delegate
-
-extension EmailCheckTypeInputView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        emailCheckTypeInputViewDelegate?.didBeginTextfield()
-        borderView.enableColor()
-        confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        borderView.disableColor()
-        confirmButton.backgroundColor = UIColor(named: "DisableColor")
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
-    }
-}
-

@@ -19,8 +19,10 @@ class ChatRoomVC: UIViewController {
     var nextState: CardState{
         return cardVisible ? .collapsed : .expanded
     }
+    var isPushNotification = false
+    
     var chatMessageList: [ChatRoomMessageModelResult] = []{
-        didSet{
+        didSet {
             self.chatRoomTableView.reloadData()
             self.chatRoomTableViewMoveToBottom()
         }
@@ -29,29 +31,21 @@ class ChatRoomVC: UIViewController {
     var originalPostion = CGPoint.zero
     var accessToken = ""
     var chatRoomID: Int = 0
-    var navigationTitle: String = "게시글 제목"
-    var subTitleSting: String = "학과*학과"
+    var navigationTitle: String?
+    var subTitleSting: String?
     var message: String = ""
     var userEmail : String = ""
     private var swiftStomp : SwiftStomp!
-    private lazy var navigationBarView : ChatRoomNavigationBar = {
+    private lazy var navigationBarView: ChatRoomNavigationBar = {
         let view = ChatRoomNavigationBar()
-        view.setLabel(title: navigationTitle, subTitle: subTitleSting)
+        
         view.naviagtionBarButtonDelegate = self
         return view
     }()
     
+    private let borderView1 = BorderView()
+    private let borderView2 = BorderView()
     
-    private lazy var borderView1 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
-    private lazy var borderView2 : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexCode: "E9E9E9")
-        return view
-    }()
     private lazy var chatRoomTableView : UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -59,6 +53,7 @@ class ChatRoomVC: UIViewController {
         tableView.register(ChatRoomEnterTableViewCell.self, forCellReuseIdentifier: ChatRoomEnterTableViewCell.identi)
         tableView.register(ChatRoomTableViewSendMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewSendMessageCell.identi)
         tableView.register(ChatRoomTableViewReceiveMessageCell.self, forCellReuseIdentifier: ChatRoomTableViewReceiveMessageCell.identi)
+        tableView.register(ChatRoomDefaultTableViewCell.self, forCellReuseIdentifier: ChatRoomDefaultTableViewCell.identi)
         tableView.register(ChatRoomDefaultTableViewCell.self, forCellReuseIdentifier: ChatRoomDefaultTableViewCell.identi)
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
@@ -77,6 +72,7 @@ class ChatRoomVC: UIViewController {
         textField.addTarget(self, action: #selector(changeValueTextField(_ :)), for: .editingChanged)
         return textField
     }()
+    
     private lazy var sendStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -85,6 +81,7 @@ class ChatRoomVC: UIViewController {
         stackView.spacing = 5
         return stackView
     }()
+    
     private lazy var sendMessageButton : ThrottleButton = {
         let button = ThrottleButton()
         button.setImage(UIImage(named: "SendImg"), for: .normal)
@@ -96,6 +93,7 @@ class ChatRoomVC: UIViewController {
         }
         return button
     }()
+    
     private lazy var sideView : ChatRoomSideView = {
         let view = ChatRoomSideView()
         view.backgroundColor = .white
@@ -105,6 +103,7 @@ class ChatRoomVC: UIViewController {
         view.sendTappedUserData = self
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(recognizer:)))
         view.addGestureRecognizer(panGestureRecognizer)
+        
         return view
     }()
     
@@ -121,10 +120,12 @@ class ChatRoomVC: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         swipeRecognizer()
         setAddSubViews()
         setAutoLayout()
         addExpirationRefreshToken()
+        setChatKeyboardObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,6 +133,7 @@ class ChatRoomVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
         getAccessToken()
+        getChatRoomNavigationInfoAPI()
         getChatMessageList()
         getUserData()
         getChatRoomMember()
@@ -142,14 +144,15 @@ class ChatRoomVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.chatRoomOut()
-        self.swiftStomp.disconnect()
-        
+        removeKeyboardObserver()
+        chatRoomOut()
+        swiftStomp.disconnect()
+        isNotificationPushed(isPush: isPushNotification)
     }
 }
 extension ChatRoomVC{
     private func setAddSubViews() {
-        view.addSubViews([navigationBarView,borderView1,chatRoomTableView,borderView2,sendStackView,sideView,opaqueView])
+        view.addSubViews([navigationBarView, borderView1, chatRoomTableView, borderView2, sendStackView, sideView, opaqueView])
         sendStackView.addStackSubViews([textField,sendMessageButton])
         self.view.bringSubviewToFront(opaqueView)
         self.view.bringSubviewToFront(sideView)
@@ -159,27 +162,26 @@ extension ChatRoomVC{
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.right.equalToSuperview()
         }
+        
         borderView1.snp.makeConstraints { make in
             make.top.equalTo(navigationBarView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
+        
         chatRoomTableView.snp.makeConstraints { make in
             make.top.equalTo(borderView1.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(25)
-            
         }
-        sendStackView.snp.makeConstraints { make in
-            make.bottom.greaterThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-15)
-            make.left.right.equalToSuperview().inset(5)
-        }
-        textField.setContentHuggingPriority(.init(249), for: .horizontal)
-        sendMessageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         borderView2.snp.makeConstraints { make in
-            make.top.equalTo(chatRoomTableView.snp.bottom)
-            make.bottom.equalTo(sendStackView.snp.top).offset(-10)
+            make.top.equalTo(chatRoomTableView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
+        }
+        
+        sendStackView.snp.makeConstraints { make in
+            make.top.equalTo(borderView2.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(5)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-15)
         }
         
         sideView.snp.makeConstraints { make in
@@ -187,34 +189,59 @@ extension ChatRoomVC{
             make.bottom.right.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
         }
+        
+        textField.setContentHuggingPriority(.init(249), for: .horizontal)
+        sendMessageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+     
     }
 }
 extension ChatRoomVC {
+    private func setChatKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(chatKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(chatKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    private func removeChatKeyboardObserver() { // 옵저버 해제
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func isNotificationPushed(isPush: Bool) {
+        if isPush {
+            let vc = TabBarController()
+            
+            vc.selectedIndex = 2
+            self.navigationController?.popToRootViewController(animated: true)
+            view.window?.rootViewController = vc
+        }
+    }
+    
     private func chatRoomTableViewMoveToBottom() {
         let chatMessageCount = self.chatMessageList.count
         DispatchQueue.main.async {
             if chatMessageCount != 0{
                 self.chatRoomTableView.scrollToRow(at: IndexPath(row: chatMessageCount - 1, section: 0), at: .bottom, animated: true)
-                
             }
         }
     }
+    
     private func isChatRoomVisible() {
         ChatVisibleManager.shared.chatRoomID = self.chatRoomID
         ChatVisibleManager.shared.isChatRoom = true
     }
+    
     private func chatRoomOut() {
         ChatVisibleManager.shared.isChatRoom = false
     }
+    
     private func addExpirationRefreshToken(){
         NotificationCenter.default.addObserver(self, selector: #selector(expirationRefreshToken), name: .expirationRefreshToken, object: nil)
     }
-
 }
+
 extension ChatRoomVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return chatMessageList.count
+        chatMessageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,7 +250,7 @@ extension ChatRoomVC: UITableViewDataSource{
         if cellData.messageType == "CHAT" {
             if cellData.email == userEmail{
                 guard let sendCell = tableView.dequeueReusableCell(withIdentifier: ChatRoomTableViewSendMessageCell.identi, for: indexPath) as? ChatRoomTableViewSendMessageCell else { return UITableViewCell() }
-                sendCell.setCell(nickName: cellData.nickname ?? "닉네임", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
+                sendCell.setCell(nickName: cellData.nickname ?? "(알 수 없음)", UserImage: cellData.profileImage ?? "", message: cellData.message, sendDate: cellData.createdDate)
                 sendCell.setSizeToFitMessageLabel()
                 sendCell.selectionStyle = .none
                 return sendCell
@@ -250,42 +277,164 @@ extension ChatRoomVC: UITableViewDataSource{
             return enterCell
         }
     }
-    
-    
 }
 
-// MARK: Button Action
+// MARK: API
+
 extension ChatRoomVC {
-    private func tapSendMessageButton() {
-        textField.text = ""
-        swiftStomp.send(body: SendMessageModel(messageType: "CHAT", message: message), to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
-        
+    private func getAccessToken(){
+        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
+        userEmail = email
+        guard let token = KeyChainManager.shared.read(key: email) else { return }
+        self.accessToken = token
     }
-    @objc private func tapOutSideView() {
-        let translation = CGAffineTransform(translationX: 0, y: 0)
-        sideView.transform = translation
+    private func initStomp(){
+        let url = URL(string: "ws://203.255.15.32:14357/chat")!
+//        let url = URL(string: "ws://203.255.15.32:1541/chat")! // Test
+        self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
+        self.swiftStomp.enableLogging = true
+        self.swiftStomp.delegate = self
+        self.swiftStomp.connect()
+    }
+    private func getChatMessageList() {
+        APIGetManager.shared.getChatMessageData(chatRoomID: self.chatRoomID) { chatMessageListData, response in
+            if response.isSuccess {
+                guard let result = chatMessageListData?.result else { return }
+                self.chatMessageList = result
+            }
+        }
+    }
+    private func getAlertSet() {
+        APIGetManager.shared.getChatRoomSetAlertStatus(chatRoomID: chatRoomID) { response in
+            guard let success = response?.isSuccess else {
+                self.showAlert(message: "재시도하세요. 계속해서 문제 발생시 고객센터로 연락 부탁드립니다.")
+                self.dismiss(animated: true)
+                return
+            }
+            if success {
+                
+                guard let status = response?.result.notificationSetting else { return }
+                self.sideView.setAlertType(alertStatus: status)
+            } else {
+                self.showAlert(message: response?.message ?? "오류 발생")
+            }
+        }
+    }
+    private func getChatRoomMember() {
+        APIGetManager.shared.getChatRoomUserList(chatRoomID: chatRoomID) { response in
+            guard let memberList = response?.result else { return }
+            self.sideView.chatRommUserModelResult = memberList
+        }
+    }
+    
+    private func getUserData() {
+        APIGetManager.shared.getUserData { userData,response  in
+            self.errorHandling(response: response)
+            self.sideView.userNickname = userData?.result?.nickname ?? "(알 수 없음)"
+        }
+    }
+    
+    private func getChatRoomNavigationInfoAPI() {
+        APIGetManager.shared.getChatRoomNavigationInfo(chatRoomID: self.chatRoomID) { response  in
+            guard let title = response?.result.title else { return }
+            guard let leaderUserDepartment = response?.result.leaderUserDepartment else { return }
+            guard let applyLeaderDepartment = response?.result.applyLeaderDepartment else { return }
+            
+            self.navigationBarView.setLabel(title: title, subTitle: "\(leaderUserDepartment) | \(applyLeaderDepartment)")
+        }
+    }
+}
+
+// MARK: - Delegate
+
+extension ChatRoomVC: NaviagtionBarButtonDelegate {
+    func tappedBackButton() {
+        popButtonTap()
+    }
+    
+    func tappedSettingButton() {
+        tapSettingButton()
+    }
+}
+extension ChatRoomVC: LeaveChatRoomButtonDelegate {
+    func tapLeaveChatRoomButtonButton() {
+        let alertController = UIAlertController(title: "채팅방 나가기", message: "채팅방을 나가시면 다시 들어 오실수없습니다. 채팅방을 나가시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "네", style: .default,handler: { _ in
+            APIPostManager.shared.postLeavetChatRoom(chatRoomID: self.chatRoomID) { defaultResponse in
+                if defaultResponse.isSuccess {
+                    self.popButtonTap()
+                } else {
+                    self.errorHandling(response: defaultResponse)
+                }
+            }
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+            
+        }
+    }
+}
+
+extension ChatRoomVC: SetAlertButtonDelegate {
+    func tapSetAlertButton(alertStatus: String) {
+        APIPutManager.shared.putAlertNotification(alertStatus: alertStatus, chatRoomID: chatRoomID) { response in
+            if !response.isSuccess{
+                self.showAlert(message: response.message)
+            }
+        }
+    }
+}
+extension ChatRoomVC: SendTappedUserData {
+    func tapUserImageButton(userData: ChatRommUserModelResult?) { // 사이드뷰에서
+        let vc = UserDetailVC()
         
+        vc.userDetailData = UserDetailModel(imageURL: userData?.profileImage,
+                                            nickname: userData?.nickname,
+                                            userStudentID: userData?.studentID,
+                                            userDepartment: userData?.department)
+        presentFullScreenVC(viewController: vc)
+    }
+    
+    func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
+        let vc = UserDetailVC()
+        
+        vc.userDetailData = UserDetailModel(imageURL: userData?.profileImage,
+                                            nickname: userData?.nickname,
+                                            userStudentID: userData?.studentId,
+                                            userDepartment: userData?.department)
+        presentFullScreenVC(viewController: vc)
+    }
+}
+
+// MARK: Action
+
+extension ChatRoomVC {
+    @objc func chatKeyboardWillShow(_ notification: Notification) { // 채팅방 버전 키보드 올림
+        let offsetY = max(chatRoomTableView.contentSize.height - chatRoomTableView.bounds.size.height, 0)
+        
+        chatRoomTableView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true) // 스크롤을 가장 아래로 내림
+    }
+    
+    @objc func chatKeyboardWillHide(_ notification: Notification) { // 키보드가 사라질 때 인셋을 원래대로 설정
+        chatRoomTableView.contentInset.bottom = 0
+        chatRoomTableView.verticalScrollIndicatorInsets.bottom = 0
+    }
+    
+    @objc private func tapOutSideView() {
+        sideView.transform = CGAffineTransform(translationX: 0, y: 0)
         UIView.animate(withDuration: 1.0, delay: 0) {
             self.sideView.transform = CGAffineTransform(translationX: self.view.frame.width, y: 0)
             self.opaqueView.isHidden = true
         }
     }
+    
     @objc private func changeValueTextField(_ sender: UITextField) {
         guard let textFieldText = sender.text else { return }
         self.message = textFieldText
     }
-    private func tapSettingButton() {
-        let translation = CGAffineTransform(translationX: view.frame.width, y: 0)
-        view.endEditing(true)
-        sideView.transform = translation
-        sideView.isHidden = false
-        opaqueView.isHidden = false
-        
-        UIView.animate(withDuration: 1.0, delay: 0) {
-            self.sideView.transform = CGAffineTransform(translationX: 0, y: 0)
-        }
-    }
-    @objc func handleCardPan(recognizer:UIPanGestureRecognizer) {
+    
+    @objc private func handleCardPan(recognizer:UIPanGestureRecognizer) {
         let newLocation = recognizer.location(in: sideView)
         
         switch recognizer.state{
@@ -308,194 +457,22 @@ extension ChatRoomVC {
             break
         }
     }
-}
-
-// MARK: Get Data
-
-extension ChatRoomVC {
-    private func getAccessToken(){
-        guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
-        userEmail = email
-        guard let token = KeyChainManager.shared.read(key: email) else { return }
-        self.accessToken = token
-    }
-    private func initStomp(){
-        let url = URL(string: "ws://203.255.15.32:14357/chat")!
-//        let url = URL(string: "ws://localhost:10001/chat")!
-        self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
-        self.swiftStomp.enableLogging = true
-        self.swiftStomp.delegate = self
-        self.swiftStomp.connect()
-    }
-    private func getChatMessageList() {
-        APIGetManager.shared.getChatMessageData(chatRoomID: chatRoomID) { chatMessageListData, response in
-            if response.isSuccess {
-                guard let result = chatMessageListData?.result else { return }
-                self.chatMessageList = result
-            }
-        }
-    }
-    private func getAlertSet() {
-        APIGetManager.shared.getChatRoomSetAlertStatus(chatRoomID: chatRoomID) { response in
-            guard let success = response?.isSuccess else { return self.showAlert(message: "재시도하세요. 계속해서 문제 발생시 고객센터로 연락 부탁드립니다.")}
-            if success {
-                
-                guard let status = response?.result.notificationSetting else { return }
-                self.sideView.setAlertType(alertStatus: status)
-            } else {
-                self.showAlert(message: response?.message ?? "오류 발생")
-            }
-        }
-    }
-    private func getChatRoomMember() {
-        APIGetManager.shared.getChatRoomUserList(chatRoomID: chatRoomID) { response in
-            guard let memberList = response?.result else { return }
-            self.sideView.chatRommUserModelResult = memberList
-        }
-    }
-    func getUserData(){
-        APIGetManager.shared.getUserData { userData,response  in
-            self.errorHandling(response: response)
-            self.sideView.userNickname = userData?.result?.nickname ?? "유저 닉네임"
-        }
-    }
-}
-// MARK: - Delegate
-extension ChatRoomVC: NaviagtionBarButtonDelegate {
-    func tappedBackButton() {
-        popButtonTap()
+    
+    private func tapSendMessageButton() {
+        textField.text = ""
+        swiftStomp.send(body: SendMessageModel(messageType: "CHAT", message: message), to: "/pub/chatRoom/\(chatRoomID)",headers: ["Authorization" : "Bearer \(accessToken)"])
     }
     
-    func tappedSettingButton() {
-        tapSettingButton()
-    }
-}
-extension ChatRoomVC: LeaveChatRoomButtonDelegate {
-    func tapLeaveChatRoomButtonButton() {
-        let alertController = UIAlertController(title: "채팅방 나가기", message: "채팅방을 나가시면 다시 들어 오실수없습니다. 채팅방을 나가시겠습니까?", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
-        alertController.addAction(UIAlertAction(title: "네", style: .default,handler: { _ in
-            APIPostManager.shared.postLeavetChatRoom(chatRoomID: self.chatRoomID) { defaultResponse in
-                if defaultResponse.isSuccess {
-                    self.popButtonTap()
-                }else {
-                    self.errorHandling(response: defaultResponse)
-                }
-                
-            }
-        }))
+    private func tapSettingButton() {
+        let translation = CGAffineTransform(translationX: view.frame.width, y: 0)
         
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true)
-            
-        }
+        view.endEditing(true)
+        sideView.transform = translation
+        sideView.isHidden = false
+        opaqueView.isHidden = false
         
-    }
-}
-
-extension ChatRoomVC: SetAlertButtonDelegate {
-    func tapSetAlertButton(alertStatus: String) {
-        APIPutManager.shared.putAlertNotification(alertStatus: alertStatus, chatRoomID: chatRoomID) { response in
-            if !response.isSuccess{
-                self.showAlert(message: response.message)
-            }
+        UIView.animate(withDuration: 1.0, delay: 0) {
+            self.sideView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
     }
-    
-}
-extension ChatRoomVC: SendTappedUserData{
-    func tapUserImageButton(userData: ChatRommUserModelResult?) { // 사이드뷰에서
-        let vc = UserDetailVC()
-        vc.imaegURL = userData?.profileImage
-        vc.userNickname = userData?.nickname
-        vc.userStudentID = userData?.studentID
-        vc.userDepartment = userData?.department
-        
-        presentFullScreenVC(viewController: vc)
-    }
-    
-    func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
-        let vc = UserDetailVC()
-        vc.imaegURL = userData?.profileImage
-        vc.userNickname = userData?.nickname
-        vc.userStudentID = userData?.studentId
-        vc.userDepartment = userData?.department
-        
-        presentFullScreenVC(viewController: vc)
-    }
-}
-
-// MARK : StompDelegate
-extension ChatRoomVC: SwiftStompDelegate{
-    func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
-        
-        if connectType == .toSocketEndpoint{
-            print("Connected to socket")
-        } else if connectType == .toStomp{
-            print("Connected to stomp")
-            swiftStomp.subscribe(to: "/sub/chatRoom/\(chatRoomID)")
-            
-        }
-    }
-    
-    func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
-        if disconnectType == .fromSocket{
-            print("Socket disconnected. Disconnect completed")
-        } else if disconnectType == .fromStomp{
-            print("Client disconnected from stomp but socket is still connected!")
-        }
-    }
-    
-    func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers : [String : String]) {
-        print("Received")
-        
-        if let message = message{
-            let messageString = message as! String
-            
-            let messageData = Data(messageString.utf8)
-            if messageString.contains("LEAVE") && messageString.contains("채팅방을 나갔습니다."){
-                do {
-                    
-                    let jsonData = try JSONDecoder().decode(LeaveMessageModel.self, from: messageData)
-                    let leaveData = ChatRoomMessageModelResult(id: 0, chatRoomId: 0, messageType: jsonData.messageType, email: nil, nickname: nil, profileImage: nil, message: jsonData.message, createdDate: "",studentId: "",department: "")
-                    chatMessageList.append(leaveData)
-                } catch {
-                    print(error)
-                }
-                
-            }  else {
-                do {
-                    let jsonData = try JSONDecoder().decode(ChatRoomMessageModelResult.self, from: messageData)
-                    
-                    chatMessageList.append(jsonData)
-                } catch {
-                    print(error)
-                }
-            }
-        } else if let message = message as? Data{
-            print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
-        }
-        
-        
-        
-    }
-    
-    func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
-        print("Receipt with id `\(receiptId)` received")
-    }
-    
-    func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
-        if type == .fromSocket{
-            print("Socket error occurred! [\(briefDescription)]")
-        } else if type == .fromStomp{
-            print("Stomp error occurred! [\(briefDescription)] : \(String(describing: fullDescription))")
-        } else {
-            print("Unknown error occured!")
-        }
-    }
-    
-    func onSocketEvent(eventName: String, description: String) {
-        print("Socket event occured: \(eventName) => \(description)")
-    }
-    
 }

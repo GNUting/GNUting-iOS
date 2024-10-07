@@ -13,7 +13,7 @@ struct BoardModel: Codable {
     let result: [BoardResult]?
 }
 
-struct BoardResult: Codable {
+struct BoardResult: Codable, BoardListCellconfiguration {
     let id: Int
     let title: String
     let detail: String
@@ -22,6 +22,9 @@ struct BoardResult: Codable {
     let user : BoardUser
     let inUserCount: Int
     let time: String
+    
+    var department: String { return user.department }
+    var studentID: String  { return user.studentId }
 }
 
 struct BoardUser: Codable {

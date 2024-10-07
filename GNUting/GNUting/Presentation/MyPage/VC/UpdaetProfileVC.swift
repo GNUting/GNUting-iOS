@@ -43,8 +43,8 @@ class UpdateProfileVC: BaseViewController {
         return button
     }()
     
-    private lazy var nickNameInputView : SignUpInputViewNicknameType = {
-        let inputView = SignUpInputViewNicknameType()
+    private lazy var nickNameInputView : NicknameTypeInputView = {
+        let inputView = NicknameTypeInputView()
         inputView.nicknameCheckButtonDelegate = self
         inputView.nicknameTextfiledDelegate = self
         return inputView
@@ -53,14 +53,12 @@ class UpdateProfileVC: BaseViewController {
   
     private lazy var majorInputView : MajorInputView = {
         let majorInputView = MajorInputView()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapMajorInputView))
-        majorInputView.isUserInteractionEnabled = true
-        majorInputView.addGestureRecognizer(tapGesture)
+        majorInputView.majorInputViewDelegate = self
         
         return majorInputView
     }()
-    private lazy var introduceInputView : SignUPInputView = {
-        let majorInputView = SignUPInputView()
+    private lazy var introduceInputView : CommonInputView = {
+        let majorInputView = CommonInputView()
         majorInputView.setInputTextTypeLabel(text: "한줄 소개")
         majorInputView.setPlaceholder(placeholder: "한줄 소개를 입력해주세요.")
         return majorInputView
@@ -98,7 +96,7 @@ extension UpdateProfileVC{
     private func setAddSubViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubViews([userImageButton,nickNameInputView,majorInputView,introduceInputView,updateProfileButton])
+        contentView.addSubViews([userImageButton, nickNameInputView, majorInputView, introduceInputView, updateProfileButton])
     }
     private func setAutoLayout(){
         scrollView.snp.makeConstraints { make in
@@ -232,14 +230,10 @@ extension UpdateProfileVC: PHPickerViewControllerDelegate {
 }
 extension UpdateProfileVC :NicknameCheckButtonDelegate {
     func action(textFieldText: String) {
-        APIGetManager.shared.checkNickname(nickname: textFieldText) { response,statuscode  in
-            guard let message = response?.message else { return }
-            if statuscode == 200 {
-                self.updateProfileButton.isEnabled = true
-            }else {
-                self.updateProfileButton.isEnabled = false
-            }
-            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(message)", success: false)
+        APIGetManager.shared.checkNickname(nickname: textFieldText) { response  in
+            guard let success = response?.isSuccess else { return }
+            self.updateProfileButton.isEnabled = success ? true : false
+            self.nickNameInputView.setCheckLabel(isHidden: false, text: "\(response?.message ?? "재시도 해주세요.")", success: false)
         }
     }
 }
@@ -256,18 +250,16 @@ extension UpdateProfileVC: NicknameTextfiledDelegate {
     }
     
 }
-extension UpdateProfileVC {
-    @objc private func tapMajorInputView() {
-        
+extension UpdateProfileVC: MajorInputViewDelegate {
+    func tapMajorInputView() {
         let vc = SearchMajorVC()
         vc.searchMajorSelectCellDelegate = self
-        
         let navigationVC = UINavigationController(rootViewController: vc)
+        
         present(navigationVC, animated: true)
     }
-    
 }
-extension UpdateProfileVC: SearchMajorSelectCellDelegate{
+extension UpdateProfileVC: SearchMajorSelectCellDelegate {
     func sendSeleceted(major: String) {
         majorInputView.setContentLabelText(text: major)
     }

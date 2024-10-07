@@ -22,7 +22,7 @@ struct ChatRoomMessageModelResult: Codable {
     let profileImage: String?
     let message: String
     let createdDate: String
-    let studentId: String
+    let studentId: String?
     let department: String?
 }
 
