@@ -20,7 +20,6 @@ class ChatRoomListVC: BaseViewController {
         didSet{
             noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
             chatTableView.reloadData()
-            chatTableView.refreshControl?.endRefreshing()
         }
     }
     
@@ -48,8 +47,7 @@ class ChatRoomListVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(reloadBoardListData), for: .valueChanged)
+        tableView.bounces = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -210,9 +208,5 @@ extension ChatRoomListVC {
                 
             }
         }
-    }
-    
-    @objc private func reloadBoardListData() {
-        getChatRoomData()
     }
 }
