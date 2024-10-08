@@ -13,7 +13,7 @@ struct ChatRoomModel: Codable {
     let result: [ChatRoomModelResult]
 }
 
-struct ChatRoomModelResult: Codable {
+struct ChatRoomModelResult: Codable, Equatable {
     let id: Int
     let title, leaderUserDepartment, applyLeaderDepartment: String
     let chatRoomUsers: [ChatRoomUserList]
@@ -22,7 +22,7 @@ struct ChatRoomModelResult: Codable {
     let chatRoomUserProfileImages: [String?]
 }
 
-struct ChatRoomUserList: Codable {
+struct ChatRoomUserList: Codable, Equatable {
     let id, userID, chatRoomID: Int
     let nickname, department, studentID: String
     let profileImage: String?
