@@ -50,6 +50,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
+        let vc = currentTopViewController()
+        if let chatRoomVC = vc as? ChatRoomVC {
+            chatRoomVC.getAccessToken()
+            chatRoomVC.initStomp()
+        }
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
         self.checkAndUpdateIfNeeded()
@@ -59,6 +64,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        let vc = currentTopViewController()
+        if let chatRoomVC = vc as? ChatRoomVC {
+            chatRoomVC.swiftStomp.disconnect()
+        }
     }
     
     // 업데이트가 필요한지 확인 후 업데이트 알럿을 띄우는 메소드
@@ -112,6 +121,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         alert.addAction(updateAction)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func currentTopViewController(controller: UIViewController? = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController) -> UIViewController? {
+        
+        if let navigationController = controller as? UINavigationController {
+            return currentTopViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabbarController = controller as? UITabBarController {
+            if let selected = tabbarController.selectedViewController {
+                return currentTopViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return currentTopViewController(controller: presented)
+        }
+        return controller
+        
     }
 }
 

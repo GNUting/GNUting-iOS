@@ -35,7 +35,7 @@ class ChatRoomVC: UIViewController {
     var subTitleSting: String?
     var message: String = ""
     var userEmail : String = ""
-    private var swiftStomp : SwiftStomp!
+    var swiftStomp : SwiftStomp!
     private lazy var navigationBarView: ChatRoomNavigationBar = {
         let view = ChatRoomNavigationBar()
         
@@ -129,6 +129,8 @@ class ChatRoomVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
@@ -144,6 +146,7 @@ class ChatRoomVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         removeKeyboardObserver()
         chatRoomOut()
         swiftStomp.disconnect()
@@ -282,13 +285,13 @@ extension ChatRoomVC: UITableViewDataSource{
 // MARK: API
 
 extension ChatRoomVC {
-    private func getAccessToken(){
+    func getAccessToken(){
         guard let email = KeyChainManager.shared.read(key: "UserEmail") else { return }
         userEmail = email
         guard let token = KeyChainManager.shared.read(key: email) else { return }
         self.accessToken = token
     }
-    private func initStomp(){
+    func initStomp(){
         let url = URL(string: "ws://203.255.15.32:14357/chat")!
 //        let url = URL(string: "ws://203.255.15.32:1541/chat")! // Test
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])

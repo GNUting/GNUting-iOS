@@ -12,15 +12,14 @@ import UIKit
 class ChatRoomListVC: BaseViewController {
     
     // MARK: - Properties
-    
     var selecetedIndex: IndexPath?
     var timeTrigger = true
     var realTime = Timer()
+    
     var chatRoomData: [ChatRoomModelResult] = [] {
         didSet{
             noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
             chatTableView.reloadData()
-            chatTableView.refreshControl?.endRefreshing()
         }
     }
     
@@ -48,8 +47,7 @@ class ChatRoomListVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(reloadBoardListData), for: .valueChanged)
+        tableView.bounces = false
         return tableView
     }()
     override func viewDidLoad() {
@@ -64,7 +62,6 @@ class ChatRoomListVC: BaseViewController {
         self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
         getChatRoomData()
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -175,12 +172,14 @@ extension ChatRoomListVC: UITableViewDelegate {
 
 extension ChatRoomListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
         return chatRoomData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
         let cellData = chatRoomData[indexPath.row]
+
         let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
         let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
         let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
@@ -190,7 +189,7 @@ extension ChatRoomListVC: UITableViewDataSource {
         
         cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: cellData.title , lastMessage: lastMessage, lastMessageTime: lastMessageTime)
         cell.selectionStyle = .none
-        
+    
         return cell
     }
 }
@@ -200,12 +199,14 @@ extension ChatRoomListVC {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getData, response in
                 guard let getChatRoomData = getData?.result else { return }
-                self.chatRoomData = getChatRoomData
+                if self.chatRoomData == getChatRoomData {
+                    print("equlal")
+                } else {
+                    self.chatRoomData = getChatRoomData
+                    print("update")
+                }
+                
             }
         }
-    }
-    
-    @objc private func reloadBoardListData() {
-        getChatRoomData()
     }
 }

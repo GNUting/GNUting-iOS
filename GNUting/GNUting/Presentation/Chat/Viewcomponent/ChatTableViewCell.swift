@@ -101,7 +101,8 @@ class ChatTableViewCell: UITableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        userImageView.image = nil
+        newChatImageView.image = nil
     }
     
 }

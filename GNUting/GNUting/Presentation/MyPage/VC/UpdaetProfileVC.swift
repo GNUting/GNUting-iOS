@@ -239,10 +239,7 @@ extension UpdateProfileVC :NicknameCheckButtonDelegate {
 }
 
 extension UpdateProfileVC: NicknameTextfiledDelegate {
-    func endEdit(textFieldText: String) {
-        if textFieldText.isEmpty {
-            self.nickNameInputView.setCheckLabel(isHidden: false, text: "닉네임을 입력해주세요.", success: false)
-        }
+    func endEdit() {
     }
 
     func didBegin() {

@@ -16,7 +16,7 @@ protocol NicknameCheckButtonDelegate: AnyObject {
 }
 protocol NicknameTextfiledDelegate: AnyObject {
     func didBegin()
-    func endEdit(textFieldText: String)
+    func endEdit()
 }
 
 final class NicknameTypeInputView: UIView {

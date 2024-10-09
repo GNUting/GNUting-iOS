@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A4860BEE577AFE9533473F /* Pods_GNUting.framework */; };
-		F80287562CA5477200089E8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F80287552CA5477200089E8A /* GoogleService-Info.plist */; };
 		F80498A22CB3038C0059DA6A /* SwiftStompDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */; };
 		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
 		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
@@ -105,6 +104,7 @@
 		F87DAD272BEC7718005DCB28 /* AlertChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */; };
 		F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813E412BAD824A008AF204 /* UserDefaultsManager.swift */; };
 		F8813E452BAD943D008AF204 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */; };
+		F88268B12CB3E732007BB110 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88268B02CB3E732007BB110 /* GoogleService-Info.plist */; };
 		F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBAB2BA40E56009201D2 /* BoardDetailModel.swift */; };
 		F882DBAF2BA42A29009201D2 /* MemBerAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */; };
 		F882DBB52BA432B5009201D2 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBB42BA432B5009201D2 /* CommonModel.swift */; };
@@ -170,7 +170,6 @@
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
 		F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */; };
-		F8D1CC8C2C6332CD00ED92BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8D1CC8B2C6332CD00ED92BB /* GoogleService-Info.plist */; };
 		F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D96F6D2B99A8D5009409A3 /* BackButton.swift */; };
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
 		F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */; };
@@ -290,6 +289,7 @@
 		F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertChatModel.swift; sourceTree = "<group>"; };
 		F8813E412BAD824A008AF204 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
+		F88268B02CB3E732007BB110 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F882DBAB2BA40E56009201D2 /* BoardDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailModel.swift; sourceTree = "<group>"; };
 		F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemBerAddTableViewCell.swift; sourceTree = "<group>"; };
 		F882DBB42BA432B5009201D2 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
@@ -355,7 +355,6 @@
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewType.swift; sourceTree = "<group>"; };
-		F8D1CC8B2C6332CD00ED92BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8D96F6D2B99A8D5009409A3 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
 		F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomVC.swift; sourceTree = "<group>"; };
@@ -613,6 +612,7 @@
 				F85344F72B5F710A001EADE6 /* Products */,
 				0383C2930558C4EAC52EA087 /* Pods */,
 				FE3AB1D242DF68A2F8B939AC /* Frameworks */,
+				F88268AF2CB3E727007BB110 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -632,7 +632,7 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F8D1CC8B2C6332CD00ED92BB /* GoogleService-Info.plist */,
+				F88268B02CB3E732007BB110 /* GoogleService-Info.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -733,6 +733,14 @@
 				F86909492BFA22BD001634D4 /* ChatVisibleManager.swift */,
 			);
 			path = UserDefaultsManager;
+			sourceTree = "<group>";
+		};
+		F88268AF2CB3E727007BB110 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				F80287552CA5477200089E8A /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		F882DBB02BA42B8C009201D2 /* ResponseModel */ = {
@@ -1428,13 +1436,12 @@
 				F853452B2B5F7A49001EADE6 /* Pretendard-SemiBold.otf in Resources */,
 				F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */,
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
-				F80287562CA5477200089E8A /* GoogleService-Info.plist in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
-				F8D1CC8C2C6332CD00ED92BB /* GoogleService-Info.plist in Resources */,
+				F88268B12CB3E732007BB110 /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
 				F85345292B5F7A49001EADE6 /* Pretendard-Light.otf in Resources */,
@@ -1814,7 +1821,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.6;
+				MARKETING_VERSION = 2.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1856,7 +1863,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.6;
+				MARKETING_VERSION = 2.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
