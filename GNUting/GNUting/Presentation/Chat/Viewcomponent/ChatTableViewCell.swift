@@ -102,7 +102,6 @@ class ChatTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         userImageView.image = nil
-        newChatImageView.image = nil
     }
     
 }
@@ -164,16 +163,29 @@ extension ChatTableViewCell{
         
         return imageView
     }
-}
-extension ChatTableViewCell {
-    func setChatTableViewCell(chatRoomUserProfileImages: String?, hasNewMessage: Bool, nameList: String, subInfoString: String?, title: String, lastMessage: String, lastMessageTime: String) {
-        setImageFromStringURL(stringURL: chatRoomUserProfileImages) { image in
+    
+    private func getCacheImageData(imageString: String?) {
+        let cacheKey = NSString(string: imageString ?? "")
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
             DispatchQueue.main.async {
-                self.userImageView.image = image
+                self.userImageView.image = cachedImage
                 self.userImageView.layer.cornerRadius = 22.5
                 self.userImageView.layer.masksToBounds = true
             }
+        } else {
+            setImageFromStringURL(stringURL: imageString) { image in
+                DispatchQueue.main.async {
+                    self.userImageView.image = image
+                    self.userImageView.layer.cornerRadius = 22.5
+                    self.userImageView.layer.masksToBounds = true
+                }
+            }
         }
+    }
+}
+extension ChatTableViewCell {
+    func setChatTableViewCell(chatRoomUserProfileImages: String?, hasNewMessage: Bool, nameList: String, subInfoString: String?, title: String, lastMessage: String, lastMessageTime: String) {
+        getCacheImageData(imageString: chatRoomUserProfileImages)
         newChatImageView.isHidden = hasNewMessage ? false : true
         chatRoomNameListLabel.text = nameList
         subInfoLabel.text = subInfoString
