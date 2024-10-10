@@ -170,6 +170,8 @@
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
 		F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */; };
+		F8D7E2962CB7FA09002F7049 /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8D7E2952CB7FA09002F7049 /* GnutingInfo.plist */; };
+		F8D7E29B2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D7E29A2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift */; };
 		F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D96F6D2B99A8D5009409A3 /* BackButton.swift */; };
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
 		F8DB02122BB3E95B0067CED2 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */; };
@@ -355,6 +357,8 @@
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewType.swift; sourceTree = "<group>"; };
+		F8D7E2952CB7FA09002F7049 /* GnutingInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
+		F8D7E29A2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GnuTingInfo++Bundle.swift"; sourceTree = "<group>"; };
 		F8D96F6D2B99A8D5009409A3 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
 		F8DB02112BB3E95B0067CED2 /* ChatRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomVC.swift; sourceTree = "<group>"; };
@@ -633,6 +637,7 @@
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
 				F88268B02CB3E732007BB110 /* GoogleService-Info.plist */,
+				F8D7E2952CB7FA09002F7049 /* GnutingInfo.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -1111,6 +1116,14 @@
 			path = BoardList;
 			sourceTree = "<group>";
 		};
+		F8D7E2972CB7FAA4002F7049 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				F8D7E29A2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		F8DB022B2BB412EE0067CED2 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1156,6 +1169,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F8D7E2972CB7FAA4002F7049 /* Info */,
 				F86909512BFCF522001634D4 /* AppStoreCheck */,
 				F889EA042BF66F550042D8FB /* Network */,
 				F8DE06802BF3695B00D32E7E /* Cache */,
@@ -1441,6 +1455,7 @@
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
+				F8D7E2962CB7FA09002F7049 /* GnutingInfo.plist in Resources */,
 				F88268B12CB3E732007BB110 /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
@@ -1537,6 +1552,7 @@
 				F8A6956A2BA1A17400BEB0C6 /* BoardModel.swift in Sources */,
 				F8C7DE4F2BC4099D00923EF5 /* NotificationModel.swift in Sources */,
 				F81D08B52BE65CD400219CEA /* TotalAlertVC.swift in Sources */,
+				F8D7E29B2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift in Sources */,
 				F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */,
 				F8AC69D32C89A26E00873455 /* HomeTopView.swift in Sources */,
 				F8DE068E2BF5E53000D32E7E /* ChatRoomFirstImageView.swift in Sources */,
@@ -1821,7 +1837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.8;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1863,7 +1879,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.8;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
