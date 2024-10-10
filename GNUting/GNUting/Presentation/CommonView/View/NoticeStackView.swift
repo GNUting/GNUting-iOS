@@ -9,7 +9,7 @@
 
 import UIKit
 
-final class NoticeStackView: UIStackView {
+final class NoticeStackView: UIView {
 
     // MARK: - Properties
     
@@ -31,7 +31,7 @@ final class NoticeStackView: UIStackView {
         label.backgroundColor = UIColor(named: "BackGroundColor")
         label.layer.cornerRadius = 8
         label.layer.masksToBounds = true
-        
+        label.numberOfLines = 2
         return label
     }()
     
@@ -57,22 +57,26 @@ extension NoticeStackView{
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        self.addStackSubViews([noticeImageView, noticeLabel])
+        self.addSubViews([noticeImageView, noticeLabel])
     }
     
     private func setAutoLayout() {
         noticeImageView.snp.makeConstraints { make in
-            make.width.equalTo(24)
+            make.left.equalToSuperview()
+            make.width.height.equalTo(24)
+            make.centerY.equalToSuperview()
+        }
+        
+        noticeLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(noticeImageView.snp.right).offset(6)
+            make.right.equalToSuperview()
         }
     }
     
     // MARK: - setView
     
     private func setNoticeStackView() {
-        self.axis = .horizontal
-        self.alignment = .fill
-        self.distribution = .fill
-        self.spacing = 6
         noticeLabel.text = self.labelText
     }
 }
