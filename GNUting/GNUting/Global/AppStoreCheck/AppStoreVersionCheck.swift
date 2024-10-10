@@ -20,8 +20,8 @@ class AppStoreVersionCheck {
     // 앱 스토어 최신 정보 확인
     
     static func isUpdateAvailable(completion: @escaping (String?, Error?) -> Void) throws -> URLSessionDataTask {
-        let identifier = 6502196555
-        guard let url = URL(string: "http://itunes.apple.com/kr/lookup?bundleId=\(identifier)") else {
+        let identifier = Bundle.main.appID
+        guard let url = URL(string: "http://itunes.apple.com/kr/lookup?id=\(identifier)") else {
             throw VersionError.invalidBundleInfo
         }
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -29,6 +29,7 @@ class AppStoreVersionCheck {
                 if let error = error { throw error }
                 guard let data = data else { throw VersionError.invalidResponse }
                 let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
+                
                 guard let result = (json?["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String else {
                     throw VersionError.invalidResponse
                 } // 앱스토어 버전 가져오기

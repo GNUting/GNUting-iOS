@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ChatRoomModel: Codable {
+struct ChatRoomModel: Codable, Hashable {
     let isSuccess: Bool
     let code, message: String
     let result: [ChatRoomModelResult]
 }
 
-struct ChatRoomModelResult: Codable, Equatable {
+struct ChatRoomModelResult: Codable, Hashable {
     let id: Int
     let title, leaderUserDepartment, applyLeaderDepartment: String
     let chatRoomUsers: [ChatRoomUserList]
@@ -22,7 +22,7 @@ struct ChatRoomModelResult: Codable, Equatable {
     let chatRoomUserProfileImages: [String?]
 }
 
-struct ChatRoomUserList: Codable, Equatable {
+struct ChatRoomUserList: Codable, Hashable {
     let id, userID, chatRoomID: Int
     let nickname, department, studentID: String
     let profileImage: String?

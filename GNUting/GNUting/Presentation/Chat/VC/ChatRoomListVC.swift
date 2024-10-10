@@ -12,14 +12,14 @@ import UIKit
 class ChatRoomListVC: BaseViewController {
     
     // MARK: - Properties
+    
     var selecetedIndex: IndexPath?
     var timeTrigger = true
     var realTime = Timer()
-    
+    var dataSource: UITableViewDiffableDataSource<Int,ChatRoomModelResult>!
     var chatRoomData: [ChatRoomModelResult] = [] {
         didSet{
             noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
-            chatTableView.reloadData()
         }
     }
     
@@ -45,16 +45,20 @@ class ChatRoomListVC: BaseViewController {
         tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identi)
         tableView.separatorStyle = .none
         tableView.delegate = self
-        tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.bounces = false
+        tableView.dataSource = dataSource
+        
         return tableView
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addSubViews()
         setAutoLayout()
+        setUpDataSourece()
+        setSnapshot()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,10 +67,12 @@ class ChatRoomListVC: BaseViewController {
         tabBarController?.tabBar.isHidden = false
         getChatRoomData()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startRepeatFunction()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopRepeatFunction()
@@ -76,6 +82,7 @@ class ChatRoomListVC: BaseViewController {
 extension ChatRoomListVC{
     
     // MARK: - Layout Helpers
+    
     private func addSubViews() {
         view.addSubViews([titleLabel, chatTableView, noDataScreenView])
     }
@@ -85,16 +92,19 @@ extension ChatRoomListVC{
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
+        
         chatTableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(24)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
         }
+        
         noDataScreenView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
         
     }
+    
     // MARK: - Private Logic
     
     private func checkImageString(imageArray: [String?])-> String? {
@@ -159,6 +169,35 @@ extension ChatRoomListVC{
     @objc private func updateChatRoomAPI() {
         getChatRoomData()
     }
+    
+    // MARK: - DataSource 관련
+    
+    private func setUpDataSourece() {
+        self.dataSource = UITableViewDiffableDataSource<Int,ChatRoomModelResult>(tableView: chatTableView, cellProvider: { [self](tableView, indexPath, itemIdentifier) -> UITableViewCell? in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
+            let cellData = chatRoomData[indexPath.row]
+
+            let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
+            let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
+            let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
+            let subInfoString = checkOneMatching(userListCount: otherMemberCount, studentID: cellData.chatRoomUsers.first?.studentID, department: cellData.chatRoomUsers.first?.department)// 1대1일 경우 학번 학과
+            let lastMessage = cellData.lastMessage // 제일 최근 메세지
+            let lastMessageTime = changeDateString(dateString: cellData.lastMessageTime) // 제일 최근 메세지 시간
+            
+            cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: cellData.title , lastMessage: lastMessage, lastMessageTime: lastMessageTime)
+            cell.selectionStyle = .none
+        
+            return cell
+        })
+    }
+    
+    func setSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int,ChatRoomModelResult>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(chatRoomData)
+        dataSource.apply(snapshot,animatingDifferences: false)
+    }
+    
 }
 
 extension ChatRoomListVC: UITableViewDelegate {
@@ -169,43 +208,15 @@ extension ChatRoomListVC: UITableViewDelegate {
         pushViewContoller(viewController: vc)
     }
 }
-
-extension ChatRoomListVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-        return chatRoomData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
-        let cellData = chatRoomData[indexPath.row]
-
-        let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
-        let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
-        let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
-        let subInfoString = checkOneMatching(userListCount: otherMemberCount, studentID: cellData.chatRoomUsers.first?.studentID, department: cellData.chatRoomUsers.first?.department)// 1대1일 경우 학번 학과
-        let lastMessage = cellData.lastMessage // 제일 최근 메세지
-        let lastMessageTime = changeDateString(dateString: cellData.lastMessageTime) // 제일 최근 메세지 시간
-        
-        cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: cellData.title , lastMessage: lastMessage, lastMessageTime: lastMessageTime)
-        cell.selectionStyle = .none
-    
-        return cell
-    }
-}
-
 extension ChatRoomListVC {
     private func getChatRoomData() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getData, response in
                 guard let getChatRoomData = getData?.result else { return }
-                if self.chatRoomData == getChatRoomData {
-                    print("equlal")
-                } else {
+                if self.chatRoomData != getChatRoomData {
                     self.chatRoomData = getChatRoomData
-                    print("update")
+                    self.setSnapshot()
                 }
-                
             }
         }
     }

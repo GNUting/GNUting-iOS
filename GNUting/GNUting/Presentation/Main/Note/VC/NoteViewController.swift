@@ -31,7 +31,7 @@ final class NoteViewController: BaseViewController {
         return view
     }()
     
-    let noticeStackView = NoticeStackView(text: "업로드 된 메모는 매일 자정에 초기화됩니다.")
+    let noticeStackView = NoticeStackView(text: "업로드 된 메모는 매일 자정에 초기화됩니다.\n같은 성별의 메모팅은 보이지 않습니다 :)")
     
     let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -159,7 +159,7 @@ extension NoteViewController {
         APIPostManager.shared.postNoteRegister(content: content) { response in
             guard let response = response else { return print("nil 출력")}
             if response.isSuccess {
-                self.showAlert(message: "메모가 등록되었습니다.")
+                self.showAlert(message: "메모가 등록되었습니다.\n(작성하신 메모는 본인에게는 표시되지 않습니다)")
             } else {
                 self.showAlert(message: response.message)
             }
