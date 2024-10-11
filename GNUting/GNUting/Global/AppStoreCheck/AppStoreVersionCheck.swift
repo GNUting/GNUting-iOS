@@ -7,21 +7,18 @@
 
 import UIKit
 enum VersionError: Error {
-    case invalidResponse, invalidBundleInfo
+    case invalidResponse, invalidBundleInfo, readErrorBundleID
 }
 class AppStoreVersionCheck {
     // 현재 버전 : 타겟 -> 일반 -> Version
     static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    
-    // 개발자가 내부적으로 확인하기 위한 용도 : 타겟 -> 일반 -> Build
-    static let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-    static let appStoreOpenUrlString = "https://apps.apple.com/kr/app/%EC%A7%80%EB%88%84%ED%8C%85-%EA%B2%BD%EC%83%81%EA%B5%AD%EB%A6%BD%EB%8C%80%ED%95%99%EA%B5%90-%EC%9E%AC%ED%95%99%EC%83%9D-%EC%A0%84%EC%9A%A9-%EA%B3%BC%ED%8C%85%EC%95%B1/id6502196555"
+    static let appStoreOpenUrlString = Bundle.main.downloadURL
     
     // 앱 스토어 최신 정보 확인
     
     static func isUpdateAvailable(completion: @escaping (String?, Error?) -> Void) throws -> URLSessionDataTask {
-        let identifier = Bundle.main.appID
-        guard let url = URL(string: "http://itunes.apple.com/kr/lookup?id=\(identifier)") else {
+        guard let bundleID = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String else { throw VersionError.readErrorBundleID }
+        guard let url = URL(string: "http://itunes.apple.com/kr/lookup?bundleId=\(bundleID)") else {
             throw VersionError.invalidBundleInfo
         }
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -33,7 +30,7 @@ class AppStoreVersionCheck {
                 guard let result = (json?["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String else {
                     throw VersionError.invalidResponse
                 } // 앱스토어 버전 가져오기
-                
+                print(version)
                 completion(version, nil)
                 // true is needUpdate
                 // false is latest version

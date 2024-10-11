@@ -8,10 +8,22 @@
 import Foundation
 
 extension Bundle {
-    var appID: String {
+    private func getValue(key: String) -> String {
         guard let file = self.path(forResource: "GnutingInfo", ofType: "plist") else { return ""}
         guard let resource = NSDictionary(contentsOfFile: file) else { return "" }
-        guard let appID = resource["AppID"] as? String else { fatalError("값을 찾을수 없습니다.")}
-        return appID
+        guard let value = resource[key] as? String else { fatalError("\(key)를 찾을수 없습니다.")}
+        return value
+    }
+    
+    var downloadURL: String {
+        return getValue(key: "AppStoreDownloadURL")
+    }
+    
+    var baseURL: String {
+        return getValue(key: "BaseURL")
+    }
+    
+    var socketURL: String {
+        return getValue(key: "SocketURL")
     }
 }
