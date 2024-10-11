@@ -17,18 +17,14 @@ class ChatRoomListVC: BaseViewController {
     var timeTrigger = true
     var realTime = Timer()
     var dataSource: UITableViewDiffableDataSource<Int,ChatRoomModelResult>!
-    var chatRoomData: [ChatRoomModelResult] = [] {
-        didSet{
-            noDataScreenView.isHidden = chatRoomData.isEmpty == true ? false : true
-        }
-    }
+    var chatRoomData: [ChatRoomModelResult] = []
     
     // MARK: - SubViews
     
     private lazy var noDataScreenView: NoDataScreenView = {
         let view = NoDataScreenView()
-        view.isHidden = true
         view.setLabel(text: "현재 참여 중인 채팅방이 없습니다. ", range: "")
+        
         return view
     }()
     
@@ -176,7 +172,7 @@ extension ChatRoomListVC{
         self.dataSource = UITableViewDiffableDataSource<Int,ChatRoomModelResult>(tableView: chatTableView, cellProvider: { [self](tableView, indexPath, itemIdentifier) -> UITableViewCell? in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identi, for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
             let cellData = chatRoomData[indexPath.row]
-
+            
             let titleImage = checkImageString(imageArray: cellData.chatRoomUserProfileImages) // 대표 이미지
             let usernameString = makeUsrnameString(by: cellData.chatRoomUsers.map({$0.nickname})) // 나를 제외한 채팅방 사용자 이름 or 아무도 없을 경우 알수없음
             let otherMemberCount = cellData.chatRoomUsers.count // 나를 제외한 채팅 멤버수
@@ -186,7 +182,7 @@ extension ChatRoomListVC{
             
             cell.setChatTableViewCell(chatRoomUserProfileImages: titleImage, hasNewMessage: cellData.hasNewMessage, nameList: usernameString, subInfoString: subInfoString, title: cellData.title , lastMessage: lastMessage, lastMessageTime: lastMessageTime)
             cell.selectionStyle = .none
-        
+            
             return cell
         })
     }
@@ -213,6 +209,7 @@ extension ChatRoomListVC {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             APIGetManager.shared.getChatRoomData { getData, response in
                 guard let getChatRoomData = getData?.result else { return }
+                self.noDataScreenView.isHidden = getChatRoomData.isEmpty == true ? false : true
                 if self.chatRoomData != getChatRoomData {
                     self.chatRoomData = getChatRoomData
                     self.setSnapshot()
