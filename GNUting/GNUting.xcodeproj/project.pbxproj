@@ -37,6 +37,7 @@
 		F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF52B764AD700E49073 /* SelectDateView.swift */; };
 		F8235CF92B765E2200E49073 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF82B765E2200E49073 /* DateModel.swift */; };
 		F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */; };
+		F829FC522CB8D65A000D180F /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F829FC512CB8D65A000D180F /* GnutingInfo.plist */; };
 		F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834A0182C05E41500E8E0DB /* Notification+Extension.swift */; };
 		F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153C2BC5185900334A6A /* UserImageButton.swift */; };
 		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
@@ -170,7 +171,6 @@
 		F8CDE34F2B849AEE00E5598D /* DetailDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */; };
 		F8CDE3522B849F9500E5598D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CDE3512B849F9500E5598D /* UserInfoView.swift */; };
 		F8D10F3D2BA0584800B795FD /* SignUpInputViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */; };
-		F8D7E2962CB7FA09002F7049 /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8D7E2952CB7FA09002F7049 /* GnutingInfo.plist */; };
 		F8D7E29B2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D7E29A2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift */; };
 		F8D96F6E2B99A8D5009409A3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D96F6D2B99A8D5009409A3 /* BackButton.swift */; };
 		F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */; };
@@ -223,6 +223,7 @@
 		F8235CF52B764AD700E49073 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		F8235CF82B765E2200E49073 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpThirdProcessVC.swift; sourceTree = "<group>"; };
+		F829FC512CB8D65A000D180F /* GnutingInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F830FE972BAA040900ADC7B5 /* GNUting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GNUting.entitlements; sourceTree = "<group>"; };
 		F834A0182C05E41500E8E0DB /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		F841153C2BC5185900334A6A /* UserImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageButton.swift; sourceTree = "<group>"; };
@@ -357,7 +358,6 @@
 		F8CDE34E2B849AEE00E5598D /* DetailDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardVC.swift; sourceTree = "<group>"; };
 		F8CDE3512B849F9500E5598D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F8D10F3C2BA0584800B795FD /* SignUpInputViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInputViewType.swift; sourceTree = "<group>"; };
-		F8D7E2952CB7FA09002F7049 /* GnutingInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F8D7E29A2CB7FB1E002F7049 /* GnuTingInfo++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GnuTingInfo++Bundle.swift"; sourceTree = "<group>"; };
 		F8D96F6D2B99A8D5009409A3 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		F8DB020F2BB3E5F00067CED2 /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
@@ -637,7 +637,7 @@
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
 				F88268B02CB3E732007BB110 /* GoogleService-Info.plist */,
-				F8D7E2952CB7FA09002F7049 /* GnutingInfo.plist */,
+				F829FC512CB8D65A000D180F /* GnutingInfo.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -1455,7 +1455,7 @@
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
-				F8D7E2962CB7FA09002F7049 /* GnutingInfo.plist in Resources */,
+				F829FC522CB8D65A000D180F /* GnutingInfo.plist in Resources */,
 				F88268B12CB3E732007BB110 /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
