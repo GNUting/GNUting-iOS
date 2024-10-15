@@ -1,10 +1,3 @@
-//
-//  TermsURL.swift
-//  GNUting
-//
-//  Created by 원동진 on 9/3/24.
-//
-
 import UIKit
 
 enum TermsURL {
