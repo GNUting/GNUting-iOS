@@ -5,7 +5,7 @@
 //  Created by 원동진 on 9/5/24.
 //
 
-// MARK: 홈 상단 화면
+// MARK: - 홈 상단 화면
 
 import UIKit
 

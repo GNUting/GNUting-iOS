@@ -9,7 +9,7 @@
 
 import UIKit
 
-// MARK: protocol
+// MARK: - protocol
 
 protocol MemberAddButtonDelegate: AnyObject{
     func sendAddMemberData(send: [UserInfosModel])

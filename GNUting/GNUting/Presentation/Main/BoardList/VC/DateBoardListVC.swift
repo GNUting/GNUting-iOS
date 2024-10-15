@@ -58,7 +58,7 @@ final class DateBoardListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getBoardData(page: page)
+        getBoardDataAPI(page: page)
         addSubViews()
         setAutoLayout()
         setNavigationBar(title: "과팅 게시판")
@@ -100,7 +100,7 @@ extension DateBoardListVC {
 // MARK: - API
 
 extension DateBoardListVC {
-    private func getBoardData(page: Int) {
+    private func getBoardDataAPI(page: Int) {
         self.isFetching = true
         
         APIGetManager.shared.getBoardText(page: page, size: 15) { boardData,response  in
@@ -129,6 +129,8 @@ extension DateBoardListVC: UITableViewDataSource {
     }
 }
 
+// MARK: - Delegate
+
 extension DateBoardListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailDateBoardVC()
@@ -145,7 +147,7 @@ extension DateBoardListVC: UITableViewDelegate {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.height) {
             if !isFetching {
                 page += 1
-                getBoardData(page: page)
+                getBoardDataAPI(page: page)
             }
         }
     }

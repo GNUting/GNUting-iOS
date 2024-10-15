@@ -37,7 +37,8 @@
 		F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF52B764AD700E49073 /* SelectDateView.swift */; };
 		F8235CF92B765E2200E49073 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF82B765E2200E49073 /* DateModel.swift */; };
 		F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */; };
-		F829FC522CB8D65A000D180F /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F829FC512CB8D65A000D180F /* GnutingInfo.plist */; };
+		F829FC542CBEA4F7000D180F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F829FC532CBEA4F7000D180F /* GoogleService-Info.plist */; };
+		F829FC562CBEA4FB000D180F /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F829FC552CBEA4FB000D180F /* GnutingInfo.plist */; };
 		F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834A0182C05E41500E8E0DB /* Notification+Extension.swift */; };
 		F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153C2BC5185900334A6A /* UserImageButton.swift */; };
 		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
@@ -105,7 +106,6 @@
 		F87DAD272BEC7718005DCB28 /* AlertChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */; };
 		F8813E422BAD824A008AF204 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813E412BAD824A008AF204 /* UserDefaultsManager.swift */; };
 		F8813E452BAD943D008AF204 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */; };
-		F88268B12CB3E732007BB110 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88268B02CB3E732007BB110 /* GoogleService-Info.plist */; };
 		F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBAB2BA40E56009201D2 /* BoardDetailModel.swift */; };
 		F882DBAF2BA42A29009201D2 /* MemBerAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */; };
 		F882DBB52BA432B5009201D2 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBB42BA432B5009201D2 /* CommonModel.swift */; };
@@ -223,7 +223,8 @@
 		F8235CF52B764AD700E49073 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		F8235CF82B765E2200E49073 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpThirdProcessVC.swift; sourceTree = "<group>"; };
-		F829FC512CB8D65A000D180F /* GnutingInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
+		F829FC532CBEA4F7000D180F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F829FC552CBEA4FB000D180F /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F830FE972BAA040900ADC7B5 /* GNUting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GNUting.entitlements; sourceTree = "<group>"; };
 		F834A0182C05E41500E8E0DB /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		F841153C2BC5185900334A6A /* UserImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageButton.swift; sourceTree = "<group>"; };
@@ -292,7 +293,6 @@
 		F87DAD262BEC7718005DCB28 /* AlertChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertChatModel.swift; sourceTree = "<group>"; };
 		F8813E412BAD824A008AF204 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		F8813E442BAD943D008AF204 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
-		F88268B02CB3E732007BB110 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F882DBAB2BA40E56009201D2 /* BoardDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailModel.swift; sourceTree = "<group>"; };
 		F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemBerAddTableViewCell.swift; sourceTree = "<group>"; };
 		F882DBB42BA432B5009201D2 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
@@ -636,8 +636,8 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F88268B02CB3E732007BB110 /* GoogleService-Info.plist */,
-				F829FC512CB8D65A000D180F /* GnutingInfo.plist */,
+				F829FC532CBEA4F7000D180F /* GoogleService-Info.plist */,
+				F829FC552CBEA4FB000D180F /* GnutingInfo.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -1447,16 +1447,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F829FC562CBEA4FB000D180F /* GnutingInfo.plist in Resources */,
 				F853452B2B5F7A49001EADE6 /* Pretendard-SemiBold.otf in Resources */,
 				F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */,
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
+				F829FC542CBEA4F7000D180F /* GoogleService-Info.plist in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
-				F829FC522CB8D65A000D180F /* GnutingInfo.plist in Resources */,
-				F88268B12CB3E732007BB110 /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
 				F85345292B5F7A49001EADE6 /* Pretendard-Light.otf in Resources */,
@@ -1837,7 +1837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1879,7 +1879,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GNUGoF.GNUting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

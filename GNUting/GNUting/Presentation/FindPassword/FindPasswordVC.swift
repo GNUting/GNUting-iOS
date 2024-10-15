@@ -111,15 +111,14 @@ extension FindPasswordVC {
 
 extension FindPasswordVC {
     private func nextButtonEnable() {
-        if emailSuccess == true && samePasswordSuccess == true {
+        if emailSuccess && samePasswordSuccess {
             passwordUpdateButton.isEnabled = true
-        }else {
+        } else {
             passwordUpdateButton.isEnabled = false
         }
-        
     }
     
-    private func setEmailCheckTime(limitSecond : Date) { // 시간 따로 변수 프로퍼티 만들어서 뺴기 struct 활용 ☑️
+    private func setEmailCheckTime(limitSecond: Date) { // 시간 따로 변수 프로퍼티 만들어서 뺴기 struct 활용 ☑️
         timer.invalidate()
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in

@@ -119,7 +119,7 @@ extension WriteNoteView {
         }
     }
     
-    // MARK: SetView
+    // MARK: - SetView
     
     private func setBlureffect() {
         self.backgroundColor = .black.withAlphaComponent(0.4)

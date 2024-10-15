@@ -19,7 +19,7 @@ final class AuthNumberInputView: UIView {
     
     // MARK: - Properties
     
-     weak var authNumberInputViewDelegate: AuthNumberInputViewDelegate?
+    weak var authNumberInputViewDelegate: AuthNumberInputViewDelegate?
     
     // MARK: - SubViews
     
@@ -63,7 +63,7 @@ final class AuthNumberInputView: UIView {
     }()
     
     private lazy var remainNumberLabel: UILabel = { // 인증번호 인증 남은 시간
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: "PrimaryColor")
         label.font = Pretendard.medium(size: 12)
         
@@ -91,7 +91,7 @@ extension AuthNumberInputView {
         addSubViews([inputTextTypeLabel, inputTextField, borderView, inputCheckLabel, remainNumberLabel, confirmButton])
     }
     
-    private func setAutoLayout(){
+    private func setAutoLayout() {
         inputTextTypeLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
@@ -132,26 +132,17 @@ extension AuthNumberInputView {
 // MARK: - Internal Method SetView
 
 extension AuthNumberInputView {
-     func setCheckLabel(isHidden: Bool, text: String?, success: Bool) { // 인증번호 성공 or 실패에 대한 출력 Label
+    func setCheckLabel(isHidden: Bool, text: String?, success: Bool) { // 인증번호 성공 or 실패에 대한 출력 Label
+        inputCheckLabel.text = text
         inputCheckLabel.isHidden = isHidden
-        
-        if !isHidden {
-            inputCheckLabel.text = text
-        }
-        
-        if success {
-            inputCheckLabel.textColor = UIColor(named: "SecondaryColor")
-        } else {
-            inputCheckLabel.textColor = UIColor(named: "PrimaryColor")
-        }
-        
+        inputCheckLabel.textColor = success ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
     }
     
-     func setRemainLabel(text: String?) { // 인증 완료 남은시간 Set
+    func setRemainLabel(text: String?) { // 인증 완료 남은시간 Set
         remainNumberLabel.text = text
     }
     
-     func setFoucInputTextFiled() { // 포커스 주기
+    func setFoucInputTextFiled() { // 포커스 주기
         inputTextField.becomeFirstResponder()
     }
 }
@@ -182,14 +173,9 @@ extension AuthNumberInputView: UITextFieldDelegate {
 
 extension AuthNumberInputView {
     @objc private func changeInputTextField(_ sender: UITextField) {
-        if sender.text?.count == 0 {
-            confirmButton.backgroundColor = UIColor(named: "DisableColor")
-            confirmButton.isEnabled = false
-        } else {
-            confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
-            confirmButton.isEnabled = true
-        }
-        
+        let isTextEmpty = (sender.text?.count == 0)
+        confirmButton.isEnabled = !isTextEmpty
+        confirmButton.backgroundColor = isTextEmpty ? UIColor(named: "DisableColor") : UIColor(named: "PrimaryColor")
     }
     
     private func tapConfirmButton() {

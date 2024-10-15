@@ -162,13 +162,9 @@ extension EmailCheckTypeInputView: UITextFieldDelegate {
 
 extension EmailCheckTypeInputView {
     @objc private func changeInputTextField(_ sender: UITextField) {
-        if sender.text?.count == 0 {
-            confirmButton.backgroundColor = UIColor(named: "DisableColor")
-            confirmButton.isEnabled = false
-        } else {
-            confirmButton.backgroundColor = UIColor(named: "PrimaryColor")
-            confirmButton.isEnabled = true
-        }
+        let isTextEmpty = (sender.text?.count == 0)
+        confirmButton.isEnabled = !isTextEmpty
+        confirmButton.backgroundColor = isTextEmpty ? UIColor(named: "DisableColor") : UIColor(named: "PrimaryColor")
     }
     
     private func tapConfirmButton() {

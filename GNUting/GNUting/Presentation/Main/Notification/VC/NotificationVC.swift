@@ -49,7 +49,7 @@ final class NotificationVC: BaseViewController {
         
         setAddSubViews()
         setAutoLayout()
-        getNotificationData()
+        getNotificationDataAPI()
         setNavigationBarPresentType(title: "알림")
     }
 }
@@ -77,7 +77,7 @@ extension NotificationVC {
 // MARK: - API
 
 extension NotificationVC {
-    private func getNotificationData() {
+    private func getNotificationDataAPI() {
         APIGetManager.shared.getNotificationData { notificationData in
             guard let notificationDataList = notificationData else { return }
         
@@ -89,7 +89,7 @@ extension NotificationVC {
         }
     }
     
-    private func deleteNotification(notificationID: Int, indexPath: IndexPath) {
+    private func deleteNotificationAPI(notificationID: Int, indexPath: IndexPath) {
         APIDeleteManager.shared.deleteNotification(notificationID: notificationID) { response in
             if response.isSuccess {
                 DispatchQueue.main.async {
@@ -123,10 +123,12 @@ extension NotificationVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteNotification(notificationID: notificationList[indexPath.row].id, indexPath: indexPath)
+            deleteNotificationAPI(notificationID: notificationList[indexPath.row].id, indexPath: indexPath)
         }
     }
 }
+
+// MARK: - Delegate
 
 extension NotificationVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

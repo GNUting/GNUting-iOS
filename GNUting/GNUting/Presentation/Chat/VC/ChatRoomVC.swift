@@ -282,7 +282,7 @@ extension ChatRoomVC: UITableViewDataSource{
     }
 }
 
-// MARK: API
+// MARK: - API
 
 extension ChatRoomVC {
     func getAccessToken(){

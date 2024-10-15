@@ -19,6 +19,7 @@ final class LoginVC: BaseViewController {
         
         return imageView
     }()
+    
     private lazy var explainLabel: UILabel = {
         let label = UILabel()
         label.text = "경상국립대학교 재학생 전용 과팅앱\n학교 속 새로운 인연을 만나보세요 :)"

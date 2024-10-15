@@ -9,9 +9,9 @@
 
 import UIKit
 
-// MARK: protocol
+// MARK: - protocol
 
-protocol BoardListCellconfiguration {
+protocol BoardListCellconfiguration { // 똑같은 데이터 형식인데 Cell만 다름
     var status: String { get }
     var title: String { get }
     var time: String { get }
@@ -141,18 +141,17 @@ extension BoardListTableViewCell {
     // MARK: - Internal SetCell
     
     func setCell<T: BoardListCellconfiguration>(model: T) {
-        if model.status == "OPEN" {
-            statsuLabel.text = "신청 가능"
-            statsuLabel.textColor = UIColor(named: "SecondaryColor")
-            titleLabel.textColor = .black
-        } else {
-            statsuLabel.text = "신청 마감"
-            statsuLabel.textColor = UIColor(named: "PrimaryColor")
-            titleLabel.textColor = UIColor(named: "DisableColor")
-        }
+        let isOpen = model.status == "OEPN"
         
+        setStatusLabel(status: isOpen)
+        titleLabel.textColor = isOpen ? .black : UIColor(named: "DisableColor")
         titleLabel.text = model.title
         subInfoLabel.text = "\(model.time) | \(model.department) | \((model.studentID)) "
         userCountLabel.text = "\(model.inUserCount):\(model.inUserCount)"
+    }
+    
+    private func setStatusLabel(status: Bool) {
+        statsuLabel.text = status ? "신청 가능" : "신청 마감"
+        statsuLabel.textColor = status ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
     }
 }

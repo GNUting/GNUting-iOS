@@ -5,7 +5,7 @@
 //  Created by 원동진 on 2/7/24.
 //
 
-// MARK: 이용약관 TableView Cell
+// MARK: - 이용약관 TableView Cell
 
 import UIKit
 
@@ -113,12 +113,8 @@ extension TermsTableViewCell {
         sender.isSelected.toggle()
         selectedState = sender.isSelected
         termsTableViewCellDelegate?.checkButtonAction(isSelected: sender.isSelected, indexPath: self.indexPath ?? IndexPath(row: 0, section: 0))
-        
-        if sender.isSelected {
-            checkButton.setImage(UIImage(named: "SelectedCheckImage"), for: .selected)
-        } else {
-            checkButton.setImage(UIImage(named: "noSelectedCheckImage"), for: .normal)
-        }
+        checkButton.setImage(sender.isSelected ? UIImage(named: "SelectedCheckImage") : UIImage(named: "noSelectedCheckImage"),
+                             for: sender.isSelected ? .selected : .normal)
     }
 }
 

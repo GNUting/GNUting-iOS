@@ -138,16 +138,10 @@ extension NicknameTypeInputView {
     
     // MARK: - Set
     
-   func setCheckLabel(isHidden: Bool, text: String?, success: Bool) {
+    func setCheckLabel(isHidden: Bool, text: String?, success: Bool) {
+        inputCheckLabel.text = text
         inputCheckLabel.isHidden = isHidden
-        if !isHidden {
-            inputCheckLabel.text = text
-        }
-        if success {
-            inputCheckLabel.textColor = UIColor(named: "SecondaryColor")
-        } else {
-            inputCheckLabel.textColor = UIColor(named: "PrimaryColor")
-        }
+        inputCheckLabel.textColor = success ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
     }
     
     func setTextField(text: String) {
@@ -162,18 +156,13 @@ extension NicknameTypeInputView {
     private func isOnlyWhitespace(text: String) -> Bool {
         return text.range(of: "^[\\s]*$", options: .regularExpression) != nil
     }
-    
 }
 
 // MARK: - Button Action
 
 extension NicknameTypeInputView {
     @objc private func changeInputTextField(_ sender: UITextField) {
-        if sender.text?.count == 0 {
-            nicknameCheckButton.backgroundColor = UIColor(hexCode: "979C9E")
-        } else {
-            nicknameCheckButton.backgroundColor = UIColor(named: "PrimaryColor")
-        }
+        nicknameCheckButton.backgroundColor = sender.text?.count == 0 ? UIColor(hexCode: "979C9E") : UIColor(named: "PrimaryColor")
     }
     
     private func getNickname() {
@@ -187,12 +176,10 @@ extension NicknameTypeInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         borderView.enableColor()
         nicknameTextfiledDelegate?.didBegin()
-        
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         borderView.disableColor()
-        
         nicknameTextfiledDelegate?.endEdit()
         
         return true
@@ -203,9 +190,6 @@ extension NicknameTypeInputView: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-       
-        
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
             if isBackSpace == -92 {

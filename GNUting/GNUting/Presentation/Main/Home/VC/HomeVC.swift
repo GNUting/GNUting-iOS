@@ -167,7 +167,7 @@ extension HomeVC {
     }
 }
 
-// MARK: API
+// MARK: - API
 
 extension HomeVC {
     

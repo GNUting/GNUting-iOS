@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-// MARK: 이용약관 VC
+// MARK: - 이용약관 VC
 
 class TermsVC: UIViewController{
     
@@ -41,7 +41,7 @@ class TermsVC: UIViewController{
         button.setText("다음")
         button.isEnabled = false
         button.addAction(UIAction { _ in
-            self.pushViewContoller(viewController: SignUpFirstProcessVC())
+            self.pushViewContoller(viewController: SignUPSecondProcessVC())
         }, for: .touchUpInside)
         
         return button

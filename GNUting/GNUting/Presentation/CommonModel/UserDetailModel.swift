@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserDetailModel {
-    var imageURL : String?
+    var imageURL: String?
     var nickname: String?
     var userStudentID: String?
     var userDepartment: String?

@@ -13,7 +13,7 @@ import PhotosUI
 
 class SignUpThirdProcessVC: BaseViewController {
     
-    // MARK: SubViews
+    // MARK: - SubViews
     
     private lazy var phpickerConfiguration: PHPickerConfiguration = {
         var configuration = PHPickerConfiguration()

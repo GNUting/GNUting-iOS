@@ -158,11 +158,9 @@ extension NoteViewController {
     private func postNoteRegisterAPI(content: String) {
         APIPostManager.shared.postNoteRegister(content: content) { response in
             guard let response = response else { return print("nil 출력")}
-            if response.isSuccess {
-                self.showAlert(message: "메모가 등록되었습니다.\n(작성하신 메모는 본인에게는 표시되지 않습니다)")
-            } else {
-                self.showAlert(message: response.message)
-            }
+            let success = response.isSuccess
+            
+            self.showAlert(message: success ? "메모가 등록되었습니다.\n(작성하신 메모는 본인에게는 표시되지 않습니다)" : response.message)
             self.writeNoteView.isHidden = true
         }
     }
@@ -225,7 +223,6 @@ extension NoteViewController: UICollectionViewDelegate {
 
 extension NoteViewController: WriteNoteViewDelegate {
     func tapRegisterButton(contentTextViewText: String) {
-        
         postNoteRegisterAPI(content: contentTextViewText)
     }
     
@@ -236,9 +233,7 @@ extension NoteViewController: WriteNoteViewDelegate {
 
 extension NoteViewController: NoteDateProgressViewDelegate {
     func tapProgressButton() {
-        print("tap")
         noteDateProgressView.isHidden = true
-        
         postApplyNote(noteID: self.selectedNoteID ?? 0)
     }
     

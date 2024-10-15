@@ -18,6 +18,7 @@ protocol SearchMajorSelectCellDelegate: AnyObject {
 final class SearchMajorVC: BaseViewController {
     
     // MARK: - Properties
+    
     weak var searchMajorSelectCellDelegate: SearchMajorSelectCellDelegate?
     private var searchResultList: [SearchMajorModelResult] = [] {
         didSet {
@@ -115,15 +116,14 @@ extension SearchMajorVC: UITableViewDataSource {
     }
 }
 
+// MARK: - Delegate
+
 extension SearchMajorVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchMajorSelectCellDelegate?.sendSeleceted(major: searchResultList[indexPath.row].name)
         dismiss(animated: true)
     }
 }
-
-
-// MARK: - Delegate
 
 extension SearchMajorVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

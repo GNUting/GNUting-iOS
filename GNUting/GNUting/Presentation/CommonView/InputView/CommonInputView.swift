@@ -82,7 +82,7 @@ extension CommonInputView {
     private func setAddSubViews() {
         self.addSubViews([inputTextTypeLabel, inputTextField, borderView, inputCheckLabel])
     }
-
+    
     private func setAutoLayout() {
         inputTextTypeLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -126,25 +126,22 @@ extension CommonInputView {
     }
     
     private func textFieldHandler(textFieldText: String) { // 텍스트필드 타입에 따른 action 처리
-        
-        if textFieldType == .password {
+        switch textFieldType {
+        case .password:
             setPasswordCheckLabel(text: textFieldText)
-        } else if textFieldType == .passwordCheck {
+        case .passwordCheck:
             passwordCheckDelegate?.passwordCheckKeyboardReturn(text: textFieldText)
-        } else if textFieldType == .phoneNumber {
+        case .phoneNumber:
             phoneNumberDelegate?.phoneNumberKeyBoardReturn(textFieldCount: textFieldText.count)
+        default:
+            break
         }
     }
     
     private func setPasswordCheckLabel(text: String) {
         let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
         let checkPassword = text.range(of: regex,options: .regularExpression) != nil
-        
-        if checkPassword {
-            self.setInputCheckLabel(isHidden: false, text: "올바른 규칙의 비밀번호입니다.", success: true)
-        } else {
-            self.setInputCheckLabel(isHidden: false, text: "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: false)
-        }
+        self.setInputCheckLabel(isHidden: false, text: checkPassword ? "올바른 규칙의 비밀번호입니다." : "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: checkPassword)
     }
 }
 
@@ -162,36 +159,31 @@ extension CommonInputView {
         inputTextField.placeholder = placeholder
     }
     
-     func setTextField(text: String) { // textField text 설정
+    func setTextField(text: String) { // textField text 설정
         inputTextField.text = text
     }
     
-     func isEmpty() -> Bool { // textField isEmpty 확인
+    func isEmpty() -> Bool { // textField isEmpty 확인
         return inputTextField.text?.count == 0 ? true : false
     }
     
-     func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
+    func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
         inputCheckLabel.isHidden = isHidden
         inputCheckLabel.text = text
-        
-        if success {
-            inputCheckLabel.textColor = UIColor(named: "SecondaryColor")
-        } else {
-            inputCheckLabel.textColor = UIColor(named: "PrimaryColor")
-        }
+        inputCheckLabel.textColor = success ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
     }
     
-     func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
+    func setKeyboardTypeNumberPad() { // 키보드 숫자 타입
         inputTextField.keyboardType = .numberPad
     }
     
-     func setSecureTextEntry() { // 비밀번호
+    func setSecureTextEntry() { // 비밀번호
         inputTextField.isSecureTextEntry = true
     }
     
     // MARK: - Get
     
-     func getTextFieldText() -> String {
+    func getTextFieldText() -> String {
         inputTextField.text ?? ""
     }
 }
@@ -201,7 +193,6 @@ extension CommonInputView {
 extension CommonInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) { // TextField 입력 시작
         borderView.enableColor()
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Return
@@ -210,7 +201,7 @@ extension CommonInputView: UITextFieldDelegate {
         
         return textField.resignFirstResponder()
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         textFieldHandler(textFieldText: textField.text ?? "")
         inputViewTextFiledDelegate?.shouldEndEdting()
