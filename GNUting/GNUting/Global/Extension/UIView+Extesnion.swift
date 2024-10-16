@@ -8,19 +8,18 @@
 import UIKit
 
 
-extension UIView{
+extension UIView {
     func addSubViews(_ views : [UIView]){
         _ = views.map{self.addSubview($0)}
     }
     func setImageFromStringURL(stringURL: String?,completion: @escaping(UIImage) -> Void){
-      
         if let url = URL(string: stringURL ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let imageData = data else { return }
                 guard let image = UIImage(data: imageData) else { return }
                 completion(image)
             }.resume()
-        }else {
+        } else {
             guard let image = UIImage(named: "photoImg") else { return }
             completion(image)
         }
@@ -37,6 +36,25 @@ extension UIView{
         case bottom
         case right
     }
+    
+    func makeThrottleButton(text: String, textColor: UIColor?, borderColor: UIColor?, backgroundColor: UIColor?) -> ThrottleButton {
+        let button = ThrottleButton()
+        button.setTitle("\(text)", for: .normal)
+        button.setTitleColor(textColor, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.setLayerCorner(cornerRaius: 10,borderColor: borderColor)
+        
+        return button
+    }
+    
+    func setLayerCorner(cornerRaius: CGFloat, borderWidth: CGFloat = 1, borderColor: UIColor? = .clear) {
+        self.layer.cornerRadius = cornerRaius
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor?.cgColor
+        self.layer.masksToBounds = true
+    }
+    
+    // MARK: - border
     
     func addBorders(to sides: [ViewSide], in color: UIColor, width: CGFloat) {
         sides.forEach { addBorder(to: $0, in: color, width: width) }
@@ -85,18 +103,5 @@ extension UIView{
         border.frame = CGRect(x: frame.size.width - borderWidth, y: 0, width: borderWidth, height: frame.size.height)
         border.autoresizingMask = [.flexibleHeight, .flexibleLeftMargin]
         addSubview(border)
-    }
-    
-    func makeButton(text: String, textColor: UIColor?, borderColor: UIColor?, backgroundColor: UIColor?) -> ThrottleButton {
-        let button = ThrottleButton()
-        button.setTitle("\(text)", for: .normal)
-        button.setTitleColor(textColor, for: .normal)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = borderColor?.cgColor
-        button.layer.masksToBounds = true
-        button.backgroundColor = backgroundColor
-        
-        return button
     }
 }

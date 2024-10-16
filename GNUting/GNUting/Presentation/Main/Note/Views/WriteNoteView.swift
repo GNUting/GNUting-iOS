@@ -65,9 +65,9 @@ final class WriteNoteView: UIView {
         return stackView
     }()
     
-    private lazy var cancelButton = makeButton(text: "취소하기", textColor: UIColor(named: "SecondaryColor"), borderColor: UIColor(named: "SecondaryColor"), backgroundColor: .white)
+    private lazy var cancelButton = makeThrottleButton(text: "취소하기", textColor: UIColor(named: "SecondaryColor"), borderColor: UIColor(named: "SecondaryColor"), backgroundColor: .white)
     
-    private lazy var registerButton = makeButton(text: "등록하기", textColor: .white, borderColor: UIColor(named: "SecondaryColor"), backgroundColor: UIColor(named: "SecondaryColor"))
+    private lazy var registerButton = makeThrottleButton(text: "등록하기", textColor: .white, borderColor: UIColor(named: "SecondaryColor"), backgroundColor: UIColor(named: "SecondaryColor"))
     
     // MARK: - Init
     

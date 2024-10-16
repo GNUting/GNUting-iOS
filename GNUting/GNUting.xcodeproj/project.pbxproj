@@ -53,7 +53,6 @@
 		F8483F2E2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */; };
 		F8483F302BE4892600FC3AB6 /* NoDataScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */; };
 		F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */; };
-		F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */; };
 		F850061B2B738D78007AB351 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061A2B738D78007AB351 /* TermsVC.swift */; };
 		F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */; };
 		F85006202B739488007AB351 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850061F2B739488007AB351 /* UIColor+Extension.swift */; };
@@ -240,7 +239,6 @@
 		F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlusLabelView.swift; sourceTree = "<group>"; };
 		F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataScreenView.swift; sourceTree = "<group>"; };
 		F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMemeberTableViewCell.swift; sourceTree = "<group>"; };
-		F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		F850061A2B738D78007AB351 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		F850061D2B738FD7007AB351 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		F850061F2B739488007AB351 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -729,7 +727,6 @@
 				F850061F2B739488007AB351 /* UIColor+Extension.swift */,
 				F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */,
 				F88EE4872B9F06550058BC00 /* UIImage+Extension.swift */,
-				F8483F332BE5215800FC3AB6 /* CALayer+Extension.swift */,
 				F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */,
 				F834A0182C05E41500E8E0DB /* Notification+Extension.swift */,
 			);
@@ -765,18 +762,18 @@
 		F87D057B2B8F787A00910773 /* SearchAddMember */ = {
 			isa = PBXGroup;
 			children = (
+				F87D057E2B8F7CB200910773 /* Views */,
 				F882DBB22BA42D23009201D2 /* VC */,
-				F87D057E2B8F7CB200910773 /* ViewComponent */,
 			);
 			path = SearchAddMember;
 			sourceTree = "<group>";
 		};
-		F87D057E2B8F7CB200910773 /* ViewComponent */ = {
+		F87D057E2B8F7CB200910773 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F87D057F2B8F7CCB00910773 /* AddMemeberCollectionViewCell.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F8813E402BAD8235008AF204 /* UserDefaultsManager */ = {
@@ -1010,6 +1007,7 @@
 		F8AC69E52C919DAD00873455 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */,
 				F8AC69E62C919DC800873455 /* NoticeStackView.swift */,
 			);
 			path = Views;
@@ -1269,7 +1267,6 @@
 			isa = PBXGroup;
 			children = (
 				F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */,
-				F8E3CD482B8CE6DE00712CBF /* UserInfoDetailView.swift */,
 				F87351852B90B043004E89C5 /* BasePaddingLabel.swift */,
 				F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */,
 				F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */,
@@ -1648,7 +1645,6 @@
 				F8A6956E2BA1D18000BEB0C6 /* SearchBoardTextModel.swift in Sources */,
 				F86909502BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift in Sources */,
 				F88EE4882B9F06550058BC00 /* UIImage+Extension.swift in Sources */,
-				F8483F342BE5215800FC3AB6 /* CALayer+Extension.swift in Sources */,
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F869094A2BFA22BD001634D4 /* ChatVisibleManager.swift in Sources */,
 				F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */,

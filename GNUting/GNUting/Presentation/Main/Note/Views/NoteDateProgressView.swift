@@ -64,9 +64,9 @@ final class NoteDateProgressView: UIView {
         return stackView
     }()
     
-    private lazy var cancelButton = makeButton(text: "아니오", textColor: UIColor(named: "SecondaryColor"), borderColor: UIColor(named: "SecondaryColor"), backgroundColor: .white)
+    private lazy var cancelButton = makeThrottleButton(text: "아니오", textColor: UIColor(named: "SecondaryColor"), borderColor: UIColor(named: "SecondaryColor"), backgroundColor: .white)
     
-    private lazy var progressButton = makeButton(text: "예", textColor: .white, borderColor: UIColor(named: "SecondaryColor"), backgroundColor: UIColor(named: "SecondaryColor"))
+    private lazy var progressButton = makeThrottleButton(text: "예", textColor: .white, borderColor: UIColor(named: "SecondaryColor"), backgroundColor: UIColor(named: "SecondaryColor"))
     
     // MARK: - Init
     

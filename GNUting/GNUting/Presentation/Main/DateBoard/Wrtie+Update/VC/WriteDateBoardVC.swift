@@ -93,7 +93,7 @@ extension WriteDateBoardVC{
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(titleContentView.snp.bottom).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
             
             make.height.equalToSuperview().dividedBy(2)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -108,9 +108,9 @@ extension WriteDateBoardVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
-            vc.memberAddButtonDelegate = self
+            vc.searchAddMemberVCDelegate = self
             vc.addMemberInfos = addMemberDataList
-            vc.requestChat = false
+            vc.pushRequestChatVC = false
             let navigationVC = UINavigationController.init(rootViewController: vc)
 
             present(navigationVC, animated: true)
@@ -234,7 +234,7 @@ extension WriteDateBoardVC {
     }
     
 }
-extension WriteDateBoardVC: MemberAddButtonDelegate {
+extension WriteDateBoardVC: SearchAddMemberVCDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
         addMemberDataList = send
     }
