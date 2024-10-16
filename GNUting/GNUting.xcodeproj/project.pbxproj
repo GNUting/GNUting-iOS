@@ -37,10 +37,10 @@
 		F8235CF62B764AD700E49073 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF52B764AD700E49073 /* SelectDateView.swift */; };
 		F8235CF92B765E2200E49073 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CF82B765E2200E49073 /* DateModel.swift */; };
 		F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */; };
-		F829FC542CBEA4F7000D180F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F829FC532CBEA4F7000D180F /* GoogleService-Info.plist */; };
-		F829FC562CBEA4FB000D180F /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F829FC552CBEA4FB000D180F /* GnutingInfo.plist */; };
 		F829FC582CBEB412000D180F /* TermsURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F829FC572CBEB412000D180F /* TermsURL.swift */; };
 		F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834A0182C05E41500E8E0DB /* Notification+Extension.swift */; };
+		F836E6A62CBFCDC50096926F /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F836E6A52CBFCDC50096926F /* GnutingInfo.plist */; };
+		F836E6A82CBFCDCD0096926F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F836E6A72CBFCDCD0096926F /* GoogleService-Info.plist */; };
 		F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153C2BC5185900334A6A /* UserImageButton.swift */; };
 		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
 		F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */; };
@@ -223,11 +223,11 @@
 		F8235CF52B764AD700E49073 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		F8235CF82B765E2200E49073 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		F8235CFC2B78C8D300E49073 /* SignUpThirdProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpThirdProcessVC.swift; sourceTree = "<group>"; };
-		F829FC532CBEA4F7000D180F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F829FC552CBEA4FB000D180F /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F829FC572CBEB412000D180F /* TermsURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsURL.swift; sourceTree = "<group>"; };
 		F830FE972BAA040900ADC7B5 /* GNUting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GNUting.entitlements; sourceTree = "<group>"; };
 		F834A0182C05E41500E8E0DB /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
+		F836E6A52CBFCDC50096926F /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
+		F836E6A72CBFCDCD0096926F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F841153C2BC5185900334A6A /* UserImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageButton.swift; sourceTree = "<group>"; };
 		F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomEnterTableViewCell.swift; sourceTree = "<group>"; };
 		F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostVC.swift; sourceTree = "<group>"; };
@@ -684,8 +684,8 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F829FC532CBEA4F7000D180F /* GoogleService-Info.plist */,
-				F829FC552CBEA4FB000D180F /* GnutingInfo.plist */,
+				F836E6A52CBFCDC50096926F /* GnutingInfo.plist */,
+				F836E6A72CBFCDCD0096926F /* GoogleService-Info.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -1495,16 +1495,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F829FC562CBEA4FB000D180F /* GnutingInfo.plist in Resources */,
 				F853452B2B5F7A49001EADE6 /* Pretendard-SemiBold.otf in Resources */,
 				F85345062B5F710B001EADE6 /* LaunchScreen.storyboard in Resources */,
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
-				F829FC542CBEA4F7000D180F /* GoogleService-Info.plist in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
+				F836E6A62CBFCDC50096926F /* GnutingInfo.plist in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
+				F836E6A82CBFCDCD0096926F /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
 				F85345292B5F7A49001EADE6 /* Pretendard-Light.otf in Resources */,
