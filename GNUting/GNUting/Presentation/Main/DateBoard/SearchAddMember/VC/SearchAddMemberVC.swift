@@ -15,15 +15,15 @@ protocol SearchAddMemberVCDelegate: AnyObject{
     func sendAddMemberData(send: [UserInfosModel])
 }
 
-class SearchAddMemberVC: BaseViewController{
+final class SearchAddMemberVC: BaseViewController{
     
     // MARK: - Properties
     
-    var searchText = ""
+    private var searchText = ""
+    private var searchUser: UserInfosModel?
+    weak var searchAddMemberVCDelegate: SearchAddMemberVCDelegate?
     var chatMemeberCount = 0
     var pushRequestChatVC = false // 채팅 신청하기 ViewController에서 push 됬는지
-    var searchUser: UserInfosModel?
-    weak var searchAddMemberVCDelegate: SearchAddMemberVCDelegate?
     var addMemberInfos: [UserInfosModel] = [] {
         didSet {
             addMemberCollectionView.reloadData()
@@ -160,6 +160,7 @@ extension SearchAddMemberVC {
     }
     
     // MARK: - Private Method
+    
     private func isMemberLimitExceeded() {
         if pushRequestChatVC {
             if chatMemeberCount < addMemberInfos.count {
@@ -222,13 +223,13 @@ extension SearchAddMemberVC: UICollectionViewDelegate {
     }
 }
 
-
 extension SearchAddMemberVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchText = searchController.searchBar.text ?? ""
     }
 }
-extension SearchAddMemberVC: UITextFieldDelegate{
+
+extension SearchAddMemberVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         upperUserInfoView.isHidden = true
     }
