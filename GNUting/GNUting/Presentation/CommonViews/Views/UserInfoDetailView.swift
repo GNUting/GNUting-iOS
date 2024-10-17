@@ -4,12 +4,12 @@
 //
 //  Created by 원동진 on 2/27/24.
 //
+// MARK: - 유저 정보 한줄 소개 있는 버전
+// MARK: - 사용 되는 곳 : 멤버 검색 ViewController, DateMemeberTableViewCell, MemberTableViewCell
 
 import UIKit
 
-
-class UserInfoDetailView: UIView { // 한줄소개 있음
-    
+class UserInfoDetailView: UIView {
     
     private lazy var infoUpperView = UIView()
     private lazy var middleTopStackView : UIStackView = {
