@@ -31,6 +31,7 @@ class UserInfoDetailView: UIView {
         stackView.distribution = .fill
         stackView.alignment = .leading
         stackView.spacing = 8
+        
         return stackView
     }()
     
@@ -41,30 +42,11 @@ class UserInfoDetailView: UIView {
         return button
     }()
     
-    private lazy var userNameLabel : UILabel = {
-        let label = UILabel()
-        label.font = Pretendard.medium(size: 16)
-        label.textColor = .black
-        label.textAlignment = .left
-        return label
-    }()
+    private lazy var userNameLabel = makeLabel(textSize: 16,textColor: .black)
     
-    private lazy var subInfoLabel: UILabel = { // 학번 나이
-        let label = UILabel()
-        label.font = Pretendard.medium(size: 12)
-        label.textColor = UIColor(named: "DisableColor")
-        label.textAlignment = .left
-        
-        return label
-    }()
-    private lazy var selfIntroduceLabel: UILabel = { // 한줄 소개
-        let label = UILabel()
-        label.font = Pretendard.medium(size: 12)
-        label.textColor = UIColor(named: "DisableColor")
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        return label
-    }()
+    private lazy var subInfoLabel = makeLabel() // 학번 & 나이
+    
+    private lazy var selfIntroduceLabel = makeLabel(numberOfLines: 0) // 한줄 소개
     
     // MARK: - LifeCycle
     
@@ -122,8 +104,30 @@ extension UserInfoDetailView {
         subInfoLabel.setContentCompressionResistancePriority(.init(750), for: .horizontal)
     }
     
-    // MARK: - SetView
+    // MARK: - MakeView
     
+    private func makeLabel(textSize: CGFloat = 12,
+                           textColor: UIColor? = UIColor(named: "DisableColor"),
+                           numberOfLines: Int = 1) -> UILabel {
+        let label = UILabel()
+        label.font = Pretendard.medium(size: textSize)
+        label.textColor = textColor
+        label.textAlignment = .left
+        label.numberOfLines = numberOfLines
+        
+        return label
+    }
+    
+    // MARK: - Action
+    
+    @objc private func tapUserImageButton() {
+        userInfoDetailViewDelegate?.tapUserImageButton()
+    }
+}
+
+// MARK: - SetView
+
+extension UserInfoDetailView {
     func setUserInfoDetailView(name :String?,major: String?,studentID: String?, introduce: String?, image : String? ) {
         self.userNameLabel.text = name
         self.subInfoLabel.text = "\(studentID ?? "학번") | \(major ?? "과")"
@@ -135,12 +139,5 @@ extension UserInfoDetailView {
                 self.userImageButton.layer.masksToBounds = true
             }
         }
-        
-    }
-    
-    // MARK: - Action
-    
-    @objc private func tapUserImageButton() {
-        userInfoDetailViewDelegate?.tapUserImageButton()
     }
 }
