@@ -11,6 +11,7 @@ protocol UserImageButtonDelegate : AnyObject {
 }
 class UserImageButton: UIButton {
     weak var userImageButtonDelegate : UserImageButtonDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
@@ -23,6 +24,9 @@ class UserImageButton: UIButton {
 }
 extension UserImageButton {
     @objc private func tapUserImageButton() {
+        let vc = GlobalUtil.currentTopViewController()
+        vc?.presentFullScreenVC(viewController: UserDetailVC())
         userImageButtonDelegate?.tappedAction()
     }
+
 }
