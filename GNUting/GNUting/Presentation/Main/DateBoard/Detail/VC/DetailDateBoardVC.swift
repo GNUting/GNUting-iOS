@@ -35,7 +35,7 @@ class DetailDateBoardVC: BaseViewController{
     }()
     private lazy var userInfoView : UserInfoView = {
         let view = UserInfoView()
-        view.userImageButton.userImageButtonDelegate = self
+        view.userInfoViewDelegate = self
         return view
     }()
     private lazy var contentTextView : UITextView  = {
@@ -267,8 +267,8 @@ extension DetailDateBoardVC {
         }
     }
 }
-extension DetailDateBoardVC: UserImageButtonDelegate {
-    func tappedAction() {
+extension DetailDateBoardVC: UserInfoViewDelegate {
+    func tapUserImageButton() {
         let vc = UserDetailVC()
         
         vc.userDetailData = UserDetailModel(imageURL: postUserInfos?.image,
@@ -277,6 +277,4 @@ extension DetailDateBoardVC: UserImageButtonDelegate {
                                             userDepartment: postUserInfos?.department)
         presentFullScreenVC(viewController: vc)
     }
-    
-    
 }

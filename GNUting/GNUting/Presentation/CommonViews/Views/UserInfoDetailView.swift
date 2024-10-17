@@ -9,10 +9,23 @@
 
 import UIKit
 
+// MARK : - protocol
+
+protocol UserInfoDetailViewDelegate: AnyObject {
+    func tapUserImageButton()
+}
+
 class UserInfoDetailView: UIView {
     
+    // MARK: - Properties
+    
+    weak var userInfoDetailViewDelegate: UserInfoDetailViewDelegate?
+    
+    // MARK: - SubViews
+    
     private lazy var infoUpperView = UIView()
-    private lazy var middleTopStackView : UIStackView = {
+    
+    private lazy var middleTopStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
@@ -20,7 +33,13 @@ class UserInfoDetailView: UIView {
         stackView.spacing = 8
         return stackView
     }()
-    lazy var userImageButton = UserImageButton()
+    
+    private lazy var userImageButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
+        
+        return button
+    }()
     
     private lazy var userNameLabel : UILabel = {
         let label = UILabel()
@@ -30,7 +49,7 @@ class UserInfoDetailView: UIView {
         return label
     }()
     
-    private lazy var subInfoLabel : UILabel = { // 학번 나이
+    private lazy var subInfoLabel: UILabel = { // 학번 나이
         let label = UILabel()
         label.font = Pretendard.medium(size: 12)
         label.textColor = UIColor(named: "DisableColor")
@@ -38,7 +57,7 @@ class UserInfoDetailView: UIView {
         
         return label
     }()
-    private lazy var selfIntroduceLabel : UILabel = { // 한줄 소개
+    private lazy var selfIntroduceLabel: UILabel = { // 한줄 소개
         let label = UILabel()
         label.font = Pretendard.medium(size: 12)
         label.textColor = UIColor(named: "DisableColor")
@@ -46,6 +65,8 @@ class UserInfoDetailView: UIView {
         label.numberOfLines = 0
         return label
     }()
+    
+    // MARK: - LifeCycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,7 +79,10 @@ class UserInfoDetailView: UIView {
     }
     
 }
-extension UserInfoDetailView{
+extension UserInfoDetailView {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddsubViews() {
         self.addSubViews([userImageButton, infoUpperView])
         infoUpperView.addSubViews([middleTopStackView, selfIntroduceLabel])
@@ -71,19 +95,23 @@ extension UserInfoDetailView{
             make.height.width.equalTo(50)
             make.top.left.bottom.equalToSuperview()
         }
+        
         infoUpperView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(5)
             make.right.equalToSuperview()
             make.left.equalTo(userImageButton.snp.right).offset(10)
         }
+        
         middleTopStackView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }
+        
         selfIntroduceLabel.snp.makeConstraints { make in
             make.top.equalTo(middleTopStackView.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
+        
         subInfoLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
         }
@@ -94,7 +122,7 @@ extension UserInfoDetailView{
         subInfoLabel.setContentCompressionResistancePriority(.init(750), for: .horizontal)
     }
     
-    
+    // MARK: - SetView
     
     func setUserInfoDetailView(name :String?,major: String?,studentID: String?, introduce: String?, image : String? ) {
         self.userNameLabel.text = name
@@ -108,5 +136,11 @@ extension UserInfoDetailView{
             }
         }
         
+    }
+    
+    // MARK: - Action
+    
+    @objc private func tapUserImageButton() {
+        userInfoDetailViewDelegate?.tapUserImageButton()
     }
 }

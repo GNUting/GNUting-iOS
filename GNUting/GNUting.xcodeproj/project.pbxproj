@@ -41,7 +41,7 @@
 		F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834A0182C05E41500E8E0DB /* Notification+Extension.swift */; };
 		F836E6A62CBFCDC50096926F /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F836E6A52CBFCDC50096926F /* GnutingInfo.plist */; };
 		F836E6A82CBFCDCD0096926F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F836E6A72CBFCDCD0096926F /* GoogleService-Info.plist */; };
-		F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153C2BC5185900334A6A /* UserImageButton.swift */; };
+		F836E6AB2CC14F2B0096926F /* GlobalUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836E6AA2CC14F2B0096926F /* GlobalUtil.swift */; };
 		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
 		F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */; };
 		F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */; };
@@ -227,7 +227,7 @@
 		F834A0182C05E41500E8E0DB /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		F836E6A52CBFCDC50096926F /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F836E6A72CBFCDCD0096926F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F841153C2BC5185900334A6A /* UserImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageButton.swift; sourceTree = "<group>"; };
+		F836E6AA2CC14F2B0096926F /* GlobalUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalUtil.swift; sourceTree = "<group>"; };
 		F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomEnterTableViewCell.swift; sourceTree = "<group>"; };
 		F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostVC.swift; sourceTree = "<group>"; };
 		F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMypostModel.swift; sourceTree = "<group>"; };
@@ -581,6 +581,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F836E6A92CC14E820096926F /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F836E6AA2CC14F2B0096926F /* GlobalUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		F841A7B72BA72DFE00A9F9D4 /* APIMananager */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,7 +720,6 @@
 				F8A15E962B60E7B2001DE5E4 /* PaddingTextField.swift */,
 				F8D96F6D2B99A8D5009409A3 /* BackButton.swift */,
 				F8C7DE602BC44F6600923EF5 /* DismissButton.swift */,
-				F841153C2BC5185900334A6A /* UserImageButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1215,6 +1222,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F836E6A92CC14E820096926F /* Util */,
 				F8D7E2972CB7FAA4002F7049 /* Info */,
 				F86909512BFCF522001634D4 /* AppStoreCheck */,
 				F889EA042BF66F550042D8FB /* Network */,
@@ -1703,10 +1711,10 @@
 				F81D08E62BEA5C7C00219CEA /* ChatRoomUserModel.swift in Sources */,
 				F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */,
 				F8E993EC2BB5A4E2002A8A5F /* ChatRoomTableViewReceiveMessageCell.swift in Sources */,
-				F841153D2BC5185900334A6A /* UserImageButton.swift in Sources */,
 				F882DBB52BA432B5009201D2 /* CommonModel.swift in Sources */,
 				F841A7CC2BA73E0E00A9F9D4 /* RequestChatModel.swift in Sources */,
 				F8A695622BA09BAC00BEB0C6 /* GetUserDataModel.swift in Sources */,
+				F836E6AB2CC14F2B0096926F /* GlobalUtil.swift in Sources */,
 				F8BE89E52B8078BA008E6767 /* MyPageVC.swift in Sources */,
 				F862C8102B622601008120FA /* UILabel+Extension.swift in Sources */,
 				F85344FC2B5F710A001EADE6 /* SceneDelegate.swift in Sources */,

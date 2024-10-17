@@ -20,7 +20,7 @@ class MemberTableViewCell: UITableViewCell {
     }()
     private lazy var userInfoView : UserInfoDetailView = {
         let view = UserInfoDetailView()
-        view.userImageButton.userImageButtonDelegate = self
+        view.userInfoDetailViewDelegate = self
         
         return view
     }()
@@ -70,8 +70,8 @@ extension MemberTableViewCell {
     }
 }
 
-extension MemberTableViewCell: UserImageButtonDelegate{
-    func tappedAction() {
+extension MemberTableViewCell: UserInfoDetailViewDelegate {
+    func tapUserImageButton() {
         userImageTappedClosure?()
     }
 }

@@ -164,7 +164,6 @@ extension WriteDateBoardVC: UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
             cell.setUserInfoViews(model: addMemberDataList[indexPath.row])
             cell.selectionStyle = .none
-            
             return cell
         } else {
             guard let addCell = tableView.dequeueReusableCell(withIdentifier: MemBerAddTableViewCell.identi, for: indexPath) as? MemBerAddTableViewCell else { return UITableViewCell()}
