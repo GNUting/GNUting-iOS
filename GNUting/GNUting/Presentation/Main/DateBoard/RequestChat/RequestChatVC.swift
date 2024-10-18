@@ -63,7 +63,7 @@ extension RequestChatVC{
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
         }
         
         chatRequestCompletedButton.snp.makeConstraints { make in
@@ -84,10 +84,10 @@ extension RequestChatVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
-            vc.memberAddButtonDelegate = self
+            vc.searchAddMemberVCDelegate = self
             vc.addMemberInfos = addMemberDataList
             vc.chatMemeberCount = chatMemeberCount
-            vc.requestChat = true
+            vc.pushRequestChatVC = true
             let navigationVC = UINavigationController.init(rootViewController: vc)
             present(navigationVC, animated: true)
             
@@ -151,7 +151,7 @@ extension RequestChatVC {
         }
     }
 }
-extension RequestChatVC: MemberAddButtonDelegate {
+extension RequestChatVC: SearchAddMemberVCDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
         addMemberDataList = send
     }

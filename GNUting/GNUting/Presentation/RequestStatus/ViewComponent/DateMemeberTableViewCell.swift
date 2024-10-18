@@ -18,7 +18,7 @@ class DateMemeberTableViewCell: UITableViewCell {
     }()
     private lazy var userInfoView : UserInfoDetailView = {
         let view = UserInfoDetailView()
-        view.userImageButton.userImageButtonDelegate = self
+        view.userInfoDetailViewDelegate = self
         
         return view
     }()
@@ -64,8 +64,8 @@ extension DateMemeberTableViewCell {
     }
 }
 
-extension DateMemeberTableViewCell: UserImageButtonDelegate{
-    func tappedAction() {
+extension DateMemeberTableViewCell: UserInfoDetailViewDelegate {
+    func tapUserImageButton() {
         userImageTappedClosure?()
     }
 }

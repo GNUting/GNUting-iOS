@@ -20,7 +20,7 @@ class MemberTableViewCell: UITableViewCell {
     }()
     private lazy var userInfoView : UserInfoDetailView = {
         let view = UserInfoDetailView()
-        view.userImageButton.userImageButtonDelegate = self
+        view.userInfoDetailViewDelegate = self
         
         return view
     }()
@@ -55,7 +55,7 @@ extension MemberTableViewCell {
         }
         userInfoView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
             make.bottom.equalToSuperview().offset(-20)
         }
     }
@@ -70,8 +70,8 @@ extension MemberTableViewCell {
     }
 }
 
-extension MemberTableViewCell: UserImageButtonDelegate{
-    func tappedAction() {
+extension MemberTableViewCell: UserInfoDetailViewDelegate {
+    func tapUserImageButton() {
         userImageTappedClosure?()
     }
 }

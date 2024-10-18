@@ -66,24 +66,24 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         switch location {
         case "apply":
             rootVC?.selectedIndex = 1
-            let vc = currentTopViewController() as? RequestStateVC
+            let vc = GlobalUtil.currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 1
             vc?.getApplicationReceivedData(ApplicatoinID: locationID, requestStatus: false)
             
         case "cancel":
             rootVC?.selectedIndex = 1
-            let vc = currentTopViewController() as? RequestStateVC
+            let vc = GlobalUtil.currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 1
         case "refuse":
             
             rootVC?.selectedIndex = 1
-            let vc = currentTopViewController() as? RequestStateVC
+            let vc = GlobalUtil.currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 0
             vc?.getApplicationReceivedData(ApplicatoinID: locationID, requestStatus: true)
         case "chat":
             rootVC?.selectedIndex = 2
             let chatRoomVC = ChatRoomVC()
-            let vc = currentTopViewController() as? ChatRoomListVC
+            let vc = GlobalUtil.currentTopViewController() as? ChatRoomListVC
             chatRoomVC.isPushNotification = true
             chatRoomVC.chatRoomID = Int(locationID) ?? 0
             vc?.pushViewContoller(viewController: chatRoomVC)
@@ -123,21 +123,5 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     // error발생시
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("🔴", error)
-    }
-    func currentTopViewController(controller: UIViewController? = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first?.windows.filter{$0.isKeyWindow}.first?.rootViewController) -> UIViewController? {
-        
-        if let navigationController = controller as? UINavigationController {
-            return currentTopViewController(controller: navigationController.visibleViewController)
-        }
-        if let tabbarController = controller as? UITabBarController {
-            if let selected = tabbarController.selectedViewController {
-                return currentTopViewController(controller: selected)
-            }
-        }
-        if let presented = controller?.presentedViewController {
-            return currentTopViewController(controller: presented)
-        }
-        return controller
-        
     }
 }

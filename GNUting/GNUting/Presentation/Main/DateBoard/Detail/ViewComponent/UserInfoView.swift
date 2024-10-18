@@ -9,14 +9,24 @@ import UIKit
 import SnapKit
 // 한줄 소개 없는 버젼
 
+protocol UserInfoViewDelegate: AnyObject {
+    func tapUserImageButton()
+}
 
 class UserInfoView: UIView {
+    
+    weak var userInfoViewDelegate: UserInfoViewDelegate?
+    
     private lazy var border1 = BorderView()
     private lazy var border2 = BorderView()
     private lazy var upperStackView = UIView()
         
-    
-    lazy var userImageButton = UserImageButton()
+    private lazy var userImageButton: UIButton = {
+       let button = UIButton()
+        button.addTarget(self, action: #selector(tapUserImageButton), for: .touchUpInside)
+        
+        return button
+    }()
     
     private lazy var middleStackView : UIStackView = {
         let stackView = UIStackView()
@@ -104,5 +114,8 @@ extension UserInfoView {
         }
     }
     
+    @objc private func tapUserImageButton() {
+        userInfoViewDelegate?.tapUserImageButton()
+    }
 }
 

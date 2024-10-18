@@ -35,7 +35,7 @@ class DetailDateBoardVC: BaseViewController{
     }()
     private lazy var userInfoView : UserInfoView = {
         let view = UserInfoView()
-        view.userImageButton.userImageButtonDelegate = self
+        view.userInfoViewDelegate = self
         return view
     }()
     private lazy var contentTextView : UITextView  = {
@@ -90,24 +90,24 @@ extension DetailDateBoardVC{
     private func setAutoLayout(){
         statusLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(statusLabel.snp.bottom).offset(5)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
             
         }
         writeDateLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
         }
         userInfoView.snp.makeConstraints { make in
             make.top.equalTo(writeDateLabel.snp.bottom).offset(16)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
         }
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(userInfoView.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
         }
         contentTextView.setContentHuggingPriority(.init(249), for: .vertical)
         chatPeopleViewButton.snp.makeConstraints { make in
@@ -116,7 +116,7 @@ extension DetailDateBoardVC{
         }
         requetChatButton.snp.makeConstraints { make in
             make.top.equalTo(chatPeopleViewButton.snp.bottom).offset(5)
-            make.left.right.equalToSuperview().inset(Spacing.UpperInset)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
             
         }
@@ -267,8 +267,8 @@ extension DetailDateBoardVC {
         }
     }
 }
-extension DetailDateBoardVC: UserImageButtonDelegate {
-    func tappedAction() {
+extension DetailDateBoardVC: UserInfoViewDelegate {
+    func tapUserImageButton() {
         let vc = UserDetailVC()
         
         vc.userDetailData = UserDetailModel(imageURL: postUserInfos?.image,
@@ -277,6 +277,4 @@ extension DetailDateBoardVC: UserImageButtonDelegate {
                                             userDepartment: postUserInfos?.department)
         presentFullScreenVC(viewController: vc)
     }
-    
-    
 }
