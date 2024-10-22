@@ -10,6 +10,7 @@ import UIKit
 class AddMemeberCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
     static let identi = "AddMemeberCollectionViewCellid"
     
     // MARK: - SubViews
