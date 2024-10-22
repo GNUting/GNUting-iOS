@@ -187,7 +187,7 @@ extension DetailDateBoardVC : OtherPostDelegate {
         self.navigationItem.rightBarButtonItem?.isSelected = false
         vc.boardID = boardID
         detailDateBoardSetView.isHidden = true
-        presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
 }
 extension DetailDateBoardVC: MyPostDelegate {
@@ -275,6 +275,6 @@ extension DetailDateBoardVC: UserInfoViewDelegate {
                                             nickname: postUserInfos?.nickname,
                                             userStudentID: postUserInfos?.studentId,
                                             userDepartment: postUserInfos?.department)
-        presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
 }

@@ -140,6 +140,6 @@ extension UserDetailVC {
         let vc = ReportVC()
         
         vc.userNickname = self.userDetailData?.nickname ?? "유저이름"
-        self.presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
 }

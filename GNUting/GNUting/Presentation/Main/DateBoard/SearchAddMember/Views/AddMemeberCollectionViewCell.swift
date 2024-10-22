@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddMemeberCollectionViewCell: UICollectionViewCell {
+final class AddMemeberCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     

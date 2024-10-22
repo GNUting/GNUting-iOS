@@ -92,9 +92,9 @@ extension UIViewController{
             self.present(alertController, animated: true)
         }
     }
-    func presentFullScreenVC(viewController: UIViewController) {
+    func presentViewController(viewController: UIViewController, modalPresentationStyle: UIModalPresentationStyle = .pageSheet) {
         let navigationVC = UINavigationController.init(rootViewController: viewController)
-        navigationVC.modalPresentationStyle = .fullScreen
+        navigationVC.modalPresentationStyle = modalPresentationStyle
         
         self.present(navigationVC, animated: true)
     }

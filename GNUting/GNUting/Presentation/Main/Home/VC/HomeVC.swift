@@ -279,14 +279,14 @@ extension HomeVC: EventViewDelegate {
 
 extension HomeVC {
     @objc private func tapNotiButtonAction() {
-        presentFullScreenVC(viewController: NotificationVC())
+        presentViewController(viewController: NotificationVC(), modalPresentationStyle: .fullScreen)
     }
     
     @objc private func tapUserImageButton(){
         let vc = UserDetailVC()
         
         vc.userDetailData = self.userDetailData
-        presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
     @objc private func tapSearchButton(){
         let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())

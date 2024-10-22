@@ -395,7 +395,7 @@ extension ChatRoomVC: SendTappedUserData {
                                             nickname: userData?.nickname,
                                             userStudentID: userData?.studentID,
                                             userDepartment: userData?.department)
-        presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
     
     func tapReceivedUserImageButton(userData: ChatRoomMessageModelResult?) { // 받은메세지 유저클릭
@@ -405,7 +405,7 @@ extension ChatRoomVC: SendTappedUserData {
                                             nickname: userData?.nickname,
                                             userStudentID: userData?.studentId,
                                             userDepartment: userData?.department)
-        presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
 }
 

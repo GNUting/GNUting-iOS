@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppStoreDownloadURL</key>
+	<string>https://apps.apple.com/kr/app/%EC%A7%80%EB%88%84%ED%8C%85-%EA%B2%BD%EC%83%81%EA%B5%AD%EB%A6%BD%EB%8C%80%ED%95%99%EA%B5%90-%EC%9E%AC%ED%95%99%EC%83%9D-%EC%A0%84%EC%9A%A9-%EA%B3%BC%ED%8C%85%EC%95%B1/id6502196555</string>
+	<key>BaseURL</key>
+	<string>http://203.255.15.32:14357/api/v1/</string>
+	<key>SocketURL</key>
+	<string>ws://203.255.15.32:14357/chat</string>
+</dict>
+</plist>

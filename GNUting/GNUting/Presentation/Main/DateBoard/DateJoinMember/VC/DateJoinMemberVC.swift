@@ -84,7 +84,7 @@ extension DateJoinMemberVC : UITableViewDataSource {
                                                 nickname: self.userInfos[indexPath.row].nickname,
                                                 userStudentID: self.userInfos[indexPath.row].studentId, 
                                                 userDepartment: self.userInfos[indexPath.row].department)
-            self.presentFullScreenVC(viewController: vc)
+            self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
         }
         return cell
     }

@@ -145,7 +145,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                                                         nickname: participantUser[indexPath.row].nickname,
                                                         userStudentID: participantUser[indexPath.row].studentId,
                                                         userDepartment: participantUser[indexPath.row].department)
-                    self.presentFullScreenVC(viewController: vc)
+                    self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
                 }
             }
             
@@ -159,7 +159,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                                                         nickname: applyUserData[indexPath.row].nickname,
                                                         userStudentID: applyUserData[indexPath.row].studentId,
                                                         userDepartment: applyUserData[indexPath.row].department)
-                    self.presentFullScreenVC(viewController: vc)
+                    self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
                 }
             }
         }

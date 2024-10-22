@@ -94,6 +94,8 @@ final class SearchAddMemberVC: BaseViewController{
         return button
     }()
     
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
