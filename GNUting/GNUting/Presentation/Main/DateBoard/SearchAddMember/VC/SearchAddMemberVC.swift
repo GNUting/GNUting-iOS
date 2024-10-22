@@ -173,6 +173,14 @@ extension SearchAddMemberVC {
         }
     }
     
+    // MARK: - PublicMethod
+    
+    func setProperties(pushRequestChatVC: Bool, addMemberInfos: [UserInfosModel], chatMemeberCount: Int = 0) {
+        self.pushRequestChatVC = pushRequestChatVC
+        self.addMemberInfos = addMemberInfos
+        self.chatMemeberCount = chatMemeberCount
+    }
+    
     // MARK: - API
     
     private func getSearchUserAPI(searchNickname: String) {

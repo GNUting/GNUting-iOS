@@ -108,13 +108,10 @@ extension WriteDateBoardVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
-            vc.searchAddMemberVCDelegate = self
-            vc.addMemberInfos = addMemberDataList
-            vc.pushRequestChatVC = false
-            let navigationVC = UINavigationController.init(rootViewController: vc)
-
-            present(navigationVC, animated: true)
             
+            vc.searchAddMemberVCDelegate = self
+            vc.setProperties(pushRequestChatVC: false, addMemberInfos: addMemberDataList)
+            presentViewController(viewController: vc)
         }
     }
 }
