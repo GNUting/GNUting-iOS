@@ -5,7 +5,7 @@
 //  Created by 원동진 on 3/19/24.
 //
 
-// MARK: - 학과 검색 VC
+// MARK: - 학과 검색 ViewController
 
 import UIKit
 

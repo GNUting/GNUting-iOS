@@ -292,7 +292,7 @@ extension ChatRoomVC {
         self.accessToken = token
     }
     func initStomp(){
-        let url = URL(string: Bundle.main.socketURL)!
+        let url = URL(string: Bundle.main.testSocketURL)!
         self.swiftStomp = SwiftStomp(host: url, headers: ["Authorization" : "Bearer \(accessToken)"])
         self.swiftStomp.enableLogging = true
         self.swiftStomp.delegate = self

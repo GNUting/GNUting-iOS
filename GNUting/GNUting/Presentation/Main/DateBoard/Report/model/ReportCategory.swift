@@ -5,8 +5,11 @@
 //  Created by 원동진 on 3/15/24.
 //
 
+//
+
 import Foundation
-enum ReportCategory{
+
+enum ReportCategory {
     case COMMERCIAL_SPAM
     case ABUSIVE_LANGUAGE
     case OBSCENITY

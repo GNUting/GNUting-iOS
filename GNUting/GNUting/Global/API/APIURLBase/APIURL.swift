@@ -113,8 +113,7 @@ enum EndPoint{
 }
 
 private extension URL{
-    static let baseURL = Bundle.main.baseURL
-
+    static let baseURL = Bundle.main.testBaseURL
     static func makeForEndpoint(endPoint : String) -> URL{
         URL(string: baseURL + endPoint)!
     }
@@ -124,5 +123,5 @@ private extension URL{
 }
 class BaseURL {
     static let shared = BaseURL()
-    let urlString = Bundle.main.baseURL
+    let urlString = Bundle.main.testBaseURL
 }

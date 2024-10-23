@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-// MARK: - 이용약관 VC
+// MARK: - 이용약관 ViewController
 
 class TermsVC: UIViewController{
     

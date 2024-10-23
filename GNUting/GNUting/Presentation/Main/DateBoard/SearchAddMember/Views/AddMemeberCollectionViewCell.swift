@@ -5,6 +5,8 @@
 //  Created by 원동진 on 2/28/24.
 //
 
+// MARK: - 과팅 멤머 추가 CollectionView Cell
+
 import UIKit
 
 final class AddMemeberCollectionViewCell: UICollectionViewCell {

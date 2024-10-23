@@ -6,7 +6,7 @@
 //  Created by 원동진 on 2/17/24.
 //
 
-// MARK: - 홈 화면
+// MARK: - 홈 화면 ViewController
 
 import UIKit
 import SnapKit

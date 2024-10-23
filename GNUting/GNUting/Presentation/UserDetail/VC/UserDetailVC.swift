@@ -5,7 +5,7 @@
 //  Created by 원동진 on 4/9/24.
 //
 
-// MARK: - 프로필 클릭시 사용자 디테일 VC
+// MARK: - 프로필 클릭시 사용자 디테일 ViewController
 
 import UIKit
 

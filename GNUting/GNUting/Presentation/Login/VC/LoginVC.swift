@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 로그인 VC
+// MARK: - 로그인 ViewController
 
 final class LoginVC: BaseViewController {
     

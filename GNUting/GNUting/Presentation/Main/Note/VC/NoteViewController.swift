@@ -5,7 +5,7 @@
 //  Created by 원동진 on 9/11/24.
 //
 
-// MARK: - 메모팅 VC
+// MARK: - 메모팅 ViewController
 
 import UIKit
 

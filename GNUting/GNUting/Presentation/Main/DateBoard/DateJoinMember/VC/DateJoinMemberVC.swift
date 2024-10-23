@@ -4,6 +4,9 @@
 //
 //  Created by 원동진 on 2/27/24.
 //
+
+// MARK: - 과팅 참여 멤버 ViewController
+
 import UIKit
 
 class DateJoinMemberVC: BaseViewController {

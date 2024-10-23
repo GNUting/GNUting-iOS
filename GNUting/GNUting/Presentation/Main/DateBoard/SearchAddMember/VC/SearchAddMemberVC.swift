@@ -5,7 +5,7 @@
 //  Created by 원동진 on 2/28/24.
 //
 
-// MARK: - 멤버 검색해서 추가하는 VC
+// MARK: - 멤버 검색해서 추가하는 ViewController
 
 import UIKit
 

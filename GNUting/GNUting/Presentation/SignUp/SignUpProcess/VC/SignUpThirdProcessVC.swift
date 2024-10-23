@@ -5,7 +5,7 @@
 //  Created by 원동진 on 2/11/24.
 //
 
-// MARK: - 회원가입 2 단계 VC
+// MARK: - 회원가입 2 단계 ViewController
 
 import UIKit
 import SnapKit

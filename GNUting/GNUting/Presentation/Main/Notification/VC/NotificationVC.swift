@@ -5,7 +5,7 @@
 //  Created by 원동진 on 4/8/24.
 //
 
-// MARK: - 알림 List VC
+// MARK: - 알림 List ViewController
 
 import UIKit
 

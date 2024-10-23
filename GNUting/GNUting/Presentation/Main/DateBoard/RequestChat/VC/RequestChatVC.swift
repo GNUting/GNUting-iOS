@@ -5,9 +5,9 @@
 //  Created by 원동진 on 2/28/24.
 //
 
-import UIKit
+// MARK: - 과팅 게시글 - 채팅 신청하기 화면 ViewController
 
-// MARK: - 과팅 게시글 - 채팅 신청하기 화면
+import UIKit
 
 final class RequestChatVC: BaseViewController {
     

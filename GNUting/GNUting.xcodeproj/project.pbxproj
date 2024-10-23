@@ -649,6 +649,7 @@
 		F850061C2B738FB9007AB351 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
+				F8933D562CC915B800134138 /* Model */,
 				F8235CEE2B74B51100E49073 /* Views */,
 				F8E3CD4F2B8CE8E200712CBF /* VC */,
 			);
@@ -874,6 +875,14 @@
 				F88EE4912B9F86310058BC00 /* APIGetManager.swift */,
 			);
 			path = APIGetManager;
+			sourceTree = "<group>";
+		};
+		F8933D562CC915B800134138 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8AC69DA2C89AFD800873455 /* Terms.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F8A15E912B60CE6B001DE5E4 /* Login */ = {
@@ -1296,7 +1305,6 @@
 			isa = PBXGroup;
 			children = (
 				F850061A2B738D78007AB351 /* TermsVC.swift */,
-				F8AC69DA2C89AFD800873455 /* Terms.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";

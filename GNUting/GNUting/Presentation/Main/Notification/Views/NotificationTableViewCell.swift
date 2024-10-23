@@ -5,6 +5,8 @@
 //  Created by 원동진 on 4/8/24.
 //
 
+// MARK: - 알림 TableView Cell
+
 import UIKit
 
 final class NotificationTableViewCell: UITableViewCell {
