@@ -137,7 +137,7 @@ extension RequestChatVC : UITableViewDataSource {
             guard let addCell = tableView.dequeueReusableCell(withIdentifier: MemBerAddTableViewCell.identi, for: indexPath) as? MemBerAddTableViewCell else { return UITableViewCell()}
             cell = addCell
         default:
-            fatalError("UnExpoected Section : \(indexPath.section)")
+            print("UnExpoected Section : \(indexPath.section)")
         }
         
         cell.selectionStyle = .none
