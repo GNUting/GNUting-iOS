@@ -743,7 +743,7 @@
 		F85F8F652B8E3EB700E69922 /* RequestChat */ = {
 			isa = PBXGroup;
 			children = (
-				F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */,
+				F86F87E02CC89B9800CA423D /* VC */,
 			);
 			path = RequestChat;
 			sourceTree = "<group>";
@@ -764,6 +764,14 @@
 				F882DBB62BA43646009201D2 /* BoardSettingButton.swift */,
 			);
 			path = ViewComponent;
+			sourceTree = "<group>";
+		};
+		F86F87E02CC89B9800CA423D /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F85F8F662B8E3EFB00E69922 /* RequestChatVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		F87D057B2B8F787A00910773 /* SearchAddMember */ = {
