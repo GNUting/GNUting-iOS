@@ -7,9 +7,14 @@
 import UIKit
 
 class DateJoinMemberVC: BaseViewController {
-    var userInfos : [UserInfosModel] = []
     
-    private lazy var titleLabel : UILabel = {
+    // MARK: - Properties
+    
+    var userInfos: [UserInfosModel] = []
+    
+    // MARK: - SubViews
+    
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "과팅 멤버 정보"
         label.font = Pretendard.medium(size: 18)
@@ -17,22 +22,26 @@ class DateJoinMemberVC: BaseViewController {
         return label
     }()
     
-    private lazy var dismissButton : UIButton = {
+    private lazy var dismissButton: UIButton = {
        let button = UIButton()
         button.setImage(UIImage(named: "DissmissImg"), for: .normal)
         button.tintColor = UIColor(named: "IconColor")
         button.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
+        
         return button
     }()
     
-    private lazy var memberTableView : UITableView = {
+    private lazy var memberTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.register(MemberTableViewCell.self, forCellReuseIdentifier: MemberTableViewCell.identi)
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
+        
         return tableView
     }()
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +52,9 @@ class DateJoinMemberVC: BaseViewController {
 }
 
 extension DateJoinMemberVC {
+    
+    // MARK: - Layout Helpers
+    
     private func setAddSubViews() {
         view.addSubViews([titleLabel, dismissButton, memberTableView])
     }
@@ -66,7 +78,7 @@ extension DateJoinMemberVC {
     }
 }
 
-
+// MARK: - UITableView DataSource
 
 extension DateJoinMemberVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
