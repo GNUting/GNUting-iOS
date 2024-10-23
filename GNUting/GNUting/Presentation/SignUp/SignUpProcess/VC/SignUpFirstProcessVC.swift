@@ -17,8 +17,9 @@ final class SignUpFirstProcessVC: BaseViewController {
     private var timer = Timer()
     private var startTime: Date?
     private var emailSuccess: Bool = false
+    private var validPassWord: Bool = false
     private var samePasswordSuccess: Bool = false
-    
+
     // MARK: - SubViews
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
@@ -137,6 +138,7 @@ extension SignUpFirstProcessVC {
         emailInputView.emailCheckTypeInputViewDelegate = self
         certifiedInputView.authNumberInputViewDelegate = self
         passWordCheckInputView.passwordCheckDelegate = self
+        passWordInputView.passwordDelegate = self
     }
     
     private func setSecureTextEntry() {
@@ -175,7 +177,7 @@ extension SignUpFirstProcessVC {
     }
     
     private func nextButtonEnable() {
-        nextButton.isEnabled = emailSuccess == true && samePasswordSuccess
+        nextButton.isEnabled = emailSuccess && samePasswordSuccess && validPassWord
     }
 }
 
@@ -235,13 +237,21 @@ extension SignUpFirstProcessVC: AuthNumberInputViewDelegate {
         postAuthenticationCheckAPI(authNumber: authNumber)
     }
 }
+
+extension SignUpFirstProcessVC: PasswordDelegate {
+    func isValidPassword(_ true: Bool) {
+        validPassWord = true
+        nextButtonEnable()
+    }
+}
+
 extension SignUpFirstProcessVC: PasswordCheckDelegate {
     func passwordCheckKeyboardReturn(text: String) {
-        let passwordTestFiledText = passWordInputView.getTextFieldText()
-        let isPasswordMatch = passwordTestFiledText == text
-        
+        let passwordTestFieldText = passWordInputView.getTextFieldText()
+        let isPasswordMatch = passwordTestFieldText == text
+        let emptyTextField = passwordTestFieldText == ""
         samePasswordSuccess = isPasswordMatch
-        passWordCheckInputView.setInputCheckLabel(isHidden: false, text: isPasswordMatch ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다.", success: isPasswordMatch)
+        passWordCheckInputView.setInputCheckLabel(isHidden: emptyTextField ? true : false, text: isPasswordMatch ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다.", success: isPasswordMatch)
         nextButtonEnable()
     }
 }

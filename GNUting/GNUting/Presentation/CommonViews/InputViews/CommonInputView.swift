@@ -12,6 +12,10 @@ import UIKit
 
 // MARK: - Protocol
 
+protocol PasswordDelegate: AnyObject {
+    func isValidPassword(_ true: Bool)
+}
+
 protocol PasswordCheckDelegate: AnyObject {
     func passwordCheckKeyboardReturn(text: String)
 }
@@ -28,6 +32,7 @@ final class CommonInputView: UIView {
     
     // MARK: - Properties
     
+    weak var passwordDelegate : PasswordDelegate? // 비밀번호
     weak var passwordCheckDelegate: PasswordCheckDelegate? // 비밀번호 확인
     weak var inputViewTextFiledDelegate: InputViewTextFiledDelegate? // return or 입력이 끝났을때 action
     weak var phoneNumberDelegate: PhoneNumberDelegate? // return or 입력이 끝났을때 action
@@ -142,6 +147,7 @@ extension CommonInputView {
         let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}"
         let checkPassword = text.range(of: regex,options: .regularExpression) != nil
         self.setInputCheckLabel(isHidden: false, text: checkPassword ? "올바른 규칙의 비밀번호입니다." : "특수문자, 영문자, 숫자 각 1개 이상 포함 8~15자에 해당 규칙을 준수해주세요.", success: checkPassword)
+        passwordDelegate?.isValidPassword(checkPassword ? true : false)
     }
 }
 
@@ -167,7 +173,7 @@ extension CommonInputView {
         return inputTextField.text?.count == 0 ? true : false
     }
     
-    func setInputCheckLabel(isHidden: Bool, text: String?, success: Bool) { // inputCheckLabel 설정
+    func setInputCheckLabel(isHidden: Bool, text: String? = "오류 발생", success: Bool = false) { // inputCheckLabel 설정
         inputCheckLabel.isHidden = isHidden
         inputCheckLabel.text = text
         inputCheckLabel.textColor = success ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
