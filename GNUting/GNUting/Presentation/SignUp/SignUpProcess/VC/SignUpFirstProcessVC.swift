@@ -205,11 +205,11 @@ extension SignUpFirstProcessVC {
                 self.timer.invalidate()
                 self.certifiedInputView.setRemainLabel(text: "")
                 let USER4004CODE = failureResponse?.code == "USER4000-4"
-                self.showMessage(message: USER4004CODE ? failureResponse?.message ?? "이미 존재하는 사용자입니다." : failureResponse?.message ?? "네트워크 에러 다시 시도하세요")
+                self.showAlert(message: USER4004CODE ? failureResponse?.message ?? "이미 존재하는 사용자입니다." : failureResponse?.message ?? "네트워크 에러 다시 시도하세요")
             }
             
             if ((response?.isSuccess) != nil) {
-                self.showMessage(message: "인증번호가 전송되었습니다.")
+                self.showAlert(message: "인증번호가 전송되었습니다.")
                 self.certifiedInputView.setFoucInputTextFiled()
                 self.activityIndicatorView.stopAnimating()
                 self.getSetTime()

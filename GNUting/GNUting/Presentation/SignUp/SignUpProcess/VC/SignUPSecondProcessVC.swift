@@ -311,7 +311,7 @@ extension SignUPSecondProcessVC {
         }
         
         if selectedDate.isEmpty {
-            showMessage(message: "생년월일을 올바르게 입력하세요.")
+            showAlert(message: "생년월일을 올바르게 입력하세요.")
         }
     }
     @objc private func tapCanelButton(){

@@ -196,7 +196,7 @@ extension WriteDateBoardVC{
             joinMemberID.append(UserIDList(id: userData.id))
         }
         if joinMemberID.count == 1 {
-            self.showMessage(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.")
+            self.showAlert(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.")
         } else {
             APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
                 if response.isSuccess {

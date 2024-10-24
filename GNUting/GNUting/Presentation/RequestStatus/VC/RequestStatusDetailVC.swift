@@ -223,7 +223,7 @@ extension RequestStatusDetailVC {
             alertContoller.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
                 APIDeleteManager.shared.deleteRequestChat(boardID:self.dedatilData?.id ?? 0) { response in
                     if response.isSuccess {
-                        self.showMessage(message: "취소되었습니다.")
+                        self.showAlert(message: "취소되었습니다.")
                         self.popButtonTap()
                     } else {
                         self.errorHandling(response: response)
@@ -256,7 +256,7 @@ extension RequestStatusDetailVC {
    private func tapAcceptButton() {
         APIPostManager.shared.chatConfirmed(id: dedatilData?.id ?? 0) { response in
             if response.isSuccess {
-                self.showMessage(message: "채팅신청을 수락하였습니다.")
+                self.showAlert(message: "채팅신청을 수락하였습니다.")
             } else {
                 self.errorHandling(response: response)
             }

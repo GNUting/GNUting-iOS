@@ -173,7 +173,7 @@ extension NoteViewController {
                 chatRoomVC.chatRoomID = successResponse?.result.chatId ?? 0
                 self.pushViewContoller(viewController: chatRoomVC)
             } else {
-                self.showMessage(message: failureResponse?.message ?? "재시도해주세요.")
+                self.showAlert(message: failureResponse?.message ?? "재시도해주세요.")
             }
          
         }

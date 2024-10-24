@@ -166,7 +166,7 @@ extension SearchAddMemberVC {
     private func isMemberLimitExceeded() {
         if pushRequestChatVC {
             if chatMemeberCount < addMemberInfos.count {
-                showMessage(message: "인원이 초과되었습니다.")
+                showAlert(message: "인원이 초과되었습니다.")
                 addMemberInfos.removeLast()
                 return
             }
@@ -247,7 +247,7 @@ extension SearchAddMemberVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let isUserExited = addMemberInfos.map({$0.nickname}).contains(searchText)
         setMemberOptionButton()
-        isUserExited ? showMessage(message: "이미 추가한 유저입니다.") : getSearchUserAPI(searchNickname: searchText)
+        isUserExited ? showAlert(message: "이미 추가한 유저입니다.") : getSearchUserAPI(searchNickname: searchText)
         
         return true
     }

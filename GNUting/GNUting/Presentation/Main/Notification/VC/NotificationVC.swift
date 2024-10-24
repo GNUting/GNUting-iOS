@@ -96,12 +96,7 @@ extension NotificationVC {
                     self.notificationList.remove(at: indexPath.row)
                 }
             } else {
-                let alertController = UIAlertController(title: "오류 발생", message: "다시 시도해주세요", preferredStyle: .alert)
-                
-                alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                DispatchQueue.main.async {
-                    self.present(alertController, animated: true)
-                }
+                self.showAlert(title: "오류 발생", message: "다시 시도해주세요.")
             }
         }
     }

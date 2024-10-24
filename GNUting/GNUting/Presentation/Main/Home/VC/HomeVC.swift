@@ -211,7 +211,7 @@ extension HomeVC {
                 self.setAlertController(chatID: successResponse?.result.chatId ?? 0)
             } else {
                 if !(failureResponse?.isSuccess ?? false)  {
-                    self.showMessage(message: failureResponse?.message ?? "재시도 해주세요.")
+                    self.showAlert(message: failureResponse?.message ?? "재시도 해주세요.")
                 }
             }
         }

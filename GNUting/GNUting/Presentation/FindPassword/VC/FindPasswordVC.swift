@@ -162,7 +162,7 @@ extension FindPasswordVC {
     
     private func postEmailCheckChangePasswordAPI(textFieldText: String) {
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
-            self.showMessage(message: "인증번호가 전송되었습니다.")
+            self.showAlert(message: "인증번호가 전송되었습니다.")
             self.certifiedInputView.setFoucInputTextFiled()
             self.activityIndicatorView.stopAnimating()
             self.getSetTime()

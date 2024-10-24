@@ -107,7 +107,7 @@ extension RequestChatVC {
             case "COMMON200":
                 self.showMessagePop(message: "채팅 신청이 완료되었습니다.")
             case "APPLY4001":
-                self.showMessage(message: "이미 신청한 유저가 존재합니다.")
+                self.showAlert(message: "이미 신청한 유저가 존재합니다.")
             default:
                 self.showAlert(message: response?.message ?? "고객센터에 문의하세요.")
             }
