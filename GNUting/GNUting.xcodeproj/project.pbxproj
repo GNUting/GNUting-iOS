@@ -40,6 +40,7 @@
 		F829FC582CBEB412000D180F /* TermsURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F829FC572CBEB412000D180F /* TermsURL.swift */; };
 		F834A0192C05E41500E8E0DB /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834A0182C05E41500E8E0DB /* Notification+Extension.swift */; };
 		F836E6AB2CC14F2B0096926F /* GlobalUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836E6AA2CC14F2B0096926F /* GlobalUtil.swift */; };
+		F83A9ED62CCA41760030B093 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83A9ED52CCA41760030B093 /* Strings.swift */; };
 		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
 		F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */; };
 		F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */; };
@@ -226,6 +227,7 @@
 		F830FE972BAA040900ADC7B5 /* GNUting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GNUting.entitlements; sourceTree = "<group>"; };
 		F834A0182C05E41500E8E0DB /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		F836E6AA2CC14F2B0096926F /* GlobalUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalUtil.swift; sourceTree = "<group>"; };
+		F83A9ED52CCA41760030B093 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomEnterTableViewCell.swift; sourceTree = "<group>"; };
 		F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostVC.swift; sourceTree = "<group>"; };
 		F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMypostModel.swift; sourceTree = "<group>"; };
@@ -587,6 +589,14 @@
 				F836E6AA2CC14F2B0096926F /* GlobalUtil.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		F83A9ED32CCA415D0030B093 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				F83A9ED52CCA41760030B093 /* Strings.swift */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		F841A7B72BA72DFE00A9F9D4 /* APIMananager */ = {
@@ -1239,6 +1249,7 @@
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F83A9ED32CCA415D0030B093 /* Strings */,
 				F836E6A92CC14E820096926F /* Util */,
 				F8D7E2972CB7FAA4002F7049 /* Info */,
 				F86909512BFCF522001634D4 /* AppStoreCheck */,
@@ -1583,6 +1594,7 @@
 			files = (
 				F8AC69E72C919DC800873455 /* NoticeStackView.swift in Sources */,
 				F882DBAF2BA42A29009201D2 /* MemBerAddTableViewCell.swift in Sources */,
+				F83A9ED62CCA41760030B093 /* Strings.swift in Sources */,
 				F8CD76A72BB6F319001B141F /* SendMessageModel.swift in Sources */,
 				F8A6955D2BA08DE400BEB0C6 /* KeyChainManager.swift in Sources */,
 				F87D05882B8F91FE00910773 /* MyPageUserInfoTableViewHeader.swift in Sources */,
