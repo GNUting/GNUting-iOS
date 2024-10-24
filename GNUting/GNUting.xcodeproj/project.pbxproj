@@ -1239,13 +1239,13 @@
 			path = ChatRoomImage;
 			sourceTree = "<group>";
 		};
-		F8E3CD082B8B5E2600712CBF /* ViewComponent */ = {
+		F8E3CD082B8B5E2600712CBF /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F8E3CD092B8B5E6600712CBF /* ReportReasonView.swift */,
 				F8E3CD0B2B8B602C00712CBF /* ReportReasonCheckButton.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F8E3CD4A2B8CE7D000712CBF /* Global */ = {
@@ -1446,7 +1446,7 @@
 			children = (
 				F882DBBA2BA43D9F009201D2 /* model */,
 				F8E3CD592B8CEAA100712CBF /* VC */,
-				F8E3CD082B8B5E2600712CBF /* ViewComponent */,
+				F8E3CD082B8B5E2600712CBF /* Views */,
 			);
 			path = Report;
 			sourceTree = "<group>";
