@@ -207,7 +207,7 @@ extension DetailDateBoardVC: MyPostDelegate {
         alertController.addAction(UIAlertAction(title: "예", style: .default,handler: { _ in
             APIDeleteManager.shared.deletePostText(boardID: self.boardID) { response in
                 if response.isSuccess {
-                    self.showMessagePop(message: "게시글이 삭제되었습니다.")
+                    self.showAlertNavigationBack(message: "게시글이 삭제되었습니다.",backType: .pop)
                 } else {
                     self.errorHandling(response: response)
                 }

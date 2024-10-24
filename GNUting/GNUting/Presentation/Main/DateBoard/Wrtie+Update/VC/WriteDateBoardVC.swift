@@ -200,7 +200,7 @@ extension WriteDateBoardVC{
         } else {
             APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
                 if response.isSuccess {
-                    self.showMessagePop(message: "게시물 작성이 완료되었습니다.")
+                    self.showAlertNavigationBack(message: "게시물 작성이 완료되었습니다.",backType: .pop)
                 } else {
                     self.errorHandling(response: response)
                 }

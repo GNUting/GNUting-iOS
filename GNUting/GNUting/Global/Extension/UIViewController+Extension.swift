@@ -76,10 +76,17 @@ extension UIViewController{
         }
     }
     
-    func showMessagePop(message: String) {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-            self.popButtonTap()
+    
+    func showAlertNavigationBack(title: String = "", message: String, actionTitle: String = "확인", backType: NavigationType) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: actionTitle, style: .default,handler: { _ in
+            switch backType {
+            case .pop:
+                self.popButtonTap()
+            case .dismiss:
+                self.tapDissmisButton()
+            }
+            
         }))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)

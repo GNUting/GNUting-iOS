@@ -153,7 +153,7 @@ extension FindPasswordVC {
     private func updatePasswordAPI() {
         APIUpdateManager.shared.updatePassword(email: emailInputView.getTextFieldText(), password: passWordCheckInputView.getTextFieldText()) { response in
             if response.isSuccess {
-                self.showMessagePop(message: "비밀번호가 수정되었습니다.")
+                self.showAlertNavigationBack(message: "비밀번호가 수정되었습니다.",backType: .pop)
             } else {
                 self.errorHandling(response: response)
             }

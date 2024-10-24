@@ -241,7 +241,7 @@ extension RequestStatusDetailVC {
             alertContoller.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
                 APIUpdateManager.shared.rejectedApplication(boardID: self.dedatilData?.id ?? 0) { response in
                     if response.isSuccess {
-                        self.showMessagePop(message: "신청을 거절하였습니다.")
+                        self.showAlertNavigationBack(message: "신청을 거절하였습니다.",backType: .pop)
                     } else {
                         self.errorHandling(response: response)
                     }

@@ -182,7 +182,7 @@ extension UpdatePostVC{
     private func tapCompletedButton(){
         APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { response in
             if response.isSuccess {
-                self.showMessagePop(message: "게시글 수정이 완료되었습니다.")
+                self.showAlertNavigationBack(message: "게시글 수정이 완료되었습니다.",backType: .pop)
             } else {
                 self.errorHandling(response: response)
             }

@@ -105,7 +105,7 @@ extension RequestChatVC {
         APIPostManager.shared.postRequestChat(userInfos: self.addMemberDataList, boardID: self.boardID) { response  in
             switch response?.code {
             case "COMMON200":
-                self.showMessagePop(message: "채팅 신청이 완료되었습니다.")
+                self.showAlertNavigationBack(message: "채팅 신청이 완료되었습니다.",backType: .pop)
             case "APPLY4001":
                 self.showAlert(message: "이미 신청한 유저가 존재합니다.")
             default:
