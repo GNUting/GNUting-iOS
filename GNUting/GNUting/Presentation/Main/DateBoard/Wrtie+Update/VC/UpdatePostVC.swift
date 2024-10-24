@@ -93,7 +93,7 @@ extension UpdatePostVC{
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(postTextView.snp.bottom).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             make.height.equalToSuperview().dividedBy(2)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }

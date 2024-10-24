@@ -58,7 +58,7 @@ final class FindPasswordVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setAddView()
+        setAddSubViews()
         setAutoLayout()
         setNavigationBar(title: "비밀번호 찾기")
         setDelegateSubViews()
@@ -70,7 +70,7 @@ extension FindPasswordVC {
     
     // MARK: - Layout Helpers
     
-    private func setAddView() {
+    private func setAddSubViews() {
         view.addSubViews([inputViewUpperStackView, passwordUpdateButton, activityIndicatorView])
         inputViewUpperStackView.addStackSubViews([emailInputView, certifiedInputView, passWordInputView, passWordCheckInputView])
         view.bringSubviewToFront(emailInputView)

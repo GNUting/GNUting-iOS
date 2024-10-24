@@ -73,12 +73,12 @@ extension RequestChatVC{
     private func setAutoLayout() {
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         
         chatRequestCompletedButton.snp.makeConstraints { make in
             make.top.equalTo(memberTableView.snp.bottom).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
         }
     }

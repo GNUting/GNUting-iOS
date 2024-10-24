@@ -63,11 +63,11 @@ extension AddMemeberCollectionViewCell {
             make.edges.equalToSuperview()
         }
         userIDNameLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(Spacing.verticalSpacing8)
+            make.top.bottom.equalToSuperview().inset(Spacing.size8)
             make.left.equalToSuperview().offset(10)
         }
         cancelImageView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(Spacing.verticalSpacing10)
+            make.top.bottom.equalToSuperview().inset(Spacing.size10)
             make.left.equalTo(userIDNameLabel.snp.right).offset(5)
             make.right.equalToSuperview().offset(-10)
         }

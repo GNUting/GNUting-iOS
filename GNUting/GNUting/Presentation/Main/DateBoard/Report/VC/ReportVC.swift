@@ -96,22 +96,22 @@ extension ReportVC {
     private func setAutoLayout() {
         explainLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
         }
         
         reportReasonView.snp.makeConstraints { make in
             make.top.equalTo(explainLabel.snp.bottom).offset(50)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
         }
         
         OtherReasonTextView.snp.makeConstraints { make in
             make.top.equalTo(reportReasonView.snp.bottom).offset(25)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
         }
         
         bottomButtonStackView.snp.makeConstraints { make in
             make.top.equalTo(OtherReasonTextView.snp.bottom).offset(50)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
     }

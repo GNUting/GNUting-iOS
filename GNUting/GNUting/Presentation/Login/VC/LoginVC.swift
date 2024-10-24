@@ -143,7 +143,7 @@ extension LoginVC {
         }
         textFieldStackView.snp.makeConstraints { make in
             make.top.equalTo(explainLabel.snp.bottom).offset(70)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         bottomStackView.snp.makeConstraints { make in
             make.top.equalTo(textFieldStackView.snp.bottom).offset(25)

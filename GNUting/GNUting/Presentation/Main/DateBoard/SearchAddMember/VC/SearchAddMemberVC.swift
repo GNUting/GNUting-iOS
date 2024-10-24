@@ -117,18 +117,18 @@ extension SearchAddMemberVC {
     private func setAutoLayout() {
         addMemberCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
             make.height.equalTo(40)
         }
         
         upperUserInfoView.snp.makeConstraints { make in
             make.top.equalTo(addMemberCollectionView.snp.bottom).offset(20)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             make.bottom.lessThanOrEqualToSuperview().offset(-50)
         }
         
         searchUserInfoView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(Spacing.verticalSpacing20)
+            make.top.bottom.equalToSuperview().inset(Spacing.size20)
             make.left.equalToSuperview().offset(18)
         }
         
@@ -139,7 +139,7 @@ extension SearchAddMemberVC {
         }
         
         completedButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
         }
         

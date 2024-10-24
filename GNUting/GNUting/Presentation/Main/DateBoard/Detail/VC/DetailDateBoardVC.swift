@@ -90,24 +90,24 @@ extension DetailDateBoardVC{
     private func setAutoLayout(){
         statusLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(statusLabel.snp.bottom).offset(5)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             
         }
         writeDateLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         userInfoView.snp.makeConstraints { make in
             make.top.equalTo(writeDateLabel.snp.bottom).offset(16)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(userInfoView.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         contentTextView.setContentHuggingPriority(.init(249), for: .vertical)
         chatPeopleViewButton.snp.makeConstraints { make in
@@ -116,7 +116,7 @@ extension DetailDateBoardVC{
         }
         requetChatButton.snp.makeConstraints { make in
             make.top.equalTo(chatPeopleViewButton.snp.bottom).offset(5)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
             
         }
