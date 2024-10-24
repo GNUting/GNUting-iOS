@@ -14,7 +14,7 @@ final class ReportVC: BaseViewController {
     // MARK: - Properties
     
     var userNickname: String = ""
-    private var boardID: Int = 0
+    var boardID: Int = 0
     private var tag: Int = 0
     private let textViewPlaceHolder = Strings.Report.textViewPlaceHolder
     
@@ -31,14 +31,7 @@ final class ReportVC: BaseViewController {
         return label
     }()
     
-    private lazy var reportReasonView: ReportReasonView = {
-        let view = ReportReasonView()
-        view.buttonTagClosure = { selectedTag in
-            self.tag = selectedTag
-        }
-        
-        return view
-    }()
+    private lazy var reportReasonView = ReportReasonView()
     
     private lazy var OtherReasonTextView: UITextView = {
         let textView = UITextView()
@@ -46,10 +39,7 @@ final class ReportVC: BaseViewController {
         textView.textColor = UIColor(hexCode: "9F9F9F")
         textView.font = Pretendard.regular(size: 18)
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        textView.layer.cornerRadius = 10
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor(hexCode: "E0E0DF").cgColor
-        textView.layer.masksToBounds = true
+        textView.setLayerCorner(cornerRaius: 10,borderWidth: 1,borderColor: UIColor(hexCode: "E0E0DF"))
         textView.delegate = self
         
         return textView
@@ -66,34 +56,18 @@ final class ReportVC: BaseViewController {
     }()
     
     private lazy var cancelButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 30, bottom: 18, trailing: 30)
-        config.attributedTitle = AttributedString("취소하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.bold(size: 14) ?? .boldSystemFont(ofSize: 14)]))
-        config.titleAlignment = .center
-        config.baseForegroundColor = .black
-        let button = UIButton(configuration: config)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(hexCode: "BEBDBD").cgColor
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
+        let button = UIButton()
+        button.setLayerCorner(cornerRaius: 10,borderColor: UIColor(hexCode: "BEBDBD"))
+        setButtonConfiguration(setButton: button, text: "취소하기", font: Pretendard.bold(size: 14), baseForefroundColor: .black)
         
         return button
     }()
     
     private lazy var reportButton: ThrottleButton = {
-        var config = UIButton.Configuration.plain()
-        config.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 30, bottom: 18, trailing: 30)
-        config.attributedTitle = AttributedString("신고하기", attributes: AttributeContainer([NSAttributedString.Key.font: Pretendard.bold(size: 14) ?? .boldSystemFont(ofSize: 14)]))
-        config.titleAlignment = .center
-        config.baseForegroundColor = .white
-        let button = ThrottleButton(configuration: config)
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
+        let button = ThrottleButton()
+        button.setLayerCorner(cornerRaius: 10)
         button.backgroundColor = UIColor(named: "PrimaryColor")
-        button.throttle(delay: 3) { _ in
-            self.tapReportButton()
-        }
+        setButtonConfiguration(setButton: button, text: "신고하기", font: Pretendard.bold(size: 14), baseForefroundColor: .white)
         
         return button
     }()
@@ -106,6 +80,7 @@ final class ReportVC: BaseViewController {
         addSubViews()
         setAutoLayout()
         setNavigationBarPresentType(title: "신고하기")
+        setButtonAction()
     }
 }
 
@@ -121,26 +96,35 @@ extension ReportVC {
     private func setAutoLayout() {
         explainLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
         }
+        
         reportReasonView.snp.makeConstraints { make in
             make.top.equalTo(explainLabel.snp.bottom).offset(50)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
         }
+        
         OtherReasonTextView.snp.makeConstraints { make in
             make.top.equalTo(reportReasonView.snp.bottom).offset(25)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
         }
         
         bottomButtonStackView.snp.makeConstraints { make in
             make.top.equalTo(OtherReasonTextView.snp.bottom).offset(50)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing25)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
+    }
+    
+    // MARK: - SetView
+    
+    private func setButtonConfiguration(setButton: UIButton,insets: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 18, leading: 30, bottom: 18, trailing: 30), text: String, font: UIFont?, baseForefroundColor: UIColor) {
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = insets
+        config.attributedTitle = AttributedString("\(text)", attributes: AttributeContainer([NSAttributedString.Key.font: font ?? .boldSystemFont(ofSize: 14)]))
+        config.titleAlignment = .center
+        config.baseForegroundColor = baseForefroundColor
+        setButton.configuration = config
     }
 }
 
@@ -149,6 +133,7 @@ extension ReportVC {
 extension ReportVC {
     private func tapReportButton() {
         var reportCategory = ""
+        
         switch tag {
         case 1:
             reportCategory = ReportCategory.COMMERCIAL_SPAM.category
@@ -163,44 +148,30 @@ extension ReportVC {
         default:
             reportCategory = ReportCategory.OTHER.category
         }
-        if userNickname == "" {
-            
-            APIPostManager.shared.reportBoardPost(boardID: boardID, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { response in
-                if response.isSuccess {
-                    let alertController = UIAlertController(title: "글 신고 완료", message: "해당 글이 신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
-                        self.tapDissmisButton()
-                    }))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                    
-                } else {
-                    let alertController = UIAlertController(title: "오류 발생", message: response.message, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                }
+        
+        userNickname == "" ? reportBoardPostAPI(category: reportCategory) : reportUserAPI(category: reportCategory)
+    }
+}
+
+// MARK: - API
+
+extension ReportVC {
+    private func reportBoardPostAPI(category: String) {
+        APIPostManager.shared.reportBoardPost(boardID: boardID, reportCategory: category, reportReason: OtherReasonTextView.text) { response in
+            if response.isSuccess {
+                self.showAlertNavigationBack(title: "글 신고 완료", message: "해당 글이 신고가 완료 되었습니다. 검토후 조치하겠습니다.", backType: .dismiss)
+            } else {
+                self.showAlert(title: "오류 발생", message: response.message)
             }
-            
-        } else {
-            APIPostManager.shared.reportUser(nickName: self.userNickname, reportCategory: reportCategory, reportReason: OtherReasonTextView.text) { response in
-                if response.isSuccess {
-                    let alertController = UIAlertController(title: "유저 신고 완료", message: "해당 유저가신고가 완료 되었습니다. 검토후 조치하겠습니다.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { action in
-                        self.tapDissmisButton()
-                    }))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                }else {
-                    let alertController = UIAlertController(title: "오류 발생", message: response.message, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true)
-                    }
-                }
+        }
+    }
+    
+    private func reportUserAPI(category: String) {
+        APIPostManager.shared.reportUser(nickName: self.userNickname, reportCategory: category, reportReason: OtherReasonTextView.text) { response in
+            if response.isSuccess {
+                self.showAlertNavigationBack(title: "유저 신고 완료", message: "해당 유저가신고가 완료 되었습니다. 검토후 조치하겠습니다.", backType: .dismiss)
+            } else {
+                self.showAlert(title: "오류 발생", message: response.message)
             }
         }
     }
@@ -213,7 +184,6 @@ extension ReportVC: UITextViewDelegate {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
             textView.textColor = .black
-            
         }
     }
     
@@ -225,3 +195,18 @@ extension ReportVC: UITextViewDelegate {
     }
 }
 
+// MARK: - ACtion
+
+extension ReportVC {
+    private func setButtonAction() {
+        reportReasonView.buttonTagClosure = { selectedTag in
+            self.tag = selectedTag
+        }
+        
+        reportButton.throttle(delay: 3) { _ in
+            self.tapReportButton()
+        }
+        
+        cancelButton.addTarget(self, action: #selector(tapDissmisButton), for: .touchUpInside)
+    }
+}
