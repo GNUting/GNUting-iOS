@@ -5,7 +5,7 @@
 //  Created by 원동진 on 3/15/24.
 //
 
-//
+// MARK: - 신고 종류 Model
 
 import Foundation
 
@@ -16,6 +16,9 @@ enum ReportCategory {
     case FLOODING
     case PRIVACY_VIOLATION
     case OTHER
+}
+
+extension ReportCategory {
     var category: String {
         switch self {
         case .COMMERCIAL_SPAM:
