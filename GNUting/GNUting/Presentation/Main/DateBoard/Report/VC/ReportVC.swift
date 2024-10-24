@@ -9,14 +9,14 @@
 
 import UIKit
 
-class ReportVC: BaseViewController {
+final class ReportVC: BaseViewController {
     
     // MARK: - Properties
     
     var userNickname: String = ""
-    let textViewPlaceHolder = Strings.Report.textViewPlaceHolder
-    var boardID: Int = 0
-    var tag: Int = 0
+    private var boardID: Int = 0
+    private var tag: Int = 0
+    private let textViewPlaceHolder = Strings.Report.textViewPlaceHolder
     
     // MARK: - SubViews
     

@@ -9,7 +9,7 @@
 
 import UIKit
 
-class DateJoinMemberVC: BaseViewController {
+final class DateJoinMemberVC: BaseViewController {
     
     // MARK: - Properties
     
