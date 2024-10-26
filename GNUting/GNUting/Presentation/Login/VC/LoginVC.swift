@@ -180,10 +180,10 @@ extension LoginVC {
     }
     
     @objc private func tapFindPasswordButton() {
-        pushViewContoller(viewController: FindPasswordVC())
+        pushViewController(viewController: FindPasswordVC())
     }
     
     @objc private func tapSingupButton() {
-        pushViewContoller(viewController: TermsVC())
+        pushViewController(viewController: TermsVC())
     }
 }

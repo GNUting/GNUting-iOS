@@ -171,7 +171,7 @@ extension NoteViewController {
                 let chatRoomVC = ChatRoomVC()
                 chatRoomVC.isPushNotification = true
                 chatRoomVC.chatRoomID = successResponse?.result.chatId ?? 0
-                self.pushViewContoller(viewController: chatRoomVC)
+                self.pushViewController(viewController: chatRoomVC)
             } else {
                 self.showAlert(message: failureResponse?.message ?? "재시도해주세요.")
             }

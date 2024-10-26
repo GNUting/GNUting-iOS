@@ -90,7 +90,7 @@ extension UserWriteTextVC: UITableViewDelegate{
         vc.setPushMypostVersion()
         tableView.deselectRow(at: indexPath, animated: true)
         if myPostList[indexPath.row].status == "OPEN" {
-            pushViewContoller(viewController: vc)
+            pushViewController(viewController: vc)
         }
         
     }

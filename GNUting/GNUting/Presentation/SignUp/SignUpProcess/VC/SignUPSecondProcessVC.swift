@@ -331,6 +331,6 @@ extension SignUPSecondProcessVC {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "studentId", setData: studentIDInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "userSelfIntroduction", setData: introduceOneLine.getTextFieldText())
         
-        pushViewContoller(viewController: SignUpThirdProcessVC())
+        pushViewController(viewController: SignUpThirdProcessVC())
     }
 }

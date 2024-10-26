@@ -139,7 +139,7 @@ extension DateBoardListVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if dateBoardListData[indexPath.row].status == "OPEN" {
-            pushViewContoller(viewController: vc)
+            pushViewController(viewController: vc)
         }
     }
     

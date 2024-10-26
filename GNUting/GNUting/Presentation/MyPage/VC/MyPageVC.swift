@@ -105,7 +105,7 @@ extension MyPageVC : UITableViewDelegate,UITableViewDataSource {
         case [2,1]:
             userDelete()
         case [3,0]:
-            pushViewContoller(viewController: TotalAlertVC())
+            pushViewController(viewController: TotalAlertVC())
         case [4,0]:
             useLicense()
         case [4,1]:
@@ -121,7 +121,7 @@ extension MyPageVC : tapProfileUpateButtonDelegate {
     func tapProfileUpdateButton() {
         let vc = UpdateProfileVC()
         vc.userInfo = self.userInfo
-        pushViewContoller(viewController: vc)
+        pushViewController(viewController: vc)
     }
     func getUserData(){
         APIGetManager.shared.getUserData { userData,response  in

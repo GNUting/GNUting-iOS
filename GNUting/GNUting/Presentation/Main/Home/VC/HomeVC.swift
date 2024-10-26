@@ -163,7 +163,7 @@ extension HomeVC {
         let chatRoomVC = ChatRoomVC()
         chatRoomVC.isPushNotification = true
         chatRoomVC.chatRoomID = chatID
-        self.pushViewContoller(viewController: chatRoomVC)
+        self.pushViewController(viewController: chatRoomVC)
     }
 }
 
@@ -223,11 +223,11 @@ extension HomeVC {
 extension HomeVC: WriteButtonDelegate {
     func tapButtonAction(tag: Int) {
         if tag == 0 {
-            self.pushViewContoller(viewController: WriteDateBoardVC())
+            self.pushViewController(viewController: WriteDateBoardVC())
         } else if tag == 1 { // 메모팅 남기기 버튼
             let vc = NoteViewController()
             vc.isHiddenwriteNoteView(hidden: false)
-            self.pushViewContoller(viewController: vc)
+            self.pushViewController(viewController: vc)
         }
     }
 }
@@ -246,7 +246,7 @@ extension HomeVC: HomeBottomViewDelegate {
     }
     
     func tapPostBoardCardView() {
-        self.pushViewContoller(viewController: DateBoardListVC())
+        self.pushViewController(viewController: DateBoardListVC())
     }
     
     func oneMatchCardView() {
@@ -254,11 +254,11 @@ extension HomeVC: HomeBottomViewDelegate {
     }
     
     func tapNoteCardView() {
-        self.pushViewContoller(viewController: NoteViewController())
+        self.pushViewController(viewController: NoteViewController())
     }
     
     func tapMypostCardView() {
-        self.pushViewContoller(viewController: UserWriteTextVC())
+        self.pushViewController(viewController: UserWriteTextVC())
     }
 }
 

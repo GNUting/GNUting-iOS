@@ -262,7 +262,7 @@ extension SignUpFirstProcessVC {
     @objc private func tapNextButton() {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "email", setData: emailInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "password", setData: passWordInputView.getTextFieldText())
-        pushViewContoller(viewController: SignUPSecondProcessVC())
+        pushViewController(viewController: SignUPSecondProcessVC())
     }
     
     @objc func getSetTime() {

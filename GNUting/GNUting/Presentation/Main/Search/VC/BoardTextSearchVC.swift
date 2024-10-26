@@ -142,7 +142,7 @@ extension BoardTextSearchVC: UITableViewDelegate {
         vc.setPushBoardList()
         tableView.deselectRow(at: indexPath, animated: true)
         
-        pushViewContoller(viewController: vc)
+        pushViewController(viewController: vc)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

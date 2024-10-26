@@ -118,11 +118,11 @@ extension UIViewController{
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    func pushViewContoller(viewController: UIViewController) {
+    func pushViewController(viewController: UIViewController) {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     @objc func tapWriteTextButton(){
-        pushViewContoller(viewController: WriteDateBoardVC())
+        pushViewController(viewController: WriteDateBoardVC())
     }
     
     func swipeRecognizer() {

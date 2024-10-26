@@ -201,7 +201,7 @@ extension ChatRoomListVC: UITableViewDelegate {
         let vc = ChatRoomVC()
         self.selecetedIndex = indexPath
         vc.chatRoomID = chatRoomData[indexPath.row].id
-        pushViewContoller(viewController: vc)
+        pushViewController(viewController: vc)
     }
 }
 extension ChatRoomListVC {

@@ -86,7 +86,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             let vc = GlobalUtil.currentTopViewController() as? ChatRoomListVC
             chatRoomVC.isPushNotification = true
             chatRoomVC.chatRoomID = Int(locationID) ?? 0
-            vc?.pushViewContoller(viewController: chatRoomVC)
+            vc?.pushViewController(viewController: chatRoomVC)
         case .none:
             break
         case .some(_):

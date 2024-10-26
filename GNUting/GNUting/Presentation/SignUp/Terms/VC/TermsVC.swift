@@ -41,7 +41,7 @@ class TermsVC: UIViewController{
         button.setText("다음")
         button.isEnabled = false
         button.addAction(UIAction { _ in
-            self.pushViewContoller(viewController: SignUpFirstProcessVC())
+            self.pushViewController(viewController: SignUpFirstProcessVC())
         }, for: .touchUpInside)
         
         return button

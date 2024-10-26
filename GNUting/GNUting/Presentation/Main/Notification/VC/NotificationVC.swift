@@ -148,7 +148,7 @@ extension NotificationVC: UITableViewDelegate {
             let chatRoomVC = ChatRoomVC()
             chatRoomVC.isPushNotification = true
             chatRoomVC.chatRoomID = locationID ?? 0
-            self.pushViewContoller(viewController: chatRoomVC)
+            self.pushViewController(viewController: chatRoomVC)
             
 
         default:

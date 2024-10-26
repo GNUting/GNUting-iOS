@@ -185,7 +185,7 @@ extension RequestStateVC: UITableViewDelegate {
             vc.requestStatus = false
         }
         tableView.deselectRow(at: indexPath, animated: true)
-        pushViewContoller(viewController: vc)
+        pushViewController(viewController: vc)
     }
     
 }
@@ -266,7 +266,7 @@ extension RequestStateVC {
                 if sucess {
                     vc.dedatilData = applicationReceivedData?.result
                     vc.requestStatus = true
-                    self.pushViewContoller(viewController: vc)
+                    self.pushViewController(viewController: vc)
                 } else {
                     self.setErrorHandling(errorCode: applicationReceivedData?.code, errorMessage: applicationReceivedData?.message)
                     rootVC?.selectedIndex = 0
@@ -279,7 +279,7 @@ extension RequestStateVC {
                 if sucess {
                     vc.dedatilData = applicationReceivedData?.result
                     vc.requestStatus = false
-                    self.pushViewContoller(viewController: vc)
+                    self.pushViewController(viewController: vc)
                 } else {
                     self.setErrorHandling(errorCode: applicationReceivedData?.code, errorMessage: applicationReceivedData?.message)
                     rootVC?.selectedIndex = 0
