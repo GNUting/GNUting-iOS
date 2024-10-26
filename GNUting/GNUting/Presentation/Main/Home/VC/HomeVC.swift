@@ -6,7 +6,7 @@
 //  Created by 원동진 on 2/17/24.
 //
 
-// MARK: - 홈 화면
+// MARK: - 홈 화면 ViewController
 
 import UIKit
 import SnapKit
@@ -163,7 +163,7 @@ extension HomeVC {
         let chatRoomVC = ChatRoomVC()
         chatRoomVC.isPushNotification = true
         chatRoomVC.chatRoomID = chatID
-        self.pushViewContoller(viewController: chatRoomVC)
+        self.pushViewController(viewController: chatRoomVC)
     }
 }
 
@@ -211,7 +211,7 @@ extension HomeVC {
                 self.setAlertController(chatID: successResponse?.result.chatId ?? 0)
             } else {
                 if !(failureResponse?.isSuccess ?? false)  {
-                    self.showMessage(message: failureResponse?.message ?? "재시도 해주세요.")
+                    self.showAlert(message: failureResponse?.message ?? "재시도 해주세요.")
                 }
             }
         }
@@ -223,11 +223,11 @@ extension HomeVC {
 extension HomeVC: WriteButtonDelegate {
     func tapButtonAction(tag: Int) {
         if tag == 0 {
-            self.pushViewContoller(viewController: WriteDateBoardVC())
+            self.pushViewController(viewController: WriteDateBoardVC())
         } else if tag == 1 { // 메모팅 남기기 버튼
             let vc = NoteViewController()
             vc.isHiddenwriteNoteView(hidden: false)
-            self.pushViewContoller(viewController: vc)
+            self.pushViewController(viewController: vc)
         }
     }
 }
@@ -246,7 +246,7 @@ extension HomeVC: HomeBottomViewDelegate {
     }
     
     func tapPostBoardCardView() {
-        self.pushViewContoller(viewController: DateBoardListVC())
+        self.pushViewController(viewController: DateBoardListVC())
     }
     
     func oneMatchCardView() {
@@ -254,11 +254,11 @@ extension HomeVC: HomeBottomViewDelegate {
     }
     
     func tapNoteCardView() {
-        self.pushViewContoller(viewController: NoteViewController())
+        self.pushViewController(viewController: NoteViewController())
     }
     
     func tapMypostCardView() {
-        self.pushViewContoller(viewController: UserWriteTextVC())
+        self.pushViewController(viewController: UserWriteTextVC())
     }
 }
 
@@ -279,14 +279,14 @@ extension HomeVC: EventViewDelegate {
 
 extension HomeVC {
     @objc private func tapNotiButtonAction() {
-        presentFullScreenVC(viewController: NotificationVC())
+        presentViewController(viewController: NotificationVC(), modalPresentationStyle: .fullScreen)
     }
     
     @objc private func tapUserImageButton(){
         let vc = UserDetailVC()
         
         vc.userDetailData = self.userDetailData
-        presentFullScreenVC(viewController: vc)
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
     }
     @objc private func tapSearchButton(){
         let vc = UINavigationController.init(rootViewController: BoardTextSearchVC())

@@ -5,6 +5,8 @@
 //  Created by 원동진 on 9/5/24.
 //
 
+// MARK: 이용약관 관련 정적 배열값
+
 import Foundation
 
 struct Terms {

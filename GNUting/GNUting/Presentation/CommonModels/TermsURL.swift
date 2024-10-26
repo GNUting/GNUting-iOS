@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - 약관 관련 URL enum
+
 enum TermsURL {
     case personalInformation
     case serviceUse

@@ -5,6 +5,8 @@
 //  Created by 원동진 on 9/25/24.
 //
 
+// MARK: - 이벤트 관련 View
+
 import UIKit
 
 protocol EventViewDelegate: AnyObject {

@@ -5,9 +5,13 @@
 //  Created by 원동진 on 2/25/24.
 //
 
+// MARK: - ReportReasonView 항목 체크 버튼
+
 import UIKit
 
 class ReportReasonCheckButton: UIButton {
+    
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,6 +21,9 @@ class ReportReasonCheckButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// MARK: - SetView
+
 extension ReportReasonCheckButton {
     func setConfiguration(buttonText:  String) {
         var configuration = UIButton.Configuration.plain()
@@ -27,14 +34,14 @@ extension ReportReasonCheckButton {
         configuration.imagePadding = 10
         configuration.titleAlignment = .leading
         configuration.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 0, bottom: 10, trailing: 10)
-        self.changesSelectionAsPrimaryAction = true
+        self.configuration = configuration
         self.configurationUpdateHandler = {  button in
             var configuration = button.configuration
             configuration?.image = button.isSelected ? UIImage(named: "SelectedImg") : UIImage(named: "DisSelectedIImg")
             configuration?.baseBackgroundColor = .clear
             button.configuration = configuration
         }
-        self.configuration = configuration
+        self.changesSelectionAsPrimaryAction = true
         self.sizeToFit()
     }
 }

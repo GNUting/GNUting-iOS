@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 로그인 VC
+// MARK: - 로그인 ViewController
 
 final class LoginVC: BaseViewController {
     
@@ -143,7 +143,7 @@ extension LoginVC {
         }
         textFieldStackView.snp.makeConstraints { make in
             make.top.equalTo(explainLabel.snp.bottom).offset(70)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
         }
         bottomStackView.snp.makeConstraints { make in
             make.top.equalTo(textFieldStackView.snp.bottom).offset(25)
@@ -180,10 +180,10 @@ extension LoginVC {
     }
     
     @objc private func tapFindPasswordButton() {
-        pushViewContoller(viewController: FindPasswordVC())
+        pushViewController(viewController: FindPasswordVC())
     }
     
     @objc private func tapSingupButton() {
-        pushViewContoller(viewController: TermsVC())
+        pushViewController(viewController: TermsVC())
     }
 }

@@ -141,7 +141,7 @@ extension BoardListTableViewCell {
     // MARK: - Internal SetCell
     
     func setCell<T: BoardListCellconfiguration>(model: T) {
-        let isOpen = model.status == "OEPN"
+        let isOpen = model.status == "OPEN"
         
         setStatusLabel(status: isOpen)
         titleLabel.textColor = isOpen ? .black : UIColor(named: "DisableColor")

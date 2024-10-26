@@ -5,7 +5,7 @@
 //  Created by 원동진 on 2/8/24.
 //
 
-// MARK: - 회원가입 1 단계 VC
+// MARK: - 회원가입 1 단계 ViewController
 
 import UIKit
 import SnapKit
@@ -17,8 +17,9 @@ final class SignUpFirstProcessVC: BaseViewController {
     private var timer = Timer()
     private var startTime: Date?
     private var emailSuccess: Bool = false
+    private var validPassWord: Bool = false
     private var samePasswordSuccess: Bool = false
-    
+
     // MARK: - SubViews
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
@@ -137,6 +138,7 @@ extension SignUpFirstProcessVC {
         emailInputView.emailCheckTypeInputViewDelegate = self
         certifiedInputView.authNumberInputViewDelegate = self
         passWordCheckInputView.passwordCheckDelegate = self
+        passWordInputView.passwordDelegate = self
     }
     
     private func setSecureTextEntry() {
@@ -175,7 +177,7 @@ extension SignUpFirstProcessVC {
     }
     
     private func nextButtonEnable() {
-        nextButton.isEnabled = emailSuccess == true && samePasswordSuccess
+        nextButton.isEnabled = emailSuccess && samePasswordSuccess && validPassWord
     }
 }
 
@@ -203,11 +205,11 @@ extension SignUpFirstProcessVC {
                 self.timer.invalidate()
                 self.certifiedInputView.setRemainLabel(text: "")
                 let USER4004CODE = failureResponse?.code == "USER4000-4"
-                self.showMessage(message: USER4004CODE ? failureResponse?.message ?? "이미 존재하는 사용자입니다." : failureResponse?.message ?? "네트워크 에러 다시 시도하세요")
+                self.showAlert(message: USER4004CODE ? failureResponse?.message ?? "이미 존재하는 사용자입니다." : failureResponse?.message ?? "네트워크 에러 다시 시도하세요")
             }
             
             if ((response?.isSuccess) != nil) {
-                self.showMessage(message: "인증번호가 전송되었습니다.")
+                self.showAlert(message: "인증번호가 전송되었습니다.")
                 self.certifiedInputView.setFoucInputTextFiled()
                 self.activityIndicatorView.stopAnimating()
                 self.getSetTime()
@@ -235,13 +237,21 @@ extension SignUpFirstProcessVC: AuthNumberInputViewDelegate {
         postAuthenticationCheckAPI(authNumber: authNumber)
     }
 }
+
+extension SignUpFirstProcessVC: PasswordDelegate {
+    func isValidPassword(_ true: Bool) {
+        validPassWord = true
+        nextButtonEnable()
+    }
+}
+
 extension SignUpFirstProcessVC: PasswordCheckDelegate {
     func passwordCheckKeyboardReturn(text: String) {
-        let passwordTestFiledText = passWordInputView.getTextFieldText()
-        let isPasswordMatch = passwordTestFiledText == text
-        
+        let passwordTestFieldText = passWordInputView.getTextFieldText()
+        let isPasswordMatch = passwordTestFieldText == text
+        let emptyTextField = passwordTestFieldText == ""
         samePasswordSuccess = isPasswordMatch
-        passWordCheckInputView.setInputCheckLabel(isHidden: false, text: isPasswordMatch ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다.", success: isPasswordMatch)
+        passWordCheckInputView.setInputCheckLabel(isHidden: emptyTextField ? true : false, text: isPasswordMatch ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다.", success: isPasswordMatch)
         nextButtonEnable()
     }
 }
@@ -252,7 +262,7 @@ extension SignUpFirstProcessVC {
     @objc private func tapNextButton() {
         SignUpModelManager.shared.setSignUpDictionary(setkey: "email", setData: emailInputView.getTextFieldText())
         SignUpModelManager.shared.setSignUpDictionary(setkey: "password", setData: passWordInputView.getTextFieldText())
-        pushViewContoller(viewController: SignUPSecondProcessVC())
+        pushViewController(viewController: SignUPSecondProcessVC())
     }
     
     @objc func getSetTime() {

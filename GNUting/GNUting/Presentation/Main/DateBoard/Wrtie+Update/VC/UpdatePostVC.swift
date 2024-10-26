@@ -93,7 +93,7 @@ extension UpdatePostVC{
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(postTextView.snp.bottom).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             make.height.equalToSuperview().dividedBy(2)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
@@ -107,12 +107,10 @@ extension UpdatePostVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
-            vc.searchAddMemberVCDelegate = self
-            vc.addMemberInfos = memberDataList
-            vc.pushRequestChatVC = false
-            let navigationVC = UINavigationController.init(rootViewController: vc)
-            present(navigationVC, animated: true)
             
+            vc.searchAddMemberVCDelegate = self
+            vc.setProperties(pushRequestChatVC: false, addMemberInfos: memberDataList)
+            presentViewController(viewController: vc)
         }
     }
 }
@@ -184,7 +182,7 @@ extension UpdatePostVC{
     private func tapCompletedButton(){
         APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { response in
             if response.isSuccess {
-                self.showMessagePop(message: "게시글 수정이 완료되었습니다.")
+                self.showAlertNavigationBack(message: "게시글 수정이 완료되었습니다.",backType: .pop)
             } else {
                 self.errorHandling(response: response)
             }

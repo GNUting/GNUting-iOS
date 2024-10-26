@@ -87,13 +87,13 @@ extension WriteDateBoardVC{
     private func setAutoLayout(){
         titleContentView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
+            make.left.equalToSuperview().inset(Spacing.size25)
             make.right.equalToSuperview().offset(Spacing.right)
         }
         
         memberTableView.snp.makeConstraints { make in
             make.top.equalTo(titleContentView.snp.bottom).offset(Spacing.top)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             
             make.height.equalToSuperview().dividedBy(2)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -108,13 +108,10 @@ extension WriteDateBoardVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
-            vc.searchAddMemberVCDelegate = self
-            vc.addMemberInfos = addMemberDataList
-            vc.pushRequestChatVC = false
-            let navigationVC = UINavigationController.init(rootViewController: vc)
-
-            present(navigationVC, animated: true)
             
+            vc.searchAddMemberVCDelegate = self
+            vc.setProperties(pushRequestChatVC: false, addMemberInfos: addMemberDataList)
+            presentViewController(viewController: vc)
         }
     }
 }
@@ -199,11 +196,11 @@ extension WriteDateBoardVC{
             joinMemberID.append(UserIDList(id: userData.id))
         }
         if joinMemberID.count == 1 {
-            self.showMessage(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.")
+            self.showAlert(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.")
         } else {
             APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberID) { response in
                 if response.isSuccess {
-                    self.showMessagePop(message: "게시물 작성이 완료되었습니다.")
+                    self.showAlertNavigationBack(message: "게시물 작성이 완료되었습니다.",backType: .pop)
                 } else {
                     self.errorHandling(response: response)
                 }

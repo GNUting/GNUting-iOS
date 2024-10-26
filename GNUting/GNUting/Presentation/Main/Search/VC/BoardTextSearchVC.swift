@@ -5,6 +5,8 @@
 //  Created by 원동진 on 2/18/24.
 //
 
+// MARK: - 게시글 검색 ViewController
+
 import UIKit
 
 final class BoardTextSearchVC: BaseViewController {
@@ -140,7 +142,7 @@ extension BoardTextSearchVC: UITableViewDelegate {
         vc.setPushBoardList()
         tableView.deselectRow(at: indexPath, animated: true)
         
-        pushViewContoller(viewController: vc)
+        pushViewController(viewController: vc)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

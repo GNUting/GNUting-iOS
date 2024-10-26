@@ -5,7 +5,7 @@
 //  Created by 원동진 on 9/11/24.
 //
 
-// MARK: - 메모팅 VC
+// MARK: - 메모팅 ViewController
 
 import UIKit
 
@@ -171,9 +171,9 @@ extension NoteViewController {
                 let chatRoomVC = ChatRoomVC()
                 chatRoomVC.isPushNotification = true
                 chatRoomVC.chatRoomID = successResponse?.result.chatId ?? 0
-                self.pushViewContoller(viewController: chatRoomVC)
+                self.pushViewController(viewController: chatRoomVC)
             } else {
-                self.showMessage(message: failureResponse?.message ?? "재시도해주세요.")
+                self.showAlert(message: failureResponse?.message ?? "재시도해주세요.")
             }
          
         }

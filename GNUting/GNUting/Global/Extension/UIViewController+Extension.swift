@@ -52,13 +52,7 @@ extension UIViewController{
         }
     }
     
-    func showAlert(message: String){
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true)
-        }
-    }
+ 
     func errorHandling(response: DefaultResponse?) {
         if response?.isSuccess == false{
             if response?.code != "BOARD4003"{
@@ -74,27 +68,45 @@ extension UIViewController{
         }
     }
    
-
-    func showMessage(message: String) {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+    func showAlert(title: String = "", message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
         }
     }
     
-    func showMessagePop(message: String) {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-            self.popButtonTap()
+    
+    func showAlertNavigationBack(title: String = "", message: String, actionTitle: String = "확인", backType: NavigationType) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: actionTitle, style: .default,handler: { _ in
+            switch backType {
+            case .pop:
+                self.popButtonTap()
+            case .dismiss:
+                self.tapDissmisButton()
+            }
+            
         }))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
         }
     }
-    func presentFullScreenVC(viewController: UIViewController) {
+    
+    func setRootViewControllerLoginVC() {
+        let alertController = UIAlertController(title: "", message: "로그인을 다시 시도해주세요.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
+            self.changeRootViewController(viewController: LoginVC())
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+            
+        }
+    }
+    
+    func presentViewController(viewController: UIViewController, modalPresentationStyle: UIModalPresentationStyle = .pageSheet) {
         let navigationVC = UINavigationController.init(rootViewController: viewController)
-        navigationVC.modalPresentationStyle = .fullScreen
+        navigationVC.modalPresentationStyle = modalPresentationStyle
         
         self.present(navigationVC, animated: true)
     }
@@ -106,11 +118,11 @@ extension UIViewController{
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    func pushViewContoller(viewController: UIViewController) {
+    func pushViewController(viewController: UIViewController) {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     @objc func tapWriteTextButton(){
-        pushViewContoller(viewController: WriteDateBoardVC())
+        pushViewController(viewController: WriteDateBoardVC())
     }
     
     func swipeRecognizer() {
@@ -171,16 +183,7 @@ extension UIViewController{
         NotificationCenter.default.removeObserver(self, name: .expirationRefreshToken, object: nil)
         self.expirationRefreshtoken()
     }
-    func setRootViewControllerLoginVC() {
-        let alertController = UIAlertController(title: "", message: "로그인을 다시 시도해주세요.", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "확인", style: .default,handler: { _ in
-            self.changeRootViewController(viewController: LoginVC())
-        }))
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true)
-            
-        }
-    }
+   
     func changeRootViewController(viewController: UIViewController) {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first(where: { $0.isKeyWindow }) {

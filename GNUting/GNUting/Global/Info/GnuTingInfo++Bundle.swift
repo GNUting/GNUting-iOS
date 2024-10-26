@@ -26,4 +26,12 @@ extension Bundle {
     var socketURL: String {
         return getValue(key: "SocketURL")
     }
+    
+    var  testBaseURL: String {
+        return getValue(key: "TestBaseURL")
+    }
+    
+    var testSocketURL: String {
+        return getValue(key: "TestSocketURL")
+    }
 }

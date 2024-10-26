@@ -145,7 +145,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                                                         nickname: participantUser[indexPath.row].nickname,
                                                         userStudentID: participantUser[indexPath.row].studentId,
                                                         userDepartment: participantUser[indexPath.row].department)
-                    self.presentFullScreenVC(viewController: vc)
+                    self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
                 }
             }
             
@@ -159,7 +159,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
                                                         nickname: applyUserData[indexPath.row].nickname,
                                                         userStudentID: applyUserData[indexPath.row].studentId,
                                                         userDepartment: applyUserData[indexPath.row].department)
-                    self.presentFullScreenVC(viewController: vc)
+                    self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
                 }
             }
         }
@@ -223,7 +223,7 @@ extension RequestStatusDetailVC {
             alertContoller.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
                 APIDeleteManager.shared.deleteRequestChat(boardID:self.dedatilData?.id ?? 0) { response in
                     if response.isSuccess {
-                        self.showMessage(message: "취소되었습니다.")
+                        self.showAlert(message: "취소되었습니다.")
                         self.popButtonTap()
                     } else {
                         self.errorHandling(response: response)
@@ -241,7 +241,7 @@ extension RequestStatusDetailVC {
             alertContoller.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
                 APIUpdateManager.shared.rejectedApplication(boardID: self.dedatilData?.id ?? 0) { response in
                     if response.isSuccess {
-                        self.showMessagePop(message: "신청을 거절하였습니다.")
+                        self.showAlertNavigationBack(message: "신청을 거절하였습니다.",backType: .pop)
                     } else {
                         self.errorHandling(response: response)
                     }
@@ -256,7 +256,7 @@ extension RequestStatusDetailVC {
    private func tapAcceptButton() {
         APIPostManager.shared.chatConfirmed(id: dedatilData?.id ?? 0) { response in
             if response.isSuccess {
-                self.showMessage(message: "채팅신청을 수락하였습니다.")
+                self.showAlert(message: "채팅신청을 수락하였습니다.")
             } else {
                 self.errorHandling(response: response)
             }

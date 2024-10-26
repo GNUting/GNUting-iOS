@@ -5,7 +5,7 @@
 //  Created by 원동진 on 3/25/24.
 //
 
-// MARK: - 비밀번호 찾기 화면 VC
+// MARK: - 비밀번호 찾기 화면 ViewController
 
 import UIKit
 
@@ -58,7 +58,7 @@ final class FindPasswordVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setAddView()
+        setAddSubViews()
         setAutoLayout()
         setNavigationBar(title: "비밀번호 찾기")
         setDelegateSubViews()
@@ -70,7 +70,7 @@ extension FindPasswordVC {
     
     // MARK: - Layout Helpers
     
-    private func setAddView() {
+    private func setAddSubViews() {
         view.addSubViews([inputViewUpperStackView, passwordUpdateButton, activityIndicatorView])
         inputViewUpperStackView.addStackSubViews([emailInputView, certifiedInputView, passWordInputView, passWordCheckInputView])
         view.bringSubviewToFront(emailInputView)
@@ -153,7 +153,7 @@ extension FindPasswordVC {
     private func updatePasswordAPI() {
         APIUpdateManager.shared.updatePassword(email: emailInputView.getTextFieldText(), password: passWordCheckInputView.getTextFieldText()) { response in
             if response.isSuccess {
-                self.showMessagePop(message: "비밀번호가 수정되었습니다.")
+                self.showAlertNavigationBack(message: "비밀번호가 수정되었습니다.",backType: .pop)
             } else {
                 self.errorHandling(response: response)
             }
@@ -162,7 +162,7 @@ extension FindPasswordVC {
     
     private func postEmailCheckChangePasswordAPI(textFieldText: String) {
         APIPostManager.shared.postEmailCheckChangePassword(email: textFieldText + "@gnu.ac.kr") { response in
-            self.showMessage(message: "인증번호가 전송되었습니다.")
+            self.showAlert(message: "인증번호가 전송되었습니다.")
             self.certifiedInputView.setFoucInputTextFiled()
             self.activityIndicatorView.stopAnimating()
             self.getSetTime()

@@ -55,7 +55,7 @@ extension MemberTableViewCell {
         }
         userInfoView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.left.right.equalToSuperview().inset(Spacing.horizontalSpacing27)
+            make.left.right.equalToSuperview().inset(Spacing.size27)
             make.bottom.equalToSuperview().offset(-20)
         }
     }
