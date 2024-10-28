@@ -20,7 +20,7 @@ protocol MyPostDelegate: AnyObject {
     func didTapDeleteButton()
 }
 
-class SettingView: UIView {
+final class SettingView: UIView {
     
     // MARK: - Properties
     
@@ -49,16 +49,17 @@ class SettingView: UIView {
         return view
     }()
     
-    private lazy var updateButton = makeBoardSettingButton(buttonText: "수정", action: #selector(didTapUpdateButton))
-    private lazy var deleteButton = makeBoardSettingButton(buttonText: "삭제", action: #selector(didTapDeleteButton))
-    private lazy var reportButton = makeBoardSettingButton(buttonText: "신고", action: #selector(didTapReportButton))
+    private lazy var updateButton = BoardSettingButton(text: "수정")
+    private lazy var deleteButton = BoardSettingButton(text: "삭제")
+    private lazy var reportButton = BoardSettingButton(text: "신고")
     
     // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setAddSubViews()
-    
+        setBoardSettingButtonAction()
     }
     
     required init?(coder: NSCoder) {
@@ -92,12 +93,10 @@ extension SettingView {
     
     // MARK: Make
     
-    private func makeBoardSettingButton(buttonText : String, action: Selector) -> BoardSettingButton {
-        let button = BoardSettingButton()
-        button.addTarget(self, action: action, for: .touchUpInside)
-        button.setButton(text: buttonText)
-        
-        return button
+    private func setBoardSettingButtonAction() {
+        updateButton.addTarget(self, action: #selector(didTapUpdateButton), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+        reportButton.addTarget(self, action: #selector(didTapReportButton), for: .touchUpInside)
     }
     
     // MARK: - Action
