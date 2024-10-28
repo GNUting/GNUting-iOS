@@ -42,12 +42,14 @@ final class DetailDateBoardVC: BaseViewController {
         label.numberOfLines = 0
         label.font = Pretendard.regular(size: 14)
         label.textColor = UIColor(named: "DisableColor")
+        
         return label
     }()
     
     private lazy var userInfoView: UserInfoView = {
         let view = UserInfoView()
         view.userInfoViewDelegate = self
+        
         return view
     }()
     
@@ -63,6 +65,7 @@ final class DetailDateBoardVC: BaseViewController {
     private lazy var chatPeopleViewButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(didTapchatPeopleViewButton), for: .touchUpInside)
+        
         return button
     }()
     
@@ -197,6 +200,36 @@ extension DetailDateBoardVC {
     }
 }
 
+// MARK: - API
+
+extension DetailDateBoardVC {
+    private func getBoardDetailDataAPI() {
+        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData,response  in
+            self.errorHandling(response: response)
+            guard let result = boardDetailData?.result else { return }
+            let user = result.user
+            let isOpen = result.status == "OPEN" ? true : false
+            self.postUserInfos = user
+            self.titleLabel.text =  result.title
+            self.writeDateLabel.text = result.time
+            self.contentTextView.text = result.detail
+            self.userInfos = result.inUser
+            self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId)
+            self.setChatPeopleViewButton(memeberCount: result.inUser.count)
+            self.chatMemeberCount = result.inUser.count
+            self.statusLabel.textColor = isOpen ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
+            self.statusLabel.text = isOpen ? "신청 가능" : "신청 마감"
+        }
+    }
+    
+    private func deletePostTextAPI() {
+        APIDeleteManager.shared.deletePostText(boardID: self.boardID) { response in
+            response.isSuccess ? self.showAlertNavigationBack(message: "게시글이 삭제되었습니다.",backType: .pop) :
+            self.errorHandling(response: response)
+        }
+    }
+}
+
 // MARK: - Delegate
 
 extension DetailDateBoardVC: OtherPostDelegate {
@@ -232,38 +265,6 @@ extension DetailDateBoardVC: MyPostDelegate {
         }
     }
 }
-
-// MARK: - API
-
-extension DetailDateBoardVC {
-    private func getBoardDetailDataAPI() {
-        APIGetManager.shared.getBoardDetail(id: boardID) { boardDetailData,response  in
-            self.errorHandling(response: response)
-            guard let result = boardDetailData?.result else { return }
-            let user = result.user
-            let isOpen = result.status == "OPEN" ? true : false
-            self.postUserInfos = user
-            self.titleLabel.text =  result.title
-            self.writeDateLabel.text = result.time
-            self.contentTextView.text = result.detail
-            self.userInfos = result.inUser
-            self.userInfoView.setUserInfoView(userImage: user.image, userNickname: user.nickname, major: user.department, StudentID: user.studentId)
-            self.setChatPeopleViewButton(memeberCount: result.inUser.count)
-            self.chatMemeberCount = result.inUser.count
-            self.statusLabel.textColor = isOpen ? UIColor(named: "SecondaryColor") : UIColor(named: "PrimaryColor")
-            self.statusLabel.text = isOpen ? "신청 가능" : "신청 마감"
-        }
-    }
-    
-    private func deletePostTextAPI() {
-        APIDeleteManager.shared.deletePostText(boardID: self.boardID) { response in
-            response.isSuccess ? self.showAlertNavigationBack(message: "게시글이 삭제되었습니다.",backType: .pop) :
-            self.errorHandling(response: response)
-        }
-    }
-}
-
-// MARK: - Delegate
 
 extension DetailDateBoardVC: UserInfoViewDelegate {
     func tapUserImageButton() {
