@@ -84,7 +84,7 @@
 		F86909532BFCF537001634D4 /* AppStoreVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */; };
 		F86A17FA2BCE660C00AC0D92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */; };
 		F86A17FC2BCE660C00AC0D92 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17FB2BCE660C00AC0D92 /* FirebaseMessaging */; };
-		F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */; };
+		F86DC9392B862B2B007EC3CA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* SettingView.swift */; };
 		F86F87DD2CC771BF00CA423D /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86F87DC2CC771BF00CA423D /* GnutingInfo.plist */; };
 		F86F87DF2CC771C700CA423D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86F87DE2CC771C700CA423D /* GoogleService-Info.plist */; };
 		F87351672B906295004E89C5 /* UpdaetProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351662B906295004E89C5 /* UpdaetProfileVC.swift */; };
@@ -272,7 +272,7 @@
 		F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDefaultTableViewCell.swift; sourceTree = "<group>"; };
 		F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreVersionCheck.swift; sourceTree = "<group>"; };
-		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
+		F86DC9382B862B2B007EC3CA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F86F87DC2CC771BF00CA423D /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F86F87DE2CC771C700CA423D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F87351662B906295004E89C5 /* UpdaetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaetProfileVC.swift; sourceTree = "<group>"; };
@@ -769,14 +769,14 @@
 			path = AppStoreCheck;
 			sourceTree = "<group>";
 		};
-		F86DC9372B862B0E007EC3CA /* ViewComponent */ = {
+		F86DC9372B862B0E007EC3CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */,
+				F86DC9382B862B2B007EC3CA /* SettingView.swift */,
 				F8CDE3512B849F9500E5598D /* UserInfoView.swift */,
 				F882DBB62BA43646009201D2 /* BoardSettingButton.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F86F87E02CC89B9800CA423D /* VC */ = {
@@ -1185,7 +1185,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E3CD5A2B8CECE000712CBF /* VC */,
-				F86DC9372B862B0E007EC3CA /* ViewComponent */,
+				F86DC9372B862B0E007EC3CA /* Views */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1690,7 +1690,7 @@
 				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
 				F8A5B6272BE11B500054E324 /* AuthNumberInputView.swift in Sources */,
-				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
+				F86DC9392B862B2B007EC3CA /* SettingView.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
 				F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */,

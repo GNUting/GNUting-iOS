@@ -5,6 +5,8 @@
 //  Created by 원동진 on 2/20/24.
 //
 
+// MARK: - 과팅 게시판 Detail ViewController
+
 import UIKit
 
 final class DetailDateBoardVC: BaseViewController {
@@ -72,8 +74,8 @@ final class DetailDateBoardVC: BaseViewController {
         return button
     }()
     
-    private lazy var detailDateBoardSetView: DetailDateBoardSetView = {
-        let view = DetailDateBoardSetView()
+    private lazy var detailDateBoardSetView: SettingView = {
+        let view = SettingView()
         view.isHidden = true
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = .zero
@@ -184,14 +186,14 @@ extension DetailDateBoardVC {
         requestChatButton.backgroundColor = UIColor(named: "SecondaryColor")
         requestChatButton.setText("신청 현황 보러가기",fointSize: 16)
         chatPeopleViewButton.isHidden = true
-        detailDateBoardSetView.myPost(isMypost: true)
-        detailDateBoardSetView.MyPostDelegate = self
+        detailDateBoardSetView.setAutoLayout(isMypost: true)
+        detailDateBoardSetView.myPostDelegate = self
     }
     
     func setPushBoardList() {
         setNavigationBar(title: "과팅 게시판")
         detailDateBoardSetView.otherPostDelegate = self
-        detailDateBoardSetView.myPost(isMypost: false)
+        detailDateBoardSetView.setAutoLayout(isMypost: false)
     }
 }
 
