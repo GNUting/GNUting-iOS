@@ -9,7 +9,7 @@
 
 import UIKit
 
-class BoardSettingButton: UIButton {
+final class BoardSettingButton: UIButton {
     
     // MARK: - init
     
