@@ -31,7 +31,9 @@ class UserWriteTextVC: BaseViewController {
     private lazy var writeTextButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "WritePostImage"), for: .normal)
-        button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
+        button.addAction( UIAction { _ in
+            self.pushViewController(viewController: WriteDateBoardVC())
+        }, for: .touchUpInside)
         return button
     }()
     private lazy var dateBoardTableView : UITableView = {
@@ -119,4 +121,5 @@ extension UserWriteTextVC {
             self.myPostList = result
         }
     }
+
 }

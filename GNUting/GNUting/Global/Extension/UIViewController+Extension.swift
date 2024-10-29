@@ -121,9 +121,6 @@ extension UIViewController{
     func pushViewController(viewController: UIViewController) {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-    @objc func tapWriteTextButton(){
-        pushViewController(viewController: WriteDateBoardVC())
-    }
     
     func swipeRecognizer() {
         let swifpeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(_ :)))
