@@ -10,7 +10,7 @@
 		9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A4860BEE577AFE9533473F /* Pods_GNUting.framework */; };
 		F80498A22CB3038C0059DA6A /* SwiftStompDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */; };
 		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
-		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
+		F80C4DDF2B83852100BA6FFB /* WriteUpdatePostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WriteUpdatePostTextView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
 		F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */; };
 		F815FF5D2C92F7A8009EB279 /* NotePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */; };
@@ -199,7 +199,7 @@
 		F80287552CA5477200089E8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftStompDelegate.swift; sourceTree = "<group>"; };
 		F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDateBoardVC.swift; sourceTree = "<group>"; };
-		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
+		F80C4DDE2B83852100BA6FFB /* WriteUpdatePostTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteUpdatePostTextView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
 		F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePostModel.swift; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E3CD562B8CEA4700712CBF /* VC */,
-				F80C4DE72B8394D200BA6FFB /* ViewComponent */,
+				F80C4DE72B8394D200BA6FFB /* Views */,
 			);
 			path = "Wrtie+Update";
 			sourceTree = "<group>";
@@ -463,14 +463,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		F80C4DE72B8394D200BA6FFB /* ViewComponent */ = {
+		F80C4DE72B8394D200BA6FFB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */,
+				F80C4DDE2B83852100BA6FFB /* WriteUpdatePostTextView.swift */,
 				F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */,
 				F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F81895CD2BA7E39900DF7ABE /* ViewComponent */ = {
@@ -1713,7 +1713,7 @@
 				F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */,
 				F869094E2BFCCC12001634D4 /* UIResponder+Extension.swift in Sources */,
-				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
+				F80C4DDF2B83852100BA6FFB /* WriteUpdatePostTextView.swift in Sources */,
 				F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */,
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,
 				F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */,

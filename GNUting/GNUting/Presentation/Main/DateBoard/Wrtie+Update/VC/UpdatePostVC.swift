@@ -17,8 +17,8 @@ class UpdatePostVC: BaseViewController {
         }
     }
     
-    private lazy var postTextView : WrtieUpdatePostTextView = {
-        let customView = WrtieUpdatePostTextView()
+    private lazy var postTextView : WriteUpdatePostTextView = {
+        let customView = WriteUpdatePostTextView()
         customView.contentTextView.delegate = self
         customView.contentTextView.text = textViewPlaceHolder
         
