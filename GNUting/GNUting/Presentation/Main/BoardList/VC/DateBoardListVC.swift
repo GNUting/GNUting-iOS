@@ -116,7 +116,7 @@ extension DateBoardListVC {
     }
 }
 
-// MARK: - UITableView
+// MARK: - UITableView DataSource
 
 extension DateBoardListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -100,7 +100,7 @@ extension SearchMajorVC {
     }
 }
 
-// MARK: - UITableVIew
+// MARK: - UITableVIew DataSource
 
 extension SearchMajorVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -202,7 +202,7 @@ extension SearchAddMemberVC {
     }
 }
 
-// MARK: - UICollectionView
+// MARK: - UICollectionView DataSource
 
 extension SearchAddMemberVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
