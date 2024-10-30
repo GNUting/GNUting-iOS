@@ -5,11 +5,14 @@
 //  Created by 원동진 on 3/17/24.
 //
 
+// MARK: - 게시글 수정 ViewController
+
 import UIKit
 
-class UpdatePostVC: BaseViewController {
-    let textViewPlaceHolder = "내용을 입력해주세요."
-    var writeDateBoardState : Bool = true
+final class UpdatePostVC: BaseViewController {
+    
+    // MARK: - Properties
+    
     var boardID: Int = 0
     var memberDataList: [UserInfosModel] = [] {
         didSet {
@@ -17,16 +20,17 @@ class UpdatePostVC: BaseViewController {
         }
     }
     
-    private lazy var postTextView : WriteUpdatePostTextView = {
-        let customView = WriteUpdatePostTextView()
-        customView.contentTextView.delegate = self
-        customView.contentTextView.text = textViewPlaceHolder
+    // MARK: - SubViews
+    
+    private lazy var postTextView: WriteUpdatePostTextView = {
+        let view = WriteUpdatePostTextView()
+        view.wrtieUpdatePostTextViewDelegate = self
         
-        return customView
+        return view
     }()
+    
     private lazy var memberTableView : UITableView = {
         let tableView = UITableView()
-        
         tableView.sectionHeaderTopPadding = 0
         tableView.separatorStyle = .none
         tableView.bounces = false
@@ -36,59 +40,46 @@ class UpdatePostVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
+        
         return tableView
     }()
+    
     private lazy var completedButton: ThrottleButton = {
        let button = ThrottleButton()
         button.setTitle("완료", for: .normal)
         button.isEnabled = false
         button.titleLabel?.font = Pretendard.medium(size: 18)
         button.setTitleColor(UIColor(named: "SecondaryColor"), for: .normal)
-      
+        button.throttle(delay: 3) { _ in
+            self.completedButtonAction()
+        }
         
         return button
     }()
-    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addSubViews()
         setAutoLayout()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setNavigationBar()
-        setCompletedButton()
     }
-    
-    
 }
-extension UpdatePostVC{
-    private func setNavigationBar(){
-        setNavigationBar(title: "수정하기")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
-    }
-    private func setCompletedButton() {
-        completedButton.throttle(delay: 3) { _ in
-            if self.postTextView.getTitleTextFieldText()?.count == 0 {
-                self.showAlert(message: "글 제목 또는 내용을 채워주세요.")
-            } else if self.postTextView.getContentTextViewText().count == 0{
-                self.showAlert(message: "글 제목 또는 내용을 채워주세요.")
-            } else {
-                self.tapCompletedButton()
-            }
-        }
-    }
+
+extension UpdatePostVC {
+    
+    // MARK: - Layout Helpers
+    
     private func addSubViews() {
         view.addSubViews([postTextView, memberTableView])
     }
-    private func setAutoLayout(){
+    
+    private func setAutoLayout() {
         postTextView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.right.equalToSuperview().offset(Spacing.right)
+            make.left.right.equalToSuperview().inset(Spacing.size25)
         }
         
         memberTableView.snp.makeConstraints { make in
@@ -99,54 +90,30 @@ extension UpdatePostVC{
         }
     }
     
+    // MARK: - SetView
+    
+    private func setNavigationBar() {
+        setNavigationBar(title: "수정하기")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
+    }
+    
+    func setPostTestView(title: String, content: String){
+        postTextView.setTitleTextFieldText(text: title)
+        postTextView.setContentTextView(text: content)
+    }
+    
+    // MARK: - API
+
+    private func updateWriteTextAPI() {
+        APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { response in
+            response.isSuccess ? self.showAlertNavigationBack(message: "게시글 수정이 완료되었습니다.",backType: .pop) : self.errorHandling(response: response)
+        }
+    }
 }
 
 // MARK: - DataSource
 
 extension UpdatePostVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let vc = SearchAddMemberVC()
-            
-            vc.searchAddMemberVCDelegate = self
-            vc.setProperties(pushRequestChatVC: false, addMemberInfos: memberDataList)
-            presentViewController(viewController: vc)
-        }
-    }
-}
-
-// MARK: - Delegate
-
-extension UpdatePostVC : UITextViewDelegate{
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
-            textView.text = nil
-            textView.textColor = .black
-            
-        }
-        if textView.text != "" {
-            textView.textColor = .black
-        }
-        
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textViewPlaceHolder
-            textView.textColor = UIColor(hexCode: "9F9F9F")
-        }
-    }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = textView.text ?? ""
-        guard let stringRange = Range(range,in: currentText) else { return false}
-        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return changedText.count <= 300
-    }
-}
-
-extension UpdatePostVC: UITableViewDelegate {
-    
-    // MARK: - Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memberDataList.count
     }
@@ -158,50 +125,54 @@ extension UpdatePostVC: UITableViewDelegate {
         
         return cell
     }
-    
-    // MARK: - Header
+}
+
+// MARK: - Delegate
+
+extension UpdatePostVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let vc = SearchAddMemberVC()
+            vc.searchAddMemberVCDelegate = self
+            vc.setProperties(pushRequestChatVC: false, addMemberInfos: memberDataList)
+            presentViewController(viewController: vc)
+        }
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MemberTableViewHeader.identi) as? MemberTableViewHeader else {return UIView()}
-        if section == 0 {
-            headerView.setMemberLabelCount(memberCount: memberDataList.count)
-            return headerView
-        }
-        return UIView()
+        headerView.setMemberLabelCount(memberCount: memberDataList.count)
+        
+        return section == 0 ? headerView : UIView()
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
-            return 1
-        }
-        return tableView.estimatedSectionHeaderHeight
+        section == 1 ? 1 : tableView.estimatedSectionHeaderHeight
     }
 }
 
-// MARK: - ButtonAction
-
-extension UpdatePostVC{
-    private func tapCompletedButton(){
-        APIUpdateManager.shared.updateWriteText(boardID: boardID, title: postTextView.getTitleTextFieldText() ?? "", detail: postTextView.getContentTextViewText(), memeberInfos: memberDataList) { response in
-            if response.isSuccess {
-                self.showAlertNavigationBack(message: "게시글 수정이 완료되었습니다.",backType: .pop)
-            } else {
-                self.errorHandling(response: response)
-            }
-        }
+extension UpdatePostVC: WriteUpdatePostTextViewDelegate {
+    func tapDoneButton() {
+        view.endEditing(true)
     }
 }
 
 extension UpdatePostVC: SearchAddMemberVCDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        
         memberDataList = send
     }
-    
-    
 }
+
+// MARK: - Action
+
 extension UpdatePostVC {
-    func setPostTestView(title: String, content: String){
-        postTextView.setTitleTextFieldText(text: title)
-        postTextView.setContentTextView(text: content)
-        
+    private func completedButtonAction() {
+        if self.postTextView.getTitleTextFieldText()?.count == 0 {
+            self.showAlert(message: "제목을 입력해주세요.")
+        } else if self.postTextView.getContentTextViewText() == Strings.WriteDateBoard.textPlaceHolder {
+            self.showAlert(message: "내용을 입력해주세요.")
+        } else {
+            updateWriteTextAPI()
+        }
     }
 }
