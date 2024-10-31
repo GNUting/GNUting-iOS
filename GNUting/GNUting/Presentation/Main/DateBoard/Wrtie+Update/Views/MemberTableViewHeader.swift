@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MemberTableViewHeader: UITableViewHeaderFooterView {
+final class MemberTableViewHeader: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     

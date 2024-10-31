@@ -15,7 +15,7 @@ protocol WriteUpdatePostTextViewDelegate: AnyObject {
     func tapDoneButton()
 }
 
-class WriteUpdatePostTextView: UIView {
+final class WriteUpdatePostTextView: UIView {
     
     // MARK: - Properties
     
