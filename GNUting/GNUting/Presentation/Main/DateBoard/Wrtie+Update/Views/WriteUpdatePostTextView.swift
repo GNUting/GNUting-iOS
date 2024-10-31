@@ -113,6 +113,8 @@ extension WriteUpdatePostTextView {
     }
 }
 
+// MARK: - Delegate
+
 extension WriteUpdatePostTextView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextField.resignFirstResponder()
@@ -121,7 +123,10 @@ extension WriteUpdatePostTextView: UITextFieldDelegate {
 
 extension WriteUpdatePostTextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print(content)
+        if textView.text == content {
+            textView.textColor = .black
+        }
+    
         if textView.text == Strings.WriteDateBoard.textPlaceHolder {
             textView.text = nil
             textView.textColor = .black

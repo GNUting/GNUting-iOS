@@ -25,7 +25,7 @@ final class UpdatePostVC: BaseViewController {
     private lazy var postTextView: WriteUpdatePostTextView = {
         let view = WriteUpdatePostTextView()
         view.wrtieUpdatePostTextViewDelegate = self
-        
+    
         return view
     }()
     
@@ -100,6 +100,7 @@ extension UpdatePostVC {
     func setPostTestView(title: String, content: String){
         postTextView.setTitleTextFieldText(text: title)
         postTextView.setContentTextView(text: content)
+        postTextView.content = content
     }
     
     // MARK: - API
@@ -130,24 +131,15 @@ extension UpdatePostVC: UITableViewDataSource {
 // MARK: - Delegate
 
 extension UpdatePostVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let vc = SearchAddMemberVC()
-            vc.searchAddMemberVCDelegate = self
-            vc.setProperties(pushRequestChatVC: false, addMemberInfos: memberDataList)
-            presentViewController(viewController: vc)
-        }
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MemberTableViewHeader.identi) as? MemberTableViewHeader else {return UIView()}
         headerView.setMemberLabelCount(memberCount: memberDataList.count)
         
-        return section == 0 ? headerView : UIView()
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        section == 1 ? 1 : tableView.estimatedSectionHeaderHeight
+        return tableView.estimatedSectionHeaderHeight
     }
 }
 
