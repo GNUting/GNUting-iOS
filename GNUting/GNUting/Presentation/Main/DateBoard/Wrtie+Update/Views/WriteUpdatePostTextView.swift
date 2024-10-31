@@ -17,6 +17,8 @@ protocol WriteUpdatePostTextViewDelegate: AnyObject {
 
 class WriteUpdatePostTextView: UIView{
     weak var wrtieUpdatePostTextViewDelegate: WriteUpdatePostTextViewDelegate?
+    var content = ""
+    
     private lazy var upperView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -40,19 +42,32 @@ class WriteUpdatePostTextView: UIView{
         view.backgroundColor = UIColor(hexCode: "E9E9E9")
         return view
     }()
-    lazy var contentTextView : UITextView = {
+    
+    private lazy var contentTextView : UITextView = {
         let textView = UITextView()
         textView.text = Strings.WriteDateBoard.textPlaceHolder
         textView.font = Pretendard.regular(size: 18)
         textView.textColor = UIColor(hexCode: "9F9F9F")
         textView.delegate = self
+        textView.inputAccessoryView = doneButton
         
         return textView
     }()
+    
+    private lazy var doneButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("Done", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .lightGray
+        button.titleLabel?.font = Pretendard.regular(size: 10)
+        button.addTarget(self, action: #selector(tapDoneButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        setkeyboardToolbar()
     }
     
     required init?(coder: NSCoder) {
@@ -71,17 +86,12 @@ extension WriteUpdatePostTextView {
         borderView.snp.makeConstraints { make in
             make.height.equalTo(1)
         }
+        
+        doneButton.snp.makeConstraints { make in
+            make.height.equalTo(30)
+        }
     }
-    private func setkeyboardToolbar() {
-        let keyboardToolbar = UIToolbar()
-        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneBarButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(tapDoneButton))
-        keyboardToolbar.items = [flexBarButton, doneBarButton]
-        keyboardToolbar.sizeToFit()
-        keyboardToolbar.tintColor = UIColor.systemGray
-
-        contentTextView.inputAccessoryView = keyboardToolbar
-    }
+ 
     @objc private func tapDoneButton() {
         wrtieUpdatePostTextViewDelegate?.tapDoneButton()
     }
@@ -93,9 +103,6 @@ extension WriteUpdatePostTextView {
     func setContentTextView(text : String) {
         contentTextView.text = text
     }
-    func setContentTextViewTextColor(color : UIColor){
-        contentTextView.textColor = color
-    }
     
     func getTitleTextFieldText() -> String? {
         return titleTextField.text
@@ -105,6 +112,7 @@ extension WriteUpdatePostTextView {
         return contentTextView.text
     }
 }
+
 extension WriteUpdatePostTextView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextField.resignFirstResponder()
@@ -113,12 +121,13 @@ extension WriteUpdatePostTextView: UITextFieldDelegate {
 
 extension WriteUpdatePostTextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        print(content)
         if textView.text == Strings.WriteDateBoard.textPlaceHolder {
             textView.text = nil
             textView.textColor = .black
-            
         }
     }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = Strings.WriteDateBoard.textPlaceHolder
@@ -130,9 +139,7 @@ extension WriteUpdatePostTextView: UITextViewDelegate {
         let currentText = contentTextView.text ?? ""
         guard let stringRange = Range(range,in: currentText) else { return false}
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return changedText.count <= 300
         
-    
+        return changedText.count <= 300
     }
-    
 }
