@@ -15,41 +15,50 @@ protocol WriteUpdatePostTextViewDelegate: AnyObject {
     func tapDoneButton()
 }
 
-class WriteUpdatePostTextView: UIView{
+class WriteUpdatePostTextView: UIView {
+    
+    // MARK: - Properties
+    
     weak var wrtieUpdatePostTextViewDelegate: WriteUpdatePostTextViewDelegate?
     var content = ""
     
-    private lazy var upperView : UIStackView = {
+    // MARK: - SubViews
+    
+    private lazy var upperView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 15
         stackView.alignment = .fill
         stackView.distribution = .fill
+        
         return stackView
     }()
-    private lazy var titleTextField : UITextField = {
+    
+    private lazy var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.font = Pretendard.bold(size: 18)
         textField.textColor = .black
+        textField.font = Pretendard.bold(size: 18)
         textField.attributedPlaceholder = NSAttributedString(string: "제목",attributes: [NSAttributedString.Key.font: Pretendard.medium(size: 18) ?? .systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor(hexCode: "9F9F9F")])
-        textField.delegate = self
         textField.returnKeyType = .done
+        textField.delegate = self
         
         return textField
     }()
-    private lazy var borderView : UIView = {
+    
+    private lazy var borderView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexCode: "E9E9E9")
+        
         return view
     }()
     
-    private lazy var contentTextView : UITextView = {
+    private lazy var contentTextView: UITextView = {
         let textView = UITextView()
         textView.text = Strings.WriteDateBoard.textPlaceHolder
-        textView.font = Pretendard.regular(size: 18)
         textView.textColor = UIColor(hexCode: "9F9F9F")
-        textView.delegate = self
+        textView.font = Pretendard.regular(size: 18)
         textView.inputAccessoryView = doneButton
+        textView.delegate = self
         
         return textView
     }()
@@ -65,24 +74,34 @@ class WriteUpdatePostTextView: UIView{
         return button
     }()
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        
+        setAddSubViews()
+        setAutoLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
+
 extension WriteUpdatePostTextView {
-    private func configure(){
+    
+    // MARK: - Layout Helpers
+    
+    private func setAddSubViews() {
         addSubview(upperView)
+        upperView.addStackSubViews([titleTextField,borderView,contentTextView])
+    }
+    
+    private func setAutoLayout() {
         upperView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        upperView.addStackSubViews([titleTextField,borderView,contentTextView])
+        
         borderView.snp.makeConstraints { make in
             make.height.equalTo(1)
         }
@@ -91,15 +110,13 @@ extension WriteUpdatePostTextView {
             make.height.equalTo(30)
         }
     }
- 
-    @objc private func tapDoneButton() {
-        wrtieUpdatePostTextViewDelegate?.tapDoneButton()
-    }
-}
-extension WriteUpdatePostTextView {
+    
+    // MARK: - Internal Method
+    
     func setTitleTextFieldText(text : String) {
         titleTextField.text = text
     }
+    
     func setContentTextView(text : String) {
         contentTextView.text = text
     }
@@ -146,5 +163,13 @@ extension WriteUpdatePostTextView: UITextViewDelegate {
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
         
         return changedText.count <= 300
+    }
+}
+
+// MARK: - Action
+
+extension WriteUpdatePostTextView {
+    @objc private func tapDoneButton() {
+        wrtieUpdatePostTextViewDelegate?.tapDoneButton()
     }
 }
