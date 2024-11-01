@@ -245,11 +245,12 @@ extension DetailDateBoardVC: OtherPostDelegate {
 
 extension DetailDateBoardVC: MyPostDelegate {
     func didTapUpDateButton() {
-        let vc = UpdatePostVC()
+        let vc = PostEditorVC()
         
+        vc.isEditingMode = true
         vc.setPostTestView(title: titleLabel.text ?? "", content: contentTextView.text)
         vc.boardID = boardID
-        vc.memberDataList = userInfos
+        vc.memberList = userInfos
         detailDateBoardSetView.isHidden = true
         pushViewController(viewController: vc)
     }

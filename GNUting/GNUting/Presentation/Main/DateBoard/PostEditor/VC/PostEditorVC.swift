@@ -9,20 +9,21 @@
 
 import UIKit
 
-final class WriteDateBoardVC: BaseViewController {
+final class PostEditorVC: BaseViewController {
     
     // MARK: - Properties
     
-    private var writeEnable: Bool = false
-    private var addMemberDataList: [UserInfosModel] = [] {
+    var isEditingMode: Bool = false // true : 수정, false: 글쓰기
+    var boardID: Int = 0
+    var memberList: [UserInfosModel] = [] {
         didSet {
             memberTableView.reloadData()
         }
     }
     
     // MARK: - SubViews
-
-    private lazy var titleContentView: WriteUpdatePostTextView = {
+    
+    private lazy var contentView: WriteUpdatePostTextView = {
         let view = WriteUpdatePostTextView()
         view.wrtieUpdatePostTextViewDelegate = self
         
@@ -45,7 +46,7 @@ final class WriteDateBoardVC: BaseViewController {
     }()
     
     private lazy var completedButton: ThrottleButton = {
-       let button = ThrottleButton()
+        let button = ThrottleButton()
         button.setTitle("완료", for: .normal)
         button.isEnabled = false
         button.titleLabel?.font = Pretendard.medium(size: 18)
@@ -64,27 +65,27 @@ final class WriteDateBoardVC: BaseViewController {
         
         setAddSubViews()
         setAutoLayout()
-        setNavigationBar()
-        getUserDataAPI()
+        setNavigationBar(isEditingMode: isEditingMode)
+        getUserDataAPI(isEditingMode: isEditingMode)
     }
 }
 
-extension WriteDateBoardVC {
+extension PostEditorVC {
     
     // MARK: - Layout Helpers
     
     private func setAddSubViews() {
-        view.addSubViews([titleContentView, memberTableView])
+        view.addSubViews([contentView, memberTableView])
     }
     
     private func setAutoLayout() {
-        titleContentView.snp.makeConstraints { make in
+        contentView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Spacing.top)
             make.left.right.equalToSuperview().inset(Spacing.size25)
         }
         
         memberTableView.snp.makeConstraints { make in
-            make.top.equalTo(titleContentView.snp.bottom).offset(Spacing.top)
+            make.top.equalTo(contentView.snp.bottom).offset(Spacing.top)
             make.left.right.equalToSuperview().inset(Spacing.size27)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(2)
@@ -93,61 +94,78 @@ extension WriteDateBoardVC {
     
     // MARK: - SetView
     
-    private func setNavigationBar() {
-        setNavigationBar(title: "글쓰기")
+    private func setNavigationBar(isEditingMode: Bool) {
+        setNavigationBar(title: isEditingMode ? "수정하기" : "글쓰기")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completedButton)
     }
-
+    
     private func addMemberID() -> [UserIDList] {
         var joinMemberIDList: [UserIDList] = []
         
-        for userData in addMemberDataList {
+        for userData in memberList {
             joinMemberIDList.append(UserIDList(id: userData.id))
         }
         return joinMemberIDList
     }
     
-    // MARK: - API
-    
-    private func getUserDataAPI() {
-        APIGetManager.shared.getUserData { userData,response  in
-            self.errorHandling(response: response)
-            guard let userData = userData?.result else { return }
-            self.addMemberDataList.append(UserInfosModel(id: userData.id,
-                                                         name: userData.nickname,
-                                                         gender: userData.gender,
-                                                         age: userData.age,
-                                                         nickname: userData.nickname,
-                                                         department: userData.department,
-                                                         studentId: userData.studentId,
-                                                         userRole: userData.userRole,
-                                                         userSelfIntroduction: userData.userSelfIntroduction,
-                                                         profileImage: userData.profileImage))
+    func setPostTestView(title: String, content: String){
+        contentView.setTitleTextFieldText(text: title)
+        contentView.setContentTextView(text: content)
+        contentView.content = content
+    }
+}
+
+// MARK: - API
+
+extension PostEditorVC  {
+    private func getUserDataAPI(isEditingMode: Bool) {
+        if !isEditingMode {
+            APIGetManager.shared.getUserData { userData,response  in
+                self.errorHandling(response: response)
+                guard let userData = userData?.result else { return }
+                self.memberList.append(UserInfosModel(id: userData.id,
+                                                             name: userData.nickname,
+                                                             gender: userData.gender,
+                                                             age: userData.age,
+                                                             nickname: userData.nickname,
+                                                             department: userData.department,
+                                                             studentId: userData.studentId,
+                                                             userRole: userData.userRole,
+                                                             userSelfIntroduction: userData.userSelfIntroduction,
+                                                             profileImage: userData.profileImage))
+            }
         }
+  
     }
     
     private func postWriteTextAPI(joinMemberIDlList: [UserIDList]) {
-        APIPostManager.shared.postWriteText(title: titleContentView.getTitleTextFieldText() ?? "", detail: titleContentView.getContentTextViewText(), joinMemberID: joinMemberIDlList) { response in
+        APIPostManager.shared.postWriteText(title: contentView.getTitleTextFieldText() ?? "", detail: contentView.getContentTextViewText(), joinMemberID: joinMemberIDlList) { response in
             response.isSuccess ? self.showAlertNavigationBack(message: "게시물 작성이 완료되었습니다.",backType: .pop) : self.errorHandling(response: response)
+        }
+    }
+    
+    private func updateWriteTextAPI() {
+        APIUpdateManager.shared.updateWriteText(boardID: boardID, title: contentView.getTitleTextFieldText() ?? "", detail: contentView.getContentTextViewText(), memeberInfos: memberList) { response in
+            response.isSuccess ? self.showAlertNavigationBack(message: "게시글 수정이 완료되었습니다.",backType: .pop) : self.errorHandling(response: response)
         }
     }
 }
 
 // MARK: - UITableView DataSource
 
-extension WriteDateBoardVC: UITableViewDataSource {
+extension PostEditorVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        return isEditingMode ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? addMemberDataList.count : 1
+        return section == 0 ? memberList.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableViewCell.identi, for: indexPath) as? MemberTableViewCell else { return UITableViewCell()}
-            cell.setUserInfoViews(model: addMemberDataList[indexPath.row])
+            cell.setUserInfoViews(model: memberList[indexPath.row])
             cell.selectionStyle = .none
             return cell
         } else {
@@ -160,19 +178,19 @@ extension WriteDateBoardVC: UITableViewDataSource {
 
 // MARK: - Delegate
 
-extension WriteDateBoardVC: UITableViewDelegate {
+extension PostEditorVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = SearchAddMemberVC()
             vc.searchAddMemberVCDelegate = self
-            vc.setProperties(pushRequestChatVC: false, addMemberInfos: addMemberDataList)
+            vc.setProperties(pushRequestChatVC: false, addMemberInfos: memberList)
             presentViewController(viewController: vc)
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MemberTableViewHeader.identi) as? MemberTableViewHeader else {return UIView()}
-        headerView.setMemberLabelCount(memberCount: addMemberDataList.count)
+        headerView.setMemberLabelCount(memberCount: memberList.count)
         
         return section == 0 ? headerView : UIView()
     }
@@ -182,28 +200,36 @@ extension WriteDateBoardVC: UITableViewDelegate {
     }
 }
 
-extension WriteDateBoardVC: WriteUpdatePostTextViewDelegate {
+extension PostEditorVC: WriteUpdatePostTextViewDelegate {
     func tapDoneButton() {
         view.endEditing(true)
     }
 }
 
-extension WriteDateBoardVC: SearchAddMemberVCDelegate {
+extension PostEditorVC: SearchAddMemberVCDelegate {
     func sendAddMemberData(send: [UserInfosModel]) {
-        addMemberDataList = send
+        memberList = send
     }
 }
 
 // MARK: - Action
 
-extension WriteDateBoardVC {
+extension PostEditorVC {
     private func completedButtonAction() {
-        if self.titleContentView.getTitleTextFieldText()?.count == 0 {
+        guard let titleText = contentView.getTitleTextFieldText(), !titleText.isEmpty else {
             self.showAlert(message: "제목을 입력해주세요.")
-        } else if self.titleContentView.getContentTextViewText() == Strings.WriteDateBoard.textPlaceHolder {
+            return
+        }
+        
+        guard contentView.getContentTextViewText() != Strings.WriteDateBoard.textPlaceHolder else {
             self.showAlert(message: "내용을 입력해주세요.")
+            return
+        }
+        
+        if isEditingMode {
+            updateWriteTextAPI()
         } else {
-            self.addMemberDataList.count == 1 ? self.showAlert(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.") : postWriteTextAPI(joinMemberIDlList: addMemberID())
+            self.memberList.count == 1 ? self.showAlert(message: "과팅 게시판 이용은 2명 이상부터 가능합니다.") : postWriteTextAPI(joinMemberIDlList: addMemberID())
         }
     }
 }

@@ -223,7 +223,7 @@ extension HomeVC {
 extension HomeVC: WriteButtonDelegate {
     func tapButtonAction(tag: Int) {
         if tag == 0 {
-            self.pushViewController(viewController: WriteDateBoardVC())
+            self.pushViewController(viewController: PostEditorVC())
         } else if tag == 1 { // 메모팅 남기기 버튼
             let vc = NoteViewController()
             vc.isHiddenwriteNoteView(hidden: false)

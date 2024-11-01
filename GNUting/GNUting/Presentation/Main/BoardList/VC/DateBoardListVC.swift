@@ -49,7 +49,7 @@ final class DateBoardListVC: BaseViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "WritePostImage"), for: .normal)
         button.addAction(UIAction { _ in
-            self.pushViewController(viewController: WriteDateBoardVC())
+            self.pushViewController(viewController: PostEditorVC())
         }, for: .touchUpInside)
         
         return button

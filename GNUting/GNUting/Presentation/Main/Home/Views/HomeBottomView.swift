@@ -62,8 +62,8 @@ final class HomeBottomView: UIView {
     }()
     
     private lazy var postBoardCardView = makeCardImaegButton(image: UIImage(named: "PostBoardCardImage") ?? UIImage(), action: #selector(tapPostBoardCardView))
-    private lazy var OneMatchCardView = makeCardImaegButton(image: UIImage(named: "OneMatchCardImage") ?? UIImage(), action: #selector(tapOneMatchCardView))
-    private lazy var noteCardView = makeCardImaegButton(image: UIImage(named: "NoteCardImage") ?? UIImage(), action: #selector(tapNoteCardView))
+    private lazy var OneMatchCardView = makeCardImaegButton(image: UIImage(named: "oneMatchCardImage") ?? UIImage(), action: #selector(tapOneMatchCardView))
+    private lazy var noteCardView = makeCardImaegButton(image: UIImage(named: "noteCardImage") ?? UIImage(), action: #selector(tapNoteCardView))
     private lazy var mypostCardView = makeCardImaegButton(image: UIImage(named: "MypostCardImage") ?? UIImage(), action: #selector(tapMypostCardView))
     
     // MARK: - Init
