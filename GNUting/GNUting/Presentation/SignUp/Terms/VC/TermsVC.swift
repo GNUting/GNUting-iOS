@@ -114,7 +114,7 @@ extension TermsVC {
     }
 }
 
-// MARK: - UITableView
+// MARK: - UITableView DataSource
 
 extension TermsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

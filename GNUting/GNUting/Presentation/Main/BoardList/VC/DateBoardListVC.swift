@@ -48,7 +48,9 @@ final class DateBoardListVC: BaseViewController {
     private lazy var writeTextButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "WritePostImage"), for: .normal)
-        button.addTarget(self, action: #selector(tapWriteTextButton), for: .touchUpInside)
+        button.addAction(UIAction { _ in
+            self.pushViewController(viewController: PostEditorVC())
+        }, for: .touchUpInside)
         
         return button
     }()
@@ -114,7 +116,7 @@ extension DateBoardListVC {
     }
 }
 
-// MARK: - UITableView
+// MARK: - UITableView DataSource
 
 extension DateBoardListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

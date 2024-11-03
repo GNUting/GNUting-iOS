@@ -5,45 +5,52 @@
 //  Created by 원동진 on 3/15/24.
 //
 
+// MARK: - 과팅 참가 멤버 TableView Cell
+
 import UIKit
 
-class MemBerAddTableViewCell: UITableViewCell {
+final class MemBerAddTableViewCell: UITableViewCell {
+    
+    // MARK: - Properties
+    
     static let identi = "MemBerAddTableViewCell"
-    private lazy var upperView : UIView = {
-       let view = UIView()
-        return view
-    }()
-    private lazy var plusImageView : UIImageView = {
+    
+    // MARK: - SubViews
+    
+    private lazy var upperView = UIView()
+
+    private lazy var plusImageView: UIImageView = {
         let imagView = UIImageView()
         imagView.image = UIImage(named: "PlusImg")
+        
         return imagView
     }()
+    
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         configure()
+        upperView.setLayerCorner(cornerRaius: 10,borderWidth: 1, borderColor: UIColor(named: "BorderColor"))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    // MARK: - Layout Helpers
+    
     private func configure(){
-        upperView.layer.cornerRadius = 10
-        upperView.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
-        upperView.layer.borderWidth = 1
-        upperView.layer.masksToBounds = true
         contentView.addSubview(upperView)
         upperView.addSubview(plusImageView)
+        
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-5)
         }
+        
         plusImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(30)
             make.centerX.equalToSuperview()

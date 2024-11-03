@@ -165,7 +165,7 @@ extension NoteViewController {
         }
     }
     
-    private func postApplyNote(noteID: Int) {
+    private func postApplyNoteAPI(noteID: Int) {
         APIPostManager.shared.postApplyNote(noteID: noteID) { successResponse,failureResponse  in
             if ((successResponse?.isSuccess) != nil) {
                 let chatRoomVC = ChatRoomVC()
@@ -180,7 +180,7 @@ extension NoteViewController {
     }
 }
 
-// MARK: - UICollectionView
+// MARK: - UICollectionView DataSource
 
 extension NoteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -234,7 +234,7 @@ extension NoteViewController: WriteNoteViewDelegate {
 extension NoteViewController: NoteDateProgressViewDelegate {
     func tapProgressButton() {
         noteDateProgressView.isHidden = true
-        postApplyNote(noteID: self.selectedNoteID ?? 0)
+        postApplyNoteAPI(noteID: self.selectedNoteID ?? 0)
     }
     
     func noteDateProgressViewTapCancelbutton() {

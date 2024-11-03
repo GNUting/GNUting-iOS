@@ -102,7 +102,7 @@ extension NotificationVC {
     }
 }
 
-// MARK: - UITableView
+// MARK: - UITableView DataSource
 
 extension NotificationVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

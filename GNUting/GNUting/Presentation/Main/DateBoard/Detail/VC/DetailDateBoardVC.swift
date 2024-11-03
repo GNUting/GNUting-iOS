@@ -5,6 +5,8 @@
 //  Created by 원동진 on 2/20/24.
 //
 
+// MARK: - 과팅 게시판 Detail ViewController
+
 import UIKit
 
 final class DetailDateBoardVC: BaseViewController {
@@ -40,12 +42,14 @@ final class DetailDateBoardVC: BaseViewController {
         label.numberOfLines = 0
         label.font = Pretendard.regular(size: 14)
         label.textColor = UIColor(named: "DisableColor")
+        
         return label
     }()
     
     private lazy var userInfoView: UserInfoView = {
         let view = UserInfoView()
         view.userInfoViewDelegate = self
+        
         return view
     }()
     
@@ -61,6 +65,7 @@ final class DetailDateBoardVC: BaseViewController {
     private lazy var chatPeopleViewButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(didTapchatPeopleViewButton), for: .touchUpInside)
+        
         return button
     }()
     
@@ -72,8 +77,8 @@ final class DetailDateBoardVC: BaseViewController {
         return button
     }()
     
-    private lazy var detailDateBoardSetView: DetailDateBoardSetView = {
-        let view = DetailDateBoardSetView()
+    private lazy var detailDateBoardSetView: SettingView = {
+        let view = SettingView()
         view.isHidden = true
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = .zero
@@ -184,50 +189,14 @@ extension DetailDateBoardVC {
         requestChatButton.backgroundColor = UIColor(named: "SecondaryColor")
         requestChatButton.setText("신청 현황 보러가기",fointSize: 16)
         chatPeopleViewButton.isHidden = true
-        detailDateBoardSetView.myPost(isMypost: true)
-        detailDateBoardSetView.MyPostDelegate = self
+        detailDateBoardSetView.setAutoLayout(isMypost: true)
+        detailDateBoardSetView.myPostDelegate = self
     }
     
     func setPushBoardList() {
         setNavigationBar(title: "과팅 게시판")
         detailDateBoardSetView.otherPostDelegate = self
-        detailDateBoardSetView.myPost(isMypost: false)
-    }
-}
-
-// MARK: - Delegate
-
-extension DetailDateBoardVC: OtherPostDelegate {
-    func didTapReportButton() { // 신고하기
-        let vc = ReportVC()
-        vc.boardID = boardID
-        
-        self.navigationItem.rightBarButtonItem?.isSelected = false
-        detailDateBoardSetView.isHidden = true
-        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
-    }
-}
-
-extension DetailDateBoardVC: MyPostDelegate {
-    func didTapUpDateButton() {
-        let vc = UpdatePostVC()
-        
-        vc.setPostTestView(title: titleLabel.text ?? "", content: contentTextView.text)
-        vc.boardID = boardID
-        vc.memberDataList = userInfos
-        detailDateBoardSetView.isHidden = true
-        pushViewController(viewController: vc)
-    }
-    
-    func didTapDeleteButton() {
-        let alertController = UIAlertController(title: "", message: "게시글을 삭제하시겠습니까?", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
-        alertController.addAction(UIAlertAction(title: "예", style: .default,handler: { _ in
-            self.deletePostTextAPI()
-        }))
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true)
-        }
+        detailDateBoardSetView.setAutoLayout(isMypost: false)
     }
 }
 
@@ -262,6 +231,41 @@ extension DetailDateBoardVC {
 }
 
 // MARK: - Delegate
+
+extension DetailDateBoardVC: OtherPostDelegate {
+    func didTapReportButton() { // 신고하기
+        let vc = ReportVC()
+        vc.boardID = boardID
+        
+        self.navigationItem.rightBarButtonItem?.isSelected = false
+        detailDateBoardSetView.isHidden = true
+        presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
+    }
+}
+
+extension DetailDateBoardVC: MyPostDelegate {
+    func didTapUpDateButton() {
+        let vc = PostEditorVC()
+        
+        vc.isEditingMode = true
+        vc.setPostTestView(title: titleLabel.text ?? "", content: contentTextView.text)
+        vc.boardID = boardID
+        vc.memberList = userInfos
+        detailDateBoardSetView.isHidden = true
+        pushViewController(viewController: vc)
+    }
+    
+    func didTapDeleteButton() {
+        let alertController = UIAlertController(title: "", message: "게시글을 삭제하시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "아니요", style: .destructive))
+        alertController.addAction(UIAlertAction(title: "예", style: .default,handler: { _ in
+            self.deletePostTextAPI()
+        }))
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+    }
+}
 
 extension DetailDateBoardVC: UserInfoViewDelegate {
     func tapUserImageButton() {

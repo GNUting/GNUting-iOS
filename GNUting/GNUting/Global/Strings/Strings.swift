@@ -24,4 +24,8 @@ enum Strings {
         
         static let textViewPlaceHolder = "기타 사유를 입력해주세요."
     }
+    
+    enum WriteDateBoard {
+        static let textPlaceHolder = "내용을 입력해주세요."
+    }
 }

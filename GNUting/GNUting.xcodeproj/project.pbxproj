@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		9DBBAC0FC1C76E6AD3837AB1 /* Pods_GNUting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A4860BEE577AFE9533473F /* Pods_GNUting.framework */; };
 		F80498A22CB3038C0059DA6A /* SwiftStompDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */; };
-		F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */; };
-		F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */; };
+		F80C4DDD2B83841100BA6FFB /* PostEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDC2B83841100BA6FFB /* PostEditorVC.swift */; };
+		F80C4DDF2B83852100BA6FFB /* WriteUpdatePostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DDE2B83852100BA6FFB /* WriteUpdatePostTextView.swift */; };
 		F80C4DE62B83930500BA6FFB /* MemberTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */; };
 		F80C4DE92B8396F800BA6FFB /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */; };
 		F815FF5D2C92F7A8009EB279 /* NotePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */; };
@@ -43,7 +43,6 @@
 		F83A9ED62CCA41760030B093 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83A9ED52CCA41760030B093 /* Strings.swift */; };
 		F83A9ED92CCA5BFB0030B093 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83A9ED82CCA5BFB0030B093 /* NavigationType.swift */; };
 		F841153F2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */; };
-		F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */; };
 		F841A7BA2BA72EA600A9F9D4 /* UpdateMypostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */; };
 		F841A7BD2BA739D300A9F9D4 /* APIDeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7BC2BA739D300A9F9D4 /* APIDeleteManager.swift */; };
 		F841A7CC2BA73E0E00A9F9D4 /* RequestChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */; };
@@ -84,9 +83,7 @@
 		F86909532BFCF537001634D4 /* AppStoreVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */; };
 		F86A17FA2BCE660C00AC0D92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17F92BCE660C00AC0D92 /* FirebaseAnalytics */; };
 		F86A17FC2BCE660C00AC0D92 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F86A17FB2BCE660C00AC0D92 /* FirebaseMessaging */; };
-		F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */; };
-		F86F87DD2CC771BF00CA423D /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86F87DC2CC771BF00CA423D /* GnutingInfo.plist */; };
-		F86F87DF2CC771C700CA423D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F86F87DE2CC771C700CA423D /* GoogleService-Info.plist */; };
+		F86DC9392B862B2B007EC3CA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DC9382B862B2B007EC3CA /* SettingView.swift */; };
 		F87351672B906295004E89C5 /* UpdaetProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351662B906295004E89C5 /* UpdaetProfileVC.swift */; };
 		F87351692B906EE0004E89C5 /* UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */; };
 		F873516B2B90703C004E89C5 /* UserWriteTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */; };
@@ -115,6 +112,8 @@
 		F882DBB92BA43D57009201D2 /* PostReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBB82BA43D57009201D2 /* PostReportModel.swift */; };
 		F882DBBC2BA43DB4009201D2 /* ReportCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882DBBB2BA43DB4009201D2 /* ReportCategory.swift */; };
 		F889EA062BF66F6F0042D8FB /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F889EA052BF66F6F0042D8FB /* NetworkMonitor.swift */; };
+		F88D25CA2CD4A5D0005D4647 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88D25C82CD4A5CF005D4647 /* GoogleService-Info.plist */; };
+		F88D25CB2CD4A5D0005D4647 /* GnutingInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88D25C92CD4A5CF005D4647 /* GnutingInfo.plist */; };
 		F88D979C2BA9BD5F009BAEEF /* SearchMajorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */; };
 		F88D979E2BA9BE0E009BAEEF /* MajorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */; };
 		F88D97A22BA9C3D7009BAEEF /* SearchMajorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */; };
@@ -198,8 +197,8 @@
 		F272B29E19B4176D6274BFBD /* Pods-GNUting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNUting.debug.xcconfig"; path = "Target Support Files/Pods-GNUting/Pods-GNUting.debug.xcconfig"; sourceTree = "<group>"; };
 		F80287552CA5477200089E8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F80498A12CB3038C0059DA6A /* SwiftStompDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftStompDelegate.swift; sourceTree = "<group>"; };
-		F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDateBoardVC.swift; sourceTree = "<group>"; };
-		F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieUpdateTitleContentView.swift; sourceTree = "<group>"; };
+		F80C4DDC2B83841100BA6FFB /* PostEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorVC.swift; sourceTree = "<group>"; };
+		F80C4DDE2B83852100BA6FFB /* WriteUpdatePostTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteUpdatePostTextView.swift; sourceTree = "<group>"; };
 		F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewHeader.swift; sourceTree = "<group>"; };
 		F80C4DE82B8396F800BA6FFB /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		F815FF5C2C92F7A8009EB279 /* NotePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePostModel.swift; sourceTree = "<group>"; };
@@ -231,7 +230,6 @@
 		F83A9ED52CCA41760030B093 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		F83A9ED82CCA5BFB0030B093 /* NavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
 		F841153E2BC649C000334A6A /* ChatRoomEnterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomEnterTableViewCell.swift; sourceTree = "<group>"; };
-		F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostVC.swift; sourceTree = "<group>"; };
 		F841A7B92BA72EA600A9F9D4 /* UpdateMypostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMypostModel.swift; sourceTree = "<group>"; };
 		F841A7BC2BA739D300A9F9D4 /* APIDeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDeleteManager.swift; sourceTree = "<group>"; };
 		F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestChatModel.swift; sourceTree = "<group>"; };
@@ -272,9 +270,7 @@
 		F869094D2BFCCC12001634D4 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		F869094F2BFCEEBA001634D4 /* ChatRoomDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDefaultTableViewCell.swift; sourceTree = "<group>"; };
 		F86909522BFCF537001634D4 /* AppStoreVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreVersionCheck.swift; sourceTree = "<group>"; };
-		F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDateBoardSetView.swift; sourceTree = "<group>"; };
-		F86F87DC2CC771BF00CA423D /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
-		F86F87DE2CC771C700CA423D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F86DC9382B862B2B007EC3CA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F87351662B906295004E89C5 /* UpdaetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaetProfileVC.swift; sourceTree = "<group>"; };
 		F87351682B906EE0004E89C5 /* UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWriteTextVC.swift; sourceTree = "<group>"; };
@@ -303,6 +299,8 @@
 		F882DBB82BA43D57009201D2 /* PostReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportModel.swift; sourceTree = "<group>"; };
 		F882DBBB2BA43DB4009201D2 /* ReportCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCategory.swift; sourceTree = "<group>"; };
 		F889EA052BF66F6F0042D8FB /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		F88D25C82CD4A5CF005D4647 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F88D25C92CD4A5CF005D4647 /* GnutingInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GnutingInfo.plist; sourceTree = "<group>"; };
 		F88D979B2BA9BD5F009BAEEF /* SearchMajorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMajorVC.swift; sourceTree = "<group>"; };
 		F88D979D2BA9BE0E009BAEEF /* MajorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorInputView.swift; sourceTree = "<group>"; };
 		F88D97A12BA9C3D7009BAEEF /* SearchMajorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMajorModel.swift; sourceTree = "<group>"; };
@@ -441,18 +439,18 @@
 				F8F3E51D2B8835E300827BB0 /* Report */,
 				F8E3CD532B8CE9CD00712CBF /* DateJoinMember */,
 				F8CDE34D2B849AA400E5598D /* Detail */,
-				F80C4DE32B838CE500BA6FFB /* Wrtie+Update */,
+				F80C4DE32B838CE500BA6FFB /* PostEditor */,
 			);
 			path = DateBoard;
 			sourceTree = "<group>";
 		};
-		F80C4DE32B838CE500BA6FFB /* Wrtie+Update */ = {
+		F80C4DE32B838CE500BA6FFB /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
 				F8E3CD562B8CEA4700712CBF /* VC */,
-				F80C4DE72B8394D200BA6FFB /* ViewComponent */,
+				F80C4DE72B8394D200BA6FFB /* Views */,
 			);
-			path = "Wrtie+Update";
+			path = PostEditor;
 			sourceTree = "<group>";
 		};
 		F80C4DE42B838CEA00BA6FFB /* Search */ = {
@@ -463,14 +461,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		F80C4DE72B8394D200BA6FFB /* ViewComponent */ = {
+		F80C4DE72B8394D200BA6FFB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DDE2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift */,
+				F80C4DDE2B83852100BA6FFB /* WriteUpdatePostTextView.swift */,
 				F80C4DE52B83930500BA6FFB /* MemberTableViewHeader.swift */,
 				F882DBAE2BA42A29009201D2 /* MemBerAddTableViewCell.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F81895CD2BA7E39900DF7ABE /* ViewComponent */ = {
@@ -703,8 +701,8 @@
 				F8E3CD4A2B8CE7D000712CBF /* Global */,
 				F853452F2B5F88AD001EADE6 /* Common */,
 				F85345072B5F710B001EADE6 /* Info.plist */,
-				F86F87DC2CC771BF00CA423D /* GnutingInfo.plist */,
-				F86F87DE2CC771C700CA423D /* GoogleService-Info.plist */,
+				F88D25C92CD4A5CF005D4647 /* GnutingInfo.plist */,
+				F88D25C82CD4A5CF005D4647 /* GoogleService-Info.plist */,
 			);
 			path = GNUting;
 			sourceTree = "<group>";
@@ -769,14 +767,14 @@
 			path = AppStoreCheck;
 			sourceTree = "<group>";
 		};
-		F86DC9372B862B0E007EC3CA /* ViewComponent */ = {
+		F86DC9372B862B0E007EC3CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F86DC9382B862B2B007EC3CA /* DetailDateBoardSetView.swift */,
+				F86DC9382B862B2B007EC3CA /* SettingView.swift */,
 				F8CDE3512B849F9500E5598D /* UserInfoView.swift */,
 				F882DBB62BA43646009201D2 /* BoardSettingButton.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F86F87E02CC89B9800CA423D /* VC */ = {
@@ -1185,7 +1183,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E3CD5A2B8CECE000712CBF /* VC */,
-				F86DC9372B862B0E007EC3CA /* ViewComponent */,
+				F86DC9372B862B0E007EC3CA /* Views */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1358,8 +1356,7 @@
 		F8E3CD562B8CEA4700712CBF /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				F80C4DDC2B83841100BA6FFB /* WriteDateBoardVC.swift */,
-				F841A7B52BA723A400A9F9D4 /* UpdatePostVC.swift */,
+				F80C4DDC2B83841100BA6FFB /* PostEditorVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1535,11 +1532,11 @@
 				F853452A2B5F7A49001EADE6 /* Pretendard-Medium.otf in Resources */,
 				F85345242B5F7A49001EADE6 /* Pretendard-Regular.otf in Resources */,
 				F85345272B5F7A49001EADE6 /* Pretendard-Bold.otf in Resources */,
-				F86F87DD2CC771BF00CA423D /* GnutingInfo.plist in Resources */,
+				F88D25CA2CD4A5D0005D4647 /* GoogleService-Info.plist in Resources */,
 				F85345282B5F7A49001EADE6 /* Pretendard-Thin.otf in Resources */,
 				F85345252B5F7A49001EADE6 /* Pretendard-ExtraLight.otf in Resources */,
+				F88D25CB2CD4A5D0005D4647 /* GnutingInfo.plist in Resources */,
 				F85345032B5F710B001EADE6 /* Assets.xcassets in Resources */,
-				F86F87DF2CC771C700CA423D /* GoogleService-Info.plist in Resources */,
 				F85345262B5F7A49001EADE6 /* Pretendard-Black.otf in Resources */,
 				F85345232B5F7A49001EADE6 /* Pretendard-ExtraBold.otf in Resources */,
 				F85345292B5F7A49001EADE6 /* Pretendard-Light.otf in Resources */,
@@ -1656,7 +1653,7 @@
 				F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */,
 				F81D08B92BE6904000219CEA /* AlertState.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatRoomListVC.swift in Sources */,
-				F80C4DDD2B83841100BA6FFB /* WriteDateBoardVC.swift in Sources */,
+				F80C4DDD2B83841100BA6FFB /* PostEditorVC.swift in Sources */,
 				F8C7DE4D2BC406B400923EF5 /* NotificationVC.swift in Sources */,
 				F8A5B6292BE11DD60054E324 /* EmailCheckTypeInputView.swift in Sources */,
 				F8A15E952B60DA40001DE5E4 /* UIStackView+Extesnion.swift in Sources */,
@@ -1687,10 +1684,9 @@
 				F8235CF42B74B77900E49073 /* SelectGenderView.swift in Sources */,
 				F869094A2BFA22BD001634D4 /* ChatVisibleManager.swift in Sources */,
 				F81D08D72BE7839100219CEA /* MessageModel.swift in Sources */,
-				F841A7B62BA723A400A9F9D4 /* UpdatePostVC.swift in Sources */,
 				F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */,
 				F8A5B6272BE11B500054E324 /* AuthNumberInputView.swift in Sources */,
-				F86DC9392B862B2B007EC3CA /* DetailDateBoardSetView.swift in Sources */,
+				F86DC9392B862B2B007EC3CA /* SettingView.swift in Sources */,
 				F8235CF12B74B54100E49073 /* SignUPSecondProcessVC.swift in Sources */,
 				F85F8F672B8E3EFB00E69922 /* RequestChatVC.swift in Sources */,
 				F81D08CE2BE76B4000219CEA /* ChatRoomMemberTableViewCell.swift in Sources */,
@@ -1713,7 +1709,7 @@
 				F882DBAC2BA40E56009201D2 /* BoardDetailModel.swift in Sources */,
 				F8235CFD2B78C8D300E49073 /* SignUpThirdProcessVC.swift in Sources */,
 				F869094E2BFCCC12001634D4 /* UIResponder+Extension.swift in Sources */,
-				F80C4DDF2B83852100BA6FFB /* WrtieUpdateTitleContentView.swift in Sources */,
+				F80C4DDF2B83852100BA6FFB /* WriteUpdatePostTextView.swift in Sources */,
 				F8483F322BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift in Sources */,
 				F8AAD3CB2BA3430F0047B8C0 /* SearchUserModel.swift in Sources */,
 				F81D08CC2BE7670800219CEA /* ChatRoomAlertStatusModel.swift in Sources */,
