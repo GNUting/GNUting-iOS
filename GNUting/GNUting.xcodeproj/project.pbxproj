@@ -471,7 +471,7 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		F81895CD2BA7E39900DF7ABE /* ViewComponent */ = {
+		F81895CD2BA7E39900DF7ABE /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */,
@@ -479,7 +479,7 @@
 				F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */,
 				F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */,
 			);
-			path = ViewComponent;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F81D08BA2BE690CB00219CEA /* APIPutManager */ = {
@@ -659,7 +659,7 @@
 		F850061C2B738FB9007AB351 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
-				F8933D562CC915B800134138 /* Model */,
+				F8933D562CC915B800134138 /* Models */,
 				F8235CEE2B74B51100E49073 /* Views */,
 				F8E3CD4F2B8CE8E200712CBF /* VC */,
 			);
@@ -845,12 +845,12 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		F882DBBA2BA43D9F009201D2 /* model */ = {
+		F882DBBA2BA43D9F009201D2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F882DBBB2BA43DB4009201D2 /* ReportCategory.swift */,
 			);
-			path = model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F889EA042BF66F550042D8FB /* Network */ = {
@@ -887,12 +887,12 @@
 			path = APIGetManager;
 			sourceTree = "<group>";
 		};
-		F8933D562CC915B800134138 /* Model */ = {
+		F8933D562CC915B800134138 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F8AC69DA2C89AFD800873455 /* Terms.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F8A15E912B60CE6B001DE5E4 /* Login */ = {
@@ -1133,8 +1133,8 @@
 		F8BE89DB2B807678008E6767 /* RequestStatus */ = {
 			isa = PBXGroup;
 			children = (
-				F81895CD2BA7E39900DF7ABE /* ViewComponent */,
 				F841A7D02BA74E2E00A9F9D4 /* Model */,
+				F81895CD2BA7E39900DF7ABE /* Views */,
 				F841A7CF2BA74BC900A9F9D4 /* VC */,
 			);
 			path = RequestStatus;
@@ -1441,7 +1441,7 @@
 		F8F3E51D2B8835E300827BB0 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				F882DBBA2BA43D9F009201D2 /* model */,
+				F882DBBA2BA43D9F009201D2 /* Models */,
 				F8E3CD592B8CEAA100712CBF /* VC */,
 				F8E3CD082B8B5E2600712CBF /* Views */,
 			);
