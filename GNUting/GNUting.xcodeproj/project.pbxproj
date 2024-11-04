@@ -89,7 +89,7 @@
 		F873516B2B90703C004E89C5 /* UserWriteTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */; };
 		F873516D2B9072CE004E89C5 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */; };
 		F87351802B9098CB004E89C5 /* UnderLineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */; };
-		F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */; };
+		F87351842B90AF76004E89C5 /* RequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351832B90AF76004E89C5 /* RequestListTableViewCell.swift */; };
 		F87351862B90B043004E89C5 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351852B90B043004E89C5 /* BasePaddingLabel.swift */; };
 		F87351882B90B21E004E89C5 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351872B90B21E004E89C5 /* RequestModel.swift */; };
 		F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */; };
@@ -276,7 +276,7 @@
 		F873516A2B90703C004E89C5 /* UserWriteTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWriteTextVC.swift; sourceTree = "<group>"; };
 		F873516C2B9072CE004E89C5 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderLineSegmentedControl.swift; sourceTree = "<group>"; };
-		F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequsetListTableViewCell.swift; sourceTree = "<group>"; };
+		F87351832B90AF76004E89C5 /* RequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListTableViewCell.swift; sourceTree = "<group>"; };
 		F87351852B90B043004E89C5 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F87351872B90B21E004E89C5 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F87351892B90B4C6004E89C5 /* RequestStatusDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusDetailVC.swift; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				F873517F2B9098CB004E89C5 /* UnderLineSegmentedControl.swift */,
-				F87351832B90AF76004E89C5 /* RequsetListTableViewCell.swift */,
+				F87351832B90AF76004E89C5 /* RequestListTableViewCell.swift */,
 				F873518F2B90B82B004E89C5 /* DateMemberHeader.swift */,
 				F8483F312BE520BE00FC3AB6 /* DateMemeberTableViewCell.swift */,
 			);
@@ -1650,7 +1650,7 @@
 				F8DB02102BB3E5F00067CED2 /* ChatRoomModel.swift in Sources */,
 				F87D05862B8F915400910773 /* MyPageModel.swift in Sources */,
 				F882DBBC2BA43DB4009201D2 /* ReportCategory.swift in Sources */,
-				F87351842B90AF76004E89C5 /* RequsetListTableViewCell.swift in Sources */,
+				F87351842B90AF76004E89C5 /* RequestListTableViewCell.swift in Sources */,
 				F81D08B92BE6904000219CEA /* AlertState.swift in Sources */,
 				F8BE89E32B8077A9008E6767 /* ChatRoomListVC.swift in Sources */,
 				F80C4DDD2B83841100BA6FFB /* PostEditorVC.swift in Sources */,

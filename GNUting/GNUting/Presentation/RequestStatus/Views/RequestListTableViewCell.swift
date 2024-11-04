@@ -5,35 +5,40 @@
 //  Created by 원동진 on 2/29/24.
 //
 
+// MARK: - 신청 현황 신청 & 신청 받은 목록 UITableViewCell
+
 import UIKit
 
-class RequsetListTableViewCell: UITableViewCell {
+class RequestListTableViewCell: UITableViewCell {
+    
+    // MARK: - Properties
+    
     static let identi = "RequsetListTableViewCellid"
-    private lazy var upperView : UIView = {
+    
+    // MARK: - SubViews
+    
+    private lazy var upperView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
-        view.layer.masksToBounds = true
+        view.setLayerCorner(cornerRaius: 10,borderColor: UIColor(named: "BorderColor"))
+        
         return view
     }()
+    
     private lazy var requestTitleLabel: UILabel = {
         let label = UILabel()
         label.font = Pretendard.medium(size: 13)
         
         return label
     }()
-    private lazy var requestStateLabel : BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
-        label.font = Pretendard.semiBold(size: 14)
-        label.textColor = .white
-        label.text = "대기중"
-        label.textAlignment = .center
-        label.layer.cornerRadius = 10
-        label.layer.masksToBounds = true
+    
+    private lazy var requestStateLabel: BasePaddingLabel = {
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15), text: "대기중", textColor: .white, textAlignment: .center, font: Pretendard.semiBold(size: 14)!)
+        label.setLayerCorner(cornerRaius: 10)
+        
         return label
     }()
     
+    // MARK: - init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,37 +49,42 @@ class RequsetListTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
-extension RequsetListTableViewCell{
+extension RequestListTableViewCell{
+    
+    // MARK: - Layout Helpers
+    
     private func setAddSubViews() {
         contentView.addSubview(upperView)
-        
-    }
-    private func setAutoLayout() {
         upperView.addSubViews([requestTitleLabel, requestStateLabel])
+    }
+    
+    private func setAutoLayout() {
         upperView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(7)
+            make.top.equalToSuperview().inset(Spacing.size7)
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-7)
         }
+        
         requestTitleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.left.equalToSuperview().offset(Spacing.left)
-            make.bottom.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().inset(Spacing.size10)
+            make.left.equalToSuperview().offset(Spacing.size25)
         }
+        
         requestStateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().inset(Spacing.size10)
             make.left.equalTo(requestTitleLabel.snp.right).offset(12)
-            make.right.equalToSuperview().offset(Spacing.right)
-            make.bottom.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(Spacing.size25)
             make.width.equalTo(110)
         }
+        
         requestStateLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         requestStateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
-    func setCell(model : DateStateModel ){
+    
+    // MARK: - SetView
+    
+    func setCell(model: DateStateModel ){
         let memeberCount = model.memeberCount
         let countStr = "\(memeberCount) : \(memeberCount) 매칭"
         let requestTitle = memeberCount == 1 ? countStr : "과팅 (\(countStr))"
@@ -83,5 +93,4 @@ extension RequsetListTableViewCell{
         requestStateLabel.text = "\(model.applyStatus.statusString)"
         requestStateLabel.backgroundColor = model.applyStatus.backgroundColor
     }
-    
 }

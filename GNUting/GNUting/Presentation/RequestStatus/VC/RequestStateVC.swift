@@ -60,7 +60,7 @@ class RequestStateVC: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(RequsetListTableViewCell.self, forCellReuseIdentifier: RequsetListTableViewCell.identi)
+        tableView.register(RequestListTableViewCell.self, forCellReuseIdentifier: RequestListTableViewCell.identi)
         tableView.showsVerticalScrollIndicator = false
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(reloadBoardListData), for: .valueChanged)
@@ -137,7 +137,7 @@ extension RequestStateVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RequsetListTableViewCell.identi, for: indexPath) as? RequsetListTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableViewCell.identi, for: indexPath) as? RequestListTableViewCell else { return UITableViewCell() }
         cell.setCell(model: dateStatusList[indexPath.row])
         
         return cell
@@ -211,7 +211,7 @@ extension RequestStateVC {
                 default:
                     applyStatus = .waiting
                 }
-                self.dateStatusList.append(DateStateModel(memeberCount: participantUserCount, applyStatus: applyStatus))
+                self.dateStatusList.append(DateStateModel(memberCount: participantUserCount, applyStatus: applyStatus))
             }
             
             
@@ -238,7 +238,7 @@ extension RequestStateVC {
                     applyStatus = .waiting
                 }
 
-                self.dateStatusList.append(DateStateModel(memeberCount: applyUserCount, applyStatus: applyStatus))
+                self.dateStatusList.append(DateStateModel(memberCount: applyUserCount, applyStatus: applyStatus))
             }
             
             
