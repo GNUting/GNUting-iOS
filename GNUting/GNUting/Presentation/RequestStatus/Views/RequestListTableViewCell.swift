@@ -9,7 +9,7 @@
 
 import UIKit
 
-class RequestListTableViewCell: UITableViewCell {
+final class RequestListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -32,7 +32,11 @@ class RequestListTableViewCell: UITableViewCell {
     }()
     
     private lazy var requestStateLabel: BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15), text: "대기중", textColor: .white, textAlignment: .center, font: Pretendard.semiBold(size: 14)!)
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15),
+                                     text: "대기중",
+                                     textColor: .white,
+                                     textAlignment: .center,
+                                     font: Pretendard.semiBold(size: 14)!)
         label.setLayerCorner(cornerRaius: 10)
         
         return label
@@ -51,7 +55,7 @@ class RequestListTableViewCell: UITableViewCell {
     }
 }
 
-extension RequestListTableViewCell{
+extension RequestListTableViewCell {
     
     // MARK: - Layout Helpers
     
@@ -62,19 +66,19 @@ extension RequestListTableViewCell{
     
     private func setAutoLayout() {
         upperView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Spacing.size7)
+            make.top.bottom.equalToSuperview().inset(Spacing.size7)
             make.left.right.equalToSuperview()
         }
         
         requestTitleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Spacing.size10)
+            make.top.bottom.equalToSuperview().inset(Spacing.size10)
             make.left.equalToSuperview().offset(Spacing.size25)
         }
         
         requestStateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Spacing.size10)
+            make.top.bottom.equalToSuperview().inset(Spacing.size10)
             make.left.equalTo(requestTitleLabel.snp.right).offset(12)
-            make.right.equalToSuperview().offset(Spacing.size25)
+            make.right.equalToSuperview().offset(Spacing.right)
             make.width.equalTo(110)
         }
         
@@ -84,10 +88,10 @@ extension RequestListTableViewCell{
     
     // MARK: - SetView
     
-    func setCell(model: DateStateModel ){
-        let memeberCount = model.memeberCount
-        let countStr = "\(memeberCount) : \(memeberCount) 매칭"
-        let requestTitle = memeberCount == 1 ? countStr : "과팅 (\(countStr))"
+    func setCell(model: DateStateModel) {
+        let memberCount = model.memberCount
+        let countStr = "\(memberCount) : \(memberCount) 매칭"
+        let requestTitle = memberCount == 1 ? countStr : "과팅 (\(countStr))"
         
         requestTitleLabel.text = requestTitle
         requestStateLabel.text = "\(model.applyStatus.statusString)"

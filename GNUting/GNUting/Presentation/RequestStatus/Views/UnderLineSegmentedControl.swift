@@ -9,7 +9,7 @@
 
 import UIKit
 
-class UnderLineSegmentedControl: UISegmentedControl {
+final class UnderLineSegmentedControl: UISegmentedControl {
     
     // MARK: - SubViews
     
