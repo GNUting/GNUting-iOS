@@ -25,13 +25,11 @@ final class NoticeStackView: UIView {
     }()
     
     private lazy var noticeLabel: BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 12, left: 15, bottom: 12, right: 15))
-        label.font = Pretendard.regular(size: 11)
-        label.textColor = UIColor(hexCode: "4F4F4F")
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 12, left: 15, bottom: 12, right: 15), textColor: UIColor(hexCode: "4F4F4F"), font: Pretendard.regular(size: 11)!)
         label.backgroundColor = UIColor(named: "BackGroundColor")
-        label.layer.cornerRadius = 8
-        label.layer.masksToBounds = true
+        label.setLayerCorner(cornerRaius: 8)
         label.numberOfLines = 2
+        
         return label
     }()
     
