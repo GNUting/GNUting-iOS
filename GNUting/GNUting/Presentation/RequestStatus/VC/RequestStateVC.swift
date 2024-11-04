@@ -36,22 +36,23 @@ class RequestStateVC: BaseViewController {
         view.setLabel(text: "신청현황이 비어있습니다.\n과팅 게시판을 이용하거나 게시글을 써보세요!", range: "과팅 게시판을 이용하거나 게시글을 써보세요!")
         return view
     }()
-    private lazy var segmentedControl : UnderLineSegmentedControl = {
+    private lazy var segmentedControl: UnderLineSegmentedControl = {
         let control = UnderLineSegmentedControl(items: ["신청목록","신청 받은 목록"])
+        control.selectedSegmentIndex = 0
         control.addTarget(self, action: #selector(didchangeValue(segment :)), for: .valueChanged)
         control.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor(named: "PrimaryColor")!,
-                .font: Pretendard.medium(size: 13) ?? .systemFont(ofSize: 13)],
+                .font: Pretendard.medium(size: 13)!],
             for: .selected
         )
         control.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor(hexCode: "6C7072"),
-                .font: Pretendard.medium(size: 13) ?? .systemFont(ofSize: 13)],
+                .font: Pretendard.medium(size: 13)!],
             for: .normal
         )
-        control.selectedSegmentIndex = 0
+        
         return control
     }()
     private lazy var requsetListTableView : UITableView = {
