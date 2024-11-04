@@ -55,7 +55,9 @@ class ChatTableViewCell: UITableViewCell {
     }()
     
     private lazy var titleLabel: BasePaddingLabel =  {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3), textColor: UIColor(hexCode: "696969"), font: Pretendard.regular(size: 11)!)
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3),
+                                     textColor: UIColor(hexCode: "696969"),
+                                     font: Pretendard.regular(size: 11)!)
         label.backgroundColor = UIColor(hexCode: "F4F2F7")
         label.setLayerCorner(cornerRaius: 4)
         

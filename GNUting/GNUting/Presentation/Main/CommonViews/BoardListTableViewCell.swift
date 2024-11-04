@@ -74,7 +74,9 @@ final class BoardListTableViewCell: UITableViewCell {
     }()
     
     private lazy var userCountLabel: BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 3, left: 8, bottom: 3, right: 8),textColor: UIColor(hexCode: "696969"), font: Pretendard.regular(size: 11)!)
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 3, left: 8, bottom: 3, right: 8),
+                                     textColor: UIColor(hexCode: "696969"),
+                                     font: Pretendard.regular(size: 11)!)
         label.backgroundColor = UIColor(named: "BackGroundColor")
         label.setLayerCorner(cornerRaius: 4)
         

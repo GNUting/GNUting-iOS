@@ -10,7 +10,9 @@ import UIKit
 class ChatRoomDefaultTableViewCell: UITableViewCell {
     static let identi = "ChatRoomDefaultTableViewCellid"
     private lazy var enterExplainLabel : BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), textColor: UIColor(hexCode: "636060"), textAlignment: .center, font: Pretendard.regular(size: 12)!)
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
+                                     textColor: UIColor(hexCode: "636060"),
+                                     textAlignment: .center, font: Pretendard.regular(size: 12)!)
         label.backgroundColor = UIColor(hexCode: "F5F5F5")
         label.setLayerCorner(cornerRaius: 10)
         label.numberOfLines = 0
