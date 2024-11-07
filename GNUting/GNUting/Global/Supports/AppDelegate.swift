@@ -68,7 +68,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             rootVC?.selectedIndex = 1
             let vc = GlobalUtil.currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 1
-            vc?.getApplicationReceivedData(ApplicatoinID: locationID, requestStatus: false)
+            vc?.fetchAndPushRequestDetail(ApplicatoinID: locationID, requestStatus: false)
             
         case "cancel":
             rootVC?.selectedIndex = 1
@@ -79,7 +79,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             rootVC?.selectedIndex = 1
             let vc = GlobalUtil.currentTopViewController() as? RequestStateVC
             vc?.selectedSegmentIndex = 0
-            vc?.getApplicationReceivedData(ApplicatoinID: locationID, requestStatus: true)
+            vc?.fetchAndPushRequestDetail(ApplicatoinID: locationID, requestStatus: true)
         case "chat":
             rootVC?.selectedIndex = 2
             let chatRoomVC = ChatRoomVC()

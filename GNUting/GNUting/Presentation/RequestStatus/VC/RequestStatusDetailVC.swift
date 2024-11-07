@@ -173,7 +173,7 @@ extension RequestStatusDetailVC : UITableViewDelegate, UITableViewDataSource {
             header.requestStatus = true
             header.setHeader(major: dedatilData?.participantUserDepartment)
             
-        }else {
+        } else {
             header.requestStatus = false
             
             header.setHeader(major: dedatilData?.applyUserDepartment)

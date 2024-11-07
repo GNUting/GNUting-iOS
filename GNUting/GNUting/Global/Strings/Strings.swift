@@ -28,4 +28,9 @@ enum Strings {
     enum WriteDateBoard {
         static let textPlaceHolder = "내용을 입력해주세요."
     }
+    
+    enum RequestState {
+        static let emptyDataExplain = "신청현황이 비어있습니다.\n과팅 게시판을 이용하거나 게시글을 써보세요!"
+        static let segmentIndexStrings = ["신청목록","신청 받은 목록"]
+    }
 }
