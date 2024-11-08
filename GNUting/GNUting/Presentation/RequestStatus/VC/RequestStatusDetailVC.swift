@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestStatusDetailVC: BaseViewController {
+final class RequestStatusDetailVC: BaseViewController {
     
     // MARK: - Properties
     
@@ -180,6 +180,15 @@ extension RequestStatusDetailVC {
         requestStatus ? showAlert(message: "신청 취소하시겠습니까?") { self.deleteRequestChatAPI() } :
         showAlert(message: "신청 거절하시겠습니까?") { self.rejectedApplicationAPI() }
     }
+    
+    private func configureAndPushUserDetailVC(appStateUserList: ApplicationStatusUser) {
+        let vc = UserDetailVC()
+        vc.userDetailData = UserDetailModel(imageURL: appStateUserList.profileImage,
+                                            nickname: appStateUserList.nickname,
+                                            userStudentID: appStateUserList.studentId,
+                                            userDepartment: appStateUserList.department)
+        self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
+    }
 }
 
 // MARK: - API
@@ -230,37 +239,19 @@ extension RequestStatusDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateMemeberTableViewCell.identi, for: indexPath) as? DateMemeberTableViewCell else {return UITableViewCell()}
+        let userList = indexPath.section == 0 ? dedatilData?.participantUser : dedatilData?.applyUser
+        guard let userData = userList?[indexPath.row] else { return UITableViewCell() }
         
         if indexPath.row == (dedatilData?.applyUserCount ?? 0) - 1 {
             cell.addBorders(to: [.bottom], in: UIColor(named: "BorderColor")!, width: 1)
         }
-        cell.selectionStyle = .none
         cell.addBorders(to: [.left,.right], in: UIColor(named: "BorderColor")!, width: 1)
-        if indexPath.section == 0 {
-            if let participantUser = dedatilData?.participantUser{
-                cell.setDateMember(model: participantUser[indexPath.row])
-                cell.userImageTappedClosure = {
-                    let vc = UserDetailVC()
-                    vc.userDetailData = UserDetailModel(imageURL: participantUser[indexPath.row].profileImage,
-                                                        nickname: participantUser[indexPath.row].nickname,
-                                                        userStudentID: participantUser[indexPath.row].studentId,
-                                                        userDepartment: participantUser[indexPath.row].department)
-                    self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
-                }
-            }
-        } else {
-            if let applyUserData = dedatilData?.applyUser{
-                cell.setDateMember(model: applyUserData[indexPath.row])
-                cell.userImageTappedClosure = {
-                    let vc = UserDetailVC()
-                    vc.userDetailData = UserDetailModel(imageURL: applyUserData[indexPath.row].profileImage,
-                                                        nickname: applyUserData[indexPath.row].nickname,
-                                                        userStudentID: applyUserData[indexPath.row].studentId,
-                                                        userDepartment: applyUserData[indexPath.row].department)
-                    self.presentViewController(viewController: vc, modalPresentationStyle: .fullScreen)
-                }
-            }
+        cell.selectionStyle = .none
+        cell.setDateMember(model: userData)
+        cell.userImageTappedClosure = {
+            self.configureAndPushUserDetailVC(appStateUserList: userData)
         }
+        
         return cell
     }
 }
