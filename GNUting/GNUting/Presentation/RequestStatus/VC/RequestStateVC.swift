@@ -5,11 +5,11 @@
 //  Created by 원동진 on 2/17/24.
 //
 
-// MARK: - 신천 현황 ViewController
+// MARK: - 신청 현황 ViewController
 
 import UIKit
 
-class RequestStateVC: BaseViewController {
+final class RequestStateVC: BaseViewController {
     
     // MARK: - Properties
     
