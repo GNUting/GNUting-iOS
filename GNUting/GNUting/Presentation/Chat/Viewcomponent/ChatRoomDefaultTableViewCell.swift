@@ -10,18 +10,18 @@ import UIKit
 class ChatRoomDefaultTableViewCell: UITableViewCell {
     static let identi = "ChatRoomDefaultTableViewCellid"
     private lazy var enterExplainLabel : BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        label.textColor = UIColor(named: "636060")
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
+                                     textColor: UIColor(hexCode: "636060"),
+                                     textAlignment: .center, font: Pretendard.regular(size: 12)!)
         label.backgroundColor = UIColor(hexCode: "F5F5F5")
-        label.layer.cornerRadius = 10
-        label.layer.masksToBounds = true
-        label.textAlignment = .center
+        label.setLayerCorner(cornerRaius: 10)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
-        label.font = Pretendard.regular(size: 12)
         label.sizeToFit()
+        
         return label
     }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(enterExplainLabel)

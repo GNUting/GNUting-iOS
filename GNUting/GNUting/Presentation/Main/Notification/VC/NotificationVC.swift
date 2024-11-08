@@ -139,9 +139,9 @@ extension NotificationVC: UITableViewDelegate {
             
             requestVC?.selectedSegmentIndex = location == "refuse" ? 0 : 1
             if location == "apply" {
-                requestVC?.getApplicationReceivedData(ApplicatoinID: String(locationID ?? 0), requestStatus: false)
+                requestVC?.fetchAndPushRequestDetail(ApplicatoinID: String(locationID ?? 0), requestStatus: false)
             } else if location == "refuse" {
-                requestVC?.getApplicationReceivedData(ApplicatoinID: String(locationID ?? 0), requestStatus: true)
+                requestVC?.fetchAndPushRequestDetail(ApplicatoinID: String(locationID ?? 0), requestStatus: true)
             }
             view.window?.rootViewController = vc
         case "chat":
