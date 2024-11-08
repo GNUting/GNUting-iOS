@@ -166,7 +166,7 @@ extension RequestStateVC {
         for result in results {
             let applyUserCount = result.applyUserCount
             var applyStatus : RequestState = .waiting
-            switch result.applyStatus{
+            switch result.applyStatus {
             case "승인":
                 applyStatus = .Success
             case "거절":
