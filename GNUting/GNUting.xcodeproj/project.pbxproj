@@ -47,7 +47,7 @@
 		F841A7BD2BA739D300A9F9D4 /* APIDeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7BC2BA739D300A9F9D4 /* APIDeleteManager.swift */; };
 		F841A7CC2BA73E0E00A9F9D4 /* RequestChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */; };
 		F841A7CE2BA74AF700A9F9D4 /* RequestStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7CD2BA74AF700A9F9D4 /* RequestStatusModel.swift */; };
-		F841A7D22BA74EA300A9F9D4 /* DateStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7D12BA74EA300A9F9D4 /* DateStatusModel.swift */; };
+		F841A7D22BA74EA300A9F9D4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F841A7D12BA74EA300A9F9D4 /* ApplicationInfo.swift */; };
 		F8483F2A2BE23DE400FC3AB6 /* WriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F292BE23DE400FC3AB6 /* WriteButton.swift */; };
 		F8483F2E2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */; };
 		F8483F302BE4892600FC3AB6 /* NoDataScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */; };
@@ -234,7 +234,7 @@
 		F841A7BC2BA739D300A9F9D4 /* APIDeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDeleteManager.swift; sourceTree = "<group>"; };
 		F841A7CB2BA73E0E00A9F9D4 /* RequestChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestChatModel.swift; sourceTree = "<group>"; };
 		F841A7CD2BA74AF700A9F9D4 /* RequestStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusModel.swift; sourceTree = "<group>"; };
-		F841A7D12BA74EA300A9F9D4 /* DateStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStatusModel.swift; sourceTree = "<group>"; };
+		F841A7D12BA74EA300A9F9D4 /* ApplicationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationInfo.swift; sourceTree = "<group>"; };
 		F8483F292BE23DE400FC3AB6 /* WriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteButton.swift; sourceTree = "<group>"; };
 		F8483F2D2BE47FFC00FC3AB6 /* ImagePlusLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlusLabelView.swift; sourceTree = "<group>"; };
 		F8483F2F2BE4892600FC3AB6 /* NoDataScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataScreenView.swift; sourceTree = "<group>"; };
@@ -642,7 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				F87351872B90B21E004E89C5 /* RequestModel.swift */,
-				F841A7D12BA74EA300A9F9D4 /* DateStatusModel.swift */,
+				F841A7D12BA74EA300A9F9D4 /* ApplicationInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1492,7 +1492,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					F85344F52B5F710A001EADE6 = {
 						CreatedOnToolsVersion = 14.3;
@@ -1665,7 +1665,7 @@
 				F873518A2B90B4C6004E89C5 /* RequestStatusDetailVC.swift in Sources */,
 				F850061E2B738FD7007AB351 /* TermsTableViewCell.swift in Sources */,
 				F88D97A22BA9C3D7009BAEEF /* SearchMajorModel.swift in Sources */,
-				F841A7D22BA74EA300A9F9D4 /* DateStatusModel.swift in Sources */,
+				F841A7D22BA74EA300A9F9D4 /* ApplicationInfo.swift in Sources */,
 				F8AC69ED2C91C22A00873455 /* NoteDateProgressView.swift in Sources */,
 				F88EE4822B9EE3420058BC00 /* APIURL.swift in Sources */,
 				F87351672B906295004E89C5 /* UpdaetProfileVC.swift in Sources */,

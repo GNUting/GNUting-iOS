@@ -88,7 +88,7 @@ extension RequestListTableViewCell {
     
     // MARK: - SetView
     
-    func setCell(model: DateStateModel) {
+    func setCell(model: ApplicationInfo) {
         let memberCount = model.memberCount
         let countStr = "\(memberCount) : \(memberCount) 매칭"
         let requestTitle = memberCount == 1 ? countStr : "과팅 (\(countStr))"

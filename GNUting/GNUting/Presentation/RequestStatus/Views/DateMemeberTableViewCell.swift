@@ -45,8 +45,8 @@ extension DateMemeberTableViewCell {
     
     private func configure() {
         contentView.addSubview(upperView)
-        upperView.addSubview(userInfoView
-        )
+        upperView.addSubview(userInfoView)
+        
         upperView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.left.right.equalToSuperview().inset(Spacing.size20)
