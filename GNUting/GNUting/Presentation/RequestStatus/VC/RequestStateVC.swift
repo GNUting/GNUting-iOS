@@ -15,7 +15,7 @@ final class RequestStateVC: BaseViewController {
     
     var selectedSegmentIndex: Int = 0
     var dateStatusAllInfos: [ApplicationStatusResult] = []
-    var dateStatusList: [DateStateModel] = []{
+    var dateStatusList: [ApplicationInfo] = []{
         didSet{
             noDataScreenView.isHidden = dateStatusList.isEmpty ? false : true
             requsetListTableView.refreshControl?.endRefreshing()
@@ -141,13 +141,13 @@ extension RequestStateVC {
     private func setErrorHandling(errorCode: String?,errorMessage: String?){
         switch errorCode{
         case "APPLY4000":
-            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+            showAlert(message: errorMessage)
         case "APPLY4004":
-            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+            showAlert(message: errorMessage)
         case "BOARD5003":
-            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+            showAlert(message: errorMessage)
         default:
-            showAlert(message: errorMessage ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.")
+            showAlert(message: errorMessage)
         }
     }
     
@@ -175,7 +175,7 @@ extension RequestStateVC {
                 applyStatus = .waiting
             }
 
-            self.dateStatusList.append(DateStateModel(memberCount: applyUserCount, applyStatus: applyStatus))
+            self.dateStatusList.append(ApplicationInfo(memberCount: applyUserCount, applyStatus: applyStatus))
         }
     }
 }

@@ -68,8 +68,8 @@ extension UIViewController{
         }
     }
    
-    func showAlert(title: String = "", message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    func showAlert(title: String = "", message: String?) {
+        let alertController = UIAlertController(title: title, message: message ?? "문제가 발생하였습니다. 지속될시 고객센터 문의바랍니다.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .cancel))
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
